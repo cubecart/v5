@@ -1,3 +1,11 @@
+backup/*
+cache/*
+files/*
+images/source/*
+images/logos/*
+images/cache/*
+includes/extra/key.php
 includes/global.inc.php
 includes/global.inc.php*
-cache/*
+.DS_Store
+Thumbs.db
