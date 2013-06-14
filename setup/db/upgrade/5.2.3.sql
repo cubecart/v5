@@ -1,0 +1,1 @@
+ALTER TABLE  `CubeCart_inventory` ADD  `google_category` VARCHAR( 250 ) NULL; #EOQ
