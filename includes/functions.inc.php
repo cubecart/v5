@@ -820,6 +820,7 @@ function rootHomePath() {
  */
 function validHTML($var) {
 	## Create W3C compliant output
+	$var = html_entity_decode($var, ENT_QUOTES, 'UTF-8');
 	$var = htmlspecialchars($var);
 	return str_ireplace("&amp;#39;", "&#39;", $var);
 }
