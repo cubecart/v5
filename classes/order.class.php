@@ -521,7 +521,7 @@ class Order {
 						$vouchers_used[] = $data['voucher'];
 						// Update usage count
 						$product_data = unserialize($data['product']);
-						if (is_array($product_data) && count($product_data) >0) {
+						if (is_array($product_data) && count($product_data) > 1) {
 							## Per product coupons
 							foreach ($this->_basket['contents'] as $hash => $item) {
 
