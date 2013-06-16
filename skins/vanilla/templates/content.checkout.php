@@ -22,7 +22,7 @@
 		  <img src="{$item.image}" alt="{$item.name}" />
 		</a>
 	  </span>
-	  <p><a href="{$item.link}" class="txtDefault"><strong>{$item.name}</strong></a> {if !empty($item.product_code)}- {$item.product_code}{/if} {if $item.base_price_display}({$item.base_price_display}){/if}</p>
+	  <p><a href="{$item.link}" class="txtDefault"><strong>{$item.name|truncate:60:"&hellip;"}</strong></a> {if !empty($item.product_code)}- {$item.product_code}{/if} {if $item.base_price_display}({$item.base_price_display}){/if}</p>
 	  {if $item.options}
 	  {foreach from=$item.options item=option}<p><strong>{$option.option_name}</strong>: {$option.value_name|truncate:45:"&hellip;":true}{if !empty($option.price_display)} ({$option.price_display}){/if}</p>{/foreach}
 	  {/if}
