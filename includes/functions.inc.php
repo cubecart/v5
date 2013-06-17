@@ -446,7 +446,8 @@ function getCountryFormat($input, $match = 'numcode', $fetch = 'name') {
  */
 function getStateFormat($input, $match = 'id', $fetch = 'name') {
 	if (($county = $GLOBALS['db']->select('CubeCart_geo_zone', false, array($match => $input))) !== false) {
-		return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : utf8_encode($county[0][$fetch]);
+//		return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : utf8_encode($county[0][$fetch]);
+		return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : $county[0][$fetch];
 	}
 	return $input;
 }
@@ -771,7 +772,8 @@ function state_json() {
 					$json_array[$state['numcode']][] = array('id' => '0', 'name' => '-- '.$GLOBALS['language']->common['please_select'].' --');
 					$current = $state['numcode'];
 				}
-				$json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => utf8_encode($state['name']));
+//				$json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => utf8_encode($state['name'])); // data already utf-8
+				$json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => $state['name']);
 			}
 
 			$json = json_encode($json_array);
