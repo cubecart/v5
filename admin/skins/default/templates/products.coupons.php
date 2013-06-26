@@ -123,6 +123,7 @@
 		  <a href="#" target="assigned-prods" class="add"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a>
 		</span>
 	  </div>
+	  <div><label for="form-subtotal">{$LANG.catalogue.coupon_subtotal}</label><span><input type="hidden" name="coupon[subtotal]" id="form-subtotal" class="toggle" value="{$COUPON.subtotal}" /></span></div>
 	  <div>{$LANG.catalogue.coupon_no_shipping}</div>
 	</fieldset>
 	<fieldset><legend>{$LANG.catalogue.title_coupon_products}</legend>

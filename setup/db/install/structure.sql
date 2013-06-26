@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_coupons` (
 	`min_subtotal` DECIMAL(16,2) UNSIGNED NOT NULL DEFAULT '0.00',
 	`count` INT UNSIGNED NOT NULL DEFAULT '0',
 	`shipping` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+	`subtotal` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 	`description` text NOT NULL,
 	`cart_order_id` VARCHAR(18) DEFAULT NULL,
 	PRIMARY KEY (`coupon_id`),

@@ -85,6 +85,8 @@ class Session {
 
 		ini_set('session.cookie_httponly',true);
 
+		//$this->_session_timeout = (ADMIN_CP) ? 3600 * 24 : 3600 * 1;
+
 		//If the current session time is longer we will not change anything
 		if ($ini['session.gc_maxlifetime'] < $this->_session_timeout) {
 			ini_set('session.gc_maxlifetime', $this->_session_timeout);

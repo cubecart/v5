@@ -505,6 +505,9 @@ class Cart {
 					$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_voucher_product']);
 					return false;
 				}
+				
+				
+				
 
 				$proceed = false;
 
@@ -552,6 +555,7 @@ class Cart {
 							'available'	=> ($coupon['allowed_uses'] > 0) ? $coupon['allowed_uses']-$coupon['count'] : 0,
 							'product'	=> $coupon['product_id'],
 							'shipping'	=> (bool)$coupon['shipping'],
+							'subtotal'	=> (bool)$coupon['subtotal'],
 						);
 						return true;
 					} else {
@@ -1133,6 +1137,9 @@ class Cart {
 					// Set remainder/usage value
 					$this->basket['coupons'][$key]['remainder'] = $remainder;
 				} else {
+				
+				
+				
 					switch ($data['type']) {
 						case 'percent':
 							if ($data['shipping']) {
@@ -1174,6 +1181,9 @@ class Cart {
 		if (isset($product_id) && is_numeric($product_id)) {
 			if (isset($this->basket['coupons']) && is_array($this->basket['coupons'])) {
 				foreach ($this->basket['coupons'] as $key => $data) {
+					if ($data['subtotal']) {
+						continue; // subtotal based coupon
+					}
 					$products = unserialize($data['product']);
 					$incexc = array_shift($products);
 					// workaround for empty product arrays and exclude set....cause excluding NOTHING causes weird behavior
@@ -1182,25 +1192,33 @@ class Cart {
 						switch ($data['type']) {
 							case 'percent':
 								$discount	= $price*($data['value']/100);
+								$this->_discount += $discount*$quantity;
 								break;
 							case 'fixed':
 							default:
-								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
-								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
+//								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
+//								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
+//								$this->_discount += $discount;
+								$discount	= ($price < $data['value']) ? $price : $data['value'];
+								$this->_discount += $discount*$quantity;
 						}
-						$this->_discount += $discount;
+//						$this->_discount += $discount;
 						$price -= $discount;
 					} elseif ($incexc == 'exclude' && !in_array($product_id, $products)) {
 						switch ($data['type']) {
 							case 'percent':
 								$discount	= $price*($data['value']/100);
+								$this->_discount += $discount*$quantity;
 								break;
 							case 'fixed':
 							default:
-								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
-								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
+//								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
+//								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
+//								$this->_discount += $discount;
+								$discount	= ($price < $data['value']) ? $price : $data['value'];
+								$this->_discount += $discount*$quantity;
 						}
-						$this->_discount += $discount;
+//						$this->_discount += $discount;
 						$price -= $discount;
 					// Cover old coupons
 					} elseif($data['product']=='0' || !is_array($products)) {

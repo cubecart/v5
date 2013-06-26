@@ -40,6 +40,7 @@ if (isset($_POST['coupon']) && is_array($_POST['coupon'])) {
 		'allowed_uses'	=> (int)$_POST['coupon']['allowed_uses'],
 		'min_subtotal'	=> $_POST['coupon']['min_subtotal'],
 		'shipping'		=> $_POST['coupon']['shipping'],
+		'subtotal'		=> $_POST['coupon']['subtotal'],
 		'description'	=> $_POST['coupon']['description'],
 		## Temporary reset
 		'discount_percent'	=> 0,
