@@ -505,9 +505,6 @@ class Cart {
 					$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_voucher_product']);
 					return false;
 				}
-				
-				
-				
 
 				$proceed = false;
 
@@ -1001,6 +998,7 @@ class Cart {
 		// Remove an item from the basket
 		if (!is_null($identifier) && isset($this->basket['contents'][$identifier])) {
 			unset($this->basket['contents'][$identifier]);
+//			$this->_applyDiscounts();
 			$this->save();
 			return $this->update();
 		}
@@ -1137,9 +1135,7 @@ class Cart {
 					// Set remainder/usage value
 					$this->basket['coupons'][$key]['remainder'] = $remainder;
 				} else {
-				
-				
-				
+
 					switch ($data['type']) {
 						case 'percent':
 							if ($data['shipping']) {
@@ -1153,7 +1149,7 @@ class Cart {
 						case 'fixed':
 						default:
 							$discount = $data['value'];
-							if ($data['shipping'] && $this->_shipping < $discount) {
+							if ($data['shipping'] && $this->_shipping <= $discount) {
 								$discount = $this->_shipping;
 							} else if ($this->_subtotal < $discount) {
 								$discount = $this->_subtotal;
