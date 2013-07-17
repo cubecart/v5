@@ -15,7 +15,9 @@ img {
 }
 /* !Begin Section Wrappers - Use these to customise specific sections*/
 .account_wrapper {}
-.category_wrapper {}
+.category_wrapper {
+	clear: left;
+}
 .checkout_wrapper {}
 .document_wrapper {}
 .download_wrapper {}
@@ -24,7 +26,9 @@ img {
 .home_wrapper {}
 .login_wrapper {}
 .order_wrapper {}
-.product_wrapper {}
+.product_wrapper {
+	clear: left;
+}
 .register_wrapper {}
 .saleitems_wrapper {}
 /* !End Section Wrappers */

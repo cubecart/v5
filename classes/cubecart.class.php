@@ -1020,7 +1020,7 @@ class Cubecart {
 				$status	= 2;
 				break;
 			default:
-				$status = ($GLOBALS['user']->is() || (isset($GLOBALS['cart']->basket['register']) && $GLOBALS['cart']->basket['register']==false)) ? 1 : 0;
+				$status = ($GLOBALS['user']->is() || $_GET['_a']=='confirm' || (isset($GLOBALS['cart']->basket['register']) && $GLOBALS['cart']->basket['register']==false)) ? 1 : 0;
 				break;
 		}
 		
