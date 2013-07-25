@@ -37,8 +37,8 @@ if (isset($_GET['format']) && !empty($_GET['format'])) {
 		switch (strtolower($_GET['format'])) {
 			case 'googlebase':
 			case 'storeya':
-				$header_fields	= array('id','product_type','google_product_category','link','title','description','image_link','price','condition','shipping_weight','upc','ean','jan','isbn','availability','brand', 'gtin', 'mpn');
-				$fields		= array('product_id', 'store_category', 'google_category', 'url', 'name', 'description', 'image', 'price', 'condition','product_weight','upc','ean','jan','isbn','availability','manufacturer', 'gtin', 'mpn');
+				$header_fields	= array('id','product_type','google_product_category','link','title','description','image_link','price','condition','shipping_weight','upc','ean','jan','isbn','availability','brand', 'gtin', 'mpn', 'identifier_exists');
+				$fields		= array('product_id', 'store_category', 'google_category', 'url', 'name', 'description', 'image', 'price', 'condition','product_weight','upc','ean','jan','isbn','availability','manufacturer', 'gtin', 'mpn', 'identifier_exists');
 				$delimiter	= "\t";
 				$extension	= 'txt';
 				$glue		= "\r\n";
@@ -103,6 +103,11 @@ if (isset($_GET['format']) && !empty($_GET['format'])) {
 			
 			$result['store_category'] = $GLOBALS['seo']->getDirectory($result['cat_id'], false, ' > ');
 			$result['shopping_com_category'] = $GLOBALS['seo']->getDirectory($result['cat_id'], false, ' -> ');
+			if (isset($result['mpn']) && empty($result['mpn']) && isset($result['gtin']) && empty($result['gtin'])) {
+				$result['identifier_exists'] = 'FALSE';
+			} else {
+				$result['identifier_exists'] = 'TRUE';
+			}
 			
 			if (strtolower($_GET['format']) == 'shopping.com') {
 				$result['description'] = addslashes(html_entity_decode($result['description'], ENT_QUOTES));
