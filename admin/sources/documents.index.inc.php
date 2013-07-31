@@ -13,8 +13,8 @@ if (isset($_POST['document']) && Admin::getInstance()->permissions('documents', 
 	## Do the database magic
 	$rem_array = null;
 	if (isset($_POST['document']['doc_id']) && is_numeric($_POST['document']['doc_id'])) {
-		if ($GLOBALS['db']->update('CubeCart_documents', $_POST['document'], array('doc_id' => $_POST['document']['doc_id']), true) || $GLOBALS['seo']->setdbPath('doc', $_POST['document']['doc_id'], $_POST['seo_path'], true, false)) {
-
+		if ($GLOBALS['db']->update('CubeCart_documents', $_POST['document'], array('doc_id' => $_POST['document']['doc_id']), true)) {
+			$GLOBALS['seo']->setdbPath('doc', $_POST['document']['doc_id'], $_POST['seo_path'], true, true);
 			$GLOBALS['main']->setACPNotify($lang['documents']['notify_document_update']);
 			$rem_array = array('action');
 		} else {
