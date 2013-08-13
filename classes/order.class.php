@@ -209,92 +209,24 @@ class Order {
 			$mailer = Mailer::getInstance();
 			$order_summary = $this->_order_summary;
 
+			$this->getOrderDetails($order_id);
+
 			switch ($status_id) {
 
 				case self::ORDER_PENDING;
 					// Send email to store admins (yes 1 is a string)
 					if ($GLOBALS['config']->get('config','admin_notify_status')=="1" && $this->_email_admin_enabled && $admin_notify = $this->_notifyAdmins()) {
 
-						// Format prices etc for order emails...
-						$order_summary['subtotal'] 	= Tax::getInstance()->priceFormat($order_summary['subtotal'], true);
-						$order_summary['total'] 	= Tax::getInstance()->priceFormat($order_summary['total'], true);
-						$order_summary['discount'] 	= Tax::getInstance()->priceFormat($order_summary['discount'], true);
-						$order_summary['shipping']	= Tax::getInstance()->priceFormat($order_summary['shipping'], true);
-						// Get taxes
-						$order_taxes = $GLOBALS['db']->select('CubeCart_order_tax', array('tax_id','amount'), array('cart_order_id' => $order_id));
-
-						// Put in items
-						$vars = array();
-						foreach ($this->_order_inventory as $item) {
-							if($item['product_id']>0){
-								$product				= array_merge($GLOBALS['catalogue']->getProductData($item['product_id']),$item);
-								$product['item_price']	= Tax::getInstance()->priceFormat($product['price']);
-								$product['price'] 		= Tax::getInstance()->priceFormat($product['price']*$product['quantity']);
-								if (!empty($item['product_options'])) $product['product_options'] = implode(' ',unserialize($item['product_options']));
-								$vars['products'][]	= $product;
-							} else {
-								$item['price']	= Tax::getInstance()->priceFormat($item['price']);
-								$vars['products'][]	= $item;
-							}
-						}
-						if (isset($vars['products']) && !empty($vars['products'])) {
-							$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
-						}
-
-						// Put tax in
-						if ($order_taxes) {
-							foreach($order_taxes as $order_tax) {
-								$tax_data = Tax::getInstance()->fetchTaxDetails($order_tax['tax_id']);
-								$tax['tax_name'] 	= $tax_data['name'];
-								$tax['tax_percent'] = sprintf('%.3f',$tax_data['tax_percent']);
-								$tax['tax_amount'] 	= Tax::getInstance()->priceFormat($order_tax['amount']);
-								$vars['taxes'][]	= $tax;
-							}
-							if (isset($vars['taxes']) && !empty($vars['taxes'])) {
-								$GLOBALS['smarty']->assign('TAXES', $vars['taxes']);
-							}
-						}
-
-						$billing = array (
-							'first_name' 	=> $order_summary['first_name'],
-							'last_name' 	=> $order_summary['last_name'],
-							'company_name' 	=> $order_summary['company_name'],
-							'line1' 		=> $order_summary['line1'],
-							'line2' 		=> $order_summary['line2'],
-							'town' 			=> $order_summary['town'],
-							'state' 		=> getStateFormat($order_summary['state']),
-							'postcode' 		=> $order_summary['postcode'],
-							'country' 		=> getCountryFormat($order_summary['country']),
-							'phone' 		=> $order_summary['phone'],
-							'email' 		=> $order_summary['email']
-						);
-						$shipping = array (
-							'first_name' 	=> $order_summary['first_name_d'],
-							'last_name' 	=> $order_summary['last_name_d'],
-							'company_name' 	=> $order_summary['company_name_d'],
-							'line1' 		=> $order_summary['line1_d'],
-							'line2' 		=> $order_summary['line2_d'],
-							'town' 			=> $order_summary['town_d'],
-							'state' 		=> getStateFormat($order_summary['state_d']),
-							'postcode' 		=> $order_summary['postcode_d'],
-							'country' 		=> getCountryFormat($order_summary['country_d'])
-						);
-
-						// Format data
-						$order_summary['order_date'] = formatTime($order_summary['order_date'],false,true);
-
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
 							$order_summary['link'] 		= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
-							$GLOBALS['smarty']->assign('DATA', $order_summary);
-							$GLOBALS['smarty']->assign('BILLING', $billing);
-							$GLOBALS['smarty']->assign('SHIPPING', $shipping);
-							$GLOBALS['smarty']->assign('TAXES', $vars['taxes']);
-							$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
+							$this->assignOrderDetails();
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
 						}
 					}
+
+
 					break;
 
 				case self::ORDER_PROCESS;
@@ -308,84 +240,10 @@ class Order {
 						$complete = false;
 						break;
 					}
-
-					// Format prices etc for order emails...
-					$order_summary = $this->_order_summary;
-					$order_summary['subtotal'] 	= Tax::getInstance()->priceFormat($order_summary['subtotal'], true);
-					$order_summary['total'] 	= Tax::getInstance()->priceFormat($order_summary['total'], true);
-					$order_summary['discount'] 	= Tax::getInstance()->priceFormat($order_summary['discount'], true);
-					$order_summary['shipping']	= Tax::getInstance()->priceFormat($order_summary['shipping'], true);
-					// Get taxes
-					$order_taxes = $GLOBALS['db']->select('CubeCart_order_tax', array('tax_id','amount'), array('cart_order_id' => $order_id));
-
-					// Put in items
-					$vars = array();
-					foreach ($this->_order_inventory as $item) {
-						if($item['product_id']>0){
-							$product				= array_merge($GLOBALS['catalogue']->getProductData($item['product_id']),$item);
-							$product['item_price']	= Tax::getInstance()->priceFormat($product['price']);
-							$product['price'] 		= Tax::getInstance()->priceFormat($product['price']*$product['quantity']);
-							if (!empty($product['product_options']))  $product['product_options'] = implode(' ',unserialize($item['product_options']));
-							$vars['products'][]	= $product;
-						} else {
-							$item['price']	= Tax::getInstance()->priceFormat($item['price']);
-							$vars['products'][]	= $item;
-						}
-					}
-					if (isset($vars['products']) && !empty($vars['products'])) {
-						$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
-					}
-
-					// Put tax in
-					if ($order_taxes) {
-						foreach($order_taxes as $order_tax) {
-							$tax_data = Tax::getInstance()->fetchTaxDetails($order_tax['tax_id']);
-							$tax['tax_name'] 	= $tax_data['name'];
-							$tax['tax_percent'] = sprintf('%.3f',$tax_data['tax_percent']);
-							$tax['tax_amount'] 	= Tax::getInstance()->priceFormat($order_tax['amount']);
-							$vars['taxes'][]	= $tax;
-						}
-						if (isset($vars['taxes']) && !empty($vars['taxes'])) {
-							$GLOBALS['smarty']->assign('TAXES', $vars['taxes']);
-						}
-					}
-
-					$billing = array (
-						'first_name' 	=> $order_summary['first_name'],
-						'last_name' 	=> $order_summary['last_name'],
-						'company_name' 	=> $order_summary['company_name'],
-						'line1' 		=> $order_summary['line1'],
-						'line2' 		=> $order_summary['line2'],
-						'town' 			=> $order_summary['town'],
-						'state' 		=> getStateFormat($order_summary['state']),
-						'postcode' 		=> $order_summary['postcode'],
-						'country' 		=> getCountryFormat($order_summary['country']),
-						'phone' 		=> $order_summary['phone'],
-						'email' 		=> $order_summary['email']
-					);
-					$shipping = array (
-						'first_name' 	=> $order_summary['first_name_d'],
-						'last_name' 	=> $order_summary['last_name_d'],
-						'company_name' 	=> $order_summary['company_name_d'],
-						'line1' 		=> $order_summary['line1_d'],
-						'line2' 		=> $order_summary['line2_d'],
-						'town' 			=> $order_summary['town_d'],
-						'state' 		=> getStateFormat($order_summary['state_d']),
-						'postcode' 		=> $order_summary['postcode_d'],
-						'country' 		=> getCountryFormat($order_summary['country_d'])
-					);
-
-					// Format data
-					$order_summary['order_date'] = formatTime($order_summary['order_date'],false,true);
-
 					// Compose the Order Confirmation email to the customer
-					if ($this->_email_enabled && ($content = $mailer->loadContent('cart.order_confirmation', $order_summary['lang'])) !== false) {
+     				if ($this->_email_enabled && ($content = $mailer->loadContent('cart.order_confirmation', $order_summary['lang'])) !== false) {
 						$order_summary['link'] 		= $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$order_id;
-						$GLOBALS['smarty']->assign('DATA', $order_summary);
-						$GLOBALS['smarty']->assign('BILLING', $billing);
-						$GLOBALS['smarty']->assign('SHIPPING', $shipping);
-						$GLOBALS['smarty']->assign('TAXES', $vars['taxes']);
-						$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
+						$this->assignOrderDetails();
 						$mailer->sendEmail($this->_order_summary['email'], $content);
 						unset($content);
 					}
@@ -395,11 +253,7 @@ class Order {
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
 							$order_summary['link'] 		= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
-							$GLOBALS['smarty']->assign('DATA', $order_summary);
-							$GLOBALS['smarty']->assign('BILLING', $billing);
-							$GLOBALS['smarty']->assign('SHIPPING', $shipping);
-							$GLOBALS['smarty']->assign('TAXES', $vars['taxes']);
-							$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
+							$this->assignOrderDetails();
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
 						}
@@ -425,14 +279,13 @@ class Order {
 						}
 					}
 					/* no need to send this email for digital only orders */
-					if(!$this->_skip_order_complete_email) {
-						$order_summary = $this->_order_summary;
-						$order_summary['state_d'] = getStateFormat($order_summary['state_d']);
-						$order_summary['state'] = getStateFormat($order_summary['state']);
-						$order_summary['country_d'] = getCountryFormat($order_summary['country_d']);
-						$order_summary['country'] = getCountryFormat($order_summary['country']);
-						$content = $mailer->loadContent('cart.order_complete', $order_summary['lang'], $order_summary);
+
+					if (!$this->_skip_order_complete_email && $this->_email_enabled && ($content = $mailer->loadContent('cart.order_complete', $order_summary['lang'])) !== false) {
+						$this->assignOrderDetails();
+						$mailer->sendEmail($this->_order_summary['email'], $content);
+						unset($content);
 					}
+
 				break;
 
 				case self::ORDER_DECLINED:
@@ -603,6 +456,97 @@ class Order {
 		}
 		return false;
 	}
+
+
+	public function getOrderDetails($order_id) {
+	
+		$order_summary = $this->getSummary($order_id);
+
+		// Format prices etc for order emails...
+		$order_summary['subtotal'] 	= Tax::getInstance()->priceFormat($order_summary['subtotal'], true);
+		$order_summary['total'] 	= Tax::getInstance()->priceFormat($order_summary['total'], true);
+		$order_summary['discount'] 	= Tax::getInstance()->priceFormat($order_summary['discount'], true);
+		$order_summary['shipping']	= Tax::getInstance()->priceFormat($order_summary['shipping'], true);
+		// Get taxes
+		$order_taxes = $GLOBALS['db']->select('CubeCart_order_tax', array('tax_id','amount'), array('cart_order_id' => $order_id));
+
+		// Put in items
+		$vars = array();
+		foreach ($this->_order_inventory as $item) {
+			if($item['product_id']>0){
+				$product				= array_merge($GLOBALS['catalogue']->getProductData($item['product_id']),$item);
+				$product['item_price']	= Tax::getInstance()->priceFormat($product['price']);
+				$product['price'] 		= Tax::getInstance()->priceFormat($product['price']*$product['quantity']);
+				if (!empty($product['product_options']))  $product['product_options'] = implode(' ',unserialize($item['product_options']));
+				$vars['products'][]	= $product;
+			} else {
+				$item['price']	= Tax::getInstance()->priceFormat($item['price']);
+				$vars['products'][]	= $item;
+			}
+		}
+
+		// Put tax in
+		if ($order_taxes) {
+			foreach($order_taxes as $order_tax) {
+				$tax_data = Tax::getInstance()->fetchTaxDetails($order_tax['tax_id']);
+				$tax['tax_name'] 	= $tax_data['name'];
+				$tax['tax_percent'] = sprintf('%.3f',$tax_data['tax_percent']);
+				$tax['tax_amount'] 	= Tax::getInstance()->priceFormat($order_tax['amount']);
+				$vars['taxes'][]	= $tax;
+			}
+		}
+
+		$billing = array (
+			'first_name' 	=> $order_summary['first_name'],
+			'last_name' 	=> $order_summary['last_name'],
+			'company_name' 	=> $order_summary['company_name'],
+			'line1' 		=> $order_summary['line1'],
+			'line2' 		=> $order_summary['line2'],
+			'town' 			=> $order_summary['town'],
+			'state' 		=> getStateFormat($order_summary['state']),
+			'postcode' 		=> $order_summary['postcode'],
+			'country' 		=> getCountryFormat($order_summary['country']),
+			'phone' 		=> $order_summary['phone'],
+			'email' 		=> $order_summary['email']
+		);
+		$shipping = array (
+			'first_name' 	=> $order_summary['first_name_d'],
+			'last_name' 	=> $order_summary['last_name_d'],
+			'company_name' 	=> $order_summary['company_name_d'],
+			'line1' 		=> $order_summary['line1_d'],
+			'line2' 		=> $order_summary['line2_d'],
+			'town' 			=> $order_summary['town_d'],
+			'state' 		=> getStateFormat($order_summary['state_d']),
+			'postcode' 		=> $order_summary['postcode_d'],
+			'country' 		=> getCountryFormat($order_summary['country_d'])
+		);
+
+		// Format data
+		$order_summary['order_date'] = formatTime($order_summary['order_date'],false,true);
+
+		$values['order_summary'] = $order_summary;
+		$values['billing']       = $billing;
+		$values['shipping']      = $shipping;
+		$values['taxes']         = $vars['taxes'];
+		$values['products']      = $vars['products'];
+
+		$this->_email_details    = $values;
+
+		return $this->_email_details;
+
+	}
+
+	public function assignOrderDetails($values = null) {
+	
+		$this->_email_details = (is_null($values)) ? $this->_email_details : $values;
+	
+		$GLOBALS['smarty']->assign('DATA', $this->_email_details['order_summary']);
+		$GLOBALS['smarty']->assign('BILLING', $this->_email_details['billing'] );
+		$GLOBALS['smarty']->assign('SHIPPING', $this->_email_details['shipping']);
+		$GLOBALS['smarty']->assign('TAXES', $this->_email_details['taxes']);
+		$GLOBALS['smarty']->assign('PRODUCTS', $this->_email_details['products']);
+	}
+
 
 	//=====[ Private ]===================================================================================================
 
