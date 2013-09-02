@@ -684,7 +684,7 @@ form div > label.return {
 }
 
 .basket_product > p {
-    height: 18px;
+    min-height: 18px;
     padding: 0!important;
 }
 

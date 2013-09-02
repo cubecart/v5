@@ -629,7 +629,7 @@ form div > label.return {
 	padding: 5px;
 }
 .basket_product > p {
-	height: 18px;
+	min-height: 18px;
 	padding: 0px !important;
 }
 .basket_product .remove {
