@@ -1100,6 +1100,7 @@ class Cubecart {
 			# Get the order details, and display a receipt
 			if (($orders = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $this->_basket['cart_order_id']))) !== false) {
 				$order = $orders[0];
+				$GLOBALS['user']->setGhostId($order['customer_id']);
 				if (($items = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $this->_basket['cart_order_id']))) !== false) {
 					$GLOBALS['smarty']->assign('GA_ITEMS', $items);
 					foreach ($items as $item) {

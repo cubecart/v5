@@ -676,6 +676,7 @@ if (isset($_GET['action']) && strtolower($_GET['action'])=='clone' && isset($_GE
 			if (($seo_path = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('item_id' => $product_id_parent, 'type' => 'prod'))) !== false) {
 
 				$GLOBALS['db']->insert('CubeCart_seo_urls', array('type' => 'prod', 'item_id' => $product_id, 'path' => sprintf('%s-p%s',$seo_path[0]['path'],$product_id)));
+
 			} else if ($GLOBALS['config']->get('config', 'seo')) {
 
 				$GLOBALS['seo']->setdbPath('prod', $product_id, '');
