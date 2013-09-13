@@ -44,7 +44,10 @@ class USPS {
 	}
 	
 	private function cleanName($name) {
-		return html_entity_decode(str_replace('*','',$name));
+//		return html_entity_decode(str_replace('*','',$name));
+		return html_entity_decode(str_replace(array('*','&lt;sup&gt;&#174;&lt;/sup&gt;'),'',$name));
+
+
 	}
 
 	################################################

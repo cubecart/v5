@@ -66,7 +66,7 @@ class FileManager {
 						$new_location	= $current_location = $this->_manage_root.CC_DS.urldecode($this->_sub_dir);
 						$new_filename	= $current_filename = $file[0]['filename'];
 						$new_subdir		= $this->_sub_dir;
-	
+
 						if ($file[0]['filename'] != $_POST['details']['filename']) {
 							$new_filename = $this->formatName($_POST['details']['filename']);
 						}
@@ -189,6 +189,8 @@ class FileManager {
 						$new_path = str_replace($oldfilename, $newfilename, $file);
 						if(!rename($file, $new_path)) {
 							trigger_error("Failed to rename file from '$oldfilename' to '$newfilename'.", E_USER_WARNING);
+						} else {
+							$file = $new_path;
 						}
 					}
 					
@@ -588,7 +590,7 @@ class FileManager {
 		if (!empty($_FILES)) {
 			$finfo	= (extension_loaded('fileinfo')) ? new finfo(FILEINFO_SYMLINK | FILEINFO_MIME) : false;
 			foreach ($_FILES as $file) {
-				  
+
 				if($this->filename_is_illegal($file['name'])) continue;
 				
 				if (is_array($file['tmp_name'])) {
@@ -599,12 +601,26 @@ class FileManager {
 								$this->uploadError($file['error'][$offset]);
 								continue;
 							}
+/*
 							switch ($this->_mode) {
 								case self::FM_FILETYPE_IMG:
 									$gd->gdUpload($tmp_name, $file['name'][$offset]);
 									$gd->gdSave($file['name'][$offset]);
 									break;
 							}
+*/
+							$target	= $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'][$offset];
+							$newfilename = $this->makeFilename($file['name'][$offset]);
+							$oldfilename = $file['name'][$offset];
+
+							if($newfilename !== $oldfilename) {
+								$target = str_replace($oldfilename, $newfilename, $target);
+							}
+
+							$filepath_record = $this->formatPath(str_replace($this->_manage_root, '', dirname($target)));
+							$filepath_record = empty($filepath_record) ? 'NULL' : $filepath_record;
+							$filepath_record = str_replace(chr(92),"/",$filepath_record);
+/*
 							$target	= $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'][$offset];
 							if ($finfo && $finfo instanceof finfo) {
 								preg_match('#([\w\-\.]+)/([\w\-\.]+)$#iU', $finfo->file($tmp_name), $match);
@@ -614,13 +630,13 @@ class FileManager {
 							} else {
 								$mime	= $file['type'][$offset];
 							}
-			
+*/
 							$record = array(
 								'type'		=> (int)$this->_mode,
-								'filepath'	=> (isset($this->_sub_dir) && !empty($this->_sub_dir)) ? str_replace('\\','/',$this->_sub_dir) : 'NULL',
-								'filename'	=> $this->makeFilename($file['name'][$offset]),
+								'filepath'	=> $filepath_record,
+								'filename'	=> $newfilename,
 								'filesize'	=> $file['size'][$offset],
-								'mimetype'	=> (!empty($mime)) ? $mime : 'application/octet-stream',
+								'mimetype'	=> $file['type'][$offset] ? $file['type'][$offset] : $this->getMimeType($tmp_name),
 								'md5hash'	=> md5_file($tmp_name),
 							);
 
@@ -629,23 +645,49 @@ class FileManager {
 								move_uploaded_file($tmp_name, $target);
 								chmod($target, 0755);
 							}
-							
+
 						}
 					}
 				} else {
+
 					$gd = new GD($this->_manage_root.CC_DS.$this->_sub_dir);
 					if (!empty($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
+
 						if ($file['error'] !== UPLOAD_ERR_OK) {
 							$this->uploadError($file['error']);
 							continue;
 						}
+/*
 						switch ($this->_mode) {
 							case self::FM_FILETYPE_IMG:
 								$gd->gdUpload($file['tmp_name'], $file['name']);
 								$gd->gdSave($file['name']);
 								break;
 						}
-						$target	= $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'];
+*/
+						$target	= $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'];
+						$newfilename = $this->makeFilename($file['name']);
+						$oldfilename = $file['name'];
+
+						if($newfilename !== $oldfilename) {
+							$target = str_replace($oldfilename, $newfilename, $target);
+						}
+
+						$filepath_record = $this->formatPath(str_replace($this->_manage_root, '', dirname($target)));
+						$filepath_record = empty($filepath_record) ? 'NULL' : $filepath_record;
+						$filepath_record = str_replace(chr(92),"/",$filepath_record);
+
+						$record = array(
+							'type'		=> (int)$this->_mode,
+							'filepath'	=> $filepath_record,
+							'filename'	=> $newfilename,
+							'filesize'	=> $file['size'],
+							'mimetype'	=> $file['type'] ? $file['type'] : $this->getMimeType($file['tmp_name']),
+							'md5hash'	=> md5_file($file['tmp_name']),
+						);
+
+/*
+
 						if (($finfo && $finfo instanceof finfo) && preg_match('#([\w\-\.]+)/([\w\-\.]+)#i', $finfo->file($file['tmp_name']), $match)) {
 							$mime = $match[0];
 						} else if (function_exists('mime_content_type')) {
@@ -653,7 +695,8 @@ class FileManager {
 						} else {
 							$mime = $file['type'];
 						}
-						$record = array(
+
+	 					$record = array(
 							'type'		=> (int)$this->_mode,
 							'filepath'	=> (isset($this->_sub_dir) && !empty($this->_sub_dir)) ? str_replace('\\','/',$this->_sub_dir) : 'NULL',
 							'filename'	=> $this->makeFilename($file['name']),
@@ -661,11 +704,14 @@ class FileManager {
 							'mimetype'	=> (!empty($mime)) ? $mime : 'application/octet-stream',
 							'md5hash'	=> md5_file($file['tmp_name']),
 						);
+*/
 						if ($GLOBALS['db']->insert('CubeCart_filemanager', $record)) {
 							$file_id[] = $GLOBALS['db']->insertid();
 							move_uploaded_file($file['tmp_name'], $target);
 							chmod($target, 0755);
 						}
+
+						
 					}
 				}
 			}
