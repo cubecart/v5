@@ -143,7 +143,7 @@ class Cubecart {
 				$contents	= $parent[0];
 				if ($parent[0]['doc_lang'] != $doc_lang) {
 				    if ($contents['doc_parent_id']>0) {
-						// we have different than store default lang dociment but language switched just on product page
+						// we have different than store default lang document but language switched just on product page
 						$target_column = ($doc_lang == $GLOBALS['config']->get('config', 'default_language')) ? 'doc_id' : 'doc_parent_id' ;
 						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array($target_column => $contents['doc_parent_id'], 'doc_lang' => $doc_lang));
 

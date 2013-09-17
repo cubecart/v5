@@ -639,8 +639,8 @@ class Cart {
 						$product['tax_inclusive'] = false;
 						$remove_options_tax = true;
 					}
+					$option_line_price = 0;
 					if (isset($item['options']) && is_array($item['options'])) {
-						$option_line_price = 0;
 						foreach ($item['options'] as $option_id => $option_data) {
 							if (is_array($option_data)) {
 								// Text option
