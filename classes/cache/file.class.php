@@ -67,7 +67,9 @@ class Cache extends Cache_Controler {
 		if(is_array($files)) {
 			foreach ($files as $file) {
 				//Delete the file
-				unlink($file);
+				if($file!==$this->_cache_path.'index.php') {
+					unlink($file);
+				}
 			}
 		}
 
