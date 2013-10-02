@@ -138,6 +138,7 @@ class Gateway {
 		## Start a request object
 		$request		= new Request($url, '/cgi-bin/webscr');
 		$request->setSSL();
+		$request->setHTTPVersion('1.1');
 		$request->setData($params);
 		## Send the request
 		$data			= $request->send();

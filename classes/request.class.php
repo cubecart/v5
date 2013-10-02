@@ -41,6 +41,7 @@ class Request {
 
 	private $_request_method		= 'post';
 	private $_request_protocol		= 'http';
+	private $_request_http_version	= '1.0';
 	private $_request_timeout		= 15;
 
 	private $_request_useragent;
@@ -154,6 +155,10 @@ class Request {
 			$this->_request_headers[] = 'Authorization: Basic '.base64_encode($username.':'.$password);
 		}
 	}
+	
+	public function setHTTPVersion($version = '1.0') {
+		$this->_request_http_version = $version;
+	}
 
 	public function setData($dataArray = null) {
 		if (is_array($dataArray)) {
@@ -163,14 +168,14 @@ class Request {
 		}
 		## Generate headers
 		$this->_request_headers = null;
-		$http_version	= (!empty($this->_proxy_username) && !empty($this->_proxy_password)) ? 1.1 : 1.0;
+		$this->_request_http_version	= (!empty($this->_proxy_username) && !empty($this->_proxy_password)) ? 1.1 : $this->_request_http_version;
 		if ($this->_send_headers) {
 			if ($this->_request_method == 'post') {
-				$this->_request_headers[] = sprintf('POST %s HTTP/%s', $this->_request_path, $http_version);
+				$this->_request_headers[] = sprintf('POST %s HTTP/%s', $this->_request_path, $this->_request_http_version);
 				$this->_request_headers[] = 'Content-Type: application/x-www-form-urlencoded';
 				$this->_request_headers[] = 'Content-Length: '.strlen($this->_request_body);
 			} else {
-				$this->_request_headers[] = sprintf('GET %s HTTP/%s', $this->_request_path.'?'.$this->_request_body, $http_version);
+				$this->_request_headers[] = sprintf('GET %s HTTP/%s', $this->_request_path.'?'.$this->_request_body, $this->_request_http_version);
 			}
 			$this->_request_headers[] 	= 'Host: '.$this->_request_url;
 			$this->_request_headers[] 	= 'Connection: Close';
