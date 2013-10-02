@@ -1702,6 +1702,7 @@
     <string name="title_archives_create" introduced="5.0.0"><![CDATA[Create Archive]]></string>
     <string name="title_archives_existing" introduced="5.0.0"><![CDATA[Existing Archives]]></string>
     <string name="title_archives_restore" introduced="5.0.0"><![CDATA[Restore from archive]]></string>
+    <string name="title_category" introduced="5.0.0"><![CDATA[Categories]]></string>
     <string name="title_categories" introduced="5.0.0"><![CDATA[Categories]]></string>
     <string name="title_category_add" introduced="5.0.0"><![CDATA[Add Category]]></string>
     <string name="title_category_details" introduced="5.0.0"><![CDATA[Category Details]]></string>
