@@ -12,6 +12,7 @@ if (!isset($_SESSION['setup']['permissions'])) {
 		'images/cache/',
 		'images/logos/',
 		'images/source/',
+		'images/source/index.php',
 		'includes/',
 		'includes/extra/',
 		'includes/global.inc.php',

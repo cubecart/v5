@@ -81,9 +81,8 @@ $to		= CC_ROOT_DIR.CC_DS.'images'.CC_DS.'source';
 $regex_slash_keep = '#[^\w\.\-\_\/]#i';
 $regex_slash_remove = '#[^\w\.\-\_]#i';
 
-## Delete the images/source/ folder from the upload (it should be empty)
 if (file_exists($to)) {
-	rmdir($to);
+	recursiveDelete($to);
 }
 
 if (file_exists($from) && is_writable(dirname($from))) {
