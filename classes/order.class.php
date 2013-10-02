@@ -944,6 +944,8 @@ class Order {
 			'ip_address'	=> get_ip_address()
 		);
 
+		foreach ($GLOBALS['hooks']->load('class.order.order_summary') as $hook) include $hook;
+
 		if (!$check = $GLOBALS['db']->select('CubeCart_order_summary', array('cart_order_id'), array('cart_order_id' => $this->_order_id))) {
 			$update = false;
 		}

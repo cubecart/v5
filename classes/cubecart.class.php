@@ -589,10 +589,12 @@ class Cubecart {
 				$GLOBALS['cart']->save();
 
 				// Set messages
-				if (!isset($this->_basket['shipping']) && !isset($this->_basket['digital_only'])) {
-					$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_shipping']);
-				} else {
-					$GLOBALS['gui']->setNotify($GLOBALS['language']->checkout['check_shipping']);
+				if (!isset($this->_basket['digital_only'])) {
+					if (!isset($this->_basket['shipping'])) {
+						$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_shipping']);
+					} else {
+						$GLOBALS['gui']->setNotify($GLOBALS['language']->checkout['check_shipping']);
+					}
 				}
 				// Confirmation page
 				httpredir('index.php?_a=confirm');

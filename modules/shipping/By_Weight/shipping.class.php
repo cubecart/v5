@@ -22,7 +22,7 @@ class By_Weight {
 		## Work out cost
 		if (!empty($this->_settings['zone'.$this->_shipZone.'RatesClass'.$class])) {
 			$bands	= explode(',', str_replace(' ', '', $this->_settings['zone'.$this->_shipZone.'RatesClass'.$class]));
-			natsort($bands);
+//			natsort($bands);
 			if (is_array($bands)) {
 				foreach ($bands as $band) {
 					$band_parts = explode(':', str_replace(' ', '', $band));
