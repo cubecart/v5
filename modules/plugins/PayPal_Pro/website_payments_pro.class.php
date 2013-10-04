@@ -421,7 +421,8 @@ class Website_Payments_Pro  {
 		return false;
 	}
 
-	public function SetExpressCheckout() {
+	public function SetExpressCheckout($bml = false) {
+		
 		## Initiates an Express Checkout transaction
 		if (empty($this->_token)) {
 			$nvp_data	= array(
@@ -431,6 +432,11 @@ class Website_Payments_Pro  {
 				'CURRENCYCODE'	=> $GLOBALS['config']->get('config','default_currency'),
 				'INVNUM'		=> $this->_basket['cart_order_id'],
 			);
+			
+			if($bml) {
+				$nvp_data = array_merge($nvp_data, array('USERSELECTEDFUNDINGSOURCE' => 'BML','SOLUTIONTYPE' => 'SOLE', 'LANDINGPAGE' => 'BILLING'));
+			}
+			
 			## Billing information
 			if ($billing = $this->_basket['billing_address']) {
 				$nvp_data	= array_merge(array(

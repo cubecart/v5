@@ -11,7 +11,6 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 	if ($module_config['status'] && $scope) {
 		if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='DoExpressCheckoutPayment') {
 			$load_checkouts = false;
-//			if ($this->_basket['shipping_verified'] && $_GET['_a']=='confirm' && !isset($_SESSION['__system']['GUI_MESSAGE']) && (isset($this->_basket['shipping']) || isset($this->_basket['digital_only']))) {
 			if ($this->_basket['shipping_verified'] && $_GET['_a']=='confirm' && (isset($this->_basket['shipping']) || isset($this->_basket['digital_only']))) {
 				$GLOBALS['smarty']->assign('CHECKOUT_BUTTON', $GLOBALS['language']->gateway['make_payment']);
 			} else {
@@ -41,11 +40,17 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 			$button_image = ($GLOBALS['gui']->mobile) ? $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/express_checkout_mobile.gif' : 'https://www.paypal.com/'.$locale.'/i/btn/btn_xpressCheckout.gif';
 			
 			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" /><img src="'.$button_image.'" alt="" /></a>';
+			
+			if($module_config['billmelater']==1) {
+				$button	= $button.'<br /><a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro&amp;bml=1" target="_self" title="" /><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_SM.png" alt="" /></a>';
+			}
+			
 			if(is_numeric($module_config['position']) && !isset($list_checkouts[$module_config['position']])) {
 				$position = $module_config['position'];
 			} else {
 				$position = '';
 			}
+			
 			$list_checkouts[$position]	= (isset($basket['PayPal_Pro'])) ? null : $button;
 			$GLOBALS['session']->set('stage', 'SetExpressCheckout', 'PayPal_Pro');
 		}
