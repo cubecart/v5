@@ -2,15 +2,26 @@
   <h3>{$LANG.dashboard.title_dashboard}</h3>
   <div class="dashboard_content">
     {if isset($QUICK_STATS)}
-	<div id="flash-chart" class="chart" style="text-align:center;">
-	  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="99%" height="300" id="graph-2" align="middle" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
-		<param name="allowScriptAccess" value="sameDomain" />
-		<param name="quality" value="high" />
-		<param name="wmode" value="opaque" />
-		<param name="movie" value="includes/lib/OFC/open-flash-chart.swf" />
-		<embed src="includes/lib/OFC/open-flash-chart.swf" quality="high" wmode="transparent" bgcolor="#FFF" width="99%" height="300" name="open-flash-chart" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-	  </object>
-	</div>
+    {literal}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          {/literal}{$CHART.data}{literal}
+        ]);
+
+        var options = {
+          title: '{/literal}{$CHART.title}{literal}'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    {/literal}	
+	<div id="chart_div" style="width:100%; height: 300px;"></div>
 	{/if}
 	<table width="100%">
 	  <tr>

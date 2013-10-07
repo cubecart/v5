@@ -110,89 +110,36 @@ $quick_tasks['this_weeks']	= urlencode(date($date_format, strtotime("last monday
 foreach ($GLOBALS['hooks']->load('admin.dashboard.quick_tasks') as $hook) include $hook;
 $GLOBALS['smarty']->assign('QUICK_TASKS',$quick_tasks);
 
-## Statistics (Now using OFC)
-/* defunct as it just subtracts 31 days from current possibility of missing Feb on March 1st/2nd!! (goto line 67)
-$last_month	= strtotime('Last Month');
-*/
+## Statistics (Google Charts)
 
-$sales = $GLOBALS['db']->select('CubeCart_order_summary', array('order_date', 'total'), array('order_date' => '>='.mktime(0,0,0,date('m', $last_month_start),1,date('Y', $last_month_start)), 'status' => array(3), 'total' => '>0'));
+$sales = $GLOBALS['db']->select('CubeCart_order_summary', array('order_date', 'total'), array('order_date' => '>='.mktime(0,0,0,date('m', $last_year),1,date('Y', $last_year)), 'status' => array(3), 'total' => '>0'));
 $data= array();
 if($sales) { ## Get data to put in chart
 	foreach ($sales as $sale) {
-		$month	= date('m', $sale['order_date']);
-		$date	= date('d', $sale['order_date']);
-		if (isset($data[(int)$month][(int)$date])) {
-			$data[(int)$month][(int)$date] += $sale['total'];
+		$year	= date('Y', $sale['order_date']);
+		$month	= date('M', $sale['order_date']);
+		if (isset($data[$year][$month])) {
+			$data[$year][$month] += sprintf('%0.2f',$sale['total']);
 		} else {
-			$data[(int)$month][(int)$date] = $sale['total'];
+			$data[$year][$month] = sprintf('%0.2f',$sale['total']);
 		}
 	}
-} else { ## Give it some null data to prevent errors
-	$data[0][0] = 0;
-}
-include CC_INCLUDES_DIR.'lib'.CC_DS.'OFC'.CC_DS.'open-flash-chart.php';
-$chart	= new open_flash_chart();
-$this_month = strftime('%B',strtotime('this month'));
-$last_month = strftime('%B',strtotime('last month'));
-
-## Set title
-$title = new title($lang['dashboard']['title_sales_stats'].': '.$last_month.' / '.$this_month);
-$title->set_style( "{font-family:Helvetica, Arial, sans-serif; font-size: 14px;}" );
-$chart->set_title( $title );
-
-$chart->set_bg_colour('#FFFFFF');
-$colours	= array('#3030D0', '#D03030');
-$loop		= 0;
-$max		= 100;
-
-foreach ($data as $month => $days) {
-	// unset($label);
-	$timestamp	= mktime(0,0,0,$month);
-	$month_name	= date('F', $timestamp);
-	$month_days	= date('t', $timestamp);
-
-	$bar	= new bar_glass();
-	if(!empty($month)) $bar->key($month_name, 10 );
-	for ($i=1;$i<=$month_days;$i++) {
-		$max		= (isset($days[$i]) && $days[$i] > $max) ? $days[$i] : $max;
-		$values[]	= (isset($days[$i])) ? (float)$days[$i] : null;
-	}
-
-	$bar->set_colour($colours[$loop++]);
-	$bar->set_values($values);
-
-	$bar->set_tooltip($month_name.' #x_label#: #val#');
-
-	$chart->add_element($bar);
-	unset($bar, $values);
-	$month_length[] = $month_days;
 }
 
-## Set up Y-Axis
-$max	= sigfig($max, 2);
-$y_axis	= new y_axis();
-$y_axis->set_range(0, $max, ceil($max/10));
+$this_year = strftime('%G',strtotime('this year'));
+$last_year = strftime('%G',strtotime('last year'));
 
-## Set up X-Axis labels
-$x_axis		= new x_axis();
-for ($i=1;$i<=max($month_length);$i++) $labels[] = (string)$i;
-$x_axis->set_labels_from_array($labels);
+$chart_data['data'] = "['Month', '$this_year', '$last_year'],";
 
-## Assign settings to OFC
-$chart->set_x_axis($x_axis);
-$chart->set_y_axis($y_axis);
+for ($month = 1; $month <= 12; $month++) {
+	$m = date("M", mktime(0, 0, 0, $month, 10));
+	$last_year_month = (isset($data[$last_year][$m]) && $data[$last_year][$m]>0) ? : 0;
+	$this_year_month = (isset($data[$this_year][$m]) && $data[$this_year][$m]>0) ? : 0;
+	$chart_data['data'] .= "['$m',  $last_year_month,      $this_year_month],";
+}
 
-## Set X-Axis Legend
-$x_legend = new x_legend($lang['dashboard']['title_day_of_month']);
-$x_legend->set_style('{font-family:Helvetica, Arial, sans-serif; font-size: 10px; color: #000000}');
-$chart->set_x_legend( $x_legend );
-
-## Set Y-Axis Legend
-$y_legend = new y_legend(sprintf($lang['dashboard']['title_sales_volume'], $GLOBALS['config']->get('config', 'default_currency')));
-$y_legend->set_style('{font-family:Helvetica, Arial, sans-serif; font-size: 10px; color: #000000}');
-$chart->set_y_legend( $y_legend );
-
-$GLOBALS['smarty']->assign('CHART_DATA', $chart->toString());
+$chart_data['title'] = $lang['dashboard']['title_sales_stats'].': '.$last_year.' - '.$this_year;
+$GLOBALS['smarty']->assign('CHART', $chart_data);
 
 ## Pending Orders Tab
 $page		= (isset($_GET['orders'])) ? $_GET['orders'] : 1;
