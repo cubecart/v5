@@ -231,9 +231,3 @@
 	</fieldset>
   </div>
 </div>
-<script type="text/javascript">
-var chart_data = '{$CHART_DATA}';
-function open_flash_chart_data() {
-	return chart_data;
-}
-</script>

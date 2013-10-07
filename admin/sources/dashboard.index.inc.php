@@ -133,8 +133,8 @@ $chart_data['data'] = "['Month', '$this_year', '$last_year'],";
 
 for ($month = 1; $month <= 12; $month++) {
 	$m = date("M", mktime(0, 0, 0, $month, 10));
-	$last_year_month = (isset($data[$last_year][$m]) && $data[$last_year][$m]>0) ? : 0;
-	$this_year_month = (isset($data[$this_year][$m]) && $data[$this_year][$m]>0) ? : 0;
+	$last_year_month = (isset($data[$last_year][$m]) && $data[$last_year][$m]>0) ? $data[$last_year][$m] : 0;
+	$this_year_month = (isset($data[$this_year][$m]) && $data[$this_year][$m]>0) ? $data[$this_year][$m] : 0;
 	$chart_data['data'] .= "['$m',  $last_year_month,      $this_year_month],";
 }
 
