@@ -85,6 +85,8 @@ class SSL {
 				'vieworder'		=> true,
 				'receipt'		=> true,
 			);
+			
+			foreach ($GLOBALS['hooks']->load('class.ssl.pages') as $hook) include $hook;
 
 			// Switch to SSL, if necessary
 			$this->_sslSwitch();

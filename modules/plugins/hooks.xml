@@ -125,4 +125,5 @@
  <hook trigger="class.user.register_user" deprecated="" />
  <hook trigger="class.user.register_user.insert" deprecated="" />
  <hook trigger="class.user.register_user.inserted" deprecated="" />
+ <hook trigger="class.ssl.pages" deprecated="" />
 </hooks>
