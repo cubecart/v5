@@ -8,7 +8,7 @@ class Website_Payments_Pro  {
 	private $_api_username;
 	private $_api_password;
 	private $_api_signature;
-	private $_api_version	= '65.0';
+	private $_api_version	= '74.0';
 
 	private $_api_endpoint;
 	private $_api_paypal;

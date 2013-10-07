@@ -5,7 +5,10 @@ images/source/*
 images/logos/*
 images/cache/*
 includes/extra/key.php
+includes/extra/snippet_*
 includes/global.inc.php
 includes/global.inc.php*
 .DS_Store
 Thumbs.db
+cache/index.php
+images/cache/index.php
