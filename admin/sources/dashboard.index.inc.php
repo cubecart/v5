@@ -35,7 +35,7 @@ if ($glob['installed'] && file_exists(CC_ROOT_DIR.CC_DS.'setup')) {
 	$history = $GLOBALS['db']->misc('SELECT `version` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_history` ORDER BY `time` DESC LIMIT 1');
 	if(version_compare(CC_VERSION,$history[0]['version'],'>')) {
 		$GLOBALS['main']->setACPWarning(sprintf($lang['dashboard']['error_version'], CC_VERSION, $history[0]['version']));
-	} elseif(file_exist(CC_ROOT_DIR.CC_DS.'setup')) {
+	} elseif(file_exists(CC_ROOT_DIR.CC_DS.'setup')) {
 		$GLOBALS['main']->setACPWarning($lang['dashboard']['error_setup_folder']);
 	}	
 }
