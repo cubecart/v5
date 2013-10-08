@@ -13,7 +13,7 @@
         ]);
 
         var options = {
-          title: '{/literal}{$CHART.title}{literal}'
+          title: '{/literal}{$CHART.title}{literal}',
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
