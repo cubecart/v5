@@ -12,10 +12,6 @@
 
 if (!defined('CC_INI_SET')) die('Access Denied');
 
-## Unset dangerous open chart exploit
-$_GET['data-file'] = '';
-unset($_GET['data-file']);
-
 global $glob, $lang, $admin_data;
 
 ## Save notes
