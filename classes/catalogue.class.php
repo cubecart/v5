@@ -958,7 +958,7 @@ class Catalogue {
 				}
 			}
 		}
-
+		foreach ($GLOBALS['hooks']->load('class.catalogue.productassign') as $hook) include $hook;
 		return true;
 
 	}
