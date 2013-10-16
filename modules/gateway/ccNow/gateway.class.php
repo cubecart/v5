@@ -22,27 +22,6 @@ class Gateway {
 	}
 
 	public function repeatVariables() {
-
-		/*
-		$i = 0;
-		$catalogue	= new Catalogue();
-
-		$discount	= 0;
-		if ($this->_basket['discount'] > 0) {
-			$count		= count($this->_basket['contents']);
-			$discount	= ($this->_basket['discount']/$count);
-		}
-		*/
-		/* TOOOOOO MUCH OF A NIGHTMARE TAX INC PRICES ETC ccNOW DON'T EVEN HAVE A TAX FIELD AAAAAAGHHH!!
-		foreach ($this->_basket['contents'] as $product) {
-			$hidden['x_product_sku_'.$i] 		= $product['product_code'];
-			$hidden['x_product_title_'.$i] 		= $product['name'];
-			$hidden['x_product_quantity_'.$i] 	= $product['quantity'];
-			$hidden['x_product_unitprice_'.$i] 	= $product['total_price_each'];
-			$hidden['x_product_url_'.$i] 		= $GLOBALS['storeURL']."/index.php?_a=product&product_id=".$product['id'];
-			$i++;
-		}
-		*/
 		return (isset($hidden)) ? $hidden : false;
 	}
 
@@ -84,7 +63,7 @@ class Gateway {
 			'x_invoice_num'			=> $this->_basket['cart_order_id'],
 			'x_instructions'		=> $this->_basket['comments'],
 			'x_amount'				=> $this->_basket['total'],
-			'x_shipping_amount'		=> (isset($this->_basket['shipping']['value'])) ? number_format($this->_basket['shipping']['value'], 2, '.', '') : '0.00',
+			'x_shipping_amount'		=> '0.00',
 			'x_discount_amount' 	=> '',
 			'x_discount_label' 		=> '',
 		);
