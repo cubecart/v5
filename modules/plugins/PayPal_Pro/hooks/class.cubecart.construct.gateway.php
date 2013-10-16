@@ -11,7 +11,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 	$wpp	= new Website_Payments_Pro($GLOBALS['config']->get('PayPal_Pro'));
 
 	if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='SetExpressCheckout') {
-		$bml = ($_GET['bml']==1) ? true : false;;
+		$bml = ($_GET['bml']==1) ? true : false;
 		$wpp->SetExpressCheckout($bml);
 		exit;
 	} else if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='DoExpressCheckoutPayment') {
