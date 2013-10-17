@@ -97,23 +97,6 @@ function chmod_writable() {
 }
 
 /**
- * Create a link
- *
- * @param string $file
- * @param string $target
- */
-function createSymlink($file, $target) {
-	if (!empty($file) && !empty($target)) {
-		$filename	= CC_ROOT_DIR.CC_DS.'images'.CC_DS.'logos'.CC_DS.$file.'.php';
-		$content	= "<?php header('Location: ".str_replace(CC_DS,'/',$target)."', false, 307); ?>";
-		if(is_file($filename) && !is_writable($filename)){
-			chmod($filename, 0755);
-		}
-		return file_put_contents($filename, $content);
-	}
-}
-
-/**
  * Get the current page url
  *
  * @param array $excluded
