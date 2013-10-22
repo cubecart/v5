@@ -6,8 +6,8 @@
 
 // The if statement what you'll need to modify/use.  Be sure to leave the rest or things break.
 
-if($_SERVER["HTTP_X_FORWARDED_SSL"] == 1) {
-	define('CC_SSL', true);
-} else {
-	define('CC_SSL', false);
-}
+//if($_SERVER["HTTP_X_FORWARDED_SSL"] == 1) {
+//	define('CC_SSL', true);
+//} else {
+//	define('CC_SSL', false);
+//}
