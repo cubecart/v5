@@ -1271,6 +1271,7 @@ class Catalogue {
 		if (isset($product_id) && is_numeric($product_id)) {
 			$optionArray = $this->getProductOptions($product_id);
 			if (is_array($optionArray)) {
+				ksort($optionArray);
 				foreach ($optionArray as $type => $group) {
 					switch ($type) {
 						case self::OPTION_SELECT:		## Dropdown options
