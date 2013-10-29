@@ -115,6 +115,8 @@
  <hook trigger="class.gui.javascripts" deprecated="" />
  <hook trigger="class.order.manage_stock" deprecated="" />
  <hook trigger="class.order.order_summary" deprecated="" />
+ <hook trigger="class.order.assign_order_details" deprecated="" />
+ <hook trigger="class.order.get_order_details" deprecated="" />
  <hook trigger="class.order.order_status" deprecated="" />
  <hook trigger="class.order.place_order" deprecated="" />
  <hook trigger="class.order.place_order.basket" deprecated="" />

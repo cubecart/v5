@@ -219,8 +219,8 @@ class Order {
 
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
-							$order_summary['link'] 		= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
-							$this->assignOrderDetails();
+							//$order_summary['link'] 	= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
+							$this->assignOrderDetails(null,true);
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
 						}
@@ -242,7 +242,7 @@ class Order {
 					}
 					// Compose the Order Confirmation email to the customer
      				if ($this->_email_enabled && ($content = $mailer->loadContent('cart.order_confirmation', $order_summary['lang'])) !== false) {
-						$order_summary['link'] 		= $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$order_id;
+						//$order_summary['link'] 	= $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$order_id;
 						$this->assignOrderDetails();
 						$mailer->sendEmail($this->_order_summary['email'], $content);
 						unset($content);
@@ -252,8 +252,8 @@ class Order {
 					if ($GLOBALS['config']->get('config','admin_notify_status')=="2" && $this->_email_enabled && $this->_email_admin_enabled && $admin_notify = $this->_notifyAdmins()) {
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
-							$order_summary['link'] 		= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
-							$this->assignOrderDetails();
+							//$order_summary['link'] = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
+							$this->assignOrderDetails(null,true);
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
 						}
@@ -529,16 +529,21 @@ class Order {
 		$values['shipping']      = $shipping;
 		$values['taxes']         = $vars['taxes'];
 		$values['products']      = $vars['products'];
+		
+		foreach ($GLOBALS['hooks']->load('class.order.get_order_details') as $hook) include $hook;
 
 		$this->_email_details    = $values;
-
 		return $this->_email_details;
 
 	}
 
-	public function assignOrderDetails($values = null) {
+	public function assignOrderDetails($values = null, $admin = null) {
 	
 		$this->_email_details = (is_null($values)) ? $this->_email_details : $values;
+		$order_id = $this->_email_details['order_summary']['cart_order_id'];
+		$this->_email_details['order_summary']['link'] = (is_null($admin)) ? $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$order_id : $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
+		
+		foreach ($GLOBALS['hooks']->load('class.order.assign_order_details') as $hook) include $hook; // custom made details
 	
 		$GLOBALS['smarty']->assign('DATA', $this->_email_details['order_summary']);
 		$GLOBALS['smarty']->assign('BILLING', $this->_email_details['billing'] );
