@@ -139,6 +139,7 @@ class Order {
 			$GLOBALS['db']->delete('CubeCart_order_tax', $where);
 			$GLOBALS['db']->delete('CubeCart_order_notes', $where);
 			$GLOBALS['db']->delete('CubeCart_order_history', $where);
+			foreach ($GLOBALS['hooks']->load('class.order.delete') as $hook) include $hook;
 		}
 
 		return $deleted;
