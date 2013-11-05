@@ -286,16 +286,20 @@ class Website_Payments_Pro  {
 		), $nvp_data);
 
 		## PayPal's statistic tracking stuff
-		switch (strtoupper($GLOBALS['config']->get('config','default_currency'))) {
-			case 'CAD':
-				$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC_CA';
-				break;
-			case 'GBP':
-				$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC';
-				break;
-			case 'USD':
-				$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC_US';
-				break;
+		if($GLOBALS['session']->has('BML', 'PayPal_Pro') {
+			$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_BML';
+		} else {		
+			switch (strtoupper($GLOBALS['config']->get('config','default_currency'))) {
+				case 'CAD':
+					$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC_CA';
+					break;
+				case 'GBP':
+					$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC';
+					break;
+				case 'USD':
+					$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_EC_US';
+					break;
+			}
 		}
 		if ($response = $this->nvp_request('DoExpressCheckoutPayment', $nvp_data)) {
 			switch ($response['ACK']) {
@@ -435,6 +439,9 @@ class Website_Payments_Pro  {
 			
 			if($bml) {
 				$nvp_data = array_merge($nvp_data, array('USERSELECTEDFUNDINGSOURCE' => 'BML','SOLUTIONTYPE' => 'SOLE', 'LANDINGPAGE' => 'BILLING'));
+				$GLOBALS['session']->set('BML', true, 'PayPal_Pro');
+			} elseif($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
+				$GLOBALS['session']->delete('BML', 'PayPal_Pro');
 			}
 			
 			## Billing information
