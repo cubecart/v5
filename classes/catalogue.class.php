@@ -34,6 +34,12 @@ class Catalogue {
 	const OPTION_SELECT     = 0;
 	const OPTION_TEXTBOX    = 1;
 	const OPTION_TEXTAREA   = 2;
+	const OPTION_PASSWORD	= 3;
+	const OPTION_RADIO		= 4;
+	const OPTION_CHECKBOX	= 5;
+	const OPTION_DATEPICKER	= 6;
+	const OPTION_HIDDEN		= 7;
+	const OPTION_FILE		= 8;
 	/**
 	 * Class instance
 	 *

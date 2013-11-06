@@ -29,19 +29,25 @@ class Cubecart {
 	 */
 	private $_basket = null;
 
-	const	AFFILIATE_GATEWAY	= 1;
-	const	AFFILIATE_COMPLETE	= 2;
+	const AFFILIATE_GATEWAY		= 1;
+	const AFFILIATE_COMPLETE	= 2;
 
-	const	OPTION_SELECT		= 0;
-	const	OPTION_TEXTBOX		= 1;
-	const	OPTION_TEXTAREA		= 2;
+	const OPTION_SELECT			= 0;
+	const OPTION_TEXTBOX		= 1;
+	const OPTION_TEXTAREA		= 2;
+	const OPTION_PASSWORD		= 3;
+	const OPTION_RADIO			= 4;
+	const OPTION_CHECKBOX		= 5;
+	const OPTION_DATEPICKER		= 6;
+	const OPTION_HIDDEN			= 7;
+	const OPTION_FILE			= 8;
 
-	const 	ORDER_PENDING		= 1;
-	const 	ORDER_PROCESS		= 2;
-	const 	ORDER_COMPLETE		= 3;
-	const 	ORDER_DECLINED		= 4;
-	const 	ORDER_FAILED		= 5;
-	const 	ORDER_CANCELLED		= 6;
+	const ORDER_PENDING			= 1;
+	const ORDER_PROCESS			= 2;
+	const ORDER_COMPLETE		= 3;
+	const ORDER_DECLINED		= 4;
+	const ORDER_FAILED			= 5;
+	const ORDER_CANCELLED		= 6;
 
 	/**
 	 * Class instance
