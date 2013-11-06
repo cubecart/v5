@@ -47,6 +47,6 @@
   <string name="settings_paypal"><![CDATA[PayPal Profile Settings]]></string>
   <string name="paypal_ipn_url"><![CDATA[IPN URL (Optional)]]></string>
   <string name="paypal_ipn_url_explained"><![CDATA[The Instant Payment Notification (IPN) URL can be set in the Profile section of your PayPal account. This allows PayPal to send callback requests to your store to automatically deal with refunds, chargebacks etc&hellip;]]></string>
-   <string name="billmelater"><![CDATA[Enable BillMeLater (US Only)]]></string>
+   <string name="billmelater"><![CDATA[Enable <a href="https://www.billmelater.com/about/index.xhtml">BillMeLater</a> (US Only)]]></string>
  </group>
 </definitions>

@@ -286,7 +286,7 @@ class Website_Payments_Pro  {
 		), $nvp_data);
 
 		## PayPal's statistic tracking stuff
-		if($GLOBALS['session']->has('BML', 'PayPal_Pro') {
+		if($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
 			$nvp_data['BUTTONSOURCE'] = 'CubeCart_Cart_BML';
 		} else {		
 			switch (strtoupper($GLOBALS['config']->get('config','default_currency'))) {
