@@ -463,14 +463,14 @@ class Website_Payments_Pro  {
 			## Delivery information
 			if (isset($this->_basket['delivery_address']['first_name']) && $delivery = $this->_basket['delivery_address']) {
 				$nvp_data	= array_merge(array(
-					'SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
-					'SHIPTOSTREET'	=> $delivery['line1'],
-					'SHIPTOSTREET2'	=> $delivery['line2'],
-					'SHIPTOCITY'	=> $delivery['town'],
-					'SHIPTOSTATE'	=> $delivery['state_abbrev'],
-					'SHIPTOZIP'		=> $delivery['postcode'],
-					'SHIPTOCOUNTRY'	=> $delivery['country_iso'],
-					'SHIPTOPHONENUM'=> $billing['phone'], /* we don't have a delivery value for this */
+					'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
+					'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
+					'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> $delivery['line2'],
+					'PAYMENTREQUEST_0_SHIPTOCITY'	=> $delivery['town'],
+					'PAYMENTREQUEST_0_SHIPTOSTATE'	=> $delivery['state_abbrev'],
+					'PAYMENTREQUEST_0_SHIPTOZIP'		=> $delivery['postcode'],
+					'PAYMENTREQUEST_0_SHIPTOCOUNTRY'	=> $delivery['country_iso'],
+					'PAYMENTREQUEST_0_SHIPTOPHONENUM'=> $billing['phone'], /* we don't have a delivery value for this */
 					'ADDROVERRIDE'	=> '1',
 				), $nvp_data);
 			}
