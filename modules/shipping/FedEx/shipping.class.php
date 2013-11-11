@@ -127,7 +127,12 @@ class FedEx {
                                           'PostalCode' => $this->_settings['postcode'],
                                           'CountryCode' => $this->_settings['country']));
 		
-		$delivery_state = in_array($this->_basket['delivery_address']['country_iso'], array('US','CA')) ? $this->_basket['delivery_address']['state_abbrev'] : '';
+		if (in_array($this->_basket['delivery_address']['country_iso'], array('US','CA'))) {
+			$delivery_state = $this->_basket['delivery_address']['state_abbrev'];
+			if(strlen($delivery_state)>2) {
+				$delivery_state = getStateFormat($delivery_state, 'name', 'abbrev');
+			}
+		}
 		
 		
 		

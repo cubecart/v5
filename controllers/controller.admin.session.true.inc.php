@@ -40,6 +40,7 @@ if (!empty($_GET['_g'])) {
 		
 		// Get order for module based on popularity listing most popular first
 		$request = new Request('www.cubecart.com', '/stats/');
+		$request->skiplog(true);
 		$request->setData('null');
 		$response = $request->send();
 		$module_order = (!empty($response)) ? json_decode($response, true) : false;
