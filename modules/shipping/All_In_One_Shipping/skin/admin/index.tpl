@@ -198,7 +198,7 @@
         <div>
           <select id="zone_countries" data-placeholder="{$LANG.allinoneshipping.choose_each_country}" name="zone_countries[]" multiple="multiple" class="chzn-select" style="width:350px;">
             {foreach from=$COUNTRIES item=country}
-            <option value="{$country.iso}" {if in_array($country.iso, $ZONE_COUNTRIES)}selected="selected"{/if}>{$country.name}</option>
+            <option value="{$country.iso}" {if !empty($ZONE_COUNTRIES)}{if in_array($country.iso, $ZONE_COUNTRIES)}selected="selected"{/if}{/if}>{$country.name}</option>
             {/foreach}
           </select>
         </div>
