@@ -358,6 +358,9 @@ jQuery(document).ready(function() {
 		slideshow:true,
 		slideshowAuto:false
 	});
+	
+	$("a.colorbox_iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	$("a.colorbox_inline").colorbox({inline:true, width:"50%"});
 
 	$('.login-toggle').each(function(){
 		$('.login-method:not(:first)').slideUp();

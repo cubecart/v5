@@ -257,33 +257,49 @@ class Website_Payments_Pro  {
 		$i	= 0;
 		$tax_total	= 0;
 		$prod_total	= 0;
-		/*
-		foreach ($this->_basket['contents'] as $hash => $item) {
-			$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-			$price		= $item['total_price_each'];	## Always tax exclusive
-			$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-			$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-			$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
-
-			$tax_total	+= $prod_tax = $taxes['applied'];
-			$prod_total	+= $price;
-
+		$store_country = $GLOBALS['config']->get('config', 'store_country');
+		if($store_country==840) {
+			foreach ($this->_basket['contents'] as $hash => $item) {
+				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
+				$price		= $item['total_price_each'];	## Always tax exclusive
+				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
+				$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
+				$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
+	
+				$tax_total	+= $prod_tax = $taxes['applied'];
+				$prod_total	+= $price;
+	
+				$nvp_data	= array_merge(array(
+					'L_NAME'.$i	=> $item['name'],
+					'L_AMT'.$i	=> sprintf('%.2f', $price),
+					'L_QTY'.$i	=> $item['quantity'],
+					'L_TAX'.$i	=> sprintf('%.2f', $prod_tax),
+				), $nvp_data);
+				$i++;
+			}
+			
+			if($this->_basket['discount']>0) {
+				$nvp_data	= array_merge(array(
+					'L_NAME'.$i	=> 'Discount',
+					'L_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
+					'L_QTY'.$i	=> 1,
+					'L_TAX'.$i	=> 0,
+				), $nvp_data);
+			}
+			
 			$nvp_data	= array_merge(array(
-				'L_NAME'.$i	=> $item['name'],
-				'L_AMT'.$i	=> sprintf('%.2f', $price),
-				'L_QTY'.$i	=> $item['quantity'],
-				'L_TAX'.$i	=> sprintf('%.2f', $prod_tax),
+				'ITEMAMT'			=> $this->_basket['subtotal'],
+				'SHIPPINGAMT'		=> $this->_basket['shipping']['value'],
+				'TAXAMT'			=> $this->_basket['total_tax'],
+				'AMT'				=> $this->_basket['total'],
 			), $nvp_data);
-			$i++;
+			
+		} else {
+			$nvp_data	= array_merge(array(
+				'ITEMAMT'			=> $this->_basket['total'],
+				'AMT'				=> $this->_basket['total'],
+			), $nvp_data);
 		}
-		*/
-		$nvp_data	= array_merge(array(
-			//'ITEMAMT'			=> $this->_basket['subtotal'],
-			//'SHIPPINGAMT'		=> $this->_basket['shipping']['value'],
-			//'TAXAMT'			=> $this->_basket['total_tax'],
-			'ITEMAMT'			=> $this->_basket['total'],
-			'AMT'				=> $this->_basket['total'],
-		), $nvp_data);
 
 		## PayPal's statistic tracking stuff
 		if($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
@@ -479,36 +495,54 @@ class Website_Payments_Pro  {
 			$i 			= 0;
 			$tax_total	= 0;
 			$prod_total	= 0;
-			/* Fail fail fail 
-			foreach ($this->_basket['contents'] as $hash => $item) {
-				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-				$price		= $item['total_price_each'];	## Always tax exclusive
-				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-				$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-				$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
-
-				$tax_total	+= $prod_tax = $taxes['applied'];
-				$prod_total	+= $price;
-
+			
+			$store_country = $GLOBALS['config']->get('config', 'store_country');
+			if($store_country==840) {
+				foreach ($this->_basket['contents'] as $hash => $item) {
+					$product	= $GLOBALS['catalogue']->getProductData($item['id']);
+					$price		= $item['total_price_each'];	## Always tax exclusive
+					$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
+					$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
+					$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
+	
+					$tax_total	+= $prod_tax = $taxes['applied'];
+					$prod_total	+= $price;
+	
+					$nvp_data	= array_merge(array(
+						'L_NAME'.$i	=> $item['name'],
+						'L_AMT'.$i	=> sprintf('%.2f', $price),
+						'L_QTY'.$i	=> $item['quantity'],
+						'L_TAX'.$i	=> sprintf('%.2f', $prod_tax),
+					), $nvp_data);
+					$i++;
+				}
+				if($this->_basket['discount']>0) {
+					$nvp_data	= array_merge(array(
+						'L_NAME'.$i	=> 'Discount',
+						'L_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
+						'L_QTY'.$i	=> 1,
+						'L_TAX'.$i	=> 0,
+					), $nvp_data);
+				}
+				
+	
+				if (isset($this->_basket['shipping'])) {
+					$nvp_data['SHIPPINGAMT']	= sprintf('%.2f', $this->_basket['shipping']['value']);
+				}
+				
 				$nvp_data	= array_merge(array(
-					'L_NAME'.$i	=> $item['name'],
-					'L_AMT'.$i	=> sprintf('%.2f', $price),
-					'L_QTY'.$i	=> $item['quantity'],
-					'L_TAX'.$i	=> sprintf('%.2f', $prod_tax),
+					'ITEMAMT'	=> sprintf('%.2f', $this->_basket['subtotal']),
+					'TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
+					'AMT'		=> sprintf('%.2f', $this->_basket['total']),
 				), $nvp_data);
-				$i++;
+				
+			} else {
+				$nvp_data	= array_merge(array(
+					'ITEMAMT'	=> sprintf('%.2f', $this->_basket['total']),
+					'AMT'		=> sprintf('%.2f', $this->_basket['total']),
+				), $nvp_data);
 			}
-			*/
-
-			//if (isset($this->_basket['shipping'])) {
-			//	$nvp_data['SHIPPINGAMT']	= sprintf('%.2f', $this->_basket['shipping']['value']);
-			//}
-			$nvp_data	= array_merge(array(
-				//'ITEMAMT'	=> sprintf('%.2f', $this->_basket['subtotal']),
-				//'TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
-				'ITEMAMT'	=> sprintf('%.2f', $this->_basket['total']),
-				'AMT'		=> sprintf('%.2f', $this->_basket['total']),
-			), $nvp_data);
+			
 			if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 				$this->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
 				switch ($response['ACK']) {

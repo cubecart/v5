@@ -56,8 +56,14 @@
 		  </select>
 		</span>
 	  </div>
-	  <div><label for="paypal_billmelater">{$LANG.paypal_pro.billmelater}</label><span><input type="hidden" name="module[billmelater]" id="paypal_billmelater" class="toggle" value="{$MODULE.billmelater}" /></span></div>
+	  
 	</fieldset>
+	
+	<fieldset><legend>{$LANG.paypal_pro.financing}</legend>
+	{if $BML}
+	  <div><label for="paypal_billmelater">{$LANG.paypal_pro.billmelater}</label><span><input type="hidden" name="module[billmelater]" id="paypal_billmelater" class="toggle" value="{$MODULE.billmelater}" /></span></div>
+	  {/if}
+	 </fieldset>
 	
 	{if $MODULE.mode!=2}
 	<fieldset id='3ds'><legend>{$LANG.paypal_pro.settings_3ds}</legend>
