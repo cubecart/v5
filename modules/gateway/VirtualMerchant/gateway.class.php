@@ -74,7 +74,7 @@ class Gateway {
 
 	public function process() {
 
-		$cart_order_id = sanitizeVar($_REQUEST['cartId']); // Used in remote.php $cart_order_id is important for failed orders
+		$cart_order_id = sanitizeVar($_REQUEST['ssl_invoice_number']); // Used in remote.php $cart_order_id is important for failed orders
 
 		$order				= Order::getInstance();
 		$order_summary		= $order->getSummary($cart_order_id);
