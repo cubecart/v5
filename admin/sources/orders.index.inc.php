@@ -262,8 +262,9 @@ if (isset($_GET['action'])) {
 
 			$overview_summary['percent'] = '';
 			if ($overview_summary['discount_type'] == 'p') {
-//				$overview_summary['percent'] = number_format(($overview_summary['discount']/($overview_summary['subtotal']+$overview_summary['discount']))*100) . '%';
 				$overview_summary['percent'] = number_format(($overview_summary['discount']/$overview_summary['subtotal'])*100) . '%';
+			} else if ($overview_summary['discount_type'] == 'pp') {
+				$overview_summary['percent'] = number_format(($overview_summary['discount']/($overview_summary['subtotal']+$overview_summary['discount']))*100) . '%';
 			}
 
 			$overview_summary['name']		= (isset($summary[0]['name']) && !empty($summary[0]['name'])) ? $summary[0]['name'] : $summary[0]['first_name'].' '.$summary[0]['last_name'];
@@ -445,8 +446,9 @@ if (isset($_GET['action'])) {
 			// Price Formatting
 			$summary['percent'] = '';
 			if ($summary['discount_type'] == 'p') {
-//				$summary['percent'] = number_format(($summary['discount']/($summary['subtotal']+$summary['discount']))*100) . '%';
 				$summary['percent'] = number_format(($summary['discount']/$summary['subtotal'])*100) . '%';
+			} else if ($summary['discount_type'] == 'pp') {
+				$summary['percent'] = number_format(($summary['discount']/($summary['subtotal']+$summary['discount']))*100) . '%';
 			}
 			$format	= array('discount','shipping','subtotal','total_tax','total');
 			foreach ($format as $field) {

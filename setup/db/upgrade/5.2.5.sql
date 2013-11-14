@@ -1,0 +1,1 @@
+ALTER TABLE `CubeCart_order_summary` CHANGE `discount_type` `discount_type` CHAR( 2 ); #EOQ
