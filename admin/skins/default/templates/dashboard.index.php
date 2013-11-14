@@ -134,7 +134,7 @@
 		  	<a href="?_g=orders&amp;action=edit&amp;order_id={$order.cart_order_id}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" /></a>
 		  	<a href="?_g=orders&amp;delete={$order.cart_order_id}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		  	{if isset($order.notes)}
-		  	<a href="?_g=orders&action=edit&order_id={$order.cart_order_id}#order_notes" title="{$LANG.dashboard.notes_read}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/note.png" alt="{$LANG.common.notes}" /></a>
+		  	<a href="?_g=orders&action=edit&order_id={$order.cart_order_id}#order_notes" title="{foreach $order.notes as $note}{$note.time} {$note.content}{"\r\n"}{/foreach}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/note.png" alt="{$LANG.common.notes}" /></a>
 		  	{/if}
 		  </td>
 		</tr>
