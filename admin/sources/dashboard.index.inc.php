@@ -147,15 +147,20 @@ if ($unsettled_orders) {
 	$tax = Tax::getInstance();
 	$GLOBALS['main']->addTabControl($lang['dashboard']['title_orders_unsettled'], 'orders', null, null, $unsettled_count);
 	foreach ($unsettled_orders as $order) {
-		if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', array('cart_order_id'), array('cart_order_id' => $order['cart_order_id']))) !== false) {
-			$order['notes'] = $notes[0];
-		}
-		$order['icon']		= (empty($order['customer_id'])) ? 'user_ghost' : 'user_registered';
-		$order['date']		= formatTime($order['order_date']);
-		$order['total']		= Tax::getInstance()->priceFormat($order['total']);
-		$order['status']	= $lang['order_state']['name_'.$order['status']];
-		$orders[] = $order;
+		$cart_order_ids[] = "'".$order['cart_order_id']."'";
+		$order['icon'] = (empty($order['customer_id'])) ? 'user_ghost' : 'user_registered';
+		$order['date'] = formatTime($order['order_date']);
+		$order['total'] = Tax::getInstance()->priceFormat($order['total']);
+		$order['status'] = $lang['order_state']['name_'.$order['status']];
+		$orders[$order['cart_order_id']] = $order;
 	}
+	if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', array('cart_order_id','time','content'), array('cart_order_id' => $cart_order_ids))) !== false) {
+		foreach($notes as $note) {
+			$order_notes[$note['cart_order_id']]['notes'][] = $note;
+		}
+		$orders = merge_array($orders,$order_notes);
+	}
+
 	$GLOBALS['smarty']->assign('ORDERS', $orders);
 	$GLOBALS['smarty']->assign('ORDER_PAGINATION', $GLOBALS['db']->pagination($unsettled_count, $results_per_page, $page, $show = 5,'orders', 'orders', $glue = ' ', $view_all = true));
 } 

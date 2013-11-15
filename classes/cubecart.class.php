@@ -1486,7 +1486,7 @@ class Cubecart {
 							$coupon['value'] = $GLOBALS['tax']->priceFormat($coupon['value'], true);
 							$coupons[] = $coupon;
 						} else if ($coupon['type'] == 'percent') {
-							$this->_basket['discount_type'] = 'p';
+							$this->_basket['discount_type'] = $coupon['products'] ? 'pp' : 'p';
 							$coupon['voucher'] .= ' ('.$coupon['value'].'%)';
 							$coupon['value'] = $GLOBALS['tax']->priceFormat($coupon['discount_value'], true);
 							$coupons[] = $coupon;

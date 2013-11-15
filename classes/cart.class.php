@@ -1224,7 +1224,10 @@ class Cart {
 					}
 					// if we're including or excluding ANY products, whether in the cart or not,
 					// we need to block full cart discounts
-					if(count($products) > 0) $this->_item_discount = true;
+					if(count($products) > 0) {
+						$this->_item_discount = true;
+						$this->basket['coupons'][$key]['products'] = 1;
+					}
 				}
 			}
 		}
