@@ -154,11 +154,11 @@ if ($unsettled_orders) {
 		$order['status'] = $lang['order_state']['name_'.$order['status']];
 		$orders[$order['cart_order_id']] = $order;
 	}
-		if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', array('cart_order_id','time','content'), array('cart_order_id' => $cart_order_ids))) !== false) {
-			foreach($notes as $note) {
-				$order_notes[$note['cart_order_id']]['notes'][] = $note;
-			}
-		$orders = array_merge($orders,$order_notes);
+	if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', array('cart_order_id','time','content'), array('cart_order_id' => $cart_order_ids))) !== false) {
+		foreach($notes as $note) {
+			$order_notes[$note['cart_order_id']]['notes'][] = $note;
+		}
+		$orders = merge_array($orders,$order_notes);
 	}
 
 	$GLOBALS['smarty']->assign('ORDERS', $orders);
