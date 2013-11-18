@@ -48,7 +48,7 @@
 		  {/if}
 
 	 	  {if isset($PRODUCT.discounts)}
-	      <p class="bulk_discount">(<a href="#quantity_discounts">{$LANG.catalogue.bulk_discount}</a>)</p>
+	      <div class="bulk_discount">(<a href="#quantity_discounts">{$LANG.catalogue.bulk_discount}</a>)</div>
 	      {/if}
 	  </p>
 
