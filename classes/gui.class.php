@@ -614,7 +614,6 @@ class GUI {
 				$logo_config[$skin] = $target;
 			}
 		}
-		$GLOBALS['config']->set('logos', false, $logo_config); // Save skin logos (required now)
 		
 		foreach($extra_templates as $type) {
 			if (isset($custom[$type])) {
@@ -626,7 +625,7 @@ class GUI {
 			}
 			$logo_config[$type] = $target;	
 		}
-		$GLOBALS['config']->set('logos',false,$logo_config); // Save skin and extra templates
+		$GLOBALS['config']->set('logos',false,str_replace(CC_DS,'/',$logo_config)); // Save skin and extra templates
 		
 	}
 
