@@ -45,6 +45,13 @@ class Gateway {
 	}
 
 	public function fixedVariables() {
+		
+		if($GLOBALS['db']->count('CubeCart_modules', 'module_id', array('module' => 'gateway', 'status' => '1')) == 1) {
+			$cancel_return = 'confirm';
+		} else {
+			$cancel_return = 'gateway';
+		}
+		
 		$hidden	= array(
 			'cmd'			=> '_xclick',
 			'charset'		=> 'utf-8',
@@ -72,7 +79,7 @@ class Gateway {
 			## IPN and Return URLs
 			'notify_url'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
 			'return'		=> $GLOBALS['storeURL'].'/index.php?_a=complete',
-			'cancel_return'	=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
+			'cancel_return'	=> $GLOBALS['storeURL'].'/index.php?_a='.$cancel_return,
 			'rm'			=> 2 // 2 = return POST vars
 		);
 		return $hidden;
