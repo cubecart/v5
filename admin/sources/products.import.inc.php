@@ -342,6 +342,7 @@ if (isset($_POST['process'])) {
 		}
 	}
 	## Provide upload box, and format selector
+	/*
 	$formats	= glob(CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'importers'.CC_DS.'*.xml');
 	if (isset($formats) && is_array($formats)) {
 		foreach ($formats as $format) {
@@ -351,6 +352,7 @@ if (isset($_POST['process'])) {
 		}
 		$GLOBALS['smarty']->assign('FORMATS',$smarty_data['formats']);
 	}
+	*/
 	$GLOBALS['smarty']->assign('DISPLAY_FORM',true);
 
 }

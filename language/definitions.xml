@@ -447,7 +447,7 @@
     <string name="title_value_remaining" introduced="5.0.0"><![CDATA[Remaining Value]]></string>
     <string name="trackback_url" introduced="5.0.0"><![CDATA[Trackback URL]]></string>
     <string name="trackbacks" introduced="5.0.0"><![CDATA[Trackbacks]]></string>
-    <string name="unknown_format" introduced="5.0.0"><![CDATA[Unknown Format or Generic CSV]]></string>
+    <string name="unknown_format" introduced="5.0.0"><![CDATA[Comma-Separated Values (CSV)]]></string>
     <string name="update_by_amount" introduced="5.0.0"><![CDATA[By Amount]]></string>
     <string name="update_by_percent" introduced="5.0.0"><![CDATA[By Percent]]></string>
     <string name="update_checked_products" introduced="5.1.2"><![CDATA[Update selected products]]></string>
