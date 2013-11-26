@@ -12,18 +12,20 @@ class Free_Shipping {
 	
 	public function calculate() {
 		$basket_value = ($this->_basket['subtotal'] - $this->_basket['discount']);
-		if(($basket_value>=$this->_settings['trigger']) || (!is_numeric($this->_settings['trigger']) || $this->_settings['trigger']==0)) {
-			$package[]	= array(
-				'id'		=> 0,
-				'name'		=> empty($this->_settings['name']) ? '' : $this->_settings['name'],
-				'value'		=> 0,
-				'tax_id'	=> 0,
-				## Delivery times not applicable to this module
-				'shipping'	=> '',
-				'delivery'	=> '',
-				'next_day'	=> '',
-			);
-			return $package;
+
+		if((($basket_value>=$this->_settings['trigger']) || (!is_numeric($this->_settings['trigger']) || $this->_settings['trigger']==0)) &&
+                (($this->_basket['weight']<=$this->_settings['maxweight']) || (!is_numeric($this->_settings['maxweight']) || $this->_settings['maxweight']==0))) {
+        $package[]	= array(
+          'id'		=> 0,
+          'name'		=> empty($this->_settings['name']) ? '' : $this->_settings['name'],
+          'value'		=> 0,
+          'tax_id'	=> 0,
+          ## Delivery times not applicable to this module
+          'shipping'	=> '',
+          'delivery'	=> '',
+          'next_day'	=> '',
+        );
+        return $package;
 		} else {
 			return false;
 		}
