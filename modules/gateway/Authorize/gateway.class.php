@@ -43,6 +43,7 @@ class Gateway {
 			$fingerprint 	= $this->_getFingerprint($this->_module['acNo'],$this->_module['txnkey'], $this->_basket['total'], $fp_sequence, $fp_timestamp);
 			
 			$hidden = array(
+				'x_type'				=> $this->_module['payment_type'], //AUTH_CAPTURE or AUTH_ONLY
 				'x_login' 				=> $this->_module['acNo'],
 				'x_fp_hash'				=> $fingerprint,
 				'x_amount'				=> $this->_basket['total'],
