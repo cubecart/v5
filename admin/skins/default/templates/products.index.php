@@ -64,7 +64,13 @@
 				<td>{$product.product_code}</td>
 		 		<td>{$product.price}</td>
 	 			<!--<td align="center">{$product.stock_level}</td>-->
-		  		<td>{$product.updated}</td>
+		  		<td>
+		  		{if $product.updated == '0000-00-00 00:00:00'}
+		  			{$LANG.common.unknown}
+		  		{else}
+		  			{$product.updated}
+		  		{/if}
+		  		</td>
 		  		<td align="center">
 		  			{foreach from=$product.translations item=translation}
 		  			<a href="{$translation.link}"><img src="language/flags/{$translation.language}.png" alt="{$translation.language}" /></a>
