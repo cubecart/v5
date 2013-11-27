@@ -1250,6 +1250,10 @@ if (isset($_GET['action'])) {
 		$seo		= SEO::getInstance();
 		foreach ($results as $result) {
 			
+			if($result['use_stock_level'] == 0 || $result['digital'] > 0 || !empty($result['digital_path'])) {
+				$result['stock_level'] = "-";
+			}
+			
 			if($stock_variations = $GLOBALS['db']->select('CubeCart_option_matrix','MAX(stock_level) AS max_stock, MIN(stock_level) AS min_stock', array('product_id' => $result['product_id'], 'use_stock' => 1, 'status' => 1),false,1)) {
 				if(is_numeric($stock_variations[0]['min_stock']) && is_numeric($stock_variations[0]['max_stock'])) {
 					$result['stock_level'] =  ($stock_variations[0]['min_stock'] == $stock_variations[0]['max_stock']) ? $stock_variations[0]['max_stock'] : $stock_variations[0]['min_stock'].' - '.$stock_variations[0]['max_stock'];
