@@ -569,6 +569,10 @@ h2+p, h2+div {
 	font-style: italic;
 	padding: 10px;
 }
+.review .content img {
+	float: left;
+	margin: 0 5px 0px 0;
+}
 p.author {
 	padding-bottom: 5px;
 }

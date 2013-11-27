@@ -261,6 +261,7 @@ class Catalogue {
 							$review['name'] = $GLOBALS['language']->catalogue['review_anon'];
 						}
 						$review['date']		= formatTime($review['time']);
+						$review['gravatar']	= md5(strtolower(trim($review['email'])));
 						$vars[]	= $review;
 					}
 					$GLOBALS['smarty']->assign('REVIEWS', $vars);

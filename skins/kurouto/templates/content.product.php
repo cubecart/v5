@@ -152,7 +152,7 @@
 		</span>
 		{$review.title}
 	  </h3>
-	  <p class="content">{$review.review}</p>
+	  <p class="content"><a href="http://gravatar.com/emails/"><img src="http://www.gravatar.com/avatar/{$review.gravatar}?s=50" /></a>{$review.review}</p>
 	  <p class="author">
 		{$review.name} :: {$review.date}
 	  </p>
