@@ -35,7 +35,7 @@
 	  			<th nowrap="nowrap">{$THEAD.name}</th>
 	  			<th nowrap="nowrap">{$THEAD.product_code}</th>
 	  			<th nowrap="nowrap">{$THEAD.price}</th>
-	  			<!--<th nowrap="nowrap">{$THEAD.stock_level}</th>-->
+	  			<th nowrap="nowrap">{$THEAD.stock_level}</th>
 	  			<th nowrap="nowrap">{$THEAD.updated}</th>
 	  			<th nowrap="nowrap">{$THEAD.translations}</th>
 	  			<th nowrap="nowrap">&nbsp;</th>
@@ -63,7 +63,7 @@
 				</td>
 				<td>{$product.product_code}</td>
 		 		<td>{$product.price}</td>
-	 			<!--<td align="center">{$product.stock_level}</td>-->
+	 			<td align="center">{$product.stock_level}</td>
 		  		<td>
 		  		{if $product.updated == '0000-00-00 00:00:00'}
 		  			{$LANG.common.unknown}

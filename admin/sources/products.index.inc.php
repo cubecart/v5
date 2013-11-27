@@ -1184,7 +1184,7 @@ if (isset($_GET['action'])) {
 	  	'name' 			=> $GLOBALS['db']->column_sort('name',$lang['catalogue']['product_name'],'sort',$current_page,$_GET['sort']),
 	  	'product_code' 	=> $GLOBALS['db']->column_sort('product_code',$lang['catalogue']['product_code'],'sort',$current_page,$_GET['sort']),
 	 	'price' 		=> $GLOBALS['db']->column_sort('price',$lang['common']['price'],'sort',$current_page,$_GET['sort']),
-	  	'stock_level' 	=> $GLOBALS['db']->column_sort('stock_level',$lang['catalogue']['title_stock'],'sort',$current_page,$_GET['sort']),
+	  	'stock_level' 	=> $lang['catalogue']['title_stock'],
 	  	'updated' 		=> $GLOBALS['db']->column_sort('updated',$lang['catalogue']['title_last_updated'],'sort',$current_page,$_GET['sort']),
 	  	'translations' 	=> $lang['translate']['title_translations']
 	);
@@ -1249,6 +1249,13 @@ if (isset($_GET['action'])) {
 		$catalogue	= Catalogue::getInstance();
 		$seo		= SEO::getInstance();
 		foreach ($results as $result) {
+			
+			if($stock_variations = $GLOBALS['db']->select('CubeCart_option_matrix','MAX(stock_level) AS max_stock, MIN(stock_level) AS min_stock', array('product_id' => $result['product_id'], 'use_stock' => 1, 'status' => 1),false,1)) {
+				if(is_numeric($stock_variations[0]['min_stock']) && is_numeric($stock_variations[0]['max_stock'])) {
+					$result['stock_level'] =  ($stock_variations[0]['min_stock'] == $stock_variations[0]['max_stock']) ? $stock_variations[0]['max_stock'] : $stock_variations[0]['min_stock'].' - '.$stock_variations[0]['max_stock'];
+				}
+			}
+			
 			$result['link_preview']	= "index.php?_a=product&product_id=".$result['product_id'];
 			if (!$GLOBALS['config']->get('config','product_clone') || $GLOBALS['config']->get('config','product_clone')<2)
 			{
