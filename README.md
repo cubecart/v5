@@ -2,7 +2,8 @@
 
 Please find install and upgrade instructions online. Links below...
 
-## [Installation](https://support.cubecart.com/index.php?/Knowledgebase/Article/View/193/0/how-can-i-install-cubecart-v5)
+## Installation
+https://support.cubecart.com/index.php?/Knowledgebase/Article/View/193/0/how-can-i-install-cubecart-v5 
 
 ## Upgrading from v5 to v5
 https://support.cubecart.com/index.php?/Knowledgebase/Article/View/197/43/how-do-i-upgrade-from-cubecart-v5-to-latest-v5
