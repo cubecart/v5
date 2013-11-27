@@ -274,7 +274,7 @@ class Module {
 		// $name is the module folder name, $module_title is the title set in the module lang file which is preferable
 		if (is_array($images) && isset($images[0])) {
 			$title = (empty($module_title)) ? $name : $module_title;
-			return '<img src="modules/'.$type.'/'.$name.'/admin/'.basename($images[0]).'" alt="'.$title.'" title="'.$title.'" />';
+			return '<img src="modules/'.$type.'/'.$name.'/admin/'.basename($images[0]).'" alt="'.$title.'" title="'.$title.'" width="114" />';
 		} elseif(!empty($module_title)) {
 			return $module_title;
 		} else {
