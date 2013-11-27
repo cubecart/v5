@@ -1449,6 +1449,10 @@
     <string name="notify_review_status" introduced="5.0.0"><![CDATA[Review statuses updated.]]></string>
     <string name="notify_review_update" introduced="5.0.0"><![CDATA[Review successfully updated.]]></string>
     <string name="title_reviews" introduced="5.0.0"><![CDATA[Product Reviews]]></string>
+    <string name="title_bulk_delete" introduced="5.2.5"><![CDATA[Bulk Delete]]></string>
+    <string name="bulk_delete_desc" introduced="5.2.5"><![CDATA[To delete multiple reviews at once please enter an ip address and/or email address and click &quot;Submit&quot;. This can't be undone.]]></string>
+    <string name="notify_review_deleted" introduced="5.2.5"><![CDATA[Reviews successfully deleted.]]></string>
+    <string name="notify_review_delete_fail" introduced="5.2.5"><![CDATA[No reviews were deleted.]]></string>
     <string name="title_review_edit" introduced="5.0.0"><![CDATA[Edit Review]]></string>
     <string name="title_review_search" introduced="5.0.0"><![CDATA[Search Reviews]]></string>
   </group>

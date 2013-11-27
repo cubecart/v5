@@ -30,6 +30,27 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete']) && Admin::getInstance(
 	httpredir(currentPage(array('delete')));
 }
 
+## Bulk delete reviews
+$delete_array_email = array();
+$delete_array_ip_address = array();
+$bulk_delete = false;
+if(!empty($_POST['delete']['email'])) {
+	$delete_array_email = array('email' => $_POST['delete']['email']);
+	$bulk_delete = true;
+}
+if(!empty($_POST['delete']['ip_address'])) {
+	$delete_array_ip_address = array('ip_address' => $_POST['delete']['ip_address']);
+	$bulk_delete = true;
+}
+if($bulk_delete) {
+	$delete_array = array_merge($delete_array_email, $delete_array_ip_address);
+	if($GLOBALS['db']->delete('CubeCart_reviews', $delete_array)) {
+		$GLOBALS['main']->setACPNotify($lang['reviews']['notify_review_deleted']);
+	} else {
+		$GLOBALS['main']->setACPWarning($lang['reviews']['notify_review_delete_fail']);
+	}
+}
+
 ## Update Review
 if (isset($_POST['review']) && is_array($_POST['review']) && is_numeric($_POST['review']['id']) && Admin::getInstance()->permissions('reviews', CC_PERM_EDIT)) {
 	$record	= array(
@@ -121,6 +142,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit']) && Admin::getInstance()->p
 } else {
 
 	$GLOBALS['main']->addTabControl($lang['reviews']['title_reviews'], 'reviews');
+	$GLOBALS['main']->addTabControl($lang['reviews']['title_bulk_delete'], 'bulk_delete');
 	$GLOBALS['main']->addTabControl($lang['common']['search'], 'search');
 
 	$page		= (isset($_GET['page'])) ? $_GET['page'] : 1;

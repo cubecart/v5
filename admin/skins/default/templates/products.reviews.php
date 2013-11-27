@@ -31,7 +31,7 @@
 		  {section name=i start=1 loop=6 step=1}<input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if} />{/section}
 		</span>
 		<a href="index.php?_a=product&amp;product_id={$review.product_id}" target="_blank">{$review.product.name}</a> &raquo;
-		{$review.date} - {$review.name}
+		{$review.date} - {$review.name} <<a href="mailto:{$review.email}">{$review.email}</a>> {$review.ip_address}
 	  </div>
 	</div>
 	{foreachelse}
@@ -41,6 +41,14 @@
 	<div class="pagination">
 	  <span>{$TOTAL_RESULTS}</span>{$PAGINATION}
 	</div>
+  </div>
+  <div id="bulk_delete" class="tab_content">
+	<h3>{$LANG.reviews.title_bulk_delete}</h3>
+	<p>{$LANG.reviews.bulk_delete_desc}</p>
+	<fieldset>
+	  <div><label for="email">{$LANG.common.email}</label><span><input type="text" id="email" name="delete[email]" class="textbox" /></span></div>
+	  <div><label for="ip_address">{$LANG.common.ip_address}</label><span><input type="text" id="ip_address" name="delete[ip_address]" class="textbox" /></span></div>
+	</fieldset>
   </div>
   <div id="search" class="tab_content">
 	<h3>{$LANG.reviews.title_review_search}</h3>
