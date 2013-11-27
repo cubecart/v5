@@ -166,7 +166,13 @@
 	  <tr>
 		<td align="center"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$user.is_admin}.png" /></td>
 		<td>
-		  <strong>{$user.name}</strong>
+		  <strong>
+		  {if !empty($user.customer_id)}
+		  	<a href="{$CONFIG.adminFile}?_g=customers&action=edit&customer_id={$user.customer_id}">{$user.name}</a>
+		  {else}
+		  	{$user.name}
+		  {/if}
+		  </strong>
 		  {if !empty($user.ip_address)}
 		  <br />
 		  [<a href="http://api.hostip.info/get_html.php?ip={$customer.ip_address}&amp;position=true" class="colorbox hostip">{$user.ip_address}</a>]
