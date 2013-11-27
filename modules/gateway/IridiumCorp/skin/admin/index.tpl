@@ -108,7 +108,7 @@
         <fieldset>
             <legend>{$LANG.module.cubecart_settings}</legend>
             <div>
-                <label for="description">{$LANG.common.description}</label>
+                <label for="description">{$LANG.common.description} *</label>
                 <span>
                     <input type="text" name="module[desc]" id="desc" class="textbox" readonly="readonly" value="{$MODULE.desc}" />
                 </span>
@@ -253,6 +253,7 @@
                 </div>
             </div>
         </fieldset>
+        <p>{$LANG.module.description_options}</p>
     </div>
 </div>
 

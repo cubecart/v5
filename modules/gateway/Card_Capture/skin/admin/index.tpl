@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="validation">{$LANG.card_capture.card_validation}</label><span><input type="hidden" name="module[validation]" id="validation" class="toggle" value="{$MODULE.validation}" /></span></div>
     		<div><label for="issue_info">{$LANG.card_capture.card_show_issue}</label><span><input type="hidden" name="module[issue_info]" id="issue_info" class="toggle" value="{$MODULE.issue_info}" /></span></div>
     		<div><label for="cvv">{$LANG.card_capture.card_cvv_store}</label><span><input type="hidden" name="module[cvv]" id="cvv" class="toggle" value="{$MODULE.cvv}" /></span></div>
@@ -89,6 +89,7 @@
 			  </tbody>
 			</table>
 		  </fieldset>
+		  <p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">

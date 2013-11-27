@@ -1202,6 +1202,7 @@
     <string name="config_settings" introduced="5.0.0"><![CDATA[Configuration Settings]]></string>
     <string name="cubecart_settings" introduced="5.0.0"><![CDATA[Module Settings]]></string>
     <string name="3rd_party_settings_desc" introduced="5.0.0"><![CDATA[The following read only settings needs to be set within the 3rd parties control panel interface.]]></string>
+    <string name="description_options" introduced="5.2.5"><![CDATA[* It is possible to either enter text such as &quot;Credit Card&quot; or enter a file path to an image.]]></string>
     <string name="merchant_id" introduced="5.0.0"><![CDATA[Merchant ID]]></string>
     <string name="notify_module_status" introduced="5.0.0"><![CDATA[Module statuses updated.]]></string>
     <string name="mode_test" introduced="5.0.0"><![CDATA[Test Mode]]></string>

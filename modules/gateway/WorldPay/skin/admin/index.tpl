@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="acNo">{$LANG.worldpay.install_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span></div>
 			<div><label for="testmode">{$LANG.module.mode_test}</label>
 				<span>
@@ -33,6 +33,7 @@
 			<div><label for="callback_enabled">{$LANG.worldpay.callback_enabled}</label><span><input name="callback_enabled" id="callback_enabled" class="textbox" type="text" value="{$LANG.common.yes}" readonly="readonly" /></span>
 			<div><label for="callback_response">{$LANG.worldpay.callback_response}</label><span><input name="callback_response" id="callback_response" class="textbox" type="text" value="{$LANG.common.yes}" readonly="readonly" /></span>
 			</fieldset>
+			<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">

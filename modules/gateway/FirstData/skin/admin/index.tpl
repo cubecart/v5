@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="storename">{$LANG.firstdata.store_number}</label><span><input name="module[storename]" id="storename" class="textbox" type="text" value="{$MODULE.storename}" /></span></div>
 			<div><label for="txntype">{$LANG.module.transaction_type}</label>
 				<span>
@@ -48,6 +48,7 @@
 			<div><label for="fail_url">{$LANG.firstdata.fail_url}</label><span><input name="fail_url" id="fail_url" class="textbox" type="text" value="{$LANG.firstdata.leave_empty}" readonly="readonly" /></span></div>
 			<div><label for="use_cgi">{$LANG.firstdata.url_is_cgi}</label><span><input name="use_cgi" id="use_cgi" class="textbox" type="text" value="{$LANG.firstdata.check_both}" readonly="readonly" /></span></div>
   		</fieldset>
+  		<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">

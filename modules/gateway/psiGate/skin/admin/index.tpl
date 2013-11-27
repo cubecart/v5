@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="acNo">{$LANG.module.merchant_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span></div>
 			<div><label for="passphrase">{$LANG.psigate.passphrase}</label><span><input name="module[passPhrase]" id="passPhrase" class="textbox" type="text" value="{$MODULE.passPhrase}" /></span></div>
 			<div><label for="gate">{$LANG.psigate.gateway_mode}</label>
@@ -29,11 +29,13 @@
 			<div><label for="gate">{$LANG.module.mode_test}</label>
 				<span><input type="hidden" name="module[test]" id="test" class="toggle" value="{$MODULE.test}" /></span>
 			</div>
+			</fieldset>
+			<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
-  	</fieldset>
+  	
   	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

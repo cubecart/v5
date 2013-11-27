@@ -15,7 +15,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="merchant_id">{$LANG.realex.merchant_id}</label><span><input name="module[merchant_id]" id="merchant_id" class="textbox" type="text" value="{$MODULE.merchant_id}" /></span></div>
 	  <div><label for="secret_word">{$LANG.realex.secret_word}</label><span><input name="module[secret_word]" id="secret_word" class="textbox" type="text" value="{$MODULE.secret_word}" /></span></div>
 	  <div>
@@ -23,7 +23,7 @@
 	<p>{$LANG.realex.contact_realex}</p>
 	<strong>{$LANG.realex.referring_url}:</strong> {$URL.referring}<br />
 	<strong>{$LANG.realex.response_url}:</strong> {$URL.response}
-	
+	<p>{$LANG.module.description_options}</p>
   </div>
   {$MODULE_ZONES}
   <div class="form_control"><input type="submit" name="save" value="{$LANG.common.save}" /></div>

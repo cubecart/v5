@@ -17,7 +17,7 @@
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
 	  <div><label for="test_mode">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[test_mode]" id="test_mode" class="toggle" value="{$MODULE.test_mode}" /></span></div>
-	  <div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div>
 	  	<label for="API_method">{$LANG.optimalpayments.api_method}</label>
 	  		<span>
@@ -35,6 +35,7 @@
   		<p>{$LANG.module.3rd_party_settings_desc}</p>
   		<div><label for="call_url">{$LANG.optimalpayments.call_url}</label><span><input name="call_url" id="call_url" class="textbox" type="text" value="{$MODULE.callURL}" readonly="readonly" /></span></div>
   	</fieldset>
+  	<p>{$LANG.module.description_options}</p>
   </div>
   {$MODULE_ZONES}
   <div class="form_control"><input type="submit" name="save" value="{$LANG.common.save}" /></div>

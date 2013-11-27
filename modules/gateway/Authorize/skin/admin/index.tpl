@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="acNo">{$LANG.module.merchant_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span></div>
 			<div>
 				<label for="mode">{$LANG.authorize.mode}</label>
@@ -51,8 +51,8 @@
     			<div><label for="encapsulation_char">{$LANG.authorize.encapsulation_char}</label><span><input name="encapsulation_char" id="encapsulation_char" class="textbox" type="text" value="{$LANG.authorize.encapsulation_char_value}" readonly="readonly" /></span></div>
     			<div><label for="password_mode">{$LANG.authorize.password_mode}</label><span><input name="password_mode" id="password_mode" class="textbox" type="text" value="{$LANG.authorize.password_mode_value}" readonly="readonly" /></span></div>
     		</fieldset>
+    		<p>{$LANG.module.description_options}</p>
   		</div>
-
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />

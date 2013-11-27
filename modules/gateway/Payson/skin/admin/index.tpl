@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="email">{$LANG.common.email}</label><span><input name="module[email]" id="email" class="textbox" type="text" value="{$MODULE.email}" /></span></div>
 			<div>
 				<label for="mode">{$LANG.payson.mode}</label>
@@ -40,12 +40,14 @@
     				</span>
     		</div>
     		<div><label for="agentid">{$LANG.payson.agentid}</label><span><input name="module[agentid]" id="agentid" class="textbox" type="text" value="{$MODULE.agentid}" /></span></div>
-    		<div><label for="key">{$LANG.payson.key}</label><span><input name="module[key]" id="key" class="textbox" type="text" value="{$MODULE.key}" /></span></div>	
+    		<div><label for="key">{$LANG.payson.key}</label><span><input name="module[key]" id="key" class="textbox" type="text" value="{$MODULE.key}" /></span></div>
+    		</fieldset>
+    		<p>{$LANG.module.description_options}</p>	
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
-  	</fieldset>
+  	
   	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

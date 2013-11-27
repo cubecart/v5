@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="product_id">{$LANG.common.email}</label><span><input name="module[email]" id="email" class="textbox" type="text" value="{$MODULE.email}" /></span></div>
   			<div><label for="email">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[testMode]" id="testMode" class="toggle" value="{$MODULE.testMode}" /></span>
     		</div>
@@ -23,6 +23,7 @@
     	<fieldset><legend>{$LANG.nochex_apc.settings}</legend>
     		<p>{$LANG.nochex_apc.APC_note}</p>
     	</fieldset>
+    	<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">

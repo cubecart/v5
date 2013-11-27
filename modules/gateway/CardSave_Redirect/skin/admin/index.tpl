@@ -30,7 +30,7 @@
 				<input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" />
 			</span></div>
 			<div>
-				<label for="description">{$LANG.common.description}</label>
+				<label for="description">{$LANG.common.description} *</label>
 				<span>
 				<input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" />
 			</span></div>
@@ -94,6 +94,7 @@
 					<input type="hidden" name="module[CountryMandatory]" id="CountryMandatory" class="toggle" value="{$MODULE.CountryMandatory}" />
 				</span></div>
 		</fieldset>
+		<p>{$LANG.module.description_options}</p>
 	</div>
 	{$MODULE_ZONES}
 	<div class="form_control">

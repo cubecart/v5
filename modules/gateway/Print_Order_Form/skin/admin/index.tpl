@@ -15,7 +15,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="multiCurrency">{$LANG.print_order_form.currency_multi}</label><span><input type="hidden" name="module[multiCurrency]" id="multiCurrency" class="toggle" value="{$MODULE.multiCurrency}" /></span></div>
 	  <div><label for="cheque">{$LANG.print_order_form.cheque_allow}</label><span><input type="hidden" name="module[cheque]" id="cheque" class="toggle" value="{$MODULE.cheque}" /></span></div>
 	  <div><label for="payableTo">{$LANG.print_order_form.cheque_payable}</label><span><input type="text" name="module[payableTo]" value="{$MODULE.payableTo}" class="textbox" size="30" /></span></div>
@@ -37,6 +37,7 @@
 	<fieldset><legend>{$LANG.common.notes}</legend>
 	  <div><label for="notes">{$LANG.print_order_form.notes}</label><span><textarea name="module[notes]" cols="30" rows="5">{$MODULE.notes}</textarea></span></div>
 	</fieldset>
+	<p>{$LANG.module.description_options}</p>
   </div>
   {$MODULE_ZONES}
   <div class="form_control"><input type="submit" name="save" value="{$LANG.common.save}" /></div>

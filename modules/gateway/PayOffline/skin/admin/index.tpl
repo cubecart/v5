@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="merchKey">Merchant Key</label><span><input name="module[merchKey]" id="merchKey" class="textbox" type="text" value="{$MODULE.merchKey}" /></span></div>
 			<div><label for="secretKey">Secret Key</label><span><input name="module[secretKey]" id="secretKey" class="textbox" type="text" value="{$MODULE.secretKey}" /></span></div>
 			<div><label for="testMode">{$LANG.module.mode_test}</label>
@@ -28,12 +28,14 @@
     </select>	
 				</span>
 			</div>
+			</fieldset>
+			<p>{$LANG.module.description_options}</p>
   		</div>
 
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
-  	</fieldset>
+  	
   	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="userID">{$LANG.hsbc.user_id}</label><span><input name="module[userID]" id="userID" class="textbox" type="text" value="{$MODULE.userID}" /></span></div>
 			<div><label for="passPhrase">{$LANG.hsbc.password}</label><span><input name="module[passPhrase]" id="passPhrase" class="textbox" type="password" value="{$MODULE.passPhrase}" autocomplete="off" /></span></div>
 			<div><label for="acNo">{$LANG.hsbc.client_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span>
@@ -55,11 +55,13 @@
     				</span>
     				&nbsp; {$LANG.hsbc.avs_check_info}
     		</div>
+    		</fieldset>
+    		<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
-  	</fieldset>
+  	
   	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

@@ -26,7 +26,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="mode">{$LANG.eway.mode}</label>
 		<span>
 		  <select name="module[mode]">
@@ -40,6 +40,7 @@
 	  <div><label for="customername">{$LANG.eway.customername}</label><span><input name="module[customername]" id="customername" class="textbox" type="text" value="{$MODULE.customername}" /></span></div>
 	  <div><label for="sandbox">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[test]" id="sandbox" class="toggle" value="{$MODULE.test}" /></span></div>
 	</fieldset>
+	<p>{$LANG.module.description_options}</p>
   </div>
   {$MODULE_ZONES}
   <div class="form_control"><input type="submit" name="save" value="{$LANG.common.save}" /></div>

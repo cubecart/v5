@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="acNo">{$LANG.module.merchant_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span></div>
 			<div><label for="passphrase">{$LANG.sagepay.encryption_phrase}</label><span><input name="module[passphrase]" id="passphrase" class="textbox" type="text" value="{$MODULE.passphrase}" /></span></div>
 			<div><label for="gate">{$LANG.sagepay.transaction_mode}</label>
@@ -47,13 +47,15 @@
 			<!--<div><label for="iframe">{$LANG.sagepay.iframe}</label><span><input type="hidden" name="module[iframe]" id="iframe" class="toggle" value="{$MODULE.iframe}" /></span></div>-->
 			<p>{$LANG.sagepay.mode_warning}</p>
 			<div><label for="VendorEMail">{$LANG.sagepay.vendor_email}</label><span><input name="module[VendorEMail]" id="VendorEMail" class="textbox" type="text" value="{$MODULE.VendorEMail}" /></span></div>
+			</fieldset>
+  		<p>{$LANG.module.description_options}</p>
   		</div>
   		
   		{$MODULE_ZONES}
   		<div class="form_control">
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
-  	</fieldset>
+  	
   	
   	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

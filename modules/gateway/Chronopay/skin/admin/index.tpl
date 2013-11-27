@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description}</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="product_id">{$LANG.chronopay.product_id}</label><span><input name="module[product_id]" id="product_id" class="textbox" type="text" value="{$MODULE.product_id}" /></span></div>
 			<div><label for="shared_sec">{$LANG.chronopay.shared_sec}</label><span><input name="module[shared_sec]" id="shared_sec" class="textbox" type="text" value="{$MODULE.shared_sec}" /></span></div>
 			<div><label for="actKey">{$LANG.common.currency}</label><span>{$LANG.chronopay.currency_info}</span></div>
@@ -24,6 +24,7 @@
   		<p>{$LANG.module.3rd_party_settings_desc}</p>
   		<div><label>{$LANG.chronopay.access_url}</label><span class="courier"><input type="text" value="{$MODULE.processURL}" readonly="readonly" class="textbox" /></span></div>
   		</fieldset>
+  		<p>{$LANG.module.description_options}</p>
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">
