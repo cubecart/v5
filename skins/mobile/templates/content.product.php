@@ -89,8 +89,15 @@
 	  		<p class="buy_button"><strong>{$LANG.catalogue.out_of_stock}</strong></p>
 	  	{/if}
 	  {/if}
+	  
+	  {if $SHARE}
+	  	{foreach from=$SHARE item=html}
+	  		{$html}
+	    {/foreach}
+	  {/if}
 	</div>
   </div>
+  
   <h2>{$LANG.catalogue.product_info}</h2>
   <div id="product_description">
 	  {$PRODUCT.description}
