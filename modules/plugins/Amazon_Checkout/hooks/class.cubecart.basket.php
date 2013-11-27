@@ -82,8 +82,9 @@ if(defined('PURCHASE_CONTRACT_ID') && $module_config = $GLOBALS['config']->get('
 					$GLOBALS['cart']->basket['register']			= false;
 					$GLOBALS['cart']->save();
 			    }
-			    if($GLOBALS['session']->get('stage', 'amazon')=='wallet' && $GLOBALS['session']->get('basket_redirect', 'amazon')!==true) {
-			    	$GLOBALS['session']->set('basket_redirect', true, 'amazon');
+			    
+			    if($GLOBALS['session']->get('stage', 'amazon')=='wallet' && $GLOBALS['session']->get('postcode', 'amazon')!==$customer_address['postcode']) {
+			    	$GLOBALS['session']->set('postcode', $customer_address['postcode'], 'amazon');
 			    	httpredir('index.php?_a=basket');
 			    	exit;
 			    }
