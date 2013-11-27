@@ -75,12 +75,12 @@ if (isset($_POST['review']) && is_array($_POST['review']) && is_numeric($_POST['
 ## Approve reviews
 if (isset($_POST['approve']) && is_array($_POST['approve']) && Admin::getInstance()->permissions('reviews', CC_PERM_EDIT)) {
 	$updated = false;
+	$before = md5(serialize($GLOBALS['db']->select('CubeCart_reviews', 'approved')));
 	foreach ($_POST['approve'] as $review_id => $status) {
-		if($GLOBALS['db']->update('CubeCart_reviews', array('approved' => (int)$status), array('id' => (int)$review_id))) {
-			$updated = true;
-		}
+		$GLOBALS['db']->update('CubeCart_reviews', array('approved' => (int)$status), array('id' => (int)$review_id));
 	}
-	if ($updated) {
+	$after = md5(serialize($GLOBALS['db']->select('CubeCart_reviews', 'approved')));
+	if ($before !== $after) {
 		$GLOBALS['main']->setACPNotify($lang['reviews']['notify_review_status']);
 	}
 	## origin variable tells us we need to come back to the dashboard now
