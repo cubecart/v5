@@ -1,6 +1,6 @@
 # Welcome to CubeCart v5
 
-Please find install and upgrade instructions online. Links below...
+Please find install and upgrade instructions online following the links below. CubeCart is a registered trade mark of Devellion Limited which is a UK registered company (5323904). [Software License Agreement](http://cubecart.com/software-license) 
 
 ## Installation
 https://support.cubecart.com/index.php?/Knowledgebase/Article/View/193/0/how-can-i-install-cubecart-v5 
