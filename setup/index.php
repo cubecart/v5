@@ -144,7 +144,6 @@ $default_config_settings	= array (
 	'offline_content'					=> '<div style="font-family: georgia,serif; text-align: center;"><p style="font-size: 18px;">Store is currently offline.</p><p style="font-size: 14px;">Please visit again soon.</p></div>',
 	'product_sort_column'				=> 'name',
 	'product_sort_direction'			=> 'ASC',
-	'bfattempts'						=> 5
 );
 
 ksort($default_config_settings);

@@ -344,7 +344,6 @@
 {include file='templates/element.hook_form_content.php'}
 
 <div class="form_control">
-  <input type="hidden" name="config[bfattempts]" value="5" />
   <input id="submit" type="submit" class="button" value="{$LANG.common.save}" />
   <input type="hidden" name="previous-tab" id="previous-tab" value="" />
 </div>

@@ -161,6 +161,7 @@ $config_default	= array(
 	'rootRel'		=> CC_ROOT_REL,
 	'storeURL'		=> CC_STORE_URL,
 	'bftime'		=> '600',
+	'bfattempts'	=> 5
 );
 
 // Include a custom ini file, if it exists
