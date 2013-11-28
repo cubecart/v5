@@ -192,11 +192,9 @@ if (isset($_GET['action']) && (Admin::getInstance()->superUser() || ((int)$_GET[
 		'customers'		=> 5,
 		'documents'		=> 4,
 		'filemanager'	=> 7,
-	#	'offers'		=> 11,	# Deprecated in 5.0.0
 		'orders'		=> 10,
 		'products'		=> 2,
 		'users'			=> 1,
-	#	'shipping'		=> 6,	# Not used? Part of settings?
 		'statistics'	=> 8,
 		'settings'		=> 9,
 		'reviews'		=> 12,

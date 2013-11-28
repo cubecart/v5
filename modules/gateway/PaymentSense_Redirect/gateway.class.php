@@ -3,7 +3,6 @@ class Gateway {
 	private $_config;
 	private $_module;
 	private $_basket;
-	private $_vendorTxCode;
 	private $_url;
 
 	public function __construct($module = false, $basket = false) {
@@ -11,7 +10,6 @@ class Gateway {
 
 		$this->_module			= $module;
 		$this->_basket			= $basket;
-		$this->_vendorTxCode 	= md5(randomPass(3).time().rand(0,32000)).randomPass(8);
 		$this->_url = "https://mms.paymentsensegateway.com/Pages/PublicPages/PaymentForm.aspx";
 	}
 

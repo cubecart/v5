@@ -12,7 +12,7 @@ class Gateway {
 
 		$this->_module			= $module;
 		$this->_basket			= $basket;
-		$this->_vendorTxCode 	= md5(randomPass(3).time().rand(0,32000)).randomPass(8);
+		$this->_vendorTxCode 	= md5($this->_randomPass(3).time().rand(0,32000)).randomPass(8);
 		$this->_encryption		= ($this->_module['encryption'] == 'XOR') ? 'XOR' : 'AES';
 		
 		if($this->_module['gate'] == "sim") {
@@ -22,6 +22,17 @@ class Gateway {
 		} elseif($this->_module['gate'] == "live"){
 			$this->_url = "https://live.sagepay.com/gateway/service/vspform-register.vsp";
 		} 
+	}
+	
+	private function _randomPass($max = 8) {
+		$chars = array("a","A","b","B","c","C","d","D","e","E","f","F","g","G","h","H","i","I","j","J", "k","K","l","L","m","M","n","N","o","O","p","P","q","Q","r","R","s","S","t","T", "u","U","v","V","w","W","x","X","y","Y","z","Z","1","2","3","4","5","6","7","8","9","0");
+		
+		$max_chars = count($chars) - 1;
+		srand((double)microtime()*1000000);
+		for ($i = 0; $i < $max; $i++) {
+			$newPass = ($i == 0) ? $chars[rand(0, $max_chars)] : $newPass . $chars[rand(0, $max_chars)];
+		}
+		return $newPass;
 	}
 
 	private function _simpleXor($InString) {
