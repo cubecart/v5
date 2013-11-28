@@ -898,10 +898,10 @@ if (isset($_GET['action'])) {
 			}
 			## Images & files
 			$file_array	= array();
-			if (($images = $GLOBALS['db']->select('CubeCart_image_index', array('file_id', 'main_img', 'img'), array('product_id' => (int)$_GET['product_id']))) !== false) {
+			if (($images = $GLOBALS['db']->select('`'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_image_index` AS `I` INNER JOIN `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_filemanager` as `F`', 'I.file_id, I.main_img, F.filepath, F.filename', array('I.product_id' => (int)$_GET['product_id']))) !== false) {
 				$update_filemanager = false;
 				foreach ($images as $image) {
-					if (!file_exists(CC_ROOT_DIR.CC_DS.'images'.CC_DS.'source'.CC_DS.$image['img'])) {
+					if (!file_exists(CC_ROOT_DIR.CC_DS.'images'.CC_DS.'source'.CC_DS.$image['filepath'].$image['filename'])) {
 						$GLOBALS['db']->delete('CubeCart_image_index', array('file_id' => $image['file_id']));
 						$update_filemanager = true;
 						continue;
