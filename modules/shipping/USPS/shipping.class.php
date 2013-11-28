@@ -152,8 +152,8 @@ class USPS {
 						if($this->_settings['class_id_'.$option['CLASSID']]) {
 							$package[]	= array(
 								'id'		=> (string)$option['CLASSID'],
-								'name'		=> (string)$this->cleanName($option->MailService),
-								'value'		=> (string)$this->plusHandling($option->Rate),
+								'name'		=> (string)$this->cleanName((string)$option->MailService),
+								'value'		=> (string)$this->plusHandling((float)$option->Rate),
 								'tax_id'	=> (int)$this->_settings['tax'],
 								## Delivery times
 								'shipping'	=> "",
