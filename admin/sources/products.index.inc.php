@@ -95,9 +95,8 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 			
 			}
 			unset($_POST['download']);
-		} else {
-			//$record['digital']	= 0;
-		}
+		} 
+		
 		$record['updated'] = date('Y-m-d H:i:s', time());
 		if ($GLOBALS['db']->update('CubeCart_inventory', $record, array('product_id' => $_POST['product_id']), true, array('stock_level'))) {
 			$product_id = $_POST['product_id'];
@@ -126,13 +125,6 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 	unset($record);
 	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id'];
 
-	if (isset($uploaded) && is_array($uploaded)) {
-		foreach ($uploaded as $image) {
-			$GLOBALS['db']->insert('CubeCart_image_index', array('product_id' => $product_id));
-		}
-	}
-
-	#############################################
 
 	// Option Sets - Assign
 	if (isset($_POST['set_assign']) && !empty($_POST['set_assign'])) {
