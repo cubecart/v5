@@ -195,7 +195,7 @@ class SSL {
 				
 				if(preg_match('/seo_path/', $page)) {
 					$URL = SEO::getInstance()->getItem($params['seo_path'], true);
-					$page = str_replace($GLOBALS['config']->get('config', 'ssl_url'),$GLOBALS['config']->get('config', 'standard_url'),SEO::getInstance()->SEOable($URL));
+					$page = str_ireplace($GLOBALS['config']->get('config', 'ssl_url'),$GLOBALS['config']->get('config', 'standard_url'),SEO::getInstance()->SEOable($URL));
 				}
 				
 				httpredir($page);
