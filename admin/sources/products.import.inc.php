@@ -205,7 +205,7 @@ if (isset($_POST['process'])) {
 				'jan'				=> $lang['catalogue']['product_jan'],
 				'isbn'				=> $lang['catalogue']['product_isbn'],
 				'brand'				=> $lang['catalogue']['product_brand'],
-				'grin'				=> $lang['catalogue']['product_grin'],
+				'gtin'				=> $lang['catalogue']['product_gtin'],
 				'man'				=> $lang['catalogue']['product_mpn']
 			);
 			$fp		= fopen($source, 'r');
