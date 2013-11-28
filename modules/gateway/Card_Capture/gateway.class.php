@@ -317,7 +317,7 @@ class Gateway {
 	private function check($cardNo, $issueNo=null, $issueDate=null, $expireDate=null, $securityCode=null) {
 		// Card Validation RegEx
 		$cardArray = array(
-			'AMERICAN EXPRESS'		=> '#^[34|37|47]([0-9]{14}|[0-9]{13}|[0-9]{12})$#',
+			'AMERICAN EXPRESS'		=> '#^3([0-9]{15}|[0-9]{14}|[0-9]{13})$#', // #^[34|37|47]([0-9]{14}|[0-9]{13}|[0-9]{12})$#
 			'MASTERCARD'			=> '#^5[1-5][0-9]{14}$#',
 			'VISA'					=> '#^4[0-9]{12}([0-9]{3})?$#',
 
