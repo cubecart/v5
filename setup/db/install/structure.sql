@@ -361,7 +361,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_image_index` (
 	`product_id` INT UNSIGNED NOT NULL,
 	`file_id` INT UNSIGNED NOT NULL,
 	`main_img` ENUM('0','1') NOT NULL DEFAULT '0',
-	`img` VARCHAR(255) NOT NULL,
 	PRIMARY KEY `id` (`id`),
 	KEY `file_id` (`file_id`),
 	KEY `productId` (`product_id`)

@@ -99,7 +99,6 @@ if (isset($_POST['process'])) {
 								$image[0]['file_id']	= (int)$GLOBALS['db']->insertid();
 							}
 						}
-						$image[0]['img'] = $image_path.$image_name; // Value for `img` in CubeCart_image_index
 					}
 					if ($polymorph) {
 						if (isset($map[$headers[$offset]])) {
@@ -129,8 +128,7 @@ if (isset($_POST['process'])) {
 						$image_record = array (
 							'product_id'	=> $product_id,
 							'file_id'		=> $image[0]['file_id'],
-							'main_img'		=> 1,
-							'img'			=> $image[0]['img']
+							'main_img'		=> 1
 						);
 						$GLOBALS['db']->insert('CubeCart_image_index', $image_record);
 					}

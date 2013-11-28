@@ -1344,11 +1344,10 @@ class Catalogue {
 			if (($gallery = $GLOBALS['db']->select('CubeCart_image_index', false, array('product_id' => $product_id), array('main_img' => 'DESC'))) !== false) {
 				$duplicates = array();
 				foreach ($gallery as $key => $image) {
-					if (is_array($image_types) && !in_array($image['img'],$duplicates)) {
-						$duplicates[] = $image['img'];
+					if (is_array($image_types) && !in_array($image['file_id'],$duplicates)) {
+						$duplicates[] = $image['file_id'];
 						foreach ($image_types as $type) {
-							$source = ($image['file_id']) ? $image['file_id'] : $image['img'];
-							$image[$type] = $this->imagePath($source, $type);
+							$image[$type] = $this->imagePath($image['file_id'], $type);
 						}
 						$return[] = $image;
 						$json['image_'.$image['id']] = $image;

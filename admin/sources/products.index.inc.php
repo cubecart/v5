@@ -119,11 +119,6 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
 	}
 
-	// Do we need to make a new SEO path for them if product name has changed and seo path hasn't?
-	//if($old_product_data && $old_product_data[0]['name']!==$_POST['name'] && $GLOBALS['seo']->getdbPath('prod', $product_id)==$_POST['seo_path']) {
-	//	$_POST['seo_path'] = $_POST['name'];
-	//}
-
 	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
 		$updated = true;
 	}
@@ -133,7 +128,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 
 	if (isset($uploaded) && is_array($uploaded)) {
 		foreach ($uploaded as $image) {
-			$GLOBALS['db']->insert('CubeCart_image_index', array('product_id' => $product_id, 'img' => $image));
+			$GLOBALS['db']->insert('CubeCart_image_index', array('product_id' => $product_id));
 		}
 	}
 
@@ -352,7 +347,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 
 	if (isset($_POST['image']) && is_array($_POST['image'])) {
 		// md5 compare of before / after so we know if changes have been made or not
-		if (($before = $GLOBALS['db']->select('CubeCart_image_index', array('product_id', 'file_id', 'main_img', 'img'), array('product_id' => (int)$product_id))) !== false) {
+		if (($before = $GLOBALS['db']->select('CubeCart_image_index', array('product_id', 'file_id', 'main_img'), array('product_id' => (int)$product_id))) !== false) {
 			$hash_before = md5(serialize($before));
 			foreach ($before as $old_img) {
 				$old_images[] = $old_img['file_id'];
@@ -400,7 +395,6 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 				if (($image = $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => (int)$image_id))) !== false) {
 					$record	= array(
 						'file_id'		=> (int)$image_id,
-						'img'			=> $image[0]['filepath'].$image[0]['filename'],
 						'product_id'	=> (int)$product_id,
 						'main_img'		=> ($default == (int)$image_id) ? '1' : '0',
 					);
@@ -410,7 +404,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 		}
 
 		// md5 compare of before / after so we know if changes have been made or not
-		if (($after = $GLOBALS['db']->select('CubeCart_image_index', array('product_id', 'file_id', 'main_img', 'img'), array('product_id' => (int)$product_id))) !== false) {
+		if (($after = $GLOBALS['db']->select('CubeCart_image_index', array('product_id', 'file_id', 'main_img'), array('product_id' => (int)$product_id))) !== false) {
 			$hash_after = md5(serialize($after));
 		}
 		if (isset($hash_before, $hash_after) && $hash_before !== $hash_after) $updated = true;
@@ -608,7 +602,7 @@ if (isset($_GET['action']) && strtolower($_GET['action'])=='clone' && isset($_GE
 		if ($product_id && $product_id_parent) {
 
 			// Images
-			if ($GLOBALS['config']->get('config','product_clone_images') && ($image_i = $GLOBALS['db']->select('CubeCart_image_index', array('file_id', 'main_img', 'img'), array('product_id' => $product_id_parent))) !== false) {
+			if ($GLOBALS['config']->get('config','product_clone_images') && ($image_i = $GLOBALS['db']->select('CubeCart_image_index', array('file_id', 'main_img'), array('product_id' => $product_id_parent))) !== false) {
 
 			    foreach ($image_i as $row_no => $image_index) {
 		    	    $image_index['product_id'] = $product_id;

@@ -410,8 +410,7 @@ class GUI {
 			$this->_product_images[$product_id] = isset($this->_product_images[$product_id]) ? $this->_product_images[$product_id] : $GLOBALS['db']->select('CubeCart_image_index', false, array('product_id' => $product_id), array('main_img' => 'DESC'), 1);
 
 			if ($this->_product_images[$product_id]) {
-				$image_ref	= ($this->_product_images[$product_id][0]['file_id']) ? $this->_product_images[$product_id][0]['file_id'] : $this->_product_images[$product_id][0]['img'];
-				return $GLOBALS['catalogue']->imagePath($image_ref, $mode, 'url');
+				return $GLOBALS['catalogue']->imagePath($this->_product_images[$product_id][0]['file_id'], $mode, 'url');
 			}
 		}
 
