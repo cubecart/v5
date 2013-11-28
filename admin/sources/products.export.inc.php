@@ -70,8 +70,8 @@ if (isset($_GET['format']) && !empty($_GET['format'])) {
 				$image_mode = 'medium';
 				break;
 			case 'cubecart':
-				$header_fields	= array('Product Name','Product Code','Product Description','Price','Sale Price','Cost Price','Image','Stock Level','Use Stock','Master Category ID','Manufacturer','UPC','EAN','JAN','ISBN','Brand','MPN','GTIN');
-				$fields		= array('name', 'product_code', 'description', 'price', 'sale_price', 'cost_price','image', 'stock_level', 'use_stock_level', 'cat_id', 'manufacturer','upc','ean','jan','isbn','brand','mpn','gtin');
+				$header_fields	= array('Product Name','Status','Featured','Product Code', 'Weight','Description','Price','Sale Price','Cost Price','Tax Class','Tax Inclusive','Main Image','Stock Level','Use Stock Level', 'Stock Level Warning','Master Category ID','Manufacturer','UPC Code','EAN Code','JAN Code','ISBN Code','Brand','MPN Code','GTIN Code','Meta Title', 'Meta Keywords', 'Meta Description','Condition');
+				$fields		= array('name', 'status','Include in latest products','product_code', 'product_weight', 'description', 'price', 'sale_price', 'cost_price','tax_type', 'tax_inclusive','image', 'stock_level', 'use_stock_level', 'stock_warning','cat_id', 'manufacturer','upc','ean','jan','isbn','brand','mpn','gtin','seo_meta_title','seo_meta_description','seo_meta_keywords','condition');
 				$delimiter	= ',';
 				$extension	= 'csv';
 				$glue		= "\n";
