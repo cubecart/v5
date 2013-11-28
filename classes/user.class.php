@@ -307,7 +307,7 @@ class User {
 					}
 					return true;
 				} else {
-					$GLOBALS['gui']->setError($GLOBALS['language']->account['error_login_blocked']);
+					$GLOBALS['gui']->setError($GLOBALS['language']->account['error_login_block']);
 				}
 			}
 		}
