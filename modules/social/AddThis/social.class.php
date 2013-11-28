@@ -52,6 +52,9 @@ class AddThis {
 					$this->_html[] = '<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>';
 				}
 				$this->_html[] = '<script type="text/javascript" src="'.$this->_protocol.$this->_url.$this->_path.'#username='.$this->_module['username'].'"></script>';
+				
+                if ($this->_section=='product') $GLOBALS['smarty']->assign('FBOG', 1);
+				
 				return implode("\r\n", $this->_html);
 			} else {
 				return false;
