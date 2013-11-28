@@ -379,8 +379,12 @@ class Admin {
 							$GLOBALS['db']->update('CubeCart_admin_users', $newdata, array('admin_id' => $user[0]['admin_id']));
 						}
 					}
+					$GLOBALS['gui']->setError($GLOBALS['language']->account['error_login']);
+				} else {
+					$minutes_blocked = ceil(($GLOBALS['config']->get('config', 'bftime')/60));
+					$GLOBALS['gui']->setError(sprintf('Too many invalid logins have been made. Access has been blocked for %s minutes.', $minutes_blocked));
 				}
-				$GLOBALS['gui']->setError($GLOBALS['language']->account['error_login']);
+				
 			}
 			if (!$GLOBALS['session']->blocked()) {
 				$redir = '';
@@ -413,6 +417,9 @@ class Admin {
 				}
 
 				httpredir((isset($redir) && !empty($redir)) ? $redir : $GLOBALS['rootRel'].$GLOBALS['config']->get('config', 'adminFile'));
+			} else {
+				$minutes_blocked = ceil(($GLOBALS['config']->get('config', 'bftime')/60));
+				$GLOBALS['gui']->setError(sprintf('Too many invalid logins have been made. Access has been blocked for %s minutes.', $minutes_blocked));
 			}
 		} else {
 			$GLOBALS['gui']->setError($GLOBALS['language']->account['error_login']);

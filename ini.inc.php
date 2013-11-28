@@ -159,9 +159,7 @@ $GLOBALS['storeURL'] = CC_STORE_URL;
 
 $config_default	= array(
 	'rootRel'		=> CC_ROOT_REL,
-	'storeURL'		=> CC_STORE_URL,
-	'bftime'		=> '600',
-	'bfattempts'	=> 5
+	'storeURL'		=> CC_STORE_URL
 );
 
 // Include a custom ini file, if it exists
