@@ -36,17 +36,11 @@ if (isset($_POST['process'])) {
 
 	$schema		= $importers.CC_DS.basename($_POST['process']);
 	$column		= 0;
-	$required	= array();
 	
 	if (isset($_POST['map']) && is_array($_POST['map'])) {
 		## Use the user defined mapping
 		foreach ($_POST['map'] as $col => $value) {
 			$map[$column++]	= (string)$value;
-		}
-		if (isset($_POST['required']) && is_array($_POST['required'])) {
-			foreach ($_POST['required'] as $offset => $value) {
-				if (!empty($value)) $required[] = $map[$offset];
-			}
 		}
 		$delimiter	= (isset($_POST['delimiter']) && !empty($delimiter)) ? $_POST['delimiter'] : ',';
 		$has_header	= (isset($_POST['option']['headers'])) ? true : false;
@@ -112,7 +106,6 @@ if (isset($_POST['process'])) {
 							$product_record[$map[$headers[$offset]]] = $value;
 						}
 					} else {
-						if (empty($map[$offset]) || (in_array($map[$offset], $required) && empty($value))) continue;
 						$product_record[$map[$offset]] = $value;
 					}
 				}

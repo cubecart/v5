@@ -50,7 +50,6 @@
 			<option value="">{$LANG.catalogue.import_column_ignore}</option>
 			{foreach from=$COLUMNS item=column}<option value="{$column.column}">{$column.title}</option>{/foreach}
 		  </select>
-		  &nbsp; {$LANG.common.required} <input type="checkbox" name="required[{$map.offset}]" value="1" />
 		</span>
 	  </div>
 	  {/foreach}
