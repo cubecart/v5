@@ -37,39 +37,8 @@ if (isset($_POST['process'])) {
 	$schema		= $importers.CC_DS.basename($_POST['process']);
 	$column		= 0;
 	$required	= array();
-	if (!empty($_POST['process']) && file_exists($schema)) {
-		## Use the schema file
-
-		$polymorph	= false;
-		$xml		= new SimpleXMLElement(file_get_contents($schema));
-		if ($xml) {
-			foreach ($xml->structure->field as $field) {
-				/*
-				## TO DO... data transformation
-				if (isset($field->attributes()->type)) {
-					switch strtolower((string)$field->attributes()->type) {
-						case 'bool':
-						case 'boolean':
-							break;
-					}
-				}
-				*/
-				$value	= ($field->attributes()->ignored) ? null :(string)$field->attributes()->column;
-				if (isset($field->attributes()->required) && strtolower((string)$field->attributes()->required) == 'true') $required[] = (string)$field->attributes()->column;
-				if (isset($field->attributes()->source) && !empty($field->attributes()->source)) {
-					## Polymorphic column mapping
-					$polymorph	= true;
-					$map[(string)$field->attributes()->source] = $value;
-				} else {
-					$offset			= (isset($field->attributes()->offset) && is_numeric($field->attributes()->offset)) ? (int)$field->attributes()->offset : $column;
-					$map[$offset]	= $value;
-				}
-				$column++;
-			}
-			$delimiter	= (isset($xml->info->delimiter)) ? (string)$xml->info->delimiter : $delimiter;
-			$has_header	= (isset($xml->info->headers)) ? true : false;
-		}
-	} else if (isset($_POST['map']) && is_array($_POST['map'])) {
+	
+	if (isset($_POST['map']) && is_array($_POST['map'])) {
 		## Use the user defined mapping
 		foreach ($_POST['map'] as $col => $value) {
 			$map[$column++]	= (string)$value;
@@ -204,123 +173,62 @@ if (isset($_POST['process'])) {
 		httpredir(currentPage());
 	} else if (is_uploaded_file($_FILES['source']['tmp_name']) && move_uploaded_file($_FILES['source']['tmp_name'], $source)) {
 		## Display interstitial page before actually importing, either displaying example data from source, or a means to map the CSV to the database columns
-	#	if ($_FILES['source']['type']=="text/plain") {
-			$schema		= $importers.CC_DS.basename($_POST['format']);
-			if (isset($_POST['format']) && !empty($_POST['format']) && file_exists($schema)) {
-
-				$xml	= new SimpleXMLElement(file_get_contents($schema));
-				$i		= 0;
-				## Create index -> column map
-				foreach ($xml->structure->field as $field) {
-					$value	= ($field->attributes()->ignored) ? null : (string)$field->attributes()->column;
-					if (isset($field->attributes()->source) && !empty($field->attributes()->source)) {
-						## Polymorphic column mapping (Yes, I'm looking at you, Magento)
-						$map[(string)$field->attributes()->source] = $value;
-					} else {
-						$map[$i++]	= $value;
-					}
+			$delimiter	= (isset($_POST['delimiter']) && !empty($_POST['delimiter'])) ? $_POST['delimiter'] : ',';
+			## No format map available, so give them a manual assignment form
+			$fields	= array(	# Update for language strings
+				'status'			=> $lang['common']['status'],
+				'name'				=> $lang['catalogue']['product_name'],
+				'image'				=> $lang['catalogue']['image_main'],
+				'product_code'		=> $lang['catalogue']['product_code'],
+				'cat_id'			=> $lang['catalogue']['master_caregory_id'],
+				'description'		=> $lang['common']['description'],
+				'manufacturer'		=> $lang['catalogue']['manufacturer'],
+				'price'				=> $lang['common']['price'],
+				'sale_price'		=> $lang['common']['price_sale'],
+				'cost_price'		=> $lang['common']['price_cost'],
+				'product_weight'	=> $lang['common']['weight'],
+				'use_stock_level'	=> $lang['catalogue']['stock_level_use'],
+				'stock_level'		=> $lang['catalogue']['stock_level'],
+				'stock_warning'		=> $lang['catalogue']['stock_level_warn'],
+				'digital'			=> $lang['catalogue']['is_digital'],
+				'digital_path'		=> $lang['catalogue']['file_path'],
+				'tax_type'			=> $lang['catalogue']['tax_class'],
+				'tax_inclusive'		=> $lang['catalogue']['tax_inclusive'],
+				'featured'			=> $lang['catalogue']['product_latest'],
+				'seo_path'			=> $lang['settings']['seo_path'],
+				'seo_meta_title'		=> $lang['settings']['seo_meta_title'],
+				'seo_meta_keywords'		=> $lang['settings']['seo_meta_keywords'],
+				'seo_meta_description'	=> $lang['settings']['seo_meta_description'],
+				'condition'			=> $lang['catalogue']['condition'],
+				'upc'				=> $lang['catalogue']['product_upc'],
+				'ean'				=> $lang['catalogue']['product_ean'],
+				'jan'				=> $lang['catalogue']['product_jan'],
+				'isbn'				=> $lang['catalogue']['product_isbn'],
+				'brand'				=> $lang['catalogue']['product_brand'],
+				'grin'				=> $lang['catalogue']['product_grin'],
+				'man'				=> $lang['catalogue']['product_mpn']
+			);
+			$fp		= fopen($source, 'r');
+			$data	= fgetcsv($fp, null, str_replace('tab', "\t", $delimiter));
+			fclose($fp);
+			if (is_array($data)) {
+				foreach ($data as $offset => $value) {
+					$smarty_data['maps'][]	= array('offset' => (int)$offset, 'example' => $value);
 				}
-				##
-				$delimiter	= (isset($xml->info->delimiter)) ? (string)$xml->info->delimiter : $delimiter;
-				$has_header	= (isset($xml->info->headers)) ? true : false;
-				## Load some rows from import data
-				$fp	= fopen($source, 'rb');
-				if ($fp) {
-					$row = 0;
-					while (($data = fgetcsv($fp, null, str_replace('tab', "\t", $delimiter))) !== false) {
-						$row++;
-						if ($has_header && $row == 1) {
-							$headers	= $data;
-							continue;
-						}
-						if (empty($data)) continue;
-
-						foreach ($data as $offset => $string) {
-							if (empty($string)) continue;
-							if (isset($xml->info->polymorphic)) {
-								if (isset($map[$headers[$offset]])) {
-									$product_record[$map[$headers[$offset]]]	= $string;
-								}
-							} else {
-								if (empty($map[$offset])) continue;
-								$product_record[$map[$offset]]	= $string;
-							}
-						}
-						break;
-					}
-					## Close file handle
-					fclose($fp);
-					## Display the example data
-					if (is_array($product_record)) {
-						foreach ($product_record as $column => $value) {
-							$smarty_data['examples'][]	= array('column' => $column, 'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'));
-						}
-						$GLOBALS['smarty']->assign('EXAMPLES', $smarty_data['examples']);
-					}
-					$GLOBALS['smarty']->assign('IMPORT', array('format' => basename($schema)));
+				foreach ($fields as $column => $title) {
+					$smarty_data['columns'][] = array('column' => $column, 'title' => $title);
 				}
+				$GLOBALS['smarty']->assign('COLUMNS', $smarty_data['columns']);
+				$GLOBALS['smarty']->assign('MAPS', $smarty_data['maps']);
+				$GLOBALS['smarty']->assign('IMPORT', array('delimiter' => $_POST['delimiter']));
+
+				$smarty_data['map']	= '';
+
 			} else {
-				$delimiter	= (isset($_POST['delimiter']) && !empty($_POST['delimiter'])) ? $_POST['delimiter'] : ',';
-				## No format map available, so give them a manual assignment form
-				$fields	= array(	# Update for language strings
-					'status'			=> $lang['common']['status'],
-					'name'				=> $lang['catalogue']['product_name'],
-					'image'				=> $lang['catalogue']['image_main'],
-					'product_code'		=> $lang['catalogue']['product_code'],
-					'cat_id'			=> $lang['catalogue']['master_caregory_id'],
-					'description'		=> $lang['common']['description'],
-					'manufacturer'		=> $lang['catalogue']['manufacturer'],
-					'price'				=> $lang['common']['price'],
-					'sale_price'		=> $lang['common']['price_sale'],
-					'cost_price'		=> $lang['common']['price_cost'],
-					'product_weight'	=> $lang['common']['weight'],
-					'use_stock_level'	=> $lang['catalogue']['stock_level_use'],
-					'stock_level'		=> $lang['catalogue']['stock_level'],
-					'stock_warning'		=> $lang['catalogue']['stock_level_warn'],
-					'digital'			=> $lang['catalogue']['is_digital'],
-					'digital_path'		=> $lang['catalogue']['file_path'],
-					'tax_type'			=> $lang['catalogue']['tax_class'],
-					'tax_inclusive'		=> $lang['catalogue']['tax_inclusive'],
-					'featured'			=> $lang['catalogue']['product_latest'],
-					'seo_path'			=> $lang['settings']['seo_path'],
-					'seo_meta_title'		=> $lang['settings']['seo_meta_title'],
-					'seo_meta_keywords'		=> $lang['settings']['seo_meta_keywords'],
-					'seo_meta_description'	=> $lang['settings']['seo_meta_description'],
-					'condition'			=> $lang['catalogue']['condition'],
-					'upc'				=> $lang['catalogue']['product_upc'],
-					'ean'				=> $lang['catalogue']['product_ean'],
-					'jan'				=> $lang['catalogue']['product_jan'],
-					'isbn'				=> $lang['catalogue']['product_isbn'],
-					'brand'				=> $lang['catalogue']['product_brand'],
-					'grin'				=> $lang['catalogue']['product_grin'],
-					'man'				=> $lang['catalogue']['product_mpn']
-				);
-				$fp		= fopen($source, 'r');
-				$data	= fgetcsv($fp, null, str_replace('tab', "\t", $delimiter));
-				fclose($fp);
-				if (is_array($data)) {
-					foreach ($data as $offset => $value) {
-						$smarty_data['maps'][]	= array('offset' => (int)$offset, 'example' => $value);
-					}
-					foreach ($fields as $column => $title) {
-						$smarty_data['columns'][] = array('column' => $column, 'title' => $title);
-					}
-					$GLOBALS['smarty']->assign('COLUMNS', $smarty_data['columns']);
-					$GLOBALS['smarty']->assign('MAPS', $smarty_data['maps']);
-					$GLOBALS['smarty']->assign('IMPORT', array('delimiter' => $_POST['delimiter']));
-
-					$smarty_data['map']	= '';
-
-				} else {
-					$GLOBALS['main']->setACPWarning($lang['catalogue']['error_import_empty']);
-					httpredir(currentPage());
-				}
+				$GLOBALS['main']->setACPWarning($lang['catalogue']['error_import_empty']);
+				httpredir(currentPage());
 			}
 			$GLOBALS['smarty']->assign('DISPLAY_CONFIRMATION',true);
-	#	} else {
-	#		$GLOBALS['main']->setACPWarning($lang['catalogue']['error_import_invalid']);
-	#		httpredir(currentPage());
-	#	}
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['error_import_upload']);
 		httpredir(currentPage());
@@ -341,18 +249,6 @@ if (isset($_POST['process'])) {
 			$GLOBALS['main']->addTabControl($lang['catalogue']['tab_import_revert'], 'revert');
 		}
 	}
-	## Provide upload box, and format selector
-	/*
-	$formats	= glob(CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'importers'.CC_DS.'*.xml');
-	if (isset($formats) && is_array($formats)) {
-		foreach ($formats as $format) {
-			$xml	= new SimpleXMLElement(file_get_contents($format));
-			$smarty_data['formats'][] = array('title' => (string)$xml->info->title, 'file' => basename($format));
-			unset($xml);
-		}
-		$GLOBALS['smarty']->assign('FORMATS',$smarty_data['formats']);
-	}
-	*/
 	$GLOBALS['smarty']->assign('DISPLAY_FORM',true);
 
 }

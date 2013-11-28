@@ -6,7 +6,6 @@
 	  <div><label for="import_source">{$LANG.catalogue.import_source}</label><span><input type="file" name="source" id="import_source" class="" /></span></div>
 	  <div><label for="import_format">{$LANG.catalogue.import_format}</label><span><select name="format" id="import_format" class="">
 		<option value="">{$LANG.catalogue.unknown_format}</option>
-		{foreach from=$FORMATS item=format}<option value="{$format.file}">{$format.title}</option>{/foreach}
 	  </select></span></div>
 	  <div><label for="opt_delimiter">{$LANG.catalogue.delimiter}</label><span><select name="delimiter" id="opt_delimiter">
 		<option value=",">,</option>
