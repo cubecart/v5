@@ -4,6 +4,14 @@ $(window).load(function() {
 });
 
 $(document).ready(function() {
+	
+	// Attempt to match import CSV columns
+	$(".map_row").each(function(){
+		var rel 	= $(this).attr("rel");
+	    var label 	= $("label_"+rel).text();
+		$(".select_"+rel+" option:contains('"+label+"')").attr('selected', true);
+	});
+	
 	//Check all products
 	if ($('#product_check').exists()) {
 		$('#product_check').change(function() {
@@ -247,7 +255,7 @@ $(document).ready(function() {
 	   open only when clicked instead of just touched.
 	$('#sidebar_control').click(function(){
 	*/
-	$('#sidebar_control').mouseover(function(){
+	$('#sidebar_control').click(function(){
 		var right_current	= $('#sidebar_contain').css('right').replace('px','');
 		var right_target	= (right_current >= 0) ? -340 : 0;
 
