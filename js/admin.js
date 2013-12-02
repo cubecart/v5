@@ -4,14 +4,6 @@ $(window).load(function() {
 });
 
 $(document).ready(function() {
-	
-	// Attempt to match import CSV columns
-	$(".map_row").each(function(){
-		var rel 	= $(this).attr("rel");
-	    var label 	= $("label_"+rel).text();
-		$(".select_"+rel+" option:contains('"+label+"')").attr('selected', true);
-	});
-	
 	//Check all products
 	if ($('#product_check').exists()) {
 		$('#product_check').change(function() {

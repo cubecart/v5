@@ -43,10 +43,10 @@
 	{if isset($MAPS)}
 	<fieldset>
 	  {foreach from=$MAPS item=map}
-	  <div class="map_row" rel="{$map.offset}">
-		<label class="label_{$map.offset}">{$map.example}</label>
+	  <div rel="{$map.offset}">
+		<label>{$map.example}</label>
 		<span>
-		  <select name="map[{$map.offset}]" class="unique select_{$map.offset}">
+		  <select name="map[{$map.offset}]" class="unique">
 			<option value="">{$LANG.catalogue.import_column_ignore}</option>
 			{foreach from=$COLUMNS item=column}<option value="{$column.column}">{$column.title}</option>{/foreach}
 		  </select>
