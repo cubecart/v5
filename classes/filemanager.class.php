@@ -223,7 +223,7 @@ class FileManager {
 		// Remove orphaned records
 		if (($existing = $GLOBALS['db']->select('CubeCart_filemanager', false, array('type' => $this->_mode))) !== false) {
 			foreach ($existing as $file) {
-				if (!file_exists($this->_manage_root.CC_DS.$file['filepath'].$file['filename'])) {
+				if ($file['file_id']>0 && !file_exists($this->_manage_root.CC_DS.$file['filepath'].$file['filename'])) {
 					$GLOBALS['db']->delete('CubeCart_filemanager', array('file_id' => (int)$file['file_id']));
 					$updated = true;
 				}
@@ -412,8 +412,10 @@ class FileManager {
 					$GLOBALS['db']->update('CubeCart_category', array('cat_image' => ''), array('cat_image' => $file[0]['file_id']));
 					$GLOBALS['db']->update('CubeCart_category', array('cat_image' => ''), array('cat_image' => $file[0]['filename']));
 					
-					$GLOBALS['db']->delete('CubeCart_image_index', array('file_id' => $file[0]['file_id']));
-					$GLOBALS['db']->delete('CubeCart_filemanager', array('file_id' => $file[0]['file_id']));
+					if($file[0]['file_id']>0) {
+						$GLOBALS['db']->delete('CubeCart_image_index', array('file_id' => $file[0]['file_id']));
+						$GLOBALS['db']->delete('CubeCart_filemanager', array('file_id' => $file[0]['file_id']));
+					}
 					// Set error message
 					$GLOBALS['gui']->setError($GLOBALS['language']->filemanager['error_image_missing']);
 				}
