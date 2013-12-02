@@ -564,7 +564,7 @@ class Database_Contoller {
 			foreach ($this->_result as $row) {
 				$output[] = $row;
 			}
-			// Added cleverness for auto pagination, without pissing around running a second query
+			// Added cleverness for auto pagination, without running a second query
 			if (!is_null($calc_rows)) {
 				$count	= $this->query('SELECT FOUND_ROWS() as Count;');
 				if ($count) $this->_found_rows = $count[0]['Count'];
