@@ -416,11 +416,7 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 
 	if (($customer_count = $GLOBALS['db']->select('CubeCart_customer', array('customer_id'), $where)) !== false) {
 		$count	= count($customer_count);
-		if ($count > $per_page) {
-			$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($count, $per_page, $page));
-		} else {
-			$GLOBALS['smarty']->assign('PAGINATION', '');
-		}
+		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($count, $per_page, $page));
 	}
 
 	if (($customers = $GLOBALS['db']->select('CubeCart_customer', '*, CONCAT(`last_name`, `first_name`) AS `customer`', $where, $order_by, $per_page, $page)) !== false) {
