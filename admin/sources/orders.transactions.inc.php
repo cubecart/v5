@@ -36,7 +36,6 @@ if (isset($_GET['order_id'])) {
 	}
 	if (($count_rows = $GLOBALS['db']->select('CubeCart_transactions', array('DISTINCT' => 'order_id'), $where)) !== false) {
 		$count	= count($count_rows);
-		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $count);
 		if ($count > $per_page) {
 			$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($count, $per_page, $page, 9));
 		}

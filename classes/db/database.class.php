@@ -363,6 +363,8 @@ class Database_Contoller {
 		if (!$total_results && !is_null($this->_found_rows) && is_numeric($this->_found_rows)) {
 			$total_results	= $this->_found_rows;
 		}
+		
+		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $total_results);
 
 		$glue = (!$glue) ? ' ' : $glue;
 		// Lets do some maths...

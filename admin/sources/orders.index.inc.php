@@ -636,7 +636,6 @@ if (isset($_GET['action'])) {
 		}
 		$GLOBALS['smarty']->assign('ORDER_LIST',$smarty_data['list_orders']);
 		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
-		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $GLOBALS['db']->getFoundRows());
 	} else if (isset($_POST['search'])) {
 		# No orders found
 		$GLOBALS['main']->setACPWarning($lang['orders']['error_search_result']);

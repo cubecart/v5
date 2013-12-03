@@ -190,7 +190,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit']) && Admin::getInstance()->p
 
 	if ($reviews) {
 		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
-		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $GLOBALS['db']->numrows());
 		foreach ($reviews as $review) {
 			if (($product = $GLOBALS['db']->select('CubeCart_inventory', array('name'), array('product_id' => $review['product_id']))) !== false) {
 				$review['product']	= $product[0];

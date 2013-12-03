@@ -8,7 +8,7 @@
 	  <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/user_registered.png" alt="{$LANG.customer.title_key_registered}" /> - {$LANG.customer.title_key_registered}
 	  <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/user_ghost.png" alt="{$LANG.customer.title_key_unregistered}" /> - {$LANG.customer.title_key_unregistered}
 	</p>
-	<table class="list">
+	<table>
 	  <thead>
 		<tr>
 		  <td>{$THEAD.status}</td>
@@ -20,7 +20,7 @@
 		  <td>&nbsp;</td>
 		</tr>
 	  </thead>
-	  <tbody>
+	  <tbody class="list">
 		{foreach from=$CUSTOMERS item=customer}
 		<tr>
 		  <td align="center"><input type="hidden" name="status[{$customer.customer_id}]" id="status_{$customer.customer_id}" value="{$customer.status}" class="toggle" /></td>
@@ -46,14 +46,16 @@
 		</tr>
 		{/foreach}
 	  </tbody>
-	  <tr>
-	  <td colspan="7">
-		  <div class="pagination">
-		  <span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>
-		  {$PAGINATION}&nbsp;
-		  </div>
-	</td>
+	  <tfoot>
+	    <tr>
+	      <td colspan="7">
+		  	<div class="pagination">
+			  	<span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>
+			  	{$PAGINATION}&nbsp;
+			</div>
+	    </td>
 	  </tr>
+	  </tfoot>
 	</table>
 
 	{if isset($CUSTOMER_EXPORT_LIST)}

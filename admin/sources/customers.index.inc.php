@@ -416,7 +416,6 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 
 	if (($customer_count = $GLOBALS['db']->select('CubeCart_customer', array('customer_id'), $where)) !== false) {
 		$count	= count($customer_count);
-		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $count);
 		if ($count > $per_page) {
 			$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($count, $per_page, $page));
 		} else {

@@ -61,13 +61,17 @@
 			<input type="submit" value="{$LANG.common.go}" name="go"/>
 		  </td>
 		</tr>
+		<tr>
+	  	  <td colspan="8">
+	  	    <div class="pagination">
+		  	<span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>
+		  	{$PAGINATION}&nbsp;
+		  	</div>
+	  	  </td>
+	  	</tr>
 	  </tfoot>
 	  {/if}
 	</table>
-	<div class="pagination">
-	  <span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>
-	  {$PAGINATION}&nbsp;
-	</div>
   </div>
   <div id="search" class="tab_content">
 	<fieldset><legend>{$LANG.orders.title_search}</legend>

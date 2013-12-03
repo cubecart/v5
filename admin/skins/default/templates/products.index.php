@@ -25,7 +25,7 @@
   		</tr>
   	</table>
 
-  	<table width="100%" class="list">
+  	<table width="100%">
   		<thead>
   			<tr>
 	  			<th nowrap="nowrap">&nbsp;</th>
@@ -41,7 +41,7 @@
 	  			<th nowrap="nowrap">&nbsp;</th>
   			</tr>
   		</thead>
-	  	<tbody>
+	  	<tbody class="list">
 	  		{if isset($PRODUCTS)}
 	  		{foreach from=$PRODUCTS item=product}
 	  		<tr>
@@ -86,16 +86,14 @@
 				</td>
 	  		</tr>
 	  		{/foreach}
+	  	</tbody>
+	  	<tfoot>
 	  	  <tr>
 	  		<td width="10">
 	  		  <span><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt="" />
 	  		</td>
-	  		<td colspan="10"><a href="#" class="check-all" rel="table">{$LANG.form.check_uncheck}</a></td>
-	  	  </tr>
-	  	  <tr>
-	  		<td width="10">&nbsp;</td>
-	  		<td colspan="10">
-	  		<strong>{$LANG.maintain.db_with_selected}</strong>
+	  		<td colspan="11"><a href="#" class="check-all" rel="table">{$LANG.form.check_uncheck}</a>
+	  		{$LANG.maintain.db_with_selected}
 	  		  <select name="action" class="textbox">
 	    	    <optgroup label="">
 	      	      <option value="">{$LANG.form.please_select}</option>
@@ -106,16 +104,20 @@
 	  	  </tr>
 	  		{else}
 	  		<tr>
-		  		<td align="center" colspan="10">{$LANG.form.none}</td>
+		  		<td align="center" colspan="11">{$LANG.form.none}</td>
 	  		</tr>
 	  		{/if}
-	  	</tbody>
+	  		<tr>
+	  		<td colspan="11">
+	  		<div class="pagination">
+		  	<span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>
+		  	{$PAGINATION}&nbsp;</div>
+	  		</td>
+	  		</tr>
+	  	</tfoot>
   	</table>
   </div>
-  <div class="pagination">
-	<span>{$TOTAL_RESULTS}</span>
-	{$PAGINATION}
-  </div>
+  
   
   {include file='templates/element.hook_form_content.php'}
   
