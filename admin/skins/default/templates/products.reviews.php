@@ -39,7 +39,7 @@
 	{/foreach}
 
 	<div class="pagination">
-	  <span>{$TOTAL_RESULTS}</span>{$PAGINATION}
+	  <span>{$LANG.common.total}: {$TOTAL_RESULTS}</span>{$PAGINATION}
 	</div>
   </div>
   <div id="bulk_delete" class="tab_content">
