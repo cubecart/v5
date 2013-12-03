@@ -1,5 +1,0 @@
-#RewriteEngine On
-
-#RewriteCond ${HTTP_REFERER} !${HTTP_HOST} [NC]
-#RewriteRule (jpe?g|png|gif)$ loading.gif [L]
-
