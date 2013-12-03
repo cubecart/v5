@@ -1180,7 +1180,7 @@ if (isset($_GET['action'])) {
 
 	// Get inventory
 	$page		= (isset($_GET['page'])) ? $_GET['page'] : 1;
-	$per_page	= 20;
+	$per_page	= 3;
 	if (isset($_GET['char']) && !empty($_GET['char'])) {
 		$where 	=  "`name` REGEXP '^[".$_GET['char']."]'";
 	} else if (isset($_GET['q']) && !empty($_GET['q'])) {

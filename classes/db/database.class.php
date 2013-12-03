@@ -117,13 +117,15 @@ class Database_Contoller {
 	public function count($table = false, $field = false, $where = false) {
 		if (!empty($table)) {
 			$allowed = $this->getFields($table);
-			if (in_array($field, $allowed) && !is_numeric($field)) {
-				$this->_query	= "SELECT COUNT($field) AS Count FROM `{$this->_prefix}$table` ".$this->where($table, $where).';';
-				$this->_execute();
-				if ($this->_result && isset($this->_result[0]['Count'])) {
-					return ((int)$this->_result[0]['Count'] > 0) ? (int)$this->_result[0]['Count'] : false;
-				}
+		
+			$field = (in_array($field, $allowed) && !is_numeric($field)) ? $field : '*';
+						
+			$this->_query	= "SELECT COUNT($field) AS Count FROM `{$this->_prefix}$table` ".$this->where($table, $where).';';
+			$this->_execute();
+			if ($this->_result && isset($this->_result[0]['Count'])) {
+				return ((int)$this->_result[0]['Count'] > 0) ? (int)$this->_result[0]['Count'] : false;
 			}
+			
 		}
 
 		return false;
@@ -564,10 +566,12 @@ class Database_Contoller {
 			foreach ($this->_result as $row) {
 				$output[] = $row;
 			}
-			// Added cleverness for auto pagination, without running a second query
+			// Added cleverness for auto pagination, without pissing around running a second query
 			if (!is_null($calc_rows)) {
 				$count	= $this->query('SELECT FOUND_ROWS() as Count;');
 				if ($count) $this->_found_rows = $count[0]['Count'];
+			} else {
+				$this->_found_rows = $this->count($table,$columns, $where);
 			}
 			return ($output) ? $output : false;
 		}
