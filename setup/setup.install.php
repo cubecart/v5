@@ -131,15 +131,8 @@ if (!isset($_SESSION['setup']['permissions'])) {
 				unset($_POST['global']['dbhost'], $_POST['global']['dbusername'], $_POST['global']['dbpassword']);
 			}
 			$GLOBALS['smarty']->assign('FORM', $_POST);
-		} /*else {
-			$current_url = sprintf('http://%s%s', $_SERVER['HTTP_HOST'], str_replace('/setup/index.php', '', $_SERVER['PHP_SELF']));
-			$GLOBALS['smarty']->assign('FORM', array(
-				'global' => array(
-					'storeURL'	=> defined('CC_STORE_URL') ? CC_STORE_URL : $current_url,
-					'rootRel'	=> str_replace('setup/index.php', '', $_SERVER['PHP_SELF']),
-				),
-			));
-		}*/
+		} 
+		
 		$currencies	= array(
 			'USD' => 'US Dollar',
 			'GBP' => 'British Pound',
@@ -199,7 +192,7 @@ if (!isset($_SESSION['setup']['permissions'])) {
 			$config[] = sprintf("\$glob['%s'] = '%s';", $key, addslashes($value));
 		}
 		$config	= sprintf("<?php\n%s\n?>", implode("\n", $config));
-		##ÊBackup existing config file, if it exists
+		## Backup existing config file, if it exists
 		if (file_exists($global_file)) rename($global_file, $global_file.'-'.date('Ymdgis').'.php');
 
 		if (file_put_contents($global_file, $config)) {
@@ -300,7 +293,7 @@ if (!isset($_SESSION['setup']['permissions'])) {
 			$GLOBALS['db']->insert('CubeCart_history', array('version' => CC_VERSION, 'time' => time()));
 			
 			build_logos('');
-			
+						
 			$_SESSION['setup']['complete']	= true;
 			httpredir('index.php');
 		}
