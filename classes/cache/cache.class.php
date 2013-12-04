@@ -137,7 +137,7 @@ class Cache_Controler {
 		if (($files = glob(CC_CACHE_DIR.'*', GLOB_NOSORT)) !== false) {
 			foreach ($files as $file) {
 				//Delete any file that is not a cache file
-				if (substr($file, -6) != '.cache' && $file != '.htaccess') {
+				if (substr($file, -6) != '.cache' && $file != '.htaccess' && $file != 'index.php') {
 					@unlink($file);
 				}
 			}
