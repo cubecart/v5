@@ -1,3 +1,4 @@
+.gitignore 
 includes/extra/key.php
 includes/extra/snippet_*
 includes/global.inc.*
