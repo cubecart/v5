@@ -6,7 +6,7 @@
   <string name="mode"><![CDATA[Mode]]></string>
   <string name="mode_live"><![CDATA[Live]]></string>
   <string name="mode_sandbox"><![CDATA[Sandbox]]></string>
-  <string name="module_description"><![CDATA[This is the PayPal Payments Standard sole solution; if you wish to use Website Payments Pro (direct card payments) or Express Checkout instead, please disable this product and configure the <a href="?_g=modules&amp;type=plugins&amp;module=PayPal_Pro">PayPal plugin</a>.<p>Not got a PayPal account? <a href="https://www.paypal.com">Signup Here &raquo;</a>]]></string>
+  <string name="module_description"><![CDATA[This is the PayPal Payments Standard sole solution; if you wish to use Website Payments Pro (direct card payments) or Express Checkout instead, please disable this product and configure the <a href="?_g=modules&amp;type=plugins&amp;module=PayPal_Pro">PayPal plugin</a>.<p><a href="https://www.paypal.com">Need a PayPal Account?</a>]]></string>
   <string name="module_title"><![CDATA[PayPal Standard]]></string>
  </group>
 </definitions>
