@@ -1,8 +1,7 @@
-.gitignore 
 includes/extra/key.php
 includes/extra/snippet_*
 includes/global.inc.*
-CubeCart_Marketplace
+modules/plugins/CubeCart_*
 importdata.tmp
 .DS_Store
 Thumbs.db
