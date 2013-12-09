@@ -316,7 +316,7 @@ class Order {
 
 			// Set status to complete if it is digital only
 			if ($complete) {
-				$this->_skip_order_complete_email = true;
+				if ($GLOBALS['config']->get('config','force_completed')!="1" ) $this->_skip_order_complete_email = true;
 				//$status_id = self::ORDER_COMPLETE;
 				$this->orderStatus(3, $order_id);
 			}
