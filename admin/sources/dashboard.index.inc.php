@@ -194,7 +194,7 @@ $fields = 'I.name ,I.stock_level AS I_stock_level, I.stock_warning AS I_stock_wa
 $where = 'use_stock_level = 1';
 $where .= ' AND (';
 //$where .= '(M.use_stock = 1 AND M.status = 1 AND M.stock_level <= '.(int)$GLOBALS['config']->get('config', 'stock_warn_level').')';
-$where .= '((I.stock_warning > 0 AND M.stock_level <= I.stock_warning) OR (I.stock_warning <= 0 AND M.stock_level <= '.(int)$GLOBALS['config']->get('config', 'stock_warn_level').'))';
+$where .= '((I.stock_warning > 0 AND M.stock_level <= I.stock_warning AND M.status = 1 AND M.use_stock = 1) OR (I.stock_warning <= 0 AND M.status = 1 AND M.use_stock = 1 AND M.stock_level <= '.(int)$GLOBALS['config']->get('config', 'stock_warn_level').'))';
 $where .= ' OR ';
 $where .= '((I.stock_warning > 0 AND I.stock_level <= I.stock_warning) OR (I.stock_warning <= 0 AND I.stock_level <= '.(int)$GLOBALS['config']->get('config', 'stock_warn_level').'))';
 $where .= ')';
