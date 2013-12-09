@@ -7,9 +7,10 @@ require_once(CC_INCLUDES_DIR.'functions.inc.php');
 define('SKIP_DB_SETUP', true);
 
 /*! Check cache folder is writable! */
-if(!is_writable(CC_CACHE_DIR) || !is_writable(CC_CACHE_DIR.'skin'.CC_DS)) {
+chmod(CC_CACHE_DIR, 0777)
+if(!is_writable(CC_CACHE_DIR)) {
 	$cache_dir = str_replace(CC_ROOT_DIR, '', CC_CACHE_DIR);
-	die('<p>Please make sure the following folders are writable in order to continue.</p><pre>'.$cache_dir.'<br />'.$cache_dir.'skin</pre>');
+	die('<p>Please make sure the following folders are writable in order to continue.</p><pre>'.$cache_dir.'</pre>');
 }
 
 $global_file = CC_INCLUDES_DIR.'global.inc.php';
