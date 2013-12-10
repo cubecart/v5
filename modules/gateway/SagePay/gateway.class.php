@@ -12,7 +12,7 @@ class Gateway {
 
 		$this->_module			= $module;
 		$this->_basket			= $basket;
-		$this->_vendorTxCode 	= md5($this->_randomPass(3).time().rand(0,32000)).randomPass(8);
+		$this->_vendorTxCode 	= md5($this->_randomPass(3).time().rand(0,32000)).$this->_randomPass(8);
 		$this->_encryption		= ($this->_module['encryption'] == 'XOR') ? 'XOR' : 'AES';
 		
 		if($this->_module['gate'] == "sim") {
