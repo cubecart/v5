@@ -378,7 +378,8 @@ jQuery(document).ready(function() {
 			}
 			
 			var add = $(this).serialize();
-			var action = $(this).attr('action').replace('?_a=saleitems', '');
+//			var action = $(this).attr('action').replace('?_a=saleitems', '');
+			var action = $(this).attr('action');
 			var basket = $('div#basket_summary');
 			// added to accommodate no existing query string
 			var parts = action.split("?");
