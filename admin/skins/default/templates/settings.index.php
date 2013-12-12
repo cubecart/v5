@@ -169,6 +169,7 @@
 	  {foreach from=$OPT_STOCK_CHANGE_TIME item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
     </select></span></div>
    	<div><label for="hide_out_of_stock">{$LANG.settings.title_hide_out_of_stock}</label><span><input name="config[hide_out_of_stock]" id="hide_out_of_stock" type="hidden" class="toggle" value="{$CONFIG.hide_out_of_stock}" /></span>&nbsp;{$LANG.settings.no_admin_affect}</div>
+   	<div><label for="update_main_stock">{$LANG.settings.update_main_stock}</label><span><input name="config[update_main_stock]" id="update_main_stock" type="hidden" class="toggle" value="{$CONFIG.update_main_stock}" /></span>&nbsp;{$LANG.settings.matrix_in_use}</div>
   </fieldset>
 </div>
 

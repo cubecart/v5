@@ -290,6 +290,7 @@
     <string name="login_to_view" introduced="5.0.0"><![CDATA[Login to view price]]></string>
     <string name="manufacturer" introduced="5.0.0"><![CDATA[Manufacturer]]></string>
     <string name="master_caregory_id" introduced="5.0.0"><![CDATA[Master Category ID]]></string>
+    <string name="matrix_stock_level" introduced="5.0.0"><![CDATA[(Matrix stock level summary)]]></string>
     <string name="minimum_subtotal" introduced="5.0.0"><![CDATA[Minimum Subtotal]]></string>
     <string name="no_categories_specified" introduced="5.0.0"><![CDATA[No categories have been assigned to this product.]]></string>
     <string name="no_option_groups" introduced="5.0.0"><![CDATA[No option groups exist.]]></string>
@@ -1515,6 +1516,7 @@
     <string name="disable_checkout_terms" introduced="5.0.0"><![CDATA[Disable terms &amp; conditions checkbox on checkout]]></string>
     <string name="disable_mobile_skin" introduced="5.1.1"><![CDATA[Disable mobile skin]]></string>
     <string name="dispatch_to_non_invoice" introduced="5.0.0"><![CDATA[Allow delivery to non-invoice address]]></string>
+    <string name="update_main_stock" introduced="5.2.6"><![CDATA[Main stock level as matrix stock level summary]]></string>
     <string name="email_disable_alert" introduced="5.0.0"><![CDATA[Disable new order alerts]]></string>
     <string name="email_method" introduced="5.0.0"><![CDATA[Sending Method]]></string>
     <string name="email_method_mail" introduced="5.0.0"><![CDATA[PHP mail() Function]]></string>
@@ -1563,6 +1565,7 @@
     <string name="htaccess_error" introduced="5.0.0"><![CDATA[(This can not be set to yes until the .htaccess file exists in the stores root folder.)]]></string>
     <string name="logo_all_skins" introduced="5.0.0"><![CDATA[All Skins]]></string>
     <string name="logo_all_styles" introduced="5.0.0"><![CDATA[All Styles]]></string>
+    <string name="matrix_in_use" introduced="5.2.6"><![CDATA[(Matrix stock level in use only!)]]></string>
     <string name="message_marked_read" introduced="5.0.0"><![CDATA[Message marked as read.]]></string>
     <string name="message_marked_unread" introduced="5.0.0"><![CDATA[Message marked as unread.]]></string>
     <string name="no_admin_affect" introduced="5.1.0"><![CDATA[(Does not affect admin)]]></string>

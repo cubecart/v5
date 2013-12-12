@@ -1129,9 +1129,17 @@ if (isset($_GET['action'])) {
 		
 		$master_image = $GLOBALS['gui']->getProductImage((int)$_GET['product_id']);
 		$result[0]['master_image'] =  !empty($master_image) ? $master_image : 'images/general/px.gif';
-		
-		$GLOBALS['smarty']->assign('PRODUCT', $result[0]);
 
+		// Update global stock level when matrix stock level in use
+		if ($GLOBALS['config']->get('config','update_main_stock')) {
+			$options_stock = $GLOBALS['db']->select('CubeCart_option_matrix', 'SUM(stock_level) AS stock', array('product_id' => $product_id, 'status' => 1, 'use_stock' => 1));
+			if ($options_stock && is_numeric($options_stock[0]['stock'])) {
+				$GLOBALS['db']->update('CubeCart_inventory', array('stock_level' => (int)$options_stock[0]['stock']), array('product_id' => $product_id));
+				$result[0]['stock_level'] = $options_stock[0]['stock'];
+				$GLOBALS['smarty']->assign('DISPLAY_MATRIX_STOCK_NOTE', true);
+			}
+		}
+		$GLOBALS['smarty']->assign('PRODUCT', $result[0]);
 
 		$selectArray = array(
 			'featured',
@@ -1149,6 +1157,7 @@ if (isset($_GET['action'])) {
 				}
 			}
 		}
+
 		$GLOBALS['smarty']->assign('FORM_HASH', md5(implode('', $result[0])));
 		$GLOBALS['smarty']->assign('DISPLAY_PRODUCT_FORM', true);
 	}

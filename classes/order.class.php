@@ -663,6 +663,8 @@ class Order {
 	private function _manageStock($status_id, $order_id) {
 
 		foreach ($GLOBALS['hooks']->load('class.order.manage_stock') as $hook) include $hook;
+		
+		$matrix_item = array();
 
 		if (($items = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $order_id), false, false, false, false)) !== false) {
 
@@ -671,9 +673,11 @@ class Order {
 			foreach ($items as $item) {
 				
 				// Check stock on options first
-				if(!empty($item['options_identifier']) && $options_stock = $GLOBALS['db']->select('CubeCart_option_matrix', array('stock_level'), array('product_id' => (int)$item['product_id'], 'options_identifier' => $item['options_identifier'], 'status' => 1, 'use_stock' => 1))) {
+				if(!empty($item['options_identifier']) && $options_stock = $GLOBALS['db']->select('CubeCart_option_matrix', array('stock_level','matrix_id'), array('product_id' => (int)$item['product_id'], 'options_identifier' => $item['options_identifier'], 'status' => 1, 'use_stock' => 1))) {
 						
 					$stock	= $options_stock[0]['stock_level'];
+
+					$matrix_prod[] = (int)$item['product_id'];
 				
 					switch ($status_id) {
 						case self::ORDER_PENDING:
@@ -766,6 +770,14 @@ class Order {
 						// Unset variables
 						unset($stock, $update);
 					}
+				}
+			}
+			if ($GLOBALS['config']->get('config','update_main_stock')) {
+				$matrix_prods = array_unique($matrix_prod);
+			
+				foreach ($matrix_prods as $prod_id) {
+					$options_stock = $GLOBALS['db']->select('CubeCart_option_matrix', 'SUM(stock_level) AS stock', array('product_id' => (int)$prod_id, 'status' => 1, 'use_stock' => 1));
+					$GLOBALS['db']->update('CubeCart_inventory', array('stock_level' => $options_stock[0]['stock']), array('product_id' => (int)$prod_id));
 				}
 			}
 			return true;
