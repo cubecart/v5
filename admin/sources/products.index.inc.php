@@ -656,6 +656,22 @@ if (isset($_GET['action']) && strtolower($_GET['action'])=='clone' && isset($_GE
 	    				$GLOBALS['db']->insert('CubeCart_options_set_product', $option_set);
 			    	}
 				}
+				
+				// Matrix
+				if ($GLOBALS['config']->get('config','product_clone_options_matrix')) {
+
+					if (($matrix_a = $GLOBALS['db']->select('CubeCart_option_matrix', false, array('product_id' => $product_id_parent))) !== false) {
+
+				    	foreach ($matrix_a as $row_no => $matrix_assign) {
+
+				    		unset($matrix_assign['matrix_id']);
+
+					        $matrix_assign['product_id'] = $product_id;
+		    				$GLOBALS['db']->insert('CubeCart_option_matrix', $matrix_assign);
+			    		}
+			    	}
+				}
+				
 			}
 
 			// SEO
@@ -667,6 +683,9 @@ if (isset($_GET['action']) && strtolower($_GET['action'])=='clone' && isset($_GE
 
 				$GLOBALS['seo']->setdbPath('prod', $product_id, '');
 			}
+
+			// Custom clone
+			foreach ($GLOBALS['hooks']->load('admin.product.clone') as $hook) include $hook;
 
 			$GLOBALS['session']->set('cloned', 1, 'extra');
 			// Redirect to cloned product edit page

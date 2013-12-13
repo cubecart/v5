@@ -1603,6 +1603,7 @@
     <string name="product_clone_new_code" introduced="5.1.0"><![CDATA[Generate]]></string>
     <string name="product_clone_old_code" introduced="5.1.0"><![CDATA[Clone]]></string>
     <string name="product_clone_options" introduced="5.1.0"><![CDATA[Product options]]></string>
+    <string name="product_clone_options_matrix" introduced="5.1.0"><![CDATA[Product options matrix]]></string>
     <string name="product_clone_translations" introduced="5.1.0"><![CDATA[Translations]]></string>
     <string name="product_clone_redirect" introduced="5.1.0"><![CDATA[Redirect to cloned product details]]></string>
     <string name="product_clone_hide" introduced="5.1.0"><![CDATA[Disabled + Hide button]]></string>
