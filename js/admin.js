@@ -292,7 +292,7 @@ $(document).ready(function() {
 	}).live('click', function(){
 		var target = $(this).children('a').attr('href');
 		if (target == '#sidebar') {
-			$('#sidebar_control').mouseover();
+			$('#sidebar_control').click();
 			return false;
 		} else if (target.match(/^#/)) {
 			document.location.hash=target;
