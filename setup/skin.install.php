@@ -57,6 +57,7 @@
 	  {$check.title}
 	  </div>
 	  {/foreach}
+	  <!--
 	  <h3>{$LANG.setup.title_optional_features}</h3>
 	  {foreach from=$EXTENSIONS item=ext}
 	  <div>
@@ -64,6 +65,7 @@
 		{$ext.name}
 	  </div>
 	  {/foreach}
+	  -->
   {/if}
 
   {if isset($MODE_METHOD)}
