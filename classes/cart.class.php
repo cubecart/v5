@@ -127,12 +127,15 @@ class Cart {
 					foreach($_POST['add'] as $key => $value) {
 						if($GLOBALS['catalogue']->getProductOptions($key) && $GLOBALS['catalogue']->getOptionRequired()) {
 							$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
+							$this->redirectToProductPage($key);
+							/*
 							if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
 								$GLOBALS['debug']->supress();
 								die('Redir:'.$GLOBALS['seo']->buildURL('prod',$key));
 							} else {
 								httpredir("index.php?_a=product&product_id=$key");
 							}
+							*/
 						}
 					}
 				}
@@ -140,12 +143,15 @@ class Cart {
 					$key = (int)$_POST['add'];
 					if($GLOBALS['catalogue']->getProductOptions($key) && $GLOBALS['catalogue']->getOptionRequired()) {
 						$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
+						$this->redirectToProductPage($key);
+						/*
 						if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
 							$GLOBALS['debug']->supress();
 							die('Redir:'.$GLOBALS['seo']->buildURL('prod',$key));
 						} else {
 							httpredir("index.php?_a=product&product_id=$key");
 						}
+						*/
 					}
 				}
 			}
@@ -159,6 +165,7 @@ class Cart {
 					} else {
 						$quantity = 1;
 					}
+					
 					$this->add((is_numeric($value)) ? $value : $key, null, $quantity);
 				}
 			} else {
@@ -279,12 +286,7 @@ class Cart {
 					// Options needed - Redirect to product page
 					// Set GUI_MESSAGE error, then redirect
 					$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
-					if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
-						$GLOBALS['debug']->supress();
-						die('Redir:'.$GLOBALS['seo']->buildURL('prod',$product_id));
-					} else {
-						httpredir("index.php?_a=product&product_id=$product_id");
-					}
+					redirectToProductPage($product_id);
 					return true;
 				} else {
 					
@@ -300,6 +302,7 @@ class Cart {
 							$max_stock	= $stock_level;
 						}
 					}
+					
 					if (isset($max_stock) && $max_stock <= 0) {
 						if(is_array($optionsArray)) {
 							
@@ -310,14 +313,13 @@ class Cart {
 						} else {
 							$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_no_stock_available']);
 						}
-						if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
-							$GLOBALS['debug']->supress();
-							die('Redir:'.$GLOBALS['seo']->buildURL('prod',$product_id));
-						} else {
-							httpredir("index.php?_a=product&product_id=$product_id");
-						}
+
+						redirectToProductPage($product_id);
 						return false;
 					}
+					
+					$this->checkMinimumProductQuantity($product_id, $quantity, true);
+					
 					// Add item to basket
 					$hash = md5($product['product_id'].((!empty($optionsArray)) ? $product['name'].recursive_implode('{@}', $optionsArray) : $product['name']));
 					if (isset($this->basket['contents'][$hash])) {
@@ -388,12 +390,12 @@ class Cart {
 							if (!$proceed) {
 								// No required options selected
 								if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
-									$GLOBALS['debug']->supress();
 									$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
-									die('Redir:'.$GLOBALS['seo']->buildURL('prod',$product_id));
+									redirectToProductPage($product_id);
 								} else {
 									httpredir(currentPage(null, array('error' => 'option')));
 								}
+
 								return false;
 							}
 						}
@@ -1046,6 +1048,9 @@ class Cart {
 					unset($this->basket['contents'][$hash]);
 				} else {
 					$product = $GLOBALS['catalogue']->getProductData($this->basket['contents'][$hash]['id']);
+
+					$this->checkMinimumProductQuantity($product['product_id'], $quantity, false);
+
 					$stock_level = $GLOBALS['catalogue']->getProductStock($product['product_id'], $this->basket['contents'][$hash]['options_identifier']);
 					if ($product['use_stock_level'] && !$GLOBALS['config']->get('config', 'basket_out_of_stock_purchase')) {
 						if ($stock_level <= 0) {
@@ -1088,6 +1093,36 @@ class Cart {
 		//If the cart is empty
 		if (count($this->basket['contents']) == 0) {
 			$this->clear();
+		}
+	}
+
+	/**
+	 * Check - Minimum Quantity
+	 */
+	public function checkMinimumProductQuantity($productID, $quantity, $redirect=true) {
+
+		$data = $GLOBALS['catalogue']->getProductData($productID);
+		$min_q = (int)$data['minimum_quantity'];
+
+	    if ($min_q && $min_q > $quantity ) {
+
+			$GLOBALS['gui']->setError(sprintf($GLOBALS['language']->catalogue['error_minimum_quantity'],$min_q));
+
+			if ($redirect) $this->redirectToProductPage($productID);
+	    }
+	    
+	    return false;
+	}
+	/**
+	 * Redirect to product page
+	 */
+	public function redirectToProductPage($productID) {
+
+		if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
+			$GLOBALS['debug']->supress();
+			die('Redir:'.$GLOBALS['seo']->buildURL('prod',$productID));
+		} else {
+			httpredir("index.php?_a=product&product_id=$productID");
 		}
 	}
 

@@ -245,6 +245,7 @@
     <string name="error_manufacturer_found" introduced="5.0.0"><![CDATA[Unable to find manufacturer.]]></string>
     <string name="error_manufacturer_none" introduced="5.0.0"><![CDATA[No manufacturers have been added.]]></string>
     <string name="error_manufacturer_update" introduced="5.0.0"><![CDATA[Failed to update manufacturer.]]></string>
+    <string name="error_minimum_quantity" introduced="5.2.6"><![CDATA[Minimum quantity to purchase this item is %s!]]></string>
     <string name="error_no_stock_available" introduced="5.2.0"><![CDATA[Sorry but that product is out of stock.]]></string>
     <string name="error_no_stock_available_options" introduced="5.2.0"><![CDATA[Sorry but the chosen product option combination is out of stock.]]></string>
     <string name="error_option_attrib_create" introduced="5.0.0"><![CDATA[Failed to create attribute.]]></string>
@@ -291,6 +292,7 @@
     <string name="manufacturer" introduced="5.0.0"><![CDATA[Manufacturer]]></string>
     <string name="master_caregory_id" introduced="5.0.0"><![CDATA[Master Category ID]]></string>
     <string name="matrix_stock_level" introduced="5.0.0"><![CDATA[(Matrix stock level summary)]]></string>
+    <string name="minimum_quantity" introduced="5.2.6"><![CDATA[Minimum Quantity Purchase]]></string>
     <string name="minimum_subtotal" introduced="5.0.0"><![CDATA[Minimum Subtotal]]></string>
     <string name="no_categories_specified" introduced="5.0.0"><![CDATA[No categories have been assigned to this product.]]></string>
     <string name="no_option_groups" introduced="5.0.0"><![CDATA[No option groups exist.]]></string>
