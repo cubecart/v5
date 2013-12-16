@@ -1359,7 +1359,6 @@ class Cubecart {
 			// Display selector, if allowed
 
 			$GLOBALS['smarty']->assign('CTRL_DELIVERY', ($GLOBALS['config']->get('config', 'basket_allow_non_invoice_address') && !$GLOBALS['cart']->getBasketDigital()));
-			$GLOBALS['smarty']->assign('VAL_CUSTOMER_COMMENTS', isset($this->_basket['comments']) ? $this->_basket['comments'] : '');
 		} else {
 			// no address found - lets redirect to the 'add address' page
 			$GLOBALS['gui']->setError($GLOBALS['language']->account['error_address_billing']);
