@@ -120,11 +120,6 @@ class Cart {
 			$this->basket['delivery_address'] = $GLOBALS['user']->getAddress((int)$_POST['delivery_address']);
 		}
 
-		if (isset($_POST['comments']) && !empty($_POST['comments'])) {
-			$this->basket['comments'] = strip_tags(urldecode($_POST['comments']));
-			$this->save();
-		}
-
 		if (isset($_POST['add'])) {
 			// Check if productOptions SHOULD be present. i.e. add from category page
 			if (!isset($_POST['productOptions'])) {

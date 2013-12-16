@@ -769,6 +769,12 @@ class Cubecart {
 		$GLOBALS['smarty']->assign('INCLUDE_CHECKOUT', true);
 
 		$this->_basket =& $GLOBALS['cart']->basket;
+		
+		if (isset($_POST['comments']) && !empty($_POST['comments'])) {
+			$this->_basket['comments'] = strip_tags(urldecode($_POST['comments']));
+			$GLOBALS['cart']->save();
+		}
+		$GLOBALS['smarty']->assign('VAL_CUSTOMER_COMMENTS', isset($this->_basket['comments']) ? $this->_basket['comments'] : '');
 
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.confirm') as $hook) include $hook;
 		// Display order confirmation page
