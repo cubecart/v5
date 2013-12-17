@@ -493,6 +493,7 @@
 	  <img src="{$PRODUCT.master_image}" id="master_image_preview" />
 	  </div>
 	</div>
+	<p>{$LANG.filemanager.file_upload_note}</p>
 	<div><label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="image" id="uploader" type="file" class="multiple" /></span></div>
 
   </div>

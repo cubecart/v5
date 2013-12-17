@@ -39,6 +39,7 @@
   </div>
   <div id="upload" class="tab_content">
 	<h3>{$FILMANAGER_TITLE}</h3>
+	<p>{$LANG.filemanager.file_upload_note}</p>
 	<div>
 	  <label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="file" id="uploader" type="file" class="multiple" /></span>
 	</div>

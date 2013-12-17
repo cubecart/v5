@@ -45,7 +45,7 @@ if (Admin::getInstance()->permissions('filemanager', CC_PERM_EDIT) && !empty($_F
 	if ($fm->upload()) {
 		$GLOBALS['main']->setACPNotify($lang['filemanager']['notify_file_upload']);
 	} else {
-		$GLOBALS['main']->setACPNotify($lang['filemanager']['error_file_upload']);
+		$GLOBALS['main']->setACPWarning($lang['filemanager']['error_file_upload']);
 	}
 	httpredir(currentPage());
 }

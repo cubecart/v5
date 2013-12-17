@@ -78,6 +78,7 @@
 	<div class="fm-container">
 	  <div id="image" rel="1" class="fm-filelist unique"></div>
 	</div>
+	<p>{$LANG.filemanager.file_upload_note}</p>
 	<div><label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="image" id="uploader" type="file" /></span></div>
 	<script type="text/javascript">
 	var file_list = {$JSON_IMAGES}
