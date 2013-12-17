@@ -17,6 +17,21 @@
 			<div class="productsTitle">
 				<a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a>
 			</div>
+			{if $product.review_score && $CTRL_REVIEW}
+			  <!-- Please uncomment to enable
+			  <div class="rating">
+			  {for $i = 1; $i <= 5; $i++}
+			    {if $product.review_score >= $i}
+				<img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/common/star.png" alt="" />
+				{elseif $product.review_score > ($i - 1) && $product.review_score < $i}
+				<img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/common/star_half.png" alt="" />
+				{else}
+				<img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/common/star_off.png" alt="" />
+				{/if}
+			  {/for}
+			  </div>
+			  -->
+			 {/if}
 			 {if $product.ctrl_sale}
 			<div class="productsPrice">
 				<span class="price_previous">{$product.price}</span><span class="price_sale">{$product.sale_price}</span>
