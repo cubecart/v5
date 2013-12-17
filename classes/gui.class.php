@@ -163,7 +163,8 @@ class GUI {
 
 
 			//Setup copyright
-			$GLOBALS['smarty']->assign('COPYRIGHT', stripslashes($GLOBALS['config']->get('config', 'store_copyright')));
+			$copyright = $GLOBALS['smarty']->fetch('string:'.stripslashes($GLOBALS['config']->get('config', 'store_copyright')));
+			$GLOBALS['smarty']->assign('COPYRIGHT', $copyright);
 
 			//Setup Google Analytics
 			$google_analytics = $GLOBALS['config']->get('config', 'google_analytics');
