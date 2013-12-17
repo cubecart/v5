@@ -299,19 +299,19 @@ function findFiles(&$list, $path = false, $recursive = true) {
  *
  * @return array
  */
-function formatBytes($bytes = 0, $implode = false) {
+function formatBytes($bytes = 0, $implode = false, $decimal_places = 2) {
 	$size = $bytes / 1024;
 	$ext = 'B';
 	if ($size < 1024) {
-		$size = number_format($size, 2);
-		$ext  = 'K';
+		$size = number_format($size, $decimal_places);
+		$ext  = 'KB';
 	} else {
 		if ($size / 1024 < 1024) {
-			$size = number_format($size / 1024, 2);
-			$ext  = 'M';
+			$size = number_format($size / 1024, $decimal_places);
+			$ext  = 'MB';
 		} else if ($size / 1024 / 1024 < 1024) {
-			$size = number_format($size / 1024 / 1024, 2);
-			$ext  = 'G';
+			$size = number_format($size / 1024 / 1024, $decimal_places);
+			$ext  = 'GB';
 		}
 	}
 	if ($implode) {

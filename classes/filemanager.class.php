@@ -607,7 +607,7 @@ class FileManager {
 							
 							
 							if($this->_mode == self::FM_FILETYPE_IMG && $file['size'][$offset] > $this->_max_upload_image_size) {
-								$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'][$offset],formatBytes($this->_max_upload_image_size, true)));
+								$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'][$offset],formatBytes($this->_max_upload_image_size, true, 0)));
 								continue;
 							}
 							
@@ -651,7 +651,7 @@ class FileManager {
 					if (!empty($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
 
 						if($this->_mode == self::FM_FILETYPE_IMG && $file['size'] > $this->_max_upload_image_size) {
-							$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'],formatBytes($this->_max_upload_image_size, true)));
+							$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'],formatBytes($this->_max_upload_image_size, true, 0)));
 							return false;
 						}
 
