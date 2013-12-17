@@ -448,7 +448,7 @@ if($database_result) {
 		$table['Data_free'] = ($table['Data_free'] > 0) ? formatBytes($table['Data_free'], true) : '-';
 		$table_size			= $table['Data_length']+$table['Index_length'];
 		$data_length		= formatBytes($table_size);
-		$table['Data_length'] = ($table_size>0) ? $data_length['size'].$data_length['suffix'] : '-';
+		$table['Data_length'] = ($table_size>0) ? $data_length['size'].' '.$data_length['suffix'] : '-';
 		$table['Name_Display'] = $GLOBALS['config']->get('config','dbdatabase').'.'.$table['Name'];
 		$smarty_data['tables'][] = $table;
 	}
@@ -476,7 +476,8 @@ if(count($files)>0) {
 									'restore_link' => $restore,
 									'type' => $type,
 									'warning' => ($type=='database') ? $lang['maintain']['restore_db_confirm'] : $lang['maintain']['restore_files_confirm'],
-									'size' => format_size(filesize($file)));
+									'size' => formatBytes(filesize($file), true)
+								);
 	}
 }
 $GLOBALS['smarty']->assign('EXISTING_BACKUPS', $existing_backups);

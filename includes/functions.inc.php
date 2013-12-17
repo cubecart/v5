@@ -264,7 +264,7 @@ function dirsize($path, &$total) {
 			}
 		}
 	}
-	return format_size($total);
+	return formatBytes($total, true);
 }
 
 /**
@@ -301,7 +301,7 @@ function findFiles(&$list, $path = false, $recursive = true) {
  */
 function formatBytes($bytes = 0, $implode = false, $decimal_places = 2) {
 	$size = $bytes / 1024;
-	$ext = 'B';
+	$ext = 'bytes';
 	if ($size < 1024) {
 		$size = number_format($size, $decimal_places);
 		$ext  = 'KB';
@@ -315,7 +315,7 @@ function formatBytes($bytes = 0, $implode = false, $decimal_places = 2) {
 		}
 	}
 	if ($implode) {
-		return $size.$ext;
+		return $size.' '.$ext;
 	}
 
 	return array('size' => $size, 'suffix' => $ext);
@@ -360,24 +360,6 @@ function formatTime($timestamp, $format = false, $static = false) {
 		return $GLOBALS['language']->common['yesterday'].", ".$time;
 	} else {
 		return strftime($format, $seconds);
-	}
-}
-
-/**
- * Format byte sting and append size suffix
- *
- * @param float $bytes
- *
- * @return string
- */
-function format_size($bytes) {
-	// Format filesizes into something more friendly
-	if ($bytes / 1048576 > 1) {
-		return round($bytes/1048576, 1).' MB';
-	} elseif ($bytes / 1024 > 1) {
-		return round($bytes/1024, 1).' KB';
-	} else {
-		return round($bytes, 1).' Bytes';
 	}
 }
 
