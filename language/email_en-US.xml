@@ -91,13 +91,13 @@
         <td><strong>Quantity</strong></td>
         <td><strong>Cost</strong></td>
         </tr>
-        <!--{foreach from=$PRODUCTS item=product}-->
+        {foreach from=$PRODUCTS item=product}
         <tr>
         <td>{$product.name} <br />{$product.product_options}</td>
         <td>{$product.quantity}</td>
         <td>{$product.price}</td>
         </tr>
-        <!--{/foreach}-->
+        {/foreach}
         <tr>
         <td>&nbsp;</td>
         <td> Shipping: {if $DATA.ship_method}({$DATA.ship_method}){/if}</td>
@@ -113,13 +113,13 @@
         <td> Subtotal:</td>
         <td> {$DATA.subtotal}</td>
         </tr>
-        <!--{foreach from=$TAXES item=tax}-->
+        {foreach from=$TAXES item=tax}
         <tr>
         <td>&nbsp;</td>
         <td> {$tax.tax_name}: ({$tax.tax_percent}%)</td>
         <td> {$tax.tax_amount}</td>
         </tr>
-        <!--{/foreach}-->
+        {/foreach}
         <tr>
         <td>&nbsp;</td>
         <td><strong>Order Total: </strong></td>
@@ -265,13 +265,13 @@
         <td><strong>Quantity</strong></td>
         <td><strong>Cost</strong></td>
         </tr>
-        <!--{foreach from=$PRODUCTS item=product}-->
+        {foreach from=$PRODUCTS item=product}
         <tr>
         <td>{$product.name} <br />{$product.product_options}</td>
         <td>{$product.quantity}</td>
         <td>{$product.price}</td>
         </tr>
-        <!--{/foreach}-->
+        {/foreach}
         <tr>
         <td>&nbsp;</td>
         <td> Shipping: {if $DATA.ship_method}({$DATA.ship_method}){/if}</td>
@@ -287,13 +287,13 @@
         <td> Subtotal:</td>
         <td> {$DATA.subtotal}</td>
         </tr>
-        <!--{foreach from=$TAXES item=tax}-->
+        {foreach from=$TAXES item=tax}
         <tr>
         <td>&nbsp;</td>
         <td> {$tax.tax_name}: ({$tax.tax_percent}%)</td>
         <td> {$tax.tax_amount}</td>
         </tr>
-        <!--{/foreach}-->
+        {/foreach}
         <tr>
         <td>&nbsp;</td>
         <td><strong>Order Total: </strong></td>

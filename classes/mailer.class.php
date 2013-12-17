@@ -71,7 +71,7 @@ class Mailer extends PHPMailer {
 			if (($contents =  $GLOBALS['db']->select('CubeCart_email_content', false, array('content_type' => (string)$content_type, 'language' => $language))) !== false) {
 				$elements = array(
 					'subject'		=> $contents[0]['subject'],
-					'content_html'	=> str_replace(array('<!--{','}-->'),array('{','}'),$contents[0]['content_html']),
+					'content_html'	=> $contents[0]['content_html'],
 					'content_text'	=> $contents[0]['content_text'],
 				);
 				if($data) {

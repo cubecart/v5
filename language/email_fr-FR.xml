@@ -54,13 +54,13 @@ Numéro de commande {$DATA.cart_order_id} a été annulé.]]></content></email> 
       <td><strong>Quantité</strong></td>
       <td><strong>Coût</strong></td>
     </tr>
-  <!--{foreach from=$PRODUCTS item=product}-->
+  {foreach from=$PRODUCTS item=product}
   <tr>
     <td>{$product.name} <br />{$product.product_options}</td>
     <td>{$product.quantity}</td>
     <td>{$product.price}</td>
   </tr>
-  <!--{/foreach}-->
+  {/foreach}
   <tr>
     <td>&nbsp;</td>
     <td> Livraison : {if $DATA.ship_method}({$DATA.ship_method}){/if}</td>
@@ -76,13 +76,13 @@ Numéro de commande {$DATA.cart_order_id} a été annulé.]]></content></email> 
     <td> Sous-total :</td>
     <td> {$DATA.subtotal}</td>
   </tr>
-  <!--{foreach from=$TAXES item=tax}-->
+  {foreach from=$TAXES item=tax}
   <tr>
     <td>&nbsp;</td>
     <td> {$tax.tax_name}: ({$tax.tax_percent}%)</td>
     <td> {$tax.tax_amount}</td>
   </tr>
-  <!--{/foreach}-->
+  {/foreach}
   <tr>
     <td>&nbsp;</td>
     <td><strong>Total de la commande : </strong></td>
@@ -196,13 +196,13 @@ Si vous avez besoin davantage d'assistance pour la réinitialisation de votre mo
       <td><strong>Quantité</strong></td>
       <td><strong>Coût</strong></td>
     </tr>
-  <!--{foreach from=$PRODUCTS item=product}-->
+  {foreach from=$PRODUCTS item=product}
   <tr>
     <td>{$product.name} <br />{$product.product_options}</td>
     <td>{$product.quantity}</td>
     <td>{$product.price}</td>
   </tr>
-  <!--{/foreach}-->
+  {/foreach}
   <tr>
     <td>&nbsp;</td>
     <td> Livraison : {if $DATA.ship_method}({$DATA.ship_method}){/if}</td>
@@ -218,13 +218,13 @@ Si vous avez besoin davantage d'assistance pour la réinitialisation de votre mo
     <td> Sous-total :</td>
     <td> {$DATA.subtotal}</td>
   </tr>
-  <!--{foreach from=$TAXES item=tax}-->
+  {foreach from=$TAXES item=tax}
   <tr>
     <td>&nbsp;</td>
     <td> {$tax.tax_name}: ({$tax.tax_percent}%)</td>
     <td> {$tax.tax_amount}</td>
   </tr>
-  <!--{/foreach}-->
+  {/foreach}
   <tr>
     <td>&nbsp;</td>
     <td><strong>Total de la commande : </strong></td>
