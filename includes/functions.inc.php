@@ -721,7 +721,7 @@ function sanitizeSEOPath($path) {
 	$path = strtolower($path);
 	## Allow 0-9, a-z, -,_ and /
 	$path = preg_replace('/[^a-z0-9-_\/]/', '-', $path);
-	## Trim multiple dashed
+	## Trim multiple dashes
 	return trim($path, '-');
 }
 
