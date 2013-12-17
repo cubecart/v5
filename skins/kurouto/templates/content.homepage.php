@@ -4,7 +4,6 @@
   {$DOCUMENT.content}
 </div>
 {/if}
-
 {if isset($LATEST_PRODUCTS)}
 <div>
   <h2>{$LANG.catalogue.latest_products}</h2>
