@@ -159,14 +159,14 @@ class Gateway {
 			
 			if($_POST['NotificationType']=='OrderCancelledNotification') {
 				$order->orderStatus(Order::ORDER_CANCELLED, $past_data['order_id']);
-				$order->paymentStatus(Order::PAYMENT_CANCEL, $$past_data['order_id']);
+				$order->paymentStatus(Order::PAYMENT_CANCEL, $past_data['order_id']);
 				
 				$transData['notes']			= 'Order cancelled, do not ship.';
 				$transData['status']		= 'Cancelled';
 				
 			} elseif ($_POST['NotificationType']=='OrderReadyToShipNotification') {
 				$order->orderStatus(Order::ORDER_PROCESS, $past_data['order_id']);
-				$order->paymentStatus(Order::PAYMENT_SUCCESS, $$past_data['order_id']);
+				$order->paymentStatus(Order::PAYMENT_SUCCESS, $past_data['order_id']);
 				
 				$transData['notes']			= 'Order now ready to ship.';
 				$transData['status']		= 'Payment Cleared';
