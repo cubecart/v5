@@ -39,7 +39,9 @@
   </div>
   <div id="upload" class="tab_content">
 	<h3>{$FILMANAGER_TITLE}</h3>
+	{if $FILMANAGER_MODE == '1'}
 	<p>{$LANG.filemanager.file_upload_note}</p>
+	{/if}
 	<div>
 	  <label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="file" id="uploader" type="file" class="multiple" /></span>
 	</div>
