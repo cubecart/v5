@@ -20,4 +20,5 @@ CKEDITOR.editorConfig = function(config) {
 	config.toolbar = 'CubeCart';
 	config.filebrowserImageBrowseUrl	= 'admin.php?_g=filemanager&mode=fck'; 
 	config.entities_greek = false ;
+	config.protectedSource.push( /\{[\s\S]*?\}/g );
 }
