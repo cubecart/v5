@@ -363,6 +363,27 @@ function formatTime($timestamp, $format = false, $static = false) {
 	}
 }
 
+/**
+ * Format Dispatch Date
+ *
+ * @param string $timestamp
+ * @param bool $format
+ *
+ * @return string/false
+ */
+function formatDispatchDate($date, $format = '%b %d %Y') {
+
+	if (empty($date)) {
+		return false;
+	}
+
+	$seconds = strtotime($date);
+
+	$format = $GLOBALS['config']->get('config', 'dispatch_date_format') ? $GLOBALS['config']->get('config', 'dispatch_date_format') : $format;
+
+	return strftime($format, $seconds);
+}
+
 function generate_product_code($product_name, $cat_id = false) {
 	$chars = array(
 		'A','B','C','D','E','F','G','H','I','J','K','L','M',

@@ -1520,6 +1520,7 @@
     <string name="disable_checkout_terms" introduced="5.0.0"><![CDATA[Disable terms &amp; conditions checkbox on checkout]]></string>
     <string name="disable_mobile_skin" introduced="5.1.1"><![CDATA[Disable mobile skin]]></string>
     <string name="dispatch_to_non_invoice" introduced="5.0.0"><![CDATA[Allow delivery to non-invoice address]]></string>
+    <string name="dispatch_date_format" introduced="5.2.6"><![CDATA[Dispatch Date Format]]></string>
     <string name="update_main_stock" introduced="5.2.6"><![CDATA[Main stock level as matrix stock level summary]]></string>
     <string name="email_disable_alert" introduced="5.0.0"><![CDATA[Disable new order alerts]]></string>
     <string name="email_method" introduced="5.0.0"><![CDATA[Sending Method]]></string>

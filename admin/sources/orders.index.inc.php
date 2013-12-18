@@ -269,7 +269,7 @@ if (isset($_GET['action'])) {
 
 			$overview_summary['name']		= (isset($summary[0]['name']) && !empty($summary[0]['name'])) ? $summary[0]['name'] : $summary[0]['first_name'].' '.$summary[0]['last_name'];
 			$overview_summary['name_d']		= (isset($summary[0]['name_d']) && !empty($summary[0]['name_d'])) ? $summary[0]['name_d'] : $summary[0]['first_name_d'].' '.$summary[0]['last_name_d'];
-			$overview_summary['ship_date'] 	= $overview_summary['ship_date'] ? formatTime(strtotime($overview_summary['ship_date']),false,true) : "&nbsp;";
+			$overview_summary['ship_date'] 	= $overview_summary['ship_date'] ? formatDispatchDate($overview_summary['ship_date']) : "&nbsp;";
 			$overview_summary['discount'] 	= $GLOBALS['tax']->priceFormat($overview_summary['discount']);
 			$overview_summary['subtotal'] 	= $GLOBALS['tax']->priceFormat($overview_summary['subtotal']);
 			$overview_summary['shipping'] 	= $GLOBALS['tax']->priceFormat($overview_summary['shipping']);
@@ -457,7 +457,7 @@ if (isset($_GET['action'])) {
 			$summary['state_d'] = (is_numeric($summary['state_d'])) ? getStateFormat($summary['state_d']) : $summary['state_d'];
 			$summary['country_d'] = getCountryFormat($summary['country_d']);
 			$summary['order_date'] = formatTime($summary['order_date'],false,true);
-			$summary['ship_date'] = ((int)(str_replace('-', '', $summary['ship_date'])) > 0) ? formatTime(strtotime($summary['ship_date']),false,true) : '&nbsp;';
+			$summary['ship_date'] = ((int)(str_replace('-', '', $summary['ship_date'])) > 0) ? formatDispatchDate($summary['ship_date']) : '&nbsp;';
 
 			$label_fix = array('ship_method','ship_tracking','gateway');
 			foreach ($summary as $key => $value) {
