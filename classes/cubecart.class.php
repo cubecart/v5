@@ -721,9 +721,12 @@ class Cubecart {
 	 */
 	private function _certificates() {
 		/* !Gift Certificates */
-		//@todo test
+
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.certificates') as $hook) include $hook;
+
 		$gc	= $GLOBALS['config']->get('gift_certs');
+		if (!$gc['status']) httpredir('index.php');
+
 		$error = false;
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->catalogue['gift_certificates'], currentPage());
 		if (isset($_POST['gc'])) {
