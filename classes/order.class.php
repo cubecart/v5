@@ -664,7 +664,7 @@ class Order {
 
 		foreach ($GLOBALS['hooks']->load('class.order.manage_stock') as $hook) include $hook;
 		
-		$matrix_item = array();
+		$matrix_prod = array();
 
 		if (($items = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $order_id), false, false, false, false)) !== false) {
 
