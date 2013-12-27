@@ -81,7 +81,7 @@
 	<p>{$LANG.paypal_pro.payflow_fields}</p>
 	{/if}
 	<fieldset><legend>IMPORTANT NOTICE</legend>
-	CubeCart requires the customers phone number in order to checkout. On returning from an Express Checkout payment CubeCart will display a form to the customers if no phone number is present. To bypass this and speed up the checkout process we recommend that &quot;Contact Telephone Number&quot; is set to &quot;On&quot; in your PayPa account. This can be found under <em>Profile &gt; Website payment settings &gt; Website Payments Standard and Express Checkout &gt; Preferences</em>.
+	CubeCart requires the customers phone number in order to checkout. On returning from an Express Checkout payment CubeCart will display a form to the customers if no phone number is present. To bypass this and speed up the checkout process we recommend that &quot;Contact Telephone Number&quot; is set to &quot;On&quot; in your PayPal account. This can be found under <em>Profile &gt; Website payment settings &gt; Website Payments Standard and Express Checkout &gt; Preferences</em>.
 </fieldset>
   </div>
   {$MODULE_ZONES}
