@@ -646,7 +646,7 @@ class SEO {
 		// Generate Standard records
 		# Homepage
 		
-		$store_url = $GLOBALS['config']->get('config','standard_url');
+		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config','standard_url') : $GLOBALS['storeURL'];
 		
 		$this->_sitemap_link(array('url' => $store_url.'/index.php'));
 		# Sale Items
