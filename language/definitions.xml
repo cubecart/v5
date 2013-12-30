@@ -1089,6 +1089,7 @@
     <string name="php_code" introduced="5.2.0"><![CDATA[PHP Code]]></string>
     <string name="version" introduced="5.2.0"><![CDATA[Version]]></string>
     <string name="error_snippet_none" introduced="5.2.0"><![CDATA[No code snippets.]]></string>
+    <string name="add_snippet" introduced="5.2.6"><![CDATA[Add Snippet]]></string>
     <string name="title_code_snippet_add" introduced="5.2.0"><![CDATA[Add Code Snippet]]></string>
     <string name="title_code_snippet_edit" introduced="5.2.0"><![CDATA[Edit Code Snippet]]></string>
     <string name="title_code_snippets" introduced="5.2.0"><![CDATA[Code Snippets]]></string>

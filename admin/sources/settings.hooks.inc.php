@@ -8,13 +8,24 @@ $GLOBALS['gui']->addBreadcrumb($lang['hooks']['title_hook'], currentPage(array('
 
 if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
 	
+	$snippet_redirect = false;
+	
+	if(is_array($_POST['snippet_status'])) {
+		foreach($_POST['snippet_status'] as $key => $value) {
+			if($GLOBALS['db']->update('CubeCart_code_snippet', array('enabled' => $value), array('snippet_id' => $key))) {
+				$snippet_redirect = true;
+			}
+		}
+		
+	}
+	
 	if(!empty($_FILES['code_snippet_import']['tmp_name'])) {
 		if($GLOBALS['hooks']->import_code_snippets($_FILES['code_snippet_import'])) {
 			$GLOBALS['main']->setACPNotify($lang['hooks']['notify_snippet_imported']);
 		} else {
 			$GLOBALS['main']->setACPWarning($lang['hooks']['notify_snippet_import_failed']);
 		}
-		httpredir(currentPage(),'snippets');
+		$snippet_redirect = true;
 	} else {
 		if (isset($_POST['snippet']) && is_array($_POST['snippet'])) {
 			
@@ -25,7 +36,7 @@ if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
 			if(isset($_POST['snippet']['snippet_id']) && is_numeric($_POST['snippet']['snippet_id'])) {
 				if($GLOBALS['db']->update('CubeCart_code_snippet',$_POST['snippet'], array('snippet_id' => (int)$_POST['snippet']['snippet_id']))) {
 					$GLOBALS['main']->setACPNotify($lang['hooks']['notify_snippet_updated']);
-					httpredir(currentPage(array('snippet')),'snippets');
+					
 				}
 			} else {
 				if($GLOBALS['db']->select('CubeCart_code_snippet', array('snippet_id'), array('unique_id' => $_POST['snippet']['unique_id']))) {
@@ -33,7 +44,7 @@ if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
 				} else {			
 					if($GLOBALS['db']->insert('CubeCart_code_snippet',$_POST['snippet'])==true) {
 						$GLOBALS['main']->setACPNotify($lang['hooks']['notify_snippet_added']);
-						httpredir(currentPage(),'snippets');
+						$snippet_redirect = true;
 					} else {
 						$GLOBALS['main']->setACPWarn($lang['hooks']['notify_snippet_not_added']);
 					}
@@ -46,9 +57,14 @@ if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
 		if($GLOBALS['db']->delete('CubeCart_code_snippet',array('snippet_id' => (int)$_GET['delete_snippet']))) {
 			$GLOBALS['hooks']->delete_snippet_file($_GET['delete_snippet']);
 			$GLOBALS['main']->setACPNotify($lang['hooks']['notify_snippet_deleted']);
-			httpredir(currentPage(array('delete_snippet')));	
+			$snippet_redirect = true;	
 		}
 	}
+	
+	if($snippet_redirect) {
+		httpredir(currentPage(array('snippet','delete_snippet','add_snippet')),'snippets');
+	}
+	
 	
 	if (isset($_POST['hook']) && is_array($_POST['hook'])) {
 		// Validation
@@ -211,9 +227,13 @@ if (isset($_GET['plugin']) && isset($plugins[(string)$_GET['plugin']]) && !is_nu
 	
 	if(isset($_GET['snippet']) && is_numeric($_GET['snippet'])) {
 		$snippet = $GLOBALS['db']->select('CubeCart_code_snippet','*', array('snippet_id' => (int)$_GET['snippet']));
+		$GLOBALS['smarty']->assign('DISPLAY_SNIPPET_FORM', true);
 	} elseif(isset($_POST['snippet'])) {
 		$snippet[0] = $_POST['snippet'];
 		$GLOBALS['smarty']->assign('SNIPPET', $snippet[0]);
+		$GLOBALS['smarty']->assign('DISPLAY_SNIPPET_FORM', true);
+	} elseif($_GET['add_snippet']) {
+		$GLOBALS['smarty']->assign('DISPLAY_SNIPPET_FORM', true);
 	}
 	
 	if(is_array($snippet[0])) {

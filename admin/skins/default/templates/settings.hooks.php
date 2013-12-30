@@ -15,22 +15,28 @@
   </div>
   <div id="snippets" class="tab_content">
 	<h3>{$LANG.hooks.title_code_snippets}</h3>
+	<p><a href="?_g=settings&amp;node=hooks&amp;add_snippet=1#snippets" class="delete">{$LANG.hooks.add_snippet}</a></p>
 	<fieldset class="list">
 	  {foreach from=$SNIPPETS item=snippet}
 	  <div>
 		<span class="actions"><a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="" /></a> <a href="?_g=settings&amp;node=hooks&amp;delete_snippet={$snippet.snippet_id}#snippets" class="delete" title="{$LANG.notification.confirm_continue}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="" /></a></span>
-		<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt="" /> <a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
+		<span class="toggle"><input type="hidden" id="snippet_status_{$snippet.snippet_id}" name="snippet_status[{$snippet.snippet_id}]" value="{$snippet.enabled}" class="toggle" /> <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt="" /> <a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
 	  </div>
 	  {foreachelse}
 	  <div>{$LANG.hooks.error_snippet_none}</div>
 	  {/foreach}
 	</fieldset>
+	
+	
+	{if $DISPLAY_SNIPPET_FORM}
+	
 	{if $SNIPPET}
 	<h3>{$LANG.hooks.title_code_snippet_edit}</h3>
-	<p><a href="?_g=settings&amp;node=hooks#snippets" class="delete">Cancel Edit</a></p>
 	{else}
 	<h3>{$LANG.hooks.title_code_snippet_add}</h3>
 	{/if}
+	<p><a href="?_g=settings&amp;node=hooks#snippets" class="delete">{$LANG.common.cancel}</a></p>
+	
 	<fieldset>
 	  <legend>{$LANG.hooks.title_code_snippet}</legend>
 	  <div><label for="enabled">{$LANG.common.enabled}</label><span><input name="snippet[enabled]" id="enabled" type="hidden" class="toggle" value="{$SNIPPET.enabled}" /></span></div>
@@ -46,7 +52,6 @@
 		  <input type="text" name="snippet[priority]" id="priority" class="textbox required number" value="{$SNIPPET.priority}" />
 		</span>
 	  </div>
-	  
 	  <div>
 		<label for="description">{$LANG.common.description}</label>
 		<span>
@@ -63,11 +68,8 @@
 		</span>
 	  </div>
 	  <div>
-		<label for="php_code">{$LANG.hooks.php_code}</label>
-		<span>
-		  {$LANG.hooks.php_tag_replace}<br />
-		  <textarea name="snippet[php_code]" id="php_code" class="required" rows="12" cols="50">{$SNIPPET.php_code}</textarea>
-		</span>
+		<label for="php_code">{$LANG.hooks.php_code}*</label>
+		  <span><textarea name="snippet[php_code]" id="php_code" class="required" rows="12" cols="50">{$SNIPPET.php_code}</textarea></span>
 	  </div>
 	  <div>
 		<label for="version">{$LANG.hooks.version}</label>
@@ -83,6 +85,8 @@
 	  </div>
 	  <input type="hidden" name="snippet[snippet_id]" id="snippet_id" class="textbox" value="{$SNIPPET.snippet_id}" />
 	</fieldset>
+	* {$LANG.hooks.php_tag_replace}
+	{/if}
   </div>
   
   <div id="snippets_import" class="tab_content">
