@@ -7,6 +7,31 @@ global $lang;
 $cache = Cache::getInstance();
 $pclzip_path = CC_INCLUDES_DIR.'lib'.CC_DS.'pclzip'.CC_DS.'pclzip.lib.php';
 
+
+/* Code to organise images into subfolders by first letter. Useful to boost performance of stores with all images in one folder. Tested succesfully on 15,000 image store. 
+foreach (glob("images/source/*") as $filename) {
+    if(is_file($filename)) {
+    	$base_name = str_replace('images/source/','',$filename);
+    	$folder_name = substr($base_name,0,1);
+    	$folder_path = 'images/source/'.$folder_name;
+    	
+    	if(!file_exists($folder_path)) {
+    		mkdir($folder_path);
+    	}
+    	
+    	rename($filename,$folder_path.'/'.$base_name);
+    	
+    }
+}
+
+
+$files = $GLOBALS['db']->select('CubeCart_filemanager', '*');
+foreach($files as $file) {
+	$folder = substr($file['filename'], 0, 1);
+	$GLOBALS['db']->update('CubeCart_filemanager', array('filepath' => $folder.'/'), array('file_id' => $file['file_id']));
+}
+*/
+
 if(isset($_GET['restore']) && !empty($_GET['restore'])) {
 	$file_path = CC_ROOT_DIR.CC_DS.'backup'.CC_DS.$_GET['restore'];
 	require_once($pclzip_path);
