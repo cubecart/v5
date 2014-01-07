@@ -308,6 +308,9 @@ if (isset($_GET['action'])) {
 				$template_vars['ZONE_TYPE'] = 'C';
 			}
 		}
+	} else {
+		$template_vars['ZONE_COUNTRIES'] = array();
+		$template_vars['ZONE_STATES'] = array();
 	}
 
 	$countries = $GLOBALS['db']->select('CubeCart_geo_country');
