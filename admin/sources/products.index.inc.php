@@ -95,8 +95,9 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 			
 			}
 			unset($_POST['download']);
-		} 
-		
+		} else {
+			$record['digital']	= 0; // no path nor list of files
+		}
 		$record['updated'] = date('Y-m-d H:i:s', time());
 		if ($GLOBALS['db']->update('CubeCart_inventory', $record, array('product_id' => $_POST['product_id']), true, array('stock_level'))) {
 			$product_id = $_POST['product_id'];
