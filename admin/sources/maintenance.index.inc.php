@@ -9,11 +9,13 @@ $pclzip_path = CC_INCLUDES_DIR.'lib'.CC_DS.'pclzip'.CC_DS.'pclzip.lib.php';
 
 
 /* Code to organise images into subfolders by first letter. Useful to boost performance of stores with all images in one folder. Tested succesfully on 15,000 image store. 
-foreach (glob("images/source/*") as $filename) {
-    if(is_file($filename)) {
-    	$base_name = str_replace('images/source/','',$filename);
+$image_path = 'images/source/';
+foreach (glob($image_path.'*') as $filename) {
+    if(is_file($filename)) 
+    
+    	$base_name = basename($filename);
     	$folder_name = substr($base_name,0,1);
-    	$folder_path = 'images/source/'.$folder_name;
+    	$folder_path = $image_path.$folder_name;
     	
     	if(!file_exists($folder_path)) {
     		mkdir($folder_path);

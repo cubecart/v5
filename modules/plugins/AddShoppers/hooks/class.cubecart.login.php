@@ -4,12 +4,12 @@ if ($GLOBALS['config']->get('AddShoppers', 'status') && !$GLOBALS['config']->isE
 	
 	$currentPageArray = explode('&as_signature',currentPage());
 	$currentPage = $currentPageArray[0];
-	
-	if (!empty($_GET['as_signature']) && $GLOBALS['user']->getId() == 0) {
-		require CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.'AddShoppers'.CC_DS.'library'.CC_DS.'addshoppers.lib.php';
 		
-		$response = addshoppers_verify_data($_GET['as_signature'],$GLOBALS['config']->get('AddShoppers', 'addshoppers_api_secret'));
+	if (!empty($_GET['as_signature']) && $GLOBALS['user']->getId() == 0) {
+			
+		require CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.'AddShoppers'.CC_DS.'library'.CC_DS.'addshoppers.lib.php';
 
+		$response = addshoppers_verify_data($_GET['as_signature'],$GLOBALS['config']->get('AddShoppers', 'addshoppers_api_secret'));
 
 		if (!$response['error']) {
 			// find and authenticate
@@ -19,6 +19,7 @@ if ($GLOBALS['config']->get('AddShoppers', 'status') && !$GLOBALS['config']->isE
 					'first_name'	=> $response['firstname'],
 					'last_name'		=> $response['lastname'],
 					'email'			=> $response['email'],
+					'new_password'  => '0',
 					'registered'	=> time(),
 					'ip_address'	=> get_ip_address()
 				);
@@ -43,9 +44,9 @@ if ($GLOBALS['config']->get('AddShoppers', 'status') && !$GLOBALS['config']->isE
 			if (!$customer_id) {
 				$customer = $GLOBALS['db']->select('CubeCart_customer', array('customer_id'), array('email' => $response['email']));
 				$customer_id = $customer[0]['customer_id'];
-			}
-									
+			}						
 			$GLOBALS['db']->update('CubeCart_sessions', array('customer_id' => $customer_id), array('session_id' => $GLOBALS['session']->getId()), false);
+			
 			// Load user data
 			$GLOBALS['user']->load();
 			$append	= ($GLOBALS['session']->isEmpty('contents','basket')) ? array('_a' => 'account') : array('_a' => 'basket');

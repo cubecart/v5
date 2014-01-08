@@ -8,8 +8,7 @@
 
   <!-- TAB -->
   <div id="All_In_One_Shipping" class="tab_content">
-    <h3>{$TITLE} <span class="AIOS-EWCopyright"><a href="http://cubecart.expandingbrain.com/index.php?_g=co&_a=viewDownloads&product=166"><img src="https://cubecart.expandingbrain.com/version.php?product=166&ver=0.9" alt="" border="0" style="vertical-align:text-bottom;" /></a></span></h3>
-    <!-- XXX <div>{$LANG.allinoneshipping.module_description}</div>-->
+    <h3>{$TITLE}</h3>
     {if $MULTIPLE_ZONES}
     <div>{$LANG.allinoneshipping.module_help_using_tabs}</div>
     {/if}

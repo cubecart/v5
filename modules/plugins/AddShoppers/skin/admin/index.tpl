@@ -33,5 +33,5 @@
 </form>
 
   <div style="padding: 0px 20px;">
-  	<p>You can find your Social Analytics reports, get the code for sharing buttons, install more apps, and way more at your <a href="https://www.addshoppers.com/merchants" target="_blank">AddShoppers dashboard</a>. Need help? Send us an email: help@addshoppers.com</p>
+  	<p>You can find your Social Analytics reports, add or edit your Social Rewards, get the code for sharing buttons, install more apps, and way more at your <a href="https://www.addshoppers.com/merchants" target="_blank">AddShoppers dashboard</a>. Need help? See our <a href="http://help.addshoppers.com" target="_blank">help site</a> or send us an email: help@addshoppers.com</p>
   </div>

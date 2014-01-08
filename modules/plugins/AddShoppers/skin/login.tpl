@@ -5,8 +5,11 @@ function init() {
    AddShoppersWidget.API.Event.bind("sign_in", createAccount);		
 };
 function createAccount(params) {	
-	if (params.source == "social_login") {		
-		var data = AddShoppersWidget.API.User.signed_data(); 
+	if (params.source == "social_login") {	
+		var data = AddShoppersWidget.API.User.signed_data();
+		if ("google_picture" in data) {
+			data.google_picture = data.google_picture.replace('http', 'h--p');
+		}
 		window.location.href = window.location.href + (window.location.search ? '&' : '?') + 'as_signature=' + JSON.stringify(data);
 	}
 }

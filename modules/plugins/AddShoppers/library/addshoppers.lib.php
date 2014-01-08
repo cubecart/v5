@@ -7,10 +7,12 @@
  
 if (!function_exists('addshoppers_verify_data')){
 	function addshoppers_verify_data($data,$api_secret) {
-		$params = json_decode($data, true);
+		$params = json_decode(urldecode($data), true);
 		$signature = null;
 		$p = array();
- 
+		
+		if ($params['google_picture']) $params['google_picture'] = str_replace('h--p', 'http', $params['google_picture']);
+  
 		foreach($params as $key => $value)
 		{
     		if($key == "signature")
@@ -22,7 +24,7 @@ if (!function_exists('addshoppers_verify_data')){
 		$query = $api_secret . implode($p);
 		$hashed = hash("md5", $query);
 		if($signature !== $hashed) return array('error' => 1); 
-		else  return get_profile_info($params); 
+		else return get_profile_info($params); 
 	}
 }
 
