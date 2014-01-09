@@ -1557,7 +1557,7 @@
     <string name="expire_pending" introduced="5.0.0"><![CDATA[Time (in seconds) before expiring pending orders]]></string>
     <string name="feed_access_key" introduced="5.1.5"><![CDATA[Product Feed Access Password]]></string>
     <string name="force_completed" introduced="5.2.6"><![CDATA[Force Order Completed Emails]]></string>
-    <string name="gc_images" introduced="5.0.0"><![CDATA[Gift Certificates Image]]></string>
+    <string name="gc_images" introduced="5.2.6"><![CDATA[Gift Certificates Image]]></string>
     <string name="gc_settings_legend" introduced="5.0.0"><![CDATA[Settings]]></string>
     <string name="gc_expiry" introduced="5.0.0"><![CDATA[Validity Period (Months)]]></string>
     <string name="gc_type_both" introduced="5.0.0"><![CDATA[Digital and Physical]]></string>
