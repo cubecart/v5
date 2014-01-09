@@ -20,7 +20,17 @@
 	{/if}
 	</fieldset>
   </div>
-  
+    <div id="gift_images" class="tab_content">
+	<h3>{$LANG.settings.gc_images}</h3>
+	<div class="fm-container">
+	  <div id="image" rel="1" class="fm-filelist unique"></div>
+	</div>
+	<p>{$LANG.filemanager.file_upload_note}</p>
+	<div><label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="image" id="uploader" type="file" /></span></div>
+	<script type="text/javascript">
+	var file_list = {$JSON_IMAGES}
+	</script>
+  </div>
   {include file='templates/element.hook_form_content.php'}
   
   <div class="form_control">

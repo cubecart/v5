@@ -5,18 +5,52 @@ Admin::getInstance()->permissions('settings', CC_PERM_READ, true);
 global $lang;
 
 if (isset($_POST['gc']) && is_array($_POST['gc']) && Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
+
+	$filemanager	= new FileManager(FileManager::FM_FILETYPE_IMG);
+	if (($uploaded = $filemanager->upload()) !== false) {
+		foreach ($uploaded as $file_id) {
+			$_POST['image'][(int)$file_id] = true;
+		}
+	}
+
+	if (isset($_POST['image']) && is_array($_POST['image'])) {
+
+		$gc = $GLOBALS['config']->get('gift_certs');
+
+		foreach ($_POST['image'] as $image_id => $enabled) {
+			if ($enabled == 0) {
+				if ($image_id == $gc['image']) {
+					$_POST['gc']['image'] = '';
+				}
+				continue;
+			}
+			$_POST['gc']['image'] = (int)$image_id;
+			break;
+		}
+	}
+
 	if ($GLOBALS['config']->set('gift_certs', '', $_POST['gc'])) {
 		$GLOBALS['cache']->clear();
 		$GLOBALS['main']->setACPNotify($lang['settings']['notify_settings_update']);
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['settings']['error_settings_update']);
 	}
+	
+	print_r($_POST);
 }
 
+$filemanager	= new FileManager(FileManager::FM_FILETYPE_IMG);
+
 $GLOBALS['main']->addTabControl($lang['catalogue']['gift_certificates'], 'Certificates');
+$GLOBALS['main']->addTabControl($lang['settings']['title_images'], 'gift_images', null, 'I');
+
 $GLOBALS['gui']->addBreadcrumb($lang['catalogue']['gift_certificates'], $_GET);
 
 $gc = $GLOBALS['config']->get('gift_certs');
+
+if (isset($gc['image'])) {
+	$GLOBALS['smarty']->assign('JSON_IMAGES', json_encode(array($gc['image'])));
+}
 
 if (($taxes = $GLOBALS['db']->select('CubeCart_tax_class')) !== false) {
 	foreach ($taxes as $tax) {
