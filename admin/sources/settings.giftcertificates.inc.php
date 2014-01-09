@@ -35,8 +35,7 @@ if (isset($_POST['gc']) && is_array($_POST['gc']) && Admin::getInstance()->permi
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['settings']['error_settings_update']);
 	}
-	
-	print_r($_POST);
+
 }
 
 $filemanager	= new FileManager(FileManager::FM_FILETYPE_IMG);
