@@ -24,12 +24,16 @@ if (isset($_GET['_g']) && !empty($_GET['_g']) && $_GET['_g'] != 'modules') {
 }
 
 if (!empty($_GET['_g'])) {
+
+	$module_type = preg_match("/[a-z]/i", $_GET['type']) ? $_GET['type'] : '';
+
 	$node = (!empty($_GET['node'])) ? strtolower($_GET['node']) : 'index';
-	if (strtolower($_GET['_g']) == 'modules' && !empty($_GET['type'])) {
+	if (strtolower($_GET['_g']) == 'modules' && !empty($module_type)) {
+		
 		$GLOBALS['gui']->addBreadcrumb(ucwords($_GET['_g']), currentPage());
 		// Display Modules
 		$GLOBALS['main']->wikiNamespace('Modules');
-		$modules_list = glob('modules'.CC_DS.strtolower($_GET['type']).CC_DS.'*');
+		$modules_list = glob('modules'.CC_DS.strtolower($module_type).CC_DS.'*');
 		if (is_array($modules_list)) {
 			foreach ($modules_list as $folder) {
 				if (file_exists($folder.CC_DS.'admin') && preg_match('#([a-z]+)[\\\/]([a-z0-9\_\-]+)$#iU', $folder, $matches)) {
@@ -44,16 +48,16 @@ if (!empty($_GET['_g'])) {
 		$request->setData('null');
 		$response = $request->send();
 		$module_order = (!empty($response)) ? json_decode($response, true) : false;
-		if (isset($module_list) && is_array($module_list) && array_key_exists(strtolower($_GET['type']), $module_list)) {
-			$breadcrumb	= (isset($lang['navigation'][$_GET['type']])) ? $lang['navigation'][$_GET['type']] : $_GET['type'];
+		if (isset($module_list) && is_array($module_list) && array_key_exists(strtolower($module_type), $module_list)) {
+			$breadcrumb	= (isset($lang['navigation'][$module_type])) ? $lang['navigation'][$module_type] : $module_type;
 
-			$GLOBALS['gui']->addBreadcrumb($breadcrumb, array('_g' => 'modules', 'type' => strtolower($_GET['type'])));
+			$GLOBALS['gui']->addBreadcrumb($breadcrumb, array('_g' => 'modules', 'type' => strtolower($module_type)));
 
-			if (!empty($_GET['module']) || stristr($_GET['type'], 'installer')) {
+			if (!empty($_GET['module']) || stristr($module_type, 'installer')) {
 				// Load Module
 				$GLOBALS['main']->wikiPage($_GET['module']);
 				// Load additional data from XML
-				$config_xml	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$_GET['type'].CC_DS.$_GET['module'].CC_DS.'config.xml';
+				$config_xml	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$module_type.CC_DS.$_GET['module'].CC_DS.'config.xml';
 				if (file_exists($config_xml)) {
 					$xml			= new SimpleXMLElement(file_get_contents($config_xml));
 					$module_info	= array(
@@ -65,8 +69,8 @@ if (!empty($_GET['_g'])) {
 					);
 				}
 				$module = array(
-					'type'	=> strtolower($_GET['type']),
-					'module'=> ($_GET['type'] == 'installer') ? '' : $_GET['module'],
+					'type'	=> strtolower($module_type),
+					'module'=> ($module_type == 'installer') ? '' : $_GET['module'],
 				);
 				$GLOBALS['gui']->addBreadcrumb((isset($_GET['variant']) ? $_GET['variant'] : $module_info['name']), $_GET);
 
@@ -74,7 +78,7 @@ if (!empty($_GET['_g'])) {
 				if (file_exists($module_admin)) {
 					define('MODULE_FORM_ACTION', (defined('VAL_SELF')) ? constant('VAL_SELF') : currentPage());
 					
-					$default_priority = $module_order[$_GET['type']][strtolower($_GET['module'])];
+					$default_priority = $module_order[$module_type][strtolower($_GET['module'])];
 					if(is_numeric($default_priority) && !isset($_POST['module']['position'])) {
 						$_POST['module']['position'] = $default_priority;
 					}
@@ -88,7 +92,7 @@ if (!empty($_GET['_g'])) {
 					foreach ($_POST['status'] as $module_name => $status) {
 						if($GLOBALS['db']->select('CubeCart_modules',false,array('folder' => $module_name))) {
 							$GLOBALS['db']->update('CubeCart_modules', array('status' => (int)$status), array('folder' => $module_name), true);
-							if ($_GET['type']=='plugins') {
+							if ($module_type=='plugins') {
 								if ($status) {
 									$GLOBALS['hooks']->install($module_name);
 								} else {
@@ -96,7 +100,7 @@ if (!empty($_GET['_g'])) {
 								}
 							}
 						} else {
-							$GLOBALS['db']->insert('CubeCart_modules', array('status' => (int)$status, 'folder' => $module_name, 'module' => $_GET['type']));
+							$GLOBALS['db']->insert('CubeCart_modules', array('status' => (int)$status, 'folder' => $module_name, 'module' => $module_type));
 						}
 						// Update config
 						$GLOBALS['config']->set($module_name, 'status', $status);
@@ -109,10 +113,10 @@ if (!empty($_GET['_g'])) {
 					httpredir(currentPage(null,array('order' => $_POST['order'])));
 				}
 
-				$GLOBALS['smarty']->assign('MODULES_TYPE', $lang['navigation']['nav_'.$_GET['type']]);
-				$GLOBALS['main']->addTabControl($lang['navigation']['nav_'.$_GET['type']], 'modules');
+				$GLOBALS['smarty']->assign('MODULES_TYPE', $lang['navigation']['nav_'.$module_type]);
+				$GLOBALS['main']->addTabControl($lang['navigation']['nav_'.$module_type], 'modules');
 				
-				$module_type = strtolower($_GET['type']);
+				$module_type = strtolower($module_type);
 				
 				if(is_array($module_order) && $_GET['order']!=='alpha') {
 					$other = 100;
@@ -129,21 +133,21 @@ if (!empty($_GET['_g'])) {
 					$order_select['alpha'] = ' selected="selected"';
 				}
 				
-				foreach ($module_list[strtolower($_GET['type'])] as $module) {
+				foreach ($module_list[strtolower($module_type)] as $module) {
 					$module_config = $GLOBALS['config']->get($module);
-					if (($module_info = $GLOBALS['db']->select('CubeCart_modules', false, array('module' => $_GET['type'], 'folder' => $module))) !== false) {
+					if (($module_info = $GLOBALS['db']->select('CubeCart_modules', false, array('module' => $module_type, 'folder' => $module))) !== false) {
 						unset($module_config['status'], $module_config['default']);
 						$module_config = array_merge($module_info[0], $module_config);
 					}
 					$module_info	= array(
 						'name'		=> str_replace('_', ' ', $module),
-						'type'		=> strtolower($_GET['type']),
+						'type'		=> strtolower($module_type),
 						'node'		=> $module,
 						'status'	=> (isset($module_config['status']) && $module_config['status']) ? 1 : 0,
 					);
 
 					// Load additional data from XML
-					$config_xml	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$_GET['type'].CC_DS.$module.CC_DS.'config.xml';
+					$config_xml	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$module_type.CC_DS.$module.CC_DS.'config.xml';
 					if (file_exists($config_xml)) {
 						$xml		= new SimpleXMLElement(file_get_contents($config_xml));
 						$xml_data	= array(
@@ -152,19 +156,19 @@ if (!empty($_GET['_g'])) {
 						$module_info = array_merge($module_info, $xml_data);
 					}
 					$module_logo		= new Module(false, $module, false);
-					$module_info['title'] = $module_logo->module_fetch_logo($_GET['type'], $module);
+					$module_info['title'] = $module_logo->module_fetch_logo($module_type, $module);
 					$module_info['mobile_optimized'] = (strtolower($xml->info->mobile_optimized)=="true") ? true : false;
 					if(!isset($xml->info->block) || $xml->info->block=='false') { $modules[] = $module_info; }
 				}
 				$GLOBALS['smarty']->assign('MODULES', $modules);
 				$GLOBALS['smarty']->assign('ORDER_SELECT', $order_select);
-				if($_GET['type']=='gateway') {
+				if($module_type=='gateway') {
 				$GLOBALS['smarty']->assign('PLUGINS_LINK', true);
 				}
 				$page_content = $GLOBALS['smarty']->fetch('templates/modules.index.php');
 			}
 		} else {
-			trigger_error(sprintf("Unknown module type '%s' - loading halted", $_GET['type']), E_USER_WARNING);
+			trigger_error(sprintf("Unknown module type '%s' - loading halted", $module_type), E_USER_WARNING);
 		}
 	} else if (strtolower($_GET['_g']) == 'plugin' && isset($_GET['name'])) {
 		// Include plugins
