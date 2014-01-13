@@ -153,7 +153,7 @@ if (!isset($_SESSION['setup']['permissions'])) {
 			$append	= array(
 				'adminFolder'	=> 'admin',
 				'adminFile'		=> 'admin.php',
-				'encoder'		=> (has_zend_optimizer()) ? 'zend' : 'ioncube',
+				'encoder'		=> 'ioncube',
 			);
 			$global	= array_merge($glob, $append);
 			ksort($global);

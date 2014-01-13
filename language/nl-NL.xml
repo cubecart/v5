@@ -1776,7 +1776,7 @@
       <string name="error_db_doesnt_exist" introduced="5.0.0"><![CDATA[Die database bestaat niet.]]></string>
       <string name="error_db_incorrect_something" introduced="5.0.0"><![CDATA[Onjuiste database host, gebruikersnaam en/of wachtwoord.]]></string>
       <string name="error_db_password_mismatch" introduced="5.0.0"><![CDATA[Uw database wachtwoorden komen niet overeen.]]></string>
-      <string name="error_ion_zend_required" introduced="5.0.0"><![CDATA[Ofwel Ioncube Loader of Zend Optimizer is vereist om CubeCart 5 te gebruiken. Neem contact op met uw serverbeheerder.]]></string>
+      <string name="error_ion_zend_required" introduced="5.0.0"><![CDATA[Ofwel Ioncube Loader is vereist om CubeCart 5 te gebruiken. Neem contact op met uw serverbeheerder.]]></string>
       <string name="error_licence_invalid" introduced="5.0.0"><![CDATA[Die licentiesleutel lijkt niet geldig te zijn.]]></string>
       <string name="error_licence_required" introduced="5.0.0"><![CDATA[Een software licentie sleutel is vereist voor het installeren en gebruik van deze software.]]></string>
       <string name="error_rename_images" introduced="5.0.0"><![CDATA[Gelieve handmatig uw 'images/uploads/' map naar 'images/source/' te heronoemen.]]></string>

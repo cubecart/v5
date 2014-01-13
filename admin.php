@@ -20,22 +20,14 @@ define('CC_IN_ADMIN', true);
 require 'includes'.CC_DS.'functions.inc.php';
 
 ## Let's bootstrap the encoded files
-if (isset($glob['encoder']) && !empty($glob['encoder'])) {
-	switch($glob['encoder']) {
-		case 'zend': // Load Zend Encrypted File
-			$php_version = (PHP_5_3) ? '5.3' : '5.2';
-			require_once CC_ROOT_DIR.CC_DS.'admin_php'.$php_version.'_enc_zend.php';
-		break;
-		case 'obfuscated': // Load Obfuscated file
-			require_once CC_ROOT_DIR.CC_DS.'admin_obf.php';
-		break;
-		case 'plain': // For internal development only
-			require_once CC_ROOT_DIR.CC_DS.'admin_no_enc.php';
-		break;
-		case 'ioncube':
-		default: // Load Ioncube Encrypted File
-			require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
-	}
-} else {
-	die("The includes/global.inc.php file has no value for the 'encoder' parameter. This needs to be set to 'zend' or 'ioncube'.");
+switch($glob['encoder']) {
+	case 'obfuscated': // Load Obfuscated file
+		require_once CC_ROOT_DIR.CC_DS.'admin_obf.php';
+	break;
+	case 'plain': // For internal development only
+		require_once CC_ROOT_DIR.CC_DS.'admin_no_enc.php';
+	break;
+	case 'ioncube':
+	default: // Load Ioncube Encrypted File
+		require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
 }

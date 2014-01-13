@@ -498,20 +498,6 @@ function glob_recursive($pattern, $flags = 0) {
 }
 
 /**
- * Has Zend
- *
- * @return bool
- */
-function has_zend_optimizer() {
-	# Detect Zend Optimizer
-	ob_start();
-	phpinfo(INFO_GENERAL);
-	$info	= ob_get_contents();
-	ob_end_clean();
-	return preg_match("/zend optimizer|zend guard/i",$info);
-}
-
-/**
  * Has ioncube
  *
  * @return bool

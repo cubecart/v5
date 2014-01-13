@@ -313,14 +313,14 @@ if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
 			'fail'		=> $strings['common']['not_installed'],
 		),
 		'Loader'	=> array(
-			'title'		=> 'IonCube PHP Loader or Zend Optimizer',
-			'status'	=> (has_ioncube_loader() || has_zend_optimizer()),
+			'title'		=> 'IonCube PHP Loader',
+			'status'	=> (has_ioncube_loader()),
 			'pass'		=> $strings['common']['installed'],
 			'fail'		=> $strings['common']['not_installed'],
 		),
 	);
 
-	if (!has_zend_optimizer() && !has_ioncube_loader()) {
+	if (!has_ioncube_loader()) {
 		$errors[] = $strings['setup']['error_ion_zend_required'];
 	}
 	$GLOBALS['smarty']->assign('CHECKS', $checks);
