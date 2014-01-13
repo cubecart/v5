@@ -3,6 +3,7 @@
 $('#menu.accordion a ~ ul').each(function(){
 	$(this).siblings('a:first').addClass('menu_closed').hover(function(){
 		$(this).addClass('menu_open').siblings('ul').slideDown();
+		return;
 	});
 });
 /* Registration toggle */
