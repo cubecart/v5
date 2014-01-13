@@ -864,7 +864,9 @@
     <string name="macro_cert_code" introduced="5.0.0"><![CDATA[The certificate's redemption code.]]></string>
     <string name="macro_cert_recipient" introduced="5.0.0"><![CDATA[Recipient's name.]]></string>
     <string name="macro_cert_value" introduced="5.0.0"><![CDATA[The certificate's value.]]></string>
+    <string name="macro_ship_date" introduced="5.0.0"><![CDATA[Dispatch Date]]></string>
     <string name="macro_download_expire" introduced="5.0.0"><![CDATA[The time when the download link will expire.]]></string>
+    <string name="macro_gateway" introduced="5.2.6"><![CDATA[Payment method used.]]></string>
     <string name="macro_link_download" introduced="5.0.0"><![CDATA[The link to download the product.]]></string>
     <string name="macro_link_order" introduced="5.0.0"><![CDATA[The link to manage the order.]]></string>
     <string name="macro_link_password" introduced="5.0.0"><![CDATA[The link to set a new password.]]></string>
@@ -888,6 +890,7 @@
     <string name="macro_sender_name" introduced="5.0.0"><![CDATA[The sender's name.]]></string>
     <string name="macro_sender_first_name" introduced="5.0.0"><![CDATA[The sender's first name.]]></string>
     <string name="macro_sender_last_name" introduced="5.0.0"><![CDATA[The sender's last name.]]></string>
+    <string name="macro_ship_tracking" introduced="5.2.6"><![CDATA[Ship tracking code.]]></string>
     <string name="macro_tax_amount" introduced="5.0.0"><![CDATA[Tax Amount]]></string>
     <string name="macro_tax_name" introduced="5.0.0"><![CDATA[Tax Name]]></string>
     <string name="macro_tax_rate" introduced="5.0.0"><![CDATA[Tax Percentage]]></string>

@@ -525,6 +525,9 @@ class Order {
 
 		// Format data
 		$order_summary['order_date'] = formatTime($order_summary['order_date'],false,true);
+		$order_summary['ship_date']  = $order_summary['ship_date'] ? formatDispatchDate($order_summary['ship_date']) : "";
+		$order_summary['gateway']    = str_replace('_',' ',$order_summary['gateway']);
+
 
 		$values['order_summary'] = $order_summary;
 		$values['billing']       = $billing;
