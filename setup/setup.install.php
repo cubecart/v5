@@ -105,7 +105,6 @@ if (!isset($_SESSION['setup']['permissions'])) {
 							'installed'		=> true,
 							'adminFolder'	=> 'admin',
 							'adminFile'		=> 'admin.php',
-							'encoder'		=> 'ioncube'
 						);
 						$_SESSION['setup']['global']	= array_merge($_POST['global'], $global);
 						$_SESSION['setup']['config']	= $_POST['config'];
