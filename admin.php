@@ -20,14 +20,18 @@ define('CC_IN_ADMIN', true);
 require 'includes'.CC_DS.'functions.inc.php';
 
 ## Let's bootstrap the encoded files
-switch($glob['encoder']) {
-	case 'obfuscated': // Load Obfuscated file
-		require_once CC_ROOT_DIR.CC_DS.'admin_obf.php';
-	break;
-	case 'plain': // For internal development only
-		require_once CC_ROOT_DIR.CC_DS.'admin_no_enc.php';
-	break;
-	case 'ioncube':
-	default: // Load Ioncube Encrypted File
-		require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
+if(isset($glob['encoder'])) {
+	switch($glob['encoder']) {
+		case 'obfuscated': // Load Obfuscated file
+			require_once CC_ROOT_DIR.CC_DS.'admin_obf.php';
+		break;
+		case 'plain': // For internal development only
+			require_once CC_ROOT_DIR.CC_DS.'admin_no_enc.php';
+		break;
+		case 'ioncube':
+		default: // Load Ioncube Encrypted File
+			require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
+	}			
+} else {
+	require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
 }
