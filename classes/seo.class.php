@@ -682,7 +682,7 @@ class SEO {
 			}
 		}
 		$sitemap = $this->_sitemap_xml->getDocument(true);
-
+		
 		if (function_exists('gzencode')) {
 			// Compress the file if GZip is enabled
 			$filename	= CC_ROOT_DIR.CC_DS.'sitemap.xml.gz';
@@ -836,13 +836,17 @@ class SEO {
 	 */
 	private function _sitemap_link($input, $updated = false, $type = false) {
 		$updated = (!$updated) ? time() : $updated;
+		
+		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config','standard_url') : $GLOBALS['storeURL'];
+		
 		if (!isset($input['url']) && !empty($type)) {
 			if ($this->enabled()) {
-				$input['url'] = $this->generatePath($input['id'], $type, '', true, true);
+				$input['url'] = $store_url.'/'.$this->generatePath($input['id'], $type, '', false, true);
 			} else {
-				$input['url'] = $GLOBALS['storeURL'].sprintf('/index.php?_a=%s&%s=%s', $type, $input['key'], $input['id']);
+				$input['url'] = $store_url.sprintf('/index.php?_a=%s&%s=%s', $type, $input['key'], $input['id']);
 			}
 		}
+
 		$this->_sitemap_xml->startElement('url');
 		$this->_sitemap_xml->setElement('loc',  htmlspecialchars($input['url']),false, false);
 		$this->_sitemap_xml->setElement('lastmod', date('c', $updated), false, false);
