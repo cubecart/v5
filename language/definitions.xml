@@ -1885,6 +1885,8 @@
     <string name="title_search" introduced="5.0.0"><![CDATA[Search Terms]]></string>
     <string name="title_viewed" introduced="5.0.0"><![CDATA[Most Viewed Products]]></string>
     <string name="total_expenditure" introduced="5.0.0"><![CDATA[Total Expenditure]]></string>
+    <string name="display_customers_only" introduced="5.2.6"><![CDATA[Display Customers Only]]></string>
+    <string name="display_bots_and_customers" introduced="5.2.6"><![CDATA[Display Webbots &amp; Customers]]></string>
   </group>
   <group name="translate">
     <string name="error_language_create" introduced="5.0.0"><![CDATA[Failed to create language.]]></string>

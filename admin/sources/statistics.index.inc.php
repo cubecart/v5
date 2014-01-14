@@ -319,7 +319,16 @@ if (($results = $GLOBALS['db']->query($query, $per_page, $page)) !== false) {
 
 // Customers Online
 $timeLimit	= time()-1800;  // 30 minutes
-$query		= sprintf("SELECT S.*, C.first_name, C.last_name FROM %1\$sCubeCart_sessions AS S LEFT JOIN %1\$sCubeCart_customer AS C ON S.customer_id = C.customer_id WHERE S.session_last>".$timeLimit." ORDER BY S.session_last DESC", $glob['dbprefix']);
+
+if($_GET['bots']=='false') { 
+	$filter = '(S.session_last > S.session_start) AND ';
+	$GLOBALS['smarty']->assign('BOTS', false);
+} else {
+	$filter = '';
+	$GLOBALS['smarty']->assign('BOTS', true);
+}
+
+$query		= sprintf("SELECT S.*, C.first_name, C.last_name FROM %1\$sCubeCart_sessions AS S LEFT JOIN %1\$sCubeCart_customer AS C ON S.customer_id = C.customer_id WHERE ".$filter."S.session_last>".$timeLimit." ORDER BY S.session_last DESC", $glob['dbprefix']);
 if (($results = $GLOBALS['db']->query($query)) !== false) {
 	$GLOBALS['main']->addTabControl($lang['statistics']['title_customers_active'], 'stats_online', false, false, count($results));
 	foreach ($results as $user) {

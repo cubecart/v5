@@ -150,6 +150,13 @@
   {if isset($USERS_ONLINE)}
   <div id="stats_online" class="tab_content">
   <h3>{$LANG.statistics.title_customers_active}</h3>
+  <p>
+  {if $BOTS==true}
+  	<a href="?_g=statistics&amp;bots=false#stats_online">{$LANG.statistics.display_customers_only}</a>
+  {else}
+  	<a href="?_g=statistics&amp;bots=true#stats_online">{$LANG.statistics.display_bots_and_customers}</a>
+  {/if}
+  </p>
   <table class="list">
 	<thead>
 	  <tr>
