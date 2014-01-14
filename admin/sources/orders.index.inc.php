@@ -132,8 +132,7 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 			$GLOBALS['main']->setACPWarning($lang['orders']['error_order_create']);
 		}
 		// Update order status, if set
-		//$order->orderStatus($_POST['order']['status'], $order_id, true);
-		$order->orderStatus($_POST['order']['status'], $order_id);
+		$order->orderStatus($_POST['order']['status'], $order_id, true);
 	} else {
 		// Update/create summary
 		$update_status = $GLOBALS['db']->update('CubeCart_order_summary', $record, array('cart_order_id' => $order_id));
