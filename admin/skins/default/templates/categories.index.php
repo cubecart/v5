@@ -8,6 +8,7 @@
 		  <td width="15" align="center">{$LANG.settings.category_id}</td>
 		  <td>{$LANG.common.arrange}</td>
 		  <td>{$LANG.common.visible}</td>
+		  <td>{$LANG.common.status}</td>
 		  <td>{$LANG.settings.category_name}</td>
 		  <td>{$LANG.translate.title_translations}</td>
 		  <td>&nbsp;</td>
@@ -23,6 +24,9 @@
 	      <td align="center">
 	        <a href="#" class="handle"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/updown.gif" title="{$LANG.ui.drag_reorder}" /></a>
 	        <input type="hidden" name="order[]" value="{$category.cat_id}" />
+	      </td>
+	      <td align="center">
+	        <input type="hidden" name="visible[{$category.cat_id}]" id="catv_{$category.cat_id}" value="{$category.visible}" class="toggle" />
 	      </td>
 	      <td align="center">
 	        <input type="hidden" name="status[{$category.cat_id}]" id="cat_{$category.cat_id}" value="{$category.status}" class="toggle" />
@@ -61,6 +65,7 @@
 	<h3>{$LANG.settings.title_category_details}</h3>
 	<fieldset><legend>{$LANG.common.general}</legend>
 	  <div><label for="status">{$LANG.common.status}</label><span><input type="hidden" name="cat[status]" id="status" value="{$CATEGORY.status}" class="toggle" /></span></div>
+	  <div><label for="visible">{$LANG.common.visible}</label><span><input type="hidden" name="cat[visible]" id="visible" value="{$CATEGORY.visible}" class="toggle" /></span></div>
 	  <div><label for="name">{$LANG.settings.category_name}</label><span><input type="text" name="cat[cat_name]" {if !empty($CATEGORY.cat_name)}id="cat_name"{else}id="name"{/if} class="textbox required" value="{$CATEGORY.cat_name}" /></span></div>
 	  <div><label for="parent">{$LANG.settings.category_parent}</label><span><select name="cat[cat_parent_id]" id="parent" class="textbox">
 	  {foreach from=$SELECT_CATEGORIES item=category}

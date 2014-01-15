@@ -720,7 +720,8 @@ class SEO {
 	private function _getCategoryList($rebuild = false) {
 		$language = Session::getInstance()->has('language', 'client') ? Session::getInstance()->get('language', 'client') : Language::getInstance()->current();
 		if ($rebuild || ($this->_cat_dirs = Cache::getInstance()->read('seo.category.list.'.$language)) === false) {
-			if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), array('hide' => '0'), array('cat_id' => 'DESC'))) !== false) {
+//			if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), array('hide' => '0'), array('cat_id' => 'DESC'))) !== false) {
+			if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), false, array('cat_id' => 'DESC'))) !== false) {
 				foreach ($results as $result) {
 					$this->_cat_dirs[$result['cat_id']] = $result;
 				}

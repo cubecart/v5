@@ -25,6 +25,8 @@ if (isset($_POST['cat']) && is_array($_POST['cat']) && Admin::getInstance()->per
 		$_POST['cat'][$key]	= html_entity_decode($value);
 	}
 
+	$_POST['cat']['hide'] = (int)$_POST['cat']['visible'] && (int)$_POST['cat']['status'] ? 0 : 1;
+
 	if (is_numeric($_POST['cat']['cat_id'])) {
 		$cat_id = $_POST['cat']['cat_id'];
 		$old_image = $GLOBALS['db']->select('CubeCart_category',array('cat_image'),array('cat_id' => $_POST['cat']['cat_id']));
@@ -164,6 +166,14 @@ if (isset($_POST['order']) && is_array($_POST['order'])) {
 		$update[$cat_id]['priority']	= $key+1;
 	}
 }
+if (isset($_POST['visible']) && is_array($_POST['visible'])) {
+	// Update category visibility only
+	foreach ($_POST['visible'] as $cat_id => $visible) {
+		$update[$cat_id]['hide'] = $visible && $_POST['status'][$cat_id]  ? 0 : 1;
+	}
+	$GLOBALS['cache']->clear();
+}
+
 if (!empty($update) && is_array($update) && Admin::getInstance()->permissions('categories', CC_PERM_EDIT)) {
 	// Put changes into the database
 	$updated = false;
@@ -261,6 +271,7 @@ if (isset($_GET['action'])) {
 			// Load from db, and assign
 			if (($category = $GLOBALS['db']->select('CubeCart_category', false, array('cat_id' => (int)$_GET['cat_id']))) !== false) {
 				$catData	= $category[0];
+				$category[0]['visible'] = $category[0]['hide'] ? 0 : 1;
 				$GLOBALS['gui']->addBreadcrumb($category[0]['cat_name']);
 				// Translations
 				$GLOBALS['main']->addTabControl($lang['translate']['title_translate'], 'cat_translate', null, 'T');
@@ -292,6 +303,7 @@ if (isset($_GET['action'])) {
 				$cat_display_data[$key]	= htmlentities($value, ENT_COMPAT, 'UTF-8');
 			}
 			$cat_display_data['seo_path'] = $GLOBALS['seo']->getdbPath('cat', $cat_display_data['cat_id']);
+			
 			$GLOBALS['smarty']->assign('CATEGORY', $cat_display_data);
 		}
 
@@ -360,6 +372,7 @@ if (isset($_GET['action'])) {
 			$children = $GLOBALS['db']->count('CubeCart_category', 'cat_id', array('cat_parent_id' => $category['cat_id']));
 			$category['no_children'] = $children;
 			$category['alt_text']	= sprintf(((int)$children == 1) ? $lang['settings']['category_has_subcat'] : $lang['settings']['category_has_subcats'], (int)$children);
+			$category['visible'] = $category['hide'] ? 0 : 1;
 			$category_list[]	= $category;
 			++$i;
 		}

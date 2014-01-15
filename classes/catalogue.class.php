@@ -356,7 +356,7 @@ class Catalogue {
 
 	public function displaySubCategory($category_id) {
 		if (!empty($category_id) && is_numeric($category_id)) {
-			if (($subcats = $GLOBALS['db']->select('CubeCart_category', false, array('cat_parent_id' => $category_id, 'status' => '1'),array('priority'=>'ASC'))) !== false) {
+			if (($subcats = $GLOBALS['db']->select('CubeCart_category', false, array('cat_parent_id' => $category_id, 'status' => '1', 'hide' => '0'),array('priority'=>'ASC'))) !== false) {
 				foreach ($subcats as $cat) {
 					// Translate
 					$GLOBALS['language']->translateCategory($cat);
@@ -402,7 +402,7 @@ class Catalogue {
 	}
 
 	public function getCategoryTree($parent_id = 0) {
-		if (($categories = $GLOBALS['db']->select('CubeCart_category', array('cat_parent_id', 'cat_id', 'cat_name'), array('cat_parent_id' => $parent_id, 'status' => 1), 'priority, cat_name ASC')) !== false) {
+		if (($categories = $GLOBALS['db']->select('CubeCart_category', array('cat_parent_id', 'cat_id', 'cat_name'), array('cat_parent_id' => $parent_id, 'status' => 1, 'hide' => 0), 'priority, cat_name ASC')) !== false) {
 
 			// Write over with translations
 			if (!$this->_category_translations && ($translations = $GLOBALS['db']->select('CubeCart_category_language', array('cat_id', 'cat_name'), array('language' => $GLOBALS['language']->current()))) !== false) {
