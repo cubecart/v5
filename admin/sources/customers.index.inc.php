@@ -461,6 +461,9 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 	}
 	$GLOBALS['smarty']->assign('DISPLAY_LIST', true);
 }
+
+if (!isset($_GET['address_id'])): // avoid states double content by address edit
+
 if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'numcode', 'name'))) !== false) {
 	$store_country = $GLOBALS['config']->get('config', 'store_country');
 	foreach ($countries as $country) {
@@ -483,5 +486,5 @@ if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'nu
 		$GLOBALS['smarty']->assign('JSON_STATE', json_encode($jsonArray));
 	}
 }
-
+endif;
 $page_content = $GLOBALS['smarty']->fetch('templates/customers.index.php');
