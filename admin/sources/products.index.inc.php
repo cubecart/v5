@@ -456,10 +456,10 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 		$rem_array = array('action');
 	} else if ($updated) {
 		$GLOBALS['main']->setACPNotify($lang['catalogue']['notify_product_update']);
-		/*if (!isset($option_update)) {
-			$_POST['previous-tab'] = null;
+		if (!isset($option_update)) {
+			//$_POST['previous-tab'] = null;
 			$rem_array = array('action','product_id');
-		}*/
+		}
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['error_product_update']);
 		$rem_array = false;
@@ -1268,7 +1268,7 @@ if (isset($_GET['action'])) {
 		foreach ($results as $result) {
 			
 			if($result['use_stock_level'] == 0 || $result['digital'] > 0 || !empty($result['digital_path'])) {
-				$result['stock_level'] = "-";
+				$result['stock_level'] = "&infin;";
 			}
 			
 			if($stock_variations = $GLOBALS['db']->select('CubeCart_option_matrix','MAX(stock_level) AS max_stock, MIN(stock_level) AS min_stock', array('product_id' => $result['product_id'], 'use_stock' => 1, 'status' => 1),false,1)) {
