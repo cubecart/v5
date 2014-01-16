@@ -18,5 +18,5 @@ if(isset($glob['encoder'])) {
 			require_once CC_ROOT_DIR.CC_DS.'index_enc_ion.php';
 	}
 } else {
-	require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
+	require_once CC_ROOT_DIR.CC_DS.'index_enc_ion.php';
 }
