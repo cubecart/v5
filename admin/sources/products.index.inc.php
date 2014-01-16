@@ -456,10 +456,10 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 		$rem_array = array('action');
 	} else if ($updated) {
 		$GLOBALS['main']->setACPNotify($lang['catalogue']['notify_product_update']);
-		if (!isset($option_update)) {
+		/*if (!isset($option_update)) {
 			$_POST['previous-tab'] = null;
 			$rem_array = array('action','product_id');
-		}
+		}*/
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['error_product_update']);
 		$rem_array = false;
