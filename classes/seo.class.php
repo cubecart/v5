@@ -448,7 +448,10 @@ class SEO {
 		if (!isset($title[1]) && isset($this->_meta_data['name'])) {
 			$title[2] = $this->_meta_data['name'];
 		}
-		$title[69] = $GLOBALS['config']->get('config', 'store_title');
+		
+		if((int)$GLOBALS['config']->get('config', 'seo_metadata')!==self::TAGS_REPLACE) {
+			$title[69] = $GLOBALS['config']->get('config', 'store_title');
+		}
 		ksort($title);
 		return implode($glue, $title);
 	}
