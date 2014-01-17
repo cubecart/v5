@@ -286,7 +286,7 @@ class Cart {
 					// Options needed - Redirect to product page
 					// Set GUI_MESSAGE error, then redirect
 					$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
-					redirectToProductPage($product_id);
+					$this->redirectToProductPage($product_id);
 					return true;
 				} else {
 					
@@ -314,7 +314,7 @@ class Cart {
 							$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_no_stock_available']);
 						}
 
-						redirectToProductPage($product_id);
+						$this->redirectToProductPage($product_id);
 						return false;
 					}
 					
@@ -391,7 +391,7 @@ class Cart {
 								// No required options selected
 								if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
 									$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
-									redirectToProductPage($product_id);
+									$this->redirectToProductPage($product_id);
 								} else {
 									httpredir(currentPage(null, array('error' => 'option')));
 								}
