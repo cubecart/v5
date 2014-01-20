@@ -85,18 +85,20 @@ class Gateway {
 				'card_cvv'		=> $securityCode
 			);
 
+            $error = false;
 			if (extension_loaded('mcrypt') && function_exists('mcrypt_module_open')) {
 				$this->_encryption	= Encryption::getInstance();
 				$this->_encryption->setup(false, $order_summary['cart_order_id']);
 				$record['offline_capture'] = $this->_encryption->encrypt(serialize($cardData));
 				$GLOBALS['db']->update('CubeCart_order_summary', $record, array('customer_id' => $order_summary['customer_id'], 'cart_order_id' => $order_summary['cart_order_id']));
 			} else {
-				trigger_error('Card Capture Error: mcrypt library missing from server required to encrypt credit card data.');
+			    $error = 'Card Capture Error: mcrypt library missing from server required to encrypt credit card data.';
+				trigger_error($error);
 			}
 			// log trans details
 			$transData['trans_id'] = false;
 			$transData['status'] = "Success";
-			$transData['notes'] = "Card Details captured ready for processing offline.";
+			$transData['notes'] = $error ? $error : "Card Details captured ready for processing offline.";
 			$order->logTransaction($transData);
 
 			if($this->_module['confirmation_email']) {
