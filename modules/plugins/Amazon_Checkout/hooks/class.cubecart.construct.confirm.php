@@ -28,6 +28,8 @@ if(defined('PURCHASE_CONTRACT_ID') && $module_config = $GLOBALS['config']->get('
 			$cubecart_total_price_each = $product['total_price_each'];
 			$product['total_price_each'] = ($product['tax_each']['tax_inclusive']) ? $product['total_price_each'] : ($product['total_price_each']+($product['tax_each']['amount'] / $product['quantity']));
 			
+			$product['total_price_each'] = sprintf('%0.2f',$product['total_price_each']);
+			
 			$itemObject = new CheckoutByAmazon_Service_Model_PurchaseItem();
 			$itemObject->createPhysicalItem($product['product_code'],$product['name'],$product['total_price_each'],'Standard');
 			$itemObject->setSKU($product['product_code']);
