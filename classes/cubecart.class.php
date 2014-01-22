@@ -1176,27 +1176,28 @@ class Cubecart {
 					$order[$key] = $GLOBALS['tax']->priceFormat($value);
 				}
 				$GLOBALS['smarty']->assign('SUM', $order);
+				
 				switch ($order['status']) {
 					case self::ORDER_PENDING:
-						$vars['messages'][]	= $GLOBALS['language']->confirm['order_processing'];
+						$GLOBALS['gui']->setNotify($GLOBALS['language']->confirm['order_pending']);
 						break;
 					case self::ORDER_PROCESS:
+						$GLOBALS['gui']->setNotify($GLOBALS['language']->confirm['order_processing']);
+						break;
 					case self::ORDER_COMPLETE:
-						$vars['messages'][]	= $GLOBALS['language']->confirm['order_success'];
+						$GLOBALS['gui']->setNotify($GLOBALS['language']->confirm['order_complete']);
 						break;
 					case self::ORDER_DECLINED:
 					case self::ORDER_FAILED:
 						$empty_basket	= false;
-						// Redirect to gateway page with an error ?
-						$vars['messages'][]	= $GLOBALS['language']->confirm['order_failed'];
-						$vars['messages'][]	= $GLOBALS['language']->confirm['order_retry'];
-						$vars['ctrl_payment'] = true;
+						$GLOBALS['gui']->setError($GLOBALS['language']->confirm['order_failed']);
+						$GLOBALS['smarty']->assign('CTRL_PAYMENT', true);
 						break;
 					case self::ORDER_CANCELLED:
-						$vars['messages'][]	= $GLOBALS['language']->confirm['order_cancelled'];
+						$GLOBALS['gui']->setError($GLOBALS['language']->confirm['order_cancelled']);
 						break;
 				}
-				$GLOBALS['smarty']->assign('MESSAGE', $vars['messages']);
+
 				// Display Affilate Tracker code
 				$affiliates	= $this->_getAffiliates(self::AFFILIATE_COMPLETE);
 				if ($affiliates) {

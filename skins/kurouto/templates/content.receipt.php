@@ -1,16 +1,9 @@
 <div id="receipt">
   <h2>{$LANG.account.your_order}: #{$SUM.cart_order_id} - {$SUM.order_status}</h2>
 
-  {if isset($MESSAGES)}
-  {foreach from=$MESSAGES item=message}
-  <p>{$message}</p>
-  {/foreach}
-  {/if}
-
-  {if $CTRL_PAYMENT}
-  <div style="text-align: center;"><a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$SUM.cart_order_id}">{$LANG.basket.complete_payment}</a></div>
-  {/if}
-
+  
+  <p style="text-align: center;">{if $CTRL_PAYMENT}<a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$SUM.cart_order_id}">{$LANG.basket.complete_payment}</a> |{/if} <a href="{$STORE_URL}/index.php?_a=vieworder">{$LANG.account.your_orders}</a></p>
+  
   <h2>{$LANG.basket.customer_info}</h2>
   <div class="address">
 	<p><strong>{$LANG.address.billing_address}</strong><br />
