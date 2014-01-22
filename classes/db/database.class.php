@@ -118,8 +118,10 @@ class Database_Contoller {
 		
 		if(!stristr($table,'JOIN')) {
 			$wrapper = '`';
+			$prefix = $this->_prefix;
 		} else {
 			$wrapper = '';
+			$prefix = '';
 		}
 		
 		if (!empty($table)) {
@@ -127,7 +129,7 @@ class Database_Contoller {
 		
 			$field = (in_array($field, $allowed) && !is_numeric($field)) ? $field : '*';
 						
-			$this->_query	= "SELECT COUNT($field) AS Count FROM $wrapper{$this->_prefix}$table$wrapper ".$this->where($table, $where).';';
+			$this->_query	= "SELECT COUNT($field) AS Count FROM $wrapper$prefix$table$wrapper ".$this->where($table, $where).';';
 			$this->_execute();
 			if ($this->_result && isset($this->_result[0]['Count'])) {
 				return ((int)$this->_result[0]['Count'] > 0) ? (int)$this->_result[0]['Count'] : false;
