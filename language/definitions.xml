@@ -1280,7 +1280,7 @@
     <string name="nav_products" introduced="5.0.0"><![CDATA[Products]]></string>
     <string name="nav_regions" introduced="5.0.0"><![CDATA[Countries/Zones]]></string>
     <string name="nav_sales_reports" introduced="5.0.0"><![CDATA[Sales Reports]]></string>
-    <string name="nav_server_info" introduced="5.0.0"><![CDATA[Server Info]]></string>
+    <string name="nav_server_info" introduced="5.0.0"><![CDATA[PHP Info]]></string>
     <string name="nav_settings" introduced="5.0.0"><![CDATA[Settings]]></string>
     <string name="nav_settings_store" introduced="5.0.0"><![CDATA[Store Settings]]></string>
     <string name="nav_shipping" introduced="5.0.0"><![CDATA[Shipping Methods]]></string>

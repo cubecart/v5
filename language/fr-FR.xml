@@ -1263,7 +1263,7 @@
       <string name="nav_products" introduced="5.0.0"><![CDATA[Produits]]></string>
       <string name="nav_regions" introduced="5.0.0"><![CDATA[Pays/zones]]></string>
       <string name="nav_sales_reports" introduced="5.0.0"><![CDATA[Rapports des ventes]]></string>
-      <string name="nav_server_info" introduced="5.0.0"><![CDATA[Info serveur]]></string>
+      <string name="nav_server_info" introduced="5.0.0"><![CDATA[Info PHP]]></string>
       <string name="nav_settings" introduced="5.0.0"><![CDATA[Paramètres]]></string>
       <string name="nav_settings_store" introduced="5.0.0"><![CDATA[Paramètres de la boutique]]></string>
       <string name="nav_shipping" introduced="5.0.0"><![CDATA[Moyens d'expédition]]></string>

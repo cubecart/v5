@@ -1278,7 +1278,7 @@
    <string name="nav_products"><![CDATA[מוצרים]]></string>
    <string name="nav_regions"><![CDATA[ארצות/אזורים]]></string>
    <string name="nav_sales_reports"><![CDATA[דוחות מכירה]]></string>
-   <string name="nav_server_info"><![CDATA[מידע אודות השרת]]></string>
+   <string name="nav_server_info"><![CDATA[מידע PHP]]></string>
    <string name="nav_settings"><![CDATA[הגדרות]]></string>
    <string name="nav_settings_store"><![CDATA[הגדרות החנות]]></string>
    <string name="nav_shipping"><![CDATA[שיטות משלוח]]></string>
