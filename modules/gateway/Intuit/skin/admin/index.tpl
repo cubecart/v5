@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="username">{$LANG.intuit.username}</label><span><input name="module[username]" id="username" class="textbox" type="text" value="{$MODULE.username}" /></span></div>
 			<div><label for="pw">{$LANG.intuit.pw}</label><span><input name="module[pw]" id="pw" class="textbox" type="password" value="{$MODULE.pw}" /></span></div>
     		<!--

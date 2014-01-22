@@ -15,7 +15,7 @@
 			</span>
 		</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="dm_account">{$LANG.dineromail.dm_account}</label><span><input name="module[dm_account]" id="dm_account" class="textbox" type="text" value="{$MODULE.dm_account}" /></span></div>
 	   <div>
 			<label for="dm_country">{$LANG.dineromail.dm_country}</label>

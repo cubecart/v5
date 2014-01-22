@@ -2,7 +2,7 @@
   <h2>{$LANG.search.advanced}</h2>
   <p></p>
   <fieldset>
-	<div><label for="keywords">{$LANG.search.keywords}</label><span><input type="text" class="textbox" name="search[keywords]" id="keywords" class="required" /> *</span></div>
+	<div><label for="keywords">{$LANG.search.keywords}</label><span><input type="text" class="textbox required" name="search[keywords]" id="keywords" /> *</span></div>
 	<div>
 	  <label for="">{$LANG.search.price_range}</label><span><input type="text" class="textbox" style="width: 50px;" name="search[priceMin]" /> 
 		- <input type="text" class="textbox" style="width: 50px;" name="search[priceMax]" /> 

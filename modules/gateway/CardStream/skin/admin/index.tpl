@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="merchant_id">{$LANG.cardstream.merchant_id}</label><span><input name="module[merchant_id]" id="merchant_id" class="textbox" type="text" value="{$MODULE.merchant_id}" /></span></div>
 			<div><label for="merchant_password">{$LANG.cardstream.merchant_password}</label><span><input name="module[merchant_password]" id="merchant_password" class="textbox" type="text" value="{$MODULE.merchant_password}" /></span></div>
 			<div><label for="payment_page_url">{$LANG.cardstream.payment_page_url}</label><span><input name="module[payment_page_url]" id="payment_page_url" class="textbox" type="text" value="{$MODULE.payment_page_url}" /></span> {$LANG.cardstream.payment_page_url_default}</div>

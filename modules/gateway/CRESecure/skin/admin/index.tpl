@@ -15,7 +15,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="cresecureid">{$LANG.cresecure.account_id}</label><span><input name="module[CRESecureID]" id="cresecureid" class="textbox" type="text" value="{$MODULE.CRESecureID}" /></span></div>
 	  <div><label for="api_token">{$LANG.cresecure.api_token}</label><span><input name="module[CRESecureAPIToken]" id="api_token" class="textbox" type="text" value="{$MODULE.CRESecureAPIToken}" /></span></div>
 	  <div><label for="sandbox">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[sandbox]" id="sandbox" class="toggle" value="{$MODULE.sandbox}" /></span></div>

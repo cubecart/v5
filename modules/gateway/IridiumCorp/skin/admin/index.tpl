@@ -110,7 +110,7 @@
             <div>
                 <label for="description">{$LANG.common.description} *</label>
                 <span>
-                    <input type="text" name="module[desc]" id="desc" class="textbox" readonly="readonly" value="{$MODULE.desc}" />
+                    <input type="text" name="module[desc]" id="description" class="textbox" value="{$MODULE.desc}" />
                 </span>
             </div>
             <div>

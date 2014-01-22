@@ -23,7 +23,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 
 	  <div><label for="clientid">{$LANG.barclaycard.clientid}</label><span><input name="module[clientid]" id="clientid" class="textbox" type="text" value="{$MODULE.clientid}" /></span> ON</div>
 	  <div><label for="passphrase">{$LANG.barclaycard.passphrase}</label><span><input name="module[passphrase]" id="passphrase" class="textbox" type="text" value="{$MODULE.passphrase}" /> ON</span></div>

@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="Username">{$LANG.account.username}</label><span><input name="module[user]" id="user" class="textbox" type="text" value="{$MODULE.user}" /></span></div>
 			<div><label for="Username">{$LANG.account.password}</label><span><input name="module[pass]" id="pass" class="textbox" type="text" value="{$MODULE.pass}" /></span></div>
 			<div><label for="testMode">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[testMode]" id="testMode" class="toggle" value="{$MODULE.testMode}" /></span></div>

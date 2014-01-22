@@ -32,7 +32,7 @@
 			<div>
 				<label for="description">{$LANG.common.description} *</label>
 				<span>
-				<input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" />
+				<input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" />
 			</span></div>
 		</fieldset>
 		<fieldset>

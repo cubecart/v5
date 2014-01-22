@@ -15,7 +15,7 @@
 				</span>
 			</div>
 	  <div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="desc" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
+	  <div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 	  <div><label for="merchant">{$LANG.paypoint.vendor_name}</label><span><input name="module[merchant]" id="merchant" class="textbox" type="text" value="{$MODULE.merchant}" /></span></div>
 	  <div>
 		<label for="testmode">{$LANG.module.mode_test}</label><span><input type="hidden" name="module[testmode]" id="testmode" class="toggle" value="{$MODULE.testmode}" /></span></div>
