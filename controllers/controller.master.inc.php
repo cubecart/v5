@@ -5,24 +5,24 @@ if(!isset($glob['encoder']) || $glob['encoder']=='ioncube') {
 	if (version_compare($loader_version, '4.4') >= 0) {
 		switch(CC_PHP_ID) {
 			case 54:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php5.4.php';
+				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.4.php';
 			break;
 			case 53:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php5.3.php';
+				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.3.php';
 			break;
 			case 52:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php5.2.php';
+				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.2.php';
 		}
 	} elseif(version_compare($loader_version, '4.0') >= 0) {
 		switch(CC_PHP_ID) {
 			case 53:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php5.3.php';
+				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.3.php';
 			break;
 			case 52:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php5.2.php';
+				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.2.php';
 		}
 	} elseif(version_compare($loader_version, '3.1') >= 0) {
-		require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_3.1'.CC_DS.'php5.2.php';
+		require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_3.1'.CC_DS.'php_5.2.php';
 	}
 } elseif(isset($glob['encoder'])) {
 	switch($glob['encoder']) {
