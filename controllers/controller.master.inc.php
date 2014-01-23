@@ -15,6 +15,7 @@ if(!isset($glob['encoder']) || $glob['encoder']=='ioncube') {
 		}
 	} elseif(version_compare($loader_version, '4.0') >= 0) {
 		switch(CC_PHP_ID) {
+			case 54:
 			case 53:
 				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.3.php';
 			break;
