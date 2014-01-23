@@ -18,12 +18,22 @@
 ini_set('display_errors', true);
 error_reporting(E_ALL ^ E_NOTICE);
 
-define('PHP_5_3', version_compare(PHP_VERSION, '5.3.0', '>='));
+
+if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+	define('CC_PHP_ID', 54);
+} elseif (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+	define('CC_PHP_ID', 53);
+} elseif (version_compare(PHP_VERSION, '5.2.0') >= 0) {
+	define('CC_PHP_ID', 52);
+} else {
+	die("You need PHP 5.2 or higher to use CubeCart.");
+}
+
 
 /************* CUSTOMISED PHP.INI SETTINGS *************/
 
 // This ensures that everyone has the correct php.ini options running
-if (PHP_5_3) {
+if (CC_PHP_ID > 52) {
 	ini_set('register_globals', false);		// Attempt to disable regster_globals for security
 	ini_set('register_long_arrays', false);	// Disable old-school long arrays (i.e. HTTP_*_VARS)
 	ini_set('magic_quotes_gpc', false);		// Turn off magic quotes

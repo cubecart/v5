@@ -1,9 +1,4 @@
 <?php
-## Let's check the PHP Version, and die ungracefully if it doesn't meet the minimum requirements
-if (version_compare(PHP_VERSION, '5.2.3', '<')) {
-	die('<strong>ERROR!</strong><br />CubeCart requires <a href="http://www.php.net">PHP</a> Version 5.2 or better. Your server is currently running PHP Version '.PHP_VERSION);
-}
-
 ## Don't let anything be cached
 header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: pre-check=0, post-check=0, max-age=0');
@@ -19,19 +14,4 @@ define('CC_IN_ADMIN', true);
 ## Include core functions
 require 'includes'.CC_DS.'functions.inc.php';
 
-## Let's bootstrap the encoded files
-if(isset($glob['encoder'])) {
-	switch($glob['encoder']) {
-		case 'obfuscated': // Load Obfuscated file
-			require_once CC_ROOT_DIR.CC_DS.'admin_obf.php';
-		break;
-		case 'plain': // For internal development only
-			require_once CC_ROOT_DIR.CC_DS.'admin_no_enc.php';
-		break;
-		case 'ioncube':
-		default: // Load Ioncube Encrypted File
-			require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
-	}			
-} else {
-	require_once CC_ROOT_DIR.CC_DS.'admin_enc_ion.php';
-}
+include 'controllers'.CC_DS.'controller.master.inc.php';

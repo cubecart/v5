@@ -430,7 +430,7 @@ class Debug {
 				break;
 			default:
 				$type = 'Unknown ('.$error_no.')';
-				if (PHP_5_3) {
+				if (CC_PHP_ID > 52) {
 					if ($error_no == E_DEPRECATED || $error_no == E_USER_DEPRECATED) {
 						$type	= 'Deprecated';
 					}
