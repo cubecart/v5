@@ -34,6 +34,12 @@ foreach($files as $file) {
 }
 */
 
+if($_SESSION['setup']['complete']==true) {
+	recursiveDelete(CC_ROOT_DIR.CC_DS.'setup');
+	unlink(CC_ROOT_DIR.CC_DS.'setup');
+	unset($_SESSION['setup']);
+}
+
 if(isset($_GET['restore']) && !empty($_GET['restore'])) {
 	$file_path = CC_ROOT_DIR.CC_DS.'backup'.CC_DS.$_GET['restore'];
 	require_once($pclzip_path);
