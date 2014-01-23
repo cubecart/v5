@@ -7,5 +7,4 @@ $glob['dbpassword'] 	= '';			// password for username
 $glob['installed'] 		= '0';			// set to 1 if store is installed
 $glob['adminFolder'] 	= 'admin';		// Change this if you have changed the admin folder name
 $glob['adminFile'] 		= 'admin.php';	// Change this if you have changed the admin file name
-$glob['encoder']		= 'ioncube';
 ?>
