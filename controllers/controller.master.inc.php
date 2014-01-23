@@ -1,7 +1,7 @@
 <?php
 if(!isset($glob['encoder']) || $glob['encoder']=='ioncube') {
-	$loader_version = ioncube_loader_version();
-	
+	$loader_version = @ioncube_loader_version();
+
 	if (version_compare($loader_version, '4.4') >= 0) {
 		switch(CC_PHP_ID) {
 			case 54:
@@ -21,7 +21,7 @@ if(!isset($glob['encoder']) || $glob['encoder']=='ioncube') {
 			case 52:
 				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.2.php';
 		}
-	} elseif(version_compare($loader_version, '3.1') >= 0) {
+	} else {
 		require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_3.1'.CC_DS.'php_5.2.php';
 	}
 } elseif(isset($glob['encoder'])) {
