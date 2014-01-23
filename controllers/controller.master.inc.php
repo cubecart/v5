@@ -1,5 +1,5 @@
 <?php
-if(!isset($glob['encoder']) || $glob['encoder']=='ioncube') {
+if(!isset($glob['encoder']) || $glob['encoder']=='ioncube' || $glob['encoder']=='zend') {
 	$loader_version = @ioncube_loader_version();
 
 	if (version_compare($loader_version, '4.4') >= 0) {

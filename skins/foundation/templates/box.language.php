@@ -1,8 +1,10 @@
-<div id="language_select">
-  <span class="title">{$LANG.common.change_language}</span>:
-  {foreach from=$LANGUAGES item=language}
-  <a href="{$language.url}" title="{$language.title}" class="{$language.css}">
-	<img src="{$STORE_URL}/language/flags/{$language.code}.png" alt="{$language.title}" id="language_{$language.code}" />
-  </a>
-  {/foreach}
+<div class="large-2 columns">
+  <form method="post">
+  <select name="set_language">
+    <option value="" disabled>{$LANG.common.change_language}:</option>
+	{foreach from=$LANGUAGES item=language}
+		<option value="{$language.code}" {$language.selected}>{$language.title}</option>
+	{/foreach}
+  </select>
+  </form>
 </div>

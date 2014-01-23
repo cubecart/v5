@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{$TEXT_DIRECTION}" lang="{$HTML_LANG}">
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" dir="{$TEXT_DIRECTION}" lang="{$HTML_LANG}">
   <head>
 	<title>{$META_TITLE}</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="canonical" href="{$VAL_SELF}" />
 	<link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/common.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{$STORE_URL}/js/styles/styles.php" media="screen" />
+	
+	<link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css" />
+    <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/styles.css" />
+    <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
+
 	{if isset($CSS)}
 		{foreach from=$CSS key=css_keys item=css_files}
 		  <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen" />
@@ -37,10 +41,16 @@
 	</script>{/literal}
 	{/if}
   </head>
+  
+
 <body>
-  <div id="page_wrapper">
-	<div id="account">
-	  {$SESSION} {$CURRENCY} {$LANGUAGE}
+
+	<div class="header-nav">
+	  <div class="row">
+	  	{$SESSION}
+	  	{$LANGUAGE}
+	  	{$CURRENCY}
+	  </div>
 	</div>
 	<div id="header">
 	  {$SEARCH_FORM}
@@ -55,47 +65,47 @@
 	  </ul>
 	</div>
 
-	<div class="{$SECTION_NAME}_wrapper">
-	  <div class="sidebar" id="sidebar_left">
-		{$CATEGORIES}
-		{$SALE_ITEMS}
-		{$MAIL_LIST}
-	  </div>
-	  <div class="sidebar" id="sidebar_right">
-		{$SHOPPING_CART}
-		{$RANDOM_PROD}
-		{if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
-	  </div>
-	  <div id="page_content">
-		{include file='templates/box.errors.php'}
-		{if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
-		{$PAGE_CONTENT}
-		<p style="clear: both; height: 1px;">&nbsp;</p>
-	  </div>
-	  <div id="documents">{if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} {$SITE_DOCS}</div>
+	
+	<div class="row {$SECTION_NAME}_wrapper">
+		  <div class="large-3 columns">
+			{$CATEGORIES}
+			{$SALE_ITEMS}
+			{$MAIL_LIST}
+		  </div>
+		  
+		  <div class="large-6 columns">
+			{include file='templates/box.errors.php'}
+			{if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
+			{$PAGE_CONTENT}
+		  </div>
+		  
+		  <div class="large-3 columns">
+			{$SHOPPING_CART}
+			{$RANDOM_PROD}
+			{if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
+		  </div>
+		  
 	</div>
-  </div>
+	
+	<div id="documents">{if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} {$SITE_DOCS}</div>
   
   {$COPYRIGHT}
   {if !$CONFIG.disable_mobile_skin}<p id="mobile_switch"><a href="{$STORE_URL}/index.php?display_mobile=1">{$LANG.common.mobile_site}</a></p>{/if}
   
   {if isset($DEBUG_INFO)}{$DEBUG_INFO}{/if}
 
-  {include file='js/common.html'}
-
-  {if isset($JANRAIN)}{$JANRAIN}{/if}
+  <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
+  <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
+  <script>
+      $(document).foundation();
+  </script>
+  
+  <script type="text/javascript" src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart/common.js"></script>
 
   {if isset($LIVE_HELP)}{$LIVE_HELP}{/if}
-
-  {foreach from=$JS_SCRIPTS key=k item=script}
-  <script type="text/javascript" src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
-  {/foreach}
   
   {if $COOKIE_DIALOGUE}
-  <form action="{$VAL_SELF}" class="cookies-notify" method="POST">
-    <p>{$LANG.notification.cookie_dialogue|replace:'%s':{$CONFIG.store_name}}</p>
-    <p{if $COOKIE_DIALOGUE_FAIL} class="retry"{/if}><input type="checkbox" name="accept_cookies" value="1" /> {$LANG.notification.cookie_dialogue_declaration} <input type="submit" name="accept_cookies_submit" value="{$LANG.common.continue}" /></p>
-  </form>
+  
   {/if}
   
 </body>
