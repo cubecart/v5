@@ -1,4 +1,4 @@
-<div id="basket_summary">
+<div class="panel callout">
   <h3>{$LANG.checkout.your_basket}</h3>
   {if isset($CONTENTS) && count($CONTENTS) > 0}
   <ul>

@@ -1,10 +1,10 @@
-<div class="large-2 columns">
-  <form method="post">
-  <select name="set_language">
-    <option value="" disabled>{$LANG.common.change_language}:</option>
-	{foreach from=$LANGUAGES item=language}
-		<option value="{$language.code}" {$language.selected}>{$language.title}</option>
-	{/foreach}
-  </select>
-  </form>
-</div>
+<ul class="right">
+  <li class="has-dropdown">
+    <a href="#">{$LANG.common.change_language}:</a>
+    <ul class="dropdown">
+      {foreach from=$LANGUAGES item=language}
+      <li><a href="{$language.url}">{$language.title}</a></li>
+      {/foreach}
+    </ul>
+  </li>
+</ul>

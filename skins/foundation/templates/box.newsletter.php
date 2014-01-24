@@ -1,4 +1,4 @@
-<div id="mailing_list">
+<div class="panel">
   <h3>{$LANG.newsletter.mailing_list}</h3>
   {if $IS_USER}
 	{if ($CTRL_SUBSCRIBED)}

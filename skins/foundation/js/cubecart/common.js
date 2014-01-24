@@ -19,3 +19,17 @@ jQuery(document).ready(function() {
     });
     
 });
+
+function equalheight() {    
+    $('.equalheight').each(function(index) {
+        var maxHeight = 0;
+        $(this).children().each(function(index) {
+            if($(this).height() > maxHeight) 
+                maxHeight = $(this).height();
+        });
+        $(this).children().height(maxHeight);
+    });    
+}
+
+$(window).bind("load", equalheight);
+$(window).bind("resize", equalheight);

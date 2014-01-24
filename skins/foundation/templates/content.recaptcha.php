@@ -1,11 +1,13 @@
 {if $RECAPTCHA}
-<fieldset id="recaptcha-title">
-  <legend>{$LANG.form.verify_human}</legend>
-  <script type="text/javascript">
-   var RecaptchaOptions = {
-      theme : 'clean'
-   };
-  </script>
-  {$DISPLAY_RECAPTCHA}
-</fieldset>
+<div class="row">
+	<div class="large-12 columns">
+		<label>{$LANG.form.verify_human}</label>
+		<script type="text/javascript">
+			var RecaptchaOptions = {
+			   theme : 'clean'
+			};
+		</script>
+		{$DISPLAY_RECAPTCHA}
+	</div>
+</div>
 {/if}

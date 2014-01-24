@@ -1017,6 +1017,7 @@
     <string name="title_image_crop" introduced="5.0.0"><![CDATA[Crop Image]]></string>
   </group>
   <group name="form">
+  	<string name="required" introduced="5.0.0"><![CDATA[(Required)]]></string>
     <string name="action" introduced="5.0.0"><![CDATA[Action]]></string>
     <string name="check_uncheck" introduced="5.0.0"><![CDATA[Check/Uncheck all]]></string>
     <string name="ignore" introduced="5.0.0"><![CDATA[-- Ignore --]]></string>
