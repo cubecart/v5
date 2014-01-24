@@ -60,7 +60,7 @@
     <string name="recover_password" introduced="5.0.0"><![CDATA[Recover Password]]></string>
     <string name="recover_password_text" introduced="5.0.0"><![CDATA[If you have forgotten your password, put your email in the box below and we'll send instructions to regain access]]></string>
     <string name="register" introduced="5.0.0"><![CDATA[Register]]></string>
-    <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list.]]></string>
+    <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list]]></string>
     <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register:]]></string>
     <string name="register_terms_agree" introduced="5.0.0"><![CDATA[I agree to the Terms &amp; Conditions]]></string>
     <string name="remember_me" introduced="5.0.0"><![CDATA[Remember Me?]]></string>
