@@ -1,8 +1,17 @@
-<div id="quick_search">
-  <form action="{$ROOT_PATH}index.php" method="get">
-	<span class="search"><input name="search[keywords]" type="text" id="keywords" title="{$LANG.search.input_default}" size="18" /></span>
+<div class="row">
+	<div class="large-12 columns">
+		<a href="{$SEARCH_URL}">{$LANG.search.advanced}</a>
+	</div>
+</div>
+<div class="row">
+	<form action="{$ROOT_PATH}index.php" method="get">
+		<div class="large-10 columns">
+			<input name="search[keywords]" type="text" title="{$LANG.search.input_default}" />
+			
+		</div>
+		<div class="large-2 columns">
+			<input class="button small" type="submit" value="{$LANG.common.search}" />
+		</div>
 	<input type="hidden" name="_a" value="category" />
-	<input class="search" type="submit" value="{$LANG.common.search}" />
-	<p class="advanced"><a href="{$SEARCH_URL}">{$LANG.search.advanced}</a></p>
-	  </form>
+	</form>
 </div>

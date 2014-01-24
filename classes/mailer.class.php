@@ -14,7 +14,7 @@
  * Unauthorized reproduction is not allowed.
  */
 if(!defined('CC_DS')) die('Access Denied');
-require 'phpMailer'.CC_DS.'class.phpmailer.php';
+require 'phpMailer'.CC_DS.'PHPMailerAutoload.php';
 
 class Mailer extends PHPMailer {
 

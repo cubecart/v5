@@ -52,9 +52,11 @@
 	  	{$CURRENCY}
 	  </div>
 	</div>
-	<div id="header">
-	  {$SEARCH_FORM}
-	  <p class="logo"><a href="{$STORE_URL}"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></p>
+	<div>
+	  <div class="row">
+	  	<div class="large-6 columns"><a href="{$STORE_URL}"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
+	    <div class="large-6 columns">{$SEARCH_FORM}</div>
+	  </div>
 	</div>
 	<div id="breadcrumb">
 	  <ul>
