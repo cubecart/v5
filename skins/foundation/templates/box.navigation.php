@@ -1,6 +1,6 @@
 
   <h3>{$LANG.navigation.title}</h3>
-  <ul class="side-nav">
+  <ul class="sub-nav">
 	<li><a href="{$STORE_URL}/index.php" title="{$LANG.navigation.homepage}">{$LANG.navigation.homepage}</a></li>
 
 	{$NAVIGATION_TREE}
