@@ -114,7 +114,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 			$inserted = true;
 		}
 	}
-
+/*  Moved down as the cats are not added to a new product
 	if (substr($_POST['seo_path'], 0, 1) == '/' || substr($_POST['seo_path'], 0, 1) == '\\') {
 		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
 	}
@@ -122,9 +122,9 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
 		$updated = true;
 	}
-
+*/
 	unset($record);
-	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id'];
+	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id']; // do we need this?
 
 
 	// Option Sets - Assign
@@ -172,7 +172,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 		}
 	}
 
-	## Create option data from option set data
+	## Create option data from option set data
 	if (isset($_POST['option_create']) && is_array($_POST['option_create'])) {
 		foreach ($_POST['option_create'] as $set_member_id => $new_option) {
 			foreach ($new_option as $key => $value) {
@@ -445,6 +445,14 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 	}
 	if(!$category_assigned) {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['no_categories_specified']);
+	}
+
+	// SEO
+	if (substr($_POST['seo_path'], 0, 1) == '/' || substr($_POST['seo_path'], 0, 1) == '\\') {
+		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
+	}
+	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
+		$updated = true;
 	}
 
 	if (empty($_POST['primary_cat']) && count($_POST['categories'])>1) {
@@ -825,7 +833,7 @@ if (isset($_GET['action'])) {
 				$GLOBALS['smarty']->assign('DISPLAY_TRANSLATE', true);
 			}
 
-			## Product Options (Sets)
+			## Product Options (Sets)
 			if (($set_products = $GLOBALS['db']->select('CubeCart_options_set_product', false, array('product_id' => $product_id))) !== false) {
 				foreach ($set_products as $set_product) {
 					if (($members = $GLOBALS['db']->select('CubeCart_options_set_member', false, array('set_id' => $set_product['set_id']))) !== false) {
@@ -902,7 +910,7 @@ if (isset($_GET['action'])) {
 				}
 				$GLOBALS['smarty']->assign('CUSTOMER_REVIEWS', $smarty_data['customer_reviews']);
 			}
-			## Images & files
+			## Images & files
 			$file_array	= array();
 			
 			if (($images = $GLOBALS['db']->misc('SELECT I.file_id, I.main_img, F.filepath, F.filename FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_image_index` AS `I` INNER JOIN `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_filemanager` as `F` ON I.file_id = F.file_id WHERE I.product_id = '.(int)$_GET['product_id'])) !== false) {

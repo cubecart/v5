@@ -192,6 +192,7 @@
 	<div><label for="seo_method">{$LANG.settings.seo_format}</label><span><select name="config[seo_method]" id="seo_method" class="textbox">
 	  {foreach from=$OPT_SEO_METHOD item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
 	</select></span></div>
+	<div><label for="seo_add_cats">{$LANG.settings.title_seo_add_cats}</label><span><input name="config[seo_add_cats]" id="seo_add_cats" type="hidden" class="toggle" value="{$CONFIG.seo_add_cats}" /></span></div>
 	<div><label for="htaccess">{$LANG.settings.seo_htaccess}</label><span>
 	<textarea name="htaccess-data" id="htaccess" class="textbox" cols="80" rows="20">{$VAL_HTACCESS_CONTENTS}</textarea></span></div>
 	<div><label class="spacer">&nbsp;</label><span><input name="install_htaccess" id="install_htaccess" type="submit" class="" value="{$LANG.settings.seo_htaccess_install}" /></span></div>
