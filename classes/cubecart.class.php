@@ -795,11 +795,21 @@ class Cubecart {
 
 			if (isset($_POST['user']) && isset($_POST['billing'])) {
 				// Reset shipping to prevent redirect to gateway page too early!!
-				if(!isset($_POST['register']) || (isset($_POST['register']) && $_POST['register']==0)) {
-					$old_address_hash = md5(serialize($this->_basket['delivery_address']));
-				} else {
-					$this->_basket['shipping_verified'] = false;
-				}
+				if($this->_basket['register'] == true || (isset($_POST['register']) && $_POST['register']==1)) {
+                	$this->_basket['register'] = true;
+                } else {
+					$new_address_hash = md5(serialize($this->_basket['delivery_address']));
+					$new_shipping_hash = md5(serialize($this->_basket['shipping']));
+
+					// Must check shipping has BEFORE address hash!
+					if($new_shipping_hash!==$old_shipping_hash) {
+						if($new_address_hash !== $old_address_hash) {
+							$this->_basket['shipping_verified'] = false;
+							}
+						}
+                        
+					$this->_basket['register'] = false;
+                }
 				$GLOBALS['cart']->save();
 
 				$proceed	= true;
