@@ -52,7 +52,7 @@
 		<td>{$sale.percent}</td>
 	  </tr>
 	  {/foreach}
-	<tbody>
+	</tbody>
   </table>
 </div>
 {/if}
