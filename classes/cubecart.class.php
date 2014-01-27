@@ -790,10 +790,6 @@ class Cubecart {
 			}
 
 			if (isset($_POST['user']) && isset($_POST['billing'])) {
-				// Reset shipping to prevent redirect to gateway page too early!!
-				if(!isset($_POST['register']) || (isset($_POST['register']) && $_POST['register']==0)) {
-					$old_address_hash 	= md5(serialize($this->_basket['delivery_address']));
-				}
 
 				$proceed	= true;
 				$optional	= array('mobile', 'line2');
