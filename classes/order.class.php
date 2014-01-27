@@ -220,7 +220,6 @@ class Order {
 
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
-							//$order_summary['link'] 	= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
 							$this->assignOrderDetails(null,true);
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
@@ -243,7 +242,6 @@ class Order {
 					}
 					// Compose the Order Confirmation email to the customer
      				if ($this->_email_enabled && ($content = $mailer->loadContent('cart.order_confirmation', $order_summary['lang'])) !== false) {
-						//$order_summary['link'] 	= $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$order_id;
 						$this->assignOrderDetails();
 						$mailer->sendEmail($this->_order_summary['email'], $content);
 						unset($content);
@@ -253,22 +251,34 @@ class Order {
 					if ($GLOBALS['config']->get('config','admin_notify_status')=="2" && $this->_email_enabled && $this->_email_admin_enabled && $admin_notify = $this->_notifyAdmins()) {
 						$admin_mailer = Mailer::getInstance();
 						if (($content = $admin_mailer->loadContent('admin.order_received')) !== false) {
-							//$order_summary['link'] = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=orders&action=edit&order_id='.$order_id;
 							$this->assignOrderDetails(null,true);
 							$admin_mailer->sendEmail($admin_notify, $content);
 							unset($content);
 						}
 					}
-
+					
+					// Send digital files
+					$this->_digitalDelivery($order_id, $this->_order_summary['email']);
+					
 					break;
 
 				case self::ORDER_COMPLETE:
 					// Check that we have not skipped processing if not already disabled
+					/*
 					if (!$GLOBALS['config']->get('config','no_skip_processing_check') && ($GLOBALS['db']->select('CubeCart_order_history', array('status'), array('cart_order_id' => $order_id, 'status' => 2))) === false) {
 						$this->orderStatus(2, $order_id);
 					}
-					// Send digital files (or the email with the download links, anyway)
-					$this->_digitalDelivery($order_id, $this->_order_summary['email']);
+					*/
+
+					if ( $GLOBALS['db']->select('CubeCart_order_history', array('status'), array('cart_order_id' => $order_id, 'status' => 2)) === false) {
+						if (!$GLOBALS['config']->get('config','no_skip_processing_check')) {
+							$this->orderStatus(2, $order_id);
+						} else {
+							// Send digital files when order status hasn't never been processing amd we always skip processing status
+							$this->_digitalDelivery($order_id, $this->_order_summary['email']);
+						}
+					}
+
 					// Load up the inventory, if we haven't already
 					if (!isset($complete)) {
 						$this->_getInventory($order_id);
