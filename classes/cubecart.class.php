@@ -547,7 +547,7 @@ class Cubecart {
 			$posted_shipping = json_decode(base64url_decode($_POST['shipping']),true);
 		
 			$GLOBALS['cart']->set('shipping', $posted_shipping);
-			
+			$GLOBALS['cart']->set('shipping_hash','');
 			if (!isset($_POST['proceed'])) {
 				httpredir(currentPage());
 			}
