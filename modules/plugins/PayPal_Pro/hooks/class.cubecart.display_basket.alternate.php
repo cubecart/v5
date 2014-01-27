@@ -11,7 +11,7 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 	if ($module_config['status'] && $scope) {
 		if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='DoExpressCheckoutPayment') {
 			$load_checkouts = false;
-			if ($this->_basket['shipping_verified'] && $_GET['_a']=='confirm' && (isset($this->_basket['shipping']) || isset($this->_basket['digital_only']))) {
+			if ($_GET['_a']=='confirm' && (isset($this->_basket['shipping']) || isset($this->_basket['digital_only']))) {
 				$GLOBALS['smarty']->assign('CHECKOUT_BUTTON', $GLOBALS['language']->gateway['make_payment']);
 			} else {
 				$GLOBALS['smarty']->assign('DISABLE_CHECKOUT_BUTTON', true);

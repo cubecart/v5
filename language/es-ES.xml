@@ -477,7 +477,7 @@
     </group>
     <group name="checkout">
       <string name="checkout" introduced="5.0.0"><![CDATA[Pago]]></string>
-      <string name="check_shipping" introduced="5.0.0"><![CDATA[Por favor, compruebe que el método de envío definida es adecuado.]]></string>
+      <string name="check_shipping" introduced="5.0.0"><![CDATA[Nuevas opciones de envío están disponibles! Compruebe y continuar.]]></string>
       <string name="error_too_many_added" introduced="5.0.0"><![CDATA[Lo sentimos, no puede comprar más de los disponibles. Hemos reducido automáticamente su cantidad hasta el máximo disponible.]]></string>
       <string name="error_voucher_expired" introduced="5.0.0"><![CDATA[Lo sentimos, ese vale ha caducado.]]></string>
       <string name="error_voucher_none" introduced="5.0.0"><![CDATA[Lo sentimos, ese vale no existe.]]></string>

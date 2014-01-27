@@ -874,11 +874,6 @@ class Cart {
 
 		if (($shipping = $GLOBALS['db']->select('CubeCart_modules', array('folder', 'countries'), array('module' => 'shipping', 'status' => '1'))) !== false) {
 
-			// isset is critical to prevent loop!
-			if(isset($this->basket['shipping_verified']) && !$this->basket['shipping_verified']) {
-				unset($this->basket['shipping']);
-			}
-
 			// Fetch the basket data
 			$basket_data = ($this->basket) ? $this->basket : false;
 			if (!isset($basket_data['delivery_address'])) {

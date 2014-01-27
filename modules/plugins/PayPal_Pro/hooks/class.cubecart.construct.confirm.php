@@ -71,7 +71,6 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		$this->_basket['billing_address']	= $address;
 		$this->_basket['delivery_address']	= $address;
 		$this->_basket['register']			= false;
-		$this->_basket['shipping_verified']	= true;
 		$this->_basket['terms_agree'] 		= true;		
 		
 		$GLOBALS['cart']->save();

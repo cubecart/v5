@@ -83,7 +83,7 @@ class Cubecart {
 		if (($home = $this->getDocument(null, true)) !== false) {
 			$GLOBALS['smarty']->assign('DOCUMENT', array(
 				'title'		=> $home['doc_name'],
-				'content'	=> $home['doc_content']
+				'content'	=> $GLOBALS['smarty']->fetch('string:'.$home['doc_content'])
 			));
 		}
 
@@ -159,7 +159,7 @@ class Cubecart {
 						$target_column = ($doc_lang == $GLOBALS['config']->get('config', 'default_language')) ? 'doc_id' : 'doc_parent_id' ;
 						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array($target_column => $contents['doc_parent_id'], 'doc_lang' => $doc_lang));
 
-						// Default Lang, if it exists
+						// Default Lang, if it exists
 						if (!$document) {
 							$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_id' => $contents['doc_parent_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 						}
@@ -167,7 +167,7 @@ class Cubecart {
 				    } else if (($document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $doc_lang))) !== false) {
 //						$contents = $document[0];
 					} else {
-						// Default Lang, if it exists
+						// Default Lang, if it exists
 						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 					}
 
@@ -575,43 +575,39 @@ class Cubecart {
 		// Display basket
 		$this->_displayBasket($editable);
 
-		if (isset($this->_basket['shipping_verified']) && !empty($this->_basket['contents']) && is_array($this->_basket['contents'])) {
-
-			if ($this->_basket['shipping_verified']) {
-	
-				# Verification successfull
-				if (!isset($this->_basket['shipping']) && !isset($this->_basket['digital_only'])) {
-				    // Tangible order but no shipping defined
-					$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_shipping']);
-				
-				} else if ($_GET['_a']=='confirm' && isset($_POST['proceed']) && !isset($_SESSION['__system']['GUI_MESSAGE']) && (isset($this->_basket['shipping']) || isset($this->_basket['digital_only']))) {
-				    // Proceed payment
-					httpredir('index.php?_a=gateway');
-				}
-
-			} else if(!$this->_basket['shipping_verified']) {
+		if (!empty($this->_basket['contents']) && is_array($this->_basket['contents'])) {
+						
+			$gatway_proceed = ($_GET['_a']=='confirm' && isset($_POST['proceed'])) ? true : false;
 			
-				if ($_GET['_a']=='confirm' && isset($_POST['proceed']) && !isset($_SESSION['__system']['GUI_MESSAGE']) && isset($this->_basket['digital_only'])) {
-			    	// Speed up digital checkout. Proceed payment, no needs to verify shipping
-					httpredir('index.php?_a=gateway');
+			// Check shipping has been defined for tangible orders
+			if (!isset($this->_basket['digital_only'])) {
+				if (!isset($this->_basket['shipping'])) {
+					$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_shipping']);
+					$gatway_proceed = false;
 				}
-
-				# Verification required
-				$this->_basket['shipping_verified'] = true;
-				$GLOBALS['cart']->save();
-
-				// Set messages
-				if (!isset($this->_basket['digital_only'])) {
-					if (!isset($this->_basket['shipping'])) {
-						$GLOBALS['gui']->setError($GLOBALS['language']->checkout['error_shipping']);
-					} else {
-						$GLOBALS['gui']->setNotify($GLOBALS['language']->checkout['check_shipping']);
-					}
-				}
-				// Confirmation page
+			} 
+			
+			// Check billing address is user defined
+			if($this->_basket['billing_address']['user_defined']==false) {
+				$gatway_proceed = false;	
+			}
+			
+			// Check new registered cutomers has been to confirmed address page
+			if($GLOBALS['user']->is() && !$GLOBALS['session']->has('confirm_addresses')) {
+				$gatway_proceed = false;
+			}
+			
+			// Check there are no system errors
+			if($GLOBALS['session']->has('GUI_MESSAGE')) {
+				$gatway_proceed = false;
+			}
+			
+			// All good we go to payment
+			if($gatway_proceed) {
+				httpredir('index.php?_a=gateway');
+			} elseif(isset($_POST['user'])) {
 				httpredir('index.php?_a=confirm');
 			}
-
 		}
 		$content = $GLOBALS['smarty']->fetch('templates/content.checkout.php');
 		foreach ($GLOBALS['hooks']->load('class.cubecart.basket') as $hook) include $hook;
@@ -730,7 +726,7 @@ class Cubecart {
 		$error = false;
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->catalogue['gift_certificates'], currentPage());
 		if (isset($_POST['gc'])) {
-			// Validate submitted data
+			// Validate submitted data
 			$_POST['gc']['value'] = preg_replace('/[^0-9.]*/','',$_POST['gc']['value']); // Strip off currency symbols etc...
 			if (!is_numeric($_POST['gc']['value'])) {
 				$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_gc_value']);
@@ -795,22 +791,9 @@ class Cubecart {
 
 			if (isset($_POST['user']) && isset($_POST['billing'])) {
 				// Reset shipping to prevent redirect to gateway page too early!!
-				if($this->_basket['register'] == true || (isset($_POST['register']) && $_POST['register']==1)) {
-                	$this->_basket['register'] = true;
-                } else {
-					$new_address_hash = md5(serialize($this->_basket['delivery_address']));
-					$new_shipping_hash = md5(serialize($this->_basket['shipping']));
-
-					// Must check shipping has BEFORE address hash!
-					if($new_shipping_hash!==$old_shipping_hash) {
-						if($new_address_hash !== $old_address_hash) {
-							$this->_basket['shipping_verified'] = false;
-							}
-						}
-                        
-					$this->_basket['register'] = false;
-                }
-				$GLOBALS['cart']->save();
+				if(!isset($_POST['register']) || (isset($_POST['register']) && $_POST['register']==0)) {
+					$old_address_hash 	= md5(serialize($this->_basket['delivery_address']));
+				}
 
 				$proceed	= true;
 				$optional	= array('mobile', 'line2');
@@ -967,8 +950,6 @@ class Cubecart {
 				if(isset($_POST['register']) && $_POST['register']==1) {
 					$this->_basket['register'] = true;
 				} else {
-					$new_address_hash = md5(serialize($this->_basket['delivery_address']));
-					$this->_basket['shipping_verified'] = ($new_address_hash == $old_address_hash) ? true : false;
 					$this->_basket['register'] = false;
 				}
 
@@ -1037,16 +1018,6 @@ class Cubecart {
 			$GLOBALS['smarty']->assign('REGISTER_CHECKED', (isset($this->_basket['register']) && $this->_basket['register']) ? 'checked="checked"' : '');
 			$GLOBALS['smarty']->assign('TERMS_CONDITIONS_CHECKED', (isset($this->_basket['terms_agree']) && $this->_basket['terms_agree']) ? 'checked="checked"' : '');
 		} else {
-			// Reset shipping to prevent redirect to gateway page too early!!
-//			$this->_basket['shipping_verified'] = true;
-            $address_serialized = md5(serialize($this->_basket['delivery_address']));
-			if (isset($_POST['delivery_address']) && (int)$_POST['delivery_address']>0) {
-				$this->_basket['check_address'] = $address_serialized;
-			} else {
-				$this->_basket['shipping_verified'] = (isset($this->_basket['check_address']) && $this->_basket['check_address']!=$address_serialized) ? false : true;
-				if (isset($this->_basket['check_address'])) unset($this->_basket['check_address']);
-			}
-			$GLOBALS['cart']->save();
 			// Registered users - Display predefined addresses, if any exist
 			$this->_displayAddresses();
 		}
@@ -1150,7 +1121,7 @@ class Cubecart {
 					}
 					$GLOBALS['smarty']->assign('ITEMS', $vars['items']);
 				}
-				// Retrieve taxes
+				// Retrieve taxes
 				if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 					$GLOBALS['tax']->loadTaxes(($GLOBALS['config']->get('config', 'basket_tax_by_delivery')) ? (int)$order['country'] : (int)$order['country_d']);
 					foreach ($taxes as $vat) {
@@ -1208,7 +1179,7 @@ class Cubecart {
 						break;
 				}
 
-				// Display Affilate Tracker code
+				// Display Affilate Tracker code
 				$affiliates	= $this->_getAffiliates(self::AFFILIATE_COMPLETE);
 				if ($affiliates) {
 					$GLOBALS['smarty']->assign('AFFILIATES', $affiliates);
@@ -1338,6 +1309,9 @@ class Cubecart {
 		}
 
 		if ($addresses) {
+			
+			$GLOBALS['session']->set('confirm_addresses', true);
+		
 			// Work out which address id to default to
 			if (isset($_POST['delivery_address']) && is_numeric($_POST['delivery_address'])) {
 				$selected	= (int)$_POST['delivery_address'];
@@ -1492,6 +1466,14 @@ class Cubecart {
 				}
 				$shipping_list = false;
 			}
+			
+			// Check if new shipping methods are avialble and notify if they are
+			$shipping_hash = md5(serialize($shipping_list));
+			if(isset($GLOBALS['cart']->basket['shipping_hash']) && !empty($GLOBALS['cart']->basket['shipping_hash']) && $shipping_hash!==$GLOBALS['cart']->basket['shipping_hash']) {
+				$GLOBALS['gui']->setNotify($GLOBALS['language']->checkout['check_shipping']);
+			}
+			$GLOBALS['cart']->basket['shipping_hash'] = $shipping_hash;
+			
 			if (!$digital_only && isset($this->_basket['digital_only'])){
 				unset($this->_basket['digital_only']); // Digital good removed fix
 			}
@@ -2015,7 +1997,7 @@ class Cubecart {
 					$GLOBALS['gui']->addBreadcrumb($order['cart_order_id'], currentPage());
 					if (($items = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 						foreach ($items as $item) {
-							// Do price formatting
+							// Do price formatting
 							$item['price_total'] = $GLOBALS['tax']->priceFormat(($item['price'] * $item['quantity']), true);
 							$item['price']	= $GLOBALS['tax']->priceFormat($item['price']);
 							$item['options'] = unserialize($item['product_options']);
@@ -2023,7 +2005,7 @@ class Cubecart {
 						}
 						$GLOBALS['smarty']->assign('ITEMS', $vars['items']);
 					}
-					// Taxes
+					// Taxes
 					if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 						$GLOBALS['tax']->loadTaxes(($GLOBALS['config']->get('config', 'basket_tax_by_delivery')) ? $order['country'] : $order['country_d']);
 						foreach ($taxes as $vat) {
@@ -2054,7 +2036,7 @@ class Cubecart {
 
 					// Courier Tracking URLs
 					if (!empty($order['ship_method']) && !empty($order['ship_tracking'])) {
-						// Load the module
+						// Load the module
 						$method	= str_replace(' ', '_', $order['ship_method']);
 						$ship_class	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'shipping'.CC_DS.$method.CC_DS.'shipping.class.php';
 						if (file_exists($ship_class)) {

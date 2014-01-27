@@ -477,7 +477,7 @@
     </group>
     <group name="checkout">
       <string name="checkout" introduced="5.0.0"><![CDATA[Caisse]]></string>
-      <string name="check_shipping" introduced="5.0.0"><![CDATA[S'il vous plaît vérifiez que le mode de livraison défini est adapté.]]></string>
+      <string name="check_shipping" introduced="5.0.0"><![CDATA[Nouvelles options d'expédition sont disponibles! S'il vous plaît vérifier et continuer.]]></string>
       <string name="error_too_many_added" introduced="5.0.0"><![CDATA[Désolé, vous ne pouvez pas acheter plus que ce que nous avons. Nous avons automatiquement réduit votre quantité au maximum disponible.]]></string>
       <string name="error_voucher_expired" introduced="5.0.0"><![CDATA[Désolé, ce bon a expiré.]]></string>
       <string name="error_voucher_none" introduced="5.0.0"><![CDATA[Désolé, ce bon n'existe pas.]]></string>

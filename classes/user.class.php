@@ -427,6 +427,7 @@ class User {
 	public function getAddress($address_id) {
 		if ($this->is()) {
 			if (($address = $GLOBALS['db']->select('CubeCart_addressbook', false, array('customer_id' => $this->_user_data['customer_id'], 'address_id' => $address_id))) !== false) {
+				$address[0]['user_defined'] = true;
 				return $address[0];
 			}
 		}
@@ -457,6 +458,7 @@ class User {
 					$address['state_abbrev'] = getStateFormat($address['state'], $state_field, 'abbrev');
 					$address['country_iso']	 = getCountryFormat($address['country_id'], 'numcode', 'iso');
 					$address['country_iso3'] = getCountryFormat($address['country_id'], 'numcode', 'iso3');
+					$address['user_defined'] = true;
 					$addressArray[]	= $address;
 				}
 				return $addressArray;
@@ -485,6 +487,7 @@ class User {
 					$address['state_abbrev'] = getStateFormat($address['state'], $state_field, 'abbrev');
 					$address['country_iso']	 = getCountryFormat($address['country_id'], 'numcode', 'iso');
 					$address['country_iso3'] = getCountryFormat($address['country_id'], 'numcode', 'iso3');
+					$address['user_defined'] = true;
 					$addressArray[]	= $address;
 				}
 				return $addressArray;
