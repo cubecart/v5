@@ -477,7 +477,7 @@
     </group>
     <group name="checkout">
       <string name="checkout" introduced="5.0.0"><![CDATA[Kasse]]></string>
-      <string name="check_shipping" introduced="5.0.0"><![CDATA[Bitte überprüfen Sie, dass der definierte Versandart geeignet ist.]]></string>
+      <string name="check_shipping" introduced="5.0.0"><![CDATA[Neue Versandoptionen zur Verfügung! Bitte überprüfen und weiter.]]></string>
       <string name="error_too_many_added" introduced="5.0.0"><![CDATA[Es tut uns leid, aber Sie können nicht mehr kaufen, als wir haben. Wir haben Ihre Menge automatisch auf die maximal verfügbare Anzahl reduziert.]]></string>
       <string name="error_voucher_expired" introduced="5.0.0"><![CDATA[Es tut uns leid, aber dieser Gutschein ist abgelaufen.]]></string>
       <string name="error_voucher_none" introduced="5.0.0"><![CDATA[Es tut uns leid, aber diesen Gutschein gibt es nicht.]]></string>

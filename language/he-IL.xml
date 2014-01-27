@@ -498,7 +498,7 @@
    <string name="process_complete"><![CDATA[סיום]]></string>
    <string name="process_payment"><![CDATA[תשלום]]></string>
    <string name="your_basket"><![CDATA[סל הקניות שלך]]></string>
-   <string name="check_shipping"><![CDATA[אנא ודא כי שיטת המשלוח הנבחרת מתאימה ובחר ב-"לקופה" או "עדכון עגלת הקניות" על מנת להמשיך בתהליך התשלום.]]></string>
+   <string name="check_shipping"><![CDATA[אפשרויות משלוח חדשות זמינות! אנא בדוק ולהמשיך.]]></string>
    <string name="error_shipping"><![CDATA[לצערנו לא נמצאו שיטות משלוח המתאימות להזמנתך. יתכן כי דבר זה נגרם עקב משקל סחורה גבוה מדי או משום שאיננו מבצעים משלוחים לאזורך. אנא צור קשר עם צוות האתר לשאלות נוספות.]]></string>
   </group>
   <group name="common">
