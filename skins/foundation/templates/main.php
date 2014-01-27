@@ -42,7 +42,9 @@
       {/if}
    </head>
    <body>
+      {include file='templates/box.eu_cookie.php'}
       <header>
+      	
          <div class="header-nav">
             <div class="row">
                <nav class="top-bar" data-topbar>
@@ -107,7 +109,5 @@
       </script>
       <script type="text/javascript" src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart/common.js"></script>
       {if isset($LIVE_HELP)}{$LIVE_HELP}{/if}
-      {if $COOKIE_DIALOGUE}
-      {/if}
    </body>
 </html>
