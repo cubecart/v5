@@ -159,7 +159,7 @@ class Cubecart {
 						$target_column = ($doc_lang == $GLOBALS['config']->get('config', 'default_language')) ? 'doc_id' : 'doc_parent_id' ;
 						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array($target_column => $contents['doc_parent_id'], 'doc_lang' => $doc_lang));
 
-						// Default Lang, if it exists
+						// Default Lang, if it exists
 						if (!$document) {
 							$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_id' => $contents['doc_parent_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 						}
@@ -167,7 +167,7 @@ class Cubecart {
 				    } else if (($document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $doc_lang))) !== false) {
 //						$contents = $document[0];
 					} else {
-						// Default Lang, if it exists
+						// Default Lang, if it exists
 						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 					}
 
@@ -726,7 +726,7 @@ class Cubecart {
 		$error = false;
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->catalogue['gift_certificates'], currentPage());
 		if (isset($_POST['gc'])) {
-			// Validate submitted data
+			// Validate submitted data
 			$_POST['gc']['value'] = preg_replace('/[^0-9.]*/','',$_POST['gc']['value']); // Strip off currency symbols etc...
 			if (!is_numeric($_POST['gc']['value'])) {
 				$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_gc_value']);
@@ -1117,7 +1117,7 @@ class Cubecart {
 					}
 					$GLOBALS['smarty']->assign('ITEMS', $vars['items']);
 				}
-				// Retrieve taxes
+				// Retrieve taxes
 				if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 					$GLOBALS['tax']->loadTaxes(($GLOBALS['config']->get('config', 'basket_tax_by_delivery')) ? (int)$order['country'] : (int)$order['country_d']);
 					foreach ($taxes as $vat) {
@@ -1175,7 +1175,7 @@ class Cubecart {
 						break;
 				}
 
-				// Display Affilate Tracker code
+				// Display Affilate Tracker code
 				$affiliates	= $this->_getAffiliates(self::AFFILIATE_COMPLETE);
 				if ($affiliates) {
 					$GLOBALS['smarty']->assign('AFFILIATES', $affiliates);
@@ -1993,7 +1993,7 @@ class Cubecart {
 					$GLOBALS['gui']->addBreadcrumb($order['cart_order_id'], currentPage());
 					if (($items = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 						foreach ($items as $item) {
-							// Do price formatting
+							// Do price formatting
 							$item['price_total'] = $GLOBALS['tax']->priceFormat(($item['price'] * $item['quantity']), true);
 							$item['price']	= $GLOBALS['tax']->priceFormat($item['price']);
 							$item['options'] = unserialize($item['product_options']);
@@ -2001,7 +2001,7 @@ class Cubecart {
 						}
 						$GLOBALS['smarty']->assign('ITEMS', $vars['items']);
 					}
-					// Taxes
+					// Taxes
 					if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $order['cart_order_id']))) !== false) {
 						$GLOBALS['tax']->loadTaxes(($GLOBALS['config']->get('config', 'basket_tax_by_delivery')) ? $order['country'] : $order['country_d']);
 						foreach ($taxes as $vat) {
@@ -2032,7 +2032,7 @@ class Cubecart {
 
 					// Courier Tracking URLs
 					if (!empty($order['ship_method']) && !empty($order['ship_tracking'])) {
-						// Load the module
+						// Load the module
 						$method	= str_replace(' ', '_', $order['ship_method']);
 						$ship_class	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'shipping'.CC_DS.$method.CC_DS.'shipping.class.php';
 						if (file_exists($ship_class)) {
