@@ -594,7 +594,7 @@ class Cubecart {
 			}
 			
 			// Check new registered cutomers has been to confirmed address page
-			if($GLOBALS['user']->is() && !$GLOBALS['session']->has('confirm_addresses')) {
+			if($GLOBALS['user']->is() && !$this->_basket['confirm_addresses']) {
 				$gatway_proceed = false;
 			}
 			
@@ -1307,7 +1307,7 @@ class Cubecart {
 
 		if ($addresses) {
 			
-			$GLOBALS['session']->set('confirm_addresses', true);
+			$GLOBALS['cart']->set('confirm_addresses', true);
 		
 			// Work out which address id to default to
 			if (isset($_POST['delivery_address']) && is_numeric($_POST['delivery_address'])) {
