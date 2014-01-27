@@ -86,7 +86,7 @@ class Gateway {
 			);
 
             $error = false;
-			if (extension_loaded('mcrypt') || function_exists('mcrypt_module_open')) {
+			if (extension_loaded('mcrypt') && function_exists('mcrypt_module_open')) {
 				$this->_encryption	= Encryption::getInstance();
 				$this->_encryption->setup(false, $order_summary['cart_order_id']);
 				$record['offline_capture'] = $this->_encryption->encrypt(serialize($cardData));
