@@ -273,14 +273,15 @@ class Order {
 					if (!isset($complete)) {
 						$this->_getInventory($order_id);
 					}
-					foreach ($this->_order_inventory as $item) {
-						// Send Gift Certificate
-						if (!empty($item['custom']) && !empty($item['coupon_id'])) {
-							$this->_sendCoupon($item['coupon_id'], unserialize($item['custom']));
+					if (!$this->_skip_order_complete_email && $this->_email_enabled) {
+						foreach ($this->_order_inventory as $item) {
+							// Send Gift Certificate
+							if (!empty($item['custom']) && !empty($item['coupon_id'])) {
+								$this->_sendCoupon($item['coupon_id'], unserialize($item['custom']));
+							}
 						}
 					}
 					/* no need to send this email for digital only orders */
-
 					if (!$this->_skip_order_complete_email && $this->_email_enabled && ($content = $mailer->loadContent('cart.order_complete', $order_summary['lang'])) !== false) {
 						$this->assignOrderDetails();
 						$mailer->sendEmail($this->_order_summary['email'], $content);
