@@ -1762,6 +1762,7 @@
     <string name="title_proxy" introduced="5.0.0"><![CDATA[Proxy Settings]]></string>
     <string name="title_sales" introduced="5.0.0"><![CDATA[Sales]]></string>
     <string name="title_seo" introduced="5.0.0"><![CDATA[Search Engine Settings]]></string>
+    <string name="title_seo_add_cats" introduced="5.2.8"><![CDATA[Category name in new product URL]]></string>
     <string name="title_seo_meta_behaviour" introduced="5.0.0"><![CDATA[Global Meta Data Behaviour]]></string>
     <string name="title_seo_meta_data" introduced="5.0.0"><![CDATA[Meta Data]]></string>
     <string name="title_seo_urls" introduced="5.0.0"><![CDATA[Search Engine Optimized (SEO) URLs]]></string>

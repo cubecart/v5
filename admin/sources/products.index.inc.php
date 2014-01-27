@@ -114,7 +114,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 			$inserted = true;
 		}
 	}
-
+/*  Moved down as the cats are not added to a new product
 	if (substr($_POST['seo_path'], 0, 1) == '/' || substr($_POST['seo_path'], 0, 1) == '\\') {
 		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
 	}
@@ -122,9 +122,9 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
 		$updated = true;
 	}
-
+*/
 	unset($record);
-	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id'];
+	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id']; // do we need this?
 
 
 	// Option Sets - Assign
@@ -445,6 +445,14 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 	}
 	if(!$category_assigned) {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['no_categories_specified']);
+	}
+
+	// SEO
+	if (substr($_POST['seo_path'], 0, 1) == '/' || substr($_POST['seo_path'], 0, 1) == '\\') {
+		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
+	}
+	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
+		$updated = true;
 	}
 
 	if (empty($_POST['primary_cat']) && count($_POST['categories'])>1) {
