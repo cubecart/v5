@@ -46,6 +46,7 @@
          {/if}
          <div class="row">
             <div class="large-12 columns" id="review_stars">
+               <label for="rating">{$LANG.documents.rating}</label>
                {foreach from=$RATING_STARS item=star}
                <input type="radio" id="rating_{$star.value}" name="rating" value="{$star.value}" class="rating" {$star.checked} />
                {/foreach}
