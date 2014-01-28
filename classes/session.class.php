@@ -519,7 +519,7 @@ class Session {
 	 * User agent
 	 */
 	private function _http_user_agent() {
-		return strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE') ? 'MSIE' : $_SERVER['HTTP_USER_AGENT'];
+		return strstr($_SERVER['HTTP_USER_AGENT'], 'rv:11') ? 'IE11' : $_SERVER['HTTP_USER_AGENT'];
 	}
 	
 	/**
