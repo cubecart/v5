@@ -268,6 +268,9 @@ if(isset($_GET['upgrade']) && !empty($_GET['upgrade'])) {
 	  		} else {
 	  			httpredir(CC_ROOT_REL.'setup/index.php?autoupdate=1');
 	  		}
+	  	} else {
+	  		$GLOBALS['main']->setACPWarning($lang['maintain']['file_download_fail']);
+	  		$_POST = array();
 	  	}
 
   	} // end if $contents
