@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
 	
 	$('input[type=radio].rating').rating({required: true});
 	
-	var magnify_options = {lensWidth:250, lensHeight:250, link:true, delay:250};
+	var magnify_options = {lensWidth:300, lensHeight:300, link:true, delay:250};
 	$('a.magnify').magnify(magnify_options);
 	$('a.gallery').hover(function(){
 		var id	= $(this).attr('id');
