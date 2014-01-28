@@ -13,7 +13,7 @@
          </div>
          <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
          {if $product.ctrl_sale}
-         <span class="old_price">{$product.price}</span> {$product.sale_price}
+         <span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
          {else}
          {$product.price}
          {/if}

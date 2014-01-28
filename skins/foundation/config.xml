@@ -25,7 +25,7 @@
 	
 	<!-- Product Page -->
 	<image reference="gallery" maximum="50" quality="60" default="noimage_gallery.png" />
-	<image reference="normal" maximum="270" quality="90" default="noimage_normal.png" />
+	<image reference="normal" maximum="300" quality="90" default="noimage_normal.png" />
 	<image reference="enlarge" maximum="600" quality="90" default="" /><!-- Doesnt need a default -->
 	
 	<!-- Possible names (sizes): thumbnail (138), product(300-ish), enlarged (big), zoom (bigger, poss. source?) -->
@@ -33,7 +33,7 @@
 	<!-- These are the ones currently in use -->
 	<image reference="tiny" maximum="30" quality="75" default="noimage_thumbnail_tiny.png" />
 	<image reference="small" maximum="138" quality="75" default="noimage_thumbnail.png" />
-	<image reference="medium" maximum="270" quality="90" default="noimage_normal.png" />
+	<image reference="medium" maximum="500" quality="90" default="noimage_normal.png" />
 	<image reference="large" maximum="600" quality="90" default="" /><!-- Doesnt need a default -->
   </images>
   

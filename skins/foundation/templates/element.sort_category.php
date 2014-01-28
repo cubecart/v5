@@ -1,5 +1,5 @@
 {if isset($SORTING)}
-
+<form action="{$VAL_SELF}" class="autosubmit" method="post">
    <div class="row">
    <div class="large-2 columns">
    <form action="{$VAL_SELF}" class="autosubmit" method="post">
@@ -14,7 +14,6 @@
    </select>
    <input type="submit" value="{$LANG.form.sort}" class="hide" />
    </form>
-
    </div>
 </div>
 {/if}

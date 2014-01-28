@@ -1,6 +1,11 @@
 .old_price {
-	color: #FF0000;
 	text-decoration: line-through;
+}
+.sale_price {
+	color: #FF0000;
+}
+.tabs {
+	border-bottom: 1px #EFEFEF solid;
 }
 /* HELPERS :-) */
 .nopad  {padding:0!important;}

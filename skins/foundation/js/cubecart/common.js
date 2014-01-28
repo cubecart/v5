@@ -9,6 +9,12 @@ jQuery(document).ready(function() {
 			$(this).removeClass('has-dropdown');
 		}
 	});
+	
+	$(".review_toggle").click(function() {
+		$('#review_read').slideToggle(); 
+		$('#review_write').slideToggle();
+		return false;
+	});
 });
 
 function equalheight() {    

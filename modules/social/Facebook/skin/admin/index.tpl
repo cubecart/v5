@@ -50,7 +50,7 @@
 	  		<option value="document" {$SELECT_comments_location_document}>{$LANG.module.social_location_document}</option>
 	  	</select>
 	  </div>
-	  <div><label for="comments_width">{$LANG.facebook.comments_width}</label><span><input type="text" id="comments_width" name="module[comments_width]" class="textbox" value="{$MODULE.comments_width}" /></span></div>
+	  <!--<div><label for="comments_width">{$LANG.facebook.comments_width}</label><span><input type="text" id="comments_width" name="module[comments_width]" class="textbox" value="{$MODULE.comments_width}" /></span></div>-->
 	  <div><label for="comments_numposts">{$LANG.facebook.comments_numposts}</label><span><input type="text" id="comments_numposts" name="module[comments_numposts]" class="textbox" value="{$MODULE.comments_numposts}" /></span></div>
 	  <!--<div><label for="comments_publish_feed">{$LANG.facebook.comments_feed}</label><span><input type="hidden" id="comments_publish_feed" name="module[comments_publish_feed]" class="toggle" value="{$MODULE.comments_publish_feed}" /></span></div>-->
 

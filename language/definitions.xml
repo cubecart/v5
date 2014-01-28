@@ -625,6 +625,7 @@
     <string name="show" introduced="5.0.0"><![CDATA[Show]]></string>
     <string name="size" introduced="5.0.0"><![CDATA[Size]]></string>
     <string name="small" introduced="5.0.0"><![CDATA[Small]]></string>
+    <string name="specification" introduced="6.0.0"><![CDATA[Specification]]></string>
     <string name="status" introduced="5.0.0"><![CDATA[Status]]></string>
     <string name="subject" introduced="5.0.0"><![CDATA[Subject]]></string>
     <string name="submit" introduced="5.0.0"><![CDATA[Submit]]></string>
