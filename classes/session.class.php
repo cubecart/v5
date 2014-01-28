@@ -599,7 +599,7 @@ class Session {
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
-		if($this->_http_user_agent()=='MSIE')) {
+		if($this->_http_user_agent()=='MSIE') {
 			$this->set_cookie(session_name(),session_id(),time()+$this->_session_timeout);
 		}
 
@@ -632,7 +632,7 @@ class Session {
 				'session_id'	=> $this->getId(),
 				'session_last'	=> time(),
 				'session_start'	=> time(),
-				'useragent'		=> $this->_http_user_agent(),
+				'useragent'		=> $this->_http_user_agent()
 			);
 			$GLOBALS['db']->insert('CubeCart_sessions', $record, false);
 			$this->set('ip_address', $ip, 'client');
