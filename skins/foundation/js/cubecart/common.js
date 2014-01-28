@@ -18,6 +18,11 @@ jQuery(document).ready(function() {
         }
     });
     
+    $(".category-nav li" ).each(function(index) {
+		if($(this).has("ul")) {
+			
+		}
+	});
 });
 
 function equalheight() {    

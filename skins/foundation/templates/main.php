@@ -44,7 +44,6 @@
    <body>
       {include file='templates/box.eu_cookie.php'}
       <header>
-      	
          <div class="header-nav">
             <div class="row">
                <nav class="top-bar" data-topbar>

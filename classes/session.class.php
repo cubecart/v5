@@ -157,7 +157,7 @@ class Session {
 			'username'	=> (!empty($user)) ? $user : '--',
 			'user_id'   => $user_id,
 			'ip_address'=> get_ip_address(),
-			'useragent' => $_SERVER['HTTP_USER_AGENT'],
+			'useragent' => $this->_http_user_agent(),
 			'success'	=> ($login) ? 'Y' : 'N',
 		);
 		$GLOBALS['db']->insert('CubeCart_access_log', $record);
@@ -166,7 +166,7 @@ class Session {
 
 		// Search for active blocks
 		$where = array(
-			'user_agent'	=> $_SERVER['HTTP_USER_AGENT'],
+			'user_agent'	=> $this->_http_user_agent(),
 			'ip_address'	=> get_ip_address(),
 			'location'		=> $location,
 		);
@@ -203,7 +203,7 @@ class Session {
 				'ban_expires'	=> 0,
 				'username'		=> strip_tags($user),
 				'location'		=> $location,
-				'user_agent'	=> $_SERVER['HTTP_USER_AGENT'],
+				'user_agent'	=> $this->_http_user_agent(),
 				'ip_address'	=> get_ip_address(),
 			);
 			$GLOBALS['db']->insert('CubeCart_blocker', $record);
@@ -516,6 +516,13 @@ class Session {
 	//=====[ Private ]===================================================================================================
 	
 	/**
+	 * User agent
+	 */
+	private function _http_user_agent() {
+		return strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE') ? 'MSIE' : $_SERVER['HTTP_USER_AGENT'];
+	}
+	
+	/**
 	 * Close a session
 	 */
 	private function _close() {
@@ -592,7 +599,7 @@ class Session {
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
-		if(!strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+		if($this->_http_user_agent()=='MSIE')) {
 			$this->set_cookie(session_name(),session_id(),time()+$this->_session_timeout);
 		}
 
@@ -625,15 +632,15 @@ class Session {
 				'session_id'	=> $this->getId(),
 				'session_last'	=> time(),
 				'session_start'	=> time(),
-				'useragent'		=> $_SERVER['HTTP_USER_AGENT'],
+				'useragent'		=> $this->_http_user_agent(),
 			);
 			$GLOBALS['db']->insert('CubeCart_sessions', $record, false);
 			$this->set('ip_address', $ip, 'client');
-			$this->set('useragent', $_SERVER['HTTP_USER_AGENT'], 'client');
+			$this->set('useragent', $this->_http_user_agent(), 'client');
 		} else {
-			if ($current[0]['useragent'] !== $_SERVER['HTTP_USER_AGENT']) {
+			if ($current[0]['useragent'] !== $this->_http_user_agent()) {
 				$this->destroy();
-				trigger_error('Stored session data did not match DB record. Session aborted as possible session hijack. Old IP Address: \''.$current[0]['ip_address'].'\' New IP Address: \''.$ip.'\' Old User Agent: \''.$current[0]['useragent'].'\' New User Agent: \''.$_SERVER['HTTP_USER_AGENT'].'\'', E_USER_WARNING);
+				trigger_error('Stored session data did not match DB record. Session aborted as possible session hijack. Old IP Address: \''.$current[0]['ip_address'].'\' New IP Address: \''.$ip.'\' Old User Agent: \''.$current[0]['useragent'].'\' New User Agent: \''.$this->_http_user_agent().'\'', E_USER_WARNING);
 			}
 			$this->set('ip_address', $current[0]['ip_address'], 'client');
 			$this->set('useragent', $current[0]['useragent'], 'client');
