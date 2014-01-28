@@ -15,6 +15,8 @@ jQuery(document).ready(function() {
 		$('#review_write').slideToggle();
 		return false;
 	});
+	
+	$('input[type=radio].rating').rating({required: true});
 });
 
 function equalheight() {    

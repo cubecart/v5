@@ -9,7 +9,8 @@
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css" />
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/styles.css" />
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
-      <link rel="stylesheet" type="text/css" href="{$STORE_URL}/js/styles/styles.php" media="screen" />
+      <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.rating.css" media="screen" />
+      <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.magnifier.css" media="screen" />
       {if isset($CSS)}
       {foreach from=$CSS key=css_keys item=css_files}
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen" />
@@ -104,16 +105,15 @@
       {if isset($DEBUG_INFO)}{$DEBUG_INFO}{/if}
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
-      
-       {include file='js/common.html'}
-      
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.rating.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.magnifier.js"></script>
       {foreach from=$JS_SCRIPTS key=k item=script}
-  <script type="text/javascript" src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
-  {/foreach}
+	  <script src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
+	  {/foreach}
       <script>
          $(document).foundation();
       </script>
-      <script type="text/javascript" src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart/common.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart/common.js"></script>
       {if isset($LIVE_HELP)}{$LIVE_HELP}{/if}
    </body>
 </html>
