@@ -56,7 +56,7 @@
             <div class="large-12 columns"><label for="rev_title" class="inline">{$LANG.catalogue.review_title}</label><input id="rev_title" type="text" name="review[title]" value="{$WRITE.title}" class="textbox required" /></div>
          </div>
          <div class="row">
-            <div class="large-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" class="textbox required" style="height: 70px; width:400px;" rows="10" cols="40">{$WRITE.review}</textarea></div>
+            <div class="large-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" class="textbox required">{$WRITE.review}</textarea></div>
          </div>
          {include file='templates/content.recaptcha.php'}
       </div>
