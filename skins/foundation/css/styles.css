@@ -7,6 +7,13 @@
 .tabs {
 	border-bottom: 1px #EFEFEF solid;
 }
+
+/* Fix 100% image on magnifier */
+#dio-lens img {
+	max-width: none;
+}
+
+
 /* HELPERS :-) */
 .nopad  {padding:0!important;}
 .pad {padding:0.625em;}
