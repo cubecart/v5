@@ -347,7 +347,13 @@ class Catalogue {
 			foreach ($directions as $order => $direction) {
 				$direction	= (isset($GLOBALS['language']->category[strtolower('sort_'.$field.'_'.$order)])) ? $GLOBALS['language']->category[strtolower('sort_'.$field.'_'.$order)] : $direction;
 				$assign	= array('name' => $name, 'field' => $field, 'order' => $order, 'direction' => $direction);
-				$assign['selected'] = (isset($_GET['sort'][$field]) && strtoupper($_GET['sort'][$field]) == $order) ? 'selected="selected"' : '';
+				
+				if((isset($_GET['sort'][$field]) && strtoupper($_GET['sort'][$field]) == $order)  || ($field==$GLOBALS['config']->get('config', 'product_sort_column') && $order==$GLOBALS['config']->get('config', 'product_sort_direction'))) {
+					$assign['selected'] = 'selected="selected"';
+				} else {
+					$assign['selected'] = '';
+				}
+				
 				$data[] = $assign;
 			}
 		}

@@ -20,7 +20,7 @@
 	<!-- Common -->
 	<image reference="thumbnail" maximum="138" quality="75" default="noimage_thumbnail.png" />
 	<!-- Category Page -->
-	<image reference="category" maximum="580" quality="100" default="" /><!-- Doesnt need a default -->
+	<image reference="category" maximum="800" quality="100" default="" /><!-- Doesnt need a default -->
 	<image reference="subcategory" maximum="70" quality="70" default="noimage_subcategory.png" />
 	
 	<!-- Product Page -->

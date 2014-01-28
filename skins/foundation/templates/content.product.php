@@ -4,7 +4,7 @@
   <div>
 	<div id="product_detail">
 	  {if $PRODUCT.ctrl_sale}
-	  <h1><span class="price_previous">{$PRODUCT.price}</span> <span class="price_sale">{$PRODUCT.sale_price}</span></h1>
+	  <h1><span class="old_price">{$PRODUCT.price}</span> {$PRODUCT.sale_price}</h1>
 	  {else}
 	  <h1>{$PRODUCT.price}</h1>
 	  {/if}

@@ -538,7 +538,7 @@ h2+p, h2+div {
 .price_sale {
 	color: #FF0000;
 }
-.price_previous {
+.old_price {
 	text-decoration: line-through;
 }
 .price_regular {
