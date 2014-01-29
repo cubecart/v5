@@ -12,6 +12,13 @@
 #dio-lens img {
 	max-width: none;
 }
+footer {
+	background-color: #000;
+	color: #fff;
+}
+footer h3 {
+	color: #fff;
+}
 
 
 /* HELPERS :-) */

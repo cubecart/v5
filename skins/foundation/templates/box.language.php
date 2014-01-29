@@ -1,10 +1,9 @@
-<ul class="right">
-  <li class="has-dropdown">
-    <a href="#">{$LANG.common.change_language}:</a>
-    <ul class="dropdown">
-      {foreach from=$LANGUAGES item=language}
-      <li><a href="{$language.url}">{$language.title}</a></li>
-      {/foreach}
-    </ul>
-  </li>
-</ul>
+<form id="language_select" action="{$VAL_SELF}" class="autosubmit" method="post">
+  <h2 class="hide">{$LANG.common.language}</h2>
+  <select name="set_language">
+   <option value="" disabled>{$LANG.common.change_language}</option>
+  {foreach from=$LANGUAGES item=language}
+  <option value="{$language.code}" {$language.selected}>{$language.title}</option>
+  {/foreach}
+  </select> <input type="submit" value="{$LANG.common.submit}" class="hide" />
+  </form>

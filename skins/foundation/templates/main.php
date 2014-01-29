@@ -45,63 +45,62 @@
    </head>
    <body>
       {include file='templates/box.eu_cookie.php'}
-      <header>
-         <div class="header-nav">
-            <div class="row">
-               <nav class="top-bar" data-topbar>
-                  <ul class="title-area">
-                     <li class="name"></li>
-                  </ul>
-                  <section class="top-bar-section">
-                     {$LANGUAGE}
-                     {$CURRENCY} 
-                     {$SESSION} 
-                  </section>
-               </nav>
-            </div>
-         </div>
-      </header>
+      <div class="row">
+      <div class="large-6 columns">{$SESSION}</div>
+      <div class="large-3 columns">{$CURRENCY}</div>
+      <div class="large-3 columns">{$LANGUAGE}</div>
+      </div>
       <div class="row">
          <div class="header-secondary equalheight">
             <div class="large-4 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
             <div class="large-8 columns">{$SEARCH_FORM}</div>
          </div>
       </div>
+      <div class="row collapse">
+      <div class="large-12 columns">
+      {$CATEGORIES}
+      </div>
+      </div>
       <div>
          <div class="row">
-            <ul class="breadcrumbs">
-               <li><a href="{$STORE_URL}">{$LANG.common.home}</a></li>
-               {foreach from=$CRUMBS item=crumb}
-               <li><a href="{$crumb.url}">{$crumb.title}</a></li>
-               {/foreach}
-            </ul>
+           {include file='templates/element.breadcrumb.php'} 
          </div>
       </div>
       <div class="row {$SECTION_NAME}_wrapper">
-         <div class="large-2 columns">
-            {$CATEGORIES}
-            {$SALE_ITEMS}
-            {$MAIL_LIST}
-         </div>
-         <div class="large-8 columns">
+         <div class="large-9 columns">
             {include file='templates/box.errors.php'}
             {if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
             {$PAGE_CONTENT}
          </div>
-         <div class="large-2 columns">
+         <div class="large-3 columns">
             {$SHOPPING_CART}
             {$RANDOM_PROD}
             {if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
+            {$SALE_ITEMS}
          </div>
       </div>
       <footer>
-         {if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} {$SITE_DOCS}
+         {if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} 
          <div class="row">
-            <div class="large-12 columns">
+            <div class="large-8 columns">
+               {$SITE_DOCS}
+            </div>
+            <div class="large-4 columns">
+               <div class="row collapse">
+               <div class="large-12 columns">
+               {$MAIL_LIST}
+               </div>
+               </div>
+               <div class="row">
+               <div class="large-12 columns">
                {$COPYRIGHT}
+               </div>
+               </div>
             </div>
          </div>
+         
       </footer>
+      
       {if isset($DEBUG_INFO)}{$DEBUG_INFO}{/if}
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
