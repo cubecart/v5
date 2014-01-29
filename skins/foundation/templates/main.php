@@ -51,19 +51,21 @@
       <div class="large-3 columns">{$LANGUAGE}</div>
       </div>
       <div class="row">
-         <div class="header-secondary equalheight">
+         <div class="header-secondary">
             <div class="large-4 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
             <div class="large-8 columns">{$SEARCH_FORM}</div>
          </div>
       </div>
-      <div class="row collapse">
+      <div class="row">
       <div class="large-12 columns">
       {$CATEGORIES}
       </div>
       </div>
       <div>
          <div class="row">
+         	<div class="large-12 columns">
            {include file='templates/element.breadcrumb.php'} 
+         	</div>
          </div>
       </div>
       <div class="row {$SECTION_NAME}_wrapper">

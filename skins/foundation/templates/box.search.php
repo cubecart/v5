@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="large-12 columns text-right">
-		<a href="{$SEARCH_URL}">{$LANG.search.advanced}</a>
+		<small><a href="{$SEARCH_URL}">{$LANG.search.advanced}</a></small>
 	</div>
 </div>
 <form action="{$ROOT_PATH}index.php" method="get">
