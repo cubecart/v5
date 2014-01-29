@@ -219,7 +219,7 @@
 		  <div id="qty_discount_0" class="list">
 		    {if isset($QUANTITY_DISCOUNTS)}
 			{foreach from=$QUANTITY_DISCOUNTS item=discount}
-			<div><span class="actions"><a href="#" rel="{$discount.discount_id}" class="remove" name="discount_delete"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span><label><span class="editable number-right" name="discount[{$discount.discount_id}][quantity]" title="Click to edit">{$discount.quantity}</span></label>
+			<div><span class="actions"><a href="#" rel="{$discount.discount_id}" class="remove" name="discount_delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span><label><span class="editable number-right" name="discount[{$discount.discount_id}][quantity]" title="Click to edit">{$discount.quantity}</span></label>
 			<input type="text" name="discount[{$discount.discount_id}][price]" class="textbox number-right" value="{$discount.price}" />
 			</div>
 			{/foreach}{/if}
