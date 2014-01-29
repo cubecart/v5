@@ -200,7 +200,7 @@
     <string name="allowed_uses" introduced="5.0.0"><![CDATA[Allowed Uses]]></string>
     <string name="all_sale_items" introduced="5.0.0"><![CDATA[All Sale Items]]></string>
     <string name="average_rating" introduced="5.0.0"><![CDATA[Average Rating]]></string>
-    <string name="bulk_discount" introduced="5.0.0"><![CDATA[Bulk discounts available]]></string>
+    <string name="bulk_discount" introduced="5.0.0"><![CDATA[Quantity discounts available]]></string>
     <string name="buy" introduced="5.0.0"><![CDATA[Buy]]></string>
     <string name="buy_now" introduced="5.0.0"><![CDATA[Buy now]]></string>
     <string name="buy_it" introduced="5.0.0"><![CDATA[Buy it]]></string>

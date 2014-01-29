@@ -1,4 +1,5 @@
 {if isset($PRODUCT) && $PRODUCT}
+<form action="{$VAL_SELF}" method="post" class="addForm">
 <div class="row">
    <div class="large-12 columns">
       <h1>{$PRODUCT.name}</h1>
@@ -74,10 +75,11 @@
          {else}
          {$PRODUCT.price}
          {/if}
-         {if isset($PRODUCT.discounts)}
-         <div>(<a href="#quantity_discounts">{$LANG.catalogue.bulk_discount}</a>)</div>
-         {/if}
+         
       </h3>
+      {if isset($PRODUCT.discounts)}
+         <p>(<a href="#quantity_discounts">{$LANG.catalogue.bulk_discount}</a>)</p>
+         {/if}
       <div class="row collapse">
          <div class="large-2 columns">
             <input type="text" name="quantity" value="1" class="quantity required text-center" />
@@ -98,7 +100,11 @@
 </div>
 <dl class="tabs" data-tab>
    <dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>
-   <dd><a href="#product_spec" >{$LANG.common.specification}</a></dd>
+   <dd><a href="#product_spec">{$LANG.common.specification}</a></dd>
+   {if isset($PRODUCT.discounts)}
+   <dd><a href="#quantity_discounts">{$LANG.catalogue.quantity_discounts}</a></dd>
+   {/if}
+</dl>
 </dl>
 <div class="tabs-content">
    <div class="content active" id="product_info">
@@ -126,38 +132,39 @@
          </tbody>
       </table>
    </div>
+   {if isset($PRODUCT.discounts)}
+   <div class="content" id="quantity_discounts">
+      <p>{$LANG.catalogue.quantity_discounts_explained}</p>
+      <br />
+      <table>
+      <thead>
+         <tr>
+            <th>{$LANG.common.quantity}</th>
+            <th>{$LANG.catalogue.price_per_unit}</th>
+         </tr>
+      </thead>
+      <tbody>
+         {foreach from=$PRODUCT.discounts item=discount}
+         <tr>
+            <td>{$discount.quantity}+</td>
+            <td>{$discount.price}</td>
+         </tr>
+         {/foreach}
+      </tbody>
+      </table>
+   </div>
+    {/if}
 </div>
+</form>
+ 
+
 {if $SHARE}
       {foreach from=$SHARE item=html}
       {$html}
    {/foreach}
 {/if}
-<hr />
-<form action="{$VAL_SELF}" method="post" class="addForm">
-   <div>
-      <div id="product_detail">
-      </div>
-   </div>
-   {if isset($PRODUCT.discounts)}
-   <div id="quantity_discounts">
-      <h2>{$LANG.catalogue.quantity_discounts}</h2>
-      <p>{$LANG.catalogue.quantity_discounts_explained}</p>
-      <br />
-      <table class="list">
-         <tr>
-            <th width="50">{$LANG.common.quantity}</th>
-            <th width="100">{$LANG.catalogue.price_per_unit}</th>
-         </tr>
-         {foreach from=$PRODUCT.discounts item=discount}
-         <tr>
-            <td align="center">{$discount.quantity}+</td>
-            <td align="center">{$discount.price}</td>
-         </tr>
-         {/foreach}
-      </table>
-   </div>
-   {/if}
-</form>
+<hr /> 
+
 {include file='templates/element.product_reviews.php'}
 
 {foreach from=$COMMENTS item=html}
