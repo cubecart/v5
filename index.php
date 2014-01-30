@@ -6,4 +6,4 @@ header('X-Frame-Options: SAME-ORIGIN'); // do not allow iframes
 
 global $config_default;
 
-include 'controllers'.CC_DS.'controller.master.inc.php';
+include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.master.inc.php';
