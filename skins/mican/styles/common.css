@@ -822,8 +822,7 @@ input.quantity {
 	text-align: center;
 	width: 30px !important;
 }
-.button_submit, .main #submit { /*, input[type="submit"], input[type="reset"] {*/
-	background: transparent url(../images/common/button_generic.png) no-repeat;
+.button_submit, .main #submit { 
 	border: 0px;
 	color: #8F8F8F;
 	cursor: pointer;
