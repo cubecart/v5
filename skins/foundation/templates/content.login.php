@@ -1,4 +1,4 @@
-<form action="{$VAL_SELF}" method="post">
+<form action="{$VAL_SELF}" id="login_form" method="post">
 	<h2>{$LANG.account.login}</h2>
 		{foreach from=$LOGIN_HTML item=html}
 		{$html}
@@ -6,12 +6,12 @@
 		<div class="row">
 			<div class="large-8 columns">
 				<label for="login-username">{$LANG.user.email_address}</label>
-				<input type="text" name="username" id="login-username" placeholder="{$LANG.user.email_address} {$LANG.form.required}" value="{$USERNAME}" />
+				<input type="text" name="username" id="login-username" placeholder="{$LANG.user.email_address} {$LANG.form.required}" value="{$USERNAME}" required />
 			</div>
 		</div>
 		<div class="row">
 			<div class="large-8 columns">
-				<label for="login-password">{$LANG.account.password}</label><input type="password" autocomplete="off" name="password" id="login-password" placeholder="{$LANG.account.password} {$LANG.form.required}" />
+				<label for="login-password">{$LANG.account.password}</label><input type="password" autocomplete="off" name="password" id="login-password" placeholder="{$LANG.account.password} {$LANG.form.required}" required />
 			</div>
 		</div>
 		<div class="row">

@@ -109,6 +109,7 @@
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.rating.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.magnifier.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.validate.js"></script>
       {foreach from=$JS_SCRIPTS key=k item=script}
 	  <script src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
 	  {/foreach}

@@ -1,7 +1,9 @@
-<form method="post" action="?_a=category" enctype="multipart/form-data">
+<form method="post" action="?_a=category" id="advanced_search_form" enctype="multipart/form-data">
    <h2>{$LANG.search.advanced}</h2>
    <div class="row">
-      <div class="large-8 columns"><label for="keywords">{$LANG.search.keywords}</label><input type="text" class="required" name="search[keywords]" placeholder="{$LANG.search.keywords}" id="keywords" /></div>
+      <div class="large-8 columns"><label for="keywords">{$LANG.search.keywords}</label>
+      <input type="text" name="search[keywords]" placeholder="{$LANG.search.keywords}" id="keywords" required />
+      </div>
    </div>
    <div class="row">
       <div class="large-8 columns">
@@ -56,7 +58,8 @@
    <div class="row">
       <div class="large-8 columns"><input type="checkbox" name="search[featured]" id="featured_only" value="1" /><label for="featured_only">{$LANG.search.featured_only}</label></div>
    </div>
-   <div class="clearfix">
-      <input type="submit" class="button" value="{$LANG.form.submit}" /> <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
-   </div>
+   <div class="row">
+      <div class="large-8 columnsclearfix">
+      <input type="submit" class="button" value="{$LANG.common.search}" /> <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
+   </div></div>
 </form>

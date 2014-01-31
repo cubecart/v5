@@ -28,7 +28,105 @@ jQuery(document).ready(function() {
 		}
 	});
 	
+	$.validator.setDefaults({
+	  errorElement: "small"
+	});
+	$.validator.addMethod("phone", function(phone, element) {
+	phone = phone.replace(/\s+/g, "");
+	return this.optional(element) || phone.match(/^[0-9-+]+$/);
+}, $('#validate_phone').text());
 	
+	$("#search_form").validate({
+	   
+	   rules: {
+		    'search[keywords]': {
+		      required: true
+		    }
+		  },
+		  messages: {
+		    'search[keywords]': {
+		      required: "Please enter a search term"
+		    }
+		  }
+	 });
+	 
+	 $("#advanced_search_form").validate({
+	   rules: {
+		    'search[keywords]': {
+		      required: true
+		    }
+		  },
+		  messages: {
+		    'search[keywords]': {
+		      required: "Please enter a search term"
+		    }
+		  }
+	 });
+	 
+	 $("#login_form").validate({
+	   rules: {
+		    username: {
+		      required: true,
+		      email: true
+		    }
+		  },
+		  messages: {
+		    username: {
+		      required: "Please enter an email address to login",
+		      email: "Your login email address must be in the format of name@example.com"
+		    }
+		  }
+	 });
+	 
+	 $("#registration_form").validate({
+	   rules: {
+		    first_name: {
+		      required: true
+		    },
+		    last_name: {
+		      required: true
+		    },
+		    email: {
+		    	required: true,
+		    	email: true
+			},
+			phone: {
+				required: true,
+				phone: true,
+			},
+			password: "required",
+			  passconf: {
+				  equalTo: "#password"
+			},
+			
+  
+		  },
+		  messages: {
+		    first_name: {
+		      required: $('#validate_firstname').text()
+		    },
+		    last_name: {
+		      required: $('#validate_lastname').text()
+		    },
+		    email: {
+		    	required: $('#validate_email').text(),
+		    	email: $('#validate_email').text()
+		    },
+		    phone: {
+		    	required: $('#validate_phone').text(),
+		    	phone: $('#validate_phone').text()
+		    },
+		    password: {
+		    	required: $('#validate_password').text()
+		    },
+		    passconf: {
+		    	required: $('#validate_password_mismatch').text(),
+		    	equalTo: $('#validate_password_mismatch').text()
+		    }
+		  }
+	 });
+	 
+	 
 	
 });
 

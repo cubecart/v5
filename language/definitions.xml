@@ -24,7 +24,9 @@
     <string name="error_login" introduced="5.0.0"><![CDATA[Invalid Username and/or Password]]></string>
     <string name="error_login_block" introduced="5.0.0"><![CDATA[User login blocked. Please try again later]]></string>
     <string name="error_name_required" introduced="5.0.0"><![CDATA[We need to know your name.]]></string>
-    <string name="error_password_empty" introduced="5.0.0"><![CDATA[Your password can not be empty.]]></string>
+    <string name="error_firstname_required" introduced="6.0.0"><![CDATA[Please enter your first name.]]></string>
+    <string name="error_lastname_required" introduced="6.0.0"><![CDATA[Please enter your last name.]]></string>
+    <string name="error_password_empty" introduced="5.0.0"><![CDATA[Please enter a password.]]></string>
     <string name="error_password_mismatch" introduced="5.0.0"><![CDATA[Your passwords do not match.]]></string>
     <string name="error_password_recovery" introduced="5.0.0"><![CDATA[Email not sent. Please check your email address, and try again.]]></string>
     <string name="error_password_recover" introduced="5.0.0"><![CDATA[Failed to update your password. Please check the email address and validation key are correct and verify the new password matches.]]></string>
