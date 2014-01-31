@@ -18,7 +18,7 @@
   </info>
   <images>
 	<!-- Common -->
-	<image reference="thumbnail" maximum="100" quality="80" default="noimage_thumbnail.png" />
+	<image reference="thumbnail" maximum="150" quality="80" default="noimage_thumbnail.png" />
 	<!-- Category Page -->
 	<image reference="category" maximum="800" quality="80" default="" /><!-- Doesnt need a default -->
 	<image reference="subcategory" maximum="70" quality="80" default="noimage_subcategory.png" />
