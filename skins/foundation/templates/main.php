@@ -7,6 +7,7 @@
       <link rel="canonical" href="{$VAL_SELF}" />
       <link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon" />
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css" />
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/styles.css" />
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.rating.css" media="screen" />
