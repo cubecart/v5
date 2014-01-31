@@ -98,6 +98,7 @@
       {/if}
    </div>
 </div>
+<hr />
 <dl class="tabs" data-tab>
    <dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>
    <dd><a href="#product_spec">{$LANG.common.specification}</a></dd>

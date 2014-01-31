@@ -22,12 +22,23 @@
             {/for} 
          </div>
          <!--<a href="{$product.url}" title="{$product.name}" class="button tiny secondary left">{$LANG.common.info}</a>-->
-         <input type="hidden" name="add" value="{$product.product_id}" />
+         
          {if $product.ctrl_stock && !$CATALOGUE_MODE}
-         <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny expand marg-top" />
+         <div class="marg-top">
+         <div class="row collapse marg-top">
+         <div class="large-3 columns">
+         <input type="text" name="quantity" value="1" class="quantity required text-center" />
+         
+         </div>
+         <div class="large-9 columns ">
+         <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix" />
+         </div>
+         </div>
+         </div>
          {elseif !$CATALOGUE_MODE}
          <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" class="button tiny disabled expand marg-top" disabled="disabled" />
          {/if}
+         <input type="hidden" name="add" value="{$product.product_id}" />
       </form>
    </li>
    {/foreach}

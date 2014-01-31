@@ -18,23 +18,23 @@
   </info>
   <images>
 	<!-- Common -->
-	<image reference="thumbnail" maximum="138" quality="75" default="noimage_thumbnail.png" />
+	<image reference="thumbnail" maximum="100" quality="80" default="noimage_thumbnail.png" />
 	<!-- Category Page -->
-	<image reference="category" maximum="800" quality="100" default="" /><!-- Doesnt need a default -->
-	<image reference="subcategory" maximum="70" quality="70" default="noimage_subcategory.png" />
+	<image reference="category" maximum="800" quality="80" default="" /><!-- Doesnt need a default -->
+	<image reference="subcategory" maximum="70" quality="80" default="noimage_subcategory.png" />
 	
 	<!-- Product Page -->
-	<image reference="gallery" maximum="50" quality="60" default="noimage_gallery.png" />
-	<image reference="normal" maximum="300" quality="90" default="noimage_normal.png" />
-	<image reference="enlarge" maximum="600" quality="90" default="" /><!-- Doesnt need a default -->
+	<image reference="gallery" maximum="50" quality="80" default="noimage_gallery.png" />
+	<image reference="normal" maximum="300" quality="80" default="noimage_normal.png" />
+	<image reference="enlarge" maximum="600" quality="80" default="" /><!-- Doesnt need a default -->
 	
 	<!-- Possible names (sizes): thumbnail (138), product(300-ish), enlarged (big), zoom (bigger, poss. source?) -->
 	
 	<!-- These are the ones currently in use -->
-	<image reference="tiny" maximum="30" quality="75" default="noimage_thumbnail_tiny.png" />
-	<image reference="small" maximum="138" quality="75" default="noimage_thumbnail.png" />
-	<image reference="medium" maximum="500" quality="90" default="noimage_normal.png" />
-	<image reference="large" maximum="600" quality="90" default="" /><!-- Doesnt need a default -->
+	<image reference="tiny" maximum="30" quality="80" default="noimage_thumbnail_tiny.png" />
+	<image reference="small" maximum="200" quality="80" default="noimage_thumbnail.png" />
+	<image reference="medium" maximum="500" quality="80" default="noimage_normal.png" />
+	<image reference="large" maximum="600" quality="80" default="" /><!-- Doesnt need a default -->
   </images>
   
 </skin>
