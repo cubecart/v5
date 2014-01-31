@@ -1,4 +1,4 @@
-<form id="language_select" action="{$VAL_SELF}" class="autosubmit" method="post">
+<form action="{$VAL_SELF}" class="autosubmit" method="post">
   <h2 class="hide">{$LANG.common.language}</h2>
   <select name="set_language">
    <option value="" disabled>{$LANG.common.change_language}</option>

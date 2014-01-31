@@ -1,4 +1,4 @@
-<form id="currency_select" action="{$VAL_SELF}" class="autosubmit" method="post">
+<form action="{$VAL_SELF}" class="autosubmit" method="post">
   <h2 class="hide">{$LANG.common.currency}</h2>
   <select name="set_currency">
   <option value="" disabled>{$LANG.common.change_currency}</option>

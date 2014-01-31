@@ -14,3 +14,4 @@
 	</div>
 	<input type="hidden" name="_a" value="category" />
 </form>
+<div class="hide" id="validate_search">{$LANG.search.enter_search_term}</div>

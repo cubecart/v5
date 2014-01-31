@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
 		  },
 		  messages: {
 		    'search[keywords]': {
-		      required: "Please enter a search term"
+		      required: $('#validate_search').text()
 		    }
 		  }
 	 });
@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
 		  },
 		  messages: {
 		    'search[keywords]': {
-		      required: "Please enter a search term"
+		      required: $('#validate_search').text()
 		    }
 		  }
 	 });

@@ -262,6 +262,9 @@ class Catalogue {
 						}
 						$review['date']		= formatTime($review['time']);
 						$review['gravatar']	= md5(strtolower(trim($review['email'])));
+						$review['gravatar_src']	= 'http://www.gravatar.com/avatar/'.$review['gravatar'].'?s=90&d=404&r=g';
+						$headers = get_headers($review['gravatar_src']);
+						$review['gravatar_exists'] = strstr($headers[0], '200') ? true : false;
 						$vars[]	= $review;
 					}
 					$GLOBALS['smarty']->assign('REVIEWS', $vars);

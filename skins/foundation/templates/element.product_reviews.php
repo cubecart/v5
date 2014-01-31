@@ -19,7 +19,7 @@
             {/for}
          </div>
       </div>
-      <blockquote><a href="http://gravatar.com/emails/"><img class="th marg-right" src="http://www.gravatar.com/avatar/{$review.gravatar}?s=90" align="left" /></a>{$review.review}<cite>{$review.name} ({$review.date})</cite></blockquote>
+      <blockquote>{if $review.gravatar_exists}<a href="http://gravatar.com/emails/"><img class="th marg-right" src="{$review.gravatar_src}" align="left" /></a>{/if}{$review.review}<cite>{$review.name} ({$review.date})</cite></blockquote>
    </div>
    {/foreach}
    {if isset($PAGINATION)}{$PAGINATION}{/if}

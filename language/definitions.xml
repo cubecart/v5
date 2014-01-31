@@ -1488,6 +1488,7 @@
     <string name="input_default" introduced="5.0.0"><![CDATA[Search our store]]></string>
     <string name="keywords" introduced="5.0.0"><![CDATA[Keywords]]></string>
     <string name="price_range" introduced="5.0.0"><![CDATA[Price Range]]></string>
+    <string name="enter_search_term" introduced="6.0.0"><![CDATA[Please enter a search keyword]]></string>
     <string name="title_by_date" introduced="5.0.0"><![CDATA[Search by Date]]></string>
     <string name="title_filter" introduced="5.0.0"><![CDATA[Report Filter]]></string>
     <string name="title_search_customers" introduced="5.0.0"><![CDATA[Search Customers]]></string>
