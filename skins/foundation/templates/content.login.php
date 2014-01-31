@@ -22,7 +22,9 @@
 			<div class="large-2 columns left text-right"><input type="checkbox" name="remember" id="login-remember" value="1" class="" {if $REMEMBER}checked="checked" {/if} /></div>
 		</div>
 		<div class="row">
-			<div class="large-8 columns text-right"><input name="submit" type="submit" value="{$LANG.account.log_in}" class="button" /></div>
+			<div class="large-8 columns clearfix">
+				<input name="submit" type="submit" value="{$LANG.account.log_in}" class="button" />
+			</div>
 		</div>
 	<input type="hidden" name="redir" value="{$REDIRECT_TO}" />
 </form>

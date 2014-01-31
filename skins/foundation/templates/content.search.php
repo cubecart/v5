@@ -59,7 +59,7 @@
       <div class="large-8 columns"><input type="checkbox" name="search[featured]" id="featured_only" value="1" /><label for="featured_only">{$LANG.search.featured_only}</label></div>
    </div>
    <div class="row">
-      <div class="large-8 columnsclearfix">
+      <div class="large-8 columns clearfix">
       <input type="submit" class="button" value="{$LANG.common.search}" /> <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
    </div></div>
 </form>

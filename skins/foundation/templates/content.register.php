@@ -1,4 +1,4 @@
-<h2>{$LANG.account.create_account}</h2>
+<h2>{$LANG.account.register}</h2>
 <p>{$LANG.account.register_text}</p>
 <form action="{$VAL_SELF}" id="registration_form" method="post" name="registration">
    {foreach from=$LOGIN_HTML item=html}
@@ -40,7 +40,10 @@
       </div>
    </div>
    <div class="row">
-      <div class="large-8 columns text-right"><input type="submit" name="register" value="{$LANG.account.register}" class="button" /></div>
+      <div class="large-8 columns clearfix">
+      	  <input type="submit" name="register" value="{$LANG.account.register}" class="button" />
+	      <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
+      </div>
    </div>
 </form>
 <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
