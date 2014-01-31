@@ -63,6 +63,7 @@
     <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list]]></string>
     <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register:]]></string>
     <string name="register_terms_agree" introduced="5.0.0"><![CDATA[I agree to the Terms &amp; Conditions]]></string>
+    <string name="register_terms_agree_link" introduced="6.0.0"><![CDATA[I agree to the <a href="%s">Terms &amp; Conditions</a>]]></string>
     <string name="remember_me" introduced="5.0.0"><![CDATA[Remember Me?]]></string>
     <string name="share" introduced="5.0.0"><![CDATA[Share]]></string>
     <string name="title_acp" introduced="5.0.0"><![CDATA[Admin Control Panel]]></string>
@@ -493,6 +494,10 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="min" introduced="6.0.0"><![CDATA[Min]]></string>
+  	<string name="max" introduced="6.0.0"><![CDATA[Max]]></string>
+  	<string name="from" introduced="6.0.0"><![CDATA[From]]></string>
+  	<string name="to" introduced="6.0.0"><![CDATA[To]]></string>
     <string name="add" introduced="5.0.0"><![CDATA[Add]]></string>
     <string name="add_new" introduced="5.0.0"><![CDATA[Add new]]></string>
     <string name="advanced" introduced="5.0.0"><![CDATA[Advanced]]></string>
