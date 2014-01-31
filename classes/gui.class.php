@@ -872,7 +872,7 @@ class GUI {
 			case 1:		// sale-based
 				$limit = (is_numeric($GLOBALS['config']->get('config', 'catalogue_popular_products_count'))) ? $GLOBALS['config']->get('config', 'catalogue_popular_products_count') : 10;
 				$whereStr   = $GLOBALS['catalogue']->outOfStockWhere(false,'i',true);
-				$query		= "SELECT `oi`.`product_id` AS product_id, `i`.`name`, SUM(`oi`.`quantity`) as `quantity` FROM `".$GLOBALS['config']->get('config','dbprefix')."CubeCart_order_inventory` as `oi` JOIN `".$GLOBALS['config']->get('config','dbprefix')."CubeCart_inventory` as `i` WHERE `oi`.`product_id` = `i`.`product_id` AND `i`.`status` = 1 $whereStr GROUP BY `product_id` ORDER BY `quantity` DESC LIMIT ".$limit.";";
+				$query		= "SELECT `oi`.`product_id` AS product_id, `i`.`name`, `i`.`price`, `i`.`sale_price`, SUM(`oi`.`quantity`) as `quantity` FROM `".$GLOBALS['config']->get('config','dbprefix')."CubeCart_order_inventory` as `oi` JOIN `".$GLOBALS['config']->get('config','dbprefix')."CubeCart_inventory` as `i` WHERE `oi`.`product_id` = `i`.`product_id` AND `i`.`status` = 1 $whereStr GROUP BY `product_id` ORDER BY `quantity` DESC LIMIT ".$limit.";";
 				$products	= $GLOBALS['db']->query($query);
 			break;
 			default:	// view-based
@@ -893,8 +893,23 @@ class GUI {
 				if (!$category_status) {
 					continue;
 				}
+				
+				
+				
+				
 				$GLOBALS['language']->translateProduct($product);
 				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id']);
+				
+				
+				$product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($product['price'], $product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
+				
+				$GLOBALS['catalogue']->getProductPrice($product);
+				$sale = $GLOBALS['tax']->salePrice($product['price'], $product['sale_price']);
+				$product['price_unformatted'] = $product['price'];
+				$product['sale_price_unformatted'] = ($sale) ? $product['sale_price'] : null;
+				$product['price'] = $GLOBALS['tax']->priceFormat($product['price']);
+				$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
+				
 				$vars[] = $product;
 			}
 			foreach ($GLOBALS['hooks']->load('class.gui.display_popular_products') as $hook) include $hook;
@@ -1044,7 +1059,7 @@ class GUI {
 
 
 		// Get Retail Prices second
-		if (isset($sale_sql_standard_select) && ($standard_pricing = $GLOBALS['db']->query('SELECT `product_id`,`description`,`name`, '.$sale_sql_standard_select.' AS `saving` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_inventory` WHERE '.$sale_sql_standard_where.' AND `status` = \'1\' '.$not_on_sale.' LIMIT '.$GLOBALS['config']->get('config', 'catalogue_sale_items'))) !== false && is_array($standard_pricing)) {
+		if (isset($sale_sql_standard_select) && ($standard_pricing = $GLOBALS['db']->query('SELECT `price`, `sale_price`, `product_id`,`description`,`name`, '.$sale_sql_standard_select.' AS `saving` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_inventory` WHERE '.$sale_sql_standard_where.' AND `status` = \'1\' '.$not_on_sale.' LIMIT '.$GLOBALS['config']->get('config', 'catalogue_sale_items'))) !== false && is_array($standard_pricing)) {
 			foreach($standard_pricing as $product) {
 				if(isset($group_products[$product['product_id']])) {
 					$unsorted_products[$product['product_id']] = $group_products[$product['product_id']];
@@ -1065,6 +1080,11 @@ class GUI {
 		}
 		unset($group_pricing,$standard_pricing,$group_products,$unsorted_products,$product,$not_on_sale);
 
+
+
+
+					
+
 		$vars = array();
 		if ($sorted_products) {
 			foreach ($sorted_products as $product) {
@@ -1073,6 +1093,14 @@ class GUI {
 				$product['url']		= $GLOBALS['seo']->buildURL('prod', $product['product_id']);
 				$product['saving_unformatted'] 	= $product['saving'];
 				$product['saving'] 	= $GLOBALS['tax']->priceFormat($product['saving']);
+				
+				$GLOBALS['catalogue']->getProductPrice($product);
+				$sale = $GLOBALS['tax']->salePrice($product['price'], $product['sale_price']);
+				$product['price_unformatted'] = $product['price'];
+				$product['sale_price_unformatted'] = ($sale) ? $product['sale_price'] : null;
+				$product['price'] = $GLOBALS['tax']->priceFormat($product['price']);
+				$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
+				
 				$vars[]	= $product;
 			}
 		}

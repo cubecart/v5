@@ -4,8 +4,8 @@
   <ul>
   {foreach from=$PRODUCTS item=product}
 	<li>
-	  <a href="{$product.url}" title="{$product.name}">{$product.name}</a><br />
-	  {if {$product.saving}}<span class="saving">{$LANG.catalogue.saving} {$product.saving}</span>{/if}
+	  <a href="{$product.url}" title="{$product.name} ({if {$product.saving}}{$LANG.catalogue.saving} {$product.saving}{/if})">{$product.name}</a><br />
+	  <span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
 	</li>
   {/foreach}
   </ul>
