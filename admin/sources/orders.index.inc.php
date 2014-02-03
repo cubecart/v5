@@ -4,6 +4,10 @@ Admin::getInstance()->permissions('orders', CC_PERM_READ, true);
 $order = Order::getInstance();
 global $lang;
 
+if(isset($_POST['search'])) {
+	httpredir('?_g=orders&'.http_build_query($_POST));
+}
+
 if (isset($_GET['reset_id']) && $_GET['reset_id']>0 && Admin::getInstance()->permissions('orders', CC_PERM_EDIT)) {
 	$GLOBALS['db']->update('CubeCart_downloads', array('downloads' => 0, 'expire' => (time() + $GLOBALS['config']->get('config', 'download_expire'))), array('order_inv_id' => (int)$_GET['reset_id']));
 	$GLOBALS['main']->setACPNotify($lang['orders']['notify_order_update']);
@@ -539,10 +543,11 @@ if (isset($_GET['action'])) {
 			$GLOBALS['main']->setACPNotify($lang['orders']['notify_orders_status']);
 		}
 		httpredir(currentPage(array('print_hash','multi-action'), $add_array));
-	} else if (isset($_POST['search'])) {
+	} else if (isset($_GET['search'])) {
+				
 		// Search by date range
-		if (isset($_POST['search']['date']) && is_array($_POST['search']['date']) && (!empty($_POST['search']['date']['form']) || !empty($_POST['search']['date']['to']))) {
-			foreach ($_POST['search']['date'] as $key => $date) {
+		if (isset($_GET['search']['date']) && is_array($_GET['search']['date']) && (!empty($_GET['search']['date']['form']) || !empty($_GET['search']['date']['to']))) {
+			foreach ($_GET['search']['date'] as $key => $date) {
 				$dates[$key] = (!empty($date)) ? strtotime($date) : null;
 			}
 			if ((!empty($dates['from']) && !empty($dates['to'])) && $dates['from'] == $dates['to'])	{
@@ -560,16 +565,16 @@ if (isset($_GET['action'])) {
 			}
 		} else {
 			// Order ID
-			if (isset($_POST['search']['order_number']) && !empty($_POST['search']['order_number'])) {
-				$where['cart_order_id'] = '~'.$_POST['search']['order_number'];
+			if (isset($_GET['search']['order_number']) && !empty($_GET['search']['order_number'])) {
+				$where['cart_order_id'] = '~'.$_GET['search']['order_number'];
 			}
 			// Order Status
-			if (isset($_POST['search']['status']) && is_numeric($_POST['search']['status'])) {
-				$where['status'] = (int)$_POST['search']['status'];
+			if (isset($_GET['search']['status']) && is_numeric($_GET['search']['status'])) {
+				$where['status'] = (int)$_GET['search']['status'];
 			}
 			// Customer ID
-			if (isset($_POST['search']['search_customer_id']) && is_numeric($_POST['search']['search_customer_id'])) {
-				$where['customer_id'] = (int)$_POST['search']['search_customer_id'];
+			if (isset($_GET['search']['search_customer_id']) && is_numeric($_GET['search']['search_customer_id'])) {
+				$where['customer_id'] = (int)$_GET['search']['search_customer_id'];
 			}
 		}
 	} else {
@@ -580,7 +585,7 @@ if (isset($_GET['action'])) {
 	for ($i = 1;$i <= 6; ++$i) {
 		$smarty_data['order_status'][]	= array(
 			'id'		=> $i,
-			'selected'	=> (isset($_POST['search']['status']) && $i == $_POST['search']['status']) ? ' selected="selected"' : '',
+			'selected'	=> (isset($_GET['search']['status']) && $i == $_GET['search']['status']) ? ' selected="selected"' : '',
 			'string'	=> $lang['order_state']['name_'.$i],
 		);
 	}
@@ -611,10 +616,13 @@ if (isset($_GET['action'])) {
 	$orders		= $GLOBALS['db']->select(sprintf('`%1$sCubeCart_order_summary` LEFT JOIN `%1$sCubeCart_customer` ON %1$sCubeCart_order_summary.customer_id = %1$sCubeCart_customer.customer_id',$GLOBALS['config']->get('config', 'dbprefix')), sprintf('%1$sCubeCart_order_summary.*, %1$sCubeCart_customer.type, CONCAT(%1$sCubeCart_order_summary.last_name, %1$sCubeCart_order_summary.first_name) AS `customer`, %1$sCubeCart_order_summary.status',$GLOBALS['config']->get('config', 'dbprefix')), $where, $order_by, $per_page, $page);
 	
 	if ($orders) {
+		
+		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
+		
 		if (isset($_GET['customer_id'])) {
 			$GLOBALS['main']->setACPNotify(sprintf($lang['orders']['notify_orders_by'], $orders[0]['first_name'], $orders[0]['last_name']));
 		}
-		if (isset($_POST['search'])) {
+		if (isset($_GET['search'])) {
 			$GLOBALS['main']->setACPNotify($lang['orders']['notify_search_result']);
 		}
 
@@ -634,8 +642,8 @@ if (isset($_GET['action'])) {
 			$smarty_data['list_orders'][]	= $order;
 		}
 		$GLOBALS['smarty']->assign('ORDER_LIST',$smarty_data['list_orders']);
-		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
-	} else if (isset($_POST['search'])) {
+		
+	} else if (isset($_GET['search'])) {
 		# No orders found
 		$GLOBALS['main']->setACPWarning($lang['orders']['error_search_result']);
 	}
