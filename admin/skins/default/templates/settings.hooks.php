@@ -20,7 +20,7 @@
 	  {foreach from=$SNIPPETS item=snippet}
 	  <div>
 		<span class="actions"><a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="" /></a> <a href="?_g=settings&amp;node=hooks&amp;delete_snippet={$snippet.snippet_id}#snippets" class="delete" title="{$LANG.notification.confirm_continue}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="" /></a></span>
-		<span class="toggle"><input type="hidden" id="snippet_status_{$snippet.snippet_id}" name="snippet_status[{$snippet.snippet_id}]" value="{$snippet.enabled}" class="toggle" /> <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt="" /> <a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
+		<span class="toggle"><input type="hidden" id="snippet_status_{$snippet.snippet_id}" name="snippet_status[{$snippet.snippet_id}]" value="{$snippet.enabled}" class="toggle" /></span> <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt="" /> <a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
 	  </div>
 	  {foreachelse}
 	  <div>{$LANG.hooks.error_snippet_none}</div>
