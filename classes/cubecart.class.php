@@ -1523,7 +1523,7 @@ class Cubecart {
 				foreach ($related_orders as $key => $data) {
 					$related[] = "'".$data['cart_order_id']."'";
 				}
-				if (($related_products = $GLOBALS['db']->select('CubeCart_order_inventory', array('DISTINCT' => 'product_id'), array('cart_order_id' => $related, '!product_id' => $product_list), false, 3)) !== false) {
+				if (($related_products = $GLOBALS['db']->select('CubeCart_order_inventory', array('DISTINCT' => 'product_id'), array('cart_order_id' => $related, 'product_id' => $product_list), false, 3)) !== false) {
 					foreach ($related_products as $related) {
 						$related = $GLOBALS['catalogue']->getProductData($related['product_id']);
 						$related['img_src']	= $GLOBALS['gui']->getProductImage($related['product_id']);
