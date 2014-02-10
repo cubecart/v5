@@ -37,35 +37,32 @@ class Gateway {
 			
 			// The array keys below MUST be ascending alphabetically!! At the time of development ksort just would NOT work?!?	
 			$hidden = array(	
-				'accepturl' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
-				'amount' 		=> (string)($this->_basket['total']*100),
-				'cancelurl' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=gateway',
+				'ACCEPTURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
+				'AMOUNT' 		=> (string)($this->_basket['total']*100),
+				'CANCELURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=gateway',
 				'CN' 			=> (string)$this->_basket['billing_address']['first_name'].' '.$this->_basket['billing_address']['last_name'],
-				'currency' 		=> (string)'GBP',
-				'declineurl' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
+				'CURRENCY' 		=> (string)'GBP',
+				'DECLINEURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
 				'EMAIL' 		=> (string)$this->_basket['billing_address']['email'],
-				'exceptionurl' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',	
-				'language' 		=> (string)'en_US',
+				'EXCEPTIONURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',	
+				'LANGUAGE' 		=> (string)'en_US',
 				'LOGO'          => !empty($this->_module['logo_url']) && preg_match('/^https:\/\//i',$this->_module['logo_url']) ? (string)$this->_module['logo_url'] : '',
-				'orderID' 		=> (string)$this->_basket['cart_order_id'],
-				'owneraddress' 	=> (string)$this->_basket['delivery_address']['line1'].' '.(string)$this->_basket['delivery_address']['line2'],
-				'ownercty'	 	=> (string)$this->_basket['billing_address']['country_iso'],
-				'ownertelno' 	=> (string)$this->_basket['billing_address']['phone'],
-				'ownertown' 	=> (string)$this->_basket['billing_address']['town'],
-				'ownerZIP' 		=> (string)$this->_basket['billing_address']['postcode'],
+				'ORDERID' 		=> (string)$this->_basket['cart_order_id'],
+				'OWNERADDRESS' 	=> (string)$this->_basket['delivery_address']['line1'].' '.(string)$this->_basket['delivery_address']['line2'],
+				'OWNERCTY'	 	=> (string)$this->_basket['billing_address']['country_iso'],
+				'OWNERTELNO' 	=> (string)$this->_basket['billing_address']['phone'],
+				'OWNERTOWN' 	=> (string)$this->_basket['billing_address']['town'],
+				'OWNERZIP' 		=> (string)$this->_basket['billing_address']['postcode'],
 				'PSPID' 		=> (string)$this->_module['clientid'],	
 			);
-/*
-			if(!empty($this->_module['logo_url']) && preg_match('/^https:\/\//i',$this->_module['logo_url'])) {
-				$hidden['LOGO'] = (string)$this->_module['logo_url'];
-			}
-*/
+
 			$sha_string = '';
+			ksort($hidden);
 			foreach($hidden as $key => $value) {
-				$sha_string .= strtoupper($key).'='.$value.$this->_module['passphrase'];
+				$sha_string .= $key.'='.$value.$this->_module['passphrase'];
 			}
 		
-			$hidden['SHASign'] = (string)strtoupper(sha1($sha_string));
+			$hidden['SHASIGN'] = strtoupper(sha1($sha_string));
 			
 		} else {
 		
