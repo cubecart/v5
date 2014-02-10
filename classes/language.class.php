@@ -103,7 +103,7 @@ class Language {
 		} else {
 			$this->_language = 'en-US';
 		}
-		$GLOBALS['smarty']->assign("LANGUAGE", $this->_language);
+		$GLOBALS['smarty']->assign("CURRENT_LANGUAGE", $this->_language);
 		$this->loadLang();
 	}
 
