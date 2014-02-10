@@ -868,6 +868,9 @@ class GUI {
 	 * Display popular products box
 	 */
 	private function _displayPopularProducts() {
+	
+		if((int)$GLOBALS['config']->get('config', 'catalogue_popular_products_count') < 1) return false;
+	
 		switch ((int)$GLOBALS['config']->get('config', 'catalogue_popular_products_source')) {
 			case 1:		// sale-based
 				$limit = (is_numeric($GLOBALS['config']->get('config', 'catalogue_popular_products_count'))) ? $GLOBALS['config']->get('config', 'catalogue_popular_products_count') : 10;
