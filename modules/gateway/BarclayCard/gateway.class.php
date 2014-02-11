@@ -38,15 +38,15 @@ class Gateway {
 			// The array keys below MUST be ascending alphabetically!! At the time of development ksort just would NOT work?!?	
 			$hidden = array(	
 				'ACCEPTURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
-				'AMOUNT' 		=> (string)($this->_basket['total']*100),
 				'CANCELURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=gateway',
+				'EXCEPTIONURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
+				'DECLINEURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
+				'AMOUNT' 		=> (string)($this->_basket['total']*100),
 				'CN' 			=> (string)$this->_basket['billing_address']['first_name'].' '.$this->_basket['billing_address']['last_name'],
 				'CURRENCY' 		=> (string)'GBP',
-				'DECLINEURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',
+				'DECLINEURL' 	=> (string)urlencode($GLOBALS['storeURL'].'/index.php?_a=complete'),
 				'EMAIL' 		=> (string)$this->_basket['billing_address']['email'],
-				'EXCEPTIONURL' 	=> (string)$GLOBALS['storeURL'].'/index.php?_a=complete',	
 				'LANGUAGE' 		=> (string)'en_US',
-				'LOGO'          => !empty($this->_module['logo_url']) && preg_match('/^https:\/\//i',$this->_module['logo_url']) ? (string)$this->_module['logo_url'] : '',
 				'ORDERID' 		=> (string)$this->_basket['cart_order_id'],
 				'OWNERADDRESS' 	=> (string)$this->_basket['delivery_address']['line1'].' '.(string)$this->_basket['delivery_address']['line2'],
 				'OWNERCTY'	 	=> (string)$this->_basket['billing_address']['country_iso'],
@@ -55,6 +55,10 @@ class Gateway {
 				'OWNERZIP' 		=> (string)$this->_basket['billing_address']['postcode'],
 				'PSPID' 		=> (string)$this->_module['clientid'],	
 			);
+			
+			if(!empty($this->_module['logo_url']) && preg_match('/^https:\/\//i',$this->_module['logo_url'])) {
+				$hidden['LOGO'] = (string)urlencode($this->_module['logo_url']);
+			}
 
 			$sha_string = '';
 			ksort($hidden);
