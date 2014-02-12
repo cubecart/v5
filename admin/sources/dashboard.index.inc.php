@@ -216,6 +216,11 @@ if ($result_limit!==0 && ($stock_c = $GLOBALS['db']->select($tables, $fields, $w
 
 ## Latest News (from RSS)
 if ($GLOBALS['config']->has('config', 'default_rss_feed') && !$GLOBALS['config']->isEmpty('config', 'default_rss_feed') && filter_var($GLOBALS['config']->get('config', 'default_rss_feed'), FILTER_VALIDATE_URL)) {
+	
+	$default_rss_feed = $GLOBALS['config']->get('config', 'default_rss_feed');
+	
+	$url = ($default_rss_feed == "http://forums.cubecart.com/index.php?act=rssout&id=1") ? 'http://forums.cubecart.com/rss/forums/1-cubecart-news-announcements/' : $default_rss_feed;
+	
 	$url = parse_url($GLOBALS['config']->get('config', 'default_rss_feed'));
 	$path = (isset($url['query'])) ? $url['path'].'?'.$url['query'] : $url['path'];
 	$request = new Request($url['host'], $path);
