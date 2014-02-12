@@ -7,9 +7,9 @@
    <div class="large-12 columns">{$DOCUMENT.doc_content}</div>
 </div>
 {if $SHARE}
+<hr>
 <div class="row">
    <div class="large-12 columns">
-      <h2>{$LANG.account.share}</h2>
       {foreach from=$SHARE item=html}
       {$html}
       {/foreach}

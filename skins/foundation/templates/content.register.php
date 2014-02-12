@@ -49,9 +49,9 @@
 <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
 <div class="hide" id="validate_firstname">{$LANG.account.error_firstname_required}</div>
 <div class="hide" id="validate_lastname">{$LANG.account.error_lastname_required}</div>
-
-<div class="hide" id="validate_error_terms_agree">{$LANG.account.error_terms_agree}</div>
-<div class="hide" id="validate_error_password_mismatch">{$LANG.account.error_password_mismatch}</div>
+<div class="hide" id="validate_terms_agree">{$LANG.account.error_terms_agree}</div>
 <div class="hide" id="validate_password">{$LANG.account.error_password_empty}</div>
+<div class="hide" id="validate_password_length">{$LANG.account.error_password_length}</div>
 <div class="hide" id="validate_password_mismatch">{$LANG.account.error_password_mismatch}</div>
 <div class="hide" id="validate_phone">{$LANG.account.error_valid_phone}</div>
+<div class="hide" id="validate_mobile">{$LANG.account.error_valid_mobile_phone}</div>

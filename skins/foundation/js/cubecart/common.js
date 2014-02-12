@@ -29,15 +29,15 @@ jQuery(document).ready(function() {
 	});
 	
 	$.validator.setDefaults({
-	  errorElement: "small"
+		errorElement: 'small'
 	});
 	$.validator.addMethod("phone", function(phone, element) {
-	phone = phone.replace(/\s+/g, "");
-	return this.optional(element) || phone.match(/^[0-9-+]+$/);
-}, $('#validate_phone').text());
+		phone = phone.replace(/\s+/g, "");
+		return this.optional(element) || phone.match(/^[0-9-+()]+$/);
+	}, $('#validate_phone').text());
+	
 	
 	$("#search_form").validate({
-	   
 	   rules: {
 		    'search[keywords]': {
 		      required: true
@@ -79,6 +79,16 @@ jQuery(document).ready(function() {
 	 });
 	 
 	 $("#registration_form").validate({
+	   
+	   errorPlacement: function(error, element) {
+	    if (element.attr("name") == "terms_agree") {
+	      element.removeClass("error");
+	      alert(error.text());
+	    } else {
+	      error.insertAfter(element);
+	    }
+	  },
+	   
 	   rules: {
 		    first_name: {
 		      required: true
@@ -92,15 +102,23 @@ jQuery(document).ready(function() {
 			},
 			phone: {
 				required: true,
-				phone: true,
+				phone: true
+			},
+			mobile: {
+				required: false,
+				phone: true
 			},
 			password: "required",
 			  passconf: {
 				  equalTo: "#password"
 			},
-			
-  
-		  },
+			password: {
+				minlength: 6
+			},
+			terms_agree: {
+		      required: true
+		    },
+		},
 		  messages: {
 		    first_name: {
 		      required: $('#validate_firstname').text()
@@ -116,17 +134,24 @@ jQuery(document).ready(function() {
 		    	required: $('#validate_phone').text(),
 		    	phone: $('#validate_phone').text()
 		    },
+		    mobile: {
+		    	phone: $('#validate_mobile').text()
+		    },
 		    password: {
-		    	required: $('#validate_password').text()
+		    	required: $('#validate_password').text(),
+		    	minlength: $('#validate_password_length').text()
 		    },
 		    passconf: {
 		    	required: $('#validate_password_mismatch').text(),
 		    	equalTo: $('#validate_password_mismatch').text()
-		    }
+		    },
+		    terms_agree: {
+		    	required: $('#validate_terms_agree').text()
+		    },
 		  }
 	 });
 	 
-	 
+	 $('input:reset').click(function() { $(this).parents('form:first').validate().resetForm(); });
 	
 });
 

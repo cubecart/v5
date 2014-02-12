@@ -33,7 +33,7 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		} elseif(!empty($phone_no)) {
 			// use it :)
 		} else {
-			$GLOBALS['gui']->setError('Please enter a valid phone number.');
+			$GLOBALS['gui']->setError($lang['account']['error_valid_phone']);
 			$phone_no = '';
 		}
 		

@@ -18,8 +18,7 @@
 			<div class="large-12 columns"><p><a href="{$STORE_URL}/index.php?_a=recover">{$LANG.account.forgotten_password}</a></p></div>
 		</div>
 		<div class="row">
-			<div class="large-6 columns"><label for="login-remember">{$LANG.account.remember_me}</label></div>
-			<div class="large-2 columns left text-right"><input type="checkbox" name="remember" id="login-remember" value="1" class="" {if $REMEMBER}checked="checked" {/if} /></div>
+			<div class="large-8 columns"><input type="checkbox" name="remember" id="login-remember" value="1" class="" {if $REMEMBER}checked="checked" {/if} /><label for="login-remember">{$LANG.account.remember_me}</label></div>
 		</div>
 		<div class="row">
 			<div class="large-8 columns clearfix">
