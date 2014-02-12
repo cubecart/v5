@@ -1,8 +1,9 @@
 {if isset($PRODUCT) && $PRODUCT}
+<div itemscope itemtype="http://schema.org/Product">
 <form action="{$VAL_SELF}" method="post" class="addForm">
 <div class="row">
    <div class="large-12 columns">
-      <h1>{$PRODUCT.name}</h1>
+      <h1 itemprop="name">{$PRODUCT.name}</h1>
    </div>
 </div>
 <div class="row">
@@ -55,7 +56,10 @@
       {/foreach}
       {/if}
       {if $PRODUCT.review_score && $CTRL_REVIEW}
-      <p>
+      <p itemprop="aggregateRating"
+    itemscope itemtype="http://schema.org/AggregateRating">
+         <meta itemprop="ratingValue" content="{$REVIEW_AVERAGE}">
+         <meta itemprop="reviewCount" content="{$REVIEW_COUNT}">
          {for $i = 1; $i <= 5; $i++}
          {if $PRODUCT.review_score >= $i}
          <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="" />
@@ -67,6 +71,7 @@
          {/for}
       <div>{$LANG_REVIEW_INFO}</div>
       </p>
+          
       {/if}
       {if ($CTRL_ALLOW_PURCHASE) && (!$CATALOGUE_MODE)}
       <h3>
@@ -109,7 +114,7 @@
 </dl>
 <div class="tabs-content">
    <div class="content active" id="product_info">
-      <p>{$PRODUCT.description}</p>
+      <p itemprop="description">{$PRODUCT.description}</p>
    </div>
    <div class="content" id="product_spec">
       <table>
@@ -182,6 +187,8 @@
    {/foreach}
    <h3>{$LANG.catalogue.trackback_url}</h3>
    <p>{$TRACKBACK_URL}</p>
+</div>
+
 </div>
 {/if}
 {else}

@@ -4,12 +4,13 @@
    {if $REVIEWS}
    <p class="pagination_top"><span class="pagination">{if isset($PAGINATION)}{$PAGINATION}{/if}</span>{$LANG.catalogue.average_rating}: <strong>{$REVIEW_AVERAGE}</strong></p>
    {foreach from=$REVIEWS item=review}
-   <div class="panel">
+   <div class="panel" itemprop="review" itemscope itemtype="http://schema.org/Review">
+      <meta itemprop="datePublished" content="{$review.date_schema}">
       <div class="row">
          <div class="large-9 columns">
             <h3>{$review.title}</h3>
          </div>
-         <div class="large-3 columns text-right">
+         <div class="large-3 columns text-right" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
             {for $i = 1; $i <= 5; $i++}
             {if $i <= $review.rating}
             <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="{$i}" />
@@ -17,9 +18,12 @@
             <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="{$i}" />
             {/if}
             {/for}
+            <meta itemprop="worstRating" content="0">
+			<meta itemprop="ratingValue" content="{$review.rating}">
+			<meta itemprop="bestRating" content="5">
          </div>
       </div>
-      <blockquote>{if $review.gravatar_exists}<a href="http://gravatar.com/emails/"><img class="th marg-right" src="{$review.gravatar_src}&s=90" align="left" /></a>{/if}{$review.review}<cite>{$review.name} ({$review.date})</cite></blockquote>
+      <blockquote>{if $review.gravatar_exists}<a href="http://gravatar.com/emails/"><img class="th marg-right" src="{$review.gravatar_src}&s=90" align="left" /></a>{/if}<span itemprop="description">{$review.review}</span><cite><span itemprop="author">{$review.name}</span> ({$review.date})</cite></blockquote>
    </div>
    {/foreach}
    {if isset($PAGINATION)}{$PAGINATION}{/if}
