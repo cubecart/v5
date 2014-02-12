@@ -176,6 +176,9 @@ $GLOBALS['smarty']->assign('VAL_HTACCESS_CONTENTS', $htaccess);
 
 ## Get Front End skins
 if (($skins = $GLOBALS['gui']->listSkins()) !== false) {
+	
+	$smarty_data['skins'] = $smarty_data['skins_mobile'] = $other_logo_array = array();
+	
 	foreach ($skins as $folder => $skin) {
 		if($skin['info']['mobile']) {
 			$skin['info']['selected'] = ($skin['info']['name'] == $GLOBALS['config']->get('config', 'skin_folder_mobile')) ? ' selected="selected"' : '';
