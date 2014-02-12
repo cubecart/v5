@@ -324,7 +324,7 @@ class Gateway {
 
         switch ($this -> module['mode']) {
             case 'api' :
-                require __DIR__ . '/iridium/HandleTransactionResults.php';
+                require __DIR__ . '/Iridium/HandleTransactionResults.php';
                 $return = HandleTransactionResults($Iridium, __FUNCTION__, $order, $order_summary, $this);
                 break;
             case 'tr' :
