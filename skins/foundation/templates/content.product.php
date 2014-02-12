@@ -105,17 +105,19 @@
 </div>
 <hr />
 <dl class="tabs" data-tab>
-   <dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>
+   {if !empty($PRODUCT.description)}<dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>{/if}
    <dd><a href="#product_spec">{$LANG.common.specification}</a></dd>
    {if isset($PRODUCT.discounts)}
    <dd><a href="#quantity_discounts">{$LANG.catalogue.quantity_discounts}</a></dd>
    {/if}
 </dl>
 <div class="tabs-content">
-   <div class="content active" id="product_info">
-      <p itemprop="description">{$PRODUCT.description}</p>
+   {if !empty($PRODUCT.description)}
+   <div class="content active" id="product_info" itemprop="description">
+      {$PRODUCT.description}
    </div>
-   <div class="content" id="product_spec">
+   {/if}
+   <div class="content{if empty($PRODUCT.description)} active{/if}" id="product_spec">
       <table>
          <tbody>
             <tr>
