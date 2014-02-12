@@ -77,7 +77,7 @@
 		</div>
 		 {if $TERMS_CONDITIONS}
 		<div>
-			<label for="reg_terms">&nbsp;</label><span><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$terms_conditions_checked}/><a href="{$TERMS_CONDITIONS}" target="_blank">{$LANG.account.register_terms_agree}</a></span>
+			<label for="reg_terms">&nbsp;</label><span><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED}/><a href="{$TERMS_CONDITIONS}" target="_blank">{$LANG.account.register_terms_agree}</a></span>
 		</div>
 		 {/if} {if $ALLOW_DELIVERY_ADDRESS}
 		<div>
