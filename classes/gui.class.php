@@ -119,7 +119,6 @@ class GUI {
 			//Setup skin and style
 			$this->_setSkin();
 			$this->_setStyle();
-			$this->_setLogo();
 
 			//Setup current skin data
 			$this->_skin_data = $this->_skins[$this->_skin];
@@ -127,6 +126,10 @@ class GUI {
 			//Set smarty to the skin
 			$GLOBALS['smarty']->template_dir = CC_ROOT_DIR.CC_DS.'skins'.CC_DS.$this->_skin.CC_DS;
 			$this->_template_dir = CC_ROOT_DIR.CC_DS.'skins'.CC_DS.$this->_skin.CC_DS;
+			
+			//Give smarty the logo
+			$this->_setLogo();
+			$GLOBALS['smarty']->assign('STORE_LOGO', CC_ROOT_REL.$this->_logo);
 
 			//CSS hooks
 			/**
@@ -1240,7 +1243,6 @@ class GUI {
 			}	
 			$this->_logo = $GLOBALS['config']->get('logos',$this->_skin.$this->_style);	
 		}
-		$GLOBALS['smarty']->assign('STORE_LOGO', CC_ROOT_REL.$this->_logo);
 	}
 
 

@@ -1,1 +1,0 @@
-jQuery("#subCategories .subCategory:nth-child(5n)").addClass("last");
