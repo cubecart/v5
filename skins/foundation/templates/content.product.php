@@ -111,7 +111,6 @@
    <dd><a href="#quantity_discounts">{$LANG.catalogue.quantity_discounts}</a></dd>
    {/if}
 </dl>
-</dl>
 <div class="tabs-content">
    <div class="content active" id="product_info">
       <p itemprop="description">{$PRODUCT.description}</p>
@@ -162,8 +161,6 @@
     {/if}
 </div>
 </form>
- 
-
 {if $SHARE}
       {foreach from=$SHARE item=html}
       {$html}
@@ -188,9 +185,8 @@
    <h3>{$LANG.catalogue.trackback_url}</h3>
    <p>{$TRACKBACK_URL}</p>
 </div>
-
-</div>
 {/if}
+</div>
 {else}
 <p>{$LANG.catalogue.product_doesnt_exist}</p>
 {/if}

@@ -10,5 +10,4 @@
       </div>
    </form>
 </div>
-</div>
 {/if}
