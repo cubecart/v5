@@ -330,7 +330,7 @@
 				</select>
 			</th>
 			<td><input type="text" id="discount" name="summary[discount]" class="textbox number-right lineprice" value="{$SUMMARY.discount_form}" /></td>
-			<td><span id="discount_percent"></span></td>
+			<td><span id="discount_percent">{if $SUMMARY.discount_type == "p"}%{/if}</span></td>
 		  </tr>
 
 		  <tr class="update-subtotal">
