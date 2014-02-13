@@ -282,7 +282,7 @@ class Catalogue {
 				}
 
 				// Trackbacks
-				if ($GLOBALS['config']->get('config', 'seo') && $GLOBALS['config']->get('config', 'seo_trackbacks')) {
+				if ($GLOBALS['config']->get('config', 'seo_trackbacks')) {
 					$trackbacks	= $GLOBALS['db']->select('CubeCart_trackback', false, array('product_id' => $product['product_id']));
 					$GLOBALS['smarty']->assign('TRACKBACKS', ($trackbacks) ? $trackbacks : false);
 					$GLOBALS['smarty']->assign('TRACKBACK_URL', currentPage(null, array('_a' => 'trackback'), true));

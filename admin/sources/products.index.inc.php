@@ -114,15 +114,7 @@ if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PE
 			$inserted = true;
 		}
 	}
-/*  Moved down as the cats are not added to a new product
-	if (substr($_POST['seo_path'], 0, 1) == '/' || substr($_POST['seo_path'], 0, 1) == '\\') {
-		$_POST['seo_path'] = substr($_POST['seo_path'], 1);
-	}
 
-	if ($GLOBALS['seo']->setdbPath('prod', $product_id, $_POST['seo_path'])){
-		$updated = true;
-	}
-*/
 	unset($record);
 	$product_id	= (isset($product_id) && !empty($product_id)) ? $product_id : (int)$_POST['product_id']; // do we need this?
 
@@ -688,7 +680,7 @@ if (isset($_GET['action']) && strtolower($_GET['action'])=='clone' && isset($_GE
 
 				$GLOBALS['db']->insert('CubeCart_seo_urls', array('type' => 'prod', 'item_id' => $product_id, 'path' => sprintf('%s-p%s',$seo_path[0]['path'],$product_id)));
 
-			} else if ($GLOBALS['config']->get('config', 'seo')) {
+			} else {
 
 				$GLOBALS['seo']->setdbPath('prod', $product_id, '');
 			}
@@ -787,7 +779,7 @@ if (isset($_GET['action'])) {
 		
 		$GLOBALS['smarty']->assign("GOOGLE_CATS",$google_cats);
 		
-		if ($GLOBALS['config']->get('config', 'seo')) $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+		$GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
 
 		// Generate list of groups and values
 		if (($groups = $GLOBALS['db']->select('CubeCart_option_group', false, false, array('priority'=>'ASC'))) !== false) {

@@ -94,20 +94,16 @@ class SEO {
 	public function __construct() {
 		// Build an array of ALL categories
 		$this->_getCategoryList();
-
-		//If SEO is enabled
-		if ($this->enabled()) {
-			//If URL is an SEO
-			if (preg_match('#^'.self::PCRE_REQUEST_URI.'$#Sui', $_SERVER['REQUEST_URI'], $match)) {
-				if (!in_array($match[2], $this->_ignored)) {
-					//Generate SEO URL
-					$seo_url = html_entity_decode($this->generatePath($match[5], $match[2], $match[4], true, true));
-					//If the SEO URL != to the current URL
-					if (str_replace($GLOBALS['rootRel'], '', $_SERVER['REQUEST_URI']) != $seo_url) {
-						//Push the user to that URL
-						header('Location: '.$seo_url, true, 301);
-						exit;
-					}
+		//If URL is an SEO
+		if (preg_match('#^'.self::PCRE_REQUEST_URI.'$#Sui', $_SERVER['REQUEST_URI'], $match)) {
+			if (!in_array($match[2], $this->_ignored)) {
+				//Generate SEO URL
+				$seo_url = html_entity_decode($this->generatePath($match[5], $match[2], $match[4], true, true));
+				//If the SEO URL != to the current URL
+				if (str_replace($GLOBALS['rootRel'], '', $_SERVER['REQUEST_URI']) != $seo_url) {
+					//Push the user to that URL
+					header('Location: '.$seo_url, true, 301);
+					exit;
 				}
 			}
 		}
@@ -145,22 +141,18 @@ class SEO {
 	 * @param string $amp
 	 * @return string
 	 */
-	public function buildURL($type, $item_id = false, $amp = '&') {
-		if ($this->enabled()) {
-			// Some SEO paths are not stored in the database
-			if (!$item_id && in_array($type, $this->_static_sections)) {
-				if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type))) !== false) {
-					return $GLOBALS['storeURL'].'/'.$item[0]['path'].$this->_extension;
-				} else {
-					return  $GLOBALS['storeURL'].'/'.$this->setdbPath($type, '', '', false).$this->_extension;
-				}
-			} elseif (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type, 'item_id' => $item_id))) !== false) {
+	public function buildURL($type, $item_id = false, $amp = '&') {		
+		// Some SEO paths are not stored in the database
+		if (!$item_id && in_array($type, $this->_static_sections)) {
+			if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type))) !== false) {
 				return $GLOBALS['storeURL'].'/'.$item[0]['path'].$this->_extension;
 			} else {
-				return  $GLOBALS['storeURL'].'/'.$this->setdbPath($type, $item_id, '', false).$this->_extension;
+				return  $GLOBALS['storeURL'].'/'.$this->setdbPath($type, '', '', false).$this->_extension;
 			}
+		} elseif (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type, 'item_id' => $item_id))) !== false) {
+			return $GLOBALS['storeURL'].'/'.$item[0]['path'].$this->_extension;
 		} else {
-			return $GLOBALS['storeURL'].'/'.'index.php?'.http_build_query($this->_getItemVars($type, $item_id), '', $amp);
+			return  $GLOBALS['storeURL'].'/'.$this->setdbPath($type, $item_id, '', false).$this->_extension;
 		}
 	}
 
@@ -185,15 +177,6 @@ class SEO {
 		$GLOBALS['smarty']->assign('META_DESCRIPTION',	$this->meta_description());
 		$GLOBALS['smarty']->assign('META_KEYWORDS',		$this->meta_keywords());
 		$GLOBALS['smarty']->assign('META_TITLE',		$this->meta_title());
-	}
-
-	/**
-	 * SEO enabled?
-	 *
-	 * @return bool
-	 */
-	public function enabled() {
-		return $GLOBALS['config']->get('config', 'seo');
 	}
 
 	/**
@@ -520,11 +503,8 @@ class SEO {
 	 */
 	public function rewriteUrls($page_html, $full_urls = false) {
 		$index = $this->_getBaseUrl($full_urls);
-
-		if ($this->enabled()) {
-			$search[0] = '#(href|action)=["\'](.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w]+)\=([\w\-\_]+)([^"\']*)["\']#Sei';
-			$replace[0]	= '"$1=\"".$index.$this->generatePath(\'$6\', \'$3\', \'$5\').$this->queryString(\'$7\')."\""';
-		}
+		$search[0] = '#(href|action)=["\'](.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w]+)\=([\w\-\_]+)([^"\']*)["\']#Sei';
+		$replace[0]	= '"$1=\"".$index.$this->generatePath(\'$6\', \'$3\', \'$5\').$this->queryString(\'$7\')."\""';
 		$search[1] = '#(href|src|background)=([\"\'])([^\"]*)([\"\'])#Suie';
 		$replace[1]	= '"$1=$2".$this->fullURL(\'$3\', $full_urls)."$4"';
 		return preg_replace($search, $replace, $page_html);
@@ -538,24 +518,21 @@ class SEO {
 	 */
 	public function SEOable($path) {
 	
-	
 		$path = preg_replace('@index.php$@', '', $path); // remove index.php if last chars in URL
 	
-		if ($this->enabled()) {
-			if (strpos($path, 'index.php?_a=category&search') !== false) {
-				$path = str_replace('index.php?', 'search.html?', $path);
-				return $path;
-			} else if (($pos = strpos($path, 'index.php?_a=search')) !== false) {
-				if (strlen($path) == $pos + 19) {
-					$path = str_replace('index.php?_a=search', 'search.html', $path);
-				} else {
-					$path = str_replace('index.php?_a=search&', 'search.html?', $path);
-				}
-				return $path;
+		if (strpos($path, 'index.php?_a=category&search') !== false) {
+			$path = str_replace('index.php?', 'search.html?', $path);
+			return $path;
+		} else if (($pos = strpos($path, 'index.php?_a=search')) !== false) {
+			if (strlen($path) == $pos + 19) {
+				$path = str_replace('index.php?_a=search', 'search.html', $path);
+			} else {
+				$path = str_replace('index.php?_a=search&', 'search.html?', $path);
 			}
+			return $path;
 		}
-
-		if ($this->enabled() && preg_match('#^(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w\[\]]+)\=([\w\-\_]+)([^"\']*)$#ieS', $path, $match)) {
+		
+		if (preg_match('#^(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w\[\]]+)\=([\w\-\_]+)([^"\']*)$#ieS', $path, $match)) {
 			return $this->generatePath($match[5], $match[2], $match[4], true, true).$this->queryString($match[6]);
 		} else {
 			return $path;
@@ -845,11 +822,7 @@ class SEO {
 		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config','standard_url') : $GLOBALS['storeURL'];
 		
 		if (!isset($input['url']) && !empty($type)) {
-			if ($this->enabled()) {
-				$input['url'] = $store_url.'/'.$this->generatePath($input['id'], $type, '', false, true);
-			} else {
-				$input['url'] = $store_url.sprintf('/index.php?_a=%s&%s=%s', $type, $input['key'], $input['id']);
-			}
+			$input['url'] = $store_url.'/'.$this->generatePath($input['id'], $type, '', false, true);
 		}
 
 		$this->_sitemap_xml->startElement('url');

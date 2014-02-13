@@ -108,7 +108,7 @@ if (isset($_GET['action'])) {
 
 	$GLOBALS['main']->addTabControl($lang['common']['general'], 'general');
 	$GLOBALS['main']->addTabControl($lang['documents']['tab_content'], 'article');
-	if ($GLOBALS['config']->get('config', 'seo')) $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+	$GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
 	if (strtolower($_GET['action']) == ('edit' || 'translate') && isset($_GET['doc_id']) && is_numeric($_GET['doc_id'])) {
 
 		// Check to see if translation space is available

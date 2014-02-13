@@ -129,8 +129,8 @@ if (isset($_GET['format']) && !empty($_GET['format'])) {
 			$result['price_formatted'] = Tax::getInstance()->priceFormat($result['price'],true);
 			
 			## Generate Product URL
-			$url	= ($GLOBALS['config']->get('config', 'seo')) ? $seo->generatePath($result['product_id'], 'product', 'product_id', true, true) : 'index.php?_a=product&product_id='.(int)$result['product_id'];
-			$result['url']		= $seo->fullURL($url, true);
+			$url = $seo->generatePath($result['product_id'], 'product', 'product_id', true, true);
+			$result['url']	= $seo->fullURL($url, true);
 
 			## Generate Image URL
 			if (($images	= $GLOBALS['db']->select('CubeCart_image_index', array('file_id'), array('main_img' => 1, 'product_id' => $result['product_id']))) !== false) {

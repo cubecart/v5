@@ -233,7 +233,7 @@ if (isset($_GET['action'])) {
 		$GLOBALS['gui']->addBreadcrumb($lang['translate']['title_translate'], currentPage());
 		$GLOBALS['main']->addTabControl($lang['common']['general'], 'general');
 		$GLOBALS['main']->addTabControl($lang['common']['description'], 'description');
-		if ($GLOBALS['config']->get('config', 'seo')) $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+		$GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
 
 		if (isset($_GET['translation_id'])) {
 			if (($translation = $GLOBALS['db']->select('CubeCart_category_language', false, array('translation_id' => (int)$_GET['translation_id'], 'cat_id' => (int)$_GET['cat_id']), array('language' => 'ASC'))) !== false) {
@@ -260,7 +260,7 @@ if (isset($_GET['action'])) {
 		$GLOBALS['main']->addTabControl($lang['common']['general'], 'cat_general', null, 'G');
 		$GLOBALS['main']->addTabControl($lang['common']['description'], 'cat_description', null, 'D');
 		$GLOBALS['main']->addTabControl($lang['settings']['title_images'], 'cat_images', null, 'I');
-		if ($GLOBALS['config']->get('config', 'seo')) $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+		$GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
 		// Add shipping tab if shipping by category is enabled
 		$ship_by_cat = $GLOBALS['config']->get('Per_Category');
 		if (isset($ship_by_cat['status']) && $ship_by_cat['status']) {

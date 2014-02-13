@@ -128,14 +128,6 @@ class Cart {
 						if($GLOBALS['catalogue']->getProductOptions($key) && $GLOBALS['catalogue']->getOptionRequired()) {
 							$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
 							$this->redirectToProductPage($key);
-							/*
-							if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
-								$GLOBALS['debug']->supress();
-								die('Redir:'.$GLOBALS['seo']->buildURL('prod',$key));
-							} else {
-								httpredir("index.php?_a=product&product_id=$key");
-							}
-							*/
 						}
 					}
 				}
@@ -144,14 +136,6 @@ class Cart {
 					if($GLOBALS['catalogue']->getProductOptions($key) && $GLOBALS['catalogue']->getOptionRequired()) {
 						$GLOBALS['gui']->setError($GLOBALS['language']->catalogue['error_option_required']);
 						$this->redirectToProductPage($key);
-						/*
-						if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
-							$GLOBALS['debug']->supress();
-							die('Redir:'.$GLOBALS['seo']->buildURL('prod',$key));
-						} else {
-							httpredir("index.php?_a=product&product_id=$key");
-						}
-						*/
 					}
 				}
 			}
@@ -218,10 +202,7 @@ class Cart {
 		if ($GLOBALS['session']->get('hide_prices')) {
 			if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
 				$GLOBALS['debug']->supress();
-				if($GLOBALS['config']->get('config','seo')) {
-					die($GLOBALS['seo']->rewriteUrls("Redir:".currentPage(),true));
-				}
-				die("Redir:".currentPage());
+				die($GLOBALS['seo']->rewriteUrls("Redir:".currentPage(),true));
 			} else {
 				httpredir(currentPage());
 			}
@@ -409,11 +390,7 @@ class Cart {
 					$jumpto = ($GLOBALS['config']->get('config', 'basket_jump_to')) ? $GLOBALS['rootRel'].'index.php?_a=basket' : currentPage(null);
 					if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd' && $GLOBALS['config']->get('config', 'basket_jump_to')) {
 						$GLOBALS['debug']->supress();
-						if($GLOBALS['config']->get('config','seo')) {
-							die($GLOBALS['seo']->rewriteUrls("Redir:".$jumpto,true));
-						} else {
-							die('Redir:'.$jumpto);
-						}
+						die($GLOBALS['seo']->rewriteUrls("Redir:".$jumpto,true));
 					} elseif (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd') {
 						$GLOBALS['debug']->supress();
 						if($stock_warning) {

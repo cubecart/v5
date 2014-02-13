@@ -186,16 +186,7 @@
     </select></span></div>
   </fieldset>
   <fieldset><legend>{$LANG.settings.title_seo_urls}</legend>
-	<div><label for="seo">{$LANG.settings.seo_enable}</label><span><select name="config[seo]" id="seo" class="textbox">
-	  {foreach from=$OPT_SEO item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
-	</select>{if $HTACCESS_DISABLED}&nbsp;&nbsp;&nbsp;{$LANG.settings.htaccess_error}{/if}</span></div>
-	<div><label for="seo_method">{$LANG.settings.seo_format}</label><span><select name="config[seo_method]" id="seo_method" class="textbox">
-	  {foreach from=$OPT_SEO_METHOD item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
-	</select></span></div>
 	<div><label for="seo_add_cats">{$LANG.settings.title_seo_add_cats}</label><span><input name="config[seo_add_cats]" id="seo_add_cats" type="hidden" class="toggle" value="{$CONFIG.seo_add_cats}" /></span></div>
-	<div><label for="htaccess">{$LANG.settings.seo_htaccess}</label><span>
-	<textarea name="htaccess-data" id="htaccess" class="textbox" cols="80" rows="20">{$VAL_HTACCESS_CONTENTS}</textarea></span></div>
-	<div><label class="spacer">&nbsp;</label><span><input name="install_htaccess" id="install_htaccess" type="submit" class="" value="{$LANG.settings.seo_htaccess_install}" /></span></div>
   </fieldset>
   <fieldset><legend>{$LANG.settings.title_trackbacks}</legend>
     <div><label for="seo_trackbacks">{$LANG.settings.title_trackbacks}</label><span><select name="config[seo_trackbacks]" id="seo_trackbacks" class="textbox">

@@ -664,12 +664,9 @@ class Cubecart {
 			}
 		}
 		if (!empty($query)) {
-			if (!$GLOBALS['config']->get('config', 'seo') || $search || $_GET['cat_id'] == 'sale') {
-				$query['_a'] = $_GET['_a'];
+			$query['_a'] = $_GET['_a'];
+			if ($search || $_GET['cat_id'] == 'sale') {
 				$query['cat_id'] = $_GET['cat_id'];
-			}
-			if ($GLOBALS['config']->get('config', 'seo')) {
-				$query['_a'] = $_GET['_a'];
 			}
 			ksort($query);
 			httpredir('?'.http_build_query($query, null, '&'));

@@ -94,17 +94,12 @@ if (isset($_POST['config']) && Admin::getInstance()->permissions('settings', CC_
 	$config_new	= $_POST['config'];
 	
 	## Validate SSL URL
-	/* Nice but not compatible with some servers so it has to go for now
 	if (!filter_var($config_new['ssl_url'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
 		unset($config_new['ssl_url']);
 		$config_new['ssl'] = false;
 		$config_new['ssl_force'] = false;
 	}
-	*/
-	## Check for .htaccess file
-	if ($config_new['seo'] && !file_exists(CC_ROOT_DIR.CC_DS.'.htaccess')) {
-		$config_new['seo'] = false;
-	}
+	
 	if (empty($config_new['time_format'])) {
 		$config_new['time_format'] = '%Y-%m-%d %H:%M';
 	}
@@ -326,9 +321,6 @@ $select_options = array(
 	'proxy'					=> null,
 	'recaptcha'				=> array($lang['common']['disabled'], $lang['common']['enabled']),
 	'catalogue_sale_mode'	=> array($lang['common']['disabled'], $lang['settings']['sales_per_product'], $lang['settings']['sales_percentage']),
-	'seo'					=> (file_exists(CC_ROOT_DIR.CC_DS.'.htaccess')) ? null : array(0 => $lang['common']['no']),
-	//'seo_method'			=> array($lang['settings']['seo_method_rewrite'],$lang['settings']['seo_method_lookback']),
-	'seo_method'			=> array($lang['settings']['seo_method_rewrite']),
 	'seo_metadata'			=> array($lang['settings']['seo_meta_option_disable'],$lang['settings']['seo_meta_option_merge'],$lang['settings']['seo_meta_option_replace']),
 	'basket_allow_non_invoice_address'	=> null,
 	'catalogue_latest_products'			=> null,

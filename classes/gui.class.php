@@ -260,7 +260,6 @@ class GUI {
 		if (!empty($name)) {
 			$this->_breadcrumb[] = array(
 				'url'	=> $GLOBALS['seo']->SEOable($href),
-//				'title'	=> ucwords(strip_tags(str_replace('_',' ',$name))) // it is affecting even product name and breaks branding rules for some customers
 				'title'	=> ucfirst(strip_tags(str_replace('_',' ',$name)))
 			);
 		}
@@ -854,10 +853,9 @@ class GUI {
 			$GLOBALS['smarty']->assign('URL', $url);
 			//Fetch the navigation so we can cache it
 			foreach ($GLOBALS['hooks']->load('class.gui.display_navigation.pre_cache') as $hook) include $hook;
-			$content = $GLOBALS['smarty']->fetch('templates/box.navigation.php');
-			if($GLOBALS['config']->get('config', 'seo')) { 
-				$content = str_replace('/index.php/','/',$content);
-			}
+			$content = $GLOBALS['smarty']->fetch('templates/box.navigation.php'); 
+			$content = str_replace('/index.php/','/',$content);
+			
 			$GLOBALS['cache']->write($content, 'html.'.$this->_skin.'.menu.'.$GLOBALS['language']->current());
 		}
 
@@ -900,12 +898,8 @@ class GUI {
 					continue;
 				}
 				
-				
-				
-				
 				$GLOBALS['language']->translateProduct($product);
 				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id']);
-				
 				
 				$product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($product['price'], $product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
 				
