@@ -40,3 +40,12 @@ if ($categories = $db->select('CubeCart_category', array('cat_id','seo_custom_ur
 		$db->insert('CubeCart_seo_urls', array('path'=> sanitizeSEOPath($item['seo_custom_url']), 'item_id' => $item['cat_id'], 'type' => 'cat'));	
 	}
 }
+## Sort out taxes
+if ($tax_rates = $db->select('CubeCart_tax_rates', array('country_id','id'))) {
+	foreach($tax_rates as $tax_rate) {
+		$country = $db->select('CubeCart_geo_country', array('numcode'), array('id' => $tax_rate['country_id']));
+		if($country[0]['numcode']>0) {
+			$db->update('CubeCart_tax_rates', array('country_id' => $country[0]['numcode']), array('id' => $tax_rate['id']));
+		}
+	}
+}
