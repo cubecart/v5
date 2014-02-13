@@ -301,12 +301,10 @@ class SEO {
 						$path = $existing[0]['path'];
 					} elseif (($prods = $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'name', 'cat_id'), array('product_id' => (int)$id), false, 1)) !== false) {
 						$cat_directory = '';
-						if ($GLOBALS['config']->get('config', 'seo_add_cats')) {
-							if (($cats = $GLOBALS['db']->select('CubeCart_category_index', array('cat_id'), array('product_id' => (int)$id), array('primary' => 'DESC'), 1)) !== false) {
-								$prods[0]['cat_id']	= $cats[0]['cat_id'];
-							}
-							$cat_directory = $this->getDirectory($prods[0]['cat_id']);
+						if (($cats = $GLOBALS['db']->select('CubeCart_category_index', array('cat_id'), array('product_id' => (int)$id), array('primary' => 'DESC'), 1)) !== false) {
+							$prods[0]['cat_id']	= $cats[0]['cat_id'];
 						}
+						$cat_directory = $this->getDirectory($prods[0]['cat_id']);
 						$path = empty($cat_directory) ? $prods[0]['name'] : $cat_directory.'/'.$prods[0]['name'];
 					}
 					break;

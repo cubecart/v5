@@ -185,14 +185,6 @@
 	  {foreach from=$OPT_SEO_METADATA item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
     </select></span></div>
   </fieldset>
-  <fieldset><legend>{$LANG.settings.title_seo_urls}</legend>
-	<div><label for="seo_add_cats">{$LANG.settings.title_seo_add_cats}</label><span><input name="config[seo_add_cats]" id="seo_add_cats" type="hidden" class="toggle" value="{$CONFIG.seo_add_cats}" /></span></div>
-  </fieldset>
-  <fieldset><legend>{$LANG.settings.title_trackbacks}</legend>
-    <div><label for="seo_trackbacks">{$LANG.settings.title_trackbacks}</label><span><select name="config[seo_trackbacks]" id="seo_trackbacks" class="textbox">
-	  {foreach from=$OPT_SEO_TRACKBACKS item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
-    </select></span></div>
-  </fieldset>
 </div>
 
 <div id="SSL" class="tab_content">
