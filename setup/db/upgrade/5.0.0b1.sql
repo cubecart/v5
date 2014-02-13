@@ -610,10 +610,6 @@ ALTER TABLE `CubeCart_sessions` CHANGE `browser` `useragent` TEXT NOT NULL; #EOQ
 ALTER TABLE `CubeCart_sessions` CHANGE `basket` `basket` BLOB NULL; #EOQ
 ALTER TABLE `CubeCart_sessions` ADD `admin_id` INT UNSIGNED NOT NULL DEFAULT '0'; #EOQ
 
-ALTER TABLE `CubeCart_taxes` RENAME TO `CubeCart_tax_class`, DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
-ALTER TABLE `CubeCart_tax_class` CHANGE `taxName` `tax_name` VARCHAR(50) NOT NULL; #EOQ
-ALTER TABLE `CubeCart_tax_class` DROP `percent`; #EOQ
-
 ALTER TABLE `CubeCart_tax_details` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `name` `name` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
@@ -706,8 +702,6 @@ ALTER TABLE `CubeCart_reviews` ADD KEY `votes` (`vote_up`,`vote_down`); #EOQ
 ALTER TABLE `CubeCart_reviews` ADD FULLTEXT KEY `fulltext` (`name`,`email`,`title`,`review`); #EOQ
 ALTER TABLE `CubeCart_sessions` KEY `customer_id` (`customer_id`); #EOQ
 ALTER TABLE `CubeCart_sessions` KEY `session_last` (`session_last`); #EOQ
-ALTER TABLE `CubeCart_tax_class` ADD PRIMARY KEY ( `id` ); #EOQ
-ALTER TABLE `CubeCart_tax_class` DROP INDEX `id`; #EOQ 
 ALTER TABLE `CubeCart_transactions` ADD KEY `order_id` (`order_id`); #EOQ
 ALTER TABLE `CubeCart_transactions` ADD KEY `time` (`time`); #EOQ
 ALTER TABLE `CubeCart_option_assign` DROP INDEX `product`; #EOQ
