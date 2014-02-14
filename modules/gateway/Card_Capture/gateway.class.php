@@ -358,11 +358,6 @@ class Gateway {
 		// Check expire date (always required)
 		$this->expireDate($expireDate);
 
-		// Check the security code if required
-		if ($this->_module['cvv_req']) {
-			$this->securityCode($securityCode);
-		}
-
 		if (empty($cardNo)) {
 			$this->error(6);
 			return false;
@@ -388,6 +383,13 @@ class Gateway {
 				}
 			}
 		}
+		
+		// Check the security code if required
+		// Moved here becase of AMEX security code lenght check [unknown card type]
+		if ($this->_module['cvv_req']) {
+			$this->securityCode($securityCode);
+		}
+
 		if (!$this->_validate_valid) {
 			$this->error(1);
 		}
@@ -450,7 +452,7 @@ class Gateway {
 
 	private function securityCode($securityCode) {
 		## Only American Express allows 4 digit security codes
-		if(is_numeric($securityCode) && (strlen($securityCode) == 3 || (strlen($securityCode) == 4 && $this->_validate_card_data['cardType']=="Amex"))) {
+		if(is_numeric($securityCode) && (strlen($securityCode) == 3 || (strlen($securityCode) == 4 && $this->_validate_card_data['cardType']=="AMERICAN EXPRESS"))) {
 			return true;
 		} else {
 			$this->error(4);
