@@ -150,10 +150,5 @@ jQuery(document).ready(function() {
 		    },
 		  }
 	 });
-	 
 	 $('input:reset').click(function() { $(this).parents('form:first').validate().resetForm(); });
-	
 });
-
-$(window).bind("load", equalheight);
-$(window).bind("resize", equalheight);
