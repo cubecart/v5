@@ -4,7 +4,7 @@
 {/if}
 {if isset($LATEST_PRODUCTS)}
 <h2>{$LANG.catalogue.latest_products}</h2>
-<ul class="large-block-grid-3 small-block-grid-1 data-equalizer">
+<ul class="large-block-grid-3 small-block-grid-1" data-equalizer>
    {foreach from=$LATEST_PRODUCTS item=product}
    <li data-equalizer-watch>
       <form action="{$VAL_SELF}" method="post" class="addForm panel">

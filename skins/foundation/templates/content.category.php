@@ -24,10 +24,10 @@
 
 {include file='templates/element.sort_category.php'}
 
-{if isset($PRODUCTS)}
+<ul class="large-block-grid-1" data-equalizer>
 {foreach from=$PRODUCTS item=product}
-<div class="panel">
-   <form action="{$VAL_SELF}" method="post" enctype="application/x-www-form-urlencoded">
+<li data-equalizer-watch>
+   <form action="{$VAL_SELF}" method="post" class="panel" enctype="application/x-www-form-urlencoded">
      
       <div class="row">
          <div class="large-3 columns">
@@ -85,11 +85,11 @@
          </div>
       </div>
    </form>
-</div>
-{/foreach}
-{else}
+</li>
+{foreachelse}
 <p>{$LANG.category.no_products}</p>
-{/if}
+{/foreach}
+</ul>
 <div class="row">
    <div class="large-12 columns">
       {$PAGINATION}
