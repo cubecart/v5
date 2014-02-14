@@ -47,14 +47,11 @@
    <body>
       {include file='templates/box.eu_cookie.php'}
       <div class="row">
-      <div class="large-6 columns">{$SESSION}</div>
-      <div class="large-3 columns">{$CURRENCY}</div>
-      <div class="large-3 columns">{$LANGUAGE}</div>
-      </div>
-      <div class="row">
          <div class="header-secondary">
-            <div class="large-4 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
-            <div class="large-8 columns">{$SEARCH_FORM}</div>
+            <div class="large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
+            <div class="large-6 columns">{$SEARCH_FORM}</div>
+            <div class="large-2 columns">{$SESSION}</div>
+            <div class="large-2 columns">{$SHOPPING_CART}</div>
          </div>
       </div>
       <div class="row">
@@ -76,7 +73,6 @@
             {$PAGE_CONTENT}
          </div>
          <div class="large-3 columns">
-            {$SHOPPING_CART}
             {$RANDOM_PROD}
             {if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
             {$SALE_ITEMS}
@@ -101,6 +97,11 @@
                </div>
             </div>
          </div>
+         <div class="row">
+      
+      <div class="large-6 columns">{$CURRENCY}</div>
+      <div class="large-6 columns">{$LANGUAGE}</div>
+      </div>
          
       </footer>
       

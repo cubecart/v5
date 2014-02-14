@@ -10,9 +10,9 @@
 </div>
 {/if}
 {if isset($SUBCATS) && $SUBCATS}
-<ul class="large-block-grid-6 equalheight">
+<ul class="large-block-grid-6 data-equalizer">
    {foreach from=$SUBCATS item=subcat}
-   <li>
+   <li data-equalizer-watch>
       <a href="{$subcat.url}" title="{$subcat.cat_name}">
       <img class="th" src="{$subcat.cat_image}" alt="{$subcat.cat_name}" />
       </a>

@@ -1,4 +1,6 @@
-<div class="panel callout">
+<i class="fa fa-shopping-cart"></i> {$CART_TOTAL} 
+<!--
+<div class="panel">
   <h3>{$LANG.checkout.your_basket}</h3>
   {if isset($CONTENTS) && count($CONTENTS) > 0}
   <ul>
@@ -22,3 +24,4 @@
   <p style="text-align: center;">{$LANG.basket.basket_is_empty}</p>
   {/if}
 </div>
+-->

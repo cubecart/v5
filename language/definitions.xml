@@ -170,6 +170,7 @@
     <string name="title_administrators" introduced="5.0.0"><![CDATA[Administrators]]></string>
   </group>
   <group name="basket">
+  	<string name="basket" introduced="6.0.0"><![CDATA[Basket]]></string>
     <string name="basket_checkout" introduced="5.0.0"><![CDATA[Checkout]]></string>
     <string name="basket_empty" introduced="5.0.0"><![CDATA[Empty Basket]]></string>
     <string name="basket_is_empty" introduced="5.0.0"><![CDATA[Your basket is empty.]]></string>
@@ -497,6 +498,7 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
   	<string name="min" introduced="6.0.0"><![CDATA[Min]]></string>
   	<string name="max" introduced="6.0.0"><![CDATA[Max]]></string>
   	<string name="from" introduced="6.0.0"><![CDATA[From]]></string>

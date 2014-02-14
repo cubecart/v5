@@ -5,6 +5,7 @@
   </ul>
   <section class="top-bar-section">
      <ul class="left">
+        <li><a href="index.php" title="{$LANG.common.home}"><i class="fa fa-home"></i></a></li>
         {$NAVIGATION_TREE}
         {if $CTRL_CERTIFICATES && !$CATALOGUE_MODE}
         <li><a href="{$URL.certificates}" title="{$LANG.navigation.giftcerts}">{$LANG.navigation.giftcerts}</a></li>

@@ -4,9 +4,9 @@
 {/if}
 {if isset($LATEST_PRODUCTS)}
 <h2>{$LANG.catalogue.latest_products}</h2>
-<ul class="large-block-grid-3 small-block-grid-1 equalheight">
+<ul class="large-block-grid-3 small-block-grid-1 data-equalizer">
    {foreach from=$LATEST_PRODUCTS item=product}
-   <li>
+   <li data-equalizer-watch>
       <form action="{$VAL_SELF}" method="post" class="addForm panel">
          <div class="text-center">
             <a class="th" href="{$product.url}" title="{$product.name}"><img src="{$product.image}" alt="{$product.name}" /></a>
