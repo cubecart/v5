@@ -81,6 +81,7 @@
     <string name="welcome_back_guest" introduced="5.0.0"><![CDATA[Welcome back, Guest!]]></string>
     <string name="welcome_guest" introduced="5.0.0"><![CDATA[Hi, Guest!]]></string>
     <string name="your_account" introduced="5.0.0"><![CDATA[Your Account]]></string>
+    <string name="my_account" introduced="6.0.0"><![CDATA[My Account]]></string>
     <string name="your_addressbook" introduced="5.0.0"><![CDATA[Your Address Book]]></string>
     <string name="your_details" introduced="5.0.0"><![CDATA[Your Details]]></string>
     <string name="your_downloads" introduced="5.0.0"><![CDATA[Your Digital Downloads]]></string>

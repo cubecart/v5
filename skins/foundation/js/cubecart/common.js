@@ -151,4 +151,11 @@ jQuery(document).ready(function() {
 		  }
 	 });
 	 $('input:reset').click(function() { $(this).parents('form:first').validate().resetForm(); });
+	 
+	 $('#basket-summary').click(function() {
+	 		$('#basket-detail').slideDown();
+	 		$('#basket-detail').delay(4000).slideUp();
+	 	}
+	 );
+	 
 });

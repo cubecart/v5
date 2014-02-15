@@ -20,6 +20,16 @@ footer h3 {
 	color: #fff;
 }
 
+#basket-detail {
+	position: absolute;
+	z-index: 100;
+	background-color: #F2F2F2;
+	width: 250px;
+	border: 1px solid black;
+	left: -98px;
+	top: 30px;
+}
+
 
 /* HELPERS :-) */
 .nopad  {padding:0!important;}

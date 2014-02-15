@@ -8,7 +8,7 @@
       <link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon" />
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css" />
       <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/styles.css" />
+      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.css" />
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.rating.css" media="screen" />
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.magnifier.css" media="screen" />
@@ -47,7 +47,7 @@
    <body>
       {include file='templates/box.eu_cookie.php'}
       <div class="row">
-         <div class="header-secondary">
+         <div class="pad-top">
             <div class="large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
             <div class="large-6 columns">{$SEARCH_FORM}</div>
             <div class="large-2 columns">{$SESSION}</div>
