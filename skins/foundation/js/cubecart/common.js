@@ -158,4 +158,44 @@ jQuery(document).ready(function() {
 	 	}
 	 );
 	 
+	 //if ($('div#mini-basket').exists()) {
+		$('form#add_item').submit(function(){
+			//This is from the required form checker
+			if (form_error) {
+				return false;
+			}
+			
+			var add = $(this).serialize();
+			var action = $(this).attr('action').replace(/\?.*/, '');			
+			var basket = $('div#mini-basket');
+			// added to accommodate no existing query string
+			var parts = action.split("?");
+			if(parts.length > 1) {
+				action += "&";
+			} else {
+				action += "?";
+			}
+
+			$.ajax({
+				url: action + '_g=ajaxadd',
+				type: 'POST',
+				cache: false,
+				data: add,
+				complete: function(returned) {
+					if(returned.responseText.match("Redir")) {
+						
+						window.location = returned.responseText.substr(6);
+					} else {
+						basket.replaceWith(returned.responseText);
+						$("#gui_message").slideUp();
+						$('#basket-detail').slideDown();
+						$('#basket-detail').delay(4000).slideUp();
+						alert('babanas');
+					}
+				}
+			});
+			return false;
+		});
+	//}
+	 
 });

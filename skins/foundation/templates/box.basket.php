@@ -1,3 +1,4 @@
+<div id="mini-basket">
 <a href="#" id="basket-summary"><i class="fa fa-shopping-cart"></i> {$CART_TOTAL}</a> 
 <div class="hide pad-side" id="basket-detail">
    {if isset($CONTENTS) && count($CONTENTS) > 0}
@@ -22,4 +23,5 @@
    {else}
    <p class="pad-top text-center">{$LANG.basket.basket_is_empty}</p>
    {/if}
+</div>
 </div>
