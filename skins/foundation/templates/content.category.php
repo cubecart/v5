@@ -27,7 +27,7 @@
 <ul class="large-block-grid-1" data-equalizer>
 {foreach from=$PRODUCTS item=product}
 <li data-equalizer-watch>
-   <form action="{$VAL_SELF}" method="post" class="panel" enctype="application/x-www-form-urlencoded">
+   <form action="{$VAL_SELF}" method="post" class="panel" id="add_to_basket">
      
       <div class="row">
          <div class="large-3 columns">

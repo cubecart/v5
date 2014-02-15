@@ -29,7 +29,8 @@
    {if isset($PAGINATION)}{$PAGINATION}{/if}
    <a href="#" class="button review_toggle">{$LANG.catalogue.write_a_review}</a>
    {else}
-   <div>{$LANG.catalogue.product_not_reviewed} <a href="#" class="review_toggle" class="button">{$LANG.catalogue.write_a_review}</a></div>
+   <p>{$LANG.catalogue.product_not_reviewed}</p>
+   <a href="#" class="button review_toggle">{$LANG.catalogue.write_a_review}</a>
    {/if}
 </div>
 <div id="review_write" style="display: none;">

@@ -20,15 +20,36 @@ footer h3 {
 	color: #fff;
 }
 
-#basket-detail {
-	position: absolute;
+/* Start Mini Basket */
+.basket-detail-container {
+	position: fixed;
 	z-index: 100;
-	background-color: #F2F2F2;
 	width: 250px;
-	border: 1px solid black;
-	left: -98px;
+	left: 50%;
 	top: 30px;
+	margin-left: 235px;
 }
+.mini-basket-title {
+	background-color: #000;
+	color: #fff;
+}
+.basket-detail {
+	  background-color: #F2F2F2;
+	  border: 1px solid black;
+}
+.basket-detail .total {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.mini-basket-arrow {
+	width: 0; 
+	height: 0; 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid black;
+	margin-left: 115px
+}
+/* End Mini Basket */
 
 
 /* HELPERS :-) */

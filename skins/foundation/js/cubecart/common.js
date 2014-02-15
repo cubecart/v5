@@ -153,49 +153,44 @@ jQuery(document).ready(function() {
 	 $('input:reset').click(function() { $(this).parents('form:first').validate().resetForm(); });
 	 
 	 $('#basket-summary').click(function() {
-	 		$('#basket-detail').slideDown();
-	 		$('#basket-detail').delay(4000).slideUp();
+	 		mini_basket_action();
 	 	}
 	 );
 	 
-	 //if ($('div#mini-basket').exists()) {
-		$('form#add_item').submit(function(){
-			//This is from the required form checker
-			if (form_error) {
-				return false;
-			}
-			
-			var add = $(this).serialize();
-			var action = $(this).attr('action').replace(/\?.*/, '');			
-			var basket = $('div#mini-basket');
-			// added to accommodate no existing query string
-			var parts = action.split("?");
-			if(parts.length > 1) {
-				action += "&";
-			} else {
-				action += "?";
-			}
-
-			$.ajax({
-				url: action + '_g=ajaxadd',
-				type: 'POST',
-				cache: false,
-				data: add,
-				complete: function(returned) {
-					if(returned.responseText.match("Redir")) {
-						
-						window.location = returned.responseText.substr(6);
-					} else {
-						basket.replaceWith(returned.responseText);
-						$("#gui_message").slideUp();
-						$('#basket-detail').slideDown();
-						$('#basket-detail').delay(4000).slideUp();
-						alert('babanas');
-					}
-				}
-			});
-			return false;
-		});
-	//}
 	 
+	$('form#add_to_basket').submit(function(){	
+		var add = $(this).serialize();
+		var action = $(this).attr('action').replace(/\?.*/, '');			
+		var basket = $('#mini-basket');
+
+		var parts = action.split("?");
+		if(parts.length > 1) {
+			action += "&";
+		} else {
+			action += "?";
+		}
+
+		$.ajax({
+			url: action + '_g=ajaxadd',
+			type: 'POST',
+			cache: false,
+			data: add,
+			complete: function(returned) {
+				if(returned.responseText.match("Redir")) {
+					window.location = returned.responseText.substr(6);
+				} else {
+					basket.replaceWith(returned.responseText);
+					$("#gui_message").slideUp();
+					mini_basket_action();
+				}
+			}
+		});
+		return false;
+	});
+		
 });
+
+function mini_basket_action() {
+	$('#basket-detail').slideDown();
+	 $('#basket-detail').delay(4000).slideUp();
+}

@@ -171,6 +171,7 @@
     <string name="title_administrators" introduced="5.0.0"><![CDATA[Administrators]]></string>
   </group>
   <group name="basket">
+    <string name="your_basket" introduced="6.0.0"><![CDATA[Your Basket]]></string>
   	<string name="basket" introduced="6.0.0"><![CDATA[Basket]]></string>
     <string name="basket_checkout" introduced="5.0.0"><![CDATA[Checkout]]></string>
     <string name="basket_empty" introduced="5.0.0"><![CDATA[Empty Basket]]></string>
@@ -578,6 +579,8 @@
     <string name="installed" introduced="5.0.0"><![CDATA[Installed]]></string>
     <string name="ip_address" introduced="5.0.0"><![CDATA[IP Address]]></string>
     <string name="items" introduced="5.0.0"><![CDATA[Item(s)]]></string>
+    <string name="item" introduced="6.0.0"><![CDATA[Item]]></string>
+    <string name="item_plural" introduced="6.0.0"><![CDATA[Items]]></string>
     <string name="language" introduced="5.0.0"><![CDATA[Language]]></string>
     <string name="large" introduced="5.0.0"><![CDATA[Large]]></string>
     <string name="length" introduced="5.0.0"><![CDATA[Length]]></string>
