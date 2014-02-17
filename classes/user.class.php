@@ -178,7 +178,6 @@ class User {
 	 * @param string $password
 	 * @param bool $remember
 	 * @param bool $from_cookie
-	 * @param bool $is_openid
 	 * @param bool $redirect
 	 *
 	 * @return bool
@@ -244,7 +243,7 @@ class User {
 				 * Set the cookie for the username
 				 * The password cookie is not stored to make stores more secure
 				 */
-				if (!$is_openid && ($remember || $from_cookie)) {
+				if ($remember || $from_cookie) {
 					setcookie('username', $user[0]['email'], time() + (3600*24*30));
 				}
 				if (!$GLOBALS['session']->blocked()) {

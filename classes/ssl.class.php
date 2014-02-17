@@ -80,7 +80,6 @@ class SSL {
 				'addressbook'	=> true,
 				'downloads'		=> true,
 				'download'		=> true,
-				'openid'		=> true,
 				'profile'		=> true,
 				'vieworder'		=> true,
 				'receipt'		=> true,

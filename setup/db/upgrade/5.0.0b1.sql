@@ -401,16 +401,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_newsletter` (
 	PRIMARY KEY (`newsletter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 
-CREATE TABLE IF NOT EXISTS `CubeCart_openid` (
-	`identity_id`INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`customer_id` INT UNSIGNED NOT NULL,
-	`identity_url` TINYTEXT NOT NULL,
-	`identity_type` VARCHAR(20) NOT NULL,
-	PRIMARY KEY  (`identity_id`),
-	UNIQUE KEY `identity_url` (`identity_url`(250)),
-	KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
-
 CREATE TABLE IF NOT EXISTS `CubeCart_options_set` (
 	`set_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`set_name` TEXT NOT NULL,
