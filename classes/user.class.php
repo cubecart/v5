@@ -279,16 +279,7 @@ class User {
 								}
 							}
 						} else {
-							if ($is_openid) {
-								$remove	= array();
-								foreach ($_GET as $key => $value) {
-									if (preg_match('#^openid\_#iu', $key) || $key == 'janrain_nonce') {
-										$remove[] = $key;
-									}
-								}
-							} else {
-								$remove = array('redir');
-							}
+							$remove = array('redir');
 						}
 
 						if (!empty($redir)) {
