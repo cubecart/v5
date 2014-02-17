@@ -284,7 +284,6 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 				if (($GLOBALS['db']->delete('CubeCart_customer', array('customer_id' => $customer[0]['customer_id']))) !== false) {
 					$GLOBALS['db']->delete('CubeCart_addressbook', array('customer_id' => $customer[0]['customer_id']));
 					$GLOBALS['db']->delete('CubeCart_customer_membership', array('customer_id' => $customer[0]['customer_id']));
-					$GLOBALS['db']->delete('CubeCart_openid', array('customer_id' => $customer[0]['customer_id']));
 					$GLOBALS['db']->delete('CubeCart_newsletter_subscriber', array('customer_id' => $customer[0]['customer_id']));
 					foreach ($GLOBALS['hooks']->load('admin.customer.delete') as $hook) include $hook;
 					$GLOBALS['main']->setACPNotify($lang['customer']['notify_customer_delete']);

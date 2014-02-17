@@ -832,14 +832,6 @@ optgroup > option {
     text-indent: 10px;
 }
 
-#openid_identifier {
-    background: url(../../../images/icons/openid.png) no-repeat;
-    height: 15px;
-    padding: 1px;
-    text-indent: 17px;
-    width: 250px;
-}
-
 #gui_message ul {
     list-style: disc inside none
 }

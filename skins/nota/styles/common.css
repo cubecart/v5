@@ -1003,13 +1003,6 @@ input[type="text"], input[type="password"] {
 	margin-bottom: 5px;
 	padding: 5px 3px;
 }
-
-.openid {
-	height: 18px;
-	line-height: 18px;
-	padding: 2px 3px;
-}
-
 .list {
 	padding: 5px;
 }
@@ -1036,13 +1029,6 @@ optgroup > option {
 
 .login-toggle {
 	cursor: pointer;
-}
-#openid_identifier {
-	background: url(../../images/icons/openid.png) no-repeat;
-	height: 15px;
-	padding: 1px;
-	text-indent: 17px;
-	width: 250px;
 }
 #gui_message {
 	margin-bottom: 10px;
