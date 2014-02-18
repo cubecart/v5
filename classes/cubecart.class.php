@@ -117,6 +117,7 @@ class Cubecart {
 					$product['price_unformatted'] = $product['price'];
 					$product['sale_price_unformatted'] = ($sale) ? $product['sale_price'] : null;
 					$product['price'] = $GLOBALS['tax']->priceFormat($product['price']);
+					$product['name'] = validHTML($product['name']);
 					$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
 
 					$product['ctrl_stock'] = (!$product['use_stock_level'] || $GLOBALS['config']->get('config', 'basket_out_of_stock_purchase') || ($product['use_stock_level'] && $GLOBALS['catalogue']->getProductStock($product['product_id'], null, true))) ? true : false;

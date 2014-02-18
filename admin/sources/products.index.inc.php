@@ -1313,6 +1313,7 @@ if (isset($_GET['action'])) {
 			}
 			$updated_time		= $result['updated'];
 			$result['updated'] 	= $updated_time ? $updated_time : $lang['common']['unknown'];
+			$result['name'] = validHTML($result['name']);
 			$smarty_data['products'][]	= $result;
 		}
 		$GLOBALS['smarty']->assign('PRODUCTS', $smarty_data['products']);

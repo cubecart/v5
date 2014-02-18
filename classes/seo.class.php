@@ -182,9 +182,9 @@ class SEO {
 	 * Put the META data to the GUI
 	 */
 	public function displayMetaData() {
-		$GLOBALS['smarty']->assign('META_DESCRIPTION',	$this->meta_description());
-		$GLOBALS['smarty']->assign('META_KEYWORDS',		$this->meta_keywords());
-		$GLOBALS['smarty']->assign('META_TITLE',		$this->meta_title());
+		$GLOBALS['smarty']->assign('META_DESCRIPTION',	validHTML($this->meta_description()));
+		$GLOBALS['smarty']->assign('META_KEYWORDS',		validHTML($this->meta_keywords()));
+		$GLOBALS['smarty']->assign('META_TITLE',		validHTML($this->meta_title()));
 	}
 
 	/**

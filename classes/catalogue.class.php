@@ -147,6 +147,7 @@ class Catalogue {
 				$product = $this->getProductPrice($product);
 				$this->productAssign($product, false);
 				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&amp;');
+				$product['name'] = validHTML($product['name']);
 				$vars['products'][] = $product;
 			}
 
@@ -291,6 +292,7 @@ class Catalogue {
 						$product['stock_level'] =  ($stock_variations[0]['min_stock'] == $stock_variations[0]['max_stock']) ? $stock_variations[0]['max_stock'] : $stock_variations[0]['min_stock'].' - '.$stock_variations[0]['max_stock'];
 					}
 				}
+				$product['name'] = validHTML($product['name']);
 				$product['stock_level'] = ($GLOBALS['config']->get('config', 'stock_level')=='1') ? $product['stock_level'] : false;
 				$GLOBALS['smarty']->assign('PRODUCT', $product);
 			}

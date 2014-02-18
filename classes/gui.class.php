@@ -899,6 +899,7 @@ class GUI {
 				}
 				$GLOBALS['language']->translateProduct($product);
 				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id']);
+				$product['name'] = validHTML($product['name']);
 				$vars[] = $product;
 			}
 			foreach ($GLOBALS['hooks']->load('class.gui.display_popular_products') as $hook) include $hook;
@@ -961,6 +962,7 @@ class GUI {
 			$product['sale_price_unformatted']	= ($sale) ? $product['sale_price'] : null;
 			$product['price']		= $GLOBALS['tax']->priceFormat($product['price']);
 			$product['sale_price']	= ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
+			$product['name'] = validHTML($product['name']);
 
 			$product['ctrl_purchase'] = true;
 			if ($product['use_stock_level']) {
@@ -1077,6 +1079,7 @@ class GUI {
 				$product['url']		= $GLOBALS['seo']->buildURL('prod', $product['product_id']);
 				$product['saving_unformatted'] 	= $product['saving'];
 				$product['saving'] 	= $GLOBALS['tax']->priceFormat($product['saving']);
+				$product['name'] = validHTML($product['name']);
 				$vars[]	= $product;
 			}
 		}
