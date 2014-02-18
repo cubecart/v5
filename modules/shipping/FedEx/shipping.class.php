@@ -104,6 +104,10 @@ class FedEx {
 		}
 
 	}
+	
+	public static function tracking() {
+		return false;
+	}
 
 	public function calculate() {
 
