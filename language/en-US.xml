@@ -25,5 +25,8 @@
     <group name="account">
       <string name="error_valid_mobile_phone" introduced="5.0.0"><![CDATA[Please enter a valid cell phone number.]]></string>
     </group>
+    <group name="orders">
+      <string name="shipping_tracking" introduced="5.0.0"><![CDATA[Shipment Tracking Number]]></string>
+    </group>
   </translation>
 </language>
