@@ -60,6 +60,6 @@
    </div>
    <div class="row">
       <div class="small-8 columns clearfix">
-      <input type="submit" class="button" value="{$LANG.common.search}" /> <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
+      <input type="submit" class="button" value="{$LANG.common.search}" /> <button type="reset" class="button secondary right"><i class="fa fa-refresh"></i> {$LANG.common.reset}</button>
    </div></div>
 </form>

@@ -42,7 +42,7 @@
    <div class="row">
       <div class="small-12 large-8 columns clearfix">
       	  <input type="submit" name="register" value="{$LANG.account.register}" class="button" />
-	      <input type="reset" class="button secondary right" value="{$LANG.common.reset}" />
+	      <button type="reset" class="button secondary right"><i class="fa fa-refresh"></i> {$LANG.common.reset}</button>
       </div>
    </div>
 </form>

@@ -40,8 +40,8 @@
    </div>
    {/foreach}
    <div class="clearfix">
-      <div class="right"><input type="submit" value="{$LANG.common.delete_selected}" class="button alert" /></div>
-      <div class="left"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add" class="button">{$LANG.address.address_add}</a></div>
+      <div class="right"><button type="submit" class="button alert" /><i class="fa fa-trash-o"></i> {$LANG.common.delete_selected}</button></div>
+      <div class="left"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add" class="button"><i class="fa fa-plus"></i> {$LANG.address.address_add}</a></div>
    </div>
    {/if}
    {if isset($CTRL_FORM)}
@@ -67,7 +67,7 @@
    </fieldset>
    <div>
       <input type="hidden" name="address_id" value="{$DATA.address_id}" />
-      <input type="submit" name="save" value="{$LANG.common.save}" class="button_submit" /> <input type="reset" value="{$LANG.common.reset}" class="button_submit" />
+      <input type="submit" name="save" value="{$LANG.common.save}" class="button_submit" /> <button type="reset" class="button secondary right"><i class="fa fa-refresh"></i> {$LANG.common.reset}</button>
    </div>
    {/if}
 </form>

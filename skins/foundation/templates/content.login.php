@@ -25,7 +25,7 @@
 		</div>
 		<div class="row">
 			<div class="small-12 columns clearfix">
-				<input name="submit" type="submit" value="{$LANG.account.log_in}" class="button" />
+				<button name="submit" type="submit" class="button" /><i class="fa fa-sign-in"></i> {$LANG.account.log_in}</button>
 			</div>
 		</div>
 	<input type="hidden" name="redir" value="{$REDIRECT_TO}" />
