@@ -65,7 +65,8 @@
     <string name="register" introduced="5.0.0"><![CDATA[Register]]></string>
     <string name="register_welcome" introduced="6.0.0"><![CDATA[New here? Please click the button below to register.]]></string>
     <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list]]></string>
-    <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register:]]></string>
+    <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register.]]></string>
+    <string name="login_text" introduced="5.0.0"><![CDATA[Already registered? <a href="?_a=login">Login here</a>]]></string>
     <string name="register_terms_agree" introduced="5.0.0"><![CDATA[I agree to the Terms &amp; Conditions]]></string>
     <string name="register_terms_agree_link" introduced="6.0.0"><![CDATA[I agree to the <a href="%s">Terms &amp; Conditions</a>]]></string>
     <string name="remember_me" introduced="5.0.0"><![CDATA[Remember Me?]]></string>

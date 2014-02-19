@@ -6,7 +6,7 @@
       <li>{$error}</li>
       {/foreach}
    </ul>
-   <a href="#" class="close"><i class="fa fa-times-circle"></i></a>
+   <a href="#" class="close"><i class="fa fa-times"></i></a>
 </div>
 {/if}
 {if isset($GUI_MESSAGE.notice)}
@@ -14,6 +14,6 @@
    {foreach from=$GUI_MESSAGE.notice item=notice}
    <div>{$notice}</div>
    {/foreach}
-   <a href="#" class="close"><i class="fa fa-times-circle"></i></a>
+   <a href="#" class="close"><i class="fa fa-times"></i></a>
 </div>
 {/if}

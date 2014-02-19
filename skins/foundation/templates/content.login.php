@@ -1,5 +1,5 @@
 <div class="row">
-<div class="small-6 columns">
+<div class="large-6 columns">
 <form action="{$VAL_SELF}" id="login_form" method="post">
 	<h2>{$LANG.account.login}</h2>
 		{foreach from=$LOGIN_HTML item=html}
@@ -7,13 +7,13 @@
 		{/foreach}
 		<div class="row">
 			<div class="small-12 columns">
-				<label for="login-username">{$LANG.user.email_address}</label>
+				<label for="login-username" class="show-for-medium-up">{$LANG.user.email_address}</label>
 				<input type="text" name="username" id="login-username" placeholder="{$LANG.user.email_address} {$LANG.form.required}" value="{$USERNAME}" required />
 			</div>
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
-				<label for="login-password">{$LANG.account.password}</label><input type="password" autocomplete="off" name="password" id="login-password" placeholder="{$LANG.account.password} {$LANG.form.required}" required />
+				<label for="login-password" class="show-for-medium-up">{$LANG.account.password}</label><input type="password" autocomplete="off" name="password" id="login-password" placeholder="{$LANG.account.password} {$LANG.form.required}" required />
 			</div>
 		</div>
 		<div class="row">
@@ -30,7 +30,7 @@
 	<input type="hidden" name="redir" value="{$REDIRECT_TO}" />
 </form>
 </div>
-<div class="small-6 columns">
+<div class="large-6 columns">
 <h2>{$LANG.account.register}</h2>
 <p>{$LANG.account.register_welcome}</p>
 <a href="?_a=register" class="button">{$LANG.account.register}</a>
