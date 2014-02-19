@@ -68,12 +68,12 @@
          </div>
       </div>
       <div class="row {$SECTION_NAME}_wrapper">
-         <div class="small-9 columns">
+         <div class="small-12 large-9 columns">
             {include file='templates/box.errors.php'}
             {if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
             {$PAGE_CONTENT}
          </div>
-         <div class="small-3 columns">
+         <div class="large-3 columns show-for-medium-up">
             {$RANDOM_PROD}
             {if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
             {$SALE_ITEMS}
