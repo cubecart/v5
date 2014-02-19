@@ -63,6 +63,7 @@
     <string name="recover_password" introduced="5.0.0"><![CDATA[Recover Password]]></string>
     <string name="recover_password_text" introduced="5.0.0"><![CDATA[If you have forgotten your password, put your email in the box below and we'll send instructions to regain access]]></string>
     <string name="register" introduced="5.0.0"><![CDATA[Register]]></string>
+    <string name="register_welcome" introduced="6.0.0"><![CDATA[New here? Please click the button below to register.]]></string>
     <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list]]></string>
     <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register:]]></string>
     <string name="register_terms_agree" introduced="5.0.0"><![CDATA[I agree to the Terms &amp; Conditions]]></string>
@@ -72,8 +73,8 @@
     <string name="title_acp" introduced="5.0.0"><![CDATA[Admin Control Panel]]></string>
     <string name="title_login_acp" introduced="5.0.0"><![CDATA[Store Control Panel Login]]></string>
     <string name="title_password_new" introduced="5.0.0"><![CDATA[Please enter a new password]]></string>
-    <string name="update_your_details" introduced="5.0.0"><![CDATA[Your existing details can be edited below:]]></string>
-    <string name="update_your_password" introduced="5.0.0"><![CDATA[To change your password please firstly verify your existing one then enter and confirm a new one:]]></string>
+    <string name="update_your_details" introduced="5.0.0"><![CDATA[Your existing details can be edited below.]]></string>
+    <string name="update_your_password" introduced="5.0.0"><![CDATA[To change your password please verify your existing one then enter and confirm a new one.]]></string>
     <string name="user_id" introduced="5.0.0"><![CDATA[User ID]]></string>
     <string name="username" introduced="5.0.0"><![CDATA[Username]]></string>
     <string name="validation_key" introduced="5.0.0"><![CDATA[Validation key]]></string>

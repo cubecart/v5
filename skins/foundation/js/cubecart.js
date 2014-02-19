@@ -123,16 +123,16 @@ jQuery(document).ready(function() {
 				required: false,
 				phone: true
 			},
-			password: "required",
-			  passconf: {
-				  equalTo: "#password"
-			},
 			password: {
+				required: true,
 				minlength: 6
+			},
+			passconf: {
+				  equalTo: "#password"
 			},
 			terms_agree: {
 		      required: true
-		    },
+		    }
 		},
 		  messages: {
 		    first_name: {
@@ -162,9 +162,71 @@ jQuery(document).ready(function() {
 		    },
 		    terms_agree: {
 		    	required: $('#validate_terms_agree').text()
-		    },
+		    }
 		  }
 	 });
+	 
+	 
+	 $("#profile_form").validate({
+	   rules: {
+		    first_name: {
+		      required: true
+		    },
+		    last_name: {
+		      required: true
+		    },
+		    email: {
+		    	required: true,
+		    	email: true
+			},
+			phone: {
+				required: true,
+				phone: true
+			},
+			mobile: {
+				required: false,
+				phone: true
+			},
+			passold: {
+				minlength: 6,
+			},
+			passnew: {
+				minlength: 6,
+			},
+			passconf: {
+				  equalTo: "#passnew",
+			}
+		},
+		  messages: {
+		    first_name: {
+		      required: $('#validate_firstname').text()
+		    },
+		    last_name: {
+		      required: $('#validate_lastname').text()
+		    },
+		    email: {
+		    	required: $('#validate_email').text(),
+		    	email: $('#validate_email').text()
+		    },
+		    phone: {
+		    	required: $('#validate_phone').text(),
+		    	phone: $('#validate_phone').text()
+		    },
+		    mobile: {
+		    	phone: $('#validate_mobile').text()
+		    },
+		    passold: {
+				minlength: $('#validate_password_length').text()
+			},
+			passnew: {
+				minlength: $('#validate_password_length').text()
+			},
+		    passconf: {
+		    	equalTo: $('#validate_password_mismatch').text()
+		    }
+		  }
+	 });
+	 
 	 $('input:reset').click(function() { $(this).parents('form:first').validate().resetForm(); });
 	 
 	 $('#basket-summary').click(function() {

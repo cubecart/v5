@@ -1,4 +1,3 @@
-{if isset($GUI_MESSAGE)}
 {if isset($GUI_MESSAGE.error)}
 <div data-alert class="alert-box warning">
    {$LANG.gui_message.errors_detected}
@@ -7,8 +6,7 @@
       <li>{$error}</li>
       {/foreach}
    </ul>
-   <a href="#" class="close">&times;</a>
-</div>
+   <a href="#" class="close"><i class="fa fa-times-circle"></i></a>
 </div>
 {/if}
 {if isset($GUI_MESSAGE.notice)}
@@ -16,7 +14,6 @@
    {foreach from=$GUI_MESSAGE.notice item=notice}
    <div>{$notice}</div>
    {/foreach}
-   <a href="#" class="close">&times;</a>
+   <a href="#" class="close"><i class="fa fa-times-circle"></i></a>
 </div>
-{/if}
 {/if}

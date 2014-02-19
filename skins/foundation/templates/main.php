@@ -82,17 +82,17 @@
       <footer>
          {if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} 
          <div class="row">
-            <div class="small-8 columns">
+            <div class="large-8 columns">
                {$SITE_DOCS}
             </div>
-            <div class="small-4 columns">
+            <div class="large-4 columns">
                <div class="row collapse">
-               <div class="small-12 columns">
+               <div class="large-12 columns">
                {$MAIL_LIST}
                </div>
                </div>
                <div class="row">
-               <div class="small-12 columns">
+               <div class="large-12 columns">
                {$COPYRIGHT}
                </div>
                </div>
@@ -100,8 +100,8 @@
          </div>
          <div class="row">
       
-      <div class="small-6 columns">{$CURRENCY}</div>
-      <div class="small-6 columns">{$LANGUAGE}</div>
+      <div class="large-6 columns">{$CURRENCY}</div>
+      <div class="large-6 columns">{$LANGUAGE}</div>
       </div>
          
       </footer>
@@ -118,7 +118,7 @@
       <script>
          $(document).foundation();
       </script>
-      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart/common.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart.js"></script>
       {if isset($LIVE_HELP)}{$LIVE_HELP}{/if}
    </body>
 </html>
