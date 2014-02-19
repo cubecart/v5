@@ -11,8 +11,8 @@
   <form action="{$VAL_SELF}" method="post">
 	<div class="hide">{$LANG.newsletter.enter_email_signup}</div>
 	<div class="row collapse">
-	<div class="large-9 columns"><input name="subscribe" type="text" class="textbox required" size="18" maxlength="250" title="{$LANG.newsletter.subscribe}"/></div>
-	<div class="large-3 columns"><input type="submit" class="button postfix" value="{$LANG.newsletter.subscribe}" /></div>
+	<div class="small-9 columns"><input name="subscribe" type="text" class="textbox required" size="18" maxlength="250" title="{$LANG.newsletter.subscribe}"/></div>
+	<div class="small-3 columns"><input type="submit" class="button postfix" value="{$LANG.newsletter.subscribe}" /></div>
 	</div>
   </form>
   {/if}

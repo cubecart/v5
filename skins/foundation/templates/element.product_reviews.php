@@ -7,10 +7,10 @@
    <div class="panel" itemprop="review" itemscope itemtype="http://schema.org/Review">
       <meta itemprop="datePublished" content="{$review.date_schema}">
       <div class="row">
-         <div class="large-9 columns">
+         <div class="small-9 columns">
             <h3>{$review.title}</h3>
          </div>
-         <div class="large-3 columns text-right" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+         <div class="small-3 columns text-right" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
             {for $i = 1; $i <= 5; $i++}
             {if $i <= $review.rating}
             <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="{$i}" />
@@ -39,18 +39,18 @@
       <div class="panel">
          {if $IS_USER}
          <div class="row">
-            <div class="large-12 columns"><input type="checkbox" id="rev_anon" name="review[anon]" value="1" /> <label for="rev_anon">{$LANG.catalogue.post_anonymously}</label></div>
+            <div class="small-12 columns"><input type="checkbox" id="rev_anon" name="review[anon]" value="1" /> <label for="rev_anon">{$LANG.catalogue.post_anonymously}</label></div>
          </div>
          {else}
          <div class="row">
-            <div class="large-12 columns"><label for="rev_name">{$LANG.common.name}</label><input id="rev_name" type="text" name="review[name]" value="{$WRITE.name}" class="textbox required" /></div>
+            <div class="small-12 columns"><label for="rev_name">{$LANG.common.name}</label><input id="rev_name" type="text" name="review[name]" value="{$WRITE.name}" class="textbox required" /></div>
          </div>
          <div class="row">
-            <div class="large-12 columns"><label for="rev_email">{$LANG.common.email}</label><input id="rev_email" type="text" name="review[email]" value="{$WRITE.email}" class="textbox required" /></div>
+            <div class="small-12 columns"><label for="rev_email">{$LANG.common.email}</label><input id="rev_email" type="text" name="review[email]" value="{$WRITE.email}" class="textbox required" /></div>
          </div>
          {/if}
          <div class="row">
-            <div class="large-12 columns" id="review_stars">
+            <div class="small-12 columns" id="review_stars">
                <label for="rating">{$LANG.documents.rating}</label>
                {foreach from=$RATING_STARS item=star}
                <input type="radio" id="rating_{$star.value}" name="rating" value="{$star.value}" class="rating" {$star.checked} />
@@ -58,10 +58,10 @@
             </div>
          </div>
          <div class="row">
-            <div class="large-12 columns"><label for="rev_title" class="inline">{$LANG.catalogue.review_title}</label><input id="rev_title" type="text" name="review[title]" value="{$WRITE.title}" class="textbox required" /></div>
+            <div class="small-12 columns"><label for="rev_title" class="inline">{$LANG.catalogue.review_title}</label><input id="rev_title" type="text" name="review[title]" value="{$WRITE.title}" class="textbox required" /></div>
          </div>
          <div class="row">
-            <div class="large-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" class="textbox required">{$WRITE.review}</textarea></div>
+            <div class="small-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" class="textbox required">{$WRITE.review}</textarea></div>
          </div>
          {include file='templates/content.recaptcha.php'}
       </div>

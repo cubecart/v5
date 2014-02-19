@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel show-for-medium-up">
   <h3>{$LANG.catalogue.title_popular}</h3>
   <ol>
 	{foreach from=$POPULAR item=product}

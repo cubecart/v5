@@ -1,4 +1,4 @@
-<a href="{$STORE_URL}/index.php?_a=account"><i class="fa fa-user"></i> {$LANG.account.my_account}</a>
+<a href="{$STORE_URL}/index.php?_a=account"><i class="fa fa-user"></i><span class="show-for-medium-up"> {$LANG.account.my_account}</span></a>
 <!--
 {if $IS_USER}
 <dt>{$LANG_WELCOME_BACK}</dt>

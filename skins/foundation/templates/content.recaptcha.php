@@ -1,6 +1,6 @@
 {if $RECAPTCHA}
 <div class="row">
-	<div class="large-12 columns">
+	<div class="small-12 columns">
 		<label>{$LANG.form.verify_human}</label>
 		<script type="text/javascript">
 			var RecaptchaOptions = {

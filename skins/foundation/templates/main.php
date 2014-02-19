@@ -47,32 +47,33 @@
    <body>
       {include file='templates/box.eu_cookie.php'}
       <div class="row">
-         <div class="pad-top">
-            <div class="large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
-            <div class="large-6 columns">{$SEARCH_FORM}</div>
-            <div class="large-2 columns">{$SESSION}</div>
-            <div class="large-2 columns">{$SHOPPING_CART}</div>
+         <div class="pad-topbottom">
+            <div class="small-6 large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}" /></a></div>
+            <div class="small-2 large-6 columns">{$SEARCH_FORM}</div>
+            <div class="small-2 large-2 columns">{$SESSION}</div>
+            <div class="small-2 large-2 columns">{$SHOPPING_CART}</div>
          </div>
       </div>
+      {include file='templates/small.box.search.php'}
       <div class="row">
-      <div class="large-12 columns">
+      <div class="small-12 columns">
       {$CATEGORIES}
       </div>
       </div>
       <div>
          <div class="row">
-         	<div class="large-12 columns">
+         	<div class="small-12 columns">
            {include file='templates/element.breadcrumb.php'} 
          	</div>
          </div>
       </div>
       <div class="row {$SECTION_NAME}_wrapper">
-         <div class="large-9 columns">
+         <div class="small-9 columns">
             {include file='templates/box.errors.php'}
             {if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
             {$PAGE_CONTENT}
          </div>
-         <div class="large-3 columns">
+         <div class="small-3 columns">
             {$RANDOM_PROD}
             {if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
             {$SALE_ITEMS}
@@ -81,17 +82,17 @@
       <footer>
          {if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} 
          <div class="row">
-            <div class="large-8 columns">
+            <div class="small-8 columns">
                {$SITE_DOCS}
             </div>
-            <div class="large-4 columns">
+            <div class="small-4 columns">
                <div class="row collapse">
-               <div class="large-12 columns">
+               <div class="small-12 columns">
                {$MAIL_LIST}
                </div>
                </div>
                <div class="row">
-               <div class="large-12 columns">
+               <div class="small-12 columns">
                {$COPYRIGHT}
                </div>
                </div>
@@ -99,8 +100,8 @@
          </div>
          <div class="row">
       
-      <div class="large-6 columns">{$CURRENCY}</div>
-      <div class="large-6 columns">{$LANGUAGE}</div>
+      <div class="small-6 columns">{$CURRENCY}</div>
+      <div class="small-6 columns">{$LANGUAGE}</div>
       </div>
          
       </footer>

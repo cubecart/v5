@@ -4,7 +4,7 @@
 {/if}
 {if isset($LATEST_PRODUCTS)}
 <h2>{$LANG.catalogue.latest_products}</h2>
-<ul class="large-block-grid-3 small-block-grid-1" data-equalizer>
+<ul class="small-block-grid-1 large-block-grid-3" data-equalizer>
    {foreach from=$LATEST_PRODUCTS item=product}
    <li data-equalizer-watch>
       <form action="{$VAL_SELF}" method="post" class="panel" id="add_to_basket">
@@ -26,11 +26,11 @@
          {if $product.ctrl_stock && !$CATALOGUE_MODE}
          <div class="marg-top">
          <div class="row collapse marg-top">
-         <div class="large-3 columns">
+         <div class="small-3 columns">
          <input type="text" name="quantity" value="1" class="quantity required text-center" />
          
          </div>
-         <div class="large-9 columns ">
+         <div class="small-9 columns ">
          <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix" />
          </div>
          </div>

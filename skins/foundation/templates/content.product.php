@@ -2,12 +2,12 @@
 <div itemscope itemtype="http://schema.org/Product">
 <form action="{$VAL_SELF}" method="post" id="add_to_basket">
 <div class="row">
-   <div class="large-12 columns">
+   <div class="small-12 columns">
       <h1 itemprop="name">{$PRODUCT.name}</h1>
    </div>
 </div>
 <div class="row">
-   <div class="large-7 columns">
+   <div class="small-7 columns">
       {if $PRODUCT.magnify}
       <a href="{$PRODUCT.source}" class="magnify" title="{$PRODUCT.name}" rel="">
       <img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="preview" />
@@ -26,12 +26,12 @@
       </script>
       {/if}
    </div>
-   <div class="large-5 columns">
+   <div class="small-5 columns">
       {if is_array($OPTIONS)}
       {foreach from=$OPTIONS item=option}
       {if $option.type == '0'}
       <div class="row">
-         <div class="large-12 columns">
+         <div class="small-12 columns">
             <label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
             <select name="productOptions[{$option.option_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}">
                <option value="">{$LANG.form.please_select}</option>
@@ -43,7 +43,7 @@
       </div>
       {else}
       <div class="row">
-         <div class="large-12 columns">
+         <div class="small-12 columns">
             <label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
             {if $option.type == '1'}
             <input type="text" name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}"  />
@@ -86,11 +86,11 @@
          <p>(<a href="#quantity_discounts">{$LANG.catalogue.bulk_discount}</a>)</p>
          {/if}
       <div class="row collapse">
-         <div class="large-2 columns">
+         <div class="small-2 columns">
             <input type="text" name="quantity" value="1" class="quantity required text-center" />
             <input type="hidden" name="add" value="{$PRODUCT.product_id}" />
          </div>
-         <div  class="large-10 columns">
+         <div  class="small-10 columns">
             <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button postfix" />
          </div>
       </div>

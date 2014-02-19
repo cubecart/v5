@@ -1,5 +1,5 @@
 {if $PRODUCTS}
-<div class="panel">
+<div class="panel show-for-medium-up">
   <h3>{$LANG.catalogue.title_saleitems}</h3>
   <ul>
   {foreach from=$PRODUCTS item=product}

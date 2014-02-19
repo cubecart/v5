@@ -1,5 +1,10 @@
 jQuery(document).ready(function() {
 	
+	var screen = '';
+	if(Modernizr.mq('(max-width: 40em)')) {
+		screen = 'small';
+	}
+	
 	$(".autosubmit select").change(function() {
 		$(".autosubmit").submit();
 	});
@@ -14,6 +19,16 @@ jQuery(document).ready(function() {
 		$('#review_read').slideToggle(); 
 		$('#review_write').slideToggle();
 		return false;
+	});
+	
+	$(".show-small-search").click(function() {
+		if($(this).hasClass('hidden')) {
+			$("#small-search").slideDown();
+			$(this).removeClass('hidden');
+		} else {
+			$("#small-search").slideUp();
+			$(this).addClass('hidden');
+		}
 	});
 	
 	$('input[type=radio].rating').rating({required: true});
@@ -159,6 +174,11 @@ jQuery(document).ready(function() {
 	 
 	 
 	$('form#add_to_basket').submit(function(){	
+		
+		//if(screen=='small') {
+		//	return false;
+		//}
+		
 		var add = $(this).serialize();
 		var action = $(this).attr('action').replace(/\?.*/, '');			
 		var basket = $('#mini-basket');

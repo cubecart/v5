@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel show-for-medium-up">
   <h3>{$LANG.catalogue.title_feature}</h3>
 	<a class="th" href="{$featured.url}" title="{$featured.name}">
 	  <img src="{$featured.image}" alt="{$featured.name}" />

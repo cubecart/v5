@@ -1,6 +1,6 @@
 <h3>{$LANG.common.information}</h3>
 <nav>
-<ul class="large-block-grid-3 small-block-grid-1">
+<ul class="small-block-grid-1 large-block-grid-3">
   {if isset($DOCUMENTS) && count($DOCUMENTS) > 0}
   	{foreach from=$DOCUMENTS item=document}
   <li class=""><a href="{$document.doc_url}" title="{$document.doc_name}" {if $document.doc_url_openin}target="_blank"{/if}>{$document.doc_name}</a></li>
