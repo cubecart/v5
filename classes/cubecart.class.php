@@ -1332,7 +1332,8 @@ class Cubecart {
 				unset($address['selected'], $address['checked']);
 
 				if ($address['billing'] || !$GLOBALS['config']->get('config', 'basket_allow_non_invoice_address')) {
-					$billing_address = true;
+					//$billing_address = true;
+					$billing_address = true;  $address['user_defined'] = true; // some skin required??
 					$this->_basket['billing_address'] = $address;
 					$GLOBALS['cart']->save();
 					$GLOBALS['smarty']->assign('DATA', $address);
