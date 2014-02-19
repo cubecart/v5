@@ -36,7 +36,7 @@
          </div>
          </div>
          {elseif !$CATALOGUE_MODE}
-         <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" class="button tiny disabled expand marg-top" disabled="disabled" />
+         <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" class="button tiny disabled expand marg-top" disabled />
          {/if}
          <input type="hidden" name="add" value="{$product.product_id}" />
       </form>

@@ -29,6 +29,7 @@ jQuery(document).ready(function() {
 			$("#small-search").slideUp();
 			$(this).addClass('hidden');
 		}
+		return;
 	});
 	
 	$('input[type=radio].rating').rating({required: true});
@@ -83,12 +84,18 @@ jQuery(document).ready(function() {
 		    username: {
 		      required: true,
 		      email: true
+		    },
+		    password: {
+		      required: true
 		    }
 		  },
 		  messages: {
 		    username: {
-		      required: "Please enter an email address to login",
-		      email: "Your login email address must be in the format of name@example.com"
+		      required: $('#validate_email').text(),
+		      email: $('#validate_email').text()
+		    },
+		    password: {
+		    	required: $('#empty_password').text()
 		    }
 		  }
 	 });

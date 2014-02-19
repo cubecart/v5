@@ -1,5 +1,5 @@
+<p>{$LANG.account.already_registered} <a href="?_a=login">{$LANG.account.login_here}</a></p>
 <h2>{$LANG.account.register}</h2>
-<p>{$LANG.account.register_text}<br />{$LANG.account.login_text}</p>
 <form action="{$VAL_SELF}" id="registration_form" method="post" name="registration">
    {foreach from=$LOGIN_HTML item=html}
    {$html}
@@ -36,7 +36,7 @@
    {/if}
    <div class="row">
       <div class="small-12 large-8 columns">
-         <input type="checkbox" id="mailing" name="mailing_list" value="1" {if isset($DATA.mailing_list) && $DATA.mailing_list == 1}checked="checked"{/if} /><label for="mailing">{$LANG.account.register_mailing}</label>
+         <input type="checkbox" id="mailing" name="mailing_list" value="1" {if isset($DATA.mailing_list) && $DATA.mailing_list == 1}checked{/if} /><label for="mailing">{$LANG.account.register_mailing}</label>
       </div>
    </div>
    <div class="row">

@@ -1,5 +1,5 @@
 <div class="hide" id="small-search">
-   <div class="row show-for-small-only pad-top">
+   <div class="row show-for-small-only">
       <div class="small-12 columns">
          <form action="{$ROOT_PATH}index.php" id="search_form" method="get">
             <div class="row collapse">
