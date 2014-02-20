@@ -18,10 +18,10 @@
          <td>{$order.time}<br><a href="{$STORE_URL}/index.php?_a=vieworder&amp;cart_order_id={$order.cart_order_id}" title="{$LANG.common.view_details}">{$order.cart_order_id}</a></td>
          <td>{$order.total}</td>
          <td>{$order.status.text}</td>
-         <td>
-            {if $order.make_payment}<a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$order.cart_order_id}&amp;retrieve=1" class="button tiny expand thinmarg-bottom">{$LANG.basket.complete_payment}</a><br />{/if}
+         <td width="120">
+            {if $order.make_payment}<a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$order.cart_order_id}&amp;retrieve=1" class="button tiny expand thinmarg-bottom">{$LANG.basket.complete_payment}</a>{/if}
             <a href="{$STORE_URL}/index.php?_a=vieworder&amp;cart_order_id={$order.cart_order_id}" class="button tiny expand thinmarg-bottom" title="{$LANG.common.view_details}">{$LANG.common.view_details}</a>
-            {if $order.cancel}<a href="{$STORE_URL}/index.php?_a=vieworder&amp;cancel={$order.cart_order_id}" class="button tiny alert expand nomarg" title="">{$LANG.basket.cancel_order}</a><br />{/if}
+            {if $order.cancel}<a href="{$STORE_URL}/index.php?_a=vieworder&amp;cancel={$order.cart_order_id}" class="button tiny alert expand nomarg" title="">{$LANG.basket.cancel_order}</a>{/if}
          </td>
       </tr>
       {/foreach}
