@@ -2144,6 +2144,11 @@ class Cubecart {
 					$order['country_d']	= getCountryFormat($order['country_d']);
 					$order['state']	= is_numeric($order['state']) ? getStateFormat($order['state']) : $order['state'];
 					$order['state_d']	= is_numeric($order['state_d']) ? getStateFormat($order['state_d']) : $order['state_d'];
+					
+					if($order['discount']>0) {
+						$GLOBALS['smarty']->assign('DISCOUNT', true);
+						
+					}
 					// Loop through price values, and do the formatting
 					foreach (array('discount','shipping','subtotal','total','total_tax') as $key) {
 						$order[$key] = $GLOBALS['tax']->priceFormat($order[$key], true);
