@@ -93,7 +93,7 @@
   <h3>{$LANG.hooks.title_import_code_snippets}</h3>
 	<p>{$LANG.hooks.example_code_snippet_xml}</p>
 	<fieldset><legend>{$LANG.hooks.browse_for_file}</legend>
-	<input type="file" name="code_snippet_import" id="code_snippet_import" class="" />
+	<input type="file" name="code_snippet_import" id="code_snippet_import" />
 	</fieldset>
   </div>
   {/if}

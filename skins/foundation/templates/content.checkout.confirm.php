@@ -78,7 +78,7 @@
 		var county_list = {$STATE_JSON};
 	  </script>
 	  
-	  <div class="select_register"><input type="checkbox" name="register" id="show-reg" value="1" class="" {$REGISTER_CHECKED} /> <label for="show-reg">{$LANG.account.create_account}</label></div>
+	  <div class="select_register"><input type="checkbox" name="register" id="show-reg" value="1" {$REGISTER_CHECKED} /> <label for="show-reg">{$LANG.account.create_account}</label></div>
 
 	  <fieldset id="account-reg"><legend>{$LANG.account.password}</legend>
 		<div><label for="reg_password">{$LANG.user.password_new}</label></span><input type="password" autocomplete="off" name="password" id="reg_password" class="textbox required" value="" /> *</span></div>

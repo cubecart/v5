@@ -1,5 +1,5 @@
 <div class="show-for-medium-up">
-<form action="{$ROOT_PATH}index.php" id="search_form" method="get">
+<form action="{$STORE_URL}/search.html" id="search_form" method="get">
 	<div class="row collapse">
 		<div class="small-10 columns">
 			<input name="search[keywords]" type="text" placeholder="{$LANG.search.input_default}" x-webkit-speech required />

@@ -18,7 +18,7 @@
          <div class="small-12 large-8 columns"><label for="acc_phone" class="show-for-medium-up">{$LANG.address.phone}</label><input type="text" name="phone" id="acc_phone" class="required" value="{$USER.phone}" placeholder="{$LANG.address.phone} {$LANG.form.required}" required /></div>
       </div>
       <div class="row">
-         <div class="small-12 large-8 columns"><label for="acc_mobile" class="show-for-medium-up">{$LANG.address.mobile}</label><input type="text" name="mobile" id="acc_mobile" class="" value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
+         <div class="small-12 large-8 columns"><label for="acc_mobile" class="show-for-medium-up">{$LANG.address.mobile}</label><input type="text" name="mobile" id="acc_mobile" value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
       </div>
       {if $ACCOUNT_EXISTS}
       <h2>{$LANG.account.password_change}</h2>

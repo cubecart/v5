@@ -43,6 +43,7 @@
          
       </script>{/literal}
       {/if}
+      <link rel="stylesheet" type="text/css" href="http://services.postcodeanywhere.co.uk/css/captureplus-2.10.min.css?key=bx66-gz79-nb22-ej99" /><script type="text/javascript" src="http://services.postcodeanywhere.co.uk/js/captureplus-2.10.min.js?key=bx66-gz79-nb22-ej99"></script>
    </head>
    <body>
       {include file='templates/box.eu_cookie.php'}

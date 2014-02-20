@@ -3,7 +3,7 @@
 	<p>{$INFO} {if !empty($PREFIX)} {$LANG.maintain.table_prefix}: '{$PREFIX}'{/if}</p>
 	<form action="{$VAL_SELF}" method="post">
 		<fieldset><legend>{$LANG.maintain.query_box}</legend>
-		<div><textarea name="query" id="query" rows="25" cols="100" class="">{$VAL_QUERY}</textarea></div>
+		<div><textarea name="query" id="query" rows="25" cols="100">{$VAL_QUERY}</textarea></div>
 	  <div>
 		<input type="hidden" name="execute" value="1" />
 		<input type="hidden" name="previous-tab" id="previous-tab" value="sql" />

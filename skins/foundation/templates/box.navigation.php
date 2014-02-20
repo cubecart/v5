@@ -8,10 +8,10 @@
         <li class="show-for-medium-up"><a href="index.php" title="{$LANG.common.home}"><i class="fa fa-home"></i></a></li>
         {$NAVIGATION_TREE}
         {if $CTRL_CERTIFICATES && !$CATALOGUE_MODE}
-        <li><a href="{$URL.certificates}" title="{$LANG.navigation.giftcerts}">{$LANG.navigation.giftcerts}</a></li>
+        <li><a href="{$STORE_URL}/gift-certificates.html" title="{$LANG.navigation.giftcerts}">{$LANG.navigation.giftcerts}</a></li>
         {/if}
         {if $CTRL_SALE}
-        <li><a href="{$URL.saleitems}" title="{$LANG.navigation.saleitems}">{$LANG.navigation.saleitems}</a></li>
+        <li><a href="{$STORE_URL}/sale-items.html" title="{$LANG.navigation.saleitems}">{$LANG.navigation.saleitems}</a></li>
         {/if}
      </ul>
   </section>

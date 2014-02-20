@@ -108,7 +108,7 @@
 		<tr class="crtCrossReferenceTransasction">
             <td width="140">Card Last Four</td>
         	<td width="140">
-        		<select name="CrossReference" class="" >
+        		<select name="CrossReference" >
 		            {foreach from=$CRT item=Card}<option value="{$Card.CrossReference}"{$Card.selected}>{$Card.LastFour}</option>{/foreach}
 		        </select>
     		</td>
