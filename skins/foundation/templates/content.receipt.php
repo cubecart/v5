@@ -96,7 +96,7 @@
    </tfoot>
 </table>
 
-<p><a href="{$STORE_URL}/index.php?_a=receipt&amp;cart_order_id={$SUM.cart_order_id}" target="_blank">{$LANG.confirm.print}</a></p>
+<p><a href="{$STORE_URL}/index.php?_a=receipt&amp;cart_order_id={$SUM.cart_order_id}" target="_blank"><i class="fa fa-print"></i> {$LANG.confirm.print}</a></p>
 {foreach from=$AFFILIATES item=affiliate}{$affiliate}{/foreach}
 {if $ANALYTICS}
 <!-- Google Analytics for e-commerce -->
