@@ -1750,6 +1750,8 @@ class Cubecart {
 			$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_downloads'], currentPage());
 			$content = $GLOBALS['smarty']->fetch('templates/content.downloads.php');
 			$GLOBALS['smarty']->assign('PAGE_CONTENT', $content);
+		} else {
+			httpredir('?_a=login');
 		}
 
 	}
