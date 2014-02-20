@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
 		return false;
 	});
 	
-	$('#addr_line1').blur(function() {
+	$('.address_lookup').blur(function() {
 		if($("#address_form").hasClass('hide')) {
 			$("#address_form").slideDown();
 		}
@@ -59,8 +59,40 @@ jQuery(document).ready(function() {
 		return this.optional(element) || phone.match(/^[0-9-+()]+$/);
 	}, $('#validate_phone').text());
 	
+	$.extend(jQuery.validator.messages, {
+	    required: $('#validate_field_required').text()
+	});
 	
-	$("#search_form").validate({
+	$("#addressbook_form").validate({
+	   rules: {
+		    description: {
+		      required: true
+		    },
+		    first_name: {
+		      required: true
+		    },
+		    last_name: {
+		      required: true
+		    },
+		    line1: {
+		      required: true
+		    },
+		    town: {
+		      required: true
+		    },
+		    country: {
+		      required: true
+		    },
+		    state: {
+		      required: true
+		    },
+		    postcode: {
+		    	required: true
+		    }
+		  }
+	 });
+	
+	$("#search_form, #small_search_form").validate({
 	   rules: {
 		    'search[keywords]': {
 		      required: true
