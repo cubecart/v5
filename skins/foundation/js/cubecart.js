@@ -91,6 +91,20 @@ jQuery(document).ready(function() {
 		    }
 		  }
 	 });
+	$("#lookup_order").validate({
+	   rules: {
+		    cart_order_id: {
+		      required: true
+		    },
+		    email: {
+		      required: true,
+		      email: true
+		    }
+		  },
+		  messages: {
+		     email: $('#validate_email').text()
+		  }
+	 });
 	
 	$("#search_form, #small_search_form").validate({
 	   rules: {

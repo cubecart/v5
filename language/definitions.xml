@@ -356,6 +356,7 @@
     <string name="post_anonymously" introduced="5.0.0"><![CDATA[Post Anonymously]]></string>
     <string name="price_hidden" introduced="5.0.0"><![CDATA[x.xx]]></string>
     <string name="price_per_unit" introduced="5.0.0"><![CDATA[Price per unit]]></string>
+    <string name="price_each" introduced="6.0.0"><![CDATA[Price Each]]></string>
     <string name="pricing_standard" introduced="5.0.0"><![CDATA[Retail Pricing]]></string>
     <string name="product_add" introduced="5.0.0"><![CDATA[Add Product]]></string>
     <string name="product_upc" introduced="5.0.0"><![CDATA[UPC Code]]></string>
