@@ -141,6 +141,18 @@ class GUI {
 			if (isset($css) && !empty($css) && is_array($css)) {
 				$GLOBALS['smarty']->assign('CSS', $css);
 			}
+			
+			// <head> JS
+			foreach ($GLOBALS['hooks']->load('class.gui.head_js') as $hook) include $hook;
+			if (isset($head_js) && !empty($head_js) && is_array($head_js)) {
+				$GLOBALS['smarty']->assign('HEAD_JS', $head_js);
+			}
+			
+			// <body> JS
+			foreach ($GLOBALS['hooks']->load('class.gui.body_js') as $hook) include $hook;
+			if (isset($body_js) && !empty($body_js) && is_array($body_js)) {
+				$GLOBALS['smarty']->assign('BODY_JS', $body_js);
+			}
 
 			//Put in the javascripts
 			// -- START v6 DEFUNCT

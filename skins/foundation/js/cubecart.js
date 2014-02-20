@@ -1,9 +1,10 @@
 jQuery(document).ready(function() {
-	
+	/*
 	var screen = '';
 	if(Modernizr.mq('(max-width: 40em)')) {
 		screen = 'small';
 	}
+	*/
 	
 	$(".autosubmit select").change(function() {
 		$(".autosubmit").submit();
@@ -19,6 +20,12 @@ jQuery(document).ready(function() {
 		$('#review_read').slideToggle(); 
 		$('#review_write').slideToggle();
 		return false;
+	});
+	
+	$('#addr_line1').blur(function() {
+		if($("#address_form").hasClass('hide')) {
+			$("#address_form").slideDown();
+		}
 	});
 	
 	$(".show-small-search").click(function() {
@@ -275,6 +282,59 @@ jQuery(document).ready(function() {
 			}
 		});
 		return false;
+	});
+	
+	/* Initial setup of country/state menu */
+	$('select#country-list, select.country-list').each(function(){
+		if (typeof(county_list) == 'object') {
+			var counties = county_list[$(this).val()];
+			var target = ($(this).attr('rel') && $(this).attr('id') != 'country-list') ? '#'+$(this).attr('rel') : '#state-list';
+			if (typeof(counties) == 'object') {
+				var setting	= $(target).val();
+				var select	= document.createElement('select');
+				$(target).replaceWith($(select).attr({'name':$(target).attr('name'),'id':$(target).attr('id'),'class':$(target).attr('class')}));
+				if ($(this).attr('title')) {
+					var option = document.createElement('option');
+					$('select'+target).append($(option).val('0').text($(this).attr('title')));
+				}
+				for (i in counties) {
+					var option = document.createElement('option');
+					if (setting == counties[i].name || setting == counties[i].id) {
+						$('select'+target).append($(option).val(counties[i].id).text(counties[i].name).attr('selected', 'selected'));
+					} else {
+						$('select'+target).append($(option).val(counties[i].id).text(counties[i].name));
+					}
+				}
+
+			} else {
+				if ($(this).hasClass('no-custom-zone')) $(target).attr({'disabled': 'disabled'}).val($(this).attr('title'));
+			}
+		}
+	}).change(function(){
+		if (typeof(county_list) == 'object') {
+			var list	= county_list[$(this).val()];
+			var target	= ($(this).attr('rel') && $(this).attr('id') != 'country-list') ? '#'+$(this).attr('rel') : '#state-list';
+			if (typeof(list) == 'object' && typeof(county_list[$(this).val()]) != 'undefined' && county_list[$(this).val()].length >= 1) {
+				var setting	= $(target).val();
+				var select	= document.createElement('select');
+				$(target).replaceWith($(select).attr({'name':$(target).attr('name'),'id':$(target).attr('id'),'class':$(target).attr('class')}));
+				if ($(this).attr('title')) {
+					var option = document.createElement('option');
+					$('select'+target).append($(option).val('0').text($(this).attr('title')));
+				}
+
+				for (var i=0; i<list.length; i++) {
+					var option = document.createElement('option');
+					$('select'+target).append($(option).val(list[i].id).text(list[i].name));
+				}
+				$('select'+target+' > option[value='+setting+']').attr('selected', 'selected');
+			} else {
+				var input		= document.createElement('input');
+				var replacement	= $(input).attr({'type':'text','id':$(target).attr('id'),'name': $(target).attr('name'),'class': $(target).attr('class')});
+				if ($(this).hasClass('no-custom-zone')) $(replacement).attr('disabled', 'disabled').val($(this).attr('title'));
+				$(target).replaceWith($(replacement));
+			}
+		}
 	});
 		
 });

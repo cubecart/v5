@@ -61,8 +61,10 @@
       <div class="small-12 large-8 columns"><label for="addr_company_name">{$LANG.address.company_name}</label><input type="text" name="company_name" id="addr_company_name" value="{$DATA.company_name}" placeholder="{$LANG.address.company_name}" /></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1}</label><input type="text" name="line1" id="addr_line1" value="{$DATA.line1}" required placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1} </label><input type="text" name="line1" id="addr_line1" value="{$DATA.line1}" required placeholder="{if $ADDRESS_LOOKUP}{$LANG.address.address_lookup}{else}{$LANG.address.line1} {$LANG.form.required}{/if}" autocomplete="off" autocorrect="off">
+      </div>
    </div>
+   <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="line2" id="addr_line2" value="{$DATA.line2}" placeholder="{$LANG.address.line2}" /></div>
    </div>
@@ -82,6 +84,7 @@
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_postcode">{$LANG.address.postcode}</label><input type="text" name="postcode" id="addr_postcode" value="{$DATA.postcode}" required placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>
+   </div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><input name="billing" type="checkbox" id="addr_billing" value="1" {$DATA.billing} /><label for="addr_billing">{$LANG.address.billing_address}</label> </div>

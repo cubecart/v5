@@ -12,11 +12,9 @@
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.rating.css" media="screen" />
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/vendor/jquery.magnifier.css" media="screen" />
-      {if isset($CSS)}
       {foreach from=$CSS key=css_keys item=css_files}
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen" />
       {/foreach}
-      {/if}
       <!--[if IE 7]>
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/ie7.css" media="screen" />
       <![endif]-->
@@ -43,7 +41,7 @@
          
       </script>{/literal}
       {/if}
-      <link rel="stylesheet" type="text/css" href="http://services.postcodeanywhere.co.uk/css/captureplus-2.10.min.css?key=bx66-gz79-nb22-ej99" /><script type="text/javascript" src="http://services.postcodeanywhere.co.uk/js/captureplus-2.10.min.js?key=bx66-gz79-nb22-ej99"></script>
+      {foreach from=$HEAD_JS item=js}{$js}{/foreach}
    </head>
    <body>
       {include file='templates/box.eu_cookie.php'}
@@ -71,17 +69,17 @@
       <div class="row {$SECTION_NAME}_wrapper">
          <div class="small-12 large-9 columns">
             {include file='templates/box.errors.php'}
-            {if isset($CHECKOUT_PROGRESS)}{$CHECKOUT_PROGRESS}{/if}
+            {$CHECKOUT_PROGRESS}
             {$PAGE_CONTENT}
          </div>
          <div class="large-3 columns show-for-medium-up">
             {$RANDOM_PROD}
-            {if isset($POPULAR_PRODUCTS)}{$POPULAR_PRODUCTS}{/if}
+            {$POPULAR_PRODUCTS}
             {$SALE_ITEMS}
          </div>
       </div>
       <footer>
-         {if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} 
+         {$SKIN_SELECT} 
          <div class="row">
             <div class="large-8 columns">
                {$SITE_DOCS}
@@ -106,20 +104,17 @@
       </div>
          
       </footer>
-      
-      {if isset($DEBUG_INFO)}{$DEBUG_INFO}{/if}
+      {$DEBUG_INFO}
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.rating.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.magnifier.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.validate.js"></script>
-      {foreach from=$JS_SCRIPTS key=k item=script}
-	  <script src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
-	  {/foreach}
       <script>
          $(document).foundation();
       </script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart.js"></script>
-      {if isset($LIVE_HELP)}{$LIVE_HELP}{/if}
+      {foreach from=$BODY_JS item=js}{$js}{/foreach}
+      {$LIVE_HELP}
    </body>
 </html>
