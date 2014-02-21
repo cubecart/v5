@@ -54,7 +54,7 @@ footer h3 {
 }
 /* End Mini Basket */
 #debug-info {
-	font-family: Verdana, Arial, Helvetica; 
+	font-family: "Courier New", Courier, monospace; 
 	font-size:10px; 
 	border-top: 5px dashed #C0C0C0; 
 	color: black; 

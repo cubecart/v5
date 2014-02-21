@@ -230,7 +230,7 @@ class Debug {
 	 */
 	public function display($return = false, $glue = "\n") {
 		// Cheeky hack for the w3c validator - we don't want it seeing the debug output
-		if (strstr($_SERVER['HTTP_USER_AGENT'], 'W3C_Validator') || get_ip_address() == '128.30.52.71') {
+		if (strstr($_SERVER['HTTP_USER_AGENT'], 'W3C_Validator')) {
 			$this->_enabled = false;
 		}
 
