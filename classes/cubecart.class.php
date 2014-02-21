@@ -2320,7 +2320,7 @@ class Cubecart {
 	 */
 	private function _receipt() {
 		/* !Print a receipt */
-		if (isset($_GET['cart_order_id'])) {
+		if (isset($_GET['cart_order_id']) && $GLOBALS['user']->is()) {
 		
 			$customer_id = $GLOBALS['user']->getId();
 			if(!$customer_id) {
@@ -2390,7 +2390,7 @@ class Cubecart {
 			$GLOBALS['debug']->supress();
 			exit;
 		} else {
-			httpredir('index.php');
+			httpredir('?_a=login');
 		}
 	}
 
