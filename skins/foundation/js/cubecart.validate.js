@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
       required: $('#validate_field_required').text()
    });
 
-   $("#newsletter_form").validate({
+   $("#newsletter_form, #newsletter_form_box").validate({
       rules: {
          subscribe: {
             required: true,

@@ -1,4 +1,5 @@
-<h2>{$LANG.account.your_order}: #{$SUM.cart_order_id} - {$SUM.order_status}</h2>
+<h2>{$LANG.account.your_order}: #{$SUM.cart_order_id}</h2>
+<div class="rubber_stamp">{$SUM.order_status}</div>
 <div class="text-center">{if $CTRL_PAYMENT}<a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$SUM.cart_order_id}">{$LANG.basket.complete_payment}</a> |{/if} <a href="{$STORE_URL}/index.php?_a=vieworder">{$LANG.account.your_orders}</a></div>
 <h3>{$LANG.basket.customer_info}</h3>
 <div class="row">
@@ -23,6 +24,7 @@
       {$SUM.country_d}
    </div>
 </div>
+
 {if !empty($SUM.customer_comments)}
 <h3>{$LANG.common.comments}</h3>
 <p>&quot;{$SUM.customer_comments}&quot;</p>
