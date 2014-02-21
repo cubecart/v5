@@ -564,9 +564,6 @@ class Website_Payments_Pro  {
 		httpredir($this->_api_paypal_url.$this->_token);
 	}
 
-	################################################
-	/* !Protected Methods */
-
 	final protected function nvp_request($method_name = null, $nvp_data = array()) {
 		if (!empty($method_name) && is_array($nvp_data)) {
 			$nvp_basic	= array(

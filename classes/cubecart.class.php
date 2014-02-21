@@ -270,7 +270,7 @@ class Cubecart {
 
 				case 'cancel':
 					$GLOBALS['smarty']->assign('SECTION_NAME', 'checkout');
-					/* !Cancel payment */
+					// Cancel payment
 					foreach ($GLOBALS['hooks']->load('class.cubecart.construct.cancel') as $hook) include $hook;
 				break;
 
@@ -293,7 +293,7 @@ class Cubecart {
 
 				case 'document':
 					$GLOBALS['smarty']->assign('SECTION_NAME', 'document');
-					/* !Site Documents */
+					// Site Documents
 					if (($document = $this->getDocument($_GET['doc_id'])) !== false) {
 						$GLOBALS['gui']->addBreadcrumb($document['doc_name'], currentPage());
 						$GLOBALS['smarty']->assign('DOCUMENT', $document);
@@ -384,7 +384,7 @@ class Cubecart {
 	 * Display addressbook
 	 */
 	private function _addressbook() {
-		/* !Address Book */
+		// Address Book
 		$GLOBALS['user']->is(true);
 
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_account'], 'index.php?_a=account');
@@ -488,12 +488,12 @@ class Cubecart {
 	 * Display user account
 	 */
 	private function _account() {
-		/* !Display profile overview */
+		// Display profile overview
 		$GLOBALS['user']->is(true);
 
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_account'], 'index.php?_a=account');
 
-		/* !Custom Account Menu Items */
+		// Custom Account Menu Items
 		$account_list_hooks = array();
 		foreach ($GLOBALS['hooks']->load('class.cubecart.account.list') as $hook) include $hook;
 		$GLOBALS['smarty']->assign('ACCOUNT_LIST_HOOKS', $account_list_hooks);
@@ -506,7 +506,7 @@ class Cubecart {
 	 * Display basket
 	 */
 	private function _basket($editable = true) {
-		/* !Basket */
+		// Basket
 		foreach ($GLOBALS['hooks']->load('class.cubecart.pre_basket') as $hook) include $hook;
 		
 		$this->_checkoutProcess();
@@ -618,7 +618,7 @@ class Cubecart {
 	 * Display product categories
 	 */
 	private function _category() {
-		/* !Category */
+		// Category
 		$query = array();
 		if (isset($_POST['sort'])) {
 			list($field, $order) = explode('|', $_POST['sort']);
@@ -713,7 +713,7 @@ class Cubecart {
 	 * Display certificates
 	 */
 	private function _certificates() {
-		/* !Gift Certificates */
+		// Gift Certificates
 
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.certificates') as $hook) include $hook;
 
@@ -762,7 +762,6 @@ class Cubecart {
 	 * Display checkout
 	 */
 	private function _checkout() {
-		/* !Checkout */
 
 		// Update basket if we need to!
 		$GLOBALS['cart']->update();
@@ -1085,7 +1084,6 @@ class Cubecart {
 	 * Display final checkout process
 	 */
 	private function _complete() {
-		/* !Order Complete */
 
 		$this->_basket =& $GLOBALS['cart']->basket;
 
@@ -1199,7 +1197,7 @@ class Cubecart {
 	 * Display contact page
 	 */
 	private function _contact() {
-		/* !Contact Form */
+		// Contact Form
 		$contact = $GLOBALS['config']->get('Contact_Form');
 		if ($contact && $contact['status']) {
 			$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->documents['document_contact'], currentPage());
@@ -1502,7 +1500,8 @@ class Cubecart {
 
 			$GLOBALS['tax']->displayTaxes();
 			$GLOBALS['smarty']->assign('TOTAL', $GLOBALS['tax']->priceFormat($GLOBALS['cart']->getTotal()));
-			$GLOBALS['smarty']->assign('CHECKOUT_BUTTON', $GLOBALS['language']->checkout['checkout']);
+			$checkout_button = (CC_SSL) ? $GLOBALS['language']->checkout['secure_checkout'] : $GLOBALS['language']->checkout['checkout'];
+			$GLOBALS['smarty']->assign('CHECKOUT_BUTTON', $checkout_button);
 			if ($this->_basket['weight'] > 0) {
 				$GLOBALS['smarty']->assign('BASKET_WEIGHT', ($GLOBALS['config']->get('config', 'show_basket_weight')) ? $this->_basket['weight'].$GLOBALS['config']->get('config','product_weight_unit') : false);
 			}
@@ -1687,7 +1686,7 @@ class Cubecart {
 	 * Download
 	 */
 	private function _download() {
-		/* !Downloads */
+
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.download') as $hook) include $hook;
 
 		$filemanager = new FileManager(FileManager::FM_FILETYPE_DL);
@@ -1758,7 +1757,7 @@ class Cubecart {
 		if(!isset($_REQUEST['gateway']) || (isset($_GET['cart_order_id']) && $_GET['retrieve'])) {
 			Order::getInstance()->placeOrder();
 		}
-		/* !Payment Gateways */
+
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.gateway') as $hook) include $hook;
 		// This has to set to _REQUEST due to HSBC
 		$gateway = (isset($_REQUEST['gateway']) && !empty($_REQUEST['gateway'])) ? $_REQUEST['gateway'] : false;
@@ -1857,7 +1856,6 @@ class Cubecart {
 	 * Login
 	 */
 	private function _login() {
-		/* !User Login */
 		$GLOBALS['session']->setBack();
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['login'], $GLOBALS['seo']->buildURL('login'));
 		//If there is a cookie for the username then use it in the login
@@ -1868,7 +1866,7 @@ class Cubecart {
 			$GLOBALS['smarty']->assign('REMEMBER', false);
 		}
 
-		/* !Login Routines */
+		// Login Routines
 		$login_html = array();
 		foreach ($GLOBALS['hooks']->load('class.cubecart.login') as $hook) include $hook;
 		$GLOBALS['smarty']->assign('LOGIN_HTML', $login_html);
@@ -1897,7 +1895,7 @@ class Cubecart {
 	 * Newsletter
 	 */
 	private function _newsletter() {
-		/* !Newsletters */
+		// Newsletters
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_account'], 'index.php?_a=account');
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->newsletter['newsletters'], '?_a=newsletter');
 		$newsletter	= Newsletter::getInstance();
@@ -1983,7 +1981,7 @@ class Cubecart {
 	 * Orders
 	 */
 	private function _orders() {
-		/* !Order history */
+		// Order history
 		$template = 'templates/content.orders.php';
 		if ($GLOBALS['user']->is()) {
 			$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_account'], 'index.php?_a=account');
@@ -2171,8 +2169,6 @@ class Cubecart {
 	 * Products
 	 */
 	private function _product() {
-		/* !Product */
-
 		if (($product = $GLOBALS['catalogue']->getProductData($_GET['product_id'])) === false) {
 			return;
 		}
@@ -2248,7 +2244,7 @@ class Cubecart {
 	 * Profile
 	 */
 	private function _profile() {
-		/* !Customer Profile */
+
 		$GLOBALS['user']->is(true);
 
 		if ($GLOBALS['session']->get('temp_profile_required')) {
@@ -2319,7 +2315,6 @@ class Cubecart {
 	 * Receipt
 	 */
 	private function _receipt() {
-		/* !Print a receipt */
 		if (isset($_GET['cart_order_id']) && $GLOBALS['user']->is()) {
 		
 			$customer_id = $GLOBALS['user']->getId();
@@ -2422,7 +2417,6 @@ class Cubecart {
 	 * Recovery
 	 */
 	private function _recovery() {
-		/* !Password Reset */
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['recover_password'], currentPage());
 		
 		$GLOBALS['smarty']->assign('SECTION_NAME', 'recovery');
@@ -2449,15 +2443,11 @@ class Cubecart {
 	 * Register
 	 */
 	private function _register() {
-		/* !Register */
 
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['register'], $GLOBALS['seo']->buildURL('register'));
 		
-		//$GLOBALS['smarty']->assign('SECTION_NAME', 'register');
-		
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.register') as $hook) include $hook;
 
-		/* !Login Routines */
 		$login_html = array();
 		foreach ($GLOBALS['hooks']->load('class.cubecart.login') as $hook) include $hook;
 		$GLOBALS['smarty']->assign('LOGIN_HTML', $login_html);
@@ -2506,7 +2496,7 @@ class Cubecart {
 	 * Search
 	 */
 	private function _search() {
-		 /* !Search */
+	
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.search') as $hook) include $hook;
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->common['search'], currentPage());
 		

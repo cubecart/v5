@@ -15,7 +15,7 @@
       {foreach from=$CSS key=css_keys item=css_files}
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen">
       {/foreach}
-      <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       
       <meta http-equiv="Content-Type" content="text/html;charset={$CHARACTER_SET}">
       <meta name="description" content="{if isset($META_DESCRIPTION)}{$META_DESCRIPTION}{/if}">

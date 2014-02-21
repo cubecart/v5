@@ -39,7 +39,7 @@ $GLOBALS['smarty']->assign('CURRENT_CAT', (isset($_GET['cat_id'])) ? $_GET['cat_
 $filemanager = new FileManager(FileManager::FM_FILETYPE_IMG);
 
 if (isset($_POST['save']) && Admin::getInstance()->permissions('products', CC_PERM_EDIT)) {
-	/* !Save Product */
+	// Save Product
 	$suppress 	= false;
 	// updated acts like a switch so that we know if the product has been changed or not.
 	$updated	= false;
@@ -510,7 +510,7 @@ if (isset($_POST['translate']) && isset($_POST['product_id']) && is_numeric($_PO
 }
 
 if (((isset($_GET['delete']) && !empty($_GET['delete'])) || is_array($_POST['delete'])) && Admin::getInstance()->permissions('products', CC_PERM_DELETE)) {
-	/* !Delete Product */
+	// Delete Product
 	foreach ($GLOBALS['hooks']->load('admin.product.delete') as $hook) include $hook;
 	
 	if(is_array($_POST['delete'])) {
@@ -556,7 +556,7 @@ if (((isset($_GET['delete']) && !empty($_GET['delete'])) || is_array($_POST['del
 }
 
 if (isset($_POST['status']) && is_array($_POST['status']) && Admin::getInstance()->permissions('products', CC_PERM_EDIT)) {
-	/* !Update Status */
+	// Update Status
 	foreach ($_POST['status'] as $product_id => $status) {
 		$GLOBALS['db']->update('CubeCart_inventory', array('status' => $status), array('product_id' => $product_id));
 	}
@@ -712,7 +712,7 @@ foreach ($GLOBALS['hooks']->load('admin.product.pre_display') as $hook) include 
 $GLOBALS['smarty']->assign('ADD_EDIT_PRODUCT', $page_title);
 
 if (isset($_GET['action'])) {
-	/* !Display product info */
+	// Display product info
 	$GLOBALS['main']->addTabControl($lang['common']['general'], 'general');
 	$GLOBALS['main']->addTabControl($lang['common']['description'], 'description');
 
@@ -1182,7 +1182,7 @@ if (isset($_GET['action'])) {
 		$GLOBALS['smarty']->assign('DISPLAY_PRODUCT_FORM', true);
 	}
 } else {
-	/* !List all products */
+	// List all products
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_product_list'], 'general');
 	$GLOBALS['main']->addTabControl($lang['catalogue']['product_add'], null, currentPage(null, array('action' => 'add')));
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_category_assign_to'], null, currentPage(null, array('node' => 'assign')));
