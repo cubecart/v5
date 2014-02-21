@@ -1899,12 +1899,13 @@ class Cubecart {
 	private function _newsletter() {
 		/* !Newsletters */
 		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->account['your_account'], 'index.php?_a=account');
-		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->newsletter['newsletters'], currentPage());
+		$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->newsletter['newsletters'], '?_a=newsletter');
 		$newsletter	= Newsletter::getInstance();
 		// Display Newsletter archive
 		if (isset($_GET['newsletter_id']) && is_numeric($_GET['newsletter_id'])) {
 			// Show a newsletter from the archive
 			if (($content = $GLOBALS['db']->select('CubeCart_newsletter', false, array('newsletter_id' => (int)$_GET['newsletter_id'], 'status' => 1))) !== false) {
+				$GLOBALS['gui']->addBreadcrumb($content[0]['subject'], '?_a=newsletter&newsletter_id='.(int)$_GET['newsletter_id']);
 				$GLOBALS['smarty']->assign('NEWSLETTER', $content[0]);
 				$GLOBALS['smarty']->assign('CTRL_VIEW', true);
 			} else {
@@ -1967,6 +1968,7 @@ class Cubecart {
 			if (($archive = $GLOBALS['db']->select('CubeCart_newsletter', false, array('status' => 1))) !== false) {
 				foreach ($archive as $content) {
 					$content['view']	= currentPage(array('subscribed'), array('newsletter_id' => $content['newsletter_id']));
+					$content['date_sent'] = formatTime(strtotime($content['date_sent']));
 					$vars['newsletters'][] = $content;
 				}
 				$GLOBALS['smarty']->assign('NEWSLETTERS', $vars['newsletters']);

@@ -1329,25 +1329,26 @@
   <group name="newsletter">
     <string name="click_to_subscribe" introduced="5.0.0"><![CDATA[Click here to subscribe.]]></string>
     <string name="click_to_unsubscribe" introduced="5.0.0"><![CDATA[Click here to unsubscribe.]]></string>
-    <string name="customer_is_subscribed" introduced="5.0.0"><![CDATA[You are currently subscribed to our newsletter.]]></string>
-    <string name="customer_not_subscribed" introduced="5.0.0"><![CDATA[You are not currently being sent our newsletter by email.]]></string>
+    <string name="customer_is_subscribed" introduced="5.0.0"><![CDATA[You are subscribed to recieve to our newsletter.]]></string>
+    <string name="customer_not_subscribed" introduced="5.0.0"><![CDATA[You are not subscribed to our newsletter.]]></string>
     <string name="customer_subscribed" introduced="5.0.0"><![CDATA[Subscribed to newsletter?]]></string>
     <string name="email_subscribed" introduced="5.0.0"><![CDATA[Your email address has been subscribed to our mailing list.]]></string>
     <string name="email_invalid" introduced="5.0.0"><![CDATA[The email address entered was not valid.]]></string>
     <string name="enter_email_signup" introduced="5.0.0"><![CDATA[Enter your e-mail address to receive our newsletter]]></string>
-    <string name="enter_email_subscribe_unsubscribe" introduced="5.0.0"><![CDATA[Please enter your email address below to subscribe or unsubscribe to our newsletter.]]></string>
+    <string name="enter_email_subscribe_unsubscribe" introduced="5.0.0"><![CDATA[Please enter your email address below to subscribe or to be removed from our mailing list.]]></string>
     <string name="error_email_verified" introduced="5.0.0"><![CDATA[There was an error verifying your email address.]]></string>
     <string name="error_subscribed" introduced="5.0.0"><![CDATA[You have either susbcribed already, or the email address entered was not valid.]]></string>
     <string name="mailing_list" introduced="5.0.0"><![CDATA[Mailing List]]></string>
     <string name="newsletters" introduced="5.0.0"><![CDATA[Newsletters]]></string>
-    <string name="no_archived_newsletters" introduced="5.0.0"><![CDATA[There are no archived newsletters available.]]></string>
+    <string name="no_archived_newsletters" introduced="5.0.0"><![CDATA[There are no archived newsletters right now.]]></string>
     <string name="notify_email_verified" introduced="5.0.0"><![CDATA[Your email address has been verified.]]></string>
     <string name="notify_subscribed" introduced="5.0.0"><![CDATA[Your email address has been added to our mailing list.]]></string>
     <string name="notify_unsubscribed" introduced="5.0.0"><![CDATA[Your email address has been removed from our mailing list.]]></string>
     <string name="subscribe" introduced="5.0.0"><![CDATA[Subscribe]]></string>
+    <string name="unsubscribe" introduced="6.0.0"><![CDATA[Unsubscribe]]></string>
     <string name="subscribe_now" introduced="5.0.0"><![CDATA[Subscribe Now]]></string>
     <string name="subscription" introduced="5.0.0"><![CDATA[Subscription]]></string>
-    <string name="view_newsletter_archive" introduced="5.0.0"><![CDATA[View our Newsletter archive.]]></string>
+    <string name="view_newsletter_archive" introduced="5.0.0"><![CDATA[Our previous newsletters can be found below.]]></string>
   </group>
   <group name="notification">
     <string name="confirm_cancel" introduced="5.2.8"><![CDATA[Are you sure you want to cancel?]]></string>

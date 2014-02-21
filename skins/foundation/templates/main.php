@@ -55,15 +55,15 @@
       </div>
       {include file='templates/small.box.search.php'}
       <div class="row">
-      <div class="small-12 columns">
-      {$CATEGORIES}
-      </div>
+         <div class="small-12 columns">
+            {$CATEGORIES}
+         </div>
       </div>
       <div>
          <div class="row">
-         	<div class="small-12 columns">
-           {include file='templates/element.breadcrumb.php'} 
-         	</div>
+            <div class="small-12 columns">
+               {include file='templates/element.breadcrumb.php'} 
+            </div>
          </div>
       </div>
       <div class="row {$SECTION_NAME}_wrapper">
@@ -86,23 +86,21 @@
             </div>
             <div class="large-4 columns">
                <div class="row collapse">
-               <div class="large-12 columns">
-               {$MAIL_LIST}
-               </div>
+                  <div class="large-12 columns">
+                     {$MAIL_LIST}
+                  </div>
                </div>
                <div class="row">
-               <div class="large-12 columns">
-               {$COPYRIGHT}
-               </div>
+                  <div class="large-12 columns">
+                     {$COPYRIGHT}
+                  </div>
                </div>
             </div>
          </div>
          <div class="row">
-      
-      <div class="large-6 columns">{$CURRENCY}</div>
-      <div class="large-6 columns">{$LANGUAGE}</div>
-      </div>
-         
+            <div class="large-6 columns">{$CURRENCY}</div>
+            <div class="large-6 columns">{$LANGUAGE}</div>
+         </div>
       </footer>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
@@ -113,6 +111,7 @@
          $(document).foundation();
       </script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart.validate.js"></script>
       {foreach from=$BODY_JS item=js}{$js}{/foreach}
       {$LIVE_HELP}
       {$DEBUG_INFO}
