@@ -3,7 +3,7 @@
 <head>
   <title>{$PAGE_TITLE}</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/print.css" media="screen,print" />
+  <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.print.css" media="screen,print" />
 </head>
 <body onload="window.print();">
   {foreach from=$LIST_ORDERS item=order}
@@ -16,7 +16,8 @@
 	  		{$order.line1_d} <br />
 	  		{if !empty($order.line2_d)}{$order.line2_d}<br />{/if}
 	  		{$order.town_d}<br />
-	  		{$order.state_d}, {$order.postcode_d}<br />
+	  		{$order.state_d},<br />
+	  		{$order.postcode_d}<br />
 	  		{$order.country_d}
 		  </div>
 		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
