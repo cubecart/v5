@@ -74,6 +74,11 @@ class Autoloader {
 			return self::autoload_cache();
 		}
 
+		//If its smarty we need to use the smarty back compatibility loader
+		if ($class == 'SmartyBC') {
+			require_once CC_INCLUDES_DIR.'lib'.CC_DS.'smarty'.CC_DS.'SmartyBC.class.php';
+			return true;
+		}
 		//If its smarty we need to use the smarty loader
 		if ($class == 'Smarty') {
 			require_once CC_INCLUDES_DIR.'lib'.CC_DS.'smarty'.CC_DS.'Smarty.class.php';
