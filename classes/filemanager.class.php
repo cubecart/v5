@@ -237,7 +237,51 @@ class FileManager {
 			return true;
 		}
 	}
-
+	/**
+	 * Get file info
+	 *
+	 * @param string $id
+	 */
+	public function getFileInfo($product_id) {
+		$product = $GLOBALS['db']->select('CubeCart_inventory', array('digital', 'digital_path'), array('product_id' => $product_id), false, 1);		$GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']));
+		
+		if (empty($product[0]['digital_path'])) {
+			if (($files = $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']))) !== false) {
+				$data	= $files[0];
+				$data['is_url']	= false;
+				$data['file']	= $this->_manage_root.CC_DS.$data['filepath'].CC_DS.$data['filename'];
+				return $data;
+			}
+		} else {
+			if (filter_var($product[0]['digital_path'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+				$data	= array(
+					'mimetype'	=> 'application/octet-stream',
+					'filename'	=> basename($product[0]['digital_path']),
+					'filesize'	=> null,
+					'md5hash'	=> md5($product[0]['digital_path']),
+					'is_url'	=> true,
+					'file'		=> $product[0]['digital_path'],
+					'url'		=> parse_url($product[0]['digital_path'])
+				);
+				return $data;
+			} else if (file_exists($product[0]['digital_path'])) {
+				$data	= array(
+					'mimetype'	=> 'application/octet-stream',
+					'filename'	=> basename($product[0]['digital_path']),
+					'filepath'	=> dirname($product[0]['digital_path']),
+					'filesize'	=> filesize($product[0]['digital_path']),
+					'md5hash'	=> md5_file($product[0]['digital_path']),
+					'is_url'	=> true
+				);
+				$data['file']	= $product[0]['digital_path'];
+			}
+			return $data;
+		}
+		return false;
+	} 
+	 
+	 
+	
 	/**
 	 * Deliver download file
 	 *
@@ -258,43 +302,11 @@ class FileManager {
 					// Maximum download limit has been reached
 					if ($GLOBALS['config']->get('config','download_count') > 0 && (int)$download['downloads'] >= $GLOBALS['config']->get('config','download_count'))	$error = FM_DL_ERROR_MAXDL;
 					if (!empty($error)) return false;
-					if (($product = $GLOBALS['db']->select('CubeCart_inventory', array('digital', 'digital_path'), array('product_id' => $download['product_id']), false, 1)) !== false) {
-						$is_url		= false;
-						if (empty($product[0]['digital_path'])) {
-
-							if (($files = $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']))) !== false) {
-								$data	= $files[0];
-								$file	= $this->_manage_root.CC_DS.$data['filepath'].CC_DS.$data['filename'];
-							}
-						} else {
-							if (filter_var($product[0]['digital_path'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
-								// Parse URL elements
-								$is_url	= true;
-								$url	= parse_url($product[0]['digital_path']);
-								$file	= $product[0]['digital_path'];
-
-								$options = array($url['scheme']	=> array('method'	=> 'GET'));
-								$context = stream_context_create($options);
-								$data	= array(
-									'mimetype'	=> 'application/octet-stream',
-									'filename'	=> basename($product[0]['digital_path']),
-									'filesize'	=> null,
-									'md5hash'	=> md5($product[0]['digital_path']),
-								);
-							} else if (file_exists($product[0]['digital_path'])) {
-
-								$data	= array(
-									'mimetype'	=> 'application/octet-stream',
-									'filename'	=> basename($product[0]['digital_path']),
-									'filepath'	=> dirname($product[0]['digital_path']),
-									'filesize'	=> filesize($product[0]['digital_path']),
-									'md5hash'	=> md5_file($product[0]['digital_path']),
-								);
-								$file	= $product[0]['digital_path'];
-							}
-						}
+					if ($data = $this->getFileInfo($download['product_id']) !== false) {
+						
+						
 						// Deliver file contents
-						if (isset($file) && ($is_url || file_exists($file))) { 
+						if (isset($data['file']) && ($data['is_url'] || file_exists($data['file']))) { 
 							if($is_url) {
 								$GLOBALS['db']->update('CubeCart_downloads', array('downloads'	=> $download['downloads']+1), array('digital_id' => $download['digital_id']));
 								httpredir($file);

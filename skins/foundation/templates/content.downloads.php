@@ -5,8 +5,8 @@
   <table>
   <thead>
   <tr>
-  	<td>Download Name</td>
-  	<td>Product Name</td>
+  	<td>{$LANG.account.download_filename}</td>
+  	<td>{$LANG.account.download_expires}</td>
   	<td>{$LANG.account.download_count}</td>
   	<td></td>
   </tr>
@@ -15,17 +15,20 @@
   {foreach from=$DOWNLOADS item=download}
 	  <tr>
 	  {if $download.deleted}
-	  <td colspan="">{$LANG.account.download_deleted}</td>
-	  {elseif $download.active}
-	  <td><a href="{$STORE_URL}/index.php?_a=download&amp;accesskey={$download.accesskey}" title="{$LANG.common.download}"><i class="fa fa-download"> {$download.filename}</i></a></td>
-	  <td><a href="{$download.product_url}" title="{$LANG.catalogue.view_product}">{$download.name}</a></td>
-	  <td>{$download.expires}</td>
-	  <td>{$download.downloads}/{$MAX_DOWNLOADS}</td>
-  
-		{else}
-  {$LANG.common.expired}
-	<a href="{$download.product_url}" title="View product">{$download.name}</a>
-	<strong>{$LANG.account.download_expired}: {$download.expires} - <strong>{$LANG.account.download_count}</strong>: {$download.downloads}/{$MAX_DOWNLOADS}	  
+	  <td colspan="4">{$LANG.account.download_deleted}</td>
+	  {else}
+	  <td>
+	  <h4>{$download.name}</h4>
+	  {if $download.active}
+	  <a href="{$STORE_URL}/index.php?_a=download&amp;accesskey={$download.accesskey}" title="{$LANG.common.download}"><i class="fa fa-download"> {$download.file_info.filename}</i></a>
+	  {else}
+	  <i class="fa fa-download"> {$download.file_info.filename}</i>
+	  {/if}
+	  </td>
+	  <td> {if $download.active}{$download.expires}{else}{$LANG.account.download_expired}{/if}</td>
+	  <td class="text-center">{$download.downloads}/{$MAX_DOWNLOADS}</td>
+	  <td><a href="{$STORE_URL}/index.php?_a=vieworder&amp;cart_order_id={$download.cart_order_id}" class="button secondary tiny expand thinmarg-bottom" title="{$LANG.common.view_details}">{$LANG.common.view_details}</a>
+	  {if $download.active}<a href="{$STORE_URL}/index.php?_a=download&amp;accesskey={$download.accesskey}" class="button tiny expand" title="{$LANG.common.view_details}">{$LANG.common.download}</a>{/if}</td>
 	{/if}
 	  </tr>
   {foreachelse}
@@ -38,7 +41,6 @@
 {else}
 <form action="{$VAL_SELF}" method="post">
   <h2>{$LANG.catalogue.redeem_download_code}</h2>
-  <p></p>
   <fieldset>
 	<div><label for="download-code">{$LANG.catalogue.download_access_key}</label><span><input type="text" name="accesskey" id="download-code" value="" /></span></div>
   </fieldset>

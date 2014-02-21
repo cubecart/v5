@@ -1690,9 +1690,9 @@ class Cubecart {
 		/* !Downloads */
 		foreach ($GLOBALS['hooks']->load('class.cubecart.construct.download') as $hook) include $hook;
 
+		$filemanager = new FileManager(FileManager::FM_FILETYPE_DL);
 		if (isset($_REQUEST['accesskey']) && !empty($_REQUEST['accesskey'])) {
 			// Supress the debugger output
-			$filemanager = new FileManager(FileManager::FM_FILETYPE_DL);
 			$GLOBALS['debug']->supress();
 			if ($filemanager->deliverDownload($_REQUEST['accesskey'], $error)) {
 				exit;
@@ -1726,6 +1726,7 @@ class Cubecart {
 				$GLOBALS['smarty']->assign('MAX_DOWNLOADS', (int)$GLOBALS['config']->get('config', 'download_count'));
 				foreach ($downloads as $download) {
 					if (($product = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('id' => $download['order_inv_id']))) !== false) {
+						$download['file_info'] = $filemanager->getFileInfo($download['product_id']);
 						$download['expires'] = ($download['expire'] > 0) ? formatTime($download['expire']) : $GLOBALS['language']->common['never'];
 						$download['active'] = ($download['expire'] > 0 && $download['expire'] < time() || $download['downloads'] >= $GLOBALS['config']->get('config', 'download_count')) ? false : true;
 						$download['deleted'] = false;
