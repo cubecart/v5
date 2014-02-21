@@ -29,6 +29,7 @@ $GLOBALS['smarty']->compile_dir  = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->config_dir   = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->cache_dir    = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->error_reporting = E_ALL & ~E_NOTICE;
+$GLOBALS['smarty']->debugging = false;
 //Initialize language
 $GLOBALS['language'] = Language::getInstance();
 //Initialize hooks
