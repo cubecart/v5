@@ -235,7 +235,7 @@ class Debug {
 		}
 
 		if ($this->_display && $this->_enabled) {
-			$output[] = '<div id="debug-info" style="font-family: Verdana, Arial, Helvetica; font-size:10px; border: 1px solid black; padding:3px; color: black; background-color:#E7E7E7; clear: both; margin: 15px;">';
+			$output[] = '<div id="debug-info" class="pad">';
 
 			// Display the PHP errors
 			$output[] = '<strong>PHP</strong>:<br />'.$this->_errorDisplay().'<hr size="1" />';

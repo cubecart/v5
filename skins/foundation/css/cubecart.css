@@ -50,6 +50,13 @@ footer h3 {
 	margin-left: 115px
 }
 /* End Mini Basket */
+#debug-info {
+	font-family: Verdana, Arial, Helvetica; 
+	font-size:10px; 
+	border-top: 5px dashed #C0C0C0; 
+	color: black; 
+	background-color:#E7E7E7; 
+}
 
 
 /* HELPERS :-) */

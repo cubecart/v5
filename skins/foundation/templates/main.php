@@ -104,7 +104,6 @@
       </div>
          
       </footer>
-      {$DEBUG_INFO}
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.rating.js"></script>
@@ -116,5 +115,6 @@
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/cubecart.js"></script>
       {foreach from=$BODY_JS item=js}{$js}{/foreach}
       {$LIVE_HELP}
+      {$DEBUG_INFO}
    </body>
 </html>
