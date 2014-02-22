@@ -384,7 +384,9 @@ table {
     
 @media print {
   * {
-    /*background: transparent !important;*/
+    /*
+    background: transparent !important;
+    */
     color: black !important;
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
@@ -455,19 +457,18 @@ table {
 footer {page-break-after:always;}
 
 .order_status {
-	color: red;
 	font-weight: bold;
-	font-size: 1.4rem;
+	font-size: 1.375rem;
 }
 .order_status_1 {
-	color: blue;
+	color: #008CBA;
 }
 .order_status_2 {
-	color: orange;
+	color: #FFA500;
 }
 .order_status_3 {
-	color: green;
+	color: #43AC6A;
 }
 .order_status_4,.order_status_5, .order_status_6 {
-	color: red;
+	color: #F04124;
 }
