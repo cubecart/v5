@@ -7,7 +7,12 @@ jQuery(document).ready(function() {
 	*/
 	$("#eu_cookie_button").click(function() {
 		$('#eu_cookie_dialogue').slideUp(); 
-		document.cookie="accept_cookies=1";
+		
+		var date = new Date();
+		date.setTime(date.getTime()+(63115200000));
+		var expires = date.toGMTString();
+
+		document.cookie="accept_cookies=1; expires="+expires+";";
 		return false;
 	});
 	
