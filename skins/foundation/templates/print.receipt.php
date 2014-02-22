@@ -14,19 +14,23 @@
             <img src="{$STORE_LOGO}" alt="" />
          </div>
          <div class="small-4 columns text-right">
+            <strong>{$CONFIG.store_name}</strong><br>
+            {$STORE.address|nl2br}<br>
+            {$STORE.county}<br>
+            {$STORE.postcode}<br>
+            {$STORE.country}
+         </div>
+      </div>
+      <div class="row">
+         <div class="small-6 columns thickmarg-topbottom">
             {if !empty($order.company_name_d)}<strong>{$order.company_name_d}</strong><br>{/if}
             {$order.title_d} {$order.first_name_d} {$order.last_name_d}<br>
             {$order.line1_d} <br>
             {if !empty($order.line2_d)}{$order.line2_d}<br>{/if}
             {$order.town_d}<br>
-            {$order.state_d},<br>
+            {$order.state_d}<br>
             {$order.postcode_d}<br>
             {$order.country_d}
-         </div>
-      </div>
-      <div class="row">
-         <div class="small-6 columns thickmarg-topbottom">
-            <strong>{$CONFIG.store_name}</strong><br>{$STORE.address|nl2br},<br>{$STORE.county},<br>{$STORE.postcode}<br>{$STORE.country}
          </div>
          <div class="small-6 columns text-right thickmarg-topbottom">
             <strong>{$LANG.common.invoice}: {$order.cart_order_id}<br>	
