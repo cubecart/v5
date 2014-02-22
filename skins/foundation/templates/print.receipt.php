@@ -1,68 +1,116 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>{$PAGE_TITLE}</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.print.css" media="screen,print" />
-</head>
-<body onload="window.print();">
-  {foreach from=$LIST_ORDERS item=order}
-  <div class="page-break">
-	  <div id="header">
-		<div id="printLabel">
-		  <div>
-		    {$order.title_d} {$order.first_name_d} {$order.last_name_d}<br />
-	  		{if !empty($order.company_name_d)}{$order.company_name_d}<br />{/if}
-	  		{$order.line1_d} <br />
-	  		{if !empty($order.line2_d)}{$order.line2_d}<br />{/if}
-	  		{$order.town_d}<br />
-	  		{$order.state_d},<br />
-	  		{$order.postcode_d}<br />
-	  		{$order.country_d}
-		  </div>
-		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
-		</div>
-		<div id="storeLabel">
-		  <img src="{$STORE_LOGO}" alt="" />
-		</div>
-	  </div>
-
-	  <div class="info">
-		<span class="orderid"><strong>{$LANG.common.order_id}</strong> &nbsp; {$order.cart_order_id}</span>
-		<strong>{$LANG.orders.title_receipt_for}</strong> {$order.order_date}
-	  </div>
-
-	  <div class="product">
-		<span class="price">{$LANG.common.price}</span>
-		<strong>{$LANG.common.product}</strong>
-	  </div>
-	  {foreach from=$order.items item=item}
-	  <div class="product">
-		<span class="price">{$item.price_total}</span>{$item.quantity} &times; {$item.name} {if !empty($item.product_code)} - {$item.product_code}{/if} ({$item.price})
-		{if isset($item.options)}
-		<br />{$LANG.catalogue.title_options} {foreach from=$item.options item=option}&raquo; {$option}{/foreach}
-		{/if}
-	  </div>
-	  {/foreach}
-	  <div id="totals">
-		<div class="total">{$LANG.basket.total_sub} <strong>{$order.subtotal}</strong></div>
-		<div class="total">{$LANG.basket.total_discount} <strong>{$order.discount}</strong></div>
-		<div class="total">{$LANG.basket.shipping} <strong>{$order.shipping}</strong></div>
-		{if isset($order.taxes)}{foreach from=$order.taxes item=tax}
-		<div class="total">{$tax.name} <strong>{$tax.value}</strong></div>
-		{/foreach}
-		{/if}
-		<br />
-		<div class="total"><strong>{$LANG.basket.total_grand} {$order.total}</strong></div>
-	  </div>
-	  {if isset($order.customer_comments)}
-	  <div id="notes"><strong>{$LANG.orders.title_notes_extra}</strong> - {$order.customer_comments}</div>
-	  {/if}
-	  <div id="thanks">{$LANG.orders.title_thanks}</div>
-	  <div id="footer">
-		<p>{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</p>
-	  </div>
-  </div>
-  {/foreach}
-</body>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" dir="{$TEXT_DIRECTION}" lang="{$HTML_LANG}">
+   <head>
+      <title>{$PAGE_TITLE}</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.print.css">
+      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+   </head>
+   <body onload="window.print();">
+      {foreach from=$LIST_ORDERS item=order}
+      <div class="row">
+         <div class="small-8 columns">
+            <img src="{$STORE_LOGO}" alt="" />
+         </div>
+         <div class="small-4 columns text-right">
+            {if !empty($order.company_name_d)}<strong>{$order.company_name_d}</strong><br>{/if}
+            {$order.title_d} {$order.first_name_d} {$order.last_name_d}<br>
+            {$order.line1_d} <br>
+            {if !empty($order.line2_d)}{$order.line2_d}<br>{/if}
+            {$order.town_d}<br>
+            {$order.state_d},<br>
+            {$order.postcode_d}<br>
+            {$order.country_d}
+         </div>
+      </div>
+      <div class="row">
+         <div class="small-6 columns thickmarg-topbottom">
+            <strong>{$CONFIG.store_name}</strong><br>{$STORE.address|nl2br},<br>{$STORE.county},<br>{$STORE.postcode}<br>{$STORE.country}
+         </div>
+         <div class="small-6 columns text-right thickmarg-topbottom">
+            <strong>{$LANG.common.invoice}: {$order.cart_order_id}<br>	
+            {$order.order_date}<br></strong>
+            <div class="order_status order_status_{$order.status} marg-top">{$order.order_status}</div>
+            <h1>{$order.total}</h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="large-12 columns">
+            <table class="expand">
+               <thead>
+                  <tr>
+                     <th>{$LANG.common.product}</th>
+                     <th>{$LANG.catalogue.price_each}</th>
+                     <th>{$LANG.common.quantity}</th>
+                     <th>{$LANG.common.price}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {foreach from=$order.items item=item}
+                  <tr>
+                     <td>
+                        {$item.name}{if !empty($item.product_code)} ({$item.product_code}){/if}
+                        {if !empty($item.options)}
+                        <p>{foreach from=$item.options item=option}{$option}<br />{/foreach}</p>
+                        {/if}
+                     </td>
+                     <td class="text-right">{$item.price}</td>
+                     <td class="text-center">{$item.quantity}</td>
+                     <td class="text-right">{$item.price_total}</td>
+                  </tr>
+               </tbody>
+               {/foreach}
+               <tfoot>
+                  <tr>
+                     <td colspan="2"></td>
+                     <td>{$LANG.basket.total_sub}</td>
+                     <td class="text-right">{$order.subtotal}</td>
+                  </tr>
+                  <tr>
+                     <td colspan="2"></td>
+                     <td>{$LANG.basket.shipping}</td>
+                     <td class="text-right">{$order.shipping}</td>
+                  </tr>
+                  {foreach from=$TAXES item=tax}
+                  <tr>
+                     <td colspan="2"></td>
+                     <td>{$tax.name}</td>
+                     <td class="text-right">{$tax.value}</td>
+                  </tr>
+                  {/foreach}
+                  {if $DISCOUNT}
+                  <tr>
+                     <td colspan="2"></td>
+                     <td>{$LANG.basket.total_discount}</td>
+                     <td class="text-right">{$order.discount}</td>
+                  </tr>
+                  {/if}
+                  <tr>
+                     <td colspan="2"></td>
+                     <td>{$LANG.basket.total_grand}</td>
+                     <td class="text-right">{$order.total}</td>
+                  </tr>
+               </tfoot>
+            </table>
+         </div>
+      </div>
+      {if isset($order.customer_comments)}
+      <div class="row">
+         <div class="small-12 columns"><strong>{$LANG.common.comments}</strong>: &quot;{$order.customer_comments}&quot;</div>
+      </div>
+      {/if}
+      <div class="row text-center">
+         <div class="small-12 columns">{$LANG.orders.title_thanks}</div>
+      </div>
+      <footer>
+         <div class="row">
+            <div class="small-12 columns">
+               <hr>
+               <small>{$LANG.address.return_address}: {$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</small>
+            </div>
+         </div>
+      </footer>
+      {/foreach}
+   </body>
 </html>

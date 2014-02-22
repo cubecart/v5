@@ -59,9 +59,9 @@
             <p>{foreach from=$item.options item=option}{$option}<br />{/foreach}</p>
             {/if}
          </td>
-         <td>{$item.price}</td>
-         <td>{$item.quantity}</td>
-         <td>{$item.price_total}</td>
+         <td class="text-right">{$item.price}</td>
+         <td class="text-center">{$item.quantity}</td>
+         <td class="text-right">{$item.price_total}</td>
       </tr>
    </tbody>
    {/foreach}
@@ -69,31 +69,31 @@
    <tr>
       <td colspan="2"></td>
       <td>{$LANG.basket.total_sub}</td>
-      <td>{$SUM.subtotal}</td>
+      <td class="text-right">{$SUM.subtotal}</td>
    </tr>
    <tr>
       <td colspan="2"></td>
       <td>{$LANG.basket.shipping}</td>
-      <td>{$SUM.shipping}</td>
+      <td class="text-right">{$SUM.shipping}</td>
    </tr>
    {foreach from=$TAXES item=tax}
    <tr>
       <td colspan="2"></td>
       <td>{$tax.name}</td>
-      <td>{$tax.value}</td>
+      <td class="text-right">{$tax.value}</td>
    </tr>
    {/foreach}
    {if $DISCOUNT}
    <tr>
       <td colspan="2"></td>
       <td>{$LANG.basket.total_discount}</td>
-      <td>{$SUM.discount}</td>
+      <td class="text-right">{$SUM.discount}</td>
    </tr>
    {/if}
    <tr>
       <td colspan="2"></td>
       <td>{$LANG.basket.total_grand}</td>
-      <td>{$SUM.total}</td>
+      <td class="text-right">{$SUM.total}</td>
    </tr>
    </tfoot>
 </table>

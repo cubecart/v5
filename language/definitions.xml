@@ -513,6 +513,7 @@
   </group>
   <group name="common">
   	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
+  	<string name="invoice" introduced="6.0.0"><![CDATA[Invoice]]></string>
   	<string name="min" introduced="6.0.0"><![CDATA[Min]]></string>
   	<string name="max" introduced="6.0.0"><![CDATA[Max]]></string>
   	<string name="from" introduced="6.0.0"><![CDATA[From]]></string>

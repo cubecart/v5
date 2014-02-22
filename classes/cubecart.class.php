@@ -2367,8 +2367,9 @@ class Cubecart {
 				$summary['country']		= getCountryFormat($summary['country']);
 				$summary['state_d']		= is_numeric($summary['state_d']) ? getStateFormat($summary['state_d']) : $summary['state_d'];
 				$summary['country_d']	= getCountryFormat($summary['country_d']);
+				$summary['order_status'] = $GLOBALS['language']->order_state['name_'.$summary['status']];
 
-				$summary['order_date'] 	= formatTime($summary['order_date'], false, true);
+				$summary['order_date'] 	= formatTime($summary['order_date'], '%d %B %Y', true);
 				$var[] = $summary;
 				$GLOBALS['smarty']->assign('LIST_ORDERS', $var);
 
