@@ -5,6 +5,11 @@ jQuery(document).ready(function() {
 		screen = 'small';
 	}
 	*/
+	$("#eu_cookie_button").click(function() {
+		$('#eu_cookie_dialogue').slideUp(); 
+		document.cookie="accept_cookies=1";
+		return false;
+	});
 	
 	$(".autosubmit select").change(function() {
 		$(".autosubmit").submit();
