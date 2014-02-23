@@ -101,7 +101,7 @@
       </div>
       {if isset($order.customer_comments)}
       <div class="row">
-         <div class="small-12 columns"><strong>{$LANG.common.comments}</strong>: &quot;{$order.customer_comments}&quot;</div>
+         <div class="small-12 columns"><h3>{$LANG.common.comments}</h3> &quot;{$order.customer_comments}&quot;</div>
       </div>
       {/if}
       <div class="row text-center">
@@ -109,7 +109,7 @@
       </div>
       <footer>
          <div class="row">
-            <div class="small-12 columns">
+            <div class="small-12 columns text-center">
                <hr>
                <small>{$LANG.address.return_address}: {$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</small>
             </div>

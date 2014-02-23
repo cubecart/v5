@@ -85,7 +85,7 @@ class Gateway {
 		$transData['amount'] 		= $_REQUEST['ssl_amount'];
 		$transData['status'] 	= $_REQUEST['ssl_result_message'];
 		
-		if($_REQUEST['ssl_result_message']=="APPROVED"){
+		if($_REQUEST['ssl_result_message']=="APPROVED" || $_REQUEST['ssl_result_message']=="APPROVAL"){
 			$transData['notes'] 	= "Payment was successful.";
 			$order->orderStatus(Order::ORDER_PROCESS, $cart_order_id);
 			$order->paymentStatus(Order::PAYMENT_SUCCESS, $cart_order_id);
