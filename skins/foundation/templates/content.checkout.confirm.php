@@ -33,16 +33,16 @@
       <div class="small-4 columns"><label for="user_title">{$LANG.user.title}</label><input type="text" name="user[title]" id="user_title"  class="capitalize" value="{$USER.title}" placeholder="{$LANG.user.title}" /></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_first">{$LANG.user.name_first}</label><input type="text" name="user[first_name]" id="user_first"   class="required" value="{$USER.first_name}" placeholder="{$LANG.user.name_first}  {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="user_first">{$LANG.user.name_first}</label><input type="text" name="user[first_name]" id="user_first"   required value="{$USER.first_name}" placeholder="{$LANG.user.name_first}  {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_last">{$LANG.user.name_last}</label><input type="text" name="user[last_name]" id="user_last"   class="required" value="{$USER.last_name}" placeholder="{$LANG.user.name_last}  {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="user_last">{$LANG.user.name_last}</label><input type="text" name="user[last_name]" id="user_last"   required value="{$USER.last_name}" placeholder="{$LANG.user.name_last}  {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_email">{$LANG.common.email}</label><input type="text" name="user[email]" id="user_email"  class="required" value="{$USER.email}" placeholder="{$LANG.common.email}  {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="user_email">{$LANG.common.email}</label><input type="text" name="user[email]" id="user_email"  required value="{$USER.email}" placeholder="{$LANG.common.email}  {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_phone">{$LANG.address.phone}</label><input type="text" name="user[phone]" id="user_phone"  class="required" value="{$USER.phone}" placeholder="{$LANG.address.phone}  {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="user_phone">{$LANG.address.phone}</label><input type="text" name="user[phone]" id="user_phone"  required value="{$USER.phone}" placeholder="{$LANG.address.phone}  {$LANG.form.required}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="user_mobile">{$LANG.address.mobile}</label><input type="text" name="user[mobile]" id="user_mobile"  value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
@@ -52,14 +52,16 @@
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_company">{$LANG.address.company_name}</label><input type="text" name="billing[company_name]" id="addr_company"  value="{$BILLING.company_name}" placeholder="{$LANG.address.company_name}" /></div>
    </div>
+   <address>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1}</label><input type="text" name="billing[line1]" id="addr_line1"  class="required" value="{$BILLING.line1}" placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1}</label><input type="text" name="billing[line1]" id="addr_line1"   value="{$BILLING.line1}" placeholder="{if $ADDRESS_LOOKUP}{$LANG.address.address_lookup}{else}{$LANG.address.line1} {$LANG.form.required}{/if}" autocomplete="off" autocorrect="off" class="address_lookup"></div>
    </div>
+   <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="billing[line2]" id="addr_line2"  value="{$BILLING.line2}" placeholder="{$LANG.address.line2}" /></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="addr_town">{$LANG.address.town}</label><input type="text" name="billing[town]" id="addr_town"  class="required" value="{$BILLING.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="addr_town">{$LANG.address.town}</label><input type="text" name="billing[town]" id="addr_town"  required value="{$BILLING.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_postcode">{$LANG.address.postcode}</label><input type="text" name="billing[postcode]" id="addr_postcode"  class="uppercase required" value="{$BILLING.postcode}" placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>
@@ -74,8 +76,10 @@
       </div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label></span><input type="text" name="billing[state]" id="state-list"  class="required" value="{$BILLING.state}"></div>
+      <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label></span><input type="text" name="billing[state]" id="state-list"  required value="{$BILLING.state}"></div>
    </div>
+   </div>
+   </address>
    {if $TERMS_CONDITIONS}
    <div class="row">
       <div class="small-12 large-8 columns"><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED} /><label for="reg_terms">{$LANG.account.register_terms_agree_link|replace:'%s':{$TERMS_CONDITIONS}}</label></div>
@@ -90,22 +94,22 @@
    <div class="hide" id="address_delivery">
    <h3>{$LANG.address.delivery_address}</h3>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="del_first">{$LANG.user.name_first}</label><input type="text" name="delivery[first_name]" id="del_first"   class="required" value="{$DELIVERY.first_name}" placeholder="{$LANG.user.name_first} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="del_first">{$LANG.user.name_first}</label><input type="text" name="delivery[first_name]" id="del_first"   required value="{$DELIVERY.first_name}" placeholder="{$LANG.user.name_first} {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="del_last">{$LANG.user.name_last}</label><input type="text" name="delivery[last_name]" id="del_last"   class="required" value="{$DELIVERY.last_name}" placeholder="{$LANG.user.name_last} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="del_last">{$LANG.user.name_last}</label><input type="text" name="delivery[last_name]" id="del_last"   required value="{$DELIVERY.last_name}" placeholder="{$LANG.user.name_last} {$LANG.form.required}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_company">{$LANG.address.company_name}</label><input type="text" name="delivery[company_name]" id="del_company"  value="{$DELIVERY.company_name}" placeholder="{$LANG.user.company_name}" /></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="del_line1">{$LANG.address.line1}</label><input type="text" name="delivery[line1]" id="del_line1"  class="required" value="{$DELIVERY.line1}" placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="del_line1">{$LANG.address.line1}</label><input type="text" name="delivery[line1]" id="del_line1"  required value="{$DELIVERY.line1}" placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_line2">{$LANG.address.line2}</label><input type="text" name="delivery[line2]" id="del_line2"  value="{$DELIVERY.line2}" placeholder="{$LANG.address.line2}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="del_town">{$LANG.address.town}</label><input type="text" name="delivery[town]" id="del_town"  class="required" value="{$DELIVERY.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="del_town">{$LANG.address.town}</label><input type="text" name="delivery[town]" id="del_town"  required value="{$DELIVERY.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_postcode">{$LANG.address.postcode}</label><input type="text" name="delivery[postcode]" id="del_postcode"  class="uppercase required" value="{$DELIVERY.postcode}" placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>
@@ -120,7 +124,7 @@
       </div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="delivery_state">{$LANG.address.state}</label></span><input type="text" name="delivery[state]" id="delivery_state"  class="required" value="{$DELIVERY.state}" placeholder="{$LANG.address.state} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="delivery_state">{$LANG.address.state}</label></span><input type="text" name="delivery[state]" id="delivery_state"  required value="{$DELIVERY.state}" placeholder="{$LANG.address.state} {$LANG.form.required}"></div>
    </div>
    </div>
    {/if}
@@ -131,10 +135,10 @@
    <div id="account-reg">
       <h3>{$LANG.account.password}</h3>
       <div class="row">
-         <div class="small-12 large-8 columns"><label for="reg_password">{$LANG.user.password}</label></span><input type="password" autocomplete="off" name="password" id="reg_password"  class="required" value="" placeholder="{$LANG.address.password} {$LANG.form.required}"></div>
+         <div class="small-12 large-8 columns"><label for="reg_password">{$LANG.user.password}</label></span><input type="password" autocomplete="off" name="password" id="reg_password"  required value="" placeholder="{$LANG.address.password} {$LANG.form.required}"></div>
       </div>
       <div class="row">
-         <div class="small-12 large-8 columns"><label for="reg_passconf">{$LANG.user.password_confirm}</label></span><input type="password" autocomplete="off" name="passconf" id="reg_passconf"  class="required" value="" placeholder="{$LANG.address.password_confirm} {$LANG.form.required}"></div>
+         <div class="small-12 large-8 columns"><label for="reg_passconf">{$LANG.user.password_confirm}</label></span><input type="password" autocomplete="off" name="passconf" id="reg_passconf"  required value="" placeholder="{$LANG.address.password_confirm} {$LANG.form.required}"></div>
       </div>
       </div>
    {include file='templates/content.recaptcha.php'}
