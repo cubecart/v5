@@ -82,8 +82,11 @@
       <footer>
          {$SKIN_SELECT} 
          <div class="row">
-            <div class="large-8 columns">
+            <div class="large-5 columns">
                {$SITE_DOCS}
+            </div>
+            <div class="large-3 columns">
+            	{include file='templates/element.social.php'}
             </div>
             <div class="large-4 columns">
                <div class="row collapse">

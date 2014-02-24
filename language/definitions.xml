@@ -11,7 +11,7 @@
     <string name="download_count" introduced="5.0.0"><![CDATA[Downloads]]></string>
     <string name="download_deleted" introduced="5.0.0"><![CDATA[This download is no longer available.]]></string>
     <string name="download_expired" introduced="5.0.0"><![CDATA[Expired]]></string>
-    <string name="download_expires" introduced="5.0.0"><![CDATA[Expires]]></string>
+    <string name="download_expires" introduced="5.0.0"><![CDATA[Expiry Date]]></string>
     <string name="download_filename" introduced="6.0.0"><![CDATA[File Name]]></string>
     <string name="enter_validation_key" introduced="5.0.0"><![CDATA[Please enter your email address and validation key below, then choose a new password]]></string>
     <string name="error_address_added" introduced="5.0.0"><![CDATA[Failed to save address.]]></string>
@@ -512,6 +512,7 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="follow_us" introduced="6.0.0"><![CDATA[Follow Us]]></string>
   	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
   	<string name="invoice" introduced="6.0.0"><![CDATA[Invoice]]></string>
   	<string name="min" introduced="6.0.0"><![CDATA[Min]]></string>

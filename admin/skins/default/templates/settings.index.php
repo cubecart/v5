@@ -13,6 +13,13 @@
          <div><label for="store_postcode">{$LANG.address.postcode}</label><span><input name="config[store_postcode]" id="store_postcode" type="text" class="textbox" value="{$CONFIG.store_postcode}" /></span></div>
       </fieldset>
       <fieldset>
+         <legend>Social Accounts</legend>
+         <div><label for="twitter">Twitter</label><span><input name="config[twitter]" id="twitter" type="text" class="textbox" value="{$CONFIG.twitter}" /></span></div>
+         <div><label for="facebook">Facebook</label><span><input name="config[facebook]" id="facebook" type="text" class="textbox" value="{$CONFIG.facebook}" /></span></div>
+         <div><label for="google_plus">Google+</label><span><input name="config[google_plus]" id="google_plus" type="text" class="textbox" value="{$CONFIG.google_plus}" /></span></div>
+         <div><label for="pinterest">Pinterest</label><span><input name="config[pinterest]" id="pinterest" type="text" class="textbox" value="{$CONFIG.pinterest}" /></span></div>
+      </fieldset>
+      <fieldset>
          <legend>{$LANG.settings.title_tax_lang}</legend>
          <div><label for="default_language">{$LANG.settings.default_language}</label><span><select name="config[default_language]" id="default_language" class="textbox">
             {foreach from=$LANGUAGES item=language}<option value="{$language.code}"{$language.selected}>{$language.title}</option>{/foreach}
