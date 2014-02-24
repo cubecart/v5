@@ -157,11 +157,14 @@ jQuery(document).ready(function() {
 		}
 	});
 	
-	$('#delivery_is_billing').click(function() {
-		if() {
-			$("#delivery_address").slideDown();	
-		}
-	});
+	if ($('#delivery_is_billing:checkbox').is(':checked') == true) $('fieldset#address_delivery').hide();
+		$('#delivery_is_billing:checkbox').change(function(){
+			if ($(this).is(':checked')) {
+				$('#address_delivery').hide();
+			} else {
+				$('#address_delivery').show();
+			}
+		});
 		
 });
 

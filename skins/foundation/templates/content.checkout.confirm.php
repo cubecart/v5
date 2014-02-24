@@ -87,7 +87,7 @@
    </div>
    {/if}
    {if $ALLOW_DELIVERY_ADDRESS}
-   <div class="hide" id="delivery_address">
+   <div class="hide" id="address_delivery">
    <h3>{$LANG.address.delivery_address}</h3>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_first">{$LANG.user.name_first}</label><input type="text" name="delivery[first_name]" id="del_first"   class="required" value="{$DELIVERY.first_name}" placeholder="{$LANG.user.name_first} {$LANG.form.required}"></div>
