@@ -149,10 +149,17 @@ jQuery(document).ready(function() {
 				$('select'+target+' > option[value='+setting+']').attr('selected', 'selected');
 			} else {
 				var input		= document.createElement('input');
-				var replacement	= $(input).attr({'type':'text','id':$(target).attr('id'),'name': $(target).attr('name'),'class': $(target).attr('class')});
+				var placeholder = $('label[for="'+ $(this).attr('id') +'"]').text()+' '+$('#validate_required').text();
+				var replacement	= $(input).attr({'type':'text','placeholder':placeholder,'id':$(target).attr('id'),'name': $(target).attr('name'),'class': $(target).attr('class')});
 				if ($(this).hasClass('no-custom-zone')) $(replacement).attr('disabled', 'disabled').val($(this).attr('title'));
 				$(target).replaceWith($(replacement));
 			}
+		}
+	});
+	
+	$('#delivery_is_billing').click(function() {
+		if() {
+			$("#delivery_address").slideDown();	
 		}
 	});
 		

@@ -110,9 +110,6 @@
       <button type="submit" name="proceed" class="button right">{$CHECKOUT_BUTTON} <i class="fa fa-chevron-right"></i></button>
       {/if}
    </div>
-   {if $CUSTOMER_LOCALE.description}
-   <p>{$CUSTOMER_LOCALE.mark} {$LANG.basket.unconfirmed_locale}
-      {/if}
 </form>
 {if $CHECKOUTS}
 <div class="row"><div class="small-12 columns text-right">-- {$LANG.common.or} --</div></div>
@@ -120,20 +117,21 @@
 <div class="row"><div class="small-12 columns text-right">{$checkout}</div></div>
 {/foreach}
 {/if}
+{if $CUSTOMER_LOCALE.description}
+<small>{$CUSTOMER_LOCALE.mark} {$LANG.basket.unconfirmed_locale}</small>
+{/if}
 {if $RELATED}
-<div>
-   <h2>{$LANG.catalogue.related_products}</h2>
+
+   <h2>{$LANG.catalogue.related_products}
+   <ul class="small-block-grid-4 no-bullet">
    {foreach from=$RELATED item=product}
-   <div class="latest_product">
-      <p class="image">
-         <a href="{$product.url}" title="{$product.name}">
-         <img src="{$product.img_src}" alt="{$product.name}" />
-         </a>
-      </p>
-      <p class="title"><a href="{$product.url}" title="{$product.name}">{$product.name}</a></p>
-   </div>
+      <li>
+      	<a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" class="th" alt="{$product.name}" /></a>
+        <br>
+        <a href="{$product.url}" title="{$product.name}">{$product.name}</a>
+      </li>
    {/foreach}
-</div>
+   </ul>
 {/if}
 {else}
 <p>{$LANG.basket.basket_is_empty}</p>

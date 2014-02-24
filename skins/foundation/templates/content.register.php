@@ -56,3 +56,4 @@
 <div class="hide" id="validate_password_mismatch">{$LANG.account.error_password_mismatch}</div>
 <div class="hide" id="validate_phone">{$LANG.account.error_valid_phone}</div>
 <div class="hide" id="validate_mobile">{$LANG.account.error_valid_mobile_phone}</div>
+<div class="hide" id="validate_required">{$LANG.form.required}</div>
