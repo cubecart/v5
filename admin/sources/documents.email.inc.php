@@ -297,7 +297,6 @@ if (isset($_POST['content']) && Admin::getInstance()->permissions('documents', C
 	## Save/Update Content
 	if (isset($_POST['content']['content_id']) && !empty($_POST['content']['content_id'])) {
 		## remove double encoding in repeat regions required to show them in FCK
-		$_POST['content']['content_html'] = str_replace(array("&lt;!--","--&gt;"),array("<!--","-->"),$_POST['content']['content_html']);
 		if($GLOBALS['db']->update('CubeCart_email_content', $_POST['content'], array('content_id' => (int)$_POST['content']['content_id']))) {
 			$GLOBALS['main']->setACPNotify($lang['email']['notify_content_update']);
 			httpredir('?_g=documents&node=email&type=content');
