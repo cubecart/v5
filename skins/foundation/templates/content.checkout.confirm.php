@@ -78,12 +78,12 @@
    </div>
    {if $TERMS_CONDITIONS}
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="reg_terms">&nbsp;</label><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED} /> <a href="{$TERMS_CONDITIONS}" target="_blank">{$LANG.account.register_terms_agree}</a></div>
+      <div class="small-12 large-8 columns"><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED} /><label for="reg_terms">{$LANG.account.register_terms_agree_link|replace:'%s':{$TERMS_CONDITIONS}}</label></div>
    </div>
    {/if}
    {if $ALLOW_DELIVERY_ADDRESS}
    <div class="row">
-      <div class="small-12 large-8 columns"><label>&nbsp;</label><input type="checkbox" name="delivery_is_billing" id="delivery_is_billing" {$DELIVERY_CHECKED} /> {$LANG.address.delivery_is_billing}</div>
+      <div class="small-12 large-8 columns"><input type="checkbox" name="delivery_is_billing" id="delivery_is_billing" {$DELIVERY_CHECKED}><label for="delivery_is_billing">{$LANG.address.delivery_is_billing}</label></div>
    </div>
    {/if}
    {if $ALLOW_DELIVERY_ADDRESS}
@@ -127,14 +127,15 @@
    <script type="text/javascript">
       var county_list = {$STATE_JSON};
    </script>
-   <div class="select_register"><input type="checkbox" name="register" id="show-reg" value="1" {$REGISTER_CHECKED} /> <label for="show-reg">{$LANG.account.create_account}</label></div>
-   
+   <div class="row"><div class="small-12 large-8 columns"><input type="checkbox" name="register" id="show-reg" value="1" {$REGISTER_CHECKED} /><label for="show-reg">{$LANG.account.create_account}</label></div></div>
+   <div id="account-reg">
       <h3>{$LANG.account.password}</h3>
       <div class="row">
          <div class="small-12 large-8 columns"><label for="reg_password">{$LANG.user.password}</label></span><input type="password" autocomplete="off" name="password" id="reg_password"  class="required" value="" placeholder="{$LANG.address.password} {$LANG.form.required}"></div>
       </div>
       <div class="row">
          <div class="small-12 large-8 columns"><label for="reg_passconf">{$LANG.user.password_confirm}</label></span><input type="password" autocomplete="off" name="passconf" id="reg_passconf"  class="required" value="" placeholder="{$LANG.address.password_confirm} {$LANG.form.required}"></div>
+      </div>
       </div>
    {include file='templates/content.recaptcha.php'}
 </div>

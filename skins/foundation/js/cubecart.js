@@ -158,13 +158,25 @@ jQuery(document).ready(function() {
 	});
 	
 	if ($('#delivery_is_billing:checkbox').is(':checked') == true) $('fieldset#address_delivery').hide();
-		$('#delivery_is_billing:checkbox').change(function(){
-			if ($(this).is(':checked')) {
-				$('#address_delivery').hide();
-			} else {
-				$('#address_delivery').show();
-			}
-		});
+	$('#delivery_is_billing:checkbox').change(function(){
+		if ($(this).is(':checked')) {
+			$('#address_delivery').hide();
+		} else {
+			$('#address_delivery').show();
+		}
+	});
+	if ($('input#show-reg:checkbox').is(':checked') == false) $('#account-reg').hide();
+	$('input#show-reg:checkbox').change(function(){
+		if ($(this).is(':checked')) {
+			$('#account-reg').show();
+			$('input#reg_password').addClass('required');
+			$('input#reg_passconf').addClass('required');
+		} else {
+			$('#account-reg').hide();
+			$('input#reg_password').removeClass('required');
+			$('input#reg_passconf').removeClass('required');
+		}
+	});	
 		
 });
 
