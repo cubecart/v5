@@ -1348,6 +1348,7 @@
     <string name="notify_email_verified" introduced="5.0.0"><![CDATA[Your email address has been verified.]]></string>
     <string name="notify_subscribed" introduced="5.0.0"><![CDATA[Your email address has been added to our mailing list.]]></string>
     <string name="notify_unsubscribed" introduced="5.0.0"><![CDATA[Your email address has been removed from our mailing list.]]></string>
+    <string name="notify_already_subscribed" introduced="6.0.0"><![CDATA[Email address already subscribed.]]></string>
     <string name="subscribe" introduced="5.0.0"><![CDATA[Subscribe]]></string>
     <string name="unsubscribe" introduced="6.0.0"><![CDATA[Unsubscribe]]></string>
     <string name="subscribe_now" introduced="5.0.0"><![CDATA[Subscribe Now]]></string>

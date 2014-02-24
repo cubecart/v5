@@ -15,13 +15,23 @@ jQuery(document).ready(function () {
       rules: {
          subscribe: {
             required: true,
-            email: true
+            email: true,
+            remote: {
+	          url: "?_g=ajax_email&source=newsletter",
+	          type: "post",
+	          data: {
+	            username: function() {
+	              return $( "#newsletter_email" ).val();
+	            }
+	          }
+	        }
          },
       },
       messages: {
          subscribe: {
             required: $('#validate_email').text(),
-            email: $('#validate_email').text()
+            email: $('#validate_email').text(),
+            remote: $('#validate_already_subscribed').text()
          },
       }
    });
@@ -139,7 +149,16 @@ jQuery(document).ready(function () {
          },
          email: {
             required: true,
-            email: true
+            email: true,
+            remote: {
+	          url: "?_g=ajax_email",
+	          type: "post",
+	          data: {
+	            username: function() {
+	              return $( "#email" ).val();
+	            }
+	          }
+	        }
          },
          phone: {
             required: true,
@@ -169,7 +188,8 @@ jQuery(document).ready(function () {
          },
          email: {
             required: $('#validate_email').text(),
-            email: $('#validate_email').text()
+            email: $('#validate_email').text(),
+            remote: $('#validate_email_in_use').text()
          },
          phone: {
             required: $('#validate_phone').text(),

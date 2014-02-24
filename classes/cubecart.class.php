@@ -198,10 +198,26 @@ class Cubecart {
 
 		if (isset($_GET['_g']) && !empty($_GET['_g'])) {
 			switch (strtolower($_GET['_g'])) {
+				case 'ajax_email':
+					$GLOBALS['debug']->supress();
+					
+					if($_GET['source']=='newsletter') {
+						$result = $GLOBALS['db']->select('CubeCart_newsletter_subscriber', 'subscriber_id', array('email' => $_POST['subscribe']));
+					} else {
+						$result = $GLOBALS['db']->select('CubeCart_customer', 'customer_id', array('email' => $_POST['email']));
+					}
+					
+					if($result) {
+						die(json_encode(false));
+					} else {
+						die(json_encode(true));
+					}
+				break;
 				case 'ajaxadd':
 					$GLOBALS['debug']->supress();
 					$sideBasket = $GLOBALS['gui']->displaySideBasket();
 					die($sideBasket);
+				break;
 				case 'rm':
 				case 'remote':
 					$GLOBALS['debug']->supress();

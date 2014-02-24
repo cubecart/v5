@@ -47,6 +47,7 @@
    </div>
 </form>
 <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
+<div class="hide" id="validate_email_in_use">{$LANG.account.error_email_in_use}</div>
 <div class="hide" id="validate_firstname">{$LANG.account.error_firstname_required}</div>
 <div class="hide" id="validate_lastname">{$LANG.account.error_lastname_required}</div>
 <div class="hide" id="validate_terms_agree">{$LANG.account.error_terms_agree}</div>
