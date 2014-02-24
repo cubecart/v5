@@ -63,3 +63,30 @@ footer h3 {
 .social-icons {
 	font-size: 30px;
 }
+input.quantity {
+	width: 50px;
+	text-align: center;
+}
+/* Start Checkout Progress */ 
+.checkout-progress-wrapper {
+	background-color: #A0D3E8;
+	color: #4F4F4F;
+}
+	.checkout-progress.previous {
+		background-color: #008CBA;
+	}
+	.checkout-progress.current {
+		background-color: #43AC6A;
+	}
+	.checkout-progress.next {
+	}
+	.checkout-progress a {
+		color: #4F4F4F;
+		text-decoration: none;
+	}
+	.checkout-progress.previous a, .checkout-progress.current a {
+		color: #FFF;
+		text-decoration: none;
+	}
+
+/* End Checkout Progress */ 

@@ -1,8 +1,7 @@
 {if isset($BLOCKS)}
-<div class="checkout-progress">
+<ul class="row no-bullet collapse checkout-progress-wrapper">
   {foreach from=$BLOCKS item=block}
-  <span class="{$block.class}"><a href="{$block.url}">{$block.step} {$block.title}</a></span>
+  <li class="small-3 columns text-center checkout-progress {$block.class}"><a href="{$block.url}">{$block.step}. {$block.title}</a></li>
   {/foreach}
-  &nbsp;
-</div>
+</ul>
  {/if}
