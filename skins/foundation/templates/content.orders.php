@@ -3,7 +3,7 @@
 {if $ORDERS}
 <p>{$LANG.account.your_orders_explained}</p>
 <div class="pagination">{$PAGINATION}</div>
-<table>
+<table class="expand">
    <thead>
       <tr>
          <th>{$LANG.customer.order_count_single}</th>

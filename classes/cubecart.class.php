@@ -245,12 +245,6 @@ class Cubecart {
 						httpredir('index.php');
 					}
 					break;
-				case 'cancel':
-					if (isset($_GET['cart_order_id'])) {
-						# Cancel the order, but do some verification checks, just in case
-
-					}
-					break;
 				default:
 					trigger_error('No callback method defined.', E_USER_WARNING);
 					httpredir('index.php');
@@ -2071,7 +2065,7 @@ class Cubecart {
 				if (isset($_GET['cancel'])) {
 					$order	= Order::getInstance();
 					if ($order->orderStatus(Order::ORDER_CANCELLED, $_GET['cancel'])) {
-						$GLOBALS['gui']->setError($GLOBALS['language']->order['notify_order_cancelled']);
+						$GLOBALS['gui']->setError($GLOBALS['language']->orders['notify_order_cancelled']);
 					}
 					httpredir(currentPage(array('cancel')));
 				}

@@ -5,6 +5,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.print.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
+      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.common.css">
       <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
    </head>
    <body onload="window.print();">
@@ -20,8 +21,8 @@
             {$STORE.postcode}<br>
             {$STORE.country}<br>
             <div class="thickpad-top">
-            {if !empty($CONFIG.tax_description) && !empty($CONFIG.tax_number)}{$LANG.settings.tax_vat_number}: {$CONFIG.tax_number}<br>{/if}
-            {$LANG.common.email}: {$CONFIG.email_address}
+            {if !empty($CONFIG.tax_number)}{$LANG.settings.tax_vat_number}: {$CONFIG.tax_number}<br>{/if}
+            {$CONFIG.email_address}
             </div>
          </div>
       </div>
