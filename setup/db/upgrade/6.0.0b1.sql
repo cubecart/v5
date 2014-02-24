@@ -1,0 +1,1 @@
+ALTER TABLE `CubeCart_tax_details` DROP `reg_number` #EOQ

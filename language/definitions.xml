@@ -683,7 +683,7 @@
   <group name="confirm">
     <string name="confirm_page" introduced="5.0.0"><![CDATA[Confirmation Page]]></string>
     <string name="fail_page" introduced="5.0.0"><![CDATA[Failure Page]]></string>
-    <string name="print" introduced="5.0.0"><![CDATA[Print Receipt]]></string>
+    <string name="print" introduced="5.0.0"><![CDATA[Print Invoice]]></string>
     <string name="order_pending" introduced="5.2.6"><![CDATA[Many thanks for your order! The order status is currently pending but it will automatically update to processing once payment is confirmed. Normally this is automated and will happen within the hour but please do contact us if require more information.]]></string>
     <string name="order_processing" introduced="5.2.6"><![CDATA[Many thanks for your order! Payment has been received and your order is now being processed.]]></string>
     <string name="order_complete" introduced="5.2.6"><![CDATA[Many thanks for your order! Payment has been received and your order is now complete.]]></string>
@@ -1742,13 +1742,14 @@
     <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Apply To]]></string>
     <string name="tax_class" introduced="5.0.0"><![CDATA[Tax Class]]></string>
     <string name="tax_class_name" introduced="5.0.0"><![CDATA[Tax Class Name]]></string>
-    <string name="tax_customer" introduced="5.0.0"><![CDATA[Add sales tax to qualifying customers]]></string>
     <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Tax Customer by]]></string>
     <string name="tax_delete" introduced="5.0.0"><![CDATA[WARNING: Deleting this will also delete all tax rules that depend on it. Are you sure you wish to continue?]]></string>
+    <string name="tax_vat_number" introduced="6.0.0"><![CDATA[VAT Registration Number]]></string>
     <string name="tax_detail" introduced="5.0.0"><![CDATA[Tax Detail]]></string>
     <string name="tax_name" introduced="5.0.0"><![CDATA[Unique Name]]></string>
     <string name="tax_name_display" introduced="5.0.0"><![CDATA[Display As]]></string>
-    <string name="tax_number" introduced="5.0.0"><![CDATA[Reg. Number]]></string>
+    <string name="tax_number" introduced="6.0.0"><![CDATA[VAT Registration Number]]></string>
+    <string name="tax_description_placeholder" introduced="6.0.0"><![CDATA[e.g. ]]></string>
     <string name="tax_on_goods" introduced="5.0.0"><![CDATA[Goods]]></string>
     <string name="tax_on_shipping" introduced="5.0.0"><![CDATA[Shipping]]></string>
     <string name="tax_rate" introduced="5.0.0"><![CDATA[Tax Rate]]></string>

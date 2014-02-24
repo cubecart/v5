@@ -1,6 +1,6 @@
-<h2>{$LANG.account.your_order}: #{$SUM.cart_order_id}</h2>
-<div class="rubber_stamp">{$SUM.order_status}</div>
-<div class="text-center">{if $CTRL_PAYMENT}<a href="{$STORE_URL}/index.php?_a=gateway&amp;cart_order_id={$SUM.cart_order_id}">{$LANG.basket.complete_payment}</a> |{/if} <a href="{$STORE_URL}/index.php?_a=vieworder">{$LANG.account.your_orders}</a></div>
+<h2>{$LANG.orders.order_number}: #{$SUM.cart_order_id}</h2>
+<div class="order_status marg-top">{$LANG.orders.title_order_status}: <span class="order_status_{$SUM.status}">{$SUM.order_status}</span></div>
+<hr>
 <h3>{$LANG.basket.customer_info}</h3>
 <div class="row">
    <div class="small-6 columns">
@@ -24,11 +24,6 @@
       {$SUM.country_d}
    </div>
 </div>
-
-{if !empty($SUM.customer_comments)}
-<h3>{$LANG.common.comments}</h3>
-<p>&quot;{$SUM.customer_comments}&quot;</p>
-{/if}
 {if $DELIVERY}
 <h3>{$LANG.common.delivery}</h3>
 {if !empty($DELIVERY.date)}
@@ -40,8 +35,9 @@
 <p>{$DELIVERY.method} - {$LANG.orders.shipping_tracking}: {$DELIVERY.tracking}
    {/if}
    {/if}
+<hr>
 <h3>{$LANG.basket.order_summary}</h3>
-<table>
+<table class="expand">
    <thead>
       <tr>
          <th>{$LANG.common.product}</th>
@@ -97,7 +93,10 @@
    </tr>
    </tfoot>
 </table>
-
+{if !empty($SUM.customer_comments)}
+<h3>{$LANG.common.comments}</h3>
+<p>&quot;{$SUM.customer_comments}&quot;</p>
+{/if}
 <p><a href="{$STORE_URL}/index.php?_a=receipt&amp;cart_order_id={$SUM.cart_order_id}" target="_blank"><i class="fa fa-print"></i> {$LANG.confirm.print}</a></p>
 {foreach from=$AFFILIATES item=affiliate}{$affiliate}{/foreach}
 {if $ANALYTICS}

@@ -1674,7 +1674,6 @@
       <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Toepassen op]]></string>
       <string name="tax_class" introduced="5.0.0"><![CDATA[BTW Groep]]></string>
       <string name="tax_class_name" introduced="5.0.0"><![CDATA[Tax Groep Naam]]></string>
-      <string name="tax_customer" introduced="5.0.0"><![CDATA[Voeg BTW toe bij de in aanmerking komende klanten]]></string>
       <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Belast Klant per]]></string>
       <string name="tax_delete" introduced="5.0.0"><![CDATA[WAARSCHUWING: Door dit te verwijderen worden ook BTW regels verwijderd die ervan af hangen. Weet u zeker dat u door wilt gaan?]]></string>
       <string name="tax_detail" introduced="5.0.0"><![CDATA[BTW Informatie]]></string>

@@ -604,7 +604,6 @@ ALTER TABLE `CubeCart_tax_details` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ALTER TABLE `CubeCart_tax_details` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `name` `name` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `display` `display` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
-ALTER TABLE `CubeCart_tax_details` CHANGE `reg_number` `reg_number` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `status` `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'; #EOQ
 
 ALTER TABLE `CubeCart_tax_rates` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ

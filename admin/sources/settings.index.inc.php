@@ -316,7 +316,6 @@ $select_options = array(
 	'offline_allow_admin'	=> null,
 	'basket_out_of_stock_purchase'		=> null,
 	'catalogue_popular_products_source'	=> array($lang['settings']['product_popular_views'], $lang['settings']['product_popular_sales']),
-	'product_prices_include_tax'		=> null,
 	'basket_tax_by_delivery'			=> array($lang['address']['billing_address'], $lang['address']['delivery_address']),
 	'proxy'					=> null,
 	'recaptcha'				=> array($lang['common']['disabled'], $lang['common']['enabled']),
