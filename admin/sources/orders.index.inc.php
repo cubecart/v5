@@ -4,7 +4,7 @@ Admin::getInstance()->permissions('orders', CC_PERM_READ, true);
 $order = Order::getInstance();
 global $lang;
 
-if(isset($_POST['search']) && empty($_POST['multi-order'])) {
+if(isset($_POST['search']) && !is_array($_POST['multi-order'])) {
 	httpredir('?_g=orders&'.http_build_query($_POST));
 }
 
