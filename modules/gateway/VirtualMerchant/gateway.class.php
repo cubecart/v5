@@ -44,7 +44,7 @@ class Gateway {
 			'ssl_receipt_decl_post_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=VirtualMerchant', 
 			'ssl_receipt_apprvl_method'	=> 'POST', 
 			'ssl_receipt_apprvl_post_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=VirtualMerchant', 
-			'ssl_company'				=> $this->_basket['billing_address']['companyName'],
+			'ssl_company'				=> $orderSum['companyName'],
 			'ssl_first_name'			=> $this->_basket['billing_address']['first_name'],
 			'ssl_last_name'				=> $this->_basket['billing_address']['last_name'],
 			'ssl_avs_address'			=> $this->_basket['billing_address']['line1'],
