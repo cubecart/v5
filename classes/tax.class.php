@@ -33,7 +33,6 @@ class Tax {
 
 	public $_total_tax_add	= 0;
 	public $_total_tax_inc	= 0;
-	public $_total_tax_percent = 0;
 
 	public $_tax_classes;
 
@@ -83,8 +82,7 @@ class Tax {
 		$GLOBALS['cart']->set('order_taxes', false);
 		if (is_array($this->_tax_table_applied)) {
 			foreach ($this->_tax_table_applied as $tax_id => $tax_name) {
-				$deduct = $this->_tax_table_add[$tax_id]*$this->_total_tax_percent/100;
-				$tax_value	= $this->_tax_table_inc[$tax_id]+$this->_tax_table_add[$tax_id]-$deduct;
+				$tax_value	= $this->_tax_table_inc[$tax_id]+$this->_tax_table_add[$tax_id];
 				$tax_data	= array(
 					'name'	=> $tax_name,
 					'value'	=> $GLOBALS['tax']->priceFormat($tax_value, true),
@@ -111,9 +109,7 @@ class Tax {
 		return true;
 	}
 
-	public function fetchTaxAmounts($percent = 0) {
-		$this->_total_tax_percent = $percent;
-		$this->_total_tax_add -= $percent/100*$this->_total_tax_add;
+	public function fetchTaxAmounts() {
 		return array(
 			'applied'	=> $this->_total_tax_add,
 			'included'	=> $this->_total_tax_inc,

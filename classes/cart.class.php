@@ -592,7 +592,7 @@ class Cart {
 		}
 
 		if (!empty($this->basket['contents']) && is_array($this->basket['contents'])) {
-			$this->_discount = $this->_subtotal = $this->_total_tax_add = $this->_weight = $this->_discount_tax_percent = 0;
+			$this->_discount = $this->_subtotal = $this->_total_tax_add = $this->_weight = 0;
 			// Include inline shipping maths for Per Category Shipping
 			$ship_by_cat = $GLOBALS['config']->get('Per_Category');
 			if (isset($ship_by_cat['status']) && $ship_by_cat['status']) {
@@ -792,7 +792,7 @@ class Cart {
 			$this->basket['weight']		= sprintf('%.3f', $this->_weight);
 			$this->basket['discount']	= sprintf('%.2f', $this->_discount);
 			$this->basket['subtotal']	= sprintf('%.2f', $this->_subtotal);
-			$taxes = $GLOBALS['tax']->fetchTaxAmounts($this->_discount_tax_percent);
+			$taxes = $GLOBALS['tax']->fetchTaxAmounts();
 			foreach ($GLOBALS['hooks']->load('class.cart.get.fetchtaxes') as $hook) include $hook;
 			$this->basket['total_tax']	= sprintf('%.2f', $taxes['applied']);
 
@@ -1172,7 +1172,6 @@ class Cart {
 							}
 							$this->basket['coupons'][$key]['discount_value'] = $discount;
 							$this->_discount += $discount;
-							$this->_discount_tax_percent = $data['value'];
 							break;
 						case 'fixed':
 						default:
