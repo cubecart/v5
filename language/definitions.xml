@@ -96,6 +96,7 @@
     <string name="your_subscription" introduced="5.0.0"><![CDATA[Newsletter Subscriptions]]></string>
   </group>
   <group name="address">
+  	<string name="address_not_found" introduced="6.0.0"><![CDATA[Can't find your address?]]></string>
   	<string name="add_address" introduced="6.0.0"><![CDATA[Add Address]]></string>
   	<string name="edit_address" introduced="6.0.0"><![CDATA[Edit Address]]></string>
   	<string name="example_address_description" introduced="6.0.0"><![CDATA[e.g. &quot;Work Address&quot;]]></string>

@@ -32,12 +32,6 @@ jQuery(document).ready(function() {
 		return false;
 	});
 	
-	$('.address_lookup').blur(function() {
-		if($("#address_form").hasClass('hide')) {
-			$("#address_form").slideDown();
-		}
-	});
-	
 	$(".show-small-search").click(function() {
 		if($(this).hasClass('hidden')) {
 			$("#small-search").slideDown();
@@ -155,6 +149,17 @@ jQuery(document).ready(function() {
 				$(target).replaceWith($(replacement));
 			}
 		}
+	});
+	
+	$('.address_lookup').blur(function() {
+		if($(this).val() && $("#address_form").hasClass('hide')) {
+			$('#lookup_fail').hide();
+			$("#address_form").slideDown();
+		}
+	});
+	$('#lookup_fail').click(function() {
+		$(this).hide();
+		$("#address_form").slideDown();
 	});
 	
 	if ($('#delivery_is_billing:checkbox').is(':checked') == true) $('fieldset#address_delivery').hide();

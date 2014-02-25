@@ -68,6 +68,7 @@
          <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1} </label><input type="text" name="line1" id="addr_line1" value="{$DATA.line1}" required placeholder="{if $ADDRESS_LOOKUP}{$LANG.address.address_lookup}{else}{$LANG.address.line1} {$LANG.form.required}{/if}" autocomplete="off" autocorrect="off" class="address_lookup">
          </div>
       </div>
+      {if $ADDRESS_LOOKUP}<p id="lookup_fail"><a href="#">{$LANG.address.address_not_found}</a></p>{/if}
       <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
       <div class="row">
          <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="line2" id="addr_line2" value="{$DATA.line2}" placeholder="{$LANG.address.line2}" /></div>
