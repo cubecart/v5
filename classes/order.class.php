@@ -799,6 +799,55 @@ class Order {
 		}
 		return false;
 	}
+	
+	public function serializeOptions($item) {
+		if (isset($item['options']) && !empty($item['options'])) {
+			foreach ($item['options'] as $option_id => $assign_id) {
+				if (!is_array($assign_id)) {
+					if (($value = $GLOBALS['catalogue']->getOptionData((int)$option_id, (int)$assign_id)) !== false) {
+						$value['price_display'] = '';
+						if (isset($value['option_price']) && $value['option_price']>0) { // record option price but not zero
+							if ($value['option_negative']) {
+								//$record['price'] -= $value['option_price'];
+								$value['price_display'] = ' (-';
+							} else {
+								//$record['price'] += $value['option_price'];
+								$value['price_display'] = ' (+';
+							}
+							$value['price_display'] .= $GLOBALS['tax']->priceFormat($value['option_price'], true).')';
+						}
+						$option[] = $value['option_name'].': '.$value['value_name'].$value['price_display'];
+					}
+				} else {
+					foreach ($assign_id as $id => $option_value) {
+						if (($assign_id = $GLOBALS['db']->select('CubeCart_option_assign', array('assign_id'), array('option_id' => (int)$option_id, 'product' => $item['id']))) !== false) {
+							$assign_id = (int)$assign_id[0]['assign_id'];
+						} else {
+							$assign_id = 0;
+						}
+						if (($value	= $GLOBALS['catalogue']->getOptionData((int)$option_id, $assign_id)) !== false) {
+							$value['price_display'] = '';
+							if (isset($value['option_price']) && $value['option_price']>0) { // record option price but not zero
+								if ($value['option_negative']) {
+									//$record['price'] -= $value['option_price'];
+									$value['price_display'] = ' (-';
+								} else {
+									//$record['price'] += $value['option_price'];
+									$value['price_display'] = ' (+';
+								}
+								$value['price_display'] .= $GLOBALS['tax']->priceFormat($value['option_price'], true).')';
+							}
+							$option[] = $value['option_name'].': '.$option_value.$value['price_display'];
+						}
+					}
+
+				}
+			}
+			if (isset($option) && is_array($option)) {
+				return serialize($option);
+			}
+		}
+	}
 
 	private function _orderAddProduct($item, $hash = '') {
 		// Add an item to the order - fetch the details from the database
@@ -832,52 +881,7 @@ class Order {
 				'options_identifier'=> $item['options_identifier']
 			);
 
-			if (isset($item['options']) && !empty($item['options'])) {
-				foreach ($item['options'] as $option_id => $assign_id) {
-					if (!is_array($assign_id)) {
-						if (($value = $GLOBALS['catalogue']->getOptionData((int)$option_id, (int)$assign_id)) !== false) {
-							$value['price_display'] = '';
-							if (isset($value['option_price']) && $value['option_price']>0) { // record option price but not zero
-								if ($value['option_negative']) {
-									//$record['price'] -= $value['option_price'];
-									$value['price_display'] = ' (-';
-								} else {
-									//$record['price'] += $value['option_price'];
-									$value['price_display'] = ' (+';
-								}
-								$value['price_display'] .= $GLOBALS['tax']->priceFormat($value['option_price'], true).')';
-							}
-							$option[] = $value['option_name'].': '.$value['value_name'].$value['price_display'];
-						}
-					} else {
-						foreach ($assign_id as $id => $option_value) {
-							if (($assign_id = $GLOBALS['db']->select('CubeCart_option_assign', array('assign_id'), array('option_id' => (int)$option_id, 'product' => $item['id']))) !== false) {
-								$assign_id = (int)$assign_id[0]['assign_id'];
-							} else {
-								$assign_id = 0;
-							}
-							if (($value	= $GLOBALS['catalogue']->getOptionData((int)$option_id, $assign_id)) !== false) {
-								$value['price_display'] = '';
-								if (isset($value['option_price']) && $value['option_price']>0) { // record option price but not zero
-									if ($value['option_negative']) {
-										//$record['price'] -= $value['option_price'];
-										$value['price_display'] = ' (-';
-									} else {
-										//$record['price'] += $value['option_price'];
-										$value['price_display'] = ' (+';
-									}
-									$value['price_display'] .= $GLOBALS['tax']->priceFormat($value['option_price'], true).')';
-								}
-								$option[] = $value['option_name'].': '.$option_value.$value['price_display'];
-							}
-						}
-
-					}
-				}
-				if (isset($option) && is_array($option)) {
-					$record['product_options'] = serialize($option);
-				}
-			}
+			$record['product_options'] = $this->serializeOptions($item);
 
 			foreach ($GLOBALS['hooks']->load('class.order.products.add.pre') as $hook) include $hook;
 

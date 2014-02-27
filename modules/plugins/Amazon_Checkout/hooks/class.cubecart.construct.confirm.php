@@ -23,6 +23,8 @@ if(defined('PURCHASE_CONTRACT_ID') && $module_config = $GLOBALS['config']->get('
 		
 		$merchantURLs->setMerchantURL($call_url);
 		
+		$order	= Order::getInstance();
+		
 		foreach ($this->_basket['contents'] as $product) {
 			
 			$cubecart_total_price_each = $product['total_price_each'];
@@ -40,7 +42,9 @@ if(defined('PURCHASE_CONTRACT_ID') && $module_config = $GLOBALS['config']->get('
 				'order_taxes' 		=> $this->_basket['order_taxes'],
 				'total_price_each' 	=> sprintf('%0.2f', $cubecart_total_price_each),
 				'customer_id' 		=> $GLOBALS['session']->get('customer_id', 'amazon'),
+				'product_options'	=> base64_encode($order->serializeOptions($product)),
 			);
+			
 			$custom_data = base64_encode(json_encode($custom_data));
 			$itemObject->setItemCustomData($custom_data);
 			$itemList->addItem($itemObject);
