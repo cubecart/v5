@@ -59,6 +59,7 @@ class Gateway {
 					'quantity' => (int)$item->Quantity,
 					'product_code' => (string)$item->SKU,
 					'cart_order_id' => $cart_order_id,
+					'product_options' => base64_decode($custom_data['product_options']),
 				);
 				
 				$GLOBALS['db']->insert('CubeCart_order_inventory',$order_inventory);
