@@ -36,12 +36,12 @@
 <form action="{$VAL_SELF}" id="lookup_order" method="post">
    <div class="row">
    <div class="small-12 large-8 columns">
-   	<label for="lookup_order_id">{$LANG.basket.order_number}</label><input type="text" id="lookup_order_id" name="cart_order_id" value="{$ORDER_NUMBER}" />
+   	<label for="lookup_order_id">{$LANG.basket.order_number}</label><input type="text" id="lookup_order_id" name="cart_order_id" value="{$ORDER_NUMBER}">
    	</div>
    	</div>
    <div class="row">
-   <div class="small-12 large-8 columns"><label for="lookup_email">{$LANG.common.email}</label><input type="text" id="lookup_email" name="email" value="" /></div></div>
-   <div><input type="submit" value="{$LANG.common.search}" class="button" /></div>
+   <div class="small-12 large-8 columns"><label for="lookup_email">{$LANG.common.email}</label><input type="text" id="lookup_email" name="email" value=""></div></div>
+   <div><input type="submit" value="{$LANG.common.search}" class="button"></div>
    <div class="hide" id="validate_field_required">{$LANG.form.field_required}</div>
    <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
 </form>

@@ -2,12 +2,12 @@
 <div class="row">
    <div class="large-6 columns">
       <h2>{if $CTRL_DELIVERY}{$LANG.address.billing_address}{else}{$LANG.address.billing_delivery_address}{/if}</h2>
-      {$DATA.title} {$DATA.first_name} {$DATA.last_name}<br />
-      {if $DATA.company_name}{$DATA.company_name}<br />{/if}
-      {$DATA.line1}<br />
-      {if $DATA.line2}{$DATA.line2}<br />{/if}
-      {$DATA.town}<br />
-      {$DATA.state}, {$DATA.postcode}<br />
+      {$DATA.title} {$DATA.first_name} {$DATA.last_name}<br>
+      {if $DATA.company_name}{$DATA.company_name}<br>{/if}
+      {$DATA.line1}<br>
+      {if $DATA.line2}{$DATA.line2}<br>{/if}
+      {$DATA.town}<br>
+      {$DATA.state}, {$DATA.postcode}<br>
       {$DATA.country}
       <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=edit&amp;address_id={$DATA.address_id}&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_edit}</a></div>
    </div>
@@ -28,7 +28,7 @@
 <h2>{$LANG.account.your_details}</h2>
 <h3>{$LANG.account.contact_details}</h3>
 <div class="row">
-   <div class="small-4 columns"><label for="user_title">{$LANG.user.title}</label><input type="text" name="user[title]" id="user_title"  class="capitalize" value="{$USER.title}" placeholder="{$LANG.user.title}" /></div>
+   <div class="small-4 columns"><label for="user_title">{$LANG.user.title}</label><input type="text" name="user[title]" id="user_title"  class="capitalize" value="{$USER.title}" placeholder="{$LANG.user.title}"></div>
 </div>
 <div class="row">
    <div class="small-12 large-8 columns"><label for="user_first">{$LANG.user.name_first}</label><input type="text" name="user[first_name]" id="user_first"   required value="{$USER.first_name}" placeholder="{$LANG.user.name_first}  {$LANG.form.required}"></div>
@@ -43,12 +43,12 @@
    <div class="small-12 large-8 columns"><label for="user_phone">{$LANG.address.phone}</label><input type="text" name="user[phone]" id="user_phone"  required value="{$USER.phone}" placeholder="{$LANG.address.phone}  {$LANG.form.required}"></div>
 </div>
 <div class="row">
-   <div class="small-12 large-8 columns"><label for="user_mobile">{$LANG.address.mobile}</label><input type="text" name="user[mobile]" id="user_mobile"  value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
+   <div class="small-12 large-8 columns"><label for="user_mobile">{$LANG.address.mobile}</label><input type="text" name="user[mobile]" id="user_mobile"  value="{$USER.mobile}" placeholder="{$LANG.address.mobile}"></div>
 </div>
 <h3>{$LANG.address.billing_address}</h3>
 {if !$ALLOW_DELIVERY_ADDRESS}{$LANG.address.ship_to_billing_only}{/if}
 <div class="row">
-   <div class="small-12 large-8 columns"><label for="addr_company">{$LANG.address.company_name}</label><input type="text" name="billing[company_name]" id="addr_company"  value="{$BILLING.company_name}" placeholder="{$LANG.address.company_name}" /></div>
+   <div class="small-12 large-8 columns"><label for="addr_company">{$LANG.address.company_name}</label><input type="text" name="billing[company_name]" id="addr_company"  value="{$BILLING.company_name}" placeholder="{$LANG.address.company_name}"></div>
 </div>
 <address>
    <div class="row">
@@ -59,7 +59,7 @@
    {/if}
    <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="billing[line2]" id="addr_line2"  value="{$BILLING.line2}" placeholder="{$LANG.address.line2}" /></div>
+      <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="billing[line2]" id="addr_line2"  value="{$BILLING.line2}" placeholder="{$LANG.address.line2}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="addr_town">{$LANG.address.town}</label><input type="text" name="billing[town]" id="addr_town"  required value="{$BILLING.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
@@ -83,7 +83,7 @@
 </address>
 {if $TERMS_CONDITIONS}
 <div class="row">
-   <div class="small-12 large-8 columns"><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED} /><label for="reg_terms">{$LANG.account.register_terms_agree_link|replace:'%s':{$TERMS_CONDITIONS}}</label></div>
+   <div class="small-12 large-8 columns"><input type="checkbox" id="reg_terms" name="terms_agree" value="1" {$TERMS_CONDITIONS_CHECKED}><label for="reg_terms">{$LANG.account.register_terms_agree_link|replace:'%s':{$TERMS_CONDITIONS}}</label></div>
 </div>
 {/if}
 {if $ALLOW_DELIVERY_ADDRESS}
@@ -101,7 +101,7 @@
       <div class="small-12 large-8 columns"><label for="del_last">{$LANG.user.name_last}</label><input type="text" name="delivery[last_name]" id="del_last"   required value="{$DELIVERY.last_name}" placeholder="{$LANG.user.name_last} {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="del_company">{$LANG.address.company_name}</label><input type="text" name="delivery[company_name]" id="del_company"  value="{$DELIVERY.company_name}" placeholder="{$LANG.user.company_name}" /></div>
+      <div class="small-12 large-8 columns"><label for="del_company">{$LANG.address.company_name}</label><input type="text" name="delivery[company_name]" id="del_company"  value="{$DELIVERY.company_name}" placeholder="{$LANG.user.company_name}"></div>
    </div>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_line1">{$LANG.address.line1}</label><input type="text" name="delivery[line1]" id="del_line1"  required value="{$DELIVERY.line1}" placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
@@ -133,7 +133,7 @@
    var county_list = {$STATE_JSON};
 </script>
 <div class="row">
-   <div class="small-12 large-8 columns"><input type="checkbox" name="register" id="show-reg" value="1" {$REGISTER_CHECKED} /><label for="show-reg">{$LANG.account.create_account}</label></div>
+   <div class="small-12 large-8 columns"><input type="checkbox" name="register" id="show-reg" value="1" {$REGISTER_CHECKED}><label for="show-reg">{$LANG.account.create_account}</label></div>
 </div>
 <div id="account-reg">
    <h3>{$LANG.account.password}</h3>

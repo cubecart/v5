@@ -5,5 +5,5 @@
   {foreach from=$LANGUAGES item=language}
   <option value="{$language.code}" {$language.selected}>{$language.title}</option>
   {/foreach}
-  </select> <input type="submit" value="{$LANG.common.submit}" class="hide" />
+  </select> <input type="submit" value="{$LANG.common.submit}" class="hide">
   </form>

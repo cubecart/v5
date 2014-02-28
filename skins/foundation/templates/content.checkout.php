@@ -19,7 +19,7 @@
          <tr>
             <td><a href="{$STORE_URL}/index.php?_a=basket&amp;remove-item={$hash}"><i class="fa fa-trash-o"></i></a></td>
             <td>
-               <a href="{$item.link}" class="th" title="{$item.name}"><img src="{$item.image}" alt="{$item.name}" /></a>
+               <a href="{$item.link}" class="th" title="{$item.name}"><img src="{$item.image}" alt="{$item.name}"></a>
                <a href="{$item.link}" class="txtDefault"><strong>{$item.name}</strong></a>
                {if $item.options}
                <ul class="no-bullet">
@@ -31,7 +31,7 @@
                <p>
             </td>
             <td>{$item.line_price_display}</td>
-            <td align="center"><input name="quan[{$hash}]" type="text" value="{$item.quantity}" maxlength="3" class="quantity" {$QUAN_READ_ONLY} /></td>
+            <td align="center"><input name="quan[{$hash}]" type="text" value="{$item.quantity}" maxlength="3" class="quantity" {$QUAN_READ_ONLY}></td>
             <td>{$item.price_display}</td>
          </tr>
          {/foreach}
@@ -100,7 +100,7 @@
          {$LANG.basket.coupon_add}
       </div>
       <div class="small-4 columns">
-         <input name="coupon" id="coupon" type="text" class="textbox" maxlength="25" />
+         <input name="coupon" id="coupon" type="text" class="textbox" maxlength="25">
       </div>
    </div>
    <div class="clearfix">
@@ -126,7 +126,7 @@
    <ul class="small-block-grid-4 no-bullet">
    {foreach from=$RELATED item=product}
       <li>
-      	<a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" class="th" alt="{$product.name}" /></a>
+      	<a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" class="th" alt="{$product.name}"></a>
         <br>
         <a href="{$product.url}" title="{$product.name}">{$product.name}</a>
       </li>

@@ -11,7 +11,7 @@
       <option value="{$sort.field}|{$sort.order}" {$sort.selected}>{$sort.name} ({$sort.direction})</option>
       {/foreach}
    </select>
-   <input type="submit" value="{$LANG.form.sort}" class="hide" />
+   <input type="submit" value="{$LANG.form.sort}" class="hide">
    </div>
 </div>
 </form>

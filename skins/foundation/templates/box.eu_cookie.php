@@ -5,8 +5,8 @@
          {$LANG.notification.cookie_dialogue|replace:'%s':{$CONFIG.store_name}}
       </div>
       <div class="small-2 columns">
-         <input type="submit" class="button tiny secondary" name="accept_cookies_submit" id="eu_cookie_button" value="{$LANG.common.continue}" />
-         <input type="hidden" name="accept_cookies" value="1" />
+         <input type="submit" class="button tiny secondary" name="accept_cookies_submit" id="eu_cookie_button" value="{$LANG.common.continue}">
+         <input type="hidden" name="accept_cookies" value="1">
       </div>
    </form>
 </div>

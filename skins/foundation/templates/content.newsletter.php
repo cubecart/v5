@@ -17,13 +17,13 @@
    <div class="row">
       <div class="small-12 large-8 columns">
          <label for="newsletter_email">{$LANG.common.email}</label>
-         <input type="text" name="subscribe" class="required" id="newsletter_email" placeholder="{$LANG.common.email} {$LANG.form.required}" />
+         <input type="text" name="subscribe" class="required" id="newsletter_email" placeholder="{$LANG.common.email} {$LANG.form.required}">
       </div>
    </div>
    <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
    <div class="hide" id="validate_already_subscribed">{$LANG.newsletter.notify_already_subscribed}</div>
    <div class="row">
-      <div class="small-12 large-8 columns"><input name="submit" class="button" type="submit" value="{$LANG.form.submit}" /></div>
+      <div class="small-12 large-8 columns"><input name="submit" class="button" type="submit" value="{$LANG.form.submit}"></div>
    </div>
 </form>
 {/if}

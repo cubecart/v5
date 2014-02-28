@@ -10,5 +10,5 @@
 		{$DISPLAY_RECAPTCHA}
 	</div>
 </div>
-<hr />
+<hr>
 {/if}

@@ -2,7 +2,7 @@
 <html class="no-js" xmlns="http://www.w3.org/1999/xhtml" dir="{$TEXT_DIRECTION}" lang="{$HTML_LANG}">
    <head>
       <title>{$PAGE_TITLE}</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.print.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.common.css">
@@ -12,7 +12,7 @@
       {foreach from=$LIST_ORDERS item=order}
       <div class="row">
          <div class="small-6 columns">
-            <img src="{$STORE_LOGO}" alt="" />
+            <img src="{$STORE_LOGO}" alt="">
          </div>
          <div class="small-6 columns text-right">
             <strong>{$CONFIG.store_name}</strong><br>
@@ -62,7 +62,7 @@
                      <td>
                         {$item.name}{if !empty($item.product_code)} ({$item.product_code}){/if}
                         {if !empty($item.options)}
-                        <p>{foreach from=$item.options item=option}{$option}<br />{/foreach}</p>
+                        <p>{foreach from=$item.options item=option}{$option}<br>{/foreach}</p>
                         {/if}
                      </td>
                      <td class="text-right">{$item.price}</td>

@@ -41,8 +41,8 @@
 <form action="{$VAL_SELF}" method="post">
    <h2>{$LANG.catalogue.redeem_download_code}</h2>
    <fieldset>
-      <div><label for="download-code">{$LANG.catalogue.download_access_key}</label><span><input type="text" name="accesskey" id="download-code" value="" /></span></div>
+      <div><label for="download-code">{$LANG.catalogue.download_access_key}</label><span><input type="text" name="accesskey" id="download-code" value=""></span></div>
    </fieldset>
-   <div><input type="submit" value="{$LANG.common.submit}" class="button_submit" /></div>
+   <div><input type="submit" value="{$LANG.common.submit}" class="button_submit"></div>
 </form>
 {/if}

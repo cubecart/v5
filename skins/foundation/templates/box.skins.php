@@ -11,5 +11,5 @@
 	<option value="{$skin.name}" {$skin.selected}>{$skin.display}</option>
     {/if}
   {/foreach}
-  </select><input type="submit" value="submit" />
+  </select><input type="submit" value="submit">
   </form>

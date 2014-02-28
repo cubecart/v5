@@ -10,15 +10,15 @@
    <div class="small-7 columns">
       {if $PRODUCT.magnify}
       <a href="{$PRODUCT.source}" class="magnify" title="{$PRODUCT.name}" rel="">
-      <img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="preview" />
+      <img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="preview">
       </a>
       {else}
-      <img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="preview" />
+      <img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="preview">
       {/if}
       {if $GALLERY}
       <ul class="small-block-grid-5 marg-top" data-clearing>
          {foreach from=$GALLERY item=image}
-         <li><a href="{$image.large}" id="image_{$image.id}" class="colorbox gallery" rel="gallery"><img class="th" src="{$image.gallery}" alt="{$LANG.catalogue.click_enlarge}" /></a></li>
+         <li><a href="{$image.large}" id="image_{$image.id}" class="colorbox gallery" rel="gallery"><img class="th" src="{$image.gallery}" alt="{$LANG.catalogue.click_enlarge}"></a></li>
          {/foreach}
       </ul>
       <script type="text/javascript">
@@ -46,7 +46,7 @@
          <div class="small-12 columns">
             <label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
             {if $option.type == '1'}
-            <input type="text" name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}"  />
+            <input type="text" name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}" >
             {elseif $option.type == '2'}
             <textarea name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}"></textarea>
             {/if}
@@ -62,11 +62,11 @@
          <meta itemprop="reviewCount" content="{$REVIEW_COUNT}">
          {for $i = 1; $i <= 5; $i++}
          {if $PRODUCT.review_score >= $i}
-         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="" />
+         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="">
          {elseif $PRODUCT.review_score > ($i - 1) && $PRODUCT.review_score < $i}
-         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="" />
+         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="">
          {else}
-         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="" />
+         <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="">
          {/if}
          {/for}
       <div>{$LANG_REVIEW_INFO}</div>
@@ -87,11 +87,11 @@
          {/if}
       <div class="row collapse">
          <div class="small-2 columns">
-            <input type="text" name="quantity" value="1" class="quantity required text-center" />
-            <input type="hidden" name="add" value="{$PRODUCT.product_id}" />
+            <input type="text" name="quantity" value="1" class="quantity required text-center">
+            <input type="hidden" name="add" value="{$PRODUCT.product_id}">
          </div>
          <div  class="small-10 columns">
-            <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button postfix" />
+            <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button postfix">
          </div>
       </div>
       {else}
@@ -103,7 +103,7 @@
       {/if}
    </div>
 </div>
-<hr />
+<hr>
 <dl class="tabs" data-tab>
    {if !empty($PRODUCT.description)}<dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>{/if}
    <dd><a href="#product_spec">{$LANG.common.specification}</a></dd>
@@ -142,7 +142,7 @@
    {if isset($PRODUCT.discounts)}
    <div class="content" id="quantity_discounts">
       <p>{$LANG.catalogue.quantity_discounts_explained}</p>
-      <br />
+      <br>
       <table>
       <thead>
          <tr>
@@ -168,7 +168,7 @@
       {$html}
    {/foreach}
 {/if}
-<hr /> 
+<hr> 
 
 {include file='templates/element.product_reviews.php'}
 
@@ -180,7 +180,7 @@
    <h2>{$LANG.catalogue.trackbacks}</h2>
    {foreach from=$TRACKBACKS item=track}
    <p>
-      <a href="{$track.url}" target="_blank">{$track.title}</a><br />
+      <a href="{$track.url}" target="_blank">{$track.title}</a><br>
    <blockquote cite="{$track.url}">&quot;{$track.excerpt}&quot;</blockquote>
    </p>
    {/foreach}

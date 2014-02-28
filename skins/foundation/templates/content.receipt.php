@@ -4,23 +4,23 @@
 <h3>{$LANG.basket.customer_info}</h3>
 <div class="row">
    <div class="small-6 columns">
-      <strong>{$LANG.address.billing_address}</strong><br />
-      {$SUM.title} {$SUM.first_name} {$SUM.last_name}<br />
-      {if $SUM.company_name}{$SUM.company_name}<br />{/if}
-      {$SUM.line1}<br />
-      {if $SUM.line2}{$SUM.line2}<br />{/if}
-      {$SUM.town}<br />
-      {$SUM.state}, {$SUM.postcode}<br />
+      <strong>{$LANG.address.billing_address}</strong><br>
+      {$SUM.title} {$SUM.first_name} {$SUM.last_name}<br>
+      {if $SUM.company_name}{$SUM.company_name}<br>{/if}
+      {$SUM.line1}<br>
+      {if $SUM.line2}{$SUM.line2}<br>{/if}
+      {$SUM.town}<br>
+      {$SUM.state}, {$SUM.postcode}<br>
       {$SUM.country}
    </div>
    <div class="small-6 columns">
-      <strong>{$LANG.address.delivery_address}</strong><br />
-      {$SUM.title_d} {$SUM.first_name_d} {$SUM.last_name_d}<br />
-      {if $SUM.company_name_d}{$SUM.company_name_d}<br />{/if}
-      {$SUM.line1_d}<br />
-      {if $SUM.line2_d}{$SUM.line2_d}<br />{/if}
-      {$SUM.town_d}<br />
-      {$SUM.state_d}, {$SUM.postcode_d}<br />
+      <strong>{$LANG.address.delivery_address}</strong><br>
+      {$SUM.title_d} {$SUM.first_name_d} {$SUM.last_name_d}<br>
+      {if $SUM.company_name_d}{$SUM.company_name_d}<br>{/if}
+      {$SUM.line1_d}<br>
+      {if $SUM.line2_d}{$SUM.line2_d}<br>{/if}
+      {$SUM.town_d}<br>
+      {$SUM.state_d}, {$SUM.postcode_d}<br>
       {$SUM.country_d}
    </div>
 </div>
@@ -52,7 +52,7 @@
          <td>
             {$item.name}{if !empty($item.product_code)} ({$item.product_code}){/if}
             {if !empty($item.options)}
-            <p>{foreach from=$item.options item=option}{$option}<br />{/foreach}</p>
+            <p>{foreach from=$item.options item=option}{$option}<br>{/foreach}</p>
             {/if}
          </td>
          <td class="text-right">{$item.price}</td>

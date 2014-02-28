@@ -5,5 +5,5 @@
   {foreach from=$CURRENCIES item=currency}
   <option value="{$currency.code}" {$currency.selected} title="{$currency.name}">{$currency.symbol_left} {$currency.name} {$currency.symbol_right}</option>
   {/foreach}
-  </select> <input type="submit" value="{$LANG.common.submit}" class="hide" />
+  </select> <input type="submit" value="{$LANG.common.submit}" class="hide">
 </form>
