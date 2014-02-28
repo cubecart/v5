@@ -13,13 +13,6 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		
 	include_once (CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.'PayPal_Pro'.CC_DS.'website_payments_pro.class.php');
 	
-	if($GLOBALS['user']->is()) {
-		$GLOBALS['session']->set('customer_id', $GLOBALS['user']->get('customer_id'), 'PayPal_Pro');
-		$GLOBALS['session']->set('phone', $GLOBALS['user']->get('phone'), 'PayPal_Pro');
-		$GLOBALS['db']->update('CubeCart_sessions', array('customer_id' => 0), array('session_id' => $GLOBALS['session']->getId()));
-		httpredir('index.php?_a=confirm&token='.$_GET['token'].'&PayerID='.$_GET['PayerID']);
-	}
-	
 	$wpp	= new Website_Payments_Pro($GLOBALS['config']->get('PayPal_Pro'));
 	
 	if ($response = $wpp->GetExpressCheckoutDetails()) {
@@ -33,7 +26,7 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		} elseif(!empty($phone_no)) {
 			// use it :)
 		} else {
-			$GLOBALS['gui']->setError('Please enter a valid phone number.');
+			$GLOBALS['gui']->setError($lang['account']['error_valid_phone']);
 			$phone_no = '';
 		}
 		
@@ -70,12 +63,37 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		$this->_basket['customer']			= $customer;
 		$this->_basket['billing_address']	= $address;
 		$this->_basket['delivery_address']	= $address;
-		$this->_basket['register']			= false;
+		$this->_basket['register']			= true;
 		$this->_basket['terms_agree'] 		= true;		
 		
 		$GLOBALS['cart']->save();
-
-		$GLOBALS['session']->set('stage', 'DoExpressCheckoutPayment', 'PayPal_Pro');
+		
+		$address = array_merge($customer, $address);
+			
+		$address['customer_id'] = $customer_id;
+		$address['billing'] = 1;
+		$address['default'] = 1;
+		$address['description'] = 'Default billing address';
+		
+		if(!$GLOBALS['user']->is()) {
+			$customer['password'] = substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",mt_rand(0,50),1).substr(md5(time()),1);
+			$customer_id = $GLOBALS['user']->createUser($customer, false);
+			$GLOBALS['db']->update('CubeCart_sessions', array('customer_id' => $customer_id), array('session_id' => $GLOBALS['session']->getId()));
+			if(!$GLOBALS['user']->getAddresses()) {
+				$GLOBALS['user']->saveAddress($address,$customer_id);
+			}
+			
+			httpredir('?_a=confirm&token='.$_GET['token'].'&PayerID='.$_GET['PayerID']);
+		} else {
+			if(empty($customer['phone'])) unset($customer['phone']); 
+			$GLOBALS['db']->update('CubeCart_customer', $customer, array('customer_id' => $GLOBALS['user']->getId()));
+			$GLOBALS['db']->delete('CubeCart_addressbook',array('customer_id' => $GLOBALS['user']->getId(), 'default' => 1, 'billing' => 1));
+			$GLOBALS['user']->saveAddress($address);
+			
+			$GLOBALS['gui']->setNotify('Please click &quot;Make Payment&quot; to complete your order.');
+			
+			$GLOBALS['session']->set('stage', 'DoExpressCheckoutPayment', 'PayPal_Pro');
+		}
 
 	}
 }
