@@ -11,6 +11,22 @@ jQuery(document).ready(function () {
       required: $('#validate_field_required').text()
    });
 
+   $("#gc_form").validate({
+      rules: {
+      	'gc[email]': {
+            required: true,
+            email: true,
+         } 
+      },
+      messages: {
+         'gc[email]': {
+         	required: $('#validate_email').text(),
+            email: $('#validate_email').text()
+		}
+      }
+   });
+
+
    $("#newsletter_form, #newsletter_form_box").validate({
       rules: {
          subscribe: {
