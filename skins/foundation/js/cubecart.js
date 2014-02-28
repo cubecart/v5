@@ -19,7 +19,11 @@ jQuery(document).ready(function() {
 	$(".autosubmit select").change(function() {
 		$(".autosubmit").submit();
 	});
-    
+       
+    $('img.imagesubmit').each(function(){
+		$(this).parents('form').submit();
+	});
+
     $(".category-nav li" ).each(function(index) {
 		if(!$(this).has("ul").length){
 			$(this).removeClass('has-dropdown');

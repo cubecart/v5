@@ -26,7 +26,7 @@
    {if $TRANSFER.mode == 'automatic'}
    <div class="thickpad-top text-center">
       <p>{$LANG.gateway.transferring}</p>
-      <p><img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/loading.gif" alt="{$LANG.gateway.transfer_progress}" class="autosubmit"></p>
+      <p><img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/loading.gif" alt="{$LANG.gateway.transfer_progress}" class="imagesubmit"></p>
    </div>
    {elseif $TRANSFER.mode == 'manual'}
    <h2>{$LANG.gateway.amount_due}</h2>
