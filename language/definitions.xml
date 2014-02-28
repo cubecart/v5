@@ -110,8 +110,8 @@
     <string name="company_name" introduced="5.0.0"><![CDATA[Company Name]]></string>
     <string name="copy_from_billing" introduced="5.0.0"><![CDATA[Copy from Billing Address]]></string>
     <string name="country" introduced="5.0.0"><![CDATA[Country]]></string>
-    <string name="default_billing_address" introduced="5.0.0"><![CDATA[Default billing address]]></string>
-    <string name="default_delivery_address" introduced="5.0.0"><![CDATA[Default delivery address]]></string>
+    <string name="default_billing_address" introduced="5.0.0"><![CDATA[Default Billing Address]]></string>
+    <string name="default_delivery_address" introduced="5.0.0"><![CDATA[Default Delivery Address]]></string>
     <string name="delivery_address" introduced="5.0.0"><![CDATA[Delivery Address]]></string>
     <string name="delivery_is_billing" introduced="5.0.0"><![CDATA[My delivery address is the same as my billing address.]]></string>
     <string name="form_address_select" introduced="5.0.0"><![CDATA[-- Predefined Addresses --]]></string>

@@ -14,9 +14,9 @@
    <div class="large-6 columns">
       {if $CTRL_DELIVERY}
       <h2>{$LANG.address.delivery_address}</h2>
-      <select name="delivery_address" id="delivery_address">
+      <select name="delivery_address" style="text-transform:capitalize;">
       {foreach from=$ADDRESSES item=address}
-      <option value="{$address.address_id}" {$address.selected}>{$address.description} - {$address.first_name} {$address.last_name}, {$address.line1}, {$address.postcode}</option>
+      <option value="{$address.address_id}" {$address.selected}>{$address.description} ({$address.state}, {$address.postcode})</option>
       {/foreach}
       </select>
       <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_add}</a></div>
