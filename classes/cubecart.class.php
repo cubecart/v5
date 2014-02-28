@@ -204,7 +204,8 @@ class Cubecart {
 					if($_GET['source']=='newsletter') {
 						$result = $GLOBALS['db']->select('CubeCart_newsletter_subscriber', 'subscriber_id', array('email' => $_POST['subscribe']));
 					} else {
-						$result = $GLOBALS['db']->select('CubeCart_customer', 'customer_id', array('email' => $_POST['email']));
+						$email = isset($_POST['user']['email']) ? $_POST['user']['email'] : $_POST['email'];
+						$result = $GLOBALS['db']->select('CubeCart_customer', 'customer_id', array('email' => $email));
 					}
 					
 					if($result) {

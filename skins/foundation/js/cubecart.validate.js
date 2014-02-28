@@ -35,7 +35,83 @@ jQuery(document).ready(function () {
          },
       }
    });
-
+   
+   $("#checkout_form").validate({   
+      rules: {
+         'user[first_name]': {
+            required: true
+         },
+         'user[last_name]': {
+            required: true
+         },
+         'user[email]': {
+            required: true,
+            email: true,
+            remote: {
+	          url: "?_g=ajax_email",
+	          type: "post",
+	          data: {
+	            username: function() {
+	              return $( "#user_email" ).val();
+	            }
+	          }
+	        }
+         },
+         'user[phone]': {
+            required: true,
+            phone: true
+         },
+         'user[mobile]': {
+            phone: true
+         },
+         'billing[line1]': {
+            required: true
+         },
+         'billing[town]': {
+            required: true
+         },
+         'billing[country]': {
+            required: true
+         },
+         'billing[state]': {
+            required: true
+         },
+         'billing[postcode]': {
+            required: true
+         },
+         'delivery[line1]': {
+            required: true
+         },
+         'delivery[town]': {
+            required: true
+         },
+         'delivery[country]': {
+            required: true
+         },
+         'delivery[state]': {
+            required: true
+         },
+         'delivery[postcode]': {
+            required: true
+         }
+      },
+      messages: {
+         'user[email]': {
+            required: $('#validate_email').text(),
+            email: $('#validate_email').text(),
+            remote: $('#validate_email_in_use').text()
+         },
+         'user[phone]': {
+            required: $('#validate_phone').text(),
+            phone: $('#validate_phone').text()
+         },
+         'user[mobile]': {
+            phone: $('#validate_mobile').text()
+         },
+      }
+   });
+   
+   
    $("#addressbook_form").validate({
       rules: {
          description: {

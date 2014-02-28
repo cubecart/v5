@@ -1,5 +1,5 @@
 {if isset($ITEMS)}
-<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" id="basket">
+<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" id="checkout_form">
    {if $INCLUDE_CHECKOUT}
    {include file='templates/content.checkout.confirm.php'}
    {/if}
