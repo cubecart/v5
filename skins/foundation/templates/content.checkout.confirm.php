@@ -139,10 +139,10 @@
 <div id="account-reg">
    <h3>{$LANG.account.password}</h3>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="reg_password">{$LANG.user.password}</label></span><input type="password" autocomplete="off" name="password" id="reg_password"  required value="" placeholder="{$LANG.address.password} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="reg_password">{$LANG.account.password}</label></span><input type="password" autocomplete="off" name="password" id="reg_password"  required  placeholder="{$LANG.account.password} {$LANG.form.required}"></div>
    </div>
    <div class="row">
-      <div class="small-12 large-8 columns"><label for="reg_passconf">{$LANG.user.password_confirm}</label></span><input type="password" autocomplete="off" name="passconf" id="reg_passconf"  required value="" placeholder="{$LANG.address.password_confirm} {$LANG.form.required}"></div>
+      <div class="small-12 large-8 columns"><label for="reg_passconf">{$LANG.user.password_confirm}</label></span><input type="password" autocomplete="off" name="passconf" id="reg_passconf"  required  placeholder="{$LANG.user.password_confirm} {$LANG.form.required}"></div>
    </div>
 </div>
 {include file='templates/content.recaptcha.php'}
@@ -154,3 +154,7 @@
 <div class="hide" id="validate_email_in_use">{$LANG.account.error_email_in_use}</div>
 <div class="hide" id="validate_phone">{$LANG.account.error_valid_phone}</div>
 <div class="hide" id="validate_mobile">{$LANG.account.error_valid_mobile_phone}</div>
+<div class="hide" id="validate_password">{$LANG.account.error_password_empty}</div>
+<div class="hide" id="validate_password_length">{$LANG.account.error_password_length}</div>
+<div class="hide" id="validate_password_mismatch">{$LANG.account.error_password_mismatch}</div>
+<div class="hide" id="validate_terms_agree">{$LANG.account.error_terms_agree}</div>

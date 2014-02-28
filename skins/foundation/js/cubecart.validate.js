@@ -37,6 +37,14 @@ jQuery(document).ready(function () {
    });
    
    $("#checkout_form").validate({   
+      errorPlacement: function (error, element) {
+         if (element.attr("name") == "terms_agree") {
+            element.removeClass("error");
+            alert(error.text());
+         } else {
+            error.insertAfter(element);
+         }
+      },
       rules: {
          'user[first_name]': {
             required: true
@@ -93,6 +101,16 @@ jQuery(document).ready(function () {
          },
          'delivery[postcode]': {
             required: true
+         },
+         password: {
+            required: true,
+            minlength: 6
+         },
+         passconf: {
+            equalTo: "#password"
+         },
+         terms_agree: {
+            required: true
          }
       },
       messages: {
@@ -108,6 +126,17 @@ jQuery(document).ready(function () {
          'user[mobile]': {
             phone: $('#validate_mobile').text()
          },
+         password: {
+            required: $('#validate_password').text(),
+            minlength: $('#validate_password_length').text()
+         },
+         passconf: {
+            required: $('#validate_password_mismatch').text(),
+            equalTo: $('#validate_password_mismatch').text()
+         },
+         terms_agree: {
+            required: $('#validate_terms_agree').text()
+         }
       }
    });
    
@@ -215,7 +244,6 @@ jQuery(document).ready(function () {
             error.insertAfter(element);
          }
       },
-
       rules: {
          first_name: {
             required: true
