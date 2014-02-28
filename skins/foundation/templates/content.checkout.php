@@ -134,5 +134,6 @@
    </ul>
 {/if}
 {else}
-<p>{$LANG.basket.basket_is_empty}</p>
+<h2>{$LANG.checkout.your_basket}</h2>
+<p class="thickpad-top">{$LANG.basket.basket_is_empty}</p>
 {/if}

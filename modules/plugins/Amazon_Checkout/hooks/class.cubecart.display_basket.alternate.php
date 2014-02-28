@@ -42,8 +42,10 @@ if ($GLOBALS['cart']->basket_digital==false && !defined('PURCHASE_CONTRACT_ID') 
 			$position = '';
 		}
 		$list_checkouts[$position]	= $button;
-
  	}
 } elseif(defined('PURCHASE_CONTRACT_ID')) {
 	$load_checkouts = false;
+}
+if($GLOBALS['session']->get('stage', 'amazon')=='wallet') {
+	$GLOBALS['smarty']->assign('CHECKOUT_BUTTON', $GLOBALS['language']->gateway['make_payment']);
 }

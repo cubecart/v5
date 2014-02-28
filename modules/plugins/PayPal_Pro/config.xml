@@ -25,5 +25,6 @@
 	<hook trigger="class.cubecart.construct.gateway" enabled="1"><![CDATA[Payment Handler]]></hook>
 	<hook trigger="class.cubecart.display_basket.alternate" enabled="1"><![CDATA[Checkout Button]]></hook>
 	<hook trigger="class.cubecart.display_gateways" enabled="1"><![CDATA[Gateways for Payments Pro]]></hook>
+	<hook trigger="class.cubecart.checkout_progress" enabled="1"><![CDATA[Checkout Progress]]></hook>
   </hooks>
 </installer>
