@@ -115,14 +115,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 			$transData['notes']			= '';
 			$order->logTransaction($transData);
 			
-			$customer_id = $GLOBALS['session']->get('customer_id', 'PayPal_Pro');
-			
 			$update_order['gateway'] = $transData['gateway'];
-			
-			if($customer_id > 0) {
-				$GLOBALS['db']->update('CubeCart_sessions', array('customer_id' => $customer_id), array('session_id' => $GLOBALS['session']->getId()));
-				$update_order['customer_id'] = $customer_id;
-			}
 			
 			$order->updateSummary($cart_order_id, $update_order);
 			if (isset($pp_order_status)) {
