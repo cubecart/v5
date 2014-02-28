@@ -5,7 +5,7 @@
 {else}
   <h2>Order Confirmation</h2>
     <h3>Thank you!</h3>
-    <p>Your order number is <a href="#" onclick="orderDetailsWidget.open('230px', '554px');">{$AMAZON.order_id}</a>. You will receive an email confirmation shortly with your order details.</p>
+    <p>Your Amazon order number is <a href="#" onclick="orderDetailsWidget.open('230px', '554px');">{$AMAZON.order_id}</a>. You will receive an email confirmation shortly with your order details.</p>
     <p>Return to <a href="{$AMAZON.order_url}" style="size: 10px">Review or edit this order on Amazon Payments</a></p>
     
     <script type='text/javascript' src='{$AMAZON.widgetURL}'></script>
