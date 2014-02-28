@@ -5,4 +5,6 @@
   <li><a href="{$crumb.url}">{$crumb.title}</a></li>
   {/foreach}
 </ul>
+{else}
+<div class="thickpad-top"></div>
 {/if}
