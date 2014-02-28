@@ -1,86 +1,85 @@
 {if $IS_USER}
-<h2>
-   <span class="inline"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=edit&amp;address_id={$DATA.address_id}&amp;redir=confirm">{$LANG.address.address_edit}</a></span>
-   {if $CTRL_DELIVERY}{$LANG.address.billing_address}{else}{$LANG.address.billing_delivery_address}{/if}
-</h2>
-<p>
-   {$DATA.title} {$DATA.first_name} {$DATA.last_name}<br />
-   {if $DATA.company_name}{$DATA.company_name}<br />{/if}
-   {$DATA.line1}<br />
-   {if $DATA.line2}{$DATA.line2}<br />{/if}
-   {$DATA.town}<br />
-   {$DATA.state}, {$DATA.postcode}<br />
-   {$DATA.country}<br />
-</p>
-{if $CTRL_DELIVERY}
-<h2>{$LANG.address.delivery_address}
-   <span class="inline"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add&amp;redir=confirm">{$LANG.address.address_add}</a></span>
-</h2>
-<p>
-   <select name="delivery_address" id="delivery_address" class="update_form" style="border: 1px solid #222222; width: 400px;">
-   {foreach from=$ADDRESSES item=address}
-   <option value="{$address.address_id}" {$address.selected}>{$address.description} - {$address.first_name} {$address.last_name}, {$address.line1}, {$address.postcode}</option>
-   {/foreach}
-   </select>
-</p>
-{/if}
-{else}
-   <p>{$LANG.account.already_registered} <a href="{$URL.login}">{$LANG.account.log_in}</a></p>
-   <h2>{$LANG.account.your_details}</h2>
-   <h3>{$LANG.account.contact_details}</h3>
-   <div class="row">
-      <div class="small-4 columns"><label for="user_title">{$LANG.user.title}</label><input type="text" name="user[title]" id="user_title"  class="capitalize" value="{$USER.title}" placeholder="{$LANG.user.title}" /></div>
+<div class="row">
+   <div class="large-6 columns">
+      <h2>{if $CTRL_DELIVERY}{$LANG.address.billing_address}{else}{$LANG.address.billing_delivery_address}{/if}</h2>
+      {$DATA.title} {$DATA.first_name} {$DATA.last_name}<br />
+      {if $DATA.company_name}{$DATA.company_name}<br />{/if}
+      {$DATA.line1}<br />
+      {if $DATA.line2}{$DATA.line2}<br />{/if}
+      {$DATA.town}<br />
+      {$DATA.state}, {$DATA.postcode}<br />
+      {$DATA.country}
+      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=edit&amp;address_id={$DATA.address_id}&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_edit}</a></div>
    </div>
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_first">{$LANG.user.name_first}</label><input type="text" name="user[first_name]" id="user_first"   required value="{$USER.first_name}" placeholder="{$LANG.user.name_first}  {$LANG.form.required}"></div>
-   </div>
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_last">{$LANG.user.name_last}</label><input type="text" name="user[last_name]" id="user_last"   required value="{$USER.last_name}" placeholder="{$LANG.user.name_last}  {$LANG.form.required}"></div>
-   </div>
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_email">{$LANG.common.email}</label><input type="text" name="user[email]" id="user_email"  required value="{$USER.email}" placeholder="{$LANG.common.email}  {$LANG.form.required}"></div>
-   </div>
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_phone">{$LANG.address.phone}</label><input type="text" name="user[phone]" id="user_phone"  required value="{$USER.phone}" placeholder="{$LANG.address.phone}  {$LANG.form.required}"></div>
-   </div>
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="user_mobile">{$LANG.address.mobile}</label><input type="text" name="user[mobile]" id="user_mobile"  value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
-   </div>
-   <h3>{$LANG.address.billing_address}</h3>
-   {if !$ALLOW_DELIVERY_ADDRESS}{$LANG.address.ship_to_billing_only}{/if}
-   <div class="row">
-      <div class="small-12 large-8 columns"><label for="addr_company">{$LANG.address.company_name}</label><input type="text" name="billing[company_name]" id="addr_company"  value="{$BILLING.company_name}" placeholder="{$LANG.address.company_name}" /></div>
-   </div>
-   <address>
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1}</label><input type="text" name="billing[line1]" id="addr_line1"   value="{$BILLING.line1}" placeholder="{if $ADDRESS_LOOKUP}{$LANG.address.address_lookup}{else}{$LANG.address.line1} {$LANG.form.required}{/if}" autocomplete="off" autocorrect="off" class="address_lookup"></div>
-      </div>
-      {if $ADDRESS_LOOKUP}
-      <p id="lookup_fail"><a href="#">{$LANG.address.address_not_found}</a></p>
+   <div class="large-6 columns">
+      {if $CTRL_DELIVERY}
+      <h2>{$LANG.address.delivery_address}</h2>
+      <select name="delivery_address" id="delivery_address">
+      {foreach from=$ADDRESSES item=address}
+      <option value="{$address.address_id}" {$address.selected}>{$address.description} - {$address.first_name} {$address.last_name}, {$address.line1}, {$address.postcode}</option>
+      {/foreach}
+      </select>
+      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_add}</a></div>
       {/if}
-      <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="billing[line2]" id="addr_line2"  value="{$BILLING.line2}" placeholder="{$LANG.address.line2}" /></div>
-      </div>
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="addr_town">{$LANG.address.town}</label><input type="text" name="billing[town]" id="addr_town"  required value="{$BILLING.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
-      </div>
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="addr_postcode">{$LANG.address.postcode}</label><input type="text" name="billing[postcode]" id="addr_postcode"  class="uppercase required" value="{$BILLING.postcode}" placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>
-      </div>
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="country-list">{$LANG.address.country}</label>
-            <select name="billing[country]"  id="country-list">
-            {foreach from=$COUNTRIES item=country}
-            <option value="{$country.numcode}" {$country.selected}>{$country.name}</option>
-            {/foreach}
-            </select>
-         </div>
-      </div>
-      <div class="row">
-         <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label></span><input type="text" name="billing[state]" id="state-list"  required value="{$BILLING.state}"></div>
-      </div>
+   </div>
 </div>
+{else}
+<p>{$LANG.account.already_registered} <a href="{$URL.login}">{$LANG.account.log_in}</a></p>
+<h2>{$LANG.account.your_details}</h2>
+<h3>{$LANG.account.contact_details}</h3>
+<div class="row">
+   <div class="small-4 columns"><label for="user_title">{$LANG.user.title}</label><input type="text" name="user[title]" id="user_title"  class="capitalize" value="{$USER.title}" placeholder="{$LANG.user.title}" /></div>
+</div>
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="user_first">{$LANG.user.name_first}</label><input type="text" name="user[first_name]" id="user_first"   required value="{$USER.first_name}" placeholder="{$LANG.user.name_first}  {$LANG.form.required}"></div>
+</div>
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="user_last">{$LANG.user.name_last}</label><input type="text" name="user[last_name]" id="user_last"   required value="{$USER.last_name}" placeholder="{$LANG.user.name_last}  {$LANG.form.required}"></div>
+</div>
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="user_email">{$LANG.common.email}</label><input type="text" name="user[email]" id="user_email"  required value="{$USER.email}" placeholder="{$LANG.common.email}  {$LANG.form.required}"></div>
+</div>
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="user_phone">{$LANG.address.phone}</label><input type="text" name="user[phone]" id="user_phone"  required value="{$USER.phone}" placeholder="{$LANG.address.phone}  {$LANG.form.required}"></div>
+</div>
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="user_mobile">{$LANG.address.mobile}</label><input type="text" name="user[mobile]" id="user_mobile"  value="{$USER.mobile}" placeholder="{$LANG.address.mobile}" /></div>
+</div>
+<h3>{$LANG.address.billing_address}</h3>
+{if !$ALLOW_DELIVERY_ADDRESS}{$LANG.address.ship_to_billing_only}{/if}
+<div class="row">
+   <div class="small-12 large-8 columns"><label for="addr_company">{$LANG.address.company_name}</label><input type="text" name="billing[company_name]" id="addr_company"  value="{$BILLING.company_name}" placeholder="{$LANG.address.company_name}" /></div>
+</div>
+<address>
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="addr_line1">{$LANG.address.line1}</label><input type="text" name="billing[line1]" id="addr_line1"   value="{$BILLING.line1}" placeholder="{if $ADDRESS_LOOKUP}{$LANG.address.address_lookup}{else}{$LANG.address.line1} {$LANG.form.required}{/if}" autocomplete="off" autocorrect="off" class="address_lookup"></div>
+   </div>
+   {if $ADDRESS_LOOKUP}
+   <p id="lookup_fail"><a href="#">{$LANG.address.address_not_found}</a></p>
+   {/if}
+   <div{if $ADDRESS_LOOKUP} class="hide"{/if} id="address_form">
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="addr_line2">{$LANG.address.line2}</label><input type="text" name="billing[line2]" id="addr_line2"  value="{$BILLING.line2}" placeholder="{$LANG.address.line2}" /></div>
+   </div>
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="addr_town">{$LANG.address.town}</label><input type="text" name="billing[town]" id="addr_town"  required value="{$BILLING.town}" placeholder="{$LANG.address.town} {$LANG.form.required}"></div>
+   </div>
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="addr_postcode">{$LANG.address.postcode}</label><input type="text" name="billing[postcode]" id="addr_postcode"  class="uppercase required" value="{$BILLING.postcode}" placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>
+   </div>
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="country-list">{$LANG.address.country}</label>
+         <select name="billing[country]"  id="country-list">
+         {foreach from=$COUNTRIES item=country}
+         <option value="{$country.numcode}" {$country.selected}>{$country.name}</option>
+         {/foreach}
+         </select>
+      </div>
+   </div>
+   <div class="row">
+      <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label></span><input type="text" name="billing[state]" id="state-list"  required value="{$BILLING.state}"></div>
+   </div>
+   </div>
 </address>
 {if $TERMS_CONDITIONS}
 <div class="row">
@@ -147,7 +146,7 @@
 </div>
 {include file='templates/content.recaptcha.php'}
 {/if}
-<p><label for="delivery_comments" class="return"><strong>{$LANG.basket.your_comments}</strong></label><textarea name="comments" id="delivery_comments">{$VAL_CUSTOMER_COMMENTS}</textarea></p>
+<label for="delivery_comments" class="return"><strong>{$LANG.basket.your_comments}</strong></label><textarea name="comments" id="delivery_comments">{$VAL_CUSTOMER_COMMENTS}</textarea>
 <div class="hide" id="validate_required">{$LANG.form.required}</div>
 <div class="hide" id="validate_field_required">{$LANG.form.field_required}</div>
 <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>

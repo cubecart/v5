@@ -1,5 +1,5 @@
 {if isset($ITEMS)}
-<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" id="checkout_form">
+<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" class="autosubmit" id="checkout_form">
    {if $INCLUDE_CHECKOUT}
    {include file='templates/content.checkout.confirm.php'}
    {/if}
@@ -49,7 +49,7 @@
          <tr>
             <td colspan="3">
                {$LANG.basket.shipping_select}:
-               <select name="shipping" class="update_form required">
+               <select name="shipping">
                   <option value="">{$LANG.form.please_select}</option>
                   {foreach from=$SHIPPING key=group item=methods}
                   {if $HIDE_OPTION_GROUPS ne '1'}

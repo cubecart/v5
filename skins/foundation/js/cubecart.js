@@ -182,7 +182,6 @@ jQuery(document).ready(function() {
 			$('input#reg_passconf').removeClass('required');
 		}
 	});	
-		
 });
 
 function mini_basket_action() {

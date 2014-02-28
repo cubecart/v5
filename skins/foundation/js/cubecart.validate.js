@@ -107,7 +107,7 @@ jQuery(document).ready(function () {
             minlength: 6
          },
          passconf: {
-            equalTo: "#password"
+            equalTo: "#reg_password"
          },
          terms_agree: {
             required: true
