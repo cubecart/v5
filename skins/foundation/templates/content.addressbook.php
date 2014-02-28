@@ -78,14 +78,14 @@
       </div>
       <div class="row">
          <div class="small-12 large-8 columns">
-            <label for="country-list">{$LANG.address.country}</label><select name="country" class="textbox" id="country-list">
+            <label for="country-list">{$LANG.address.country}</label><select name="country" id="country-list">
             {foreach from=$COUNTRIES item=country}
             <option value="{$country.numcode}" {$country.selected}>{$country.name}</option>
             {/foreach}</select>
          </div>
       </div>
       <div class="row">
-         <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label><input type="text" name="state" id="state-list" class="textbox required" value="{$DATA.state}" placeholder="{$LANG.address.state} {$LANG.form.required}"></div>
+         <div class="small-12 large-8 columns"><label for="state-list">{$LANG.address.state}</label><input type="text" name="state" id="state-list" required value="{$DATA.state}" placeholder="{$LANG.address.state} {$LANG.form.required}"></div>
       </div>
       <div class="row">
          <div class="small-12 large-8 columns"><label for="addr_postcode">{$LANG.address.postcode}</label><input type="text" name="postcode" id="addr_postcode" value="{$DATA.postcode}" required placeholder="{$LANG.address.postcode} {$LANG.form.required}"></div>

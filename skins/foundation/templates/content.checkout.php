@@ -100,7 +100,7 @@
          {$LANG.basket.coupon_add}
       </div>
       <div class="small-4 columns">
-         <input name="coupon" id="coupon" type="text" class="textbox" maxlength="25">
+         <input name="coupon" id="coupon" type="text" maxlength="25">
       </div>
    </div>
    <div class="clearfix">

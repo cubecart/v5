@@ -33,7 +33,7 @@
       <div class="row">
          <div class="small-12 columns">
             <label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
-            <select name="productOptions[{$option.option_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}">
+            <select name="productOptions[{$option.option_id}]" id="option_{$option.option_id}" {if $option.required}required{/if}>
                <option value="">{$LANG.form.please_select}</option>
                {foreach from=$option.values item=value}
                <option value="{$value.assign_id}">{$value.value_name}{if $value.price} ({$value.symbol}{$value.price}){/if}</option>
@@ -46,9 +46,9 @@
          <div class="small-12 columns">
             <label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
             {if $option.type == '1'}
-            <input type="text" name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}" >
+            <input type="text" name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" {if $option.required}required{/if} >
             {elseif $option.type == '2'}
-            <textarea name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}"></textarea>
+            <textarea name="productOptions[{$option.option_id}][{$OPT.assign_id}]" id="option_{$option.option_id}" {if $option.required}required{/if}></textarea>
             {/if}
          </div>
       </div>

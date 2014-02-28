@@ -35,7 +35,7 @@
 </div>
 <div id="review_write" style="display: none;">
    <h3>{$LANG.catalogue.write_review}</h3>
-   <form action="{$VAL_SELF}#reviews_write" method="post">
+   <form action="{$VAL_SELF}#reviews_write" id="review_form" method="post">
       <div class="panel">
          {if $IS_USER}
          <div class="row">
@@ -43,10 +43,10 @@
          </div>
          {else}
          <div class="row">
-            <div class="small-12 columns"><label for="rev_name">{$LANG.common.name}</label><input id="rev_name" type="text" name="review[name]" value="{$WRITE.name}" class="textbox required"></div>
+            <div class="small-12 columns"><label for="rev_name">{$LANG.common.name}</label><input id="rev_name" type="text" name="review[name]" value="{$WRITE.name}" placeholder="{$LANG.common.name} {$LANG.form.required}" required></div>
          </div>
          <div class="row">
-            <div class="small-12 columns"><label for="rev_email">{$LANG.common.email}</label><input id="rev_email" type="text" name="review[email]" value="{$WRITE.email}" class="textbox required"></div>
+            <div class="small-12 columns"><label for="rev_email">{$LANG.common.email}</label><input id="rev_email" type="text" name="review[email]" value="{$WRITE.email}" placeholder="{$LANG.common.email} {$LANG.form.required}" required></div>
          </div>
          {/if}
          <div class="row">
@@ -58,10 +58,10 @@
             </div>
          </div>
          <div class="row">
-            <div class="small-12 columns"><label for="rev_title" class="inline">{$LANG.catalogue.review_title}</label><input id="rev_title" type="text" name="review[title]" value="{$WRITE.title}" class="textbox required"></div>
+            <div class="small-12 columns"><label for="rev_title" class="inline">{$LANG.catalogue.review_title}</label><input id="rev_title" type="text" name="review[title]" value="{$WRITE.title}" placeholder="{$LANG.catalogue.review_title} {$LANG.form.required}" required></div>
          </div>
          <div class="row">
-            <div class="small-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" class="textbox required">{$WRITE.review}</textarea></div>
+            <div class="small-12 columns"><label for="rev_review" class="return">{$LANG.catalogue.review}</label><textarea id="rev_review" name="review[review]" placeholder="{$LANG.catalogue.review} {$LANG.form.required}" required>{$WRITE.review}</textarea></div>
          </div>
          {include file='templates/content.recaptcha.php'}
       </div>
@@ -71,4 +71,6 @@
       </div>
    </form>
 </div>
+<div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>
+<div class="hide" id="validate_field_required">{$LANG.form.field_required}</div>
 {/if}
