@@ -7,7 +7,7 @@
  
 if (!function_exists('addshoppers_verify_data')){
 	function addshoppers_verify_data($data,$api_secret) {
-		$params = json_decode(urldecode($data), true);
+		$params = json_decode(stripslashes(urldecode($data)), true);
 		$signature = null;
 		$p = array();
 		
