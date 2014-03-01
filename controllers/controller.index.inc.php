@@ -4,7 +4,7 @@ if(!defined('CC_DS')) die('Access Denied');
 if (version_compare(PHP_VERSION, '5.2.3', '<')) {
 	die('<strong>ERROR!</strong><br />CubeCart requires <a href="http://www.php.net">PHP</a> Version 5.2.3 or better. Your server is currently running PHP Version '.PHP_VERSION);
 }
-$global_template_file = 'main.php';
+
 define('ADMIN_CP', false);
 // Include core functions
 require CC_INCLUDES_DIR.'functions.inc.php';
