@@ -1037,7 +1037,7 @@ class Cart {
 							$quantity = $max_stock;
 						}
 					}
-					$this->basket['contents'][$hash]['quantity'] = $quantity;
+					$this->basket['contents'][$hash]['quantity'] = (int)$quantity; // or ceil($quantity);
 					$product_data['product_id'] = (int)$this->basket['contents'][$hash]['id'];
 					//$this->basket['contents'][$hash]['total_price_each'] = ($product['price']+$this->basket['contents'][$hash]['option_line_price']);
 					$pprice = $product['ctrl_sale'] ? $product['sale_price'] : $product['price'];
