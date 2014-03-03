@@ -1,9 +1,10 @@
 <div>
+	<form action="{$VAL_SELF}" method="post">
+	<div>
 	<h2>{$LANG.account.your_details}</h2>
 	<p>
 		{$LANG.account.update_your_details}
 	</p>
-	<form action="{$VAL_SELF}" method="post">
 		<fieldset>
 			<div>
 				<label for="acc_title">{$LANG.user.title}</label><span><input type="text" name="title" id="acc_title" value="{$USER.title}"/></span>
@@ -24,7 +25,9 @@
 				<label for="acc_mobile">{$LANG.address.mobile}</label><span><input type="text" name="mobile" id="acc_mobile" class="" value="{$USER.mobile}"/></span>
 			</div>
 		</fieldset>
+	</div>
 		 {if $ACCOUNT_EXISTS}
+		<div>
 		<h2>{$LANG.account.password_change}</h2>
 		<p>
 			{$LANG.account.update_your_password}
@@ -40,6 +43,7 @@
 				<label for="passconf">{$LANG.user.password_confirm}</label><span><input type="password" autocomplete="off" name="passconf" id="passconf"/></span>
 			</div>
 		</fieldset>
+		</div>
 		 {/if}
 		<p>
 			<input name="update" type="submit" value="{$LANG.common.update}" class="button_submit"/><input type="reset" value="{$LANG.common.reset}" class="button_submit"/>
