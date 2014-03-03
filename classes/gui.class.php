@@ -812,9 +812,15 @@ class GUI {
 		if (isset($_POST['subscribe'])) {
 			$newsletter = Newsletter::getInstance();
 			if ($newsletter->subscribe($_POST['subscribe'])) {
+				$GLOBALS['gui']->setNotify($GLOBALS['language']->newsletter['notify_subscribed']);
 				httpredir(currentPage(null, array('subscribed' => 'true')));
+			} else if($newsletter->unsubscribe($_POST['subscribe'])) {
+				$GLOBALS['gui']->setNotify($GLOBALS['language']->newsletter['notify_unsubscribed']);
+				httpredir(currentPage(null, array('subscribed' => 'false')));
+				//httpredir(currentPage());
 			} else {
-				httpredir(currentPage(null, array('_a' => 'newsletter', 'subscribed' => 'false')));
+				$GLOBALS['gui']->setError($GLOBALS['language']->common['error_email_invalid']);
+				httpredir(currentPage(null, array('subscribed' => 'false')));
 			}
 		}
 
