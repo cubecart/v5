@@ -422,6 +422,12 @@ class Gateway {
 				);
 				$order->logTransaction($log);
 			}
+			
+			if($response['L_ERRORCODE0'] == '11611') {
+				$GLOBALS['gui']->setNotify("Your payment has been accepted but requires manual review by a member of staff. Please accept our apologies for any delay in the process of your order.");
+				return true;	
+			} 
+			
 			switch ($response['ACK']) {
 				case 'SuccessWithWarning':
 				case 'Success':
