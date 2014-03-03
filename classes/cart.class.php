@@ -237,7 +237,7 @@ class Cart {
 			return true;
 		} else if (!is_null($product_id) && is_numeric($product_id)) {
 			$proceed = true;
-			
+			$options_identifier_string = '';
 			if(is_array($optionsArray)) {
 				
 				foreach($optionsArray as $value) {
@@ -245,17 +245,20 @@ class Cart {
 						$assign_ids[] = $value;
 					}
 				}
-				$query = 'SELECT `option_id`, `value_id` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_option_assign` WHERE `matrix_include` = 1 AND `assign_id` IN ('.implode(',', $assign_ids).') ORDER BY `option_id`, `value_id` ASC';
 				
-				$option_identifiers = $GLOBALS['db']->query($query);
-				// Update product code & stock based on options matrix
-				
-				$options_identifier_string = '';
-				foreach($option_identifiers as $option_identifier) {
-					$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
+				if(is_array($assign_ids)) {
+					$query = 'SELECT `option_id`, `value_id` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_option_assign` WHERE `matrix_include` = 1 AND `assign_id` IN ('.implode(',', $assign_ids).') ORDER BY `option_id`, `value_id` ASC';
+					
+					$option_identifiers = $GLOBALS['db']->query($query);
+					// Update product code & stock based on options matrix
+					
+					$options_identifier_string = '';
+					foreach($option_identifiers as $option_identifier) {
+						$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
+					}
+					
+					$options_identifier_string = md5($options_identifier_string);
 				}
-				
-				$options_identifier_string = md5($options_identifier_string);
 			}
 			
 			$product = $GLOBALS['catalogue']->getProductData($product_id, $options_identifier_string);
