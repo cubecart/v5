@@ -256,6 +256,7 @@ class Cart {
 			return true;
 		} else if (!is_null($product_id) && is_numeric($product_id)) {
 			$proceed = true;
+			$options_identifier_string = '';
 			
 			if(is_array($optionsArray)) {
 				
@@ -264,6 +265,8 @@ class Cart {
 						$assign_ids[] = $value;
 					}
 				}
+				
+				if(is_array($assign_ids)) {
 				$query = 'SELECT `option_id`, `value_id` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_option_assign` WHERE `matrix_include` = 1 AND `assign_id` IN ('.implode(',', $assign_ids).') ORDER BY `option_id`, `value_id` ASC';
 				
 				$option_identifiers = $GLOBALS['db']->query($query);
@@ -275,6 +278,8 @@ class Cart {
 				}
 				
 				$options_identifier_string = md5($options_identifier_string);
+				
+				}
 			}
 			
 			$product = $GLOBALS['catalogue']->getProductData($product_id, $options_identifier_string);
