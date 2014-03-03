@@ -267,17 +267,17 @@ class Cart {
 				}
 				
 				if(is_array($assign_ids)) {
-				$query = 'SELECT `option_id`, `value_id` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_option_assign` WHERE `matrix_include` = 1 AND `assign_id` IN ('.implode(',', $assign_ids).') ORDER BY `option_id`, `value_id` ASC';
-				
-				$option_identifiers = $GLOBALS['db']->query($query);
-				// Update product code & stock based on options matrix
-				
-				$options_identifier_string = '';
-				foreach($option_identifiers as $option_identifier) {
-					$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
-				}
-				
-				$options_identifier_string = md5($options_identifier_string);
+					$query = 'SELECT `option_id`, `value_id` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_option_assign` WHERE `matrix_include` = 1 AND `assign_id` IN ('.implode(',', $assign_ids).') ORDER BY `option_id`, `value_id` ASC';
+					
+					$option_identifiers = $GLOBALS['db']->query($query);
+					// Update product code & stock based on options matrix
+					
+					$options_identifier_string = '';
+					foreach($option_identifiers as $option_identifier) {
+						$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
+					}
+					
+					$options_identifier_string = md5($options_identifier_string);
 				
 				}
 			}
