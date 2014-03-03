@@ -519,7 +519,7 @@ class Session {
 	 * User agent
 	 */
 	private function _http_user_agent() {
-		return strstr($_SERVER['HTTP_USER_AGENT'], 'Trident') ? 'IEX' : $_SERVER['HTTP_USER_AGENT'];
+		return strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') ? 'IEX' : $_SERVER['HTTP_USER_AGENT'];
 	}
 	
 	/**
@@ -599,7 +599,7 @@ class Session {
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
-		if($this->_http_user_agent()=='MSIE') {
+		if($this->_http_user_agent()=='IEX') {
 			$this->set_cookie(session_name(),session_id(),time()+$this->_session_timeout);
 		}
 
