@@ -28,9 +28,11 @@ function download_parts($format = 'cubecart', $no_rows, $per_page) {
 
 if (isset($_GET['format']) && !empty($_GET['format'])) {
 	if($_GET['format'] == 'cubecart') {
-		$query = sprintf('SELECT C.*, I.* FROM %1$sCubeCart_inventory AS I INNER JOIN %1$sCubeCart_category_index AS R ON I.product_id = R.product_id LEFT JOIN %1$sCubeCart_category AS C ON R.cat_id = C.cat_id WHERE R.primary = 1 AND I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
+		//$query = sprintf('SELECT C.*, I.* FROM %1$sCubeCart_inventory AS I INNER JOIN %1$sCubeCart_category_index AS R ON I.product_id = R.product_id LEFT JOIN %1$sCubeCart_category AS C ON R.cat_id = C.cat_id WHERE R.primary = 1 AND I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
+		$query = sprintf('SELECT I.* FROM %1$sCubeCart_inventory AS I INNER JOIN %1$sCubeCart_category_index AS R ON I.product_id = R.product_id LEFT JOIN %1$sCubeCart_category AS C ON R.cat_id = C.cat_id WHERE R.primary = 1 AND I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
 	} else {
-    	$query = sprintf('SELECT C.*, I.* FROM %1$sCubeCart_inventory AS I LEFT JOIN %1$sCubeCart_category AS C ON I.cat_id = C.cat_id WHERE I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
+    	//$query = sprintf('SELECT C.*, I.* FROM %1$sCubeCart_inventory AS I LEFT JOIN %1$sCubeCart_category AS C ON I.cat_id = C.cat_id WHERE I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
+    	$query = sprintf('SELECT I.* FROM %1$sCubeCart_inventory AS I LEFT JOIN %1$sCubeCart_category AS C ON I.cat_id = C.cat_id WHERE I.status = 1', $GLOBALS['config']->get('config', 'dbprefix'));
 	}
 
     if ($results = $GLOBALS['db']->query($query, $per_page, $page)) {
