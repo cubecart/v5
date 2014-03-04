@@ -276,7 +276,7 @@ if (class_exists('DateTimeZone')) {
 	$tzabbr = DateTimeZone::listAbbreviations();
 	foreach ($tzabbr as $abbr => $array) {
 		foreach ($array as $details) {
-			if (!empty($details['timezone_id']) && preg_match('#^([a-z\s]+)/([a-z\s]+)$|^UTC$#i', $details['timezone_id'])) {
+			if (!empty($details['timezone_id']) && preg_match('#^([a-z\s_]+)/([a-z\s_]+)$|^UTC$#i', $details['timezone_id'])) {
 				$timezones[$details['timezone_id']] = $details['timezone_id'];
 			}
 		}
