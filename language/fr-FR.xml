@@ -119,7 +119,7 @@
       <string name="postcode" introduced="5.0.0"><![CDATA[Code postal]]></string>
       <string name="return_address" introduced="5.0.0"><![CDATA[Adresse de retour]]></string>
       <string name="ship_to_billing_only" introduced="5.0.0"><![CDATA[(Les livraisons de biens matériels ne peuvent être livrées qu'à l'adresse de facturation)]]></string>
-      <string name="state" introduced="5.0.0"><![CDATA[État]]></string>
+      <string name="state" introduced="5.0.0"><![CDATA[Département]]></string>
       <string name="title_address" introduced="5.0.0"><![CDATA[Adresse]]></string>
       <string name="town" introduced="5.0.0"><![CDATA[Village/ville]]></string>
       <string name="your_address_book" introduced="5.0.0"><![CDATA[Votre carnet d'adresse]]></string>

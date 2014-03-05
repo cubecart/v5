@@ -119,7 +119,7 @@
       <string name="postcode" introduced="5.0.0"><![CDATA[Postcode]]></string>
       <string name="return_address" introduced="5.0.0"><![CDATA[Retouradres]]></string>
       <string name="ship_to_billing_only" introduced="5.0.0"><![CDATA[(Leveringen van materiele goederen kunnen alleen worden verzonden naar het factuuradres)]]></string>
-      <string name="state" introduced="5.0.0"><![CDATA[Staat]]></string>
+      <string name="state" introduced="5.0.0"><![CDATA[Provincie]]></string>
       <string name="title_address" introduced="5.0.0"><![CDATA[Adres]]></string>
       <string name="town" introduced="5.0.0"><![CDATA[Gemeente/Stad]]></string>
       <string name="your_address_book" introduced="5.0.0"><![CDATA[Uw adresboek]]></string>
