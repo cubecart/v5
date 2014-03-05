@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{$TEXT_DIRECTION}" lang="{$HTML_LANG}">
   <head>
 	<title>{$META_TITLE}</title>
-	<link rel="canonical" href="{$VAL_SELF}" />
+	<link rel="canonical" href="{$CANCONIAL}" />
 	<link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/common.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/styles/{$SKIN_SUBSET}/layout.css" media="screen" />
