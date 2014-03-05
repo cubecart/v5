@@ -776,7 +776,7 @@ class User {
 	 *
 	 * @param array $update
 	 */
-	public function update($update) {
+	public function update($update = null) {
 		if (!empty($update) && is_array($update)) {
 			unset($update['customer_id']);
 			foreach ($update as $k => $v) {
