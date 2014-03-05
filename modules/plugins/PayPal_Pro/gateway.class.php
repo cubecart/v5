@@ -439,7 +439,7 @@ class Gateway {
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
 					foreach ($response as $key => $value) {
 						if(!empty($response['FMFDENYNAME'])) {
-							$GLOBALS['gui']->setError($value);
+							$GLOBALS['gui']->setError($response['FMFDENYNAME']);
 						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
 							$GLOBALS['gui']->setError($value);
 						}
