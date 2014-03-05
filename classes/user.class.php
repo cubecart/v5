@@ -802,7 +802,7 @@ class User {
 			unset($update['type']);
 
 			//Check of any acutal changes
-			$diff = array_diff($update, $this->_user_data);
+			$diff = arrayRecursiveDiff($update, $this->_user_data);
 			if (!empty($diff)) {
 				$this->_user_data = array_merge($this->_user_data, $update);
 				$this->_changed = true;
