@@ -1,5 +1,5 @@
 <?php
-if(!defined('CC_DS')) die('Access Denied');
+if (!defined('CC_DS')) die('Access Denied');
 
 ## AutoLoader - automatically load classes if not already included
 
@@ -69,10 +69,10 @@ function chmod_writable() {
 			//Same user
 			if (fileowner(__FILE__) === posix_getuid()) {
 				$mode = 755;
-			//Same group
+				//Same group
 			} else if (filegroup(__FILE__) === posix_getgid()) {
-				$mode = 775;
-			}
+					$mode = 775;
+				}
 		}
 
 		if (is_writable(CC_CACHE_DIR)) {
@@ -85,8 +85,8 @@ function chmod_writable() {
 				//Fall back
 				$mode = 777;
 			} else if (!is_writable($tmpdir)) {
-				trigger_error('Cannot detect proper CHMOD', E_USER_ERROR);
-			}
+					trigger_error('Cannot detect proper CHMOD', E_USER_ERROR);
+				}
 			rmdir($tmpdir);
 		}
 
@@ -106,7 +106,7 @@ function chmod_writable() {
  * @return string
  */
 function currentPage($excluded = null, $included = null, $remove_excluded = true) {
-	
+
 	static $base = null;
 
 	if (is_null($base)) {
@@ -123,19 +123,19 @@ function currentPage($excluded = null, $included = null, $remove_excluded = true
 	// If there are GET variables, strip redir and rebuild query string
 	if (!empty($_GET)) {
 		$array = (is_array($included) && !empty($included)) ? array_merge($_GET, $included) : $_GET;
-		
+
 		$one_time = array('added', 'completed', 'deleted', 'edited', 'failed', 'removed', 'subscribed', 'submitted', 'unsubscribed', 'updated', session_name());
 		if ($excluded === true) {
 			// Drop *all* $_GET vars, except $protected
-			$protected	= array('_a');
-			$excluded	= array();
+			$protected = array('_a');
+			$excluded = array();
 			foreach ($array as $key => $val) {
 				if (!in_array($key, $protected)) {
 					$excluded[] = $key;
 				}
 			}
 		} else {
-			$excluded	= (is_array($excluded) && !empty($excluded)) ? $excluded : array();
+			$excluded = (is_array($excluded) && !empty($excluded)) ? $excluded : array();
 		}
 
 		// Delete unwanted keys
@@ -155,12 +155,12 @@ function currentPage($excluded = null, $included = null, $remove_excluded = true
 		}
 	}
 
-	// Make it SEO friendly		
-	if(isset($_GET['seo_path']) && !empty($_GET['seo_path'])) {
+	// Make it SEO friendly
+	if (isset($_GET['seo_path']) && !empty($_GET['seo_path'])) {
 		$currentPage = SEO::getInstance()->getItem($_GET['seo_path'], true);
 	}
 	return SEO::getInstance()->SEOable($currentPage);
-	
+
 }
 
 /**
@@ -204,7 +204,7 @@ function deliverFile($path, $localFile = true, $data = null, $fileName = null) {
 	} else {
 		$fileLength = strlen($data);
 	}
-	$fileName = str_replace(' ','_',$fileName);
+	$fileName = str_replace(' ', '_', $fileName);
 	header('Pragma: public');
 	header('Cache-Control: no-store, no-cache, must-revalidate');
 	header('Cache-Control: post-check=0, pre-check=0', false);
@@ -227,7 +227,7 @@ function deliverFile($path, $localFile = true, $data = null, $fileName = null) {
 			}
 			fclose($file);
 		}
-		return (!connection_status() && !connection_aborted());
+		return !connection_status() && !connection_aborted();
 	} else {
 		echo $data;
 	}
@@ -239,7 +239,7 @@ function deliverFile($path, $localFile = true, $data = null, $fileName = null) {
  * @return bool
  */
 function detectGD() {
-	return (extension_loaded('gd') && function_exists('gd_info'));
+	return extension_loaded('gd') && function_exists('gd_info');
 }
 
 /**
@@ -251,7 +251,7 @@ function detectGD() {
  * @return float
  */
 function dirsize($path, &$total) {
-	$path	= (substr($path, -1, 1) == CC_DS) ? $path : $path.CC_DS;
+	$path = (substr($path, -1, 1) == CC_DS) ? $path : $path.CC_DS;
 	if (($files = glob($path.'*')) !== false) {
 		foreach ($files as $file) {
 			if (is_dir($file)) {
@@ -274,7 +274,7 @@ function dirsize($path, &$total) {
 function findFiles(&$list, $path = false, $recursive = true) {
 	$path .= (substr($path, -1) == CC_DS) ? '' : CC_DS;
 	if (file_exists($path)) {
-		$files	= glob($path.'*', GLOB_MARK);
+		$files = glob($path.'*', GLOB_MARK);
 		foreach ($files as $file) {
 			if (is_dir($file) && $recursive) {
 				if (preg_match('#(source|thumbs)[\\\/]$#', $file)) {
@@ -282,7 +282,7 @@ function findFiles(&$list, $path = false, $recursive = true) {
 				}
 				findFiles($list, $file, $recursive);
 			} else {
-				$list[]	= $file;
+				$list[] = $file;
 			}
 		}
 	}
@@ -307,9 +307,9 @@ function formatBytes($bytes = 0, $implode = false, $decimal_places = 2) {
 			$size = number_format($size / 1024, $decimal_places);
 			$ext  = 'MB';
 		} else if ($size / 1024 / 1024 < 1024) {
-			$size = number_format($size / 1024 / 1024, $decimal_places);
-			$ext  = 'GB';
-		}
+				$size = number_format($size / 1024 / 1024, $decimal_places);
+				$ext  = 'GB';
+			}
 	}
 	if ($implode) {
 		return $size.' '.$ext;
@@ -336,17 +336,17 @@ function formatTime($timestamp, $format = false, $static = false) {
 	if (!$format) {
 		$format = $GLOBALS['config']->get('config', 'time_format');
 	}
-	$sign	= substr($GLOBALS['config']->get('config', 'time_offset'), 0, 1);
-	$value	= substr($GLOBALS['config']->get('config', 'time_offset'), 1);
+	$sign = substr($GLOBALS['config']->get('config', 'time_offset'), 0, 1);
+	$value = substr($GLOBALS['config']->get('config', 'time_offset'), 1);
 	if ($sign == '+') {
 		$seconds = $timestamp+$value;
 	} else if ($sign == '-') {
-		$seconds = $timestamp-$value;
-	} else {
+			$seconds = $timestamp-$value;
+		} else {
 		$seconds = $timestamp;
 	}
 	$fuzzy = true;
-	if(!$date_today	= strftime('%D', time())) {
+	if (!$date_today = strftime('%D', time())) {
 		$fuzzy = false;
 	}
 	$date = strftime('%D', $seconds);
@@ -383,20 +383,20 @@ function formatDispatchDate($date, $format = '%b %d %Y') {
 
 function generate_product_code($product_name, $cat_id = false) {
 	$chars = array(
-		'A','B','C','D','E','F','G','H','I','J','K','L','M',
-		'O','N','P','Q','R','S','T','U','V','W','X','Y','Z',
-		'0','1','2','3','4','5','6','7','8','9'
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+		'O', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
 	);
 	$max_chars = count($chars) - 1;
 	for ($i = 0; $i < 5; ++$i) {
 		$randChars = ($i == 0) ? $chars[mt_rand(0, $max_chars)] : $randChars . $chars[mt_rand(0, $max_chars)];
 	}
 	if (!$cat_id) {
-		$cat_id = mt_rand(0,99);
+		$cat_id = mt_rand(0, 99);
 	}
 	$product_code = strtoupper(substr($product_name, 0, 3)).$randChars.(int)$cat_id;
 	// Check it's not already in use
-	if (($query	= $GLOBALS['db']->select('CubeCart_inventory', 'product_id', array('product_code' => $product_code))) !== false) {
+	if (($query = $GLOBALS['db']->select('CubeCart_inventory', 'product_id', array('product_code' => $product_code))) !== false) {
 		//If it is make it again
 		$product_code = generate_product_code($product_name, $cat_id);
 	}
@@ -429,7 +429,7 @@ function getCountryFormat($input, $match = 'numcode', $fetch = 'name') {
  */
 function getStateFormat($input, $match = 'id', $fetch = 'name') {
 	if (($county = $GLOBALS['db']->select('CubeCart_geo_zone', false, array($match => $input))) !== false) {
-//		return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : utf8_encode($county[0][$fetch]);
+		//  return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : utf8_encode($county[0][$fetch]);
 		return ($fetch == 'abbrev' && empty($county[0][$fetch])) ? $county[0]['name'] : $county[0][$fetch];
 	}
 	return $input;
@@ -453,12 +453,12 @@ function get_ip_address() {
 		if (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && !empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && strtolower($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) != 'unknown') {
 			$address = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
 		} else if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR']) && strtolower($_SERVER['HTTP_X_FORWARDED_FOR']) != 'unknown') {
-			$address = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else if (isset($_SERVER['HTTP_CLIENT_IP'])&& !empty($_SERVER['HTTP_CLIENT_IP']) && strtolower($_SERVER['HTTP_X_FORWARDED_FOR']) != 'unknown') {
-			$address = $_SERVER['HTTP_CLIENT_IP'];
-		} else if (isset($_SERVER['REMOTE_ADDR'])&& !empty($_SERVER['REMOTE_ADDR']) && strtolower($_SERVER['REMOTE_ADDR']) != 'unknown') {
-			$address = $_SERVER['REMOTE_ADDR'];
-		} else {
+				$address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+			} else if (isset($_SERVER['HTTP_CLIENT_IP'])&& !empty($_SERVER['HTTP_CLIENT_IP']) && strtolower($_SERVER['HTTP_X_FORWARDED_FOR']) != 'unknown') {
+				$address = $_SERVER['HTTP_CLIENT_IP'];
+			} else if (isset($_SERVER['REMOTE_ADDR'])&& !empty($_SERVER['REMOTE_ADDR']) && strtolower($_SERVER['REMOTE_ADDR']) != 'unknown') {
+				$address = $_SERVER['REMOTE_ADDR'];
+			} else {
 			$address = '';
 		}
 	} else {
@@ -466,11 +466,11 @@ function get_ip_address() {
 	}
 
 	// Remove port if it exists
-	$parts = explode(':',$address);
+	$parts = explode(':', $address);
 	$address = (empty($parts[0])) ? $address : $parts[0];
 	// Remove second IP
 	unset($parts);
-	$parts = explode(',',$address);
+	$parts = explode(',', $address);
 	$address = trim((empty($parts[0])) ? $address : $parts[0]);
 
 	//Try to validate the IP
@@ -487,11 +487,11 @@ function get_ip_address() {
  * @return array
  */
 function glob_recursive($pattern, $flags = 0) {
-    $files = glob($pattern, $flags);
-    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
-        $files = array_merge($files, glob_recursive($dir.'/'.basename($pattern), $flags));
-    }
-    return $files;
+	$files = glob($pattern, $flags);
+	foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+		$files = array_merge($files, glob_recursive($dir.'/'.basename($pattern), $flags));
+	}
+	return $files;
 }
 
 /**
@@ -521,32 +521,32 @@ function httpredir($destination = '', $anchor = '', $meta_refresh = false, $stat
 	## Remove multiple slashes (i.e. '//' becomes '/')
 
 	$base = '';
-	$destination	= preg_replace('#([^:])/{2,}#', '$1/', urldecode($destination));
-	$destination	= str_replace('amp;', '', html_entity_decode($destination, ENT_COMPAT, 'UTF-8'));
+	$destination = preg_replace('#([^:])/{2,}#', '$1/', urldecode($destination));
+	$destination = str_replace('amp;', '', html_entity_decode($destination, ENT_COMPAT, 'UTF-8'));
 
 	if (preg_match('#^http#i', $destination)) {
 		$URL = parse_url($destination);
-		$base = sprintf('%s://%s',$URL['scheme'],$URL['host'],$URL);
+		$base = sprintf('%s://%s', $URL['scheme'], $URL['host'], $URL);
 	}
 	//SEO Redirect
 	if (!preg_match('#^https#i', $destination) && isset($GLOBALS['seo']) && $GLOBALS['seo'] instanceof SEO) { // added !preg_match('#^https#i', $destination) to prevent SEO lookup on SSL redirect to basket breaking on shared SSL like https://xxx.xxx.co.uk/yyy.co.uk/index.php?_a=basket
 		// make the seo class rewrite the URL
 		$rewrite = $GLOBALS['seo']->rewriteUrls(sprintf('href="%s"', $destination));
 		if (preg_match('#href="(.+)"#i', $rewrite, $match)) {
-			$destination	= preg_match('#^http#i', $match[1]) ? $match[1] : $base.$match[1];
+			$destination = preg_match('#^http#i', $match[1]) ? $match[1] : $base.$match[1];
 		}
-		if(!CC_IN_ADMIN && !strstr($destination, '.') && substr($destination, 0, 1)!=='?') { // Add .html if for some reason its missing!!
+		if (!CC_IN_ADMIN && !strstr($destination, '.') && substr($destination, 0, 1)!=='?') { // Add .html if for some reason its missing!!
 			$destination = $destination.'.html';
 		}
 	}
-	
+
 	// Redirect - appending the last tab anchor for extra cleverness
 	if (!empty($anchor)) {
 		$destination .= '#'.$anchor;
 	} else if (isset($_POST['previous-tab'])) {
-		$destination	.= (preg_match('/^#/', $_POST['previous-tab'])) ? $_POST['previous-tab'] : '#'.$_POST['previous-tab'];
-	}
-	
+			$destination .= (preg_match('/^#/', $_POST['previous-tab'])) ? $_POST['previous-tab'] : '#'.$_POST['previous-tab'];
+		}
+
 	## Now we'll send the redirect header using one method or another
 	$destination = filter_var($destination, FILTER_UNSAFE_RAW);
 	## Nasty HTML meta refresh required to lose domain masking for certain payment modules
@@ -585,7 +585,7 @@ function merge_array($first, $second) {
 	if (!empty($second) && is_array($second)) {
 		//Used the key for loop since it is a tad faster than foreach
 		$key = array_keys($second);
-		$size = sizeOf($key);
+		$size = sizeof($key);
 		for ($i = 0; $i < $size; ++$i) {
 			if (isset($first[$key[$i]])) {
 				$first[(string)$key[$i]] = (is_array($second[$key[$i]])) ? array_merge($first[$key[$i]], $second[$key[$i]]) : $second[$key[$i]];
@@ -609,7 +609,7 @@ function merge_array($first, $second) {
  */
 function moduleVersion($min = false, $max = false) {
 	if (!empty($min) && !empty($max)) {
-		$max = str_replace('*', 999, $max);	## We can safely assume we'll ever reach a minor/maintenance this high
+		$max = str_replace('*', 999, $max); ## We can safely assume we'll ever reach a minor/maintenance this high
 		if (version_compare(CC_VERSION, $min, '>=') && version_compare(CC_VERSION, $max, '<=')) {
 			return true;
 		}
@@ -654,8 +654,8 @@ function price_sort($x, $y) {
 	if ($x['value'] < $y['value']) {
 		return -1;
 	} else if ($x['value'] == $y['value']) {
-		return 0;
-	}
+			return 0;
+		}
 	return 1;
 }
 
@@ -669,18 +669,18 @@ function price_sort($x, $y) {
 
 function recursiveDelete($path) {
 	if (is_dir($path)) {
-		$files	= glob($path.CC_DS.'*');
+		$files = glob($path.CC_DS.'*');
 		foreach ($files as $file) {
 			if (is_dir($file)) {
 				recursiveDelete($file);
 			} else if (is_file($file)) {
-				unlink($file);
-			}
+					unlink($file);
+				}
 		}
 		return rmdir($path);
 	} else if (is_file($path)) {
-		return unlink($path);
-	}
+			return unlink($path);
+		}
 }
 
 /**
@@ -717,9 +717,9 @@ function sanitizeSEOPath($path) {
  * @param int $figures
  */
 function sigfig($value, $figures = 2) {
-	$exponent		= floor(log10($value) + 1);
-	$significant	= $value / pow(10, $exponent);
-	$significant	= ceil($significant * pow(10, $figures)) / pow(10, $figures);
+	$exponent  = floor(log10($value) + 1);
+	$significant = $value / pow(10, $exponent);
+	$significant = ceil($significant * pow(10, $figures)) / pow(10, $figures);
 	return $significant * pow(10, $exponent);
 }
 
@@ -741,7 +741,7 @@ function state_json() {
 					$json_array[$state['numcode']][] = array('id' => '0', 'name' => '-- '.$GLOBALS['language']->common['please_select'].' --');
 					$current = $state['numcode'];
 				}
-//				$json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => utf8_encode($state['name'])); // data already utf-8
+				//    $json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => utf8_encode($state['name'])); // data already utf-8
 				$json_array[$state['numcode']][] = array('id' => $state['id'], 'name' => $state['name']);
 			}
 
@@ -762,7 +762,7 @@ function state_json() {
  */
 function recursive_implode($glue, $pieces) {
 	if (is_array($pieces)) {
-		foreach ($pieces as $r_pieces){
+		foreach ($pieces as $r_pieces) {
 			if (is_array($r_pieces)) {
 				$ret[] = recursive_implode($glue, $r_pieces);
 			} else {
@@ -779,7 +779,7 @@ function recursive_implode($glue, $pieces) {
  * @return string
  */
 function rootHomePath() {
-	return str_replace(array('public_html', 'htdocs'), '', str_replace(substr(str_replace("/",CC_DS,$GLOBALS['rootRel']),0,-1), '', CC_ROOT_DIR));
+	return str_replace(array('public_html', 'htdocs'), '', str_replace(substr(str_replace("/", CC_DS, $GLOBALS['rootRel']), 0, -1), '', CC_ROOT_DIR));
 }
 
 /**
@@ -815,7 +815,7 @@ function version_clean($version) {
  * @return string
  */
 function base64url_encode($data) {
-  return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+	return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
 /**
@@ -826,8 +826,8 @@ function base64url_encode($data) {
  * @return string
  */
 function base64url_decode($data) {
-  return base64_decode(strtr($data, '-_', '+/'));
-  //return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+	return base64_decode(strtr($data, '-_', '+/'));
+	//return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 }
 /**
  * Custom product optionsarray sorting
@@ -852,23 +852,23 @@ function cmpmc($a, $b) {
  *
  * @return diff array
  */
-function arrayRecursiveDiff($aArray1, $aArray2) { 
-    $aReturn = array(); 
-   
-    foreach ($aArray1 as $mKey => $mValue) { 
-        if (array_key_exists($mKey, $aArray2)) { 
-            if (is_array($mValue)) { 
-                $aRecursiveDiff = arrayRecursiveDiff($mValue, $aArray2[$mKey]); 
-                if (count($aRecursiveDiff)) { $aReturn[$mKey] = $aRecursiveDiff; } 
-            } else { 
-                if ($mValue != $aArray2[$mKey]) { 
-                    $aReturn[$mKey] = $mValue; 
-                } 
-            } 
-        } else { 
-            $aReturn[$mKey] = $mValue; 
-        } 
-    } 
-   
-    return $aReturn; 
+function arrayRecursiveDiff($aArray1, $aArray2) {
+	$aReturn = array();
+
+	foreach ($aArray1 as $mKey => $mValue) {
+		if (array_key_exists($mKey, $aArray2)) {
+			if (is_array($mValue)) {
+				$aRecursiveDiff = arrayRecursiveDiff($mValue, $aArray2[$mKey]);
+				if (count($aRecursiveDiff)) { $aReturn[$mKey] = $aRecursiveDiff; }
+			} else {
+				if ($mValue != $aArray2[$mKey]) {
+					$aReturn[$mKey] = $mValue;
+				}
+			}
+		} else {
+			$aReturn[$mKey] = $mValue;
+		}
+	}
+
+	return $aReturn;
 } 

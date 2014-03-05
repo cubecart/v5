@@ -9,29 +9,29 @@ $GLOBALS['gui']->addBreadcrumb($lang['settings']['title_currency']);
 ###########################################
 
 if (isset($_POST['autoupdate']) && Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
-	
+
 	foreach ($GLOBALS['hooks']->load('admin.settings.currency.pre_process') as $hook) include $hook;
-	
+
 	## European Central Bank
-	if (($request	= new Request('www.ecb.europa.eu', '/stats/eurofxref/eurofxref-daily.xml')) !== false) {
+	if (($request = new Request('www.ecb.europa.eu', '/stats/eurofxref/eurofxref-daily.xml')) !== false) {
 		$request->setData(array('null'=>0)); // setData needs a value to work
-		$rates_xml	= $request->send();
+		$rates_xml = $request->send();
 
 		// If this fails fall back to original file_get_contents, if that failes we have tried all we can
-		if(empty($rates_xml)) {
+		if (empty($rates_xml)) {
 			$rates_xml = file_get_contents('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
 		}
 
-		if(!empty($rates_xml)) {
-			$xml		= new SimpleXMLElement($rates_xml);
+		if (!empty($rates_xml)) {
+			$xml  = new SimpleXMLElement($rates_xml);
 			foreach ($xml->Cube->Cube->Cube as $currency) {
-				$rate	= $currency->attributes();
+				$rate = $currency->attributes();
 				$fx[(string)$rate['currency']] = (float)$rate['rate'];
 			}
-			$fx['EUR']	= 1;
-			$updated	= strtotime((string)$xml->Cube->Cube->attributes()->time);
+			$fx['EUR'] = 1;
+			$updated = strtotime((string)$xml->Cube->Cube->attributes()->time);
 			# Get the divisor
-			$base		= (1/$fx[strtoupper($GLOBALS['config']->get('config', 'default_currency'))]);
+			$base  = (1/$fx[strtoupper($GLOBALS['config']->get('config', 'default_currency'))]);
 			foreach ($fx as $code => $rate) {
 				$value = ($base/(1/$rate));
 				$GLOBALS['db']->update('CubeCart_currency', array('value' => $value, 'updated' => $updated), array('code' => $code), true);
@@ -62,8 +62,8 @@ if (isset($_POST['update_manual']) && Admin::getInstance()->permissions('setting
 		$updated = false;
 		foreach ($_POST['currency'] as $code => $array) {
 			if (isset($array['value'])) {
-				$array['value']			= round((float)$array['value'], 6);
-				$array['updated']	= time();
+				$array['value']   = round((float)$array['value'], 6);
+				$array['updated'] = time();
 			}
 			if ($GLOBALS['db']->update('CubeCart_currency', $array, array('code' => $code), true)) {
 				$updated = true;
@@ -99,6 +99,6 @@ if (($currencies = $GLOBALS['db']->select('CubeCart_currency', false, false, arr
 		$currency['updated'] = formatTime($currency['updated']);
 		$smarty_data['currencies'][] = $currency;
 	}
-	$GLOBALS['smarty']->assign('CURRENCIES',$smarty_data['currencies']);
+	$GLOBALS['smarty']->assign('CURRENCIES', $smarty_data['currencies']);
 }
 $page_content = $GLOBALS['smarty']->fetch('templates/settings.currency.php');

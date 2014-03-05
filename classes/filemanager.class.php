@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -23,51 +23,51 @@ class FileManager {
 	private $_manage_root;
 	private $_sub_dir;
 
-	private $_sendfile	= false;
-	
+	private $_sendfile = false;
+
 	private $_max_upload_image_size = 358400;
 
-	const FM_FILETYPE_IMG	= 1;
-	const FM_FILETYPE_DL	= 2;
+	const FM_FILETYPE_IMG = 1;
+	const FM_FILETYPE_DL = 2;
 
 	public function __construct($mode = false, $sub_dir = false) {
 		// Define some constants
-		if (!defined('FM_DL_ERROR_EXPIRED'))	define('FM_DL_ERROR_EXPIRED', 1);
-		if (!defined('FM_DL_ERROR_MAXDL'))		define('FM_DL_ERROR_MAXDL', 2);
-		if (!defined('FM_DL_ERROR_NOFILE'))		define('FM_DL_ERROR_NOFILE', 3);
-		if (!defined('FM_DL_ERROR_NOPRODUCT'))	define('FM_DL_ERROR_NOPRODUCT', 4);
-		if (!defined('FM_DL_ERROR_NORECORD'))	define('FM_DL_ERROR_NORECORD', 5);
-		if (!defined('FM_DL_ERROR_PAYMENT'))	define('FM_DL_ERROR_PAYMENT', 6);
+		if (!defined('FM_DL_ERROR_EXPIRED')) define('FM_DL_ERROR_EXPIRED', 1);
+		if (!defined('FM_DL_ERROR_MAXDL'))  define('FM_DL_ERROR_MAXDL', 2);
+		if (!defined('FM_DL_ERROR_NOFILE'))  define('FM_DL_ERROR_NOFILE', 3);
+		if (!defined('FM_DL_ERROR_NOPRODUCT')) define('FM_DL_ERROR_NOPRODUCT', 4);
+		if (!defined('FM_DL_ERROR_NORECORD')) define('FM_DL_ERROR_NORECORD', 5);
+		if (!defined('FM_DL_ERROR_PAYMENT')) define('FM_DL_ERROR_PAYMENT', 6);
 
 		switch ($mode) {
-			case self::FM_FILETYPE_DL:
-				$this->_manage_root = ($GLOBALS['config']->has('config', 'download_custom_path') && file_exists($GLOBALS['config']->get('config', 'download_custom_path'))) ? $GLOBALS['config']->get('config', 'download_custom_path') : CC_ROOT_DIR.CC_DS.'files';
+		case self::FM_FILETYPE_DL:
+			$this->_manage_root = ($GLOBALS['config']->has('config', 'download_custom_path') && file_exists($GLOBALS['config']->get('config', 'download_custom_path'))) ? $GLOBALS['config']->get('config', 'download_custom_path') : CC_ROOT_DIR.CC_DS.'files';
 			break;
-			case self::FM_FILETYPE_IMG:
-			default:
-				$mode = 1;
-				$this->_manage_root	= CC_ROOT_DIR.CC_DS.'images'.CC_DS.'source';
-				$this->_manage_cache = CC_ROOT_DIR.CC_DS.'images'.CC_DS.'cache';
+		case self::FM_FILETYPE_IMG:
+		default:
+			$mode = 1;
+			$this->_manage_root = CC_ROOT_DIR.CC_DS.'images'.CC_DS.'source';
+			$this->_manage_cache = CC_ROOT_DIR.CC_DS.'images'.CC_DS.'cache';
 		}
-		$this->_mode		= (int)$mode;
-		$this->_manage_dir	= str_replace(CC_ROOT_DIR.CC_DS, '', $this->_manage_root);
-		$this->_sub_dir		= ($sub_dir) ? $this->formatPath($sub_dir) : null;
+		$this->_mode  = (int)$mode;
+		$this->_manage_dir = str_replace(CC_ROOT_DIR.CC_DS, '', $this->_manage_root);
+		$this->_sub_dir  = ($sub_dir) ? $this->formatPath($sub_dir) : null;
 
 		//Auto-handler: Create Directory
 		if (isset($_POST['fm']['create-dir']) && !empty($_POST['fm']['create-dir'])) {
-			$create	= $this->createDirectory($_POST['fm']['create-dir']);
+			$create = $this->createDirectory($_POST['fm']['create-dir']);
 		}
 		// Auto-handler: image details & cropping
 		if (isset($_POST['file_id']) && is_numeric($_POST['file_id'])) {
 			if (($file = $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => (int)$_POST['file_id']))) !== false) {
 				if (isset($_POST['details'])) {
-					
-					if(!$this->filename_is_illegal($_POST['details']['filename'])) {
-					
+
+					if (!$this->filename_is_illegal($_POST['details']['filename'])) {
+
 						// Update details
-						$new_location	= $current_location = $this->_manage_root.CC_DS.urldecode($this->_sub_dir);
-						$new_filename	= $current_filename = $file[0]['filename'];
-						$new_subdir		= $this->_sub_dir;
+						$new_location = $current_location = $this->_manage_root.CC_DS.urldecode($this->_sub_dir);
+						$new_filename = $current_filename = $file[0]['filename'];
+						$new_subdir  = $this->_sub_dir;
 
 						if ($file[0]['filename'] != $_POST['details']['filename']) {
 							$new_filename = $this->formatName($_POST['details']['filename']);
@@ -75,26 +75,26 @@ class FileManager {
 						if (isset($_POST['details']['move']) && !empty($_POST['details']['move'])) {
 							$move_to = $this->_manage_root.CC_DS.$this->formatPath($_POST['details']['move']);
 							if (is_dir($move_to)) {
-								$new_location	= $move_to;
-								$new_subdir		= $this->formatPath(str_replace($this->_manage_root, '', $new_location), false);
+								$new_location = $move_to;
+								$new_subdir  = $this->formatPath(str_replace($this->_manage_root, '', $new_location), false);
 							}
 						}
 						// Does it need moving?
 						if ($new_location != $current_location || $new_filename != $current_filename) {
 							if (file_exists($current_location.$current_filename) && rename($current_location.$current_filename, $new_location.$new_filename)) {
-								$this->_sub_dir		= $new_subdir;
-								$current_location	= $new_location;
-								$current_filename	= $new_filename;
+								$this->_sub_dir  = $new_subdir;
+								$current_location = $new_location;
+								$current_filename = $new_filename;
 								// Database record
-								$record['filename']	= $new_filename;
-								$record['filepath']	= $this->formatPath($this->_sub_dir);
-								$record['filepath']	= ($this->_sub_dir == null) ? 'NULL' : $this->formatPath($this->_sub_dir);
+								$record['filename'] = $new_filename;
+								$record['filepath'] = $this->formatPath($this->_sub_dir);
+								$record['filepath'] = ($this->_sub_dir == null) ? 'NULL' : $this->formatPath($this->_sub_dir);
 							} else {
 								$GLOBALS['gui']->setError($GLOBALS['language']->filemanager['error_file_moved']);
 							}
 						}
-						$record['description']	= strip_tags($_POST['details']['description']);
-	
+						$record['description'] = strip_tags($_POST['details']['description']);
+
 						$update = false;
 						foreach ($record as $k => $v) {
 							if (!isset($file[0][$k]) || $file[0][$k] != $v) {
@@ -111,14 +111,14 @@ class FileManager {
 					}
 				}
 				if (isset($_POST['resize']) && !empty($_POST['resize']['w']) && !empty($_POST['resize']['h'])) {
-					$resize	= $_POST['resize'];
+					$resize = $_POST['resize'];
 					if (file_exists($this->_manage_root.CC_DS.$this->_sub_dir.$current_filename)) {
 						// Use Hi-res image
-						$source	= $this->_manage_root.CC_DS.$this->_sub_dir.$current_filename;
-						$size	= getimagesize($source);
-						$gd		= new GD(dirname($source), false, 100);
+						$source = $this->_manage_root.CC_DS.$this->_sub_dir.$current_filename;
+						$size = getimagesize($source);
+						$gd  = new GD(dirname($source), false, 100);
 						$gd->gdLoadFile($source);
-						#	TO DO: ROTATION
+						# TO DO: ROTATION
 						$gd->gdCrop((int)$resize['x'], (int)$resize['y'], (int)$resize['w'], (int)$resize['h']);
 						if ($gd->gdSave(basename($source))) {
 							// Delete previously generated images
@@ -126,7 +126,7 @@ class FileManager {
 							if (($files = glob($current_location.$match[1].'*', GLOB_NOSORT)) !== false) {
 								foreach ($files as $file) {
 									if ($file != $source) {
-										unlink ($file);
+										unlink($file);
 									}
 								}
 							}
@@ -186,34 +186,34 @@ class FileManager {
 
 					$newfilename = $this->makeFilename($file);
 					$oldfilename = basename($file);
-					if($newfilename !== $oldfilename) {
+					if ($newfilename !== $oldfilename) {
 						// rename file so we match up
 						$new_path = str_replace($oldfilename, $newfilename, $file);
-						if(!rename($file, $new_path)) {
+						if (!rename($file, $new_path)) {
 							trigger_error("Failed to rename file from '$oldfilename' to '$newfilename'.", E_USER_WARNING);
 						} else {
 							$file = $new_path;
 						}
 					}
-					
+
 					$filepath_record = $this->formatPath(str_replace($this->_manage_root, '', dirname($file)));
 					$filepath_record = empty($filepath_record) ? 'NULL' : $filepath_record;
-					$filepath_record = str_replace(chr(92),"/",$filepath_record);
+					$filepath_record = str_replace(chr(92), "/", $filepath_record);
 
 					$record = array(
-						'type'		=> (int)$this->_mode,
-						'filepath'	=> $filepath_record,
-						'filename'	=> $newfilename,
-						'filesize'	=> filesize($file),
-						'mimetype'	=> $this->getMimeType($file),
-						'md5hash'	=> md5_file($file),
+						'type'  => (int)$this->_mode,
+						'filepath' => $filepath_record,
+						'filename' => $newfilename,
+						'filesize' => filesize($file),
+						'mimetype' => $this->getMimeType($file),
+						'md5hash' => md5_file($file),
 					);
 
 					// Hash comparison check
-					$checkhash	= $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('type' => $this->_mode, 'md5hash' => $record['md5hash'], 'filepath' => $record['filepath']), false, 1);
+					$checkhash = $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('type' => $this->_mode, 'md5hash' => $record['md5hash'], 'filepath' => $record['filepath']), false, 1);
 					if (!$checkhash) {
 						$GLOBALS['db']->insert('CubeCart_filemanager', $record);
-						$updated	= true;
+						$updated = true;
 					} else {
 						if ($tidy) {
 							unlink($file);
@@ -231,9 +231,9 @@ class FileManager {
 				}
 			}
 		}
-		
+
 		if (isset($updated) && $updated === true) {
-		#	$GLOBALS['gui']->setNotify($GLOBALS['language']->filemanager['notify_db_update']);
+			# $GLOBALS['gui']->setNotify($GLOBALS['language']->filemanager['notify_db_update']);
 			return true;
 		}
 	}
@@ -243,45 +243,45 @@ class FileManager {
 	 * @param string $id
 	 */
 	public function getFileInfo($product_id) {
-		$product = $GLOBALS['db']->select('CubeCart_inventory', array('digital', 'digital_path'), array('product_id' => $product_id), false, 1);		$GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']));
-		
+		$product = $GLOBALS['db']->select('CubeCart_inventory', array('digital', 'digital_path'), array('product_id' => $product_id), false, 1);  $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']));
+
 		if (empty($product[0]['digital_path'])) {
 			if (($files = $GLOBALS['db']->select('CubeCart_filemanager', false, array('file_id' => $product[0]['digital']))) !== false) {
-				$data	= $files[0];
-				$data['is_url']	= false;
-				$data['file']	= $this->_manage_root.CC_DS.$data['filepath'].CC_DS.$data['filename'];
+				$data = $files[0];
+				$data['is_url'] = false;
+				$data['file'] = $this->_manage_root.CC_DS.$data['filepath'].CC_DS.$data['filename'];
 				return $data;
 			}
 		} else {
 			if (filter_var($product[0]['digital_path'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
-				$data	= array(
-					'mimetype'	=> 'application/octet-stream',
-					'filename'	=> basename($product[0]['digital_path']),
-					'filesize'	=> null,
-					'md5hash'	=> md5($product[0]['digital_path']),
-					'is_url'	=> true,
-					'file'		=> $product[0]['digital_path'],
-					'url'		=> parse_url($product[0]['digital_path'])
+				$data = array(
+					'mimetype' => 'application/octet-stream',
+					'filename' => basename($product[0]['digital_path']),
+					'filesize' => null,
+					'md5hash' => md5($product[0]['digital_path']),
+					'is_url' => true,
+					'file'  => $product[0]['digital_path'],
+					'url'  => parse_url($product[0]['digital_path'])
 				);
 				return $data;
 			} else if (file_exists($product[0]['digital_path'])) {
-				$data	= array(
-					'mimetype'	=> 'application/octet-stream',
-					'filename'	=> basename($product[0]['digital_path']),
-					'filepath'	=> dirname($product[0]['digital_path']),
-					'filesize'	=> filesize($product[0]['digital_path']),
-					'md5hash'	=> md5_file($product[0]['digital_path']),
-					'is_url'	=> true
-				);
-				$data['file']	= $product[0]['digital_path'];
-			}
+					$data = array(
+						'mimetype' => 'application/octet-stream',
+						'filename' => basename($product[0]['digital_path']),
+						'filepath' => dirname($product[0]['digital_path']),
+						'filesize' => filesize($product[0]['digital_path']),
+						'md5hash' => md5_file($product[0]['digital_path']),
+						'is_url' => true
+					);
+					$data['file'] = $product[0]['digital_path'];
+				}
 			return $data;
 		}
 		return false;
-	} 
-	 
-	 
-	
+	}
+
+
+
 	/**
 	 * Deliver download file
 	 *
@@ -292,29 +292,29 @@ class FileManager {
 	public function deliverDownload($access_key = false, &$error = null) {
 		if ($this->_mode == self::FM_FILETYPE_DL && $access_key) {
 			if (($downloads = $GLOBALS['db']->select('CubeCart_downloads', false, array('accesskey' => $access_key))) !== false) {
-				$download	= $downloads[0];
+				$download = $downloads[0];
 				if (($summary = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $download['cart_order_id']))) !== false) {
 					// Order/Download Validation
 					// Download has expired
-					if ($download['expire']>0 && $download['expire'] < time())		$error = FM_DL_ERROR_EXPIRED;
+					if ($download['expire']>0 && $download['expire'] < time())  $error = FM_DL_ERROR_EXPIRED;
 					// Order hasn't been paid for
-					if (!in_array((int)$summary[0]['status'], array(2,3)))					$error = FM_DL_ERROR_PAYMENT;
+					if (!in_array((int)$summary[0]['status'], array(2, 3)))     $error = FM_DL_ERROR_PAYMENT;
 					// Maximum download limit has been reached
-					if ($GLOBALS['config']->get('config','download_count') > 0 && (int)$download['downloads'] >= $GLOBALS['config']->get('config','download_count'))	$error = FM_DL_ERROR_MAXDL;
+					if ($GLOBALS['config']->get('config', 'download_count') > 0 && (int)$download['downloads'] >= $GLOBALS['config']->get('config', 'download_count')) $error = FM_DL_ERROR_MAXDL;
 					if (!empty($error)) return false;
 					if ($data = $this->getFileInfo($download['product_id']) !== false) {
-						
-						
+
+
 						// Deliver file contents
-						if (isset($data['file']) && ($data['is_url'] || file_exists($data['file']))) { 
-							if($is_url) {
-								$GLOBALS['db']->update('CubeCart_downloads', array('downloads'	=> $download['downloads']+1), array('digital_id' => $download['digital_id']));
+						if (isset($data['file']) && ($data['is_url'] || file_exists($data['file']))) {
+							if ($is_url) {
+								$GLOBALS['db']->update('CubeCart_downloads', array('downloads' => $download['downloads']+1), array('digital_id' => $download['digital_id']));
 								httpredir($file);
 								return true;
 							} else {
 								ob_end_clean();
 								if (!is_file($file) or connection_status()!=0) return false;
-							
+
 								header("Expires: ".gmdate("D, d M Y H:i:s", mktime(date("H")+2, date("i"), date("s"), date("m"), date("d"), date("Y")))." GMT");
 								header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 								header('Content-Disposition: attachment; filename="'.basename($file).'"');
@@ -322,22 +322,22 @@ class FileManager {
 								header("Content-Transfer-Encoding: binary");
 								## IE 7 Fix
 								header('Vary: User-Agent');
-							
+
 								if (($openfile = fopen($file, 'rb')) !== false) {
 									while (!feof($openfile)) { // && !connection_status()) {
 										echo fread($openfile, 8192);
-							  			flush();
+										flush();
 									}
 									fclose($openfile);
 								}
-								if(!connection_status() && !connection_aborted()) {
-									$GLOBALS['db']->update('CubeCart_downloads', array('downloads'	=> $download['downloads']+1), array('digital_id' => $download['digital_id']));
+								if (!connection_status() && !connection_aborted()) {
+									$GLOBALS['db']->update('CubeCart_downloads', array('downloads' => $download['downloads']+1), array('digital_id' => $download['digital_id']));
 									return true;
 								}
 							}
 						}
 						## File doesn't exist
-						$error	= FM_DL_ERROR_NOFILE;
+						$error = FM_DL_ERROR_NOFILE;
 						return false;
 					}
 					## Product record doesn't exist
@@ -346,7 +346,7 @@ class FileManager {
 				}
 			}
 			// Download record doesn't exist
-			$error	= FM_DL_ERROR_NORECORD;
+			$error = FM_DL_ERROR_NORECORD;
 		}
 		return false;
 	}
@@ -404,15 +404,15 @@ class FileManager {
 						}
 						natsort($list);
 						foreach ($list as $dir) {
-							$vars['dirs'][]	= array(
-								'path'		=> $dir,
-								'selected'	=> ($sub_dir == $dir) ? ' selected="selected"' : '',
+							$vars['dirs'][] = array(
+								'path'  => $dir,
+								'selected' => ($sub_dir == $dir) ? ' selected="selected"' : '',
 							);
 						}
 						$GLOBALS['smarty']->assign('DIRS', $vars['dirs']);
 					}
-					$file[0]['filepath']	= $source;
-					$file[0]['random']		= mt_rand();
+					$file[0]['filepath'] = $source;
+					$file[0]['random']  = mt_rand();
 					$GLOBALS['smarty']->assign('FILE', $file[0]);
 
 					if ($file[0]['type'] == self::FM_FILETYPE_IMG) {
@@ -425,8 +425,8 @@ class FileManager {
 					// File doesn't exist - Delete record, and all associations legacy names and id
 					$GLOBALS['db']->update('CubeCart_category', array('cat_image' => ''), array('cat_image' => $file[0]['file_id']));
 					$GLOBALS['db']->update('CubeCart_category', array('cat_image' => ''), array('cat_image' => $file[0]['filename']));
-					
-					if($file[0]['file_id']>0) {
+
+					if ($file[0]['file_id']>0) {
 						$GLOBALS['db']->delete('CubeCart_image_index', array('file_id' => $file[0]['file_id']));
 						$GLOBALS['db']->delete('CubeCart_filemanager', array('file_id' => $file[0]['file_id']));
 					}
@@ -448,7 +448,7 @@ class FileManager {
 	 * @return string/false
 	 */
 	public function findDirectories($search_dir = false, $i = 0) {
-		$search_dir	= (!$search_dir) ? $this->_manage_dir : $search_dir;
+		$search_dir = (!$search_dir) ? $this->_manage_dir : $search_dir;
 		if ($search_dir && file_exists($search_dir)) {
 			$list = glob($search_dir.CC_DS.'*', GLOB_ONLYDIR);
 			if ($list) {
@@ -507,16 +507,16 @@ class FileManager {
 	public function getMimeType($file) {
 		$finfo = (extension_loaded('fileinfo')) ? new finfo(FILEINFO_MIME_TYPE) : false;
 		if ($finfo && $finfo instanceof finfo) {
-			$mime	= $finfo->file($file);
+			$mime = $finfo->file($file);
 		} else if (function_exists('mime_content_type')) {
-			$mime	= mime_content_type($file);
-		} else {
-			$data	= getimagesize($file);
-			$mime	= $data['mime'];
+				$mime = mime_content_type($file);
+			} else {
+			$data = getimagesize($file);
+			$mime = $data['mime'];
 		}
 		return (empty($mime)) ? 'application/octet-stream' : $mime;
 	}
-	
+
 	/**
 	 * Check filename is allowed (true on illegal!)
 	 *
@@ -525,13 +525,13 @@ class FileManager {
 	 */
 
 	public function filename_is_illegal($file_name) {
-		if(preg_match('/(\.sh\.inc\.ini|\.htaccess|\.php|\.phtml|\.php[3-6])$/i', $file_name)) {
+		if (preg_match('/(\.sh\.inc\.ini|\.htaccess|\.php|\.phtml|\.php[3-6])$/i', $file_name)) {
 			return true;
-		} else if(preg_match('/\.php\./i', $file_name)) {
-			return true;
-		}
+		} else if (preg_match('/\.php\./i', $file_name)) {
+				return true;
+			}
 		return false;
-	} 
+	}
 
 	/**
 	 * List file type
@@ -560,37 +560,37 @@ class FileManager {
 			// List subdirectories
 			foreach ($this->_directories[$this->formatPath($this->_sub_dir)] as $dir) {
 				if ($this->_mode == self::FM_FILETYPE_IMG && in_array($this->makeFilename($dir), array('thumbs', 'source'))) continue;
-				$name	= $this->makeFilename($dir);
-				$folder	= array(
-					'name'		=> $name,
-					'link'		=> currentPage(null, array('subdir' => $this->formatPath($this->_sub_dir.$dir, false))),
-					'delete'	=> (substr($name, 0, 1) !== '.') ? currentPage(null, array('delete' => $this->formatPath($this->_sub_dir.$dir, false))) : null,
+				$name = $this->makeFilename($dir);
+				$folder = array(
+					'name'  => $name,
+					'link'  => currentPage(null, array('subdir' => $this->formatPath($this->_sub_dir.$dir, false))),
+					'delete' => (substr($name, 0, 1) !== '.') ? currentPage(null, array('delete' => $this->formatPath($this->_sub_dir.$dir, false))) : null,
 				);
-				$list_folders[]	= $folder;
+				$list_folders[] = $folder;
 			}
 			$GLOBALS['smarty']->assign('FOLDERS', $list_folders);
 		}
 
-		$filepath_where		= empty($this->_sub_dir) ? 'IS NULL' : '= \''.str_replace('\\','/',$this->_sub_dir).'\'';		
+		$filepath_where  = empty($this->_sub_dir) ? 'IS NULL' : '= \''.str_replace('\\', '/', $this->_sub_dir).'\'';
 		$where = '`disabled` = 0 AND `type` = '.(int)$this->_mode.' AND `filepath` '.$filepath_where;
 
 		if (($files = $GLOBALS['db']->select('CubeCart_filemanager', false, $where, array('filename' => 'ASC'))) !== false) {
-			$catalogue	= new Catalogue();
+			$catalogue = new Catalogue();
 			$GLOBALS['smarty']->assign('ROOT_REL', $GLOBALS['rootRel']);
 			foreach ($files as $key => $file) {
-				$file['icon']			= $this->getFileIcon($file['mimetype']);
-				$file['class']			= (preg_match('#^image#', $file['mimetype'])) ? 'class="colorbox"' : '';
-				$file['edit']			= currentPage(null, array('fm-edit' => $file['file_id']));
-				$file['delete']			= currentPage(null, array('delete' => $file['file_id']));
-				$file['random']			= mt_rand();
-				$file['description']	= (!empty($file['description'])) ? $file['description'] : $file['filename'];
-				$file['master_filepath']= str_replace(chr(92),"/",$this->_manage_dir.CC_DS.$file['filepath'].$file['filename']);
-				$file['filepath']	 	= ($this->_mode == self::FM_FILETYPE_IMG) ? $catalogue->imagePath($file['file_id'], 'medium') : $this->_manage_dir.CC_DS.$file['filepath'].$file['filename'];
-				$file['select_button']	= (bool)$select_button;
-				
+				$file['icon']   = $this->getFileIcon($file['mimetype']);
+				$file['class']   = (preg_match('#^image#', $file['mimetype'])) ? 'class="colorbox"' : '';
+				$file['edit']   = currentPage(null, array('fm-edit' => $file['file_id']));
+				$file['delete']   = currentPage(null, array('delete' => $file['file_id']));
+				$file['random']   = mt_rand();
+				$file['description'] = (!empty($file['description'])) ? $file['description'] : $file['filename'];
+				$file['master_filepath']= str_replace(chr(92), "/", $this->_manage_dir.CC_DS.$file['filepath'].$file['filename']);
+				$file['filepath']   = ($this->_mode == self::FM_FILETYPE_IMG) ? $catalogue->imagePath($file['file_id'], 'medium') : $this->_manage_dir.CC_DS.$file['filepath'].$file['filename'];
+				$file['select_button'] = (bool)$select_button;
+
 				if ($select_button) $file['master_filepath'] = $GLOBALS['rootRel'].$file['master_filepath']; // Fix the image path added to the FCK editor area
 
-				$list_files[$key]	= $file;
+				$list_files[$key] = $file;
 			}
 			$GLOBALS['smarty']->assign('FILES', $list_files);
 			return $list_files;
@@ -608,46 +608,46 @@ class FileManager {
 	 */
 	public function upload($type = false, $thumbnail = false) {
 		if (!empty($_FILES)) {
-			$finfo	= (extension_loaded('fileinfo')) ? new finfo(FILEINFO_SYMLINK | FILEINFO_MIME) : false;
+			$finfo = (extension_loaded('fileinfo')) ? new finfo(FILEINFO_SYMLINK | FILEINFO_MIME) : false;
 			foreach ($_FILES as $file) {
 
-				if($this->filename_is_illegal($file['name'])) continue;
-				
+				if ($this->filename_is_illegal($file['name'])) continue;
+
 				if (is_array($file['tmp_name'])) {
 					foreach ($file['tmp_name'] as $offset => $tmp_name) {
 						$gd = new GD($this->_manage_root.CC_DS.$this->_sub_dir);
 						if (!empty($tmp_name) && is_uploaded_file($tmp_name)) {
-							
-							
-							if($this->_mode == self::FM_FILETYPE_IMG && $file['size'][$offset] > $this->_max_upload_image_size) {
-								$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'][$offset],formatBytes($this->_max_upload_image_size, true, 0)));
+
+
+							if ($this->_mode == self::FM_FILETYPE_IMG && $file['size'][$offset] > $this->_max_upload_image_size) {
+								$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'], $file['name'][$offset], formatBytes($this->_max_upload_image_size, true, 0)));
 								continue;
 							}
-							
+
 							if ($file['error'][$offset] !== UPLOAD_ERR_OK) {
 								$this->uploadError($file['error'][$offset]);
 								continue;
 							}
 
-							$target	= $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'][$offset];
+							$target = $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'][$offset];
 							$newfilename = $this->makeFilename($file['name'][$offset]);
 							$oldfilename = $file['name'][$offset];
 
-							if($newfilename !== $oldfilename) {
+							if ($newfilename !== $oldfilename) {
 								$target = str_replace($oldfilename, $newfilename, $target);
 							}
 
 							$filepath_record = $this->formatPath(str_replace($this->_manage_root, '', dirname($target)));
 							$filepath_record = empty($filepath_record) ? 'NULL' : $filepath_record;
-							$filepath_record = str_replace(chr(92),"/",$filepath_record);
+							$filepath_record = str_replace(chr(92), "/", $filepath_record);
 
 							$record = array(
-								'type'		=> (int)$this->_mode,
-								'filepath'	=> $filepath_record,
-								'filename'	=> $newfilename,
-								'filesize'	=> $file['size'][$offset],
-								'mimetype'	=> $file['type'][$offset] ? $file['type'][$offset] : $this->getMimeType($tmp_name),
-								'md5hash'	=> md5_file($tmp_name),
+								'type'  => (int)$this->_mode,
+								'filepath' => $filepath_record,
+								'filename' => $newfilename,
+								'filesize' => $file['size'][$offset],
+								'mimetype' => $file['type'][$offset] ? $file['type'][$offset] : $this->getMimeType($tmp_name),
+								'md5hash' => md5_file($tmp_name),
 							);
 
 							if ($GLOBALS['db']->insert('CubeCart_filemanager', $record)) {
@@ -663,8 +663,8 @@ class FileManager {
 					$gd = new GD($this->_manage_root.CC_DS.$this->_sub_dir);
 					if (!empty($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
 
-						if($this->_mode == self::FM_FILETYPE_IMG && $file['size'] > $this->_max_upload_image_size) {
-							$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'],$file['name'],formatBytes($this->_max_upload_image_size, true, 0)));
+						if ($this->_mode == self::FM_FILETYPE_IMG && $file['size'] > $this->_max_upload_image_size) {
+							$GLOBALS['gui']->setError(sprintf($GLOBALS['lang']['filemanager']['error_file_upload_size'], $file['name'], formatBytes($this->_max_upload_image_size, true, 0)));
 							return false;
 						}
 
@@ -673,25 +673,25 @@ class FileManager {
 							continue;
 						}
 
-						$target	= $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'];
+						$target = $target_old = $this->_manage_root.CC_DS.$this->_sub_dir.$file['name'];
 						$newfilename = $this->makeFilename($file['name']);
 						$oldfilename = $file['name'];
 
-						if($newfilename !== $oldfilename) {
+						if ($newfilename !== $oldfilename) {
 							$target = str_replace($oldfilename, $newfilename, $target);
 						}
 
 						$filepath_record = $this->formatPath(str_replace($this->_manage_root, '', dirname($target)));
 						$filepath_record = empty($filepath_record) ? 'NULL' : $filepath_record;
-						$filepath_record = str_replace(chr(92),"/",$filepath_record);
+						$filepath_record = str_replace(chr(92), "/", $filepath_record);
 
 						$record = array(
-							'type'		=> (int)$this->_mode,
-							'filepath'	=> $filepath_record,
-							'filename'	=> $newfilename,
-							'filesize'	=> $file['size'],
-							'mimetype'	=> $file['type'] ? $file['type'] : $this->getMimeType($file['tmp_name']),
-							'md5hash'	=> md5_file($file['tmp_name']),
+							'type'  => (int)$this->_mode,
+							'filepath' => $filepath_record,
+							'filename' => $newfilename,
+							'filesize' => $file['size'],
+							'mimetype' => $file['type'] ? $file['type'] : $this->getMimeType($file['tmp_name']),
+							'md5hash' => md5_file($file['tmp_name']),
 						);
 
 						if ($GLOBALS['db']->insert('CubeCart_filemanager', $record)) {
@@ -700,7 +700,7 @@ class FileManager {
 							chmod($target, 0755);
 						}
 
-						
+
 					}
 				}
 			}
@@ -723,10 +723,10 @@ class FileManager {
 				$this->upgrade($seek, $dir);
 			}
 		} else {
-			$scan_root	= CC_ROOT_DIR.CC_DS.'images'.CC_DS.'uploads'.CC_DS.$start;
+			$scan_root = CC_ROOT_DIR.CC_DS.'images'.CC_DS.'uploads'.CC_DS.$start;
 			if (substr($scan_root, -1, 1) != CC_DS) $scan_root .= CC_DS;
 
-			$scan_dir	= $scan_root;
+			$scan_dir = $scan_root;
 			if (!is_null($dir)) {
 				$scan_dir .= (substr($dir, 0, 1) == CC_DS) ? substr($dir, 1) : $dir;
 			}
@@ -734,14 +734,14 @@ class FileManager {
 			if (file_exists($scan_dir) && is_dir($scan_dir)) {
 				if (($files = glob($scan_dir.'*', GLOB_MARK)) !== false) {
 					foreach ($files as $file) {
-						$target	= str_replace($scan_root, '', $file);
+						$target = str_replace($scan_root, '', $file);
 						if (is_dir($file)) {
 							if (in_array($target, array('source', 'thumbs', '_vti_cnf'))) continue;
 							$this->upgrade($start, $target);
 							rmdir($file);
 						} else {
 							// Copy to new sources
-							$to	= $this->_manage_root.CC_DS.$target;
+							$to = $this->_manage_root.CC_DS.$target;
 							if (!file_exists(dirname($to))) mkdir(dirname($to), chmod_writable(), true);
 							rename($file, $to);
 						}
@@ -757,11 +757,11 @@ class FileManager {
 
 	private function createDirectory($new_dir = false, $in_sub_dir = true) {
 		if (!empty($new_dir)) {
-			$create	= $this->formatName($new_dir);
+			$create = $this->formatName($new_dir);
 			$path = $this->_manage_root.CC_DS.$this->_sub_dir.$create;
 			if (!file_exists($path)) {
 				$result = (bool)mkdir($path);
-				if(!is_writable($path)) {
+				if (!is_writable($path)) {
 					chmod($path, chmod_writable());
 				}
 				return $result;
@@ -784,7 +784,7 @@ class FileManager {
 						}
 					}
 				}
-				$file	= $this->_manage_root.CC_DS.$this->_sub_dir.$result[0]['filename'];
+				$file = $this->_manage_root.CC_DS.$this->_sub_dir.$result[0]['filename'];
 				if (file_exists($file) && unlink($file) || !file_exists($file)) {
 					if ($GLOBALS['db']->delete('CubeCart_filemanager', array('file_id' => (int)$file_id))) {
 						return true;
@@ -796,16 +796,16 @@ class FileManager {
 	}
 
 	private function deleteRecursive($directory = null) {
-		$directory	= urldecode($directory);
-		$scan	= glob($this->_manage_root.CC_DS.$directory.CC_DS.'*');
+		$directory = urldecode($directory);
+		$scan = glob($this->_manage_root.CC_DS.$directory.CC_DS.'*');
 		if (is_array($scan)) {
 			foreach ($scan as $entry) {
-				$this->_sub_dir	= str_replace(array($this->_manage_root.CC_DS, basename($entry)), '', $entry);
+				$this->_sub_dir = str_replace(array($this->_manage_root.CC_DS, basename($entry)), '', $entry);
 				if (is_dir($entry)) {
 					$this->deleteRecursive(str_replace($this->_manage_root.CC_DS, '', $entry));
 				} else {
 					if (!in_array(basename(dirname($entry)), array('source', 'thumbs', '_vti_cnf'))) {
-						$files	= $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('filename' => basename($entry), 'filepath' => $this->_sub_dir));
+						$files = $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('filename' => basename($entry), 'filepath' => $this->_sub_dir));
 						if ($files) {
 							foreach ($files as $file) {
 								$this->deleteFile($file['file_id'], true);
@@ -828,26 +828,26 @@ class FileManager {
 			return 'image';
 		} else {
 			switch ($mimetype) {
-				case 'application/x-gzip':
-				case 'application/x-gtar':
-				case 'application/x-tar':
-				case 'application/x-zip':
-				case 'application/zip':
-					$icon	= 'page_archive';
+			case 'application/x-gzip':
+			case 'application/x-gtar':
+			case 'application/x-tar':
+			case 'application/x-zip':
+			case 'application/zip':
+				$icon = 'page_archive';
 				break;
-				case 'video/mpeg':
-				case 'video/quicktime':
-				case 'video/x-msvideo':
-					$icon	= 'video';
+			case 'video/mpeg':
+			case 'video/quicktime':
+			case 'video/x-msvideo':
+				$icon = 'video';
 				break;
-				case 'application/msword':
-					$icon	= 'page_word';
+			case 'application/msword':
+				$icon = 'page_word';
 				break;
-				case 'application/vnd.ms-excel':
-					$icon	= 'page_excel';
+			case 'application/vnd.ms-excel':
+				$icon = 'page_excel';
 				break;
-				default:
-					$icon	= 'page_generic';
+			default:
+				$icon = 'page_generic';
 			}
 			return $icon;
 		}
@@ -859,27 +859,27 @@ class FileManager {
 	}
 
 	private function makeFilepath($file) {
-		$path	=  str_replace($this->_manage_root, '', dirname($file));
+		$path =  str_replace($this->_manage_root, '', dirname($file));
 		return $this->formatPath($path);
 	}
 
 	private function parentDir($block) {
-		$array	= explode('/', $this->formatPath($this->_sub_dir, false));
+		$array = explode('/', $this->formatPath($this->_sub_dir, false));
 		foreach ($array as $key => $dir) {
 			if (empty($dir)) unset($array[$key]);
 		}
-		$count	= count($array);
+		$count = count($array);
 		if ($count > 0) {
 			if ($count > 1) {
 				unset($array[$count-1]);
-				$subdir	= implode('/', $array);
+				$subdir = implode('/', $array);
 			} else if ($count == 1) {
-				// Parent is root directory
-				$subdir	= '';
-			}
-			$folder	= array(
-				'name'	=> $this->makeFilename('..'),
-				'link'	=> currentPage(null, array('subdir' => $this->formatPath($subdir, false))),
+					// Parent is root directory
+					$subdir = '';
+				}
+			$folder = array(
+				'name' => $this->makeFilename('..'),
+				'link' => currentPage(null, array('subdir' => $this->formatPath($subdir, false))),
 			);
 			#$GLOBALS['smarty']->assign('FOLDER', $folder);
 		}
@@ -887,29 +887,29 @@ class FileManager {
 
 	private function uploadError($error_no) {
 		switch ($error_no) {
-			case UPLOAD_ERR_INI_SIZE:
-				$message	= 'The uploaded file exceeds the upload_max_filesize directive in php.ini';
+		case UPLOAD_ERR_INI_SIZE:
+			$message = 'The uploaded file exceeds the upload_max_filesize directive in php.ini';
 			break;
-			case UPLOAD_ERR_FORM_SIZE:
-				$message	= 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form';
+		case UPLOAD_ERR_FORM_SIZE:
+			$message = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form';
 			break;
-			case UPLOAD_ERR_PARTIAL:
-				$message	= 'The uploaded file was only partially uploaded';
+		case UPLOAD_ERR_PARTIAL:
+			$message = 'The uploaded file was only partially uploaded';
 			break;
-			case UPLOAD_ERR_NO_FILE:
-				$message	= 'No file was uploaded';
+		case UPLOAD_ERR_NO_FILE:
+			$message = 'No file was uploaded';
 			break;
-			case UPLOAD_ERR_NO_TMP_DIR:
-				$message	= 'Missing a temporary folder';
+		case UPLOAD_ERR_NO_TMP_DIR:
+			$message = 'Missing a temporary folder';
 			break;
-			case UPLOAD_ERR_CANT_WRITE:
-				$message	= 'Failed to write file to disk';
+		case UPLOAD_ERR_CANT_WRITE:
+			$message = 'Failed to write file to disk';
 			break;
-			case UPLOAD_ERR_EXTENSION:
-				$message	= 'File upload stopped by extension';
+		case UPLOAD_ERR_EXTENSION:
+			$message = 'File upload stopped by extension';
 			break;
-			default:
-				$message	= 'Unknown upload error';
+		default:
+			$message = 'Unknown upload error';
 		}
 		trigger_error($message, E_USER_WARNING);
 		return false;

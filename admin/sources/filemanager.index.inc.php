@@ -1,11 +1,11 @@
 <?php
-if (!defined('CC_INI_SET'))	die('Access Denied');
+if (!defined('CC_INI_SET')) die('Access Denied');
 Admin::getInstance()->permissions('filemanager', CC_PERM_READ, true);
 
 global $lang;
 
-if (isset($_POST['cancel'])){
-	 httpredir(currentPage(array('fm-edit')));
+if (isset($_POST['cancel'])) {
+	httpredir(currentPage(array('fm-edit')));
 }
 if (isset($_POST['filter-update']) && isset($_POST['filter']['subdir'])) {
 	httpredir(currentPage(null, array('subdir' => urlencode($_POST['filter']['subdir']))));
@@ -14,29 +14,29 @@ if (isset($_POST['filter-update']) && isset($_POST['filter']['subdir'])) {
 $select_button = false;
 if (isset($_GET['mode'])) {
 	switch (strtolower($_GET['mode'])) {
-		case 'digital':
-			$mode	= FileManager::FM_FILETYPE_DL;
+	case 'digital':
+		$mode = FileManager::FM_FILETYPE_DL;
 		break;
-		case 'fck':
-			$GLOBALS['main']->hideNavigation(true);
-			$select_button	= true;
-		default:
-			$mode	= FileManager::FM_FILETYPE_IMG;
+	case 'fck':
+		$GLOBALS['main']->hideNavigation(true);
+		$select_button = true;
+	default:
+		$mode = FileManager::FM_FILETYPE_IMG;
 	}
 } else {
-	$mode	= FileManager::FM_FILETYPE_IMG;
+	$mode = FileManager::FM_FILETYPE_IMG;
 }
 
 
-$subdir	= (isset($_GET['subdir'])) ? urldecode($_GET['subdir']) : '';
+$subdir = (isset($_GET['subdir'])) ? urldecode($_GET['subdir']) : '';
 
-$fm		= new FileManager($mode, $subdir);
+$fm  = new FileManager($mode, $subdir);
 
 if (isset($_GET['rebuild']) && Admin::getInstance()->permissions('filemanager', CC_PERM_EDIT)) {
 	if ($fm->buildDatabase()) {
 		$GLOBALS['main']->setACPNotify($lang['filemanager']['notify_list_update']);
 	} else {
-	#	$GLOBALS['main']->setACPWarning($lang['filemanager']['error_list_update']);
+		# $GLOBALS['main']->setACPWarning($lang['filemanager']['error_list_update']);
 	}
 	httpredir(currentPage(array('rebuild')));
 }

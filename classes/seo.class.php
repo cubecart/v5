@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -28,31 +28,31 @@ class SEO {
 	 *
 	 * @var array of strings
 	 */
-	private $_cat_dirs			= null;
+	private $_cat_dirs   = null;
 	/**
 	 * Category paths
 	 *
 	 * @var array of strings
 	 */
-	private $_cat_path			= null;
+	private $_cat_path   = null;
 	/**
 	 * Dynamic URL sections
 	 *
 	 * @var array of strings
 	 */
-	private $_dynamic_sections	= array('prod', 'cat', 'doc');
+	private $_dynamic_sections = array('prod', 'cat', 'doc');
 	/**
 	 * SEO url extension
 	 *
 	 * @var string
 	 */
-	private $_extension			= '.html';
+	private $_extension   = '.html';
 	/**
 	 * Ignored URL sections
 	 *
 	 * @var array of strings
 	 */
-	private $_ignored			= array(
+	private $_ignored   = array(
 		'account', 'addressbook', 'basket', 'checkout', 'complete', 'confirm', 'downloads', 'gateway', 'logout', 'profile', 'recover', 'recovery', 'remote', 'vieworder', 'plugin'
 	);
 	/**
@@ -60,19 +60,19 @@ class SEO {
 	 *
 	 * @var array
 	 */
-	private $_meta_data			= array();
+	private $_meta_data   = array();
 	/**
 	 * Sitemap XML handle
 	 *
 	 * @var handle
 	 */
-	private $_sitemap_xml		= false;
+	private $_sitemap_xml  = false;
 	/**
 	 * Static URL sections
 	 *
 	 * @var array of strings
 	 */
-	private $_static_sections	= array('saleitems', 'certificates', 'trackback', 'contact', 'search', 'login', 'register');
+	private $_static_sections = array('saleitems', 'certificates', 'trackback', 'contact', 'search', 'login', 'register');
 
 	/**
 	 * Class instance
@@ -81,11 +81,11 @@ class SEO {
 	 */
 	protected static $_instance;
 
-	const TAGS_DEFAULT	= 0;
-	const TAGS_MERGE	= 1;
-	const TAGS_REPLACE	= 2;
+	const TAGS_DEFAULT = 0;
+	const TAGS_MERGE = 1;
+	const TAGS_REPLACE = 2;
 
-	const PCRE_REQUEST_URI	= '(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w]+)\=([\w\-\_]+)([^"\']*)';
+	const PCRE_REQUEST_URI = '(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w]+)\=([\w\-\_]+)([^"\']*)';
 
 	public $_a = '';
 
@@ -116,10 +116,10 @@ class SEO {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**
@@ -141,7 +141,7 @@ class SEO {
 	 * @param string $amp
 	 * @return string
 	 */
-	public function buildURL($type, $item_id = false, $amp = '&') {		
+	public function buildURL($type, $item_id = false, $amp = '&') {
 		// Some SEO paths are not stored in the database
 		if (!$item_id && in_array($type, $this->_static_sections)) {
 			if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type))) !== false) {
@@ -174,9 +174,9 @@ class SEO {
 	 * Put the META data to the GUI
 	 */
 	public function displayMetaData() {
-		$GLOBALS['smarty']->assign('META_DESCRIPTION',	$this->meta_description());
-		$GLOBALS['smarty']->assign('META_KEYWORDS',		$this->meta_keywords());
-		$GLOBALS['smarty']->assign('META_TITLE',		$this->meta_title());
+		$GLOBALS['smarty']->assign('META_DESCRIPTION', $this->meta_description());
+		$GLOBALS['smarty']->assign('META_KEYWORDS',  $this->meta_keywords());
+		$GLOBALS['smarty']->assign('META_TITLE',  $this->meta_title());
 	}
 
 	/**
@@ -191,8 +191,8 @@ class SEO {
 			if ($process) {
 				$url = $GLOBALS['storeURL'] . (($GLOBALS['rootRel'] != CC_DS) ? '/'. str_replace($GLOBALS['rootRel'], '', $url) : '/'.$url);
 			} else if (substr($url, 0, strlen($GLOBALS['rootRel'])) != $GLOBALS['rootRel']) {
-				$url = $GLOBALS['rootRel'].$url;
-			}
+					$url = $GLOBALS['rootRel'].$url;
+				}
 		}
 		return $url;
 	}
@@ -204,15 +204,15 @@ class SEO {
 	 * @param bool $url
 	 */
 	public function getItem($path, $url = false) {
-		
+
 		if (isset($_GET['seo_path'])) unset($_GET['seo_path']);
-		
+
 		if (!empty($path)) {
 			if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', false, array('path' => $path))) !== false) {
 				$item_vars = $this->_getItemVars($item[0]['type'], $item[0]['item_id']);
 				$_GET = (is_array($_GET)) ? array_merge($item_vars, $_GET) : $item_vars;
 				if ($url) {
-					return	$GLOBALS['storeURL'].'/index.php?'.http_build_query($_GET);
+					return $GLOBALS['storeURL'].'/index.php?'.http_build_query($_GET);
 				} else {
 					return true;
 				}
@@ -250,13 +250,13 @@ class SEO {
 	 * @return string
 	 */
 	public function generatePath($id = null, $type = null, $key = null, $absolute = false, $extension = false) {
-		$prefix 	= '';
-		$type 		= strtolower($type);
+		$prefix  = '';
+		$type   = strtolower($type);
 		if (!isset($GLOBALS['db']) || !is_object($GLOBALS['db'])) {
 			$GLOBALS['db'] = Database::getInstance();
 		}
 
-		if(in_array($type, $this->_static_sections)) { /*! Static */
+		if (in_array($type, $this->_static_sections)) { /*! Static */
 			if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => $type))) !== false) {
 				$path = $existing[0]['path'];
 			} else {
@@ -264,51 +264,51 @@ class SEO {
 			}
 		} else { /*! Dymanic */
 			switch ($type) {
-				case 'cat':
-				case 'category':
-				case 'viewcat':
-					// check its not been made already
-					if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'cat', 'item_id' => $id))) !== false) {
-						$path = $existing[0]['path'];
-					} elseif (is_numeric($id) && isset($this->_cat_dirs[$id])) {
-						$path = $this->getDirectory($id);
-					} elseif (!isset($this->_cat_dirs[$id])) {
-						// new category won't be in cache so it needs rebuilding
-						$GLOBALS['cache']->delete('seo.category.list');
-						$this->_getCategoryList();
-						$path = $this->getDirectory($id);
-					} else {
-						// last panic resort which shouldn't happen
-						$path = 'cat'.$id;
+			case 'cat':
+			case 'category':
+			case 'viewcat':
+				// check its not been made already
+				if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'cat', 'item_id' => $id))) !== false) {
+					$path = $existing[0]['path'];
+				} elseif (is_numeric($id) && isset($this->_cat_dirs[$id])) {
+					$path = $this->getDirectory($id);
+				} elseif (!isset($this->_cat_dirs[$id])) {
+					// new category won't be in cache so it needs rebuilding
+					$GLOBALS['cache']->delete('seo.category.list');
+					$this->_getCategoryList();
+					$path = $this->getDirectory($id);
+				} else {
+					// last panic resort which shouldn't happen
+					$path = 'cat'.$id;
+				}
+				break;
+			case 'doc':
+			case 'document':
+			case 'viewdoc':
+				// check its not been made already
+				if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'doc', 'item_id' => $id))) !== false) {
+					$path = $existing[0]['path'];
+				} else {
+					$docs = $GLOBALS['db']->select('CubeCart_documents', array('doc_name'), array('doc_id' => $id));
+					$path = $docs[0]['doc_name'];
+				}
+				break;
+			case 'prod':
+			case 'product':
+			case 'viewprod':
+				// check its not been made already
+				if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'prod', 'item_id' => $id))) !== false) {
+					$path = $existing[0]['path'];
+				} elseif (($prods = $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'name', 'cat_id'), array('product_id' => (int)$id), false, 1)) !== false) {
+					$cat_directory = '';
+					if (($cats = $GLOBALS['db']->select('CubeCart_category_index', array('cat_id'), array('product_id' => (int)$id), array('primary' => 'DESC'), 1)) !== false) {
+						$prods[0]['cat_id'] = $cats[0]['cat_id'];
 					}
-					break;
-				case 'doc':
-				case 'document':
-				case 'viewdoc':
-					// check its not been made already
-					if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'doc', 'item_id' => $id))) !== false) {
-						$path = $existing[0]['path'];
-					} else {
-						$docs = $GLOBALS['db']->select('CubeCart_documents', array('doc_name'), array('doc_id' => $id));
-						$path = $docs[0]['doc_name'];
-					}
-					break;
-				case 'prod':
-				case 'product':
-				case 'viewprod':
-					// check its not been made already
-					if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'path', array('type' => 'prod', 'item_id' => $id))) !== false) {
-						$path = $existing[0]['path'];
-					} elseif (($prods = $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'name', 'cat_id'), array('product_id' => (int)$id), false, 1)) !== false) {
-						$cat_directory = '';
-						if (($cats = $GLOBALS['db']->select('CubeCart_category_index', array('cat_id'), array('product_id' => (int)$id), array('primary' => 'DESC'), 1)) !== false) {
-							$prods[0]['cat_id']	= $cats[0]['cat_id'];
-						}
-						$cat_directory = $this->getDirectory($prods[0]['cat_id']);
-						$path = empty($cat_directory) ? $prods[0]['name'] : $cat_directory.'/'.$prods[0]['name'];
-					}
-					break;
-				default:
+					$cat_directory = $this->getDirectory($prods[0]['cat_id']);
+					$path = empty($cat_directory) ? $prods[0]['name'] : $cat_directory.'/'.$prods[0]['name'];
+				}
+				break;
+			default:
 				$this->_url = 'index.php?_a=' . $type . '&amp;' . $key . '=' . $id;
 				return $this->_url;
 			}
@@ -334,8 +334,8 @@ class SEO {
 			if (!empty($category)) {
 
 				// Prevent never-ending loops!
-				if(in_array($cat_id, $noLoops)) {
-					trigger_error('Cat Loop Detected! Cat Path: '.implode(' -> ', $noLoops).'.',E_USER_WARNING);
+				if (in_array($cat_id, $noLoops)) {
+					trigger_error('Cat Loop Detected! Cat Path: '.implode(' -> ', $noLoops).'.', E_USER_WARNING);
 					return false;
 				}
 				$noLoops[] = $cat_id;
@@ -346,7 +346,7 @@ class SEO {
 					$this->_cat_path[] = $category['cat_name'];
 				}
 				if (is_numeric($category['cat_parent_id']) && $category['cat_parent_id'] != 0) {
-					$this->_cat_path[]	= $this->getDirectory($category['cat_parent_id'], $link, $glue, $append, $custom, $noLoops);
+					$this->_cat_path[] = $this->getDirectory($category['cat_parent_id'], $link, $glue, $append, $custom, $noLoops);
 				}
 				krsort($this->_cat_path);
 				if ($append) {
@@ -378,13 +378,13 @@ class SEO {
 	public function meta_description($glue = ' - ') {
 		if ($GLOBALS['config']->has('config', 'seo_metadata') && $GLOBALS['config']->get('config', 'seo_metadata') && !empty($this->_meta_data['description'])) {
 			switch ((int)$GLOBALS['config']->get('config', 'seo_metadata')) {
-				case self::TAGS_MERGE:
-					$description[] = $this->_meta_data['description'];
-					$description[] = $GLOBALS['config']->get('config', 'store_meta_description');
-					break;
-				case self::TAGS_REPLACE:
-					$description = $this->_meta_data['description'];
-					break;
+			case self::TAGS_MERGE:
+				$description[] = $this->_meta_data['description'];
+				$description[] = $GLOBALS['config']->get('config', 'store_meta_description');
+				break;
+			case self::TAGS_REPLACE:
+				$description = $this->_meta_data['description'];
+				break;
 			}
 			return (is_array($description)) ? implode($glue, $description) : $description;
 		} else {
@@ -401,13 +401,13 @@ class SEO {
 	public function meta_keywords($glue = ',') {
 		if ($GLOBALS['config']->has('config', 'seo_metadata') && $GLOBALS['config']->get('config', 'seo_metadata') && !empty($this->_meta_data['keywords'])) {
 			switch ((int)$GLOBALS['config']->get('config', 'seo_metadata')) {
-				case self::TAGS_MERGE:
-					$keywords[]	= $this->_meta_data['keywords'];
-					$keywords[]	= $GLOBALS['config']->get('config', 'store_meta_keywords');
-					break;
-				case self::TAGS_REPLACE:
-					$keywords = $this->_meta_data['keywords'];
-					break;
+			case self::TAGS_MERGE:
+				$keywords[] = $this->_meta_data['keywords'];
+				$keywords[] = $GLOBALS['config']->get('config', 'store_meta_keywords');
+				break;
+			case self::TAGS_REPLACE:
+				$keywords = $this->_meta_data['keywords'];
+				break;
 			}
 			return (is_array($keywords)) ? implode($glue, $keywords) : $keywords;
 		} else {
@@ -431,7 +431,7 @@ class SEO {
 		if ((int)$GLOBALS['config']->get('config', 'seo_metadata')!==self::TAGS_DEFAULT && !isset($title[1]) && isset($this->_meta_data['name'])) {
 			$title[2] = $this->_meta_data['name'];
 		}
-		if((int)$GLOBALS['config']->get('config', 'seo_metadata')!==self::TAGS_REPLACE) {
+		if ((int)$GLOBALS['config']->get('config', 'seo_metadata')!==self::TAGS_REPLACE) {
 			$title[69] = $GLOBALS['config']->get('config', 'store_title');
 		}
 		ksort($title);
@@ -502,9 +502,9 @@ class SEO {
 	public function rewriteUrls($page_html, $full_urls = false) {
 		$index = $this->_getBaseUrl($full_urls);
 		$search[0] = '#(href|action)=["\'](.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w]+)\=([\w\-\_]+)([^"\']*)["\']#Sei';
-		$replace[0]	= '"$1=\"".$index.$this->generatePath(\'$6\', \'$3\', \'$5\').$this->queryString(\'$7\')."\""';
+		$replace[0] = '"$1=\"".$index.$this->generatePath(\'$6\', \'$3\', \'$5\').$this->queryString(\'$7\')."\""';
 		$search[1] = '#(href|src|background)=([\"\'])([^\"]*)([\"\'])#Suie';
-		$replace[1]	= '"$1=$2".$this->fullURL(\'$3\', $full_urls)."$4"';
+		$replace[1] = '"$1=$2".$this->fullURL(\'$3\', $full_urls)."$4"';
 		return preg_replace($search, $replace, $page_html);
 	}
 
@@ -515,21 +515,21 @@ class SEO {
 	 * @return bool/string
 	 */
 	public function SEOable($path) {
-	
+
 		$path = preg_replace('@index.php$@', '', $path); // remove index.php if last chars in URL
-	
+
 		if (strpos($path, 'index.php?_a=category&search') !== false) {
 			$path = str_replace('index.php?', 'search.html?', $path);
 			return $path;
 		} else if (($pos = strpos($path, 'index.php?_a=search')) !== false) {
-			if (strlen($path) == $pos + 19) {
-				$path = str_replace('index.php?_a=search', 'search.html', $path);
-			} else {
-				$path = str_replace('index.php?_a=search&', 'search.html?', $path);
+				if (strlen($path) == $pos + 19) {
+					$path = str_replace('index.php?_a=search', 'search.html', $path);
+				} else {
+					$path = str_replace('index.php?_a=search&', 'search.html?', $path);
+				}
+				return $path;
 			}
-			return $path;
-		}
-		
+
 		if (preg_match('#^(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w\[\]]+)\=([\w\-\_]+)([^"\']*)$#ieS', $path, $match)) {
 			return $this->generatePath($match[5], $match[2], $match[4], true, true).$this->queryString($match[6]);
 		} else {
@@ -561,26 +561,26 @@ class SEO {
 				$path = $this->generatePath($item_id, $type);
 			}
 			$path = sanitizeSEOPath($path);
-			
-			if(empty($path)) {
+
+			if (empty($path)) {
 				return ($bool) ? false : '';
 			}
 			if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'id', array('type' => $type, 'item_id' => $item_id))) !== false) {
 				$GLOBALS['db']->update('CubeCart_seo_urls', array('type' => $type, 'item_id' => $item_id, 'path' => $path), array('id' => $existing[0]['id']));
 			} else {
 				//Check for dup path
-				if(!$GLOBALS['db']->select('CubeCart_seo_urls', false, array('path' => $path))) {
+				if (!$GLOBALS['db']->select('CubeCart_seo_urls', false, array('path' => $path))) {
 					$GLOBALS['db']->insert('CubeCart_seo_urls', array('type' => $type, 'item_id' => $item_id, 'path' => $path));
 				} else {
 					// Force unique path is it's already taken
-					$unique_id = substr($type,0,1).$item_id;
+					$unique_id = substr($type, 0, 1).$item_id;
 					$GLOBALS['db']->insert('CubeCart_seo_urls', array('type' => $type, 'item_id' => $item_id, 'path' => $path.'-'.$unique_id));
 					$GLOBALS['gui']->setError($GLOBALS['language']->settings['seo_path_taken']);
 				}
 			}
 			return $bool ? true : $path;
 		} else {
-			trigger_error('Invalid SEO path type '.$type.'.',E_USER_NOTICE);
+			trigger_error('Invalid SEO path type '.$type.'.', E_USER_NOTICE);
 			return false;
 		}
 	}
@@ -593,10 +593,10 @@ class SEO {
 	 */
 	public function set_meta_data($meta_data) {
 		if (!empty($meta_data) && is_array($meta_data)) {
-			$default	= array('name' => '', 'path' => '', 'title' => '', 'description' => '', 'keywords' => '');
-			$meta_data	= array_merge($default, $this->_meta_data, $meta_data);
+			$default = array('name' => '', 'path' => '', 'title' => '', 'description' => '', 'keywords' => '');
+			$meta_data = array_merge($default, $this->_meta_data, $meta_data);
 			foreach ($meta_data as $key => $value) {
-				$this->_meta_data[$key]	= $value;
+				$this->_meta_data[$key] = $value;
 			}
 			return true;
 		}
@@ -624,9 +624,9 @@ class SEO {
 
 		// Generate Standard records
 		# Homepage
-		
-		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config','standard_url') : $GLOBALS['storeURL'];
-		
+
+		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config', 'standard_url') : $GLOBALS['storeURL'];
+
 		$this->_sitemap_link(array('url' => $store_url.'/index.php'));
 		# Sale Items
 		$this->_sitemap_link(array('url' => $store_url.'/index.php?_a=saleitems'));
@@ -634,45 +634,45 @@ class SEO {
 		$this->_sitemap_link(array('url' => $store_url.'/index.php?_a=certificates'));
 
 		$queryArray = array(
-			'category'	=> $GLOBALS['db']->select('CubeCart_category', array('cat_id'), array('status' => '1')),
-			'product'	=> $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'updated'), array('status' => '1')),
-			'document'	=> $GLOBALS['db']->select('CubeCart_documents', array('doc_id'), array('doc_parent_id' => '0', 'doc_status' => 1)),
+			'category' => $GLOBALS['db']->select('CubeCart_category', array('cat_id'), array('status' => '1')),
+			'product' => $GLOBALS['db']->select('CubeCart_inventory', array('product_id', 'updated'), array('status' => '1')),
+			'document' => $GLOBALS['db']->select('CubeCart_documents', array('doc_id'), array('doc_parent_id' => '0', 'doc_status' => 1)),
 		);
 
 		foreach ($queryArray as $type => $results) {
 			if ($results) {
 				foreach ($results as $record) {
-					switch ($type){
-						case 'category':
-							$id		= $record['cat_id'];
-							$key	= 'cat_id';
-							break;
-						case 'product':
-							$id		= $record['product_id'];
-							$key	= 'product_id';
-							break;
-						case 'document':
-							$id		= $record['doc_id'];
-							$key	= 'doc_id';
-							break;
+					switch ($type) {
+					case 'category':
+						$id  = $record['cat_id'];
+						$key = 'cat_id';
+						break;
+					case 'product':
+						$id  = $record['product_id'];
+						$key = 'product_id';
+						break;
+					case 'document':
+						$id  = $record['doc_id'];
+						$key = 'doc_id';
+						break;
 					}
 					$this->_sitemap_link(array('key' => $key, 'id' => $id), (!isset($record['updated'])) ? (int)$record['updated'] : time(), $type);
 				}
 			}
 		}
 		$sitemap = $this->_sitemap_xml->getDocument(true);
-		
+
 		if (function_exists('gzencode')) {
 			// Compress the file if GZip is enabled
-			$filename	= CC_ROOT_DIR.CC_DS.'sitemap.xml.gz';
-			$mapdata	= gzencode($sitemap, 9, FORCE_GZIP);
+			$filename = CC_ROOT_DIR.CC_DS.'sitemap.xml.gz';
+			$mapdata = gzencode($sitemap, 9, FORCE_GZIP);
 		} else {
-			$filename	= CC_ROOT_DIR.CC_DS.'sitemap.xml';
-			$mapdata	= $sitemap;
+			$filename = CC_ROOT_DIR.CC_DS.'sitemap.xml';
+			$mapdata = $sitemap;
 		}
 		if (file_put_contents($filename, $mapdata)) {
 			// Ping Google
-			$request = new Request('www.google.com','/webmasters/sitemaps/ping');
+			$request = new Request('www.google.com', '/webmasters/sitemaps/ping');
 			$request->setMethod('get');
 			$request->setData(array('sitemap' => $store_url.'/'.basename($filename)));
 			$request->send();
@@ -699,7 +699,7 @@ class SEO {
 	private function _getCategoryList($rebuild = false) {
 		$language = Session::getInstance()->has('language', 'client') ? Session::getInstance()->get('language', 'client') : Language::getInstance()->current();
 		if ($rebuild || ($this->_cat_dirs = Cache::getInstance()->read('seo.category.list.'.$language)) === false) {
-//			if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), array('hide' => '0'), array('cat_id' => 'DESC'))) !== false) {
+			//   if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), array('hide' => '0'), array('cat_id' => 'DESC'))) !== false) {
 			if (($results = $GLOBALS['db']->select('CubeCart_category', array('cat_id', 'cat_name', 'cat_parent_id'), false, array('cat_id' => 'DESC'))) !== false) {
 				foreach ($results as $result) {
 					$this->_cat_dirs[$result['cat_id']] = $result;
@@ -707,7 +707,7 @@ class SEO {
 
 				// Write over with translations
 				if (($translations = $GLOBALS['db']->select('CubeCart_category_language', array('cat_id', 'cat_name'), array('language' => $language))) !== false) {
-					foreach($translations as $translation) {
+					foreach ($translations as $translation) {
 						$this->_cat_dirs[$translation['cat_id']]['cat_name'] = $translation['cat_name'];
 					}
 				}
@@ -727,67 +727,67 @@ class SEO {
 	 * @return array
 	 */
 	private function _getItemVars($type, $item_id) {
-		switch($type) {
+		switch ($type) {
 			/*! Static */
-			case 'search':
-				$array = array(
-					'_a' => 'search'
-				);
+		case 'search':
+			$array = array(
+				'_a' => 'search'
+			);
 			break;
-			case 'contact':
-				$array = array(
-					'_a' => 'contact'
-				);
+		case 'contact':
+			$array = array(
+				'_a' => 'contact'
+			);
 			break;
-			case 'saleitems':
-				$array = array(
-					'_a' => 'saleitems'
-				);
+		case 'saleitems':
+			$array = array(
+				'_a' => 'saleitems'
+			);
 			break;
-			case 'certificates':
-				$array = array(
-					'_a' => 'certificates'
-				);
+		case 'certificates':
+			$array = array(
+				'_a' => 'certificates'
+			);
 			break;
 			/*! Dymanic */
-			case 'cat':
-				$array = array(
-					'_a' => 'category',
-					'cat_id' => $item_id
-				);
+		case 'cat':
+			$array = array(
+				'_a' => 'category',
+				'cat_id' => $item_id
+			);
 			break;
-			case 'doc':
-				$array = array(
-					'_a' => 'document',
-					'doc_id' => $item_id
-				);
+		case 'doc':
+			$array = array(
+				'_a' => 'document',
+				'doc_id' => $item_id
+			);
 			break;
 
-			case 'prod':
-				$array = array(
-					'_a' => 'product',
-					'product_id' => $item_id
-				);
+		case 'prod':
+			$array = array(
+				'_a' => 'product',
+				'product_id' => $item_id
+			);
 			break;
-			case 'certificates':
-				$array = array(
-					'_a' => 'certificates',
-				);
+		case 'certificates':
+			$array = array(
+				'_a' => 'certificates',
+			);
 			break;
-			case 'basket':
-				$array = array(
-					'_a' => 'basket',
-				);
+		case 'basket':
+			$array = array(
+				'_a' => 'basket',
+			);
 			break;
-			case 'login':
-			    $array = array(
-			        '_a' => 'login'
-			    );
+		case 'login':
+			$array = array(
+				'_a' => 'login'
+			);
 			break;
-			case 'register':
-			    $array = array(
-			        '_a' => 'register'
-			    );
+		case 'register':
+			$array = array(
+				'_a' => 'register'
+			);
 			break;
 		}
 		$this->_a = $array['_a'];
@@ -816,15 +816,15 @@ class SEO {
 	 */
 	private function _sitemap_link($input, $updated = false, $type = false) {
 		$updated = (!$updated) ? time() : $updated;
-		
-		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config','standard_url') : $GLOBALS['storeURL'];
-		
+
+		$store_url = (CC_SSL) ? $GLOBALS['config']->get('config', 'standard_url') : $GLOBALS['storeURL'];
+
 		if (!isset($input['url']) && !empty($type)) {
 			$input['url'] = $store_url.'/'.$this->generatePath($input['id'], $type, '', false, true);
 		}
 
 		$this->_sitemap_xml->startElement('url');
-		$this->_sitemap_xml->setElement('loc',  htmlspecialchars($input['url']),false, false);
+		$this->_sitemap_xml->setElement('loc',  htmlspecialchars($input['url']), false, false);
 		$this->_sitemap_xml->setElement('lastmod', date('c', $updated), false, false);
 		$this->_sitemap_xml->endElement();
 	}
@@ -836,25 +836,25 @@ class SEO {
 	 * @param string $data
 	 */
 	private function _trackback($product_id = false, $data = false) {
-		$products	= $GLOBALS['db']->select('CubeCart_inventory', 'product_id', array('product_id' => (int)$product_id));
+		$products = $GLOBALS['db']->select('CubeCart_inventory', 'product_id', array('product_id' => (int)$product_id));
 		if ($products) {
 			if (isset($data['url']) && filter_var(urldecode($data['url']), FILTER_VALIDATE_URL)) {
-				$record	= array(
-					'product_id'	=> (int)$product_id,
-					'url'			=> urldecode($data['url']),
-					'blog_name'		=> (isset($data['blog_name']) && !empty($data['blog_name'])) ? strip_tags($data['blog_name']) : null,
-					'title'			=> (isset($data['title']) && !empty($data['title'])) ? strip_tags($data['title']) : null,
-					'excerpt'		=> (isset($data['excerpt']) && !empty($data['excerpt'])) ? strip_tags($data['excerpt']) : null,
+				$record = array(
+					'product_id' => (int)$product_id,
+					'url'   => urldecode($data['url']),
+					'blog_name'  => (isset($data['blog_name']) && !empty($data['blog_name'])) ? strip_tags($data['blog_name']) : null,
+					'title'   => (isset($data['title']) && !empty($data['title'])) ? strip_tags($data['title']) : null,
+					'excerpt'  => (isset($data['excerpt']) && !empty($data['excerpt'])) ? strip_tags($data['excerpt']) : null,
 				);
 				if (!$GLOBALS['db']->insert('CubeCart_trackback', $record)) $error = 'Unknown Error';
 			} else {
-				$error	= 'Invalid URL';
+				$error = 'Invalid URL';
 			}
 		} else {
-			$error	= 'That page does not exist';
+			$error = 'That page does not exist';
 		}
 		// Generate response
-		$response	= new XMLWriter();
+		$response = new XMLWriter();
 		$response->openMemory();
 		$response->startDocument('1.0', 'UTF-8');
 		$response->startElement('response');

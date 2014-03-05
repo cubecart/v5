@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -27,7 +27,7 @@ class Autoloader {
 	 *
 	 * @var array of paths
 	 */
-	private static $_paths	= null;
+	private static $_paths = null;
 
 	/**
 	 * Append a path to the path array
@@ -56,7 +56,7 @@ class Autoloader {
 	 */
 	public static function autoload($class) {
 		if (CC_DS != '/') {
-			$class	= str_replace('/', CC_DS, $class);
+			$class = str_replace('/', CC_DS, $class);
 		}
 
 		//Don't double load
@@ -98,9 +98,9 @@ class Autoloader {
 					include_once $path.CC_DS.strtolower($class).'.class.php';
 					return true;
 				} else if (file_exists($path.CC_DS.$class.'.php')) {
-					include_once $path.CC_DS.$class.'.php';
-					return true;
-				}
+						include_once $path.CC_DS.$class.'.php';
+						return true;
+					}
 			}
 		}
 
@@ -219,7 +219,7 @@ class Autoloader {
 
 		//Lop through the call backs and unload them
 		$key = array_keys($callbacks);
-		$size = sizeOf($key);
+		$size = sizeof($key);
 		for ($i = 0; $i < $size; ++$i) {
 			spl_autoload_unregister($callbacks[$key[$i]]);
 		}

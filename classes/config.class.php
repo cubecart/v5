@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -28,13 +28,13 @@ class Config {
 	 *
 	 * @var array
 	 */
-	private $_config	= array();
+	private $_config = array();
 	/**
 	 * Temp configs that should not be written to the db
 	 *
 	 * @var array
 	 */
-	private $_temp		= array();
+	private $_temp  = array();
 	/**
 	 * Write the config to the DB
 	 *
@@ -67,7 +67,7 @@ class Config {
 		if (!empty($array_out)) {
 			$this->_config['config'] = $this->_clean($array_out);
 			//Merge the main global with the config
-			if(is_array($this->_config['config'])) {
+			if (is_array($this->_config['config'])) {
 				$this->_config['config'] = array_merge($this->_config['config'], $glob);
 			}
 		} else {
@@ -81,7 +81,7 @@ class Config {
 			$this->_writeDB();
 		}
 	}
-	
+
 	/**
 	 * Setup the instance (singleton)
 	 *
@@ -91,10 +91,10 @@ class Config {
 	 */
 	public static function getInstance($glob = array()) {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self($glob);
-        }
+			self::$_instance = new self($glob);
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
@@ -120,8 +120,8 @@ class Config {
 			if (empty($element)) {
 				return $this->_config[$config_name];
 			} else if (isset($this->_config[$config_name][$element])) {
-				return $this->_config[$config_name][$element];
-			}
+					return $this->_config[$config_name][$element];
+				}
 
 			return false;
 		}
@@ -142,7 +142,7 @@ class Config {
 	 * @return bool
 	 */
 	public function has($config_name, $element) {
-		return (($this->get($config_name, $element)) !== false);
+		return ($this->get($config_name, $element)) !== false;
 	}
 
 	/**
@@ -207,8 +207,8 @@ class Config {
 			array_walk_recursive($data, create_function('&$s, $k', '$s=stripslashes($s);'));
 			$data = $this->_json_encode($data);
 		} else if (is_array($data)) {
-			array_walk_recursive($data, create_function('&$s, $k', '$s=stripslashes($s);'));
-		} else {
+				array_walk_recursive($data, create_function('&$s, $k', '$s=stripslashes($s);'));
+			} else {
 			$data = stripslashes($data);
 		}
 
@@ -274,25 +274,25 @@ class Config {
 			}
 		}
 	}
-	
+
 	/**
 	 * Json decode but convert if serialized
 	 */
 	private function _json_decode($string) {
-		if(preg_match('/^a:[0-9]/', $string)) { // convert from serialized and next save will convert
+		if (preg_match('/^a:[0-9]/', $string)) { // convert from serialized and next save will convert
 			$array = unserialize($string);
-			if(isset($array['offline_content']) && !empty($array['offline_content'])) {
-				$array['offline_content']	= base64_decode($array['offline_content']);
+			if (isset($array['offline_content']) && !empty($array['offline_content'])) {
+				$array['offline_content'] = base64_decode($array['offline_content']);
 			}
-			if(isset($array['store_copyright']) && !empty($array['store_copyright'])) {
-				$array['store_copyright']	= base64_decode($array['store_copyright']);
+			if (isset($array['store_copyright']) && !empty($array['store_copyright'])) {
+				$array['store_copyright'] = base64_decode($array['store_copyright']);
 			}
 			return $array;
 		} else {
 			return json_decode(base64_decode($string), true);
 		}
 	}
-	
+
 	/**
 	 * Json encode
 	 */
@@ -326,7 +326,7 @@ class Config {
 				}
 				if (Database::getInstance()->count('CubeCart_config', 'name', array('name' => $config))) {
 					//Safeguard to prevent config loss
-					if($config=='config' && !isset($this->_pre_enc_config['store_name'])) { 
+					if ($config=='config' && !isset($this->_pre_enc_config['store_name'])) {
 						return false;
 					} else {
 						Database::getInstance()->update('CubeCart_config', $record, array('name' => $config));

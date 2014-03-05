@@ -3,7 +3,7 @@
 /**
  * Header
  */
-if(!defined('CC_DS')) die('Access Denied');
+if (!defined('CC_DS')) die('Access Denied');
 
 require CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'cache'.CC_DS.'cache.class.php';
 
@@ -29,16 +29,16 @@ class Cache extends Cache_Controler {
 			return ;
 		}
 
-    	$this->_mode		= 'Memcache';
-    	$this->_memcache	= new Memcache;
+		$this->_mode  = 'Memcache';
+		$this->_memcache = new Memcache;
 
-    	//Check the config file for memcache servers and try to load them
+		//Check the config file for memcache servers and try to load them
 		if (isset($GLOBALS['config']['cache_memcache_list']) && !empty($GLOBALS['config']['cache_memcache_list'])) {
 			$online = false;
 			$pool = explode(',', $GLOBALS['config']['cache_memcache_list']);
 
 			foreach ($pool as $server) {
-				$server	= explode(':', $server);
+				$server = explode(':', $server);
 				// Add to the server pool
 				if (!$this->_memcache->addServer(trim($server[0]), (isset($server[1])) ? (int)trim($server[1]) : 11211)) {
 					trigger_error('Invalid Server '.$server[0], E_USER_WARNING);
@@ -70,16 +70,16 @@ class Cache extends Cache_Controler {
 
 		$this->_online = true;
 
-    	//Run the parent constructor
-    	parent::__construct();
-    }
+		//Run the parent constructor
+		parent::__construct();
+	}
 
-    public function __destruct() {
-    	if ($this->_online) {
-    		//Close the memcache handler if not it will stay open for awhile which is wasteful
-    		$this->_memcache->close();
-    	}
-    }
+	public function __destruct() {
+		if ($this->_online) {
+			//Close the memcache handler if not it will stay open for awhile which is wasteful
+			$this->_memcache->close();
+		}
+	}
 
 	/**
 	 * Setup the instance (singleton)
@@ -88,10 +88,10 @@ class Cache extends Cache_Controler {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**

@@ -22,49 +22,49 @@ class Cache_Controler {
 	 *
 	 * @var bool
 	 */
-	protected $_enabled		= true;
+	protected $_enabled  = true;
 	/**
 	 * Cache expire
 	 *
 	 * @var int
 	 */
-	protected $_expire		= 86400;
+	protected $_expire  = 86400;
 	/**
 	 * Cache IDs
 	 *
 	 * @var array
 	 */
-	protected $_ids			= array();
+	protected $_ids   = array();
 	/**
 	 * Cache mode/type
 	 *
 	 * @var string
 	 */
-	protected $_mode		= 'None';
+	protected $_mode  = 'None';
 	/**
 	 * Is the cache system itself online (did it load)
 	 *
 	 * @var bool
 	 */
-	protected $_online		= false;
+	protected $_online  = false;
 	/**
 	 * Cache prefix
 	 *
 	 * @var string
 	 */
-	protected $_prefix		= '';
+	protected $_prefix  = '';
 	/**
 	 * File name suffix
 	 *
 	 * @var string
 	 */
-	protected $_suffix		= '.cache';
+	protected $_suffix  = '.cache';
 	/**
 	 * Temp variable to hold the cache read for exists function
 	 *
 	 * @var mixed
 	 */
-	protected $_temp		= null;
+	protected $_temp  = null;
 
 	/**
 	 * Class instance
@@ -75,7 +75,7 @@ class Cache_Controler {
 
 	protected function __construct() {
 		// Using the db name as a fixed identifier np's
-		$this->_prefix	= substr(md5($GLOBALS['glob']['dbdatabase']),0,5).'.';
+		$this->_prefix = substr(md5($GLOBALS['glob']['dbdatabase']), 0, 5).'.';
 	}
 
 	/**
@@ -111,7 +111,7 @@ class Cache_Controler {
 	 * @return bool
 	 */
 	public function status() {
-		return ($this->_online && $this->_enabled);
+		return $this->_online && $this->_enabled;
 	}
 
 	/**

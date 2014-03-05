@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -27,8 +27,8 @@ class Sanitize {
 	 *
 	 * @var array
 	 */
-	private static $exempt = array('description', 'offline_content', 'doc_content','content_html', 'content_text', 'cat_desc', 'copyright', 'maillist_format', 'store_copyright', 'htaccess-data', 'NotificationData');
-	
+	private static $exempt = array('description', 'offline_content', 'doc_content', 'content_html', 'content_text', 'cat_desc', 'copyright', 'maillist_format', 'store_copyright', 'htaccess-data', 'NotificationData');
+
 	//=====[ Public ]====================================================================================================
 
 	/**
@@ -67,7 +67,7 @@ class Sanitize {
 			}
 			//Make a new token
 			$GLOBALS['session']->getToken(true);
-		} 
+		}
 	}
 
 	//=====[ Private ]====================================================================================================
@@ -119,7 +119,7 @@ class Sanitize {
 	 * Used when the POST token is not valid
 	 */
 	static private function _stopToken() {
-		unset($_POST,$_GET);
+		unset($_POST, $_GET);
 		trigger_error('Invalid Security Token', E_USER_WARNING);
 	}
 

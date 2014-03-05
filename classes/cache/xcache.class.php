@@ -4,7 +4,7 @@
  * Header
  */
 
-if(!defined('CC_DS')) die('Access Denied');
+if (!defined('CC_DS')) die('Access Denied');
 
 require CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'cache'.CC_DS.'cache.class.php';
 
@@ -23,12 +23,12 @@ class Cache extends Cache_Controler {
 			return ;
 		}
 
-    	$this->_mode	= 'XCache';
-    	$this->_online	= true;
+		$this->_mode = 'XCache';
+		$this->_online = true;
 
-    	//Run the parent constructor
-    	parent::__construct();
-    }
+		//Run the parent constructor
+		parent::__construct();
+	}
 
 	/**
 	 * Setup the instance (singleton)
@@ -37,10 +37,10 @@ class Cache extends Cache_Controler {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**
@@ -115,18 +115,18 @@ class Cache extends Cache_Controler {
 	 */
 	public function getIDs() {
 		if (empty($this->_ids)) {
-	        for ($i = 0, $count = xcache_count(XC_TYPE_VAR); $i < $count; ++$i) {
-	            $entries = xcache_list(XC_TYPE_VAR, $i);
+			for ($i = 0, $count = xcache_count(XC_TYPE_VAR); $i < $count; ++$i) {
+				$entries = xcache_list(XC_TYPE_VAR, $i);
 
-	            if (is_array($entries['cache_list'])) {
-	                foreach ($entries['cache_list'] as $entry) {
-	                	$this->_ids[] = str_replace(array($this->_prefix, $this->_suffix), '', $entry['name']);
-	                }
-	            }
-	        }
+				if (is_array($entries['cache_list'])) {
+					foreach ($entries['cache_list'] as $entry) {
+						$this->_ids[] = str_replace(array($this->_prefix, $this->_suffix), '', $entry['name']);
+					}
+				}
+			}
 		}
 
-        return $this->_ids;
+		return $this->_ids;
 	}
 
 	/**
