@@ -4,7 +4,7 @@
       <title>{$META_TITLE}</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="canonical" href="{$CANCONIAL}">
+      <link rel="canonical" href="{$CANONICAL}">
       <link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css">
       <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
