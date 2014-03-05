@@ -103,6 +103,7 @@
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_company">{$LANG.address.company_name}</label><input type="text" name="delivery[company_name]" id="del_company"  value="{$DELIVERY.company_name}" placeholder="{$LANG.user.company_name}"></div>
    </div>
+   <address>
    <div class="row">
       <div class="small-12 large-8 columns"><label for="del_line1">{$LANG.address.line1}</label><input type="text" name="delivery[line1]" id="del_line1"  required value="{$DELIVERY.line1}" placeholder="{$LANG.address.line1} {$LANG.form.required}"></div>
    </div>
@@ -127,6 +128,7 @@
    <div class="row">
       <div class="small-12 large-8 columns"><label for="delivery_state">{$LANG.address.state}</label></span><input type="text" name="delivery[state]" id="delivery_state"  required value="{$DELIVERY.state}" placeholder="{$LANG.address.state} {$LANG.form.required}"></div>
    </div>
+   </address>
 </div>
 {/if}
 <script type="text/javascript">

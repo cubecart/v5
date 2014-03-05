@@ -16,5 +16,6 @@
   <hooks>
 	<hook trigger="class.gui.head_js" enabled="1"><![CDATA[Postcode Anywhere Header JS]]></hook>
 	<hook trigger="class.gui.body_js" enabled="1"><![CDATA[Postcode Anywhere Body JS]]></hook>
+	<hook trigger="class.gui.css" enabled="1"><![CDATA[CSS]]></hook>
   </hooks>
 </installer>
