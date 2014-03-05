@@ -1114,7 +1114,6 @@ if (isset($_GET['action'])) {
 		}
 		endif;
 
-
 		if (is_array($possible)) {
 			$delete_query = "UPDATE `".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_option_matrix` SET `status` = 0 WHERE `product_id` = $product_id AND `options_identifier` NOT IN ('".implode("','",$possible)."')";
 			$GLOBALS['db']->misc($delete_query);
