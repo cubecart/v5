@@ -994,7 +994,6 @@ class Language {
 			            $merged_addon_strings .= $element->asXML();
 			        }
 		        }
-		        $merged_addon_strings .= '</translation>';
 	        }
 	        $merged_addon_strings .= '</translation></language>';
 	        return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
