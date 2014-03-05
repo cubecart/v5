@@ -26,6 +26,7 @@
 {else}
 <div class="hide" id="checkout_login_form">
    <h2>{$LANG.account.login}</h2>
+   <p>{$LANG.account.return_register_form} <a href="#" id="checkout_register">{$LANG.common.signup}</a></p>
    <div class="row">
       <div class="small-12 large-6 columns">
          <label for="login-username" class="show-for-medium-up">{$LANG.user.email_address}</label>
@@ -43,8 +44,6 @@
 			<input type="hidden" name="redir" value="?_a=checkout">
 		</div>
 	</div>
-	<p><a href="#" id="checkout_register">{$LANG.account.return_register_form}</a></p>
-	
 </div>
 <div id="checkout_register_form">
    <h2>{$LANG.account.your_details}</h2>

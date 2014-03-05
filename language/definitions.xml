@@ -5,7 +5,7 @@
 -->
 <definitions version="1.0">
   <group name="account">
-  	<string name="return_register_form" introduced="6.0.0"><![CDATA[Return to register form]]></string>
+  	<string name="return_register_form" introduced="6.0.0"><![CDATA[Need to register?]]></string>
     <string name="already_registered" introduced="5.0.0"><![CDATA[Already registered?]]></string>
     <string name="contact_details" introduced="5.0.0"><![CDATA[Contact Details]]></string>
     <string name="create_account" introduced="5.0.0"><![CDATA[I would like to create an account]]></string>
@@ -514,6 +514,7 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="signup" introduced="6.0.0"><![CDATA[Signup]]></string>
   	<string name="follow_us" introduced="6.0.0"><![CDATA[Follow Us]]></string>
   	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
   	<string name="invoice" introduced="6.0.0"><![CDATA[Invoice]]></string>

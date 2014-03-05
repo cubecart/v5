@@ -103,6 +103,10 @@ jQuery(document).ready(function() {
 			}
 		},
 		rules: {
+			username: {
+				required: true,
+				email: true
+			},
 			'user[first_name]': {
 				required: true
 			},
@@ -171,6 +175,10 @@ jQuery(document).ready(function() {
 			}
 		},
 		messages: {
+			username: {
+				required: $('#validate_email').text(),
+				email: $('#validate_email').text()
+			},
 			'user[email]': {
 				required: $('#validate_email').text(),
 				email: $('#validate_email').text(),
