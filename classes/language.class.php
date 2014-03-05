@@ -391,9 +391,9 @@ class Language {
 	public function getData($element = '') {
 		if (empty($element)) {
 			return $this->_language_data;
-		} else if (isset($this->_language_data[$element])) {
-				return $this->_language_data[$element];
-			}
+		} elseif (isset($this->_language_data[$element])) {
+			return $this->_language_data[$element];
+		}
 
 		return false;
 	}
@@ -734,7 +734,6 @@ class Language {
 			$data = $this->_extractXML($path.$language);
 			if (!empty($data)) {
 				$xml = new SimpleXMLElement($data);
-
 				if (!empty($xml)) {
 					if (!empty($xml->info)) {
 						foreach ((array)$xml->info as $key => $value) {
@@ -743,7 +742,6 @@ class Language {
 						$GLOBALS['cache']->write($lang_data, 'lang.info.'.(string)$xml->info->code);
 						$this->_language_data = $lang_data;
 					}
-
 					switch (floor((float)$xml->attributes()->version)) {
 					case 2:
 						// New format - Similar layout to the definition file
@@ -877,9 +875,6 @@ class Language {
 	public function setTemplate() {
 		$lang_data = $this->getData();
 
-		$lang_data['text-direction'] = (isset($lang_data['text-direction']) && !empty($lang_data['text-direction'])) ? $lang_data['text-direction'] : 'ltr';
-		$lang_data['character_set'] = (isset($lang_data['character_set']) && !empty($lang_data['character_set'])) ? strtoupper($lang_data['character_set']) : 'UTF-8';
-
 		//Assign left to right or right to left
 		$GLOBALS['smarty']->assign('TEXT_DIRECTION', $lang_data['text-direction']);
 
@@ -975,7 +970,7 @@ class Language {
 	 */
 	private function _extractXML($language) {
 		if ((($files = glob($language.'*{-custom,}.xml*', GLOB_BRACE | GLOB_NOSORT)) !== false) && !empty($files)) {
-			$merged_addon_strings = '<?xml version="1.0"?><language version="2.0"><translation>';
+			$merged_addon_strings = '<?xml version="1.0"?><language version="2.0">';
 			foreach ($files as $file) {
 				if (substr($file, -3) == '.gz') {
 					// Extract GZipped content
@@ -983,18 +978,26 @@ class Language {
 				} else {
 					$xml_data = simplexml_load_file($file);
 				}
+				if (is_object($xml_data->info)) {
+					foreach ($xml_data->info as $element) {
+						$merged_addon_strings .= $element->asXML();
+					}
+				}
+				$merged_addon_strings .= '<translation>';
 				if (is_object($xml_data->translation->group)) {
 					foreach ($xml_data->translation->group as $element) {
 						$merged_addon_strings .= $element->asXML();
 					}
 				}
+				$merged_addon_strings .= '<translation></translation>';
 				if (is_object($xml_data->translation->translate)) {
 					foreach ($xml_data->translation->translate as $element) {
 						$merged_addon_strings .= $element->asXML();
 					}
 				}
+				$merged_addon_strings .= '</translation>';
 			}
-			$merged_addon_strings .= '</translation></language>';
+			$merged_addon_strings .= '</language>';
 			return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
 		}
 		return false;
@@ -1005,10 +1008,8 @@ class Language {
 	 */
 	private function _setLocale() {
 		if (isset($this->_language_data) && isset($GLOBALS['session']) && !empty($this->_language_data)) {
-			$charset = (isset($this->_language_data['character_set']) && !empty($this->_language_data['character_set'])) ? (string)$this->_language_data['character_set'] : 'UTF-8';
 			$money = ($GLOBALS['session']->has('currency', 'client') && $GLOBALS['session']->get('currency', 'client') == 'EUR') ? '@euro' : '';
-
-			setlocale(LC_ALL, $this->_language_data['locale'].'.'.$charset.$money);
+			setlocale(LC_ALL, $this->_language_data['locale'].'.'.$this->_language_data['character_set'].$money);
 		}
 	}
 
