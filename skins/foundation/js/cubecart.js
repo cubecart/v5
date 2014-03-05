@@ -1,10 +1,4 @@
 jQuery(document).ready(function() {
-/*
-	var screen = '';
-	if(Modernizr.mq('(max-width: 40em)')) {
-		screen = 'small';
-	}
-	*/
 	$("#eu_cookie_button").click(function() {
 		$('#eu_cookie_dialogue').slideUp();
 		var date = new Date();
@@ -14,7 +8,7 @@ jQuery(document).ready(function() {
 		return false;
 	});
 	$(".autosubmit select").change(function() {
-		$(".autosubmit").submit();
+		$(this).parents(".autosubmit").submit();
 	});
 	$('img.imagesubmit').each(function() {
 		$(this).parents('form').submit();
