@@ -1098,6 +1098,7 @@ if (isset($_GET['action'])) {
 		}
 		$option_matrix = option_matrix($unique_groups);
 	
+		if (is_array($option_matrix)):
 		foreach($option_matrix as $matrix_values) {					
 			foreach($matrix_values as $matrix_value_id) {
 				$options_values[] =  '<strong>'.$option[$matrix_value_id]['option_group'].'</strong>: '.$option[$matrix_value_id]['option_name'];
@@ -1111,14 +1112,20 @@ if (isset($_GET['action'])) {
 			$possible[] = $option_identifier_string;
 			unset($options_identifier,$options_values);
 		}
-		
-		$delete_query = "UPDATE `".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_option_matrix` SET `status` = 0 WHERE `product_id` = $product_id AND `options_identifier` NOT IN ('".implode("','",$possible)."')";
-		$GLOBALS['db']->misc($delete_query);
-		
-		// update cached name
-		foreach($smarty_data['option_matrix']['all_possible'] as $option_group) {
-			$GLOBALS['db']->update('CubeCart_option_matrix',array('cached_name' => $option_group['options_values'], 'status' => 1),array('options_identifier' => $option_group['options_identifier']));
+		endif;
+
+
+		if (is_array($possible)) {
+			$delete_query = "UPDATE `".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_option_matrix` SET `status` = 0 WHERE `product_id` = $product_id AND `options_identifier` NOT IN ('".implode("','",$possible)."')";
+			$GLOBALS['db']->misc($delete_query);
 		}
+
+		// update cached name
+		if (is_array($smarty_data['option_matrix']['all_possible'])) {
+			foreach($smarty_data['option_matrix']['all_possible'] as $option_group) {
+				$GLOBALS['db']->update('CubeCart_option_matrix',array('cached_name' => $option_group['options_values'], 'status' => 1),array('options_identifier' => $option_group['options_identifier']));
+			}
+        }
 		
 		// Get existing
 		if($existing_matrices = $GLOBALS['db']->select('CubeCart_option_matrix',false,array('product_id'=>$product_id))) {
