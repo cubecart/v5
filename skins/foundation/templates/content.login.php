@@ -24,7 +24,7 @@
 			<div class="small-12 columns"><input type="checkbox" name="remember" id="login-remember" value="1" {if $REMEMBER}checked{/if}><label for="login-remember">{$LANG.account.remember_me}</label></div>
 		</div>
 		<div class="row">
-			<div class="small-12 columns clearfix">
+			<div class="small-12 columns">
 				<button name="submit" type="submit" class="button"><i class="fa fa-sign-in"></i> {$LANG.account.log_in}</button>
 			</div>
 		</div>

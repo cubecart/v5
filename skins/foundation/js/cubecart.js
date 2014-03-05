@@ -68,10 +68,6 @@ jQuery(document).ready(function() {
 	 
 	$('form#add_to_basket').submit(function(){	
 		
-		//if(screen=='small') {
-		//	return false;
-		//}
-		
 		var add = $(this).serialize();
 		var action = $(this).attr('action').replace(/\?.*/, '');			
 		var basket = $('#mini-basket');
@@ -161,6 +157,18 @@ jQuery(document).ready(function() {
 			$("#address_form").slideDown();
 		}
 	});
+	
+	$('#checkout_login').click(function() {
+		$("#checkout_login_form").slideDown();
+		$("#checkout_register_form").slideUp();
+		$("#reg_password").prop('disabled', true);
+	});
+	$('#checkout_register').click(function() {
+		$("#checkout_login_form").slideUp();
+		$("#checkout_register_form").slideDown();
+		$("#reg_password").prop('disabled', false);
+	});
+	
 	$('#lookup_fail').click(function() {
 		$(this).hide();
 		$("#address_form").slideDown();

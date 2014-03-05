@@ -111,17 +111,18 @@
       {/if}
    </div>
 </form>
-{if $CHECKOUTS}
-<div class="row"><div class="small-12 columns text-right">-- {$LANG.common.or} --</div></div>
-{foreach from=$CHECKOUTS item=checkout}
-<div class="row"><div class="small-12 columns text-right">{$checkout}</div></div>
-{/foreach}
-{/if}
 {if $CUSTOMER_LOCALE.description}
 <small>{$CUSTOMER_LOCALE.mark} {$LANG.basket.unconfirmed_locale}</small>
 {/if}
-{if $RELATED}
+{if $CHECKOUTS}
+<div class="row"><div class="small-12 columns text-right">-- {$LANG.common.or} --</div></div>
+{foreach from=$CHECKOUTS item=checkout}
+<div class="row"><div class="small-12 columns text-right pad-topbottom">{$checkout}</div></div>
+{/foreach}
+{/if}
 
+
+{if $RELATED}
    <h2>{$LANG.catalogue.related_products}
    <ul class="small-block-grid-4 no-bullet">
    {foreach from=$RELATED item=product}

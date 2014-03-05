@@ -519,7 +519,7 @@ class Cubecart {
 	private function _basket($editable = true) {
 		// Basket
 		foreach ($GLOBALS['hooks']->load('class.cubecart.pre_basket') as $hook) include $hook;
-		
+			
 		$this->_checkoutProcess();
 		$this->_basket =& $GLOBALS['cart']->basket;
 
@@ -776,7 +776,7 @@ class Cubecart {
 
 		// Update basket if we need to!
 		$GLOBALS['cart']->update();
-
+			
 		$GLOBALS['smarty']->assign('URL', array('login' => $GLOBALS['seo']->buildURL('login')));
 		$GLOBALS['smarty']->assign('INCLUDE_CHECKOUT', true);
 
