@@ -72,7 +72,7 @@ class GD {
 					imagesavealpha($this->_gdImageSource, true);
 					break;
 				default:
-					trigger_error(__METHOD__.' - Unknown file type');
+					trigger_error(__METHOD__.' - Unknown file type: '.$file);
 					return false;
 			}
 			return true;
