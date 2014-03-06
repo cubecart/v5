@@ -1,4 +1,4 @@
-<div class="thickpad skin_selector">
+<div class="pad skin_selector">
 <form action="{$VAL_SELF}" method="post" class="autosubmit nomarg">
    <div class="row">
       <div class="small-2 columns"><h4>Change Skin:</h4></div>
