@@ -830,7 +830,7 @@ class Catalogue {
 		if ($return_placeholder && isset($skins['images'][$mode])) {
 			$default = (string)$skins['images'][$mode]['default'];
 			
-			if($skins['styles'][$this->_style]['images']) { // do we use a seperate style folder for images?
+			if($skins['styles'][$GLOBALS['gui']->getStyle()]['images']) { // do we use a seperate style folder for images?
 				$files = glob('skins'.CC_DS.$GLOBALS['gui']->getSkin().CC_DS.'images'.CC_DS.'{common,'.$GLOBALS['gui']->getStyle().'}'.CC_DS.$default , GLOB_BRACE);
 			} else {
 				$files = glob('skins'.CC_DS.$GLOBALS['gui']->getSkin().CC_DS.'images'.CC_DS.$default , GLOB_BRACE);
