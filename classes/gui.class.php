@@ -421,8 +421,10 @@ class GUI {
 
 		if (isset($this->_skin_data['images'][$mode])) {
 			$default = $this->_skin_data['images'][$mode]['default'];
-			if (($files = glob('skins'.CC_DS.$this->_skin.CC_DS.'{images,styleImages}'.CC_DS.'{common,'.$this->_style.'}'.CC_DS.$default , GLOB_BRACE)) !== false) {
-				return $GLOBALS['storeURL'].'/'.str_replace(array(CC_DS.CC_DS,CC_DS), '/', $files[0]);
+			if($this->_skin_data['styles'][$this->_style]['images']) { // do we use a seperate style folder for images?
+				$files = glob('skins'.CC_DS.$this->_skin.CC_DS.'images'.CC_DS.'{common,'.$this->_style.'}'.CC_DS.$default , GLOB_BRACE);
+			} else {
+				$files = glob('skins'.CC_DS.$this->_skin.CC_DS.'images'.CC_DS.$default , GLOB_BRACE);
 			}
 		}
 		return false;
@@ -1180,7 +1182,7 @@ class GUI {
 			$style = $GLOBALS['config']->get('config','skin_style');
 		}
 		
-		$path = (!empty($style)) ? 'images'.CC_DS.$style : '{images,styleImages}';
+		$path = (!empty($style)) ? 'images'.CC_DS.$style : 'images';
 		$source = glob('skins'.CC_DS.$skin.CC_DS.$path.CC_DS.'logo'.CC_DS.'default.{gif,jpg,png}', GLOB_BRACE);
 		return (!empty($source)) ? $source[0] : null;
 	}
