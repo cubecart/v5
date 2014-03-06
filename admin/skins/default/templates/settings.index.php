@@ -153,6 +153,7 @@
             {foreach from=$OPT_SKIN_CHANGE item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
             </select></span>
          </div>
+         {if $SKINS_MOBILE}
          <div><label for="skin_folder_mobile">{$LANG.settings.skins_mobile_default_front}</label><span>
             <input type="hidden" class="default-style-mobile" value="{$CONFIG.skin_style_mobile}" />
             <select name="config[skin_folder_mobile]" id="skin_folder_mobile" class="textbox select-skin-mobile no-drop"{$MOBILE_DISABLED}>
@@ -167,6 +168,9 @@
             </span>
          </div>
          <div><label for="disable_mobile_skin">{$LANG.settings.disable_mobile_skin}</label><span><input name="config[disable_mobile_skin]" id="disable_mobile_skin" type="hidden" class="toggle" value="{$CONFIG.disable_mobile_skin}" /></span></div>
+         {else}
+         	<input name="config[disable_mobile_skin]" id="disable_mobile_skin" type="hidden" value="1" />
+         {/if}
       </fieldset>
    </div>
    <div id="Stock" class="tab_content">

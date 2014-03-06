@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.common.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
+      <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.{$SKIN_SUBSET}.css">
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/jquery.rating.css" media="screen">
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/jquery.magnifier.css" media="screen">
@@ -66,8 +67,7 @@
             {$PAGE_CONTENT}
          </div>
       </div>
-      <footer>
-         {$SKIN_SELECT} 
+      <footer> 
          <div class="row">
             <div class="large-5 columns">
                {$SITE_DOCS}
@@ -106,5 +106,6 @@
       {foreach from=$BODY_JS item=js}{$js}{/foreach}
       {$LIVE_HELP}
       {$DEBUG_INFO}
+      {$SKIN_SELECT}
    </body>
 </html>
