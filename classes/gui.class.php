@@ -426,6 +426,10 @@ class GUI {
 			} else {
 				$files = glob('skins'.CC_DS.$this->_skin.CC_DS.'images'.CC_DS.$default , GLOB_BRACE);
 			}
+			
+			if ($files) {
+  				return $GLOBALS['storeURL'].'/'.str_replace(array(CC_DS.CC_DS, CC_DS), '/', $files[0]);
+  			}
 		}
 		return false;
 	}
