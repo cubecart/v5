@@ -5,6 +5,8 @@
 -->
 <definitions version="1.0">
   <group name="account">
+	<string name="payment_review"><![CDATA[Your payment has been accepted but requires manual review by a member of staff. Please accept our apologies for any delay in the process of your order.]]></string>
+    <string name="payment_decline"><![CDATA[Your payment has been declined. Please check that your billing address matches that of your card and that the three digit security code is correct. If the issue perists please contact a member of staff.]]></string>
     <string name="already_registered" introduced="5.0.0"><![CDATA[Already registered?]]></string>
     <string name="contact_details" introduced="5.0.0"><![CDATA[Contact Details]]></string>
     <string name="create_account" introduced="5.0.0"><![CDATA[I would like to create an account]]></string>

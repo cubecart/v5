@@ -5,6 +5,7 @@ class Gateway {
 
 	private $_wpp;
 	private $_result;
+	private $_lang;
 
 	public function __construct($module = false, $basket = false) {
 		$this->_module	= $module;
@@ -14,6 +15,10 @@ class Gateway {
 		$this->_wpp		= new Website_Payments_Pro($this->_module);
 		
 		$this->_centinel_maps	= ($this->_module['gateway']) ? 'paypal.cardinalcommerce.com/maps/txns.asp' : 'centineltest.cardinalcommerce.com/maps/txns.asp';
+		
+		$GLOBALS['language']->loadDefinitions('PayPal_Pro', CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'shipping'.CC_DS.$_GET['module'].CC_DS.'language', 'module.definitions.xml');
+		$this->_lang = $GLOBALS['language']->getStrings('PayPal_Pro');
+		
 	}
 
 	##################################################
@@ -424,7 +429,8 @@ class Gateway {
 			}
 			
 			if($response['L_ERRORCODE0'] == '11610') {
-				$GLOBALS['gui']->setNotify("Your payment has been accepted but requires manual review by a member of staff. Please accept our apologies for any delay in the process of your order.");
+				$GLOBALS['gui']->setNotify($this->_lang['payment_review']);
+				$order->orderStatus(Order::ORDER_PENDING, $this->_basket['cart_order_id']);
 				return true;	
 			} 
 			
@@ -438,9 +444,9 @@ class Gateway {
 				case 'Failure':
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
 					foreach ($response as $key => $value) {
-						if(!empty($response['FMFDENYNAME'])) {
-							$GLOBALS['gui']->setError($response['FMFDENYNAME']);
-						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
+						if(!empty($response['L_ERRORCODE0'] == '11610')) {
+							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
+  						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
 							$GLOBALS['gui']->setError($value);
 						}
 					}
