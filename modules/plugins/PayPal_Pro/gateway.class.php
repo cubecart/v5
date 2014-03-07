@@ -16,9 +16,8 @@ class Gateway {
 		
 		$this->_centinel_maps	= ($this->_module['gateway']) ? 'paypal.cardinalcommerce.com/maps/txns.asp' : 'centineltest.cardinalcommerce.com/maps/txns.asp';
 		
-		$GLOBALS['language']->loadDefinitions('PayPal_Pro', CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'shipping'.CC_DS.$_GET['module'].CC_DS.'language', 'module.definitions.xml');
-		$this->_lang = $GLOBALS['language']->getStrings('PayPal_Pro');
-		
+		$GLOBALS['language']->loadDefinitions('paypal_pro', CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.'PayPal_Pro'.CC_DS.'language', 'module.definitions.xml');
+		$this->_lang = $GLOBALS['language']->getStrings('paypal_pro');
 	}
 
 	##################################################
@@ -444,7 +443,7 @@ class Gateway {
 				case 'Failure':
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
 					foreach ($response as $key => $value) {
-						if(!empty($response['L_ERRORCODE0'] == '11610')) {
+						if($response['L_ERRORCODE0'] == '11610') {
 							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
 						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
 							$GLOBALS['gui']->setError($value);

@@ -169,10 +169,11 @@
    </div>
 </div>
 {include file='templates/content.recaptcha.php'}
+</div>
 {/if}
 <label for="delivery_comments" class="return"><strong>{$LANG.basket.your_comments}</strong></label>
 <textarea name="comments" id="delivery_comments">{$VAL_CUSTOMER_COMMENTS}</textarea>
-</div>
+
 <div class="hide" id="validate_required">{$LANG.form.required}</div>
 <div class="hide" id="validate_field_required">{$LANG.form.field_required}</div>
 <div class="hide" id="validate_email">{$LANG.common.error_email_invalid}</div>

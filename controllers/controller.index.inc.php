@@ -88,7 +88,7 @@ $GLOBALS['language']->setTemplate();
 $GLOBALS['cubecart']->loadPage();
 $GLOBALS['gui']->displayCommon();
 
-$checkout_pages = array('confirm', 'basket', 'gateway', 'cart');
+$checkout_pages = array('confirm', 'basket', 'gateway', 'cart','checkout');
 
 
 $global_template_file = (in_array($_GET['_a'], $checkout_pages) && file_exists(CC_ROOT_DIR.'/skins/'.$GLOBALS['gui']->getSkin().'/templates/main.checkout.php')) ? 'main.checkout.php' : 'main.php';
