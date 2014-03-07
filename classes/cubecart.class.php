@@ -83,7 +83,7 @@ class Cubecart {
 		if (($home = $this->getDocument(null, true)) !== false) {
 			$GLOBALS['smarty']->assign('DOCUMENT', array(
 					'title'  => $home['doc_name'],
-					'content' => $GLOBALS['smarty']->fetch('string:'.$home['doc_content'])
+					'content' => $home['doc_content']
 				));
 		}
 
