@@ -190,6 +190,30 @@ jQuery(document).ready(function() {
 			$('input#reg_passconf').removeClass('required');
 		}
 	});
+	$('.grid_view').click(function() {
+		$('#product_list').removeClass('small-block-grid-1');
+		$('#product_list').addClass('small-block-grid-3');
+		
+		$('.grid_view').parent('dd').addClass('active');
+		$('.list_view').parent('dd').removeClass('active');
+		
+		$('.product_list_view').addClass('hide');
+		$('.product_grid_view').removeClass('hide');
+		
+		return false;
+	});
+	$('.list_view').click(function() {
+		$('#product_list').removeClass('small-block-grid-3');
+		$('#product_list').addClass('small-block-grid-1');
+		
+		$('.list_view').parent('dd').addClass('active');
+		$('.grid_view').parent('dd').removeClass('active');
+		
+		$('.product_grid_view').addClass('hide');
+		$('.product_list_view').removeClass('hide');
+		
+		return false;
+	});
 });
 
 function mini_basket_action() {
