@@ -7,7 +7,7 @@
       <link rel="canonical" href="{$CANONICAL}">
       <link rel="shortcut icon" href="{$STORE_URL}/favicon.ico" type="image/x-icon">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/foundation.css">
-      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <link href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.common.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
@@ -18,7 +18,6 @@
       {foreach from=$CSS key=css_keys item=css_files}
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen">
       {/foreach}
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
       
       <meta http-equiv="Content-Type" content="text/html;charset={$CHARACTER_SET}">
       <meta name="description" content="{if isset($META_DESCRIPTION)}{$META_DESCRIPTION}{/if}">
