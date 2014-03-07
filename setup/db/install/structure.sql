@@ -269,6 +269,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_documents` (
 	`seo_meta_description` TEXT NOT NULL,
 	`seo_meta_keywords` TEXT NOT NULL,
 	`navigation_link` tinyint(1) unsigned NOT NULL DEFAULT '1',
+	`doc_parse` tinyint(1) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`doc_id`),
 	KEY `doc_parent_id` (`doc_parent_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ

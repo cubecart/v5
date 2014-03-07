@@ -151,24 +151,24 @@ class Cubecart {
 		if (is_numeric($doc_id) || $homepage) {
 			$where  = ($homepage) ? array('doc_home' => true, 'doc_status' => '1') : array('doc_id' => $doc_id, 'doc_status' => '1');
 			$doc_lang = $GLOBALS['language']->current();
-			if (($parent = $GLOBALS['db']->select('CubeCart_documents', array('doc_id', 'doc_name', 'doc_content', 'doc_lang', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords', 'doc_parent_id'), $where)) !== false) {
+			if (($parent = $GLOBALS['db']->select('CubeCart_documents', false, $where)) !== false) {
 				$contents = $parent[0];
 				if ($parent[0]['doc_lang'] != $doc_lang) {
 					if ($contents['doc_parent_id']>0) {
 						// we have different than store default lang document but language switched just on product page
 						$target_column = ($doc_lang == $GLOBALS['config']->get('config', 'default_language')) ? 'doc_id' : 'doc_parent_id' ;
-						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array($target_column => $contents['doc_parent_id'], 'doc_lang' => $doc_lang));
+						$document = $GLOBALS['db']->select('CubeCart_documents', false, array($target_column => $contents['doc_parent_id'], 'doc_lang' => $doc_lang));
 
 						// Default Lang, if it exists
 						if (!$document) {
-							$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_id' => $contents['doc_parent_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
+							$document = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_id' => $contents['doc_parent_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 						}
 
-					} else if (($document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $doc_lang))) !== false) {
+					} else if (($document = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $doc_lang))) !== false) {
 							//      $contents = $document[0];
 						} else {
 						// Default Lang, if it exists
-						$document = $GLOBALS['db']->select('CubeCart_documents', array('doc_name', 'doc_content', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
+						$document = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_parent_id' => $contents['doc_id'], 'doc_lang' => $GLOBALS['config']->get('config', 'default_language')));
 					}
 
 					if ($document) {
@@ -187,6 +187,8 @@ class Cubecart {
 				$GLOBALS['seo']->set_meta_data($meta_data);
 			}
 		}
+		
+		$contents['doc_content'] = ($contents['doc_parse']==1) ? $GLOBALS['smarty']->fetch('string:'.$contents['doc_content']) : $contents['doc_content'];
 
 		return (isset($contents) && !empty($contents)) ? $contents : false;
 	}

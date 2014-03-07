@@ -832,6 +832,7 @@
     <string name="title_technical_data" introduced="5.0.0"><![CDATA[Technical Details]]></string>
   </group>
   <group name="documents">
+  	<string name="smarty_parse" introduced="6.0.0"><![CDATA[Parse Smarty Tags]]></string>
     <string name="document_contact" introduced="5.0.0"><![CDATA[Contact Us]]></string>
     <string name="document_content" introduced="5.0.0"><![CDATA[Content]]></string>
     <string name="document_create" introduced="5.0.0"><![CDATA[Create Document]]></string>
