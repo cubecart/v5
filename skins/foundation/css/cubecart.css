@@ -1,5 +1,6 @@
 html * {
-	font-family:'Open Sans';
+	font-family: 'segoe ui', 'helvetica neue', arial, helvetica, sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
 .old_price {
