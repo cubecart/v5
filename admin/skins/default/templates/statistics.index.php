@@ -182,7 +182,7 @@
 		  </strong>
 		  {if !empty($user.ip_address)}
 		  <br />
-		  [<a href="http://api.hostip.info/get_html.php?ip={$customer.ip_address}&amp;position=true" class="colorbox hostip">{$user.ip_address}</a>]
+		  [<a href="http://api.hostip.info/get_html.php?ip={$user.ip_address}&amp;position=true" class="colorbox hostip">{$user.ip_address}</a>]
 		  {/if}
 		</td>
 		<td>{$user.location} <a href="{$user.location}" target="_blank">&raquo;</a></td>
