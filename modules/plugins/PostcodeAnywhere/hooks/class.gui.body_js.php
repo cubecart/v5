@@ -19,4 +19,5 @@ $body_js[] = '<script type="text/javascript">
          key: "'.$capture_key.'"
       },
       control = new pca.Address(fields, options);
-      </script>';
+      </script>
+      <script src="'.$GLOBALS['storeURL'].'/modules/plugins/PostcodeAnywhere/js/cubecart.min.js"></script>';

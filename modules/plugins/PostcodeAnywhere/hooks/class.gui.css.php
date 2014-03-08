@@ -1,3 +1,3 @@
 <?php
 $protocol = (CC_SSL) ? 's': '';
-$css[] = 'http'.$protocol.'://services.postcodeanywhere.co.uk/css/address-3.20.css';
+$css[] = 'modules/plugins/PostcodeAnywhere/css/address-3.20.min.css';
