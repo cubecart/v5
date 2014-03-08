@@ -1,10 +1,7 @@
 jQuery(document).ready(function() {
 	$("#eu_cookie_button").click(function() {
 		$('#eu_cookie_dialogue').slideUp();
-		var date = new Date();
-		date.setTime(date.getTime() + (63115200000));
-		var expires = date.toGMTString();
-		document.cookie = "accept_cookies=1; expires=" + expires + ";";
+		create_cookie('accept_cookies', 1, 730);
 		return false;
 	});
 	$(".autosubmit select").change(function() {
@@ -171,32 +168,69 @@ jQuery(document).ready(function() {
 		}
 	});
 	$('.grid_view').click(function() {
-		$('#product_list').removeClass('small-block-grid-1');
-		$('#product_list').addClass('small-block-grid-3');
-		
-		$('.grid_view').parent('dd').addClass('active');
-		$('.list_view').parent('dd').removeClass('active');
-		
-		$('.product_list_view').addClass('hide');
-		$('.product_grid_view').removeClass('hide');
-		
-		return false;
+		grid_view();
 	});
 	$('.list_view').click(function() {
-		$('#product_list').removeClass('small-block-grid-3');
-		$('#product_list').addClass('small-block-grid-1');
-		
-		$('.list_view').parent('dd').addClass('active');
-		$('.grid_view').parent('dd').removeClass('active');
-		
-		$('.product_grid_view').addClass('hide');
-		$('.product_list_view').removeClass('hide');
-		
-		return false;
+		list_view();
 	});
+	
+	var list_mode = read_cookie('product_view');
+	if(list_mode == 'grid') {
+		grid_view();
+	}
+	
 });
 
 function mini_basket_action() {
 	$('#basket-detail').slideDown();
 	$('#basket-detail').delay(4000).slideUp();
+}
+function grid_view() {
+	$('#product_list').removeClass('small-block-grid-1');
+	$('#product_list').addClass('small-block-grid-3');
+	
+	$('.grid_view').parent('dd').addClass('active');
+	$('.list_view').parent('dd').removeClass('active');
+	
+	$('.product_list_view').addClass('hide');
+	$('.product_grid_view').removeClass('hide');
+	
+	create_cookie('product_view', 'grid', 730);
+	
+	return false;
+}
+
+function list_view() {
+	$('#product_list').removeClass('small-block-grid-3');
+	$('#product_list').addClass('small-block-grid-1');
+	
+	$('.list_view').parent('dd').addClass('active');
+	$('.grid_view').parent('dd').removeClass('active');
+	
+	$('.product_grid_view').addClass('hide');
+	$('.product_list_view').removeClass('hide');
+	
+	create_cookie('product_view', 'list', 730);
+	return false;
+}
+
+function create_cookie(name,value,days) {
+	if (days) {
+		var d = new Date();
+		d.setTime(d.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+d.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function read_cookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
 }
