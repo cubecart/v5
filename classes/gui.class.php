@@ -514,6 +514,7 @@ class GUI {
 						'homepage'  => (string)$data->info->{'homepage'},
 						'mobile'  => (strtolower($data->info->{'mobile'})=='true') ? true : false,
 					);
+					$skins[(string)$data->info->{'name'}]['layout'] = $data->layout;
 					// Substyles
 					if ($data->styles) {
 						$i = 0;
@@ -961,48 +962,48 @@ class GUI {
 					}
 				}
 			}
-			if (!$category_status):
-				if ($p<15):
+			if (!$category_status) {
+				if ($p<15) {
 					$p++;
-				$this->_displayRandomProduct($p);
-			endif;
-			else;
-			
-			$image = $this->getProductImage($random_product[0]['product_id']);
-			$product = $random_product[0];
+					$this->_displayRandomProduct($p);
+				}
+			} else {
 
-			$GLOBALS['language']->translateProduct($product);
-
-			$product['image'] = $image;
-
-			$product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($product['price'], $product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
-
-
-			$GLOBALS['catalogue']->getProductPrice($product);
-			$sale = $GLOBALS['tax']->salePrice($product['price'], $product['sale_price']);
-			$product['price_unformatted']  = $product['price'];
-			$product['sale_price_unformatted'] = ($sale) ? $product['sale_price'] : null;
-			$product['price']  = $GLOBALS['tax']->priceFormat($product['price']);
-			$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
-
-			$product['ctrl_purchase'] = true;
-			if ($product['use_stock_level']) {
-				// Get Stock Level
-				$stock_level = $GLOBALS['catalogue']->getProductStock($product['product_id']);
-				if ((int)$stock_level <= 0) {
-					// Out of Stock
-					if (!$GLOBALS['config']->get('config', 'basket_out_of_stock_purchase')) {
-						// Not Allowed
-						$product['ctrl_purchase'] = false;
+				$image = $this->getProductImage($random_product[0]['product_id']);
+				$product = $random_product[0];
+	
+				$GLOBALS['language']->translateProduct($product);
+	
+				$product['image'] = $image;
+	
+				$product['ctrl_sale'] = (!$GLOBALS['tax']->salePrice($product['price'], $product['sale_price']) || !$GLOBALS['config']->get('config', 'catalogue_sale_mode')) ? false : true;
+	
+	
+				$GLOBALS['catalogue']->getProductPrice($product);
+				$sale = $GLOBALS['tax']->salePrice($product['price'], $product['sale_price']);
+				$product['price_unformatted']  = $product['price'];
+				$product['sale_price_unformatted'] = ($sale) ? $product['sale_price'] : null;
+				$product['price']  = $GLOBALS['tax']->priceFormat($product['price']);
+				$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
+	
+				$product['ctrl_purchase'] = true;
+				if ($product['use_stock_level']) {
+					// Get Stock Level
+					$stock_level = $GLOBALS['catalogue']->getProductStock($product['product_id']);
+					if ((int)$stock_level <= 0) {
+						// Out of Stock
+						if (!$GLOBALS['config']->get('config', 'basket_out_of_stock_purchase')) {
+							// Not Allowed
+							$product['ctrl_purchase'] = false;
+						}
 					}
 				}
+				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id']);
+				foreach ($GLOBALS['hooks']->load('class.gui.display_random_product') as $hook) include $hook;
+				$GLOBALS['smarty']->assign('featured', $product);
+				$content = $GLOBALS['smarty']->fetch('templates/box.featured.php');
+				$GLOBALS['smarty']->assign('RANDOM_PROD', $content);
 			}
-			$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id']);
-			foreach ($GLOBALS['hooks']->load('class.gui.display_random_product') as $hook) include $hook;
-			$GLOBALS['smarty']->assign('featured', $product);
-			$content = $GLOBALS['smarty']->fetch('templates/box.featured.php');
-			$GLOBALS['smarty']->assign('RANDOM_PROD', $content);
-			endif;
 		} elseif ($p<20) { // Math to generate random product might give a product_id that doesn't exist or doen't meet WHERE criteria
 			$p++;
 			$this->_displayRandomProduct($p);
