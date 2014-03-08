@@ -19,8 +19,9 @@
   <layout>
 	<products>
 		<perpage>12</perpage>
-		<perpage>30</perpage>
-		<perpage>90</perpage>
+		<perpage>24</perpage>
+		<perpage>48</perpage>
+		<perpage>96</perpage>
 	</products>
   </layout>
   <styles>
