@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 	$("#eu_cookie_button").click(function() {
 		$('#eu_cookie_dialogue').slideUp();
-		create_cookie('accept_cookies', 1, 730);
+		$.cookie('accept_cookies', 1, { expires: 730 });
 		return false;
 	});
 	$(".autosubmit select").change(function() {
@@ -173,8 +173,8 @@ jQuery(document).ready(function() {
 	$('.list_view').click(function() {
 		list_view(200);
 	});
-	var list_mode = read_cookie('product_view');
-	if (list_mode == 'grid') {
+	
+	if ($.cookie('product_view') == 'grid') {
 		grid_view(0);
 	}
 	
@@ -204,7 +204,7 @@ function grid_view(duration) {
 		$('.product_grid_view').removeClass('hide');
 	});
 	$('#product_list').fadeIn(duration, function() {
-		create_cookie('product_view', 'grid', 730);
+		$.cookie('product_view', 'grid', { expires: 730 });
 	});
 	return false;
 }
@@ -220,27 +220,7 @@ function list_view(duration) {
 		$('.product_list_view').removeClass('hide');
 	});
 	$('#product_list').fadeIn(duration, function() {
-		create_cookie('product_view', 'list', 730);
+		$.cookie('product_view', 'list', { expires: 730 });
 	});
 	return false;
-}
-
-function create_cookie(name, value, days) {
-	if (days) {
-		var d = new Date();
-		d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-		var expires = "; expires=" + d.toGMTString();
-	} else var expires = "";
-	document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-function read_cookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-	}
-	return null;
 }
