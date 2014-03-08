@@ -13,8 +13,6 @@
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.helpers.css">
       <link rel="stylesheet" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/cubecart.{$SKIN_SUBSET}.css">
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/modernizr.js"></script>
-      <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/jquery.rating.css" media="screen">
-      <link rel="stylesheet" type="text/css" href="{$STORE_URL}/skins/{$SKIN_FOLDER}/css/jquery.magnifier.css" media="screen">
       {foreach from=$CSS key=css_keys item=css_files}
       <link rel="stylesheet" type="text/css" href="{$STORE_URL}/{$css_files}" media="screen">
       {/foreach}
