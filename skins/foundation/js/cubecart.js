@@ -168,15 +168,15 @@ jQuery(document).ready(function() {
 		}
 	});
 	$('.grid_view').click(function() {
-		grid_view();
+		grid_view(200);
 	});
 	$('.list_view').click(function() {
-		list_view();
+		list_view(200);
 	});
 	
 	var list_mode = read_cookie('product_view');
 	if(list_mode == 'grid') {
-		grid_view();
+		grid_view(0);
 	}
 	
 });
@@ -185,32 +185,40 @@ function mini_basket_action() {
 	$('#basket-detail').slideDown();
 	$('#basket-detail').delay(4000).slideUp();
 }
-function grid_view() {
-	$('#product_list').removeClass('small-block-grid-1');
-	$('#product_list').addClass('small-block-grid-3');
-	
-	$('.grid_view').parent('dd').addClass('active');
-	$('.list_view').parent('dd').removeClass('active');
-	
-	$('.product_list_view').addClass('hide');
-	$('.product_grid_view').removeClass('hide');
-	
-	create_cookie('product_view', 'grid', 730);
+function grid_view(duration) {
+	event.preventDefault();
+	$('#product_list').fadeOut(duration, function() {
+		$('#product_list').removeClass('small-block-grid-1');
+		$('#product_list').addClass('small-block-grid-3');
+		
+		$('.grid_view').parent('dd').addClass('active');
+		$('.list_view').parent('dd').removeClass('active');
+		
+		$('.product_list_view').addClass('hide');
+		$('.product_grid_view').removeClass('hide');
+	});
+	$('#product_list').fadeIn(duration, function() {
+		create_cookie('product_view', 'grid', 730);
+	});
 	
 	return false;
 }
 
-function list_view() {
-	$('#product_list').removeClass('small-block-grid-3');
-	$('#product_list').addClass('small-block-grid-1');
-	
-	$('.list_view').parent('dd').addClass('active');
-	$('.grid_view').parent('dd').removeClass('active');
-	
-	$('.product_grid_view').addClass('hide');
-	$('.product_list_view').removeClass('hide');
-	
-	create_cookie('product_view', 'list', 730);
+function list_view(duration) {
+	event.preventDefault();
+	$('#product_list').fadeOut(duration, function() {
+		$('#product_list').removeClass('small-block-grid-3');
+		$('#product_list').addClass('small-block-grid-1');
+		
+		$('.list_view').parent('dd').addClass('active');
+		$('.grid_view').parent('dd').removeClass('active');
+		
+		$('.product_grid_view').addClass('hide');
+		$('.product_list_view').removeClass('hide');
+	});
+	$('#product_list').fadeIn(duration, function() {
+		create_cookie('product_view', 'list', 730);
+	});
 	return false;
 }
 
