@@ -16,8 +16,22 @@ html * {
 }
 
 /* Fix 100% image on magnifier */
+#dio-lens {
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	z-index: 9998;
+}
 #dio-lens img {
 	max-width:none;
+}
+#dio-sensor{
+	z-index: 11000;
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+}
+#dio-loader{
+	background: #FFFFFF;	
+	text-indent: -30000px;
 }
 
 footer {
