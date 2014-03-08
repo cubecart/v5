@@ -177,6 +177,15 @@ jQuery(document).ready(function() {
 	if (list_mode == 'grid') {
 		grid_view(0);
 	}
+	
+	$('.url_select').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+	
 });
 
 function mini_basket_action() {

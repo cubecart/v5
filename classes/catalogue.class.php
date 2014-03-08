@@ -82,7 +82,9 @@ class Catalogue {
 	public function categoryPagination($page) {
 		if ($this->_category_count) {
 			//Pagination
-			if (!is_numeric($GLOBALS['config']->get('config', 'catalogue_products_per_page'))) {
+			if((int)$_GET['perpage']>0) {
+				$catalogue_products_per_page = (int)$_GET['perpage'];
+			} elseif (!is_numeric($GLOBALS['config']->get('config', 'catalogue_products_per_page'))) {
 				$catalogue_products_per_page = 10;
 			} else {
 				$catalogue_products_per_page = $GLOBALS['config']->get('config', 'catalogue_products_per_page');
@@ -171,6 +173,15 @@ class Catalogue {
 
 		// Sorting
 		$GLOBALS['smarty']->assign('SORTING', ($sorting = $this->displaySort((isset($_GET['cat_id']) && $_GET['cat_id'] == 'sale'))) ? $sorting : false);
+		
+		// Amount to display
+		$page_splits = array(
+			array('selected' => ($_GET['perpage']==12) ? true : false ,'url' => currentPage(null, array('perpage' => 12)), 'amount' => 12),
+			array('selected' => ($_GET['perpage']==30) ? true : false ,'url' => currentPage(null, array('perpage' => 30)), 'amount' => 30),
+			array('selected' => ($_GET['perpage']==90) ? true : false ,'url' => currentPage(null, array('perpage' => 90)), 'amount' => 90),
+		);
+		
+		$GLOBALS['smarty']->assign('PAGE_SPLITS', $page_splits);
 		foreach ($GLOBALS['hooks']->load('class.cubecart.display_category') as $hook) include $hook;
 		$content = $GLOBALS['smarty']->fetch('templates/content.category.php');
 		$GLOBALS['smarty']->assign('PAGE_CONTENT', $content);

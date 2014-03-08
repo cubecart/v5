@@ -16,6 +16,13 @@
 	<homepage>http://www.cubecart.com</homepage>
 	<mobile>false</mobile>
   </info>
+  <layout>
+	<products>
+		<perpage>12</perpage>
+		<perpage>30</perpage>
+		<perpage>90</perpage>
+	</products>
+  </layout>
   <styles>
 	<style images="false" default="true">
 	  <!-- images: TRUE tells the template system that this style has its own image folder. FALSE would use the contents in the root of the images folder -->

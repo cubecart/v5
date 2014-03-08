@@ -160,8 +160,10 @@
    <div class="small-3 columns">
       <dl>
          <dd>
-            <select>
-               <option>ewr</option>
+            <select class="url_select">
+               {foreach from=$PAGE_SPLITS item=page_split}
+               <option value="{$page_split.url}"{if $page_split.selected} selected{/if}>{$page_split.amount}</option>
+               {/foreach}
             </select>
          </dd>
       </dl>

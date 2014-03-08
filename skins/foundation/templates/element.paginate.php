@@ -31,6 +31,7 @@
    <li class="unavailable">&hellip;</li>
    <li><a href="{$current}{http_build_query($params)}{$anchor}">{$total}</a></li>
    {/if}
+   <!-- Replaced with dropdown quantities
    {if ($view_all)}
    {if (strtolower($page) != 'all')}
    {$params[$var_name] = 'all'}
@@ -39,4 +40,5 @@
    <li><strong>[{$LANG.common.view_all}]</strong></li>
    {/if}
    {/if}
+   -->
 </ul>

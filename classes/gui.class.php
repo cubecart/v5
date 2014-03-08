@@ -966,18 +966,9 @@ class GUI {
 					$p++;
 				$this->_displayRandomProduct($p);
 			endif;
-			else:
-
-				// try to make sure Random products have images
-				//   for($i=0, $max=count($random_product[0]); $i<$max; $i++) {
-				//    $image = $this->getProductImage($random_product[$i]['product_id']);
-				//    $product = $random_product[$i];
-				//    if($image && !strpos($image,"noimage")) {
-				//     break;
-				//    }
-				//   }
-
-				$image = $this->getProductImage($random_product[0]['product_id']);
+			else;
+			
+			$image = $this->getProductImage($random_product[0]['product_id']);
 			$product = $random_product[0];
 
 			$GLOBALS['language']->translateProduct($product);
@@ -1100,11 +1091,6 @@ class GUI {
 			$sorted_products = false;
 		}
 		unset($group_pricing, $standard_pricing, $group_products, $unsorted_products, $product, $not_on_sale);
-
-
-
-
-
 
 		$vars = array();
 		if ($sorted_products) {
