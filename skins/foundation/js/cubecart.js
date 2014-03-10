@@ -174,9 +174,8 @@ jQuery(document).ready(function() {
 	$('.list_view').click(function() {
 		list_view(200);
 	});
-	if ($.cookie('product_view') == 'grid') {
-		grid_view(0);
-	}
+	
+	set_product_view(0);
 	
 	$('.url_select').bind('change', function () {
           var url = $(this).val(); // get selected value
@@ -189,10 +188,17 @@ jQuery(document).ready(function() {
     $('#jscroll').jscroll({
 	    loadingHtml: '<p class="text-center"><i class="fa fa-spinner fa-spin thickpad-topbottom"></i> '+$('#lang_loading').text()+'&hellip;<p>',
 	    nextSelector: '#jscroll-next',
-	    contentSelector: '#jscroll'
+	    contentSelector: '#jscroll',
+	    callback: function(){set_product_view(0)}
 	});
 	
 });
+
+function set_product_view(delay) {
+	if ($.cookie('product_view') == 'grid') {
+		grid_view(delay);
+	}
+}
 
 function mini_basket_action() {
 	$('#basket-detail').slideDown();
