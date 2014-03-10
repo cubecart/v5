@@ -412,7 +412,28 @@ class GUI {
 			return 10;
 		} 
 	}
-
+	
+	public function perPageSplits($list_id = 'products', $page_key = 'perpage') {
+		
+		if(isset($this->_skin_data['layout']->$list_id->perpage)) {
+			foreach($this->_skin_data['layout']->$list_id->perpage as $k => $p) {
+				$default = (string)$p->attributes()->{'default'};
+				$amount = (int)$p->attributes()->{'amount'};
+				if(!isset($_GET[$page_key]) && $default=="true") {
+					$selected = true;
+				} elseif($_GET[$page_key]==$amount) {
+					$selected = true;
+				} else {
+					$selected = false;
+				}
+					
+				$page_splits[] = array('selected' => $selected ,'url' => currentPage(null, array($page_key => $amount)), 'amount' => $amount);
+			}
+			return $page_splits;
+		}
+		return false;
+	}
+	
 	/**
 	 * Get custom template for module from default skin
 	 *

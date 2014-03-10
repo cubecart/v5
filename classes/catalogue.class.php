@@ -173,25 +173,9 @@ class Catalogue {
 
 		// Sorting
 		$GLOBALS['smarty']->assign('SORTING', ($sorting = $this->displaySort((isset($_GET['cat_id']) && $_GET['cat_id'] == 'sale'))) ? $sorting : false);
+				
+		$GLOBALS['smarty']->assign('PAGE_SPLITS', $GLOBALS['gui']->perPageSplits());
 		
-		// Amount to display
-		$skin_data = $GLOBALS['gui']->getSkinData();
-		if(isset($skin_data['layout']->products->perpage)) {
-			foreach($skin_data['layout']->products->perpage as $k => $p) {
-				$default = (string)$p->attributes()->{'default'};
-				$amount = (int)$p->attributes()->{'amount'};
-				if(!isset($_GET['perpage']) && $default=="true") {
-					$selected = true;
-				} elseif($_GET['perpage']==$amount) {
-					$selected = true;
-				} else {
-					$selected = false;
-				}
-					
-				$page_splits[] = array('selected' => $selected ,'url' => currentPage(null, array('perpage' => $amount)), 'amount' => $amount);
-			}
-			$GLOBALS['smarty']->assign('PAGE_SPLITS', $page_splits);
-		}
 		foreach ($GLOBALS['hooks']->load('class.cubecart.display_category') as $hook) include $hook;
 		$content = $GLOBALS['smarty']->fetch('templates/content.category.php');
 		$GLOBALS['smarty']->assign('PAGE_CONTENT', $content);
