@@ -195,3 +195,16 @@ input.quantity {
 	text-transform:capitalize;
 	background-color: #fff;
 }
+
+.flag {
+	width: 16px;
+	height: 11px;
+	background:url(../images/sprite_flags.png) no-repeat
+}
+.flag.flag-DE {background-position: -16px 0}
+.flag.flag-ES {background-position: -32px 0}
+.flag.flag-FR {background-position: 0 -11px}
+.flag.flag-GB {background-position: -16px -11px}
+.flag.flag-IL {background-position: -32px -11px}
+.flag.flag-NL {background-position: 0 -22px}
+.flag.flag-US {background-position: -16px -22px}
