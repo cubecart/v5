@@ -388,6 +388,30 @@ class GUI {
 	public function getBreadcrumbs() {
 		return (!empty($this->_breadcrumb)) ? $this->_breadcrumb : false;
 	}
+	
+	/**
+	 * Get number items per page
+	 *
+	 * @return int
+	 */
+	public function itemsPerPage($list_id = 'products', $page_key = 'perpage') {
+		
+		if(isset($this->_skin_data['layout']->$list_id->perpage)) {
+			foreach($this->_skin_data['layout']->$list_id->perpage as $k => $p) {
+				if((string)$p->attributes()->{'default'}=='true') {
+					return (int)$p->attributes()->{'amount'};	
+				}
+			}
+		}
+		
+		if((int)$_GET[$page_key]>0) {
+			return (int)$_GET[$page_key];
+		} elseif (is_numeric($GLOBALS['config']->get('config', 'catalogue_products_per_page'))) {
+			return $GLOBALS['config']->get('config', 'catalogue_products_per_page');
+		} else { // Last ditch ..
+			return 10;
+		} 
+	}
 
 	/**
 	 * Get custom template for module from default skin

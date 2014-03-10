@@ -686,15 +686,10 @@ class Cubecart {
 		}
 
 		$page = (isset($_REQUEST['page']) && !empty($_GET['page'])) ? $_REQUEST['page'] : 1;
+		
+		$catalogue_products_per_page = $GLOBALS['gui']->itemsPerPage();
 
 		if (isset($_REQUEST['search']) && is_array($_REQUEST['search'])) {
-			if((int)$_GET['perpage']>0) {
-				$catalogue_products_per_page = (int)$_GET['perpage'];
-			} elseif (!is_numeric($GLOBALS['config']->get('config', 'catalogue_products_per_page'))) {
-				$catalogue_products_per_page = 10;
-			} else {
-				$catalogue_products_per_page = $GLOBALS['config']->get('config', 'catalogue_products_per_page');
-			}
 			if (!$GLOBALS['catalogue']->searchCatalogue($_REQUEST['search'], $page, $catalogue_products_per_page)) {
 				$GLOBALS['catalogue']->setCategory('cat_name', $GLOBALS['language']->navigation['search_results']);
 				$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->common['search'], 'index.php?_a=search');
@@ -706,13 +701,6 @@ class Cubecart {
 				$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->navigation['search_results'], currentPage());
 			}
 		} else {
-			if((int)$_GET['perpage']>0) {
-				$catalogue_products_per_page = (int)$_GET['perpage'];
-			} elseif (!is_numeric($GLOBALS['config']->get('config', 'catalogue_products_per_page'))) {
-				$catalogue_products_per_page = 10;
-			} else {
-				$catalogue_products_per_page = $GLOBALS['config']->get('config', 'catalogue_products_per_page');
-			}
 			$GLOBALS['catalogue']->searchCatalogue($_GET['cat_id'], $page, $catalogue_products_per_page);
 			if ($_GET['cat_id'] == 'sale') {
 				$GLOBALS['catalogue']->setCategory('cat_name', $GLOBALS['language']->navigation['saleitems']);

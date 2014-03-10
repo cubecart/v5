@@ -186,12 +186,15 @@ jQuery(document).ready(function() {
           return false;
     });
 	
-    $('#jscroll').jscroll({
-	    loadingHtml: '',
-	    padding: 20,
-	    nextSelector: '#jscroll-next',
-	    contentSelector: '#jscroll'
-	});
+	//Foundation.utils.register_media('custom', 'my-mq-custom');
+    //if (matchMedia(Foundation.media_queries['custom']).matches){
+	    $('#jscroll').jscroll({
+		    loadingHtml: '',
+		    padding: 0,
+		    nextSelector: '#jscroll-next',
+		    contentSelector: '#jscroll'
+		});
+	//}
 	
 	
 });

@@ -22,7 +22,7 @@
 </ul>
 {/if}
 <div class="row">
-   <div class="small-8 columns">
+   <div class="small-12 large-8 columns">
       {if isset($SORTING)}
       <form action="{$VAL_SELF}" class="autosubmit" method="post">
          <div class="row">
@@ -42,7 +42,7 @@
       </form>
       {/if}
    </div>
-   <div class="small-4 columns">
+   <div class="large-4 columns show-for-medium-up">
       <dl class="sub-nav right" id="layout_toggle">
          <dd><a href="#" class="grid_view"><i class="fa fa-th-large"></i></a></dd>
          <dd class="active"><a href="#" class="list_view"><i class="fa fa-th-list"></i></a></dd>
@@ -155,10 +155,10 @@
 	   {/foreach}
 	</ul>
 	<div class="row">
-	   <div class="small-9 columns">
+	   <div class="small-12 large-9 columns">
 	      {$PAGINATION}
 	   </div>
-	   <div class="small-3 columns">
+	   <div class="large-3 columns show-for-medium-up">
 	      <dl>
 	         <dd>
 	            <select class="url_select">
