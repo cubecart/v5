@@ -50,7 +50,7 @@
    </div>
 </div>
 <div id="jscroll">
-	<ul class="small-block-grid-1" id="product_list" data-equalizer>
+	<ul class="small-block-grid-1 product_list" data-equalizer>
 	   {foreach from=$PRODUCTS item=product}
 	   <li data-equalizer-watch>
 	      <form action="{$VAL_SELF}" method="post" class="panel" id="add_to_basket" >
@@ -154,7 +154,7 @@
 	   <p>{$LANG.category.no_products}</p>
 	   {/foreach}
 	</ul>
-	<div class="row">
+	<div class="row hide">
 	   <div class="small-12 large-9 columns">
 	      {$PAGINATION}
 	   </div>
@@ -171,3 +171,4 @@
 	   </div>
 	</div>
 </div>
+<div class="hide" id="lang_loading">{$LANG.common.loading}</div>

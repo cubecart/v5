@@ -514,6 +514,7 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="loading" introduced="6.0.0"><![CDATA[Loading]]></string>
   	<string name="signup" introduced="6.0.0"><![CDATA[Signup]]></string>
   	<string name="follow_us" introduced="6.0.0"><![CDATA[Follow Us]]></string>
   	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
