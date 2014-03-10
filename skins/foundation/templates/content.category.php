@@ -62,7 +62,7 @@
 	            </div>
 	            <div class="small-6 columns">
 	               <h3>
-	                  {$product.product_id}<a href="{$product.url}" title="{$product.name}">{$product.name}</a> 
+	                  <a href="{$product.url}" title="{$product.name}">{$product.name}</a> 
 	               </h3>
 	               {$product.description_short}
 	               {if $product.review_score}

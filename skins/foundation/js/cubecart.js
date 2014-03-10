@@ -189,7 +189,7 @@ jQuery(document).ready(function() {
 	//Foundation.utils.register_media('custom', 'my-mq-custom');
     //if (matchMedia(Foundation.media_queries['custom']).matches){
 	    $('#jscroll').jscroll({
-		    loadingHtml: '',
+		    loadingHtml: '<i class="fa fa-spinner fa-spin thickpad-topbottom"></i>',
 		    padding: 0,
 		    nextSelector: '#jscroll-next',
 		    contentSelector: '#jscroll'

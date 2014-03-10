@@ -6,7 +6,7 @@
    {/if}
    {if ($page > 1)}
    {$params[$var_name] = $page-1}
-   <li class="arrow"><a href="{$current}{http_build_query($params)}{$anchor}">&laquo;</a></li>
+   <li class="arrow"><a href="{$current}{http_build_query($params)}{$anchor}"><i class="fa fa-angle-double-left"></i></a></li>
    {/if}
    {for $i = 1; $i <= $total; $i++}
    {if ($i < $page - floor($show / 2))}
@@ -24,7 +24,7 @@
    {/for}
    {if ($page < $total)}
    {$params[$var_name] = $page + 1}
-   <li class="arrow"><a href="{$current}{http_build_query($params)}{$anchor}">&raquo;</a></li>
+   <li class="arrow"><a href="{$current}{http_build_query($params)}{$anchor}"><i class="fa fa-angle-double-right"></i></a></li>
    {/if}
    {if ($i <= $total)}
    {$params[$var_name] = $total}
@@ -45,6 +45,6 @@
 <div class="show-for-small-only">
 {if ($page < $total)}
 {$params[$var_name] = $page + 1}
-<a href="{$current}{http_build_query($params)}{$anchor}" class="button expand" id="jscroll-next">Next Page</a>
+<a href="{$current}{http_build_query($params)}{$anchor}" class="button expand" id="jscroll-next">Next Page <i class="fa fa-angle-right"></i></a>
 {/if}
 </div>
