@@ -48,10 +48,14 @@
          <div class="pad-topbottom">
             <div class="small-6 large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}"></a></div>
             <div class="small-2 large-6 columns">{$SEARCH_FORM}</div>
-            <div class="small-1 large-1 columns text-center">{$SESSION}</div>
-            <div class="small-1 large-1 columns text-center">{$CURRENCY}</div>
-            <div class="small-1 large-1 columns text-center">{$LANGUAGE}</div>
-            <div class="small-1 large-1 columns text-center">{$SHOPPING_CART}</div>
+	        <div class="small-4 large-4 columns">
+	            <div class="row collapse">
+	            	<div class="small-2 large-2 columns text-center">{$SESSION}</div>
+					<div class="small-3 large-3 columns text-center">{$CURRENCY}</div>
+					<div class="small-2 large-2 columns text-center">{$LANGUAGE}</div>
+					<div class="small-5 large-5 columns text-right">{$SHOPPING_CART}</div>
+	            </div>
+	        </div>
          </div>
       </div>
       {include file='templates/small.box.search.php'}
