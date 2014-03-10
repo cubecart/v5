@@ -18,10 +18,11 @@
   </info>
   <layout>
 	<products>
-		<perpage>12</perpage>
-		<perpage>24</perpage>
-		<perpage>48</perpage>
-		<perpage>96</perpage>
+		<perpage default="true" amount="6" />
+		<perpage amount="12" />
+		<perpage amount="24" />
+		<perpage amount="48" />
+		<perpage amount="96" />
 	</products>
   </layout>
   <styles>

@@ -178,7 +178,17 @@ class Catalogue {
 		$skin_data = $GLOBALS['gui']->getSkinData();
 		if(isset($skin_data['layout']->products->perpage)) {
 			foreach($skin_data['layout']->products->perpage as $k => $p) {
-				$page_splits[] = array('selected' => ($_GET['perpage']==$p) ? true : false ,'url' => currentPage(null, array('perpage' => $p)), 'amount' => $p);
+				$default = (string)$p->attributes()->{'default'};
+				$amount = (int)$p->attributes()->{'amount'};
+				if(!isset($_GET['perpage']) && $default=="true") {
+					$selected = true;
+				} elseif($_GET['perpage']==$amount) {
+					$selected = true;
+				} else {
+					$selected = false;
+				}
+					
+				$page_splits[] = array('selected' => $selected ,'url' => currentPage(null, array('perpage' => $amount)), 'amount' => $amount);
 			}
 			$GLOBALS['smarty']->assign('PAGE_SPLITS', $page_splits);
 		}

@@ -109,6 +109,7 @@
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.rating.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.magnifier.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.validate.js"></script>
+      <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.jscroll.min.js"></script>
       <script>
          $(document).foundation();
       </script>

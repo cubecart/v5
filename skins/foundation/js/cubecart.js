@@ -184,7 +184,15 @@ jQuery(document).ready(function() {
               window.location = url; // redirect
           }
           return false;
-      });
+    });
+	
+    $('#jscroll').jscroll({
+	    loadingHtml: '',
+	    padding: 20,
+	    nextSelector: '#jscroll-next',
+	    contentSelector: '#jscroll'
+	});
+	
 	
 });
 
@@ -224,3 +232,4 @@ function list_view(duration) {
 	});
 	return false;
 }
+

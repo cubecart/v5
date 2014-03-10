@@ -1,4 +1,4 @@
-<ul class="pagination">
+<ul class="pagination hide-for-small-only">
    {if ($page >= $show-1)}
    {$params[$var_name] = 1}
    <li><a href="{$current}{http_build_query($params)}{$anchor}">1</a></li>
@@ -42,3 +42,9 @@
    {/if}
    -->
 </ul>
+<div class="show-for-small-only">
+{if ($page < $total)}
+{$params[$var_name] = $page + 1}
+<a href="{$current}{http_build_query($params)}{$anchor}" class="button expand secondary" id="jscroll-next">Next Page</a>
+{/if}
+</div>

@@ -1,8 +1,8 @@
 <div class="pad skin_selector">
 <form action="{$VAL_SELF}" method="post" class="autosubmit nomarg">
    <div class="row">
-      <div class="small-2 columns"><h4>Change Skin:</h4></div>
-      <div class="small-3 end columns">
+      <div class="small-6 large-2 columns"><h4>Change Skin:</h4></div>
+      <div class="small-6 large-3 end columns">
          <select name="select_skin" class="auto_submit">
          {foreach from=$SKINS item=skin}
          {if isset($skin.styles)}

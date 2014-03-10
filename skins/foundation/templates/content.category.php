@@ -10,7 +10,7 @@
 </div>
 {/if}
 {if isset($SUBCATS) && $SUBCATS}
-<ul class="small-block-grid-6 text-center" data-equalizer>
+<ul class="small-block-grid-6 text-center show-for-medium-up" data-equalizer>
    {foreach from=$SUBCATS item=subcat}
    <li data-equalizer-watch>
       <a href="{$subcat.url}" title="{$subcat.cat_name}">
@@ -49,123 +49,125 @@
       </dl>
    </div>
 </div>
-<ul class="small-block-grid-1" id="product_list" data-equalizer>
-   {foreach from=$PRODUCTS item=product}
-   <li data-equalizer-watch>
-      <form action="{$VAL_SELF}" method="post" class="panel" id="add_to_basket" >
-         <div class="row product_list_view">
-            <div class="small-3 columns">
-               <a href="{$product.url}" title="{$product.name}">
-               <img class="th" src="{$product.thumbnail}" alt="{$product.name}">
-               </a>
-            </div>
-            <div class="small-6 columns">
-               <h3>
-                  <a href="{$product.url}" title="{$product.name}">{$product.name}</a> 
-               </h3>
-               {$product.description_short}
-               {if $product.review_score}
-               <!--
-                  <div>
-                     {for $i = 1; $i <= 5; $i++}
-                     {if $product.review_score >= $i}
-                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="">
-                     {elseif $product.review_score > ($i - 1) && $product.review_score < $i}
-                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="">
-                     {else}
-                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="">
-                     {/if}
-                     {/for}
-                     </div>
-                  <p class="rating-info">{$product.review_info}</p>
-                  -->
-               {/if}
-            </div>
-            <div class="small-3 columns">
-               <h3>
-                  {if $product.ctrl_sale}<span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
-                  {else}
-                  {$product.price}
-                  {/if}
-               </h3>
-               {if $product.ctrl_purchase && !$CATALOGUE_MODE}
-               <div class="row collapse">
-                  <div class="small-4 columns">
-                     <input type="text" name="add[{$product.product_id}][quantity]" value="1" class="quantity text-center">
-                  </div>
-                  <div class="small-8 columns">
-                     <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix">
-                  </div>
-               </div>
-               {elseif $product.out}
-               <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" disabled class="button disabled expand tiny">
-               {/if}
-            </div>
-         </div>
-         <div class="product_grid_view hide">
-         <div class="text-center">
-            <a href="{$product.url}" title="{$product.name}"><img class="th" src="{$product.thumbnail}" alt="{$product.name}"></a>
-         </div>
-         <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
-         <h3>
-            {if $product.ctrl_sale}<span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
-            {else}
-            {$product.price}
-            {/if}
-         </h3>
-         <div class="rating">
-            {if $product.review_score}
-            <!--
-               <div>
-                  {for $i = 1; $i <= 5; $i++}
-                  {if $product.review_score >= $i}
-                  <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="">
-                  {elseif $product.review_score > ($i - 1) && $product.review_score < $i}
-                  <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="">
-                  {else}
-                  <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="">
-                  {/if}
-                  {/for}
-                  </div>
-               <p class="rating-info">{$product.review_info}</p>
-               -->
-            {/if}
-         </div>
-         <!--<a href="{$product.url}" title="{$product.name}" class="button tiny secondary left">{$LANG.common.info}</a>-->
-         {if $product.ctrl_purchase && !$CATALOGUE_MODE}
-         <div class="marg-top">
-            <div class="row collapse marg-top">
-               <div class="small-3 columns">
-                  <input type="text" name="quantity" value="1" class="quantity required text-center">
-               </div>
-               <div class="small-9 columns ">
-                  <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix">
-               </div>
-            </div>
-         </div>
-         {elseif !$CATALOGUE_MODE}
-         <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" class="button tiny disabled expand marg-top" disabled>
-         {/if}
-         <input type="hidden" name="add" value="{$product.product_id}">
-      </form>
-   </li>
-   {foreachelse}
-   <p>{$LANG.category.no_products}</p>
-   {/foreach}
-</ul>
-<div class="row">
-   <div class="small-9 columns">
-      {$PAGINATION}
-   </div>
-   <div class="small-3 columns">
-      <dl>
-         <dd>
-            <select class="url_select">
-               {foreach from=$PAGE_SPLITS item=page_split}
-               <option value="{$page_split.url}"{if $page_split.selected} selected{/if}>{$page_split.amount}</option>
-               {/foreach}
-            </select>
-         </dd>
-      </dl>
-   </div>
+<div id="jscroll">
+	<ul class="small-block-grid-1" id="product_list" data-equalizer>
+	   {foreach from=$PRODUCTS item=product}
+	   <li data-equalizer-watch>
+	      <form action="{$VAL_SELF}" method="post" class="panel" id="add_to_basket" >
+	         <div class="row product_list_view">
+	            <div class="small-3 columns">
+	               <a href="{$product.url}" title="{$product.name}">
+	               <img class="th" src="{$product.thumbnail}" alt="{$product.name}">
+	               </a>
+	            </div>
+	            <div class="small-6 columns">
+	               <h3>
+	                  {$product.product_id}<a href="{$product.url}" title="{$product.name}">{$product.name}</a> 
+	               </h3>
+	               {$product.description_short}
+	               {if $product.review_score}
+	               <!--
+	                  <div>
+	                     {for $i = 1; $i <= 5; $i++}
+	                     {if $product.review_score >= $i}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="">
+	                     {elseif $product.review_score > ($i - 1) && $product.review_score < $i}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="">
+	                     {else}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="">
+	                     {/if}
+	                     {/for}
+	                     </div>
+	                  <p class="rating-info">{$product.review_info}</p>
+	                  -->
+	               {/if}
+	            </div>
+	            <div class="small-3 columns">
+	               <h3>
+	                  {if $product.ctrl_sale}<span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
+	                  {else}
+	                  {$product.price}
+	                  {/if}
+	               </h3>
+	               {if $product.ctrl_purchase && !$CATALOGUE_MODE}
+	               <div class="row collapse">
+	                  <div class="small-4 columns">
+	                     <input type="text" name="add[{$product.product_id}][quantity]" value="1" class="quantity text-center">
+	                  </div>
+	                  <div class="small-8 columns">
+	                     <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix">
+	                  </div>
+	               </div>
+	               {elseif $product.out}
+	               <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" disabled class="button disabled expand tiny">
+	               {/if}
+	            </div>
+	         </div>
+	         <div class="product_grid_view hide">
+	            <div class="text-center">
+	               <a href="{$product.url}" title="{$product.name}"><img class="th" src="{$product.thumbnail}" alt="{$product.name}"></a>
+	            </div>
+	            <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
+	            <h3>
+	               {if $product.ctrl_sale}<span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
+	               {else}
+	               {$product.price}
+	               {/if}
+	            </h3>
+	            <div class="rating">
+	               {if $product.review_score}
+	               <!--
+	                  <div>
+	                     {for $i = 1; $i <= 5; $i++}
+	                     {if $product.review_score >= $i}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt="">
+	                     {elseif $product.review_score > ($i - 1) && $product.review_score < $i}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt="">
+	                     {else}
+	                     <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt="">
+	                     {/if}
+	                     {/for}
+	                     </div>
+	                  <p class="rating-info">{$product.review_info}</p>
+	                  -->
+	               {/if}
+	            </div>
+	            <!--<a href="{$product.url}" title="{$product.name}" class="button tiny secondary left">{$LANG.common.info}</a>-->
+	            {if $product.ctrl_purchase && !$CATALOGUE_MODE}
+	            <div class="marg-top">
+	               <div class="row collapse marg-top">
+	                  <div class="small-3 columns">
+	                     <input type="text" name="quantity" value="1" class="quantity required text-center">
+	                  </div>
+	                  <div class="small-9 columns ">
+	                     <input type="submit" value="{$LANG.catalogue.add_to_basket}" class="button tiny postfix">
+	                  </div>
+	               </div>
+	            </div>
+	            {elseif !$CATALOGUE_MODE}
+	            <input type="submit" value="{$LANG.catalogue.out_of_stock_short}" class="button tiny disabled expand marg-top" disabled>
+	            {/if}
+	            <input type="hidden" name="add" value="{$product.product_id}">
+	      </form>
+	   </li>
+	   {foreachelse}
+	   <p>{$LANG.category.no_products}</p>
+	   {/foreach}
+	</ul>
+	<div class="row">
+	   <div class="small-9 columns">
+	      {$PAGINATION}
+	   </div>
+	   <div class="small-3 columns">
+	      <dl>
+	         <dd>
+	            <select class="url_select">
+	            {foreach from=$PAGE_SPLITS item=page_split}
+	            <option value="{$page_split.url}"{if $page_split.selected} selected{/if}>{$page_split.amount}</option>
+	            {/foreach}
+	            </select>
+	         </dd>
+	      </dl>
+	   </div>
+	</div>
 </div>
