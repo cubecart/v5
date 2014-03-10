@@ -187,3 +187,11 @@ input.quantity {
 .skin_selector h4 {
     color: #fff;
 }
+
+#currency_menu, #language_menu {
+	position: absolute; 
+	z-index: 10; 
+	width: 200px; 
+	text-transform:capitalize;
+	background-color: #fff;
+}

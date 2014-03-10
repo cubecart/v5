@@ -51,6 +51,15 @@ jQuery(document).ready(function() {
 			}).unbind().magnify(magnify_options);
 		}
 	});
+	$('#currency_switch').mouseover(function() {
+		$('#currency_menu').slideDown();
+		$('#currency_menu').delay(3000).slideUp();
+	});
+	$('#language_switch').mouseover(function() {
+		$('#language_menu').slideDown();
+		$('#language_menu').delay(3000).slideUp();
+	});
+
 	$('#basket-summary').click(function() {
 		mini_basket_action();
 	});

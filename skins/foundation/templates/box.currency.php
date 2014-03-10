@@ -1,46 +1,8 @@
-<i class="fa fa-dollar"></i>
-<!--
-
-
-
-
-
-
-fa-bitcoin 
-fa-btc
-fa-cny 
-fa-dollar 
-fa-eur
-fa-euro 
-fa-gbp
-fa-inr
-fa-jpy
-fa-krw
-fa-rmb 
-fa-rouble 
-fa-rub
-fa-ruble 
-fa-rupee 
-fa-try
-fa-turkish-lira 
-fa-usd
-fa-won 
-fa-yen 
-
-
-
-
-
-
-
-
-<form action="{$VAL_SELF}" class="autosubmit" method="post">
-  <h2 class="hide">{$LANG.common.currency}</h2>
-  <select name="set_currency">
-  <option value="" disabled>{$LANG.common.change_currency}</option>
-  {foreach from=$CURRENCIES item=currency}
-  <option value="{$currency.code}" {$currency.selected} title="{$currency.name}">{$currency.symbol_left} {$currency.name} {$currency.symbol_right}</option>
-  {/foreach}
-  </select> <input type="submit" value="{$LANG.common.submit}" class="hide">
-</form>
--->
+<a href="#" id="currency_switch">{$CURRENT_CURRENCY.symbol_left} {$CURRENT_CURRENCY.code} {$CURRENT_CURRENCY.symbol_right}</a>
+<div class="hide pad" id="currency_menu">
+<div>{$LANG.common.change_currency}</div>
+{foreach from=$CURRENCIES item=currency}
+<hr>
+<div class="text-left"><a href="{$currency.url}">{$currency.symbol_left} {$currency.code} {$currency.symbol_right}<br>{$currency.name}</a></div>
+{/foreach}
+</div>

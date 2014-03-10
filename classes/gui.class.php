@@ -763,7 +763,7 @@ class GUI {
 	/**
 	 * Display currency switch box
 	 */
-	private function _displayCurrencySwitch() {
+	private function _displayCurrencySwitch() {		
 		if (($currencies = $GLOBALS['db']->select('CubeCart_currency', false, array('active' => '1'))) !== false) {
 			if (count($currencies) > 1) {
 				$vars = array();
