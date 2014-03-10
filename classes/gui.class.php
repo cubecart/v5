@@ -1205,14 +1205,16 @@ class GUI {
 	 */
 	private function _displaySessionBox() {
 		if ($GLOBALS['user']->is()) {
-			$first_name = $GLOBALS['user']->get('first_name');
-			$last_name = $GLOBALS['user']->get('last_name');
+			
+			$customer = $GLOBALS['user']->get();
+			
+			$GLOBALS['smarty']->assign('CUSTOMER', $customer);
+			
 			// Account may be made but name may not be known yet e.g. Yahoo login
-			if (empty($first_name) && empty($last_name)) {
+			if (empty($customer['first_name'])) {
 				$GLOBALS['smarty']->assign('LANG_WELCOME_BACK', $GLOBALS['language']->account['welcome_back_guest']);
 			} else {
-				$GLOBALS['smarty']->assign('LANG_WELCOME_BACK', sprintf($GLOBALS['language']->account['welcome_back'], $GLOBALS['user']->get('first_name'), ''));
-
+				$GLOBALS['smarty']->assign('LANG_WELCOME_BACK', sprintf($GLOBALS['language']->account['welcome_back'], $customer['first_name'], ''));
 			}
 		}
 		foreach ($GLOBALS['hooks']->load('class.gui.display_session_box') as $hook) include $hook;

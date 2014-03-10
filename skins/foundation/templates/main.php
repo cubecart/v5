@@ -48,8 +48,9 @@
          <div class="pad-topbottom">
             <div class="small-6 large-2 columns"><a href="{$STORE_URL}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$META_TITLE}"></a></div>
             <div class="small-2 large-6 columns">{$SEARCH_FORM}</div>
-            <div class="small-2 large-2 columns">{$SESSION}</div>
-            <div class="small-2 large-2 columns">{$SHOPPING_CART}</div>
+            <div class="small-1 large-1 columns text-center">{$SESSION}</div>
+            <div class="small-1 large-1 columns text-center">{$CURRENCY}</div>
+            <div class="small-2 large-2 columns text-center">{$SHOPPING_CART}</div>
          </div>
       </div>
       {include file='templates/small.box.search.php'}
@@ -99,7 +100,7 @@
             </div>
          </div>
          <div class="row">
-            <div class="large-6 columns">{$CURRENCY}</div>
+            <div class="large-6 columns"></div>
             <div class="large-6 columns">{$LANGUAGE}</div>
          </div>
       </footer>
