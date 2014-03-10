@@ -85,10 +85,6 @@
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class="large-6 columns">{$CURRENCY}</div>
-            <div class="large-6 columns">{$LANGUAGE}</div>
-         </div>
       </footer>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/vendor/jquery.js"></script>
       <script src="{$STORE_URL}/skins/{$SKIN_FOLDER}/js/foundation.min.js"></script>
