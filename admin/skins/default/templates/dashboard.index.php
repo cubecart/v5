@@ -82,7 +82,7 @@
 			{foreach from=$NEWS.items item=item}
 			<li><a href="{$item.link}" target="_blank">{$item.title}</a></li>
 		 	{/foreach}
-			<li><a href="{$NEWS.link}" target="_blank">{$LANG.common.more}</a></li>
+			<li><a href="{$NEWS.link}" target="_blank">{$LANG.common.more} &raquo;</a></li>
 		  </ul>
 		  {/if}
 	    </td>
