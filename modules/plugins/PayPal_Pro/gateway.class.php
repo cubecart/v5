@@ -428,7 +428,7 @@ class Gateway {
 				$order->logTransaction($log);
 			}
 			
-			## Improved FMF logic by Havenswift Hosting
+			## Improved FMF logic by Havenswift Hosting & Ron at offshoremarineparts.com
 			if($response['L_ERRORCODE0'] == '11610') {
 				$GLOBALS['gui']->setNotify($this->_lang['payment_review']);
 				$order->orderStatus(Order::ORDER_PENDING, $this->_basket['cart_order_id']);
@@ -444,7 +444,7 @@ class Gateway {
 				case 'FailureWithWarning':
 				case 'Failure':
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
-					## Improved FMF logic by Havenswift Hosting
+					## Improved FMF logic by Havenswift Hosting & Ron at offshoremarineparts.com
 					foreach ($response as $key => $value) {
 						if($response['L_ERRORCODE0'] == '11610') {
  							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
