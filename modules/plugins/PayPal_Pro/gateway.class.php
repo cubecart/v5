@@ -443,9 +443,13 @@ class Gateway {
 				case 'Failure':
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
 					foreach ($response as $key => $value) {
-						if($response['L_ERRORCODE0'] == '11610') {
-							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
-						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
+						if($response['L_ERRORCODE0'] == '11611') {
+							$GLOBALS['gui']->setNotify($this->_lang['payment_decline']);
+						}	elseif($response['L_ERRORCODE0'] == '15005') {
+							$GLOBALS['gui']->setNotify($this->_lang['bank_declined']);
+						}	elseif($response['L_ERRORCODE0'] == '15007') {
+							$GLOBALS['gui']->setNotify($this->_lang['card_expired']);
+  					} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
 							$GLOBALS['gui']->setError($value);
 						}
 					}
