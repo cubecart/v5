@@ -226,12 +226,13 @@ input.quantity {
 	right: 0px;
 	text-decoration: none;
 	color: #000000;
-	background-color: rgba(235, 235, 235, 1);
-	font-size: 20px;
+	background-color: #EBEBEB;
 	padding: 1em;
 	display: none;
+	z-index: 100;
 }
 
 .back-to-top:hover {	
-	background-color: rgba(135, 135, 135, 0.50);
+	background-color: #5E5E5E;
+	color: #fff;
 }	
