@@ -200,8 +200,24 @@ jQuery(document).ready(function() {
 	    loadingHtml: '<p class="text-center"><i class="fa fa-spinner fa-spin thickpad-topbottom"></i> '+$('#lang_loading').text()+'&hellip;<p>',
 	    nextSelector: '#jscroll-next',
 	    contentSelector: '#jscroll',
+	    autoTrigger: false,
 	    callback: function(){set_product_view(0)}
 	});
+	
+    var duration = 500;
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 400) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+    
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
 	
 });
 

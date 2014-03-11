@@ -18,8 +18,8 @@
   </info>
   <layout>
 	<products>
-		<perpage default="true" amount="6" />
-		<perpage amount="12" />
+		<perpage amount="6" />
+		<perpage default="true" amount="12" />
 		<perpage amount="24" />
 		<perpage amount="48" />
 		<perpage amount="96" />

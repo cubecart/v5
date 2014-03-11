@@ -219,3 +219,19 @@ input.quantity {
 .flag.flag-IL {background-position: -32px -11px}
 .flag.flag-NL {background-position: 0 -22px}
 .flag.flag-US {background-position: -16px -22px}
+
+.back-to-top {
+	position: fixed;
+	bottom: 3em;
+	right: 0px;
+	text-decoration: none;
+	color: #000000;
+	background-color: rgba(235, 235, 235, 1);
+	font-size: 20px;
+	padding: 1em;
+	display: none;
+}
+
+.back-to-top:hover {	
+	background-color: rgba(135, 135, 135, 0.50);
+}	

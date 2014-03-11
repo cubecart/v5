@@ -170,5 +170,9 @@
 	      </dl>
 	   </div>
 	</div>
+	{if ($page < $total)}
+	{$params[$var_name] = $page + 1}
+	<a href="{$current}{http_build_query($params)}{$anchor}" class="button expand" id="jscroll-next">More <i class="fa fa-angle-down"></i></a>
+	{/if}
 </div>
 <div class="hide" id="lang_loading">{$LANG.common.loading}</div>

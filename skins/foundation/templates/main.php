@@ -82,7 +82,9 @@
             {$POPULAR_PRODUCTS}
             {$SALE_ITEMS}
          </div>
+         <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i> Top</a>
       </div>
+      
       <footer> 
          <div class="row">
             <div class="large-5 columns">

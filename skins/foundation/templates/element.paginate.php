@@ -42,9 +42,3 @@
    {/if}
    -->
 </ul>
-<div class="show-for-small-only">
-{if ($page < $total)}
-{$params[$var_name] = $page + 1}
-<a href="{$current}{http_build_query($params)}{$anchor}" class="button expand" id="jscroll-next">Next Page <i class="fa fa-angle-right"></i></a>
-{/if}
-</div>
