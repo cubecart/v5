@@ -1,6 +1,11 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions version="1.0">
  <group name="paypal_pro">
+  <string name="payment_review"><![CDATA[Your payment has been accepted but requires manual review by a member of staff. Please accept our apologies for any delay in the process of your order.]]></string>
+  <string name="payment_decline"><![CDATA[Your payment has been declined. Please check that your billing address matches that of your card and that the three digit security code is correct. If the issue persists please contact a member of staff.]]></string>
+  <string name="card_expired"><![CDATA[Your payment has been declined. This is probably because your card has expired so please check this and if this isnt the case and the issue persists, please contact a member of staff.]]></string>
+  <string name="bank_declined"><![CDATA[Your payment has been declined. This is due to your bank declining the payment so please check this with your issuing bank. If the issue persists please contact a member of staff.]]></string>
   <string name="action_capture"><![CDATA[Capture Transaction]]></string>
   <string name="action_refund"><![CDATA[Refund Transaction]]></string>
   <string name="action_void"><![CDATA[Void Transaction]]></string>
