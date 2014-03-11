@@ -217,7 +217,18 @@ jQuery(document).ready(function() {
         event.preventDefault();
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
-    })
+    });
+    
+    $('#checkout_login').click(function () {
+      $("#checkout_login_form").slideDown();
+      $("#checkout_register_form").hide();
+      $("#reg_password").prop('disabled', true);
+   });
+   $('#checkout_register').click(function () {
+      $("#checkout_login_form").hide();
+      $("#checkout_register_form").slideDown();
+      $("#reg_password").prop('disabled', false);
+   });
 	
 });
 
