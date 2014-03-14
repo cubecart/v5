@@ -1,1 +1,4 @@
 deny from all
+<Files print.*.php>
+  allow from all
+</Files>
