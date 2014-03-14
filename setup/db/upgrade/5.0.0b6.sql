@@ -64,5 +64,7 @@ CREATE TABLE `CubeCart_seo_urls` (
   `type` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `item_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`path`),
-  KEY `id` (`id`)
+  KEY `id` (`id`),
+  KEY `type` (`type`),
+  KEY `item_id` (`item_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
