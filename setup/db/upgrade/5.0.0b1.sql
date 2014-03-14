@@ -586,6 +586,7 @@ ALTER TABLE `CubeCart_reviews` ADD `customer_id` INT UNSIGNED NOT NULL DEFAULT '
 ALTER TABLE `CubeCart_reviews` ADD `vote_up` INT NOT NULL DEFAULT '0'; #EOQ
 ALTER TABLE `CubeCart_reviews` ADD `vote_down` INT NOT NULL DEFAULT '0'; #EOQ
 ALTER TABLE `CubeCart_reviews` ADD `anon` TINYINT(1) UNSIGNED DEFAULT '0'; #EOQ
+ALTER TABLE `CubeCart_reviews` ADD INDEX (`approved`); #EOQ
 
 ALTER TABLE `CubeCart_sessions` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 ALTER TABLE `CubeCart_sessions` CHANGE `sessId` `session_id` VARCHAR(32) NOT NULL DEFAULT ''; #EOQ

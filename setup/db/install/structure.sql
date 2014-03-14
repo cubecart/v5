@@ -405,6 +405,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_inventory` (
   `condition` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Condition',
   PRIMARY KEY (`product_id`),
   KEY `status` (`status`),
+  KEY `popularity` (`popularity`),
   FULLTEXT KEY `fulltext` (`product_code`,`description`,`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -720,6 +721,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_reviews` (
 	PRIMARY KEY (`id`),
 	KEY `product_id` (`product_id`),
 	KEY `votes` (`vote_up`,`vote_down`),
+	KEY `approved` (`approved`),
 	FULLTEXT KEY `fulltext` (`name`,`email`,`title`,`review`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 

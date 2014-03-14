@@ -130,6 +130,7 @@ ALTER TABLE `CubeCart_inventory` ADD `prod_metadesc` TEXT NOT NULL; #EOQ
 ALTER TABLE `CubeCart_inventory` ADD `prod_metakeywords` TEXT NOT NULL; #EOQ
 ALTER TABLE `CubeCart_inventory` ADD `eanupcCode` BIGINT(17) UNSIGNED NULL; #EOQ
 ALTER TABLE `CubeCart_inventory` ADD FULLTEXT `fulltext` (`productCode`,`description`,`name`); #EOQ
+ALTER TABLE  `CubeCart_inventory` ADD INDEX (`popularity`); #EOQ
 
 ALTER TABLE `CubeCart_inv_lang` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT; #EOQ
 ALTER TABLE `CubeCart_inv_lang` ADD FULLTEXT `fulltext` (`name`,`description`); #EOQ
