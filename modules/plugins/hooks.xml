@@ -92,6 +92,7 @@
  <hook trigger="class.cubecart.display_category" deprecated="" />
  <hook trigger="class.cubecart.display_content" deprecated="" />
  <hook trigger="class.cubecart.display_gateways" deprecated="" />
+ <hook trigger="class.cubecart.display_checkout_gateways" deprecated="" />
  <hook trigger="class.cubecart.display_homepage" deprecated="" />
  <hook trigger="class.cubecart.display_product" deprecated="" />
  <hook trigger="class.cubecart.display_basket.alternate" deprecated="" />

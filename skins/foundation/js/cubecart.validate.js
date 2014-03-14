@@ -95,7 +95,10 @@ jQuery(document).ready(function() {
 	});
 	$("#checkout_form").validate({
 		errorPlacement: function(error, element) {
-			if (element.attr("name") == "terms_agree") {
+			if (element.attr("name") == "gateway") {
+				element.removeClass("error");
+				alert(error.text());
+			} else if (element.attr("name") == "terms_agree") {
 				element.removeClass("error");
 				alert(error.text());
 			} else {
@@ -172,6 +175,9 @@ jQuery(document).ready(function() {
 			},
 			terms_agree: {
 				required: true
+			},
+			gateway: {
+				required: true
 			}
 		},
 		messages: {
@@ -201,6 +207,9 @@ jQuery(document).ready(function() {
 			},
 			terms_agree: {
 				required: $('#validate_terms_agree').text()
+			},
+			gateway: {
+				required: $('#validate_gateway_required').text()
 			}
 		}
 	});

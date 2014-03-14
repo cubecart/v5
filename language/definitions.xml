@@ -1095,6 +1095,7 @@
     <string name="postal_address" introduced="5.0.0"><![CDATA[Postal Address]]></string>
     <string name="postal_order" introduced="5.0.0"><![CDATA[Postal Order]]></string>
     <string name="select" introduced="5.0.0"><![CDATA[Choose Payment Method]]></string>
+    <string name="choose_payment" introduced="6.0.0"><![CDATA[Please select a payment method.]]></string>
     <string name="transfer_progress" introduced="5.0.0"><![CDATA[Payment gateway progress]]></string>
     <string name="transferring" introduced="5.0.0"><![CDATA[Transferring, Please wait...]]></string>
     <string name="plugins_link" introduced="5.2.2"><![CDATA[Alternate Checkout providers such as <strong>Amazon Payments</strong>, <strong>Google Checkout</strong> and <strong>PayPal</strong> can be found in the &quot;<a href="?_g=modules&type=plugins">Plugins</a>&quot; section.]]></string>

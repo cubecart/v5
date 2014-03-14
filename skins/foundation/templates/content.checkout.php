@@ -103,6 +103,30 @@
          <input name="coupon" id="coupon" type="text" maxlength="25">
       </div>
    </div>
+   <h3>Payment Method</h3>
+   <div class="row">
+	   <div class="small-6 columns">
+	   <!-- Start Payment Options -->
+	   <ul class="no-bullet">
+	   {foreach from=$GATEWAYS item=gateway}
+	   <li>
+	      <input name="gateway" type="radio" value="{$gateway.folder}" id="{$gateway.folder}" required {$gateway.checked}>
+	         {if !empty($gateway.help)}
+	         <a href="{$gateway.help}" class="info" title="{$LANG.common.information}"><img src="images/icons/information.png" alt="{$LANG.common.information}"></a>
+	         {/if}
+	         <label for="{$gateway.folder}">{$gateway.description}</label>
+	      </li>
+	   {/foreach}
+	   </ul>
+	   <div class="hide" id="validate_gateway_required">{$LANG.gateway.choose_payment}</div>
+	   <!-- End Payment Options -->
+	   </div>
+	    <div class="small-6 columns">
+	    credit card form
+	    </div>
+   </div>
+
+   
    <div class="clearfix">
       <a href="{$STORE_URL}/index.php?_a=basket&amp;empty-basket=true" class="button alert left">{$LANG.basket.basket_empty}</a>
       <input type="submit" name="update" class="button secondary left" value="{$LANG.basket.basket_update}">

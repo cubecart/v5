@@ -1025,16 +1025,17 @@ class Cubecart {
 	 * Display part of the checkout process
 	 */
 	private function _checkoutProcess($section = null) {
+		
 		switch ($section) {
-		case 'complete':
-			$status = 3;
-			break;
-		case 'gateway':
-			$status = 2;
-			break;
-		default:
-			$status = ($GLOBALS['user']->is() || $_GET['_a']=='confirm' || (isset($GLOBALS['cart']->basket['register']) && $GLOBALS['cart']->basket['register']==false)) ? 1 : 0;
-			break;
+			case 'complete':
+				$status = 3;
+				break;
+			case 'gateway':
+				$status = 2;
+				break;
+			default:
+				$status = ($GLOBALS['user']->is() || $_GET['_a']=='confirm' || (isset($GLOBALS['cart']->basket['register']) && $GLOBALS['cart']->basket['register']==false)) ? 1 : 0;
+				break;
 		}
 
 		foreach ($GLOBALS['hooks']->load('class.cubecart.checkout_progress') as $hook) include $hook;
@@ -1045,6 +1046,14 @@ class Cubecart {
 			2 => $GLOBALS['language']->checkout['process_payment'],
 			3 => $GLOBALS['language']->checkout['process_complete'],
 		);
+		
+		// v6 skins don't have a payment step!
+		$skin_data = $GLOBALS['gui']->getSkinData();
+		
+		if (version_compare($skin_data['info']['compatible']['min'], '6.0.0a', '>=')) {
+			unset($blocks[2]);
+		}
+		
 		$step = 1;
 		foreach ($blocks as $key => $title) {
 			switch (true) {
@@ -1510,6 +1519,8 @@ class Cubecart {
 			if ($this->_basket['weight'] > 0) {
 				$GLOBALS['smarty']->assign('BASKET_WEIGHT', ($GLOBALS['config']->get('config', 'show_basket_weight')) ? $this->_basket['weight'].$GLOBALS['config']->get('config', 'product_weight_unit') : false);
 			}
+			
+			$this->_listPaymentOptions();
 
 			// Alternate Checkouts - loaded as hooks
 			$load_checkouts = true;
@@ -1538,9 +1549,48 @@ class Cubecart {
 			foreach ($GLOBALS['hooks']->load('class.cubecart.display_basket') as $hook) include $hook;
 		}
 	}
+	
+	private function _listPaymentOptions() {
+		//if (version_compare($skin_data['info']['compatible']['min'], '6.0.0', '<')) return false;
+		
+		$gateways = $GLOBALS['db']->select('CubeCart_modules', false, array('module' => 'gateway', 'status' => '1'), array('position' => 'ASC'));
+		// Gateway hooks
+		foreach ($GLOBALS['hooks']->load('class.cubecart.display_checkout_gateways') as $hook) include $hook;
+		
+			// List all available and enabled payment gateways
+			foreach ($gateways as $gateway) {
+			
+				$gateway_path  = CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'gateway'.CC_DS.$gateway['folder'].CC_DS.'gateway.class.php';
+				$plugin_path  = CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.$gateway['base_folder'].CC_DS.'gateway.class.php';
+
+				if (!file_exists($gateway_path) && !file_exists($plugin_path)) {
+					continue;
+				}
+				$module = (isset($gateway['plugin']) && $gateway['plugin']) ? $gateway : $GLOBALS['config']->get($gateway['folder']);
+
+				$countries = (!empty($module['countries'])) ? unserialize($module['countries']) : false;
+				$disabled_countries = (!empty($module['disabled_countries'])) ? unserialize($module['disabled_countries']) : false;
+
+				// Check module isn't set for mobile / main only!
+				if (isset($module['scope']) && !empty($module['scope']) && ($module['scope']=='main' && $GLOBALS['gui']->mobile) || ($module['scope']=='mobile' && !$GLOBALS['gui']->mobile)) continue;
+
+				if (is_array($countries) && !in_array($GLOBALS['cart']->basket['delivery_address']['country_id'], $countries) || is_array($disabled_countries) && in_array($GLOBALS['cart']->basket['delivery_address']['country_id'], $disabled_countries)) continue;
+
+				if (preg_match('#\.(gif|jpg|png|jpeg)$#i', strtolower($module['desc']))) {
+					$gateway['description'] = sprintf('<img src="%s" border="0" title="" alt="" />', $module['desc']);
+				} elseif (!empty($module['desc'])) {
+					$gateway['description'] = $module['desc'];
+				} else {
+					$gateway['description'] = $gateway['folder'];
+				}
+				$gateway['checked'] = (isset($gateway['default']) && $gateway['default']) ? 'checked="checked"' : '';
+				$gateway_list[] = $gateway;
+			}
+			$GLOBALS['smarty']->assign('GATEWAYS', $gateway_list);
+	}
 
 	/**
-	 * Display gateways
+	 * Display gateways (Semi depreciated)
 	 */
 	private function _displayGateways($name = false) {
 		$where = array('module' => 'gateway', 'status' => '1');
