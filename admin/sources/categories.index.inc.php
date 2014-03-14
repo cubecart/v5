@@ -27,6 +27,8 @@ if (isset($_POST['cat']) && is_array($_POST['cat']) && Admin::getInstance()->per
 
 	$_POST['cat']['hide'] = (int)$_POST['cat']['visible'] && (int)$_POST['cat']['status'] ? 0 : 1;
 
+	$_POST['cat']['cat_desc'] = $GLOBALS['RAW']['POST']['cat']['cat_desc'];
+	
 	if (is_numeric($_POST['cat']['cat_id'])) {
 		$cat_id = $_POST['cat']['cat_id'];
 		$old_image = $GLOBALS['db']->select('CubeCart_category', array('cat_image'), array('cat_id' => $_POST['cat']['cat_id']));

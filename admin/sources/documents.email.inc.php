@@ -272,6 +272,10 @@ if (isset($_POST['template_default']) && is_array($_POST['template_default']) &&
 }
 
 if (isset($_POST['template'])) {
+	
+	$_POST['template']['content_html'] = $GLOBALS['RAW']['POST']['template']['content_html'];
+	$_POST['template']['content_text'] = $GLOBALS['RAW']['POST']['template']['content_text'];
+
 	## Save/Update Template
 	$proceed = true;
 	foreach (array('content_html', 'content_text') as $key) {
@@ -280,6 +284,7 @@ if (isset($_POST['template'])) {
 			$proceed = false;
 		}
 	}
+	
 	if ($proceed && Admin::getInstance()->permissions('documents', CC_PERM_EDIT)) {
 		if (isset($_POST['template']['template_id']) && is_numeric($_POST['template']['template_id'])) {
 			$GLOBALS['db']->update('CubeCart_email_template', $_POST['template'], array('template_id' => (int)$_POST['template']['template_id']));
@@ -294,6 +299,10 @@ if (isset($_POST['template'])) {
 }
 
 if (isset($_POST['content']) && Admin::getInstance()->permissions('documents', CC_PERM_EDIT)) {
+	
+	$_POST['content']['content_html'] = $GLOBALS['RAW']['POST']['content']['content_html'];
+	$_POST['content']['content_text'] = $GLOBALS['RAW']['POST']['content']['content_text'];
+	
 	## Save/Update Content
 	if (isset($_POST['content']['content_id']) && !empty($_POST['content']['content_id'])) {
 		## remove double encoding in repeat regions required to show them in FCK

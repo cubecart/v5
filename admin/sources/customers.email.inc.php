@@ -4,9 +4,9 @@ Admin::getInstance()->permissions('customers', CC_PERM_READ, true);
 
 global $lang;
 
-if (isset($_POST['maillist_format'])) {
-	if (empty($_POST['maillist_format'])) {
-		$_POST['maillist_format'] = '{$EMAIL_ADDRESS}';
+if (isset($GLOBALS['RAW']['POST']['maillist_format'])) {
+	if (empty($GLOBALS['RAW']['POST']['maillist_format'])) {
+		$GLOBALS['RAW']['POST']['maillist_format'] = '{$EMAIL_ADDRESS}';
 	}
 	if (($maillist = $GLOBALS['db']->select('CubeCart_newsletter_subscriber', array('customer_id', 'email'), array('status' => 1))) !== false) {
 		// Set initial variables
@@ -51,9 +51,9 @@ if (isset($_POST['maillist_format'])) {
 			);
 			/* Start Fixing Bug 2884 */
 			if ($_POST['maillist_extension']=="txt") {
-				$file_data .= str_replace($find, $replace, $_POST['maillist_format']).",";
+				$file_data .= str_replace($find, $replace, $GLOBALS['RAW']['POST']['maillist_format']).",";
 			}else {
-				$file_data .= str_replace($find, $replace, $_POST['maillist_format'])."\n";
+				$file_data .= str_replace($find, $replace, $GLOBALS['RAW']['POST']['maillist_format'])."\n";
 			}
 			/* End Fixing Bug 2884 */
 			unset($customer, $replace, $member, $long_name, $short_name);

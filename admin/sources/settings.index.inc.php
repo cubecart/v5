@@ -5,28 +5,6 @@ Admin::getInstance()->permissions('settings', CC_PERM_READ, true);
 
 global $lang;
 
-$htaccess = CC_ROOT_DIR.CC_DS.'.htaccess';
-$GLOBALS['smarty']->assign('HTACCESS_DISABLED', (!is_writable($htaccess)));
-if (isset($_POST['install_htaccess'])) {
-	Admin::getInstance()->permissions('settings', CC_PERM_FULL, true);
-	$ht_new = (get_magic_quotes_gpc()) ? stripslashes($_POST['htaccess-data']) : $_POST['htaccess-data'];
-	if (file_exists($htaccess)) {
-		if (file_put_contents($htaccess, $ht_new)) {
-			$GLOBALS['main']->setACPNotify($lang['settings']['notify_htaccess_update']);
-		} else {
-			$GLOBALS['main']->setACPWarning($lang['settings']['error_htaccess_update']);
-		}
-	} else {
-		if (is_writable(CC_ROOT_DIR) && file_put_contents($htaccess, $ht_new)) {
-			$GLOBALS['main']->setACPNotify($lang['settings']['notify_htaccess_create']);
-		} else {
-			$GLOBALS['main']->setACPWarning($lang['settings']['error_htaccess_create']);
-		}
-	}
-	httpredir(currentPage());
-}
-unset($htaccess);
-
 // specify some SSL for them if its not been set yet
 $ssl_url   = $GLOBALS['config']->get('config', 'ssl_url');
 $standard_url  = $GLOBALS['config']->get('config', 'standard_url');
@@ -92,6 +70,8 @@ if (isset($_POST['config']) && Admin::getInstance()->permissions('settings', CC_
 	}
 
 	$config_new = $_POST['config'];
+	$config_new['offline_content'] = $GLOBALS['RAW']['POST']['config']['offline_content'];
+	$config_new['store_copyright'] = $GLOBALS['RAW']['POST']['config']['store_copyright'];
 
 	## Validate SSL URL
 	if (!filter_var($config_new['ssl_url'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
@@ -157,17 +137,6 @@ $GLOBALS['main']->addTabControl($lang['settings']['tab_logos'], 'Logos');
 $GLOBALS['main']->addTabControl($lang['settings']['tab_advanced'], 'Advanced_Settings');
 $GLOBALS['main']->addTabControl($lang['settings']['tab_copyright'], 'Copyright');
 $GLOBALS['main']->addTabControl($lang['settings']['tab_extra'], 'Extra');
-
-if (file_exists(CC_ROOT_DIR.CC_DS.'.htaccess')) {
-	$htaccess = file_get_contents(CC_ROOT_DIR.CC_DS.'.htaccess');
-}
-
-if (!strstr($htaccess, 'seo_path')) {
-	$htaccess = (!empty($htaccess)) ? $htaccess."\r\n\r\n" : '';
-	$htaccess .= file_get_contents(CC_ROOT_DIR.CC_DS.$glob['adminFolder'].CC_DS.'sources'.CC_DS.'settings'.CC_DS.'seo-htaccess.txt');
-}
-$GLOBALS['smarty']->assign('VAL_HTACCESS_CONTENTS', $htaccess);
-
 
 ## Get Front End skins
 if (($skins = $GLOBALS['gui']->listSkins()) !== false) {
@@ -296,9 +265,6 @@ if (class_exists('DateTimeZone')) {
 ## Default digital custom path
 $GLOBALS['config']->get('config', 'dnLoadRootPath', rootHomePath());
 $GLOBALS['config']->get('config', 'dnLoadCustomPath', ($GLOBALS['config']->isEmpty('config', 'dnLoadCustomPath')) ? 'files' : $GLOBALS['config']->get('config', 'dnLoadCustomPath'));
-
-## Offline content data
-//$GLOBALS['config']->get('config', 'offline_content', base64_decode($GLOBALS['config']->get('config', 'offline_content')));
 
 ## Auto assign config settings to {VAL_[KEYNAME]}
 $select_options = array(

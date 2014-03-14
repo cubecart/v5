@@ -12,6 +12,7 @@ if (isset($_POST['document']) && Admin::getInstance()->permissions('documents', 
 	}
 	## Do the database magic
 	$rem_array = null;
+	$_POST['document']['doc_content'] = $GLOBALS['RAW']['POST']['doc_content'];
 	if (isset($_POST['document']['doc_id']) && is_numeric($_POST['document']['doc_id'])) {
 		if ($GLOBALS['db']->update('CubeCart_documents', $_POST['document'], array('doc_id' => $_POST['document']['doc_id']), true)) {
 			$GLOBALS['seo']->setdbPath('doc', $_POST['document']['doc_id'], $_POST['seo_path'], true, true);
