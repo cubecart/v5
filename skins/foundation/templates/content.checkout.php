@@ -122,7 +122,10 @@
 	   <!-- End Payment Options -->
 	   </div>
 	    <div class="small-6 columns">
-	    credit card form
+	    <div class="row">
+	      <div class="small-4 column">Name on Card</div>
+	      <div class="small-8 column"> </div>
+	    </div>
 	    </div>
    </div>
 
