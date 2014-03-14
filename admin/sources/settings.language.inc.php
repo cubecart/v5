@@ -26,7 +26,7 @@ if (isset($_POST['save']) && isset($_POST['string']) && Admin::getInstance()->pe
 
 	# Save strings to Database
 	$clear = false;
-	foreach ($_POST['string'] as $type => $data) {
+	foreach ($GLOBALS['RAW']['POST']['string'] as $type => $data) {
 		foreach ($data as $name => $value) {
 			$record = array(
 				'language' => $_GET['language'],
