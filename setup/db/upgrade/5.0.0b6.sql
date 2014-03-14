@@ -59,10 +59,12 @@ CREATE TABLE IF NOT EXISTS `CubeCart_request_log` (
 ALTER TABLE  `CubeCart_geo_country` CHANGE  `printable_name`  `name` VARCHAR( 80 ) NOT NULL DEFAULT  ''; #EOQ
 
 CREATE TABLE `CubeCart_seo_urls` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `item_id` int(10) unsigned DEFAULT NULL,
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+	`type` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+	`item_id` int(25) unsigned DEFAULT NULL,
   PRIMARY KEY (`path`),
-  KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
+  KEY `id` (`id`),
+  KEY `type` (`type`),
+  KEY `item_id` (`item_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ; #EOQ
