@@ -586,8 +586,14 @@ class Session {
 	 */
 	private function _start() {
 		$session_name = session_name();
-		if (isset($_GET[$session_name]) && !empty($_GET[$session_name])) {
-			session_id($_GET[$session_name]);
+		// Only allow session interchange for SSL and when SSL domains don't match!
+		$config = $GLOBALS['config']->get('config');
+		if($config['ssl']==1) {
+			$ssl_url 		= str_replace('https','',$config['ssl_url']);
+			$standard_url 	= str_replace('http','',$config['standard_url']);
+			if ($ssl_url!==$standard_url && isset($_GET[$session_name]) && !empty($_GET[$session_name])) {
+				session_id($_GET[$session_name]);
+			}
 		}
 		session_cache_limiter('none');
 		session_start();

@@ -178,15 +178,23 @@ class SSL {
 				// Switch into SSL mode
 				$page = $GLOBALS['config']->get('config', 'ssl_url').str_replace(CC_ROOT_REL, '/', $_SERVER['PHP_SELF']);
 			} else if (!$enable_ssl && CC_SSL) {
-					// Switch out of SSL mode
-					$page = $GLOBALS['config']->get('config', 'standard_url').str_replace($GLOBALS['config']->get('config', 'ssl_path'), '/', $_SERVER['PHP_SELF']);
-				}
+				// Switch out of SSL mode
+				$page = $GLOBALS['config']->get('config', 'standard_url').str_replace($GLOBALS['config']->get('config', 'ssl_path'), '/', $_SERVER['PHP_SELF']);
+			}
 
 			if (isset($page)) {
 				if ($force) {
 					$params['SSL'] = md5(serialize($params));
 				}
-				$params[session_name()] = session_id();
+				
+				if($GLOBALS['config']->get('config', 'ssl')==1) {
+					$ssl_url 		= str_replace('https','',$GLOBALS['config']->get('config', 'ssl_url'));
+					$standard_url 	= str_replace('http','',$GLOBALS['config']->get('config', 'standard_url'));
+					if ($ssl_url!==$standard_url) {
+						$params[session_name()] = session_id();
+					}
+				}
+			
 				unset($params['ssl_switch']);
 				if (!empty($params)) {
 					$page .= '?'.http_build_query($params, false, '&');
