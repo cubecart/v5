@@ -430,20 +430,6 @@ class Session {
 	}
 
 	/**
-	 * Restart a session
-	 */
-	public function restart() {
-		$old = $this->getId();
-
-		$this->_state = 'restart';
-		session_regenerate_id(true);
-		$GLOBALS['db']->update('CubeCart_sessions', array('session_id' => session_id()), array('session_id' => $old), false);
-		$this->_state = 'active';
-
-		$this->_validate();
-	}
-
-	/**
 	 * Set a session value to something
 	 *
 	 * @param string $name
@@ -529,14 +515,20 @@ class Session {
 		if ($this->_state == 'closed') {
 			return true;
 		}
+		
+		$old_sessionid = $this->getId();
+		session_regenerate_id(true);
+
+		$new_sessionid = session_id();
 
 		$record = array(
 			'location'		=> currentPage(),
 			'session_last'	=> $this->get('session_last', 'client', ''),
+			'session_id'	=> $new_sessionid
 		);
-
+		
 		//Use the instance because the global might be gone already
-		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $this->getId()), false);
+		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $old_sessionid), false);
 
 		// Tidy Access Logs keep months worth
 		Database::getInstance()->delete('CubeCart_access_log', array('time' => '<'.(time()-(3600*24*7*4))));
@@ -612,16 +604,8 @@ class Session {
 	 *
 	 * @param bool $restart
 	 */
-	private function _validate($restart = false) {
+	private function _validate() {
 		$ip = get_ip_address();
-
-		if ($restart) {
-			$this->_state = 'active';
-			$this->set('address', null, 'client');
-			$this->set('forwarded', null, 'client');
-			$this->set('browser', null, 'client');
-			$this->set('token', null, 'client');
-		}
 
 		if (($current = $GLOBALS['db']->select('CubeCart_sessions', false, array('session_id' => $this->getId()), false, 1, false, false)) === false) {
 			$record = array(
