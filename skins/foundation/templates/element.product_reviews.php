@@ -1,5 +1,5 @@
 {if $CTRL_REVIEW}
-<h2>{$LANG.catalogue.customer_reviews}</h2>
+<h2 id="reviews">{$LANG.catalogue.customer_reviews}</h2>
 <div id="review_read">
    {if $REVIEWS}
    <p class="pagination_top"><span class="pagination">{if isset($PAGINATION)}{$PAGINATION}{/if}</span>{$LANG.catalogue.average_rating}: <strong>{$REVIEW_AVERAGE}</strong></p>

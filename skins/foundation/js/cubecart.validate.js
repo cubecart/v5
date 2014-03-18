@@ -9,6 +9,8 @@ jQuery(document).ready(function() {
 	$.extend(jQuery.validator.messages, {
 		required: $('#validate_field_required').text()
 	});
+	
+	$("#add_to_basket").validate();
 	$("#review_form").validate({
 		rules: {
 			'review[name]': {

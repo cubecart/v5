@@ -65,7 +65,8 @@ jQuery(document).ready(function() {
 	$('#basket-summary').click(function() {
 		mini_basket_action();
 	});
-	$('form#add_to_basket').submit(function() {
+	$('form#add_to_basket').submit(function() { 
+		
 		var add = $(this).serialize();
 		var action = $(this).attr('action').replace(/\?.*/, '');
 		var basket = $('#mini-basket');
