@@ -5,7 +5,7 @@
 	<div class="list">
 	<div>
 		<span class="actions">
-		  <a href="?_g=settings&amp;node=language&amp;download=definitions" title="{$LANG.common.download}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/download.png" alt="{$LANG.common.download}" /></a>
+		  <a href="?_g=settings&node=language&download=definitions" title="{$LANG.common.download}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/download.png" alt="{$LANG.common.download}" /></a>
 		</span>
 		<img src="language/flags/globe.png" alt="{$LANG.translate.master_language}" />
 		{$LANG.translate.master_language}

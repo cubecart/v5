@@ -92,7 +92,7 @@ class Gateway {
 				
 				'return' 				=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 				'cancel_return' 		=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
-				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'			
+				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal'			
 			);
 			
 		} else { 

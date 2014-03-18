@@ -525,7 +525,7 @@
 	<div class="note">
 	  <span class="actions">
 		<input type="hidden" name="review[{$review.id}]" id="review_{$review.id}" value="{$review.approved}" class="toggle" />
-		<a href="?_g=reviews&amp;edit={$review.id}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
+		<a href="?_g=reviews&edit={$review.id}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
 		<a href="{$review.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 	  </span>
 	  <strong>{$review.title}</strong>
@@ -536,7 +536,7 @@
 		<input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if} />
 		{/section}
 		</span>
-		{$review.date} :: <a href="mailto:<{$review.email}">{$review.name}</a> (<a href="http://api.hostip.info/get_html.php?ip={$review.ip_address}&amp;position=true" class="colourbox hostip">{$review.ip_address}</a>)
+		{$review.date} :: <a href="mailto:<{$review.email}">{$review.name}</a> (<a href="http://api.hostip.info/get_html.php?ip={$review.ip_address}&position=true" class="colourbox hostip">{$review.ip_address}</a>)
 	  </div>
 	</div>
 	{/foreach}

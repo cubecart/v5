@@ -40,7 +40,7 @@
   		<fieldset><legend>{$LANG.2checkout.2checkout_settings}</legend>
   			<p>{$LANG.module.3rd_party_settings_desc}</p>
   			<div><label for="direct_return">{$LANG.2checkout.direct_return}</label><span><input name="direct_return" id="direct_return" class="textbox" type="text" value="{$LANG.2checkout.direct_return_value}" readonly="readonly" /></span></div>
-  			<div><label for="approved_url">{$LANG.2checkout.approved_url}</label><span><input name="approved_url" id="approved_url" class="textbox" type="text" value="{$STORE_URL}/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=2Checkout" readonly="readonly" /></span></div>
+  			<div><label for="approved_url">{$LANG.2checkout.approved_url}</label><span><input name="approved_url" id="approved_url" class="textbox" type="text" value="{$STORE_URL}/index.php?_g=rm&type=gateway&cmd=process&module=2Checkout" readonly="readonly" /></span></div>
   		</fieldset>
   		<p>{$LANG.module.description_options}</p>
   		</div>

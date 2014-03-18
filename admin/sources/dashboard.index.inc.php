@@ -58,7 +58,7 @@ if (!isset($_SESSION['version-check']) && $request = new Request('cp.cubecart.co
 	$request->setData(array('version' => CC_VERSION));
 	if (($response = $request->send()) !== false) {
 		if (version_compare(trim($response), CC_VERSION, '>')) {
-			$GLOBALS['main']->setACPWarning(sprintf($lang['dashboard']['error_version_update'], $response, CC_VERSION).' <a href="?_g=maintenance&amp;node=index#upgrade">'.$lang['maintain']['upgrade_now'].'</a>');
+			$GLOBALS['main']->setACPWarning(sprintf($lang['dashboard']['error_version_update'], $response, CC_VERSION).' <a href="?_g=maintenance&node=index#upgrade">'.$lang['maintain']['upgrade_now'].'</a>');
 		}
 		$_SESSION['version-check'] = true;
 	}
@@ -175,8 +175,8 @@ if (($reviews = $GLOBALS['db']->select('CubeCart_reviews', false, array('approve
 		$product   = $GLOBALS['db']->select('CubeCart_inventory', array('name'), array('product_id' => (int)$review['product_id']));
 		$review['product'] = $product[0];
 		$review['date']  = formatTime($review['time']);
-		$review['delete'] = "?_g=products&amp;node=reviews&amp;delete=".(int)$review['id'];
-		$review['edit']  = "?_g=products&amp;node=reviews&amp;edit=".(int)$review['id'];
+		$review['delete'] = "?_g=products&node=reviews&delete=".(int)$review['id'];
+		$review['edit']  = "?_g=products&node=reviews&edit=".(int)$review['id'];
 		$review['stars'] = 5;
 		$review_list[] = $review;
 	}

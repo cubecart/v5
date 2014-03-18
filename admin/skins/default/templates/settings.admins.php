@@ -17,7 +17,7 @@
 	  <div><label for="order_notify">{$LANG.admins.notifications}</label><span><input type="hidden" name="admin[order_notify]" id="order_notify" class="toggle" value="{$ADMIN.order_notify}" /></span></div>
 
 	  {if $LINKED}
-	  <div><label>{$LANG.admins.account_linked}</label><span><a href="?_g=customers&amp;action=edit&amp;customer_id={$ADMIN.customer_id}">{$LANG.admins.account_link_view}</a> &nbsp; [<a href="{$UNLINK}" class="delete">{$LANG.common.remove}</a>]</span></div>
+	  <div><label>{$LANG.admins.account_linked}</label><span><a href="?_g=customers&action=edit&customer_id={$ADMIN.customer_id}">{$LANG.admins.account_link_view}</a> &nbsp; [<a href="{$UNLINK}" class="delete">{$LANG.common.remove}</a>]</span></div>
 	  {else}
 	  <div><label for="admin-customer">{$LANG.admins.account_link}</label><span>
 		<input type="hidden" id="result_admin-customer" name="admin[customer_id]" /><input type="text" id="admin-customer" class="ajax textbox" rel="user" />

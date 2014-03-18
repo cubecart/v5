@@ -31,8 +31,8 @@
 			{foreach from=$CUSTOM_QUICK_TASKS item=$task}
 				<li><a href="{$task.url}">{$task.name}</a></li>
 			{foreachelse}
-				<li><a href="?_g=reports&amp;report[date][from]={$QUICK_TASKS.today}&amp;report[date][to]={$QUICK_TASKS.today}">{$LANG.dashboard.task_orders_view_day}</a></li>
-				<li><a href="?_g=reports&amp;report[date][from]={$QUICK_TASKS.this_weeks}&amp;report[date][to]={$QUICK_TASKS.today}">{$LANG.dashboard.task_orders_view_week}</a></li>
+				<li><a href="?_g=reports&report[date][from]={$QUICK_TASKS.today}&report[date][to]={$QUICK_TASKS.today}">{$LANG.dashboard.task_orders_view_day}</a></li>
+				<li><a href="?_g=reports&report[date][from]={$QUICK_TASKS.this_weeks}&report[date][to]={$QUICK_TASKS.today}">{$LANG.dashboard.task_orders_view_week}</a></li>
 				<li><a href="?_g=reports">{$LANG.dashboard.task_orders_view_month}</a></li>
 				<li><a href="?_g=products&action=add">{$LANG.catalogue.product_add}</a></li>
 				<li><a href="?_g=categories&action=add">{$LANG.catalogue.category_add}</a></li>
@@ -118,10 +118,10 @@
 	  <tbody>
 		{foreach from=$ORDERS item=order}
 		<tr>
-		  <td><a href="?_g=orders&amp;action=edit&amp;order_id={$order.cart_order_id}">{$order.cart_order_id}</a></td>
+		  <td><a href="?_g=orders&action=edit&order_id={$order.cart_order_id}">{$order.cart_order_id}</a></td>
 		  <td><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$order.icon}.png" alt="" /></td>
 		  <td>
-		    <a href="?_g=customers&amp;action=edit&amp;customer_id={$order.customer_id}">{if empty($order.first_name) && empty($order.last_name)}
+		    <a href="?_g=customers&action=edit&customer_id={$order.customer_id}">{if empty($order.first_name) && empty($order.last_name)}
 		  		{$order.name}
 		  	{else}
 		  		{$order.first_name} {$order.last_name}
@@ -131,8 +131,8 @@
 		  <td>{$order.date}</td>
 		  <td>{$order.total}</td>
 		  <td>
-		  	<a href="?_g=orders&amp;action=edit&amp;order_id={$order.cart_order_id}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" /></a>
-		  	<a href="?_g=orders&amp;delete={$order.cart_order_id}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
+		  	<a href="?_g=orders&action=edit&order_id={$order.cart_order_id}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" /></a>
+		  	<a href="?_g=orders&delete={$order.cart_order_id}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		  	{if isset($order.notes)}
 		  	<a href="?_g=orders&action=edit&order_id={$order.cart_order_id}#order_notes" title="{foreach $order.notes as $note}{$note.time} {$note.content}{"\r\n"}{/foreach}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/note.png" alt="{$LANG.common.notes}" /></a>
 		  	{/if}
@@ -165,7 +165,7 @@
 			  <input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if} />
 			{/section}
 		  </span>
-		  <a href="?_g=products&amp;product_id={$review.product_id}&amp;action=edit">{$review.product.name}</a> &raquo; {$review.date} :: {$review.name} &lt;<a href="mailto:{$review.email}">{$review.email}</a>&gt;  {$review.ip_address}
+		  <a href="?_g=products&product_id={$review.product_id}&action=edit">{$review.product.name}</a> &raquo; {$review.date} :: {$review.name} &lt;<a href="mailto:{$review.email}">{$review.email}</a>&gt;  {$review.ip_address}
 		</div>
 	  </div>
 	  {/foreach}
@@ -184,8 +184,8 @@
   <div class="list">
   {foreach from=$STOCK item=warn}
 	<div>
-	  <span class="actions"><a href="?_g=products&amp;action=edit&amp;product_id={$warn.product_id}{if $warn.M_use_stock==1}#Options{/if}" class="edit"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a></span>
-	  <a href="?_g=products&amp;action=edit&amp;product_id={$warn.product_id}{if $warn.M_use_stock==1}#Options{/if}">{$warn.name}</a> ({$LANG.dashboard.stock_level}: {if $warn.M_use_stock==1}{$warn.M_stock_level}{else}{$warn.I_stock_level}{/if})
+	  <span class="actions"><a href="?_g=products&action=edit&product_id={$warn.product_id}{if $warn.M_use_stock==1}#Options{/if}" class="edit"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a></span>
+	  <a href="?_g=products&action=edit&product_id={$warn.product_id}{if $warn.M_use_stock==1}#Options{/if}">{$warn.name}</a> ({$LANG.dashboard.stock_level}: {if $warn.M_use_stock==1}{$warn.M_stock_level}{else}{$warn.I_stock_level}{/if})
 	  {if $warn.cached_name}
 	  - {$warn.cached_name}
 	  {/if}

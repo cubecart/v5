@@ -55,13 +55,13 @@ class Gateway {
 			'delivery_postcode' 	=> $this->_basket['delivery_address']['postcode'],
 			'email_address' 		=> $this->_basket['billing_address']['email'],
 
-			'success_url' 			=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&amp;cart_order_id='.$this->_basket['cart_order_id'].'&_a=complete',	
+			'success_url' 			=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$this->_basket['cart_order_id'].'&_a=complete',	
 			'cancel_url' 			=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
-			'callback_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=Nochex_APC&amp;cart_order_id='.$this->_basket['cart_order_id'],
+			'callback_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=Nochex_APC&cart_order_id='.$this->_basket['cart_order_id'],
 			
 			
 			'test_transaction' 		=> ($this->_module['testMode']) ? 100 : '',
-			'test_success_url' 		=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&amp;cart_order_id='.$this->_basket['cart_order_id'].'&_a=complete'
+			'test_success_url' 		=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$this->_basket['cart_order_id'].'&_a=complete'
 			
 		);
 		return $hidden;

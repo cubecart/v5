@@ -120,7 +120,7 @@ class Cubecart {
 					$product['sale_price'] = ($sale) ? $GLOBALS['tax']->priceFormat($product['sale_price']) : null;
 
 					$product['ctrl_stock'] = (!$product['use_stock_level'] || $GLOBALS['config']->get('config', 'basket_out_of_stock_purchase') || ($product['use_stock_level'] && $GLOBALS['catalogue']->getProductStock($product['product_id'], null, true))) ? true : false;
-					$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&amp;');
+					$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&');
 
 					$GLOBALS['smarty']->assign('CTRL_REVIEW', (bool)$GLOBALS['config']->get('config', 'enable_reviews'));
 					if (($product_review = $GLOBALS['db']->select('CubeCart_reviews', 'SUM(`rating`) AS Score, COUNT(`id`) as Count', array('approved' => 1, 'product_id' => $product['product_id']))) !== false) {
@@ -1010,7 +1010,7 @@ class Cubecart {
 					$GLOBALS['smarty']->assign('RECAPTCHA', true);
 				}
 			}
-			$GLOBALS['smarty']->assign('TERMS_CONDITIONS', (!$GLOBALS['config']->get('config', 'disable_checkout_terms') && $terms = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_terms' => '1'))) ? $GLOBALS['seo']->buildURL('doc', $terms[0]['doc_id'], '&amp;') : false);
+			$GLOBALS['smarty']->assign('TERMS_CONDITIONS', (!$GLOBALS['config']->get('config', 'disable_checkout_terms') && $terms = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_terms' => '1'))) ? $GLOBALS['seo']->buildURL('doc', $terms[0]['doc_id'], '&') : false);
 			if (isset($_POST['terms_agree']) && $_POST['terms_agree']==1) {
 				$this->_basket['terms_agree'] = true;
 			}
@@ -1540,7 +1540,7 @@ class Cubecart {
 					foreach ($related_products as $related) {
 						$related = $GLOBALS['catalogue']->getProductData($related['product_id']);
 						$related['img_src'] = $GLOBALS['gui']->getProductImage($related['product_id']);
-						$related['url'] = $GLOBALS['seo']->buildURL('prod', $related['product_id'], '&amp;');
+						$related['url'] = $GLOBALS['seo']->buildURL('prod', $related['product_id'], '&');
 						if ($related['product_id']>0) {
 							$related_list[] = $related;
 						}
@@ -2014,8 +2014,8 @@ class Cubecart {
 					httpredir(currentPage(array('action')));
 				}
 				$GLOBALS['smarty']->assign('URL', array(
-						'subscribe' => $GLOBALS['storeURL'].'/index.php?_a=newsletter&amp;action=subscribe',
-						'unsubscribe' => $GLOBALS['storeURL'].'/index.php?_a=newsletter&amp;action=unsubscribe')
+						'subscribe' => $GLOBALS['storeURL'].'/index.php?_a=newsletter&action=subscribe',
+						'unsubscribe' => $GLOBALS['storeURL'].'/index.php?_a=newsletter&action=unsubscribe')
 				);
 				$GLOBALS['smarty']->assign('SUBSCRIBED', (bool)$GLOBALS['db']->select('CubeCart_newsletter_subscriber', false, array('email' => $GLOBALS['user']->get('email')), false, false, false, false));
 			}
@@ -2527,7 +2527,7 @@ class Cubecart {
 			}
 			$GLOBALS['smarty']->assign('DATA', $_POST);
 			if (($terms = $GLOBALS['db']->select('CubeCart_documents', false, array('doc_terms' => '1'))) !== false) {
-				$GLOBALS['smarty']->assign('TERMS_CONDITIONS', $GLOBALS['seo']->buildURL('doc', $terms[0]['doc_id'], '&amp;'));
+				$GLOBALS['smarty']->assign('TERMS_CONDITIONS', $GLOBALS['seo']->buildURL('doc', $terms[0]['doc_id'], '&'));
 			} else {
 				$GLOBALS['smarty']->assign('TERMS_CONDITIONS', false);
 			}

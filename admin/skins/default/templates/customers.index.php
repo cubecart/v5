@@ -34,7 +34,7 @@
 		  <td><a href="{$customer.edit}">{$customer.last_name}, {$customer.first_name}</a> {if !empty($customer.groups)}({$customer.groups}){/if}</td>
 		  <td>{$customer.email}</td>
 		  <td>{$customer.registered}</td>
-		  <td align="center"><a href="?_g=orders&amp;customer_id={$customer.customer_id}">{$customer.order_count}</a></td>
+		  <td align="center"><a href="?_g=orders&customer_id={$customer.customer_id}">{$customer.order_count}</a></td>
 		  <td align="center">
 			<a href="{$customer.edit}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
 			<a href="{$customer.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>

@@ -21,7 +21,7 @@ function download_parts($format = 'cubecart', $no_rows, $per_page) {
 	$no_pages = ($no_pages) ? $no_pages : 1;
 	$html_out = null;
 	for ($i = 1; $i <= $no_pages; ++$i) {
-		$html_out .= '<a href="?_g=products&amp;node=export&amp;page='.$i.'&amp;per_page='.$per_page.'&amp;format='.$format.'">'.$i.'</a> ';
+		$html_out .= '<a href="?_g=products&node=export&page='.$i.'&per_page='.$per_page.'&format='.$format.'">'.$i.'</a> ';
 	}
 	return $html_out;
 }
@@ -202,7 +202,7 @@ $GLOBALS['smarty']->assign('LIMITS', $smarty_data['limits']);
 foreach ($formats as $format_key => $format_name) {
 	$format['name']  = $format_name;
 	$format['parts']  = download_parts($format_key, $no_rows, $per_page);
-	$format['link']  = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config', 'adminFile')."?_g=products&amp;node=export&amp;page=1&amp;per_page=5000&amp;format=$format_key&amp;node=export&amp;access=".$GLOBALS['config']->get('config', 'feed_access_key');
+	$format['link']  = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config', 'adminFile')."?_g=products&node=export&page=1&per_page=5000&format=$format_key&node=export&access=".$GLOBALS['config']->get('config', 'feed_access_key');
 	$smarty_data['formats'][] = $format;
 }
 $GLOBALS['smarty']->assign('FORMATS', $smarty_data['formats']);

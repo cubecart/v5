@@ -144,7 +144,7 @@
 
 	  	{foreach from=$PRODUCTS item=product}
 	  	<div id="item">
-	  	{$product.quantity} x {$product.name} - {$product.product_code} ({$product.line_formatted}) {if $product.digital}<a href="{$VAL_SELF}&amp;reset_id={$product.id}" />[{$LANG.orders.reset_download_link}]</a>{/if}<span>{$product.price_total_formatted}</span>
+	  	{$product.quantity} x {$product.name} - {$product.product_code} ({$product.line_formatted}) {if $product.digital}<a href="{$VAL_SELF}&reset_id={$product.id}" />[{$LANG.orders.reset_download_link}]</a>{/if}<span>{$product.price_total_formatted}</span>
 	  	{if $product.options}
 	    <br />{$product.options}
 	    {/if}

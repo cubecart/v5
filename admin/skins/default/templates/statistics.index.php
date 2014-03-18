@@ -152,9 +152,9 @@
   <h3>{$LANG.statistics.title_customers_active}</h3>
   <p>
   {if $BOTS==true}
-  	<a href="?_g=statistics&amp;bots=false#stats_online">{$LANG.statistics.display_customers_only}</a>
+  	<a href="?_g=statistics&bots=false#stats_online">{$LANG.statistics.display_customers_only}</a>
   {else}
-  	<a href="?_g=statistics&amp;bots=true#stats_online">{$LANG.statistics.display_bots_and_customers}</a>
+  	<a href="?_g=statistics&bots=true#stats_online">{$LANG.statistics.display_bots_and_customers}</a>
   {/if}
   </p>
   <table class="list">
@@ -182,7 +182,7 @@
 		  </strong>
 		  {if !empty($user.ip_address)}
 		  <br />
-		  [<a href="http://api.hostip.info/get_html.php?ip={$user.ip_address}&amp;position=true" class="colorbox hostip">{$user.ip_address}</a>]
+		  [<a href="http://api.hostip.info/get_html.php?ip={$user.ip_address}&position=true" class="colorbox hostip">{$user.ip_address}</a>]
 		  {/if}
 		</td>
 		<td>{$user.location} <a href="{$user.location}" target="_blank">&raquo;</a></td>

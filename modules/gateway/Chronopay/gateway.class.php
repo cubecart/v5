@@ -61,7 +61,7 @@ class Gateway {
 			'cb_url' 					=> $GLOBALS['storeURL'].'/modules/gateway/Chronopay/call.php',
 			'cb_type' 					=> 'P',
 			'decline_url' 				=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
-			'success_url'				=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&amp;cart_order_id='.$this->_basket['cart_order_id'],
+			'success_url'				=> $GLOBALS['storeURL'].'/index.php?_a=vieworder&cart_order_id='.$this->_basket['cart_order_id'],
 			
 			'f_name' 					=> $this->_basket['billing_address']['first_name'],
 			's_name' 					=> $this->_basket['billing_address']['last_name'],

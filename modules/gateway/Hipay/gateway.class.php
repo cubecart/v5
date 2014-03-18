@@ -81,10 +81,10 @@ class Gateway {
 				        <merchantSiteId>'.$hidden['website_id'].'</merchantSiteId>
 				        <statsGroupId>0</statsGroupId>
 				        <merchantDatas><_aKey_id>'.$this->_basket['cart_order_id'].'</_aKey_id><_aKey_key>'.$hidden['code_to_encrypt'].'</_aKey_key></merchantDatas>
-				        <url_ok>'.$GLOBALS['storeURL'].'/index.php?_g=remote&amp;type=gateway&amp;cmd=process&amp;status=Approved&amp;module=Hipay</url_ok>
-				        <url_nok>'.$GLOBALS['storeURL'].'/index.php?_g=remote&amp;type=gateway&amp;cmd=process&amp;status=Declined&amp;module=Hipay</url_nok>
-				        <url_cancel>'.$GLOBALS['storeURL'].'/index.php?_g=remote&amp;type=gateway&amp;cmd=process&amp;status=Canceled&amp;module=Hipay</url_cancel>
-				        <url_ack>'.$GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=Hipay</url_ack>
+				        <url_ok>'.$GLOBALS['storeURL'].'/index.php?_g=remote&type=gateway&cmd=process&status=Approved&module=Hipay</url_ok>
+				        <url_nok>'.$GLOBALS['storeURL'].'/index.php?_g=remote&type=gateway&cmd=process&status=Declined&module=Hipay</url_nok>
+				        <url_cancel>'.$GLOBALS['storeURL'].'/index.php?_g=remote&type=gateway&cmd=process&status=Canceled&module=Hipay</url_cancel>
+				        <url_ack>'.$GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=Hipay</url_ack>
 				        <ack_wd></ack_wd>
 				        <email_ack>'.$hidden['email_ack'].'</email_ack>
 				        <bg_color></bg_color>

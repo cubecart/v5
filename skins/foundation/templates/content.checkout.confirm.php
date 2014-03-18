@@ -9,7 +9,7 @@
       {$DATA.town}<br>
       {$DATA.state}, {$DATA.postcode}<br>
       {$DATA.country}
-      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=edit&amp;address_id={$DATA.address_id}&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_edit}</a></div>
+      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&action=edit&address_id={$DATA.address_id}&redir=confirm" class="button tiny secondary">{$LANG.address.address_edit}</a></div>
    </div>
    <div class="large-6 columns">
       {if $CTRL_DELIVERY}
@@ -19,7 +19,7 @@
       <option value="{$address.address_id}" {$address.selected}>{$address.description} ({$address.state}, {$address.postcode})</option>
       {/foreach}
       </select>
-      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add&amp;redir=confirm" class="button tiny secondary">{$LANG.address.address_add}</a></div>
+      <div class="pad-top"><a href="{$STORE_URL}/index.php?_a=addressbook&action=add&redir=confirm" class="button tiny secondary">{$LANG.address.address_add}</a></div>
       {/if}
    </div>
 </div>

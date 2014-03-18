@@ -92,7 +92,7 @@ class Database_Contoller {
 	 * @return string
 	 */
 	public function column_sort($column_name, $display_text, $order_by = 'sort', $current_page, $current_sort = false, $anchor = false) {
-		$link   = "$current_page&amp;{$order_by}[$column_name]=";
+		$link   = "$current_page&{$order_by}[$column_name]=";
 		$image_path = $GLOBALS['config']->get('config', 'adminFolder').'/skins/default/images/';
 		if ($anchor) {
 			$anchor = '#'.$anchor;

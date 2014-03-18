@@ -35,7 +35,7 @@ if (is_array($module->_settings)) {
 				$country['name'] 		= $results[0]['name'];
 	     		$country['tax_code'] 	= $value; 
 	     		$country['module_key'] 	= $key; 
-	     		$country['link'] 		= '?_g=modules&amp;type=external&amp;module=sage&amp;rmTaxCode='.str_replace('taxCode_', '', $key); 
+	     		$country['link'] 		= '?_g=modules&type=external&module=sage&rmTaxCode='.str_replace('taxCode_', '', $key); 
 				$list_enabled[] = $country;
 			}
 		}

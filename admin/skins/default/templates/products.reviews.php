@@ -30,7 +30,7 @@
 		<span style="float: right;">
 		  {section name=i start=1 loop=6 step=1}<input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if} />{/section}
 		</span>
-		<a href="index.php?_a=product&amp;product_id={$review.product_id}" target="_blank">{$review.product.name}</a> &raquo;
+		<a href="index.php?_a=product&product_id={$review.product_id}" target="_blank">{$review.product.name}</a> &raquo;
 		{$review.date} - {$review.name} <<a href="mailto:{$review.email}">{$review.email}</a>> {$review.ip_address}
 	  </div>
 	</div>

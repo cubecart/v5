@@ -105,7 +105,7 @@ class Catalogue {
 			$this->_categoryTranslation();
 
 			$result = $this->_categoryData;
-			$this->_pathElements[] = ($link) ? sprintf('<a href="'.$GLOBALS['storeURL'].'/index.php?_a=viewCat&amp;cat_id=%d">%s</a>', $result['cat_id'], $result['cat_name']) : $result['cat_name'];
+			$this->_pathElements[] = ($link) ? sprintf('<a href="'.$GLOBALS['storeURL'].'/index.php?_a=viewCat&cat_id=%d">%s</a>', $result['cat_id'], $result['cat_name']) : $result['cat_name'];
 			if ($result['cat_parent_id'] != 0) {
 				$this->categoryPath($result['cat_parent_id'], $glue, $link, $reverse_sort, false);
 			}
@@ -148,7 +148,7 @@ class Catalogue {
 			foreach ($products as $product) {
 				$product = $this->getProductPrice($product);
 				$this->productAssign($product, false);
-				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&amp;');
+				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&');
 				$vars['products'][] = $product;
 			}
 
@@ -292,7 +292,7 @@ class Catalogue {
 					$GLOBALS['smarty']->assign('TRACKBACKS', ($trackbacks) ? $trackbacks : false);
 					$GLOBALS['smarty']->assign('TRACKBACK_URL', currentPage(null, array('_a' => 'trackback'), true));
 				}
-				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&amp;');
+				$product['url'] = $GLOBALS['seo']->buildURL('prod', $product['product_id'], '&');
 
 				// Get stock level variations for options
 				if ($stock_variations = $GLOBALS['db']->select('CubeCart_option_matrix', 'MAX(stock_level) AS max_stock, MIN(stock_level) AS min_stock', array('product_id' => $product['product_id'], 'use_stock' => 1, 'status' => 1), false, 1)) {
@@ -378,7 +378,7 @@ class Catalogue {
 					$products = $this->productCount($cat['cat_id']);
 					if ($products || ($products = $this->productCount($cat['cat_id']) || $GLOBALS['config']->get('config', 'catalogue_show_empty')) !== false) {
 						$cat['cat_image'] = $this->imagePath($cat['cat_image'], 'subcategory', 'url');
-						$cat['url'] = $GLOBALS['seo']->buildURL('cat', $cat['cat_id'], '&amp;');
+						$cat['url'] = $GLOBALS['seo']->buildURL('cat', $cat['cat_id'], '&');
 						$cat['products_number'] = $products;
 						$return[] = $cat;
 					}
@@ -952,7 +952,7 @@ class Catalogue {
 			}
 			$product['review_score'] = round($score/$count, 1);
 			if (!$product_view) {
-				$link = currentPage(array('_a', 'cat_id'), null, false).'_a=product&amp;product_id='.$product['product_id'].'#reviews';
+				$link = currentPage(array('_a', 'cat_id'), null, false).'_a=product&product_id='.$product['product_id'].'#reviews';
 			} else {
 				$link = '#reviews';
 			}

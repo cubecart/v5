@@ -583,8 +583,9 @@ class Session {
 	 * Start session
 	 */
 	private function _start() {
+		// Only allow session interchange for SSL and when SSL domains don't match! (Depreciated for security reasons)
+		/*
 		$session_name = session_name();
-		// Only allow session interchange for SSL and when SSL domains don't match!
  		$config = $GLOBALS['config']->get('config');
  		if($config['ssl']==1) {
  			$ssl_url 		= str_replace('https','',$config['ssl_url']);
@@ -593,6 +594,7 @@ class Session {
  				session_id($_GET[$session_name]);
  			}
  		}
+ 		*/
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA

@@ -1,6 +1,6 @@
 <div id="backup" class="tab_content">
   <h3>{$LANG.maintain.title_files_backup}</h3>
-  <form action="?_g=maintenance&amp;node=index&amp;files_backup=1#backup" method="post">
+  <form action="?_g=maintenance&node=index&files_backup=1#backup" method="post">
 	<p>{$LANG.maintain.files_backup_desc}</p>
 	<div>
 		<input type="submit" name="backup" class="delete" title="{$LANG.notification.confirm_continue}" value="{$LANG.maintain.tab_backup}" />
@@ -72,7 +72,7 @@
   {else}
   <p>{$LANG.maintain.latest_installed}</p>
   {/if}
-  <form action="?_g=maintenance&amp;upgrade={$LATEST_VERSION}#upgrade" method="post">
+  <form action="?_g=maintenance&upgrade={$LATEST_VERSION}#upgrade" method="post">
     <div>
 		<input type="submit" name="backup" class="submit_confirm" title="{$LANG.notification.confirm_continue}" value="{$UPGRADE_NOW}" />
 		<input type="hidden" name="token" value="{$SESSION_TOKEN}" />

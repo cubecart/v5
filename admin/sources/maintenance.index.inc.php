@@ -502,10 +502,10 @@ if (count($files)>0) {
 	foreach ($sorted_files as $file) {
 		$filename = basename($file);
 		$type = (preg_match('/^database/', $filename)) ? 'database' : 'files';
-		$restore = (preg_match('/^database_full|files/', $filename)) ? '?_g=maintenance&amp;node=index&amp;restore='.$filename.'#backup' : false;
+		$restore = (preg_match('/^database_full|files/', $filename)) ? '?_g=maintenance&node=index&restore='.$filename.'#backup' : false;
 		$existing_backups[] = array('filename' => $filename,
-			'delete_link' => '?_g=maintenance&amp;node=index&amp;delete='.$filename.'#backup',
-			'download_link' => '?_g=maintenance&amp;node=index&amp;download='.$filename.'#backup',
+			'delete_link' => '?_g=maintenance&node=index&delete='.$filename.'#backup',
+			'download_link' => '?_g=maintenance&node=index&download='.$filename.'#backup',
 			'restore_link' => $restore,
 			'type' => $type,
 			'warning' => ($type=='database') ? $lang['maintain']['restore_db_confirm'] : $lang['maintain']['restore_files_confirm'],

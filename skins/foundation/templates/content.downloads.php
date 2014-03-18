@@ -19,15 +19,15 @@
          <td>
             <h4>{$download.name}</h4>
             {if $download.active}
-            <a href="{$STORE_URL}/index.php?_a=download&amp;accesskey={$download.accesskey}" title="{$LANG.common.download}"><i class="fa fa-download"> {$download.file_info.filename}</i></a>
+            <a href="{$STORE_URL}/index.php?_a=download&accesskey={$download.accesskey}" title="{$LANG.common.download}"><i class="fa fa-download"> {$download.file_info.filename}</i></a>
             {else}
             <i class="fa fa-download"> {$download.file_info.filename}</i>
             {/if}
          </td>
          <td> {if $download.active}{$download.expires}{else}{$LANG.account.download_expired}{/if}</td>
          <td class="text-center">{$download.downloads}/{$MAX_DOWNLOADS}</td>
-         <td width="120"><a href="{$STORE_URL}/index.php?_a=vieworder&amp;cart_order_id={$download.cart_order_id}" class="button tiny expand thinmarg-bottom" title="{$LANG.common.view_details}">{$LANG.common.view_details}</a>
-            {if $download.active}<a href="{$STORE_URL}/index.php?_a=download&amp;accesskey={$download.accesskey}" class="button tiny expand" title="{$LANG.common.view_details}">{$LANG.common.download}</a>{/if}
+         <td width="120"><a href="{$STORE_URL}/index.php?_a=vieworder&cart_order_id={$download.cart_order_id}" class="button tiny expand thinmarg-bottom" title="{$LANG.common.view_details}">{$LANG.common.view_details}</a>
+            {if $download.active}<a href="{$STORE_URL}/index.php?_a=download&accesskey={$download.accesskey}" class="button tiny expand" title="{$LANG.common.view_details}">{$LANG.common.download}</a>{/if}
          </td>
          {/if}
       </tr>

@@ -111,6 +111,6 @@
 	<div id="progress_bar"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/loading.gif" alt="" class="newsletter" /></div>
   </div>
   <div id="progress_bar_percent"></div>
-  <p><a href="?_g=customers&amp;node=email" class="delete" title="{$LANG.email.confirm_cancel}">{$LANG.email.news_cancel}</a></p>
+  <p><a href="?_g=customers&node=email" class="delete" title="{$LANG.email.confirm_cancel}">{$LANG.email.news_cancel}</a></p>
 </div>
 {/if}

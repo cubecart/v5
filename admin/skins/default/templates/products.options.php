@@ -67,7 +67,7 @@
 			<input type="hidden" name="attr_priority[]" value="{$key}" />
 		  </span>
 		  <span class="actions">
-			<a href="?_g=products&amp;node=options&amp;delete=attribute&amp;id={$key}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
+			<a href="?_g=products&node=options&delete=attribute&id={$key}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		  </span>
 		  &bull; <span class="editable" name="edit_attribute[{$key}][value_name]">{$option}</span>
 		</div>

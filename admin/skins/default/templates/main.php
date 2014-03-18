@@ -16,7 +16,7 @@
 
 <body>
   <div id="header">
-  <span class="user_info">{$LANG.settings.title_welcome_back} <a href="?_g=settings&amp;node=admins&amp;action=edit&amp;admin_id={$ADMIN_UID}">{$ADMIN_USER}</a> - [<a href="?_g=logout">{$LANG.account.logout}</a>]</span>
+  <span class="user_info">{$LANG.settings.title_welcome_back} <a href="?_g=settings&node=admins&action=edit&admin_id={$ADMIN_UID}">{$ADMIN_USER}</a> - [<a href="?_g=logout">{$LANG.account.logout}</a>]</span>
   </div>
   <div id="navigation">
   {if isset($NAVIGATION)}

@@ -41,7 +41,7 @@ class Gateway {
 			'regindi_address2'		=> $this->_basket['billing_address']['line2'],
 			'regindi_sub'			=> $this->_basket['billing_address']['town'],
 			'regindi_pcode'			=> $this->_basket['billing_address']['postcode'],
-			'return'				=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=PayMate'
+			'return'				=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=PayMate'
 		);
 
 		return $hidden;

@@ -17,7 +17,7 @@
       <tbody>
          {foreach from=$ITEMS key=hash item=item}
          <tr>
-            <td><a href="{$STORE_URL}/index.php?_a=basket&amp;remove-item={$hash}"><i class="fa fa-trash-o"></i></a></td>
+            <td><a href="{$STORE_URL}/index.php?_a=basket&remove-item={$hash}"><i class="fa fa-trash-o"></i></a></td>
             <td>
                <a href="{$item.link}" class="th" title="{$item.name}"><img src="{$item.image}" alt="{$item.name}"></a>
                <a href="{$item.link}" class="txtDefault"><strong>{$item.name}</strong></a>
@@ -77,7 +77,7 @@
          {foreach from=$COUPONS item=coupon}
          <tr>
             <td colspan="3"></td>
-            <td><a href="{$VAL_SELF}&amp;remove_code={$coupon.remove_code}" title="{$LANG.common.remove}">{$coupon.voucher}</a></td>
+            <td><a href="{$VAL_SELF}&remove_code={$coupon.remove_code}" title="{$LANG.common.remove}">{$coupon.voucher}</a></td>
             <td>{$coupon.value}</td>
          </tr>
          {/foreach}
@@ -131,7 +131,7 @@
 
    
    <div class="clearfix">
-      <a href="{$STORE_URL}/index.php?_a=basket&amp;empty-basket=true" class="button alert left">{$LANG.basket.basket_empty}</a>
+      <a href="{$STORE_URL}/index.php?_a=basket&empty-basket=true" class="button alert left">{$LANG.basket.basket_empty}</a>
       <input type="submit" name="update" class="button secondary left" value="{$LANG.basket.basket_update}">
       {if $DISABLE_CHECKOUT_BUTTON!==true}
       <button type="submit" name="proceed" class="button right">{$CHECKOUT_BUTTON} <i class="fa fa-chevron-right"></i></button>

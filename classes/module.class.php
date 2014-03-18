@@ -230,7 +230,7 @@ class Module {
 		if ($method == 'from') {
 			return $GLOBALS['storeURL'].'/index.php?_a=gateway';
 		} else {
-			return $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type='.$this->_info['type'].'&amp;cmd='.$method.'&amp;module='.$this->_module_name;
+			return $GLOBALS['storeURL'].'/index.php?_g=rm&type='.$this->_info['type'].'&cmd='.$method.'&module='.$this->_module_name;
 		}
 	}
 

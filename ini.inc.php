@@ -41,7 +41,7 @@ if (CC_PHP_ID > 52) {
 }
 ini_set('short_open_tag', false);   // Disable '<?' style php short tags for xml happiness
 ini_set('asp_tags', false);     // Disable '<%' asp-style tags - anyone using these should be shot
-ini_set('arg_separator.output', '&'); // Set argument separator from & to &amp; for XHTML validity
+ini_set('arg_separator.output', '&'); // Set argument separator to & HTML validity
 ini_set('auto_detect_line_endings', true); // Automatically detect line endings - Good for Mac OS X
 ini_set('allow_url_include', false);  // Disable URL includes
 ini_set('default_charset', 'UTF-8');  // Set default charset as 'UTF-8'

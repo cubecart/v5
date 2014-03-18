@@ -5,7 +5,7 @@
    <div class="panel">
       <div class="row">
          <div class="small-4 columns">
-            <a href="?_a=addressbook&amp;action=edit&amp;address_id={$address.address_id}">{$address.description}</a><br>
+            <a href="?_a=addressbook&action=edit&address_id={$address.address_id}">{$address.description}</a><br>
             {$address.line1},<br/>{if !empty($address.line2)} {$address.line2},<br/>{/if} {$address.town},<br/> {$address.state},<br/> {$address.postcode}<br>{$address.country}
          </div>
          <div class="small-6 columns">
@@ -33,7 +33,7 @@
             </div>
          </div>
          <div class="small-2 columns text-center">
-            <a href="?_a=addressbook&amp;action=edit&amp;address_id={$address.address_id}" class="button tiny expand">{$LANG.common.edit}</a>
+            <a href="?_a=addressbook&action=edit&address_id={$address.address_id}" class="button tiny expand">{$LANG.common.edit}</a>
             <br><input type="checkbox" name="delete[]" value="{$address.address_id}"{if $address.billing} disabled{/if}>
          </div>
       </div>
@@ -41,7 +41,7 @@
    {/foreach}
    <div class="clearfix">
       <div class="right"><button type="submit" class="button alert"><i class="fa fa-trash-o"></i> {$LANG.common.delete_selected}</button></div>
-      <div class="left"><a href="{$STORE_URL}/index.php?_a=addressbook&amp;action=add" class="button"><i class="fa fa-plus"></i> {$LANG.address.address_add}</a></div>
+      <div class="left"><a href="{$STORE_URL}/index.php?_a=addressbook&action=add" class="button"><i class="fa fa-plus"></i> {$LANG.address.address_add}</a></div>
    </div>
 </form>
 {/if}

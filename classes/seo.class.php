@@ -309,7 +309,7 @@ class SEO {
 				}
 				break;
 			default:
-				$this->_url = 'index.php?_a=' . $type . '&amp;' . $key . '=' . $id;
+				$this->_url = 'index.php?_a=' . $type . '&' . $key . '=' . $id;
 				return $this->_url;
 			}
 		}
@@ -341,7 +341,7 @@ class SEO {
 				$noLoops[] = $cat_id;
 
 				if ($link) {
-					$this->_cat_path[] = '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=category&amp;cat_id='.(int)$category['cat_id'].'">'.$category['cat_name'].'</a>';
+					$this->_cat_path[] = '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=category&cat_id='.(int)$category['cat_id'].'">'.$category['cat_name'].'</a>';
 				} else {
 					$this->_cat_path[] = $category['cat_name'];
 				}

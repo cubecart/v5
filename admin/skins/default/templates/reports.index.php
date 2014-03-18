@@ -20,13 +20,13 @@
 	  <tbody>
 		{foreach from=$REPORT_DATE item=data}
 		<tr>{$data.value}
-		  <td><a href="?_g=orders&amp;action=edit&amp;order_id={$data.cart_order_id}">{$data.cart_order_id}</a></td>
+		  <td><a href="?_g=orders&action=edit&order_id={$data.cart_order_id}">{$data.cart_order_id}</a></td>
 		  <td align="right">{$data.subtotal}</td>
 		  <td align="right">{$data.discount}</td>
 		  <td align="right">{$data.shipping}</td>
 		  <td align="right">{$data.total_tax}</td>
 		  <td align="right">{$data.total}</td>
-		  <td align="left"><a href="?_g=customers&amp;action=edit&amp;customer_id={$data.customer_id}">{$data.first_name} {$data.last_name}</a></td>
+		  <td align="left"><a href="?_g=customers&action=edit&customer_id={$data.customer_id}">{$data.first_name} {$data.last_name}</a></td>
 		  <td>{$data.country}</td>
 		  <td>{$data.state}</td>
 		  <td>{$data.status}</td>

@@ -1,6 +1,6 @@
 <div id="admin_error_log" class="tab_content">
   <h3>{$LANG.settings.title_error_log}</h3>
-  <p>[<a href="?_g=maintenance&amp;clearLogs=true">{$LANG.maintain.logs_error}</a>]</p>
+  <p>[<a href="?_g=maintenance&clearLogs=true">{$LANG.maintain.logs_error}</a>]</p>
   <form action="{$VAL_SELF}#admin_error_log" method="post" enctype="multipart/form-data">
 	  <table class="list">
 		<thead>
@@ -47,7 +47,7 @@
 <div id="system_error_log" class="tab_content">
   <h3>{$LANG.settings.title_system_error_log}</h3>
 
-  <p>[<a href="?_g=maintenance&amp;emptyErrorLogs=true">{$LANG.maintain.logs_error}</a>]</p>
+  <p>[<a href="?_g=maintenance&emptyErrorLogs=true">{$LANG.maintain.logs_error}</a>]</p>
   
   <form action="{$VAL_SELF}#system_error_log" method="post" enctype="multipart/form-data">
 	  <table class="list">

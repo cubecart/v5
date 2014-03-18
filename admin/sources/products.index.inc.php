@@ -1260,7 +1260,7 @@ if (isset($_GET['action'])) {
 		natcasesort($char_list_array);
 		foreach ($char_list_array as $char) {
 			$char_get_val  = ($char == '#') ? '0-9' : $char;
-			$char_data['link'] = $char_link."&amp;char=".$char_get_val;
+			$char_data['link'] = $char_link."&char=".$char_get_val;
 			$char_data['char']  = $char;
 			$smarty_data['sort_characters'][] = $char_data;
 		}

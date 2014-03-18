@@ -70,7 +70,7 @@ class Gateway {
 			'ok_payer_zip'			=> $this->_basket['billing_address']['postcode'],
 			'ok_payer_country'		=> $this->_basket['billing_address']['country_iso'],
 			## IPN and Return URLs
-			'ok_ipn'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=OKPay',
+			'ok_ipn'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=OKPay',
 			'ok_return_success'		=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 			'ok_return_fail'	=> $GLOBALS['storeURL'].'/index.php?_a=gateway'
 		);
