@@ -187,6 +187,7 @@ class SSL {
 					$params['SSL'] = md5(serialize($params));
 				}
 				
+				/* Defunct for security reasons
 				if($GLOBALS['config']->get('config', 'ssl')==1) {
  					$ssl_url 		= str_replace('https','',$GLOBALS['config']->get('config', 'ssl_url'));
  					$standard_url 	= str_replace('http','',$GLOBALS['config']->get('config', 'standard_url'));
@@ -194,6 +195,7 @@ class SSL {
  						$params[session_name()] = session_id();
  					}
  				}
+ 				*/
 				
 				unset($params['ssl_switch']);
 				if (!empty($params)) {

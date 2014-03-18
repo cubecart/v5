@@ -79,13 +79,15 @@ class Session {
 		if ($ini['session.gc_divisor'] != 100) {
 			ini_set('session.gc_divisor', 100);
 		}
+		$cookie_domain = $GLOBALS['config']->get('config', 'cookie_domain');
+ 		if(!empty($cookie_domain)) {
+ 			ini_set('session.cookie_domain',$cookie_domain);
+ 		}
 		if (!$ini['session.cookie_path']) {
 			ini_set('session.cookie_path', $GLOBALS['rootRel']);
 		}
 
 		ini_set('session.cookie_httponly',true);
-
-		//$this->_session_timeout = (ADMIN_CP) ? 3600 * 24 : 3600 * 1;
 
 		//If the current session time is longer we will not change anything
 		if ($ini['session.gc_maxlifetime'] < $this->_session_timeout) {
@@ -583,6 +585,7 @@ class Session {
 	 * Start session
 	 */
 	private function _start() {
+		/* Defunct for security reasons
 		$session_name = session_name();
 		// Only allow session interchange for SSL and when SSL domains don't match!
  		$config = $GLOBALS['config']->get('config');
@@ -593,6 +596,7 @@ class Session {
  				session_id($_GET[$session_name]);
  			}
  		}
+ 		*/
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
