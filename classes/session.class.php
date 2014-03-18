@@ -529,8 +529,7 @@ class Session {
 		);
 
 		//Use the instance because the global might be gone already
-		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $old_sessionid), false);
-
+		Database::getInstance()->delete('CubeCart_sessions', array('session_id' => $old_sessionid));
 		// Tidy Access Logs keep months worth
 		Database::getInstance()->delete('CubeCart_access_log', array('time' => '<'.(time()-(3600*24*7*4))));
 		// Purge sessions older than the session time out
