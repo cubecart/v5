@@ -13,7 +13,7 @@
 		<tbody>
 		{foreach from=$ADMIN_ERROR_LOG item=log}
 		  <tr>
-			<td><input type="checkbox" name="adminread[]" value="{$log.log_id}" class="error" /></td>
+			<td><input type="checkbox" name="adminread[]" value="{$log.log_id}" class="error"></td>
 			<td {$log.style}>{$log.time}</td>
 			<td {$log.style}>{$log.message}</td>
 		  </tr>
@@ -26,7 +26,7 @@
 		{if isset($ADMIN_ERROR_LOG)}
 		  <tfoot>
 			<tr>
-			  <td><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt="" /></td>
+			  <td><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt=""></td>
 			  <td><a href="#" class="check-all" rel="error">{$LANG.form.check_uncheck}</a></td>
 			  <td>
 			  {$LANG.orders.with_selected}:
@@ -34,13 +34,13 @@
 				  <option value="1">{$LANG.form.mark_read}</option>
 				  <option value="0">{$LANG.form.mark_unread}</option>
 			    </select>
-				<input type="submit" value="{$LANG.common.go}" name="go" />
+				<input type="submit" value="{$LANG.common.go}" name="go">
 			  </td>
 			</tr>
 		  </tfoot>
 		  {/if}
 	  </table>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
   </form>
   <div>{$PAGINATION_ADMIN_ERROR_LOG}</div>
 </div>
@@ -61,7 +61,7 @@
 		<tbody>
 		{foreach from=$SYSTEM_ERROR_LOG item=syslog}
 		  <tr>
-			<td><input type="checkbox" name="systemread[]" value="{$syslog.log_id}" class="systemerror" /></td>
+			<td><input type="checkbox" name="systemread[]" value="{$syslog.log_id}" class="systemerror"></td>
 			<td {$syslog.style}>{$syslog.time}</td>
 			<td {$syslog.style}>{$syslog.message}</td>
 		  </tr>
@@ -74,7 +74,7 @@
 		{if isset($SYSTEM_ERROR_LOG)}
 		  <tfoot>
 			<tr>
-			  <td><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt="" /></td>
+			  <td><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt=""></td>
 			  <td><a href="#" class="check-all" rel="systemerror">{$LANG.form.check_uncheck}</a></td>
 			  <td>
 			  {$LANG.orders.with_selected}:
@@ -82,13 +82,13 @@
 				  <option value="1">{$LANG.form.mark_read}</option>
 				  <option value="0">{$LANG.form.mark_unread}</option>
 			    </select>
-				<input type="submit" value="{$LANG.common.go}" name="go" />
+				<input type="submit" value="{$LANG.common.go}" name="go">
 			  </td>
 			</tr>
 		  </tfoot>
 		  {/if}
 	  </table>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
   </form>
   <div>{$PAGINATION_SYSTEM_ERROR_LOG}</div>
 </div>

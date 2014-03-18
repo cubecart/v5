@@ -15,13 +15,13 @@
 	  <div class="module">
 		<span class="actions">
 		  {if $module.mobile_optimized}
-		  <a href="javascript:alert('{$LANG.module.mobile_optimized}');"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/phone.png" /></a>
+		  <a href="javascript:alert('{$LANG.module.mobile_optimized}');"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/phone.png"></a>
 		  {/if}
 		  <a href="?_g=modules&type={$module.type}&module={$module.node}" class="edit">
-			<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" />
+			<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}">
 		  </a>
 		</span>
-		<span class="toggle"><input type="hidden" id="status_{$module.node}" name="status[{$module.node}]" value="{$module.status}" class="toggle" /></span>
+		<span class="toggle"><input type="hidden" id="status_{$module.node}" name="status[{$module.node}]" value="{$module.status}" class="toggle"></span>
 		<a href="?_g=modules&type={$module.type}&module={$module.node}">{$module.title}</a>
 	  </div>
 	{/foreach}
@@ -31,7 +31,7 @@
   {include file='templates/element.hook_form_content.php'}
   
   <div class="form_control">
-	<input type="submit" value="{$LANG.common.save}" />
+	<input type="submit" value="{$LANG.common.save}">
   </div>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
 </form>

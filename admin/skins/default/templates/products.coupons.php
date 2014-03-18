@@ -17,14 +17,14 @@
 	  <tbody>
 		{foreach from=$COUPONS item=coupon}
 		<tr>
-		  <td align="center"><input type="hidden" id="status_{$coupon.coupon_id}" name="status[{$coupon.coupon_id}]" value="{$coupon.status}" class="toggle" /></td>
+		  <td align="center"><input type="hidden" id="status_{$coupon.coupon_id}" name="status[{$coupon.coupon_id}]" value="{$coupon.status}" class="toggle"></td>
 		  <td><a href="{$coupon.link_edit}" class="edit" title="{$LANG.common.edit}">{$coupon.code}</a></td>
 		  <td>{$coupon.value}</td>
 		  <td>{$coupon.expires}</td>
 		  <td align="center">{$coupon.count} / {$coupon.allowed_uses}</td>
 		  <td>
-			<a href="{$coupon.link_edit}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
-			<a href="{$coupon.link_delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
+			<a href="{$coupon.link_edit}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
+			<a href="{$coupon.link_delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
 		  </td>
 		</tr>
 		{foreachelse}
@@ -53,7 +53,7 @@
 		{if isset($CERTIFICATES)}
 		{foreach from=$CERTIFICATES item=certificate}
 		<tr>
-		  <td align="center"><input type="hidden" id="status_{$certificate.coupon_id}" name="status[{$certificate.coupon_id}]" value="{$certificate.status}" class="toggle" /></td>
+		  <td align="center"><input type="hidden" id="status_{$certificate.coupon_id}" name="status[{$certificate.coupon_id}]" value="{$certificate.status}" class="toggle"></td>
 		  <td>{$certificate.code}</td>
 		  <td>{$certificate.value}</td>
 		  <td>{$certificate.expires}</td>
@@ -76,7 +76,7 @@
   <div id="edit-coupon" class="tab_content">
 	<h3>{$LEGEND}</h3>
 	<fieldset><legend>{$LANG.catalogue.title_coupon_detail}</legend>
-	  <div><label for="form-code">{$LANG.catalogue.coupon_code}</label><span><input type="text" name="coupon[code]" id="form-code" value="{$COUPON.code}" class="textbox" /></span></div>
+	  <div><label for="form-code">{$LANG.catalogue.coupon_code}</label><span><input type="text" name="coupon[code]" id="form-code" value="{$COUPON.code}" class="textbox"></span></div>
 	  <div><label for="form-description">{$LANG.common.description}</label><span><textarea name="coupon[description]" id="form-description" class="textbox">{$COUPON.description}</textarea></span></div>
 	</fieldset>
 	<fieldset><legend>{$LANG.catalogue.title_coupon_value}</legend>
@@ -90,17 +90,17 @@
 		  </select>
 		</span>
 	  </div>
-	  <div><label for="form-value">{$LANG.catalogue.discount_value}</label><span><input type="text" name="discount_value" id="form-value" value="{$COUPON.discount_value}" class="textbox number" /></span></div>
+	  <div><label for="form-value">{$LANG.catalogue.discount_value}</label><span><input type="text" name="discount_value" id="form-value" value="{$COUPON.discount_value}" class="textbox number"></span></div>
 	</fieldset>
 	<fieldset><legend>{$LANG.catalogue.title_coupon_limits}</legend>
-	  <div><label for="form-expires">{$LANG.catalogue.title_coupon_expires} (YYYY-MM-DD)</label><span><input type="text" name="coupon[expires]" id="form-expires" value="{$COUPON.expires}" class="textbox date number" /></span></div>
-	  <div><label for="form-allowed">{$LANG.catalogue.allowed_uses}</label><span><input type="text" name="coupon[allowed_uses]" id="form-allowed" value="{$COUPON.allowed_uses}" class="textbox number" /></span></div>
+	  <div><label for="form-expires">{$LANG.catalogue.title_coupon_expires} (YYYY-MM-DD)</label><span><input type="text" name="coupon[expires]" id="form-expires" value="{$COUPON.expires}" class="textbox date number"></span></div>
+	  <div><label for="form-allowed">{$LANG.catalogue.allowed_uses}</label><span><input type="text" name="coupon[allowed_uses]" id="form-allowed" value="{$COUPON.allowed_uses}" class="textbox number"></span></div>
 	  {if $DISPLAY_TIMES_USED}
-	  <div><label>{$LANG.catalogue.title_coupon_count}</label><span><input type="text" disabled="disabled" readonly="readonly" class="textbox number" value="{$COUPON.count}" /></span></div>
+	  <div><label>{$LANG.catalogue.title_coupon_count}</label><span><input type="text" disabled="disabled" readonly="readonly" class="textbox number" value="{$COUPON.count}"></span></div>
 	  {/if}
-	  <div><label for="form-minimum">{$LANG.catalogue.minimum_subtotal}</label><span><input type="text" name="coupon[min_subtotal]" id="form-minimum" value="{$COUPON.min_subtotal}" class="textbox number" /></span></div>
-	  <div><label for="form-shipping">{$LANG.catalogue.coupon_shipping}</label><span><input type="hidden" name="coupon[shipping]" id="form-shipping" class="toggle" value="{$COUPON.shipping}" /></span></div>
-	  <input type="hidden" name="coupon[coupon_id]" value="{$COUPON.coupon_id}" />
+	  <div><label for="form-minimum">{$LANG.catalogue.minimum_subtotal}</label><span><input type="text" name="coupon[min_subtotal]" id="form-minimum" value="{$COUPON.min_subtotal}" class="textbox number"></span></div>
+	  <div><label for="form-shipping">{$LANG.catalogue.coupon_shipping}</label><span><input type="hidden" name="coupon[shipping]" id="form-shipping" class="toggle" value="{$COUPON.shipping}"></span></div>
+	  <input type="hidden" name="coupon[coupon_id]" value="{$COUPON.coupon_id}">
 	</fieldset>
   </div>
   <div id="edit-products" class="tab_content">
@@ -108,22 +108,22 @@
 	  <div id="assigned-prods" class="list">
 	  	{foreach from=$PRODUCTS item=product}
 		<div>
-		  <span class="actions"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span>
-		  <input type="hidden" name="product[]" value="{$product.product_id}" />{$product.name}
+		  <span class="actions"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span>
+		  <input type="hidden" name="product[]" value="{$product.product_id}">{$product.name}
 		</div>
 		{/foreach}
 	  </div>
 	  <div>
 		<label for="form-product">{$LANG.common.product}</label>
 		<span>
-		  <input type="hidden" name="product[]" id="result_form-product" class="add" />
+		  <input type="hidden" name="product[]" id="result_form-product" class="add">
 
-		  <input type="text" id="form-product" rel="product" class="ajax textbox add display" />
+		  <input type="text" id="form-product" rel="product" class="ajax textbox add display">
 
-		  <a href="#" target="assigned-prods" class="add"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a>
+		  <a href="#" target="assigned-prods" class="add"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}"></a>
 		</span>
 	  </div>
-	  <div><label for="form-subtotal">{$LANG.catalogue.coupon_subtotal}</label><span><input type="hidden" name="coupon[subtotal]" id="form-subtotal" class="toggle" value="{$COUPON.subtotal}" /></span></div>
+	  <div><label for="form-subtotal">{$LANG.catalogue.coupon_subtotal}</label><span><input type="hidden" name="coupon[subtotal]" id="form-subtotal" class="toggle" value="{$COUPON.subtotal}"></span></div>
 	  <div>{$LANG.catalogue.coupon_no_shipping}</div>
 	</fieldset>
 	<fieldset><legend>{$LANG.catalogue.title_coupon_products}</legend>
@@ -144,9 +144,9 @@
   {include file='templates/element.hook_form_content.php'}
 
   <div class="form_control">
-	<input type="hidden" name="save" value="{$FORM_HASH}" />
-	<input type="hidden" name="previous-tab" id="previous-tab" value="" />
-	<input type="submit" value="{$LANG.common.save}" />
+	<input type="hidden" name="save" value="{$FORM_HASH}">
+	<input type="hidden" name="previous-tab" id="previous-tab" value="">
+	<input type="submit" value="{$LANG.common.save}">
   </div>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
 </form>
