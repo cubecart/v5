@@ -328,6 +328,8 @@ class Cubecart {
 				case 'saleitems':
 					$GLOBALS['smarty']->assign('SECTION_NAME', 'saleitems');
 					$_GET['cat_id'] = 'sale';
+					$this->_category();
+				break;
 				case 'category':
 					$GLOBALS['smarty']->assign('SECTION_NAME', 'category');
 					$this->_category();
