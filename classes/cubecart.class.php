@@ -667,6 +667,7 @@ class Cubecart {
 				}
 			}
 		}
+        
 		if (!empty($query)) {
 			if (!$GLOBALS['config']->get('config', 'seo') || $search || $_GET['cat_id'] == 'sale') {
 				$query['_a'] = $_GET['_a'];
@@ -678,7 +679,6 @@ class Cubecart {
 			ksort($query);
 			httpredir('?'.http_build_query($query, null, '&'));
 		}
-
 		$page = (isset($_REQUEST['page']) && !empty($_GET['page'])) ? $_REQUEST['page'] : 1;
 
 		if (isset($_REQUEST['search']) && is_array($_REQUEST['search'])) {

@@ -552,9 +552,16 @@ class SEO {
 					$path = str_replace('index.php?_a=search&', 'search.html?', $path);
 				}
 				return $path;
-			}
-		}
+ 			} else if (($pos = strpos($path, 'index.php?_a=saleitems')) !== false) {
+         if (strlen($path) == $pos + 22) {
+					$path = str_replace('index.php?_a=saleitems', 'sale-items.html', $path);
+				} else {
+					$path = str_replace('index.php?_a=saleitems&', 'sale-items.html?', $path);
+				}
+        return $path;    
+      }
 
+		}
 		if ($this->enabled() && preg_match('#^(.*/)?[\w]+.[a-z]+\?_a\=([\w]+)\&(amp;)?([\w\[\]]+)\=([\w\-\_]+)([^"\']*)$#ieS', $path, $match)) {
 			return $this->generatePath($match[5], $match[2], $match[4], true, true).$this->queryString($match[6]);
 		} else {
