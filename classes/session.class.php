@@ -79,20 +79,21 @@ class Session {
 		if ($ini['session.gc_divisor'] != 100) {
 			ini_set('session.gc_divisor', 100);
 		}
+		$cookie_domain = $GLOBALS['config']->get('config', 'cookie_domain');
+		if(!empty($cookie_domain)) {
+			ini_set('session.cookie_domain',$cookie_domain);
+		}
 		if (!$ini['session.cookie_path']) {
 			ini_set('session.cookie_path', $GLOBALS['rootRel']);
 		}
 
 		ini_set('session.cookie_httponly',true);
 
-		//$this->_session_timeout = (ADMIN_CP) ? 3600 * 24 : 3600 * 1;
-
 		//If the current session time is longer we will not change anything
 		if ($ini['session.gc_maxlifetime'] < $this->_session_timeout) {
 			ini_set('session.gc_maxlifetime', $this->_session_timeout);
 			session_set_cookie_params($this->_session_timeout);
 		}
-
 		if (!$ini['session.use_cookies']) {
 			//Enforce cookies only
 			ini_set('session.use_cookies', true);
@@ -105,6 +106,7 @@ class Session {
 			// make sure sesison cookies are http ONLY!
 			ini_set('session.cookie_httponly',true);
 		}
+		
 		$this->_start();
 		$this->_validate();
 		$this->_setTimers();

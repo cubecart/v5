@@ -13,6 +13,11 @@ if (empty($ssl_url) && CC_SSL) {
 } elseif (empty($standard_url) && !CC_SSL) {
 	$GLOBALS['config']->set('config', 'standard_url', CC_STORE_URL);
 }
+$cookie_domain  = $GLOBALS['config']->get('config', 'cookie_domain');
+if(empty($cookie_domain)) {
+	$url = parse_url(CC_STORE_URL);
+	$GLOBALS['config']->set('config', 'cookie_domain', '.'.$url['host']);
+}
 
 
 if (isset($_POST['config']) && Admin::getInstance()->permissions('settings', CC_PERM_FULL)) {

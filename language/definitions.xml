@@ -1718,6 +1718,7 @@
     <string name="ssl_enable" introduced="5.0.0"><![CDATA[Enable SSL]]></string>
     <string name="ssl_force" introduced="5.0.0"><![CDATA[Force SSL mode on all pages]]></string>
     <string name="ssl_root_path" introduced="5.0.0"><![CDATA[SSL root path]]></string>
+    <string name="cookie_domain" introduced="6.0.0"><![CDATA[Cookie Domain]]></string>
     <string name="ssl_url" introduced="5.0.0"><![CDATA[SSL Store URL]]></string>
     <string name="standard_url" introduced="5.0.0"><![CDATA[Standard Store URL]]></string>
     <string name="stock_allow_oos" introduced="5.0.0"><![CDATA[Allow out-of-stock purchases]]></string>
