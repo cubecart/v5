@@ -528,8 +528,7 @@ class Session {
 		);
 		
 		//Use the instance because the global might be gone already
-		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $old_sessionid), false);
-
+		Database::getInstance()->delete('CubeCart_sessions', array('session_id' => $old_sessionid));
 		// Tidy Access Logs keep months worth
 		Database::getInstance()->delete('CubeCart_access_log', array('time' => '<'.(time()-(3600*24*7*4))));
 		// Purge sessions older than the session time out
@@ -585,9 +584,15 @@ class Session {
 	 */
 	private function _start() {
 		$session_name = session_name();
-		if(isset($_GET[$session_name]) && !empty($_GET[$session_name])) {
-			session_id($_GET[$session_name]);
-		}
+		// Only allow session interchange for SSL and when SSL domains don't match!
+ 		$config = $GLOBALS['config']->get('config');
+ 		if($config['ssl']==1) {
+ 			$ssl_url 		= str_replace('https','',$config['ssl_url']);
+ 			$standard_url 	= str_replace('http','',$config['standard_url']);
+ 			if ($ssl_url!==$standard_url && isset($_GET[$session_name]) && !empty($_GET[$session_name])) {
+ 				session_id($_GET[$session_name]);
+ 			}
+ 		}
 		session_cache_limiter('none');
 		session_start();
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
