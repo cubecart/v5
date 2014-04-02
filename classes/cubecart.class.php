@@ -2130,6 +2130,7 @@ class Cubecart {
 							// Do price formatting
 							$item['price_total'] = $GLOBALS['tax']->priceFormat(($item['price'] * $item['quantity']), true);
 							$item['price']	= $GLOBALS['tax']->priceFormat($item['price']);
+							$item['options'] = unserialize($item['product_options']);							
 							$vars['items'][] = $item;
 						}
 						$GLOBALS['smarty']->assign('ITEMS', $vars['items']);
