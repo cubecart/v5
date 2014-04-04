@@ -448,8 +448,7 @@ class Gateway {
 					foreach ($response as $key => $value) {
 						if($response['L_ERRORCODE0'] == '11610') {
  							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
- 						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
- 						if($response['L_ERRORCODE0'] == '11611') {
+ 						} elseif($response['L_ERRORCODE0'] == '11611') {
  							$GLOBALS['gui']->setNotify($this->_lang['payment_decline']);
  						}	elseif($response['L_ERRORCODE0'] == '15005') {
  							$GLOBALS['gui']->setNotify($this->_lang['bank_declined']);
