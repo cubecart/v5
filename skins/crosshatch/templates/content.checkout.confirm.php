@@ -81,7 +81,7 @@
 		</div>
 		 {/if} {if $ALLOW_DELIVERY_ADDRESS}
 		<div>
-			<label>&nbsp;</label><span><input type="checkbox" name="delivery_is_billing" id="delivery_is_billing" {$delivery_checked}/> {$LANG.address.delivery_is_billing}</span>
+			<label>&nbsp;</label><span><input type="checkbox" name="delivery_is_billing" id="delivery_is_billing" {$DELIVERY_CHECKED}/> {$LANG.address.delivery_is_billing}</span>
 		</div>
 		{/if}
 	</fieldset>
