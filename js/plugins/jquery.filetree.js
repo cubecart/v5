@@ -47,7 +47,7 @@ if (jQuery)(function($){
 			if (!o.root) o.root = '/';
 			if (!o.name) o.name = 'image';
 			if (!o.group) o.group = 1;
-			if (!o.script) o.script = 'admin.php';
+			if (!o.script) o.script = $('#val_admin_file').text();
 			if (!o.unique) {
 				o.unique = ($(this).hasClass('unique')) ? true : false;
 			}
@@ -102,7 +102,7 @@ if (jQuery)(function($){
 											default:
 												status = bool;
 										}
-										img.src = 'admin/skins/default/images/'+status+'.png';
+										img.src = $('#val_admin_folder').text()+'/skins/default/images/'+status+'.png';
 										$(img).attr({rel: '#'+o.name+'_'+item.id}).addClass('checkbox');
 										if (o.unique) $(img).addClass('unique');
 										$(span).append(img);
@@ -152,7 +152,7 @@ if (jQuery)(function($){
 	$('input.toggle:hidden').each(function(){
 		var img_status = ($(this).val() == '1') ? '1' : '0';
 		var img			= document.createElement('img');
-		img.src = 'admin/skins/default/images/'+img_status+'.png';
+		img.src = $('#val_admin_folder').text()+'/skins/default/images/'+img_status+'.png';
 		if (img_status == '1') {
 			img.alt = img.title = 'Disable';
 		} else {
@@ -172,7 +172,7 @@ if (jQuery)(function($){
 				var status = '0'; var alt = 'Enable'; break;
 		}
 		var controller = 'img.checkbox[rel=#'+$(this).attr('id')+']';
-		$(controller).attr({'src': 'admin/skins/default/images/'+status+'.png', 'alt' : alt, 'title' : alt});
+		$(controller).attr({'src': $('#val_admin_folder').text()+'/skins/default/images/'+status+'.png', 'alt' : alt, 'title' : alt});
 	});
 
 	// handle special insertion of form element only when an image is changed from current
@@ -203,7 +203,7 @@ if (jQuery)(function($){
 					status = '0'; break;
 			}
 			var controller = 'img.checkbox[rel=#'+id_val+']';
-			$(controller).attr({'src': 'admin/skins/default/images/'+status+'.png'});
+			$(controller).attr({'src': $('#val_admin_folder').text()+'/skins/default/images/'+status+'.png'});
 		});
 		var parent_span = $(this).parent('span.action');
 		$(this).before(input);
