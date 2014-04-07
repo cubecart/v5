@@ -252,11 +252,11 @@ class FileManager {
 				if (($summary = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $download['cart_order_id']))) !== false) {
 					// Order/Download Validation
 					// Download has expired
-					if ($download['expire']>0 && $download['expire'] < time())		$error = FM_DL_ERROR_EXPIRED;
+					if ($download['expire']>0 && $download['expire'] < time())		$error = self::FM_DL_ERROR_EXPIRED;
 					// Order hasn't been paid for
-					if (!in_array((int)$summary[0]['status'], array(2,3)))					$error = FM_DL_ERROR_PAYMENT;
+					if (!in_array((int)$summary[0]['status'], array(2,3)))					$error = self::FM_DL_ERROR_PAYMENT;
 					// Maximum download limit has been reached
-					if ($GLOBALS['config']->get('config','download_count') > 0 && (int)$download['downloads'] >= $GLOBALS['config']->get('config','download_count'))	$error = FM_DL_ERROR_MAXDL;
+					if ($GLOBALS['config']->get('config','download_count') > 0 && (int)$download['downloads'] >= $GLOBALS['config']->get('config','download_count'))	$error = self::FM_DL_ERROR_MAXDL;
 					if (!empty($error)) return false;
 					if (($product = $GLOBALS['db']->select('CubeCart_inventory', array('digital', 'digital_path'), array('product_id' => $download['product_id']), false, 1)) !== false) {
 						$is_url		= false;
@@ -325,16 +325,16 @@ class FileManager {
 							}
 						}
 						## File doesn't exist
-						$error	= FM_DL_ERROR_NOFILE;
+						$error	= self::FM_DL_ERROR_NOFILE;
 						return false;
 					}
 					## Product record doesn't exist
-					$error = FM_DL_ERROR_NOPRODUCT;
+					$error = self::FM_DL_ERROR_NOPRODUCT;
 					return false;
 				}
 			}
 			// Download record doesn't exist
-			$error	= FM_DL_ERROR_NORECORD;
+			$error	= self::FM_DL_ERROR_NORECORD;
 		}
 		return false;
 	}
