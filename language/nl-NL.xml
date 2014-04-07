@@ -219,7 +219,7 @@
       <string name="category_add" introduced="5.0.0"><![CDATA[Categorie toevoegen]]></string>
       <string name="category_additional" introduced="5.0.0"><![CDATA[Extra]]></string>
       <string name="category_primary" introduced="5.0.0"><![CDATA[Primair]]></string>
-      <string name="checkout_latest_products" introduced="5.0.0"><![CDATA[Bekijk deze geweldige producten ...]]></string>
+      <string name="checkout_latest_products" introduced="5.0.0"><![CDATA[Nieuwste producten ...]]></string>
       <string name="click_enlarge" introduced="5.0.0"><![CDATA[Klik om te vergroten]]></string>
       <string name="condition" introduced="5.0.0"><![CDATA[Voorwaarde]]></string>
       <string name="condition_new" introduced="5.0.0"><![CDATA[Nieuw]]></string>
@@ -279,7 +279,7 @@
       <string name="friends_email" introduced="5.0.0"><![CDATA[E-mail van uw vriend]]></string>
       <string name="friends_name" introduced="5.0.0"><![CDATA[Naam van uw vriend]]></string>
       <string name="gift_certificate" introduced="5.0.0"><![CDATA[Cadeaubon]]></string>
-      <string name="gift_certificate_value" introduced="5.0.0"><![CDATA[Cadeaubonnen moet een minimum waarde van %1$s, en een maximum van %2$s bevatten. Houdt u er rekening mee dat het alleen mogelijk is om een ​​cadeaubon te kopen in het hoofdvaluta van de winkel.]]></string>
+      <string name="gift_certificate_value" introduced="5.0.0"><![CDATA[De cadeaubon moet een minimum waarde van %1$s, en een maximum van %2$s bevatten. Houdt u er rekening mee dat het alleen mogelijk is om een ​​cadeaubon te kopen in het hoofdvaluta van de winkel.]]></string>
       <string name="gift_certificates" introduced="5.0.0"><![CDATA[Cadeaubonnen]]></string>
       <string name="hover_zoom" introduced="5.0.0"><![CDATA[Ga met uw muis over de afbeelding voor een vergroting]]></string>
       <string name="image_excluded" introduced="5.0.0"><![CDATA[Uitgesloten Afbeelding]]></string>
@@ -667,7 +667,7 @@
       <string name="notify_contact_update" introduced="5.0.0"><![CDATA[Contactformulier instellingen bijgewerkt.]]></string>
       <string name="title_configuration" introduced="5.0.0"><![CDATA[Configuratie]]></string>
       <string name="title_contact" introduced="5.0.0"><![CDATA[Contact Formulier Instellingen]]></string>
-      <string name="title_content" introduced="5.0.0"><![CDATA[Contacteer ons' pagina inhoud]]></string>
+      <string name="title_content" introduced="5.0.0"><![CDATA[Contact' pagina inhoud]]></string>
       <string name="title_departments" introduced="5.0.0"><![CDATA[Afdelingen (optioneel)]]></string>
     </group>
     <group name="country">
@@ -789,7 +789,7 @@
       <string name="title_technical_data" introduced="5.0.0"><![CDATA[Technische Gegevens]]></string>
     </group>
     <group name="documents">
-      <string name="document_contact" introduced="5.0.0"><![CDATA[Contacteer ons]]></string>
+      <string name="document_contact" introduced="5.0.0"><![CDATA[Contact]]></string>
       <string name="document_content" introduced="5.0.0"><![CDATA[Inhoud]]></string>
       <string name="document_create" introduced="5.0.0"><![CDATA[Maak een Document aan]]></string>
       <string name="document_delete" introduced="5.0.0"><![CDATA[Document verwijderen]]></string>
@@ -1305,7 +1305,7 @@
       <string name="view_newsletter_archive" introduced="5.0.0"><![CDATA[Bekijk ons Nieuwsbrief archief.]]></string>
     </group>
     <group name="notification">
-      <string name="cookie_dialogue" introduced="5.0.0"><![CDATA[&quot;%s&quot; willen graag om cookies te plaatsen op uw computer om ons te helpen deze website beter. Om meer te weten over de cookies, zie onze privacy policy.]]></string>
+      <string name="cookie_dialogue" introduced="5.0.0"><![CDATA[&quot;%s&quot; wil graag een cookie op uw computer plaatsen om de website op een juiste manier te laten werken. Om meer te weten over cookies; zie onze privacy policy.]]></string>
       <string name="cookie_dialogue_declaration" introduced="5.0.0"><![CDATA[Ik ga akkoord met cookies van deze site.]]></string>
       <string name="confirm_delete" introduced="5.0.0"><![CDATA[Weet u zeker dat u wilt verwijderen?]]></string>
       <string name="confirm_revert" introduced="5.0.0"><![CDATA[Weet u zeker dat u wilt terug zetten?]]></string>
