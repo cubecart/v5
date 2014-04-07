@@ -80,7 +80,7 @@ class Gateway {
 		} else if ($order_summary["cart_order_id"]) {
 			$transData['status'] 	= "Failed";
 			$transData['notes'] 	= "Payment unsuccessful. More information may be available in the WorldPay control panel.";
-			$order$order->orderStatus(Order::ORDER_PENDING, $cart_order_id);
+			$order->orderStatus(Order::ORDER_PENDING, $cart_order_id);
 			$order->paymentStatus(Order::PAYMENT_PENDING, $cart_order_id);
 		} else {
 			$transData['status'] 	= "None";
