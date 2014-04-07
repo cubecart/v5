@@ -94,7 +94,7 @@
       <string name="your_order" introduced="5.0.0"><![CDATA[Uw bestelling]]></string>
       <string name="your_orders" introduced="5.0.0"><![CDATA[Overzicht van uw bestellingen]]></string>
       <string name="your_orders_explained" introduced="5.0.0"><![CDATA[Uw oude en huidige bestellingen worden hier vermeld.]]></string>
-      <string name="your_subscription" introduced="5.0.0"><![CDATA[Nieuwsbrief Abbonnees]]></string>
+      <string name="your_subscription" introduced="5.0.0"><![CDATA[Nieuwsbrief Abonnees]]></string>
     </group>
     <group name="address">
       <string name="add_edit" introduced="5.0.0"><![CDATA[Adres toevoegen / wijzigen]]></string>
