@@ -60,7 +60,7 @@
 
 	{if isset($CUSTOMER_EXPORT_LIST)}
 	{foreach from=$CUSTOMER_EXPORT_LIST item=export}
-	<input type="submit" name="external_report[{$export.folder}" class="submit" value="{$LANG.customer.export_to} {$export.description}" />
+	<input type="submit" name="external_report[{$export.folder}]" class="submit" value="{$LANG.customer.export_to} {$export.description}" />
 	{/foreach}
 	{/if}
   </div>
