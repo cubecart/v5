@@ -24,7 +24,7 @@ class Gateway {
 
     public function transfer() {
 
-        require_once 'modules/gateway/payvector/PayVector/Config.php';
+        require_once 'modules/gateway/PayVector/PayVector/Config.php';
 
         switch($this -> module['mode']) {
             case 'hpf' :
@@ -165,13 +165,8 @@ class Gateway {
             $PayVector -> setMerchantID($this -> module['mid_test']);
             $PayVector -> setPassword($this -> module['pass_test']);
         } else {
-            if (isset($this -> module['mid_ca']) && isset($this -> module['pass_ca'])) {
-                $PayVector -> setMerchantID($this -> module['mid_ca']);
-                $PayVector -> setPassword($this -> module['pass_ca']);
-            } else {
-                $PayVector -> setMerchantID($this -> module['mid_prod']);
-                $PayVector -> setPassword($this -> module['pass_prod']);
-            }
+            $PayVector -> setMerchantID($this -> module['mid_prod']);
+            $PayVector -> setPassword($this -> module['pass_prod']);
         }
 
         $PayVector -> setOrderID($this -> _basket['cart_order_id']);

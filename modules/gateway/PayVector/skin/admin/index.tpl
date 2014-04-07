@@ -9,7 +9,9 @@
 		var productionCredentials = jQuery_1_10_2("div#production_credentials");
 		var caCredentials = jQuery_1_10_2("div#ca_credentials");
 		
-		var modeSelected = jQuery_1_10_2('select[name="module[mode]"] option:selected').text();
+		var modeSelected = jQuery_1_10_2('select[name="module[mode]"] option:selected');
+
+		console.log(modeSelected);
 		
 	    if ({if isset($MODULE.testMode)} {$MODULE.testMode} {else} 0 {/if}) {
 	        testCredentials.show();
@@ -176,12 +178,6 @@
                     <label for="pass_test">{$LANG.payvector.password_test}</label>
                     <span><input name="module[pass_test]" id="pass_test" class="textbox" type="text" value="{$MODULE.pass_test}" /></span>
                 </div>
-                <div>
-	                <label for="ca_test">{$LANG.payvector.ca_test}</label>
-	                <span>
-	                    <input type="hidden" name="module[ca_test]" id="ca_test" class="toggle" value="{$MODULE.ca_test}" />
-	                </span>
-               	</div> 
             </div>
             <div id="production_credentials">
                 <div>
@@ -195,20 +191,6 @@
                     <span>
                         <input name="module[pass_prod]" id="pass_prod" class="textbox" type="text" value="{$MODULE.pass_prod}" />
                     </span>
-                </div>
-                <div id="ca_credentials" class="apiVariables">
-                    <div>
-                        <label for="mid_ca">{$LANG.payvector.merchant_id_ca}</label>
-                        <span>
-                            <input name="module[mid_ca]" id="mid_ca" class="textbox" type="text" value="{$MODULE.mid_ca}" />
-                        </span>
-                    </div>
-                    <div>
-                        <label for="pass_ca">{$LANG.payvector.password_ca}</label>
-                        <span>
-                            <input name="module[pass_ca]" id="pass_ca" class="textbox" type="text" value="{$MODULE.pass_ca}" />
-                        </span>
-                    </div>
                 </div>
             </div>
             <div id="hpfVariables">
