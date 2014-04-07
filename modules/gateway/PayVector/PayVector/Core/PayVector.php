@@ -1064,7 +1064,7 @@ abstract class PayVectorSQL {
     public static function updateGEP_EntryPoint($GatewayEntryPointListXMLString) {
     	self::$g_szQueryString = "
     	UPDATE " . self::tblGEP_EntryPoints . "
-    	SET GatewayEntryPointObject = '$gatewayEntryPointListXMLString', TransactionDateTime = CURRENT_TIMESTAMP;";
+    	SET GatewayEntryPointObject = '$GatewayEntryPointListXMLString', TransactionDateTime = CURRENT_TIMESTAMP;";
 		
 		return self::$g_szQueryString;
     }

@@ -1,9 +1,14 @@
 <?php
+
 if(!defined('CC_DS')) die('Access Denied');
 
 require 'modules/gateway/PayVector/PayVector/Core/PayVector.php';
 
-$GLOBALS['db'] -> misc(PayVectorSQL::createGEP_EntryPoints());
+if (!$GLOBALS['db'] -> misc(PayVectorSQL::TableExists(PayVectorSQL::tblGEP_EntryPoints)))
+{
+	$GLOBALS['db'] -> misc(PayVectorSQL::createGEP_EntryPoints());
+	$GLOBALS['db'] -> misc(PayVectorSQL::insertGEP_EntryPointsPlaceholder());
+}
 $GLOBALS['db'] -> misc(PayVectorSQL::createCRT_CrossReference());
 
 

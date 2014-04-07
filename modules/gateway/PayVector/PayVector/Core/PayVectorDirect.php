@@ -68,7 +68,14 @@ class PayVectorDirect extends PayVectorBase {
 		
 		$result = $GLOBALS['db'] -> misc(PayVectorSQL::selectGEP_EntryPoint());
 		
-		$geplGatewayEntryPointListXML = $result[0][0]['GatewayEntryPointObject'];
+		if(isset($result[0][0]['GatewayEntryPointObject']))
+		{
+			$geplGatewayEntryPointListXML = $result[0][0]['GatewayEntryPointObject'];
+		}
+		else
+		{
+			$geplGatewayEntryPointListXML = null;
+		}
 		
 		if ($geplGatewayEntryPointListXML != null)
 		{
@@ -361,7 +368,10 @@ class PayVectorDirect extends PayVectorBase {
                 $this -> boErrorActive = TRUE;
                 array_push($this -> szErrorMessage, Errors::NoCommunicationWithGateway);
             } else {
-            	$GLOBALS['db'] -> misc(PayVectorSQL::updateGEP_EntryPoint($this->todTransactionOutputData->getGatewayEntryPoints()->toXMLString()));
+            	if( isset($this->todTransactionOutputData) && method_exists($this->todTransactionOutputData, "getGatewayEntryPoints") && method_exists($this->todTransactionOutputData->getGatewayEntryPoints(), "toXMLString") )
+				{
+					$GLOBALS['db'] -> misc(PayVectorSQL::updateGEP_EntryPoint($this->todTransactionOutputData->getGatewayEntryPoints()->toXMLString()));
+				}
             }
         } else {
             $return = FALSE;
