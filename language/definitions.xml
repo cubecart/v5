@@ -1763,7 +1763,7 @@
     <string name="tax_on_goods" introduced="5.0.0"><![CDATA[Goods]]></string>
     <string name="tax_on_shipping" introduced="5.0.0"><![CDATA[Shipping]]></string>
     <string name="tax_rate" introduced="5.0.0"><![CDATA[Tax Rate]]></string>
-    <string name="time_format" introduced="5.0.0"><![CDATA[Time Format]]></string>
+    <string name="time_format" introduced="5.0.0"><![CDATA[Date & Time Format]]></string>
     <string name="fuzzy_time_format" introduced="6.0.0"><![CDATA[Fuzzy Time Format]]></string>
     <string name="time_utc_offset" introduced="5.0.0"><![CDATA[UTC Offset]]></string>
     <string name="time_zone" introduced="5.0.0"><![CDATA[Timezone]]></string>

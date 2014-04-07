@@ -68,7 +68,7 @@
 		  		{if $product.updated == '0000-00-00 00:00:00'}
 		  			{$LANG.common.unknown}
 		  		{else}
-		  			{$product.updated}
+		  			{formatTime(strtotime($product.updated))}
 		  		{/if}
 		  		</td>
 		  		<td align="center">
