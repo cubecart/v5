@@ -194,6 +194,9 @@ class Order {
 		// Update order status, manage stock, and email if required
 		if (!empty($status_id) && !empty($order_id)) {
 			$currentStatus = $GLOBALS['db']->select('CubeCart_order_summary', array('status'), array('cart_order_id' => $order_id));
+			
+			if ((int)$currentStatus[0]['status'] == 0) return false; // no order record
+			
 			// Insert order status if it's changed
 			if ((int)$status_id !== (int)$currentStatus[0]['status'] || $force) {
 				$this->_addHistory($order_id, $status_id);
@@ -433,6 +436,9 @@ class Order {
 	public function paymentStatus($status_id, $order_id) {
 		if (!empty($status_id) && !empty($order_id)) {
 			$this->getSummary($order_id);
+			
+			if ((int)$this->_order_summary['status'] == 0) return false; // no order record
+			
 			$mailer = Mailer::getInstance();
 			switch ($status_id) {
 			case self::PAYMENT_PENDING:
