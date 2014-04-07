@@ -196,6 +196,7 @@ class GUI {
 		} else {
 			$skin_folder = (!$GLOBALS['config']->isEmpty('config', 'admin_skin')) ? $GLOBALS['config']->get('config', 'admin_skin') : 'default';
 			$admin_folder  = (!$GLOBALS['config']->isEmpty('config', 'adminFolder')) ? $GLOBALS['config']->get('config', 'adminFolder') : 'admin';
+			$admin_file  = (!$GLOBALS['config']->isEmpty('config', 'adminFile')) ? $GLOBALS['config']->get('config', 'adminFile') : 'admin.php';
 			$skin_root  = $admin_folder.CC_DS.'skins';
 			if (strstr($skin_root, CC_ROOT_DIR)) {
 				$skindir = $skin_root;
@@ -213,6 +214,7 @@ class GUI {
 
 			// Assign global admin skin variables
 			$skin_data['admin_folder']   = $admin_folder;
+			$skin_data['admin_file']   = $admin_file;
 			$skin_data['skin_folder']   = $skin_folder;
 			$GLOBALS['smarty']->assign('SKIN_VARS', $skin_data);
 			$GLOBALS['smarty']->template_dir = $this->_template_dir = $skindir;

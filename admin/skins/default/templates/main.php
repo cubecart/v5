@@ -87,6 +87,8 @@
 	  {$DISPLAY_CONTENT}
 	</div>
   </div>
+  <div style="display: none" id="val_admin_folder">{$SKIN_VARS.admin_folder}</div>
+  <div style="display: none" id="val_admin_file">{$SKIN_VARS.admin_file}</div>
   <!-- Include JavaScript last - YSlow! rates it better this way -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js"></script>
