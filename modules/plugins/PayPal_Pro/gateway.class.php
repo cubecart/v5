@@ -450,9 +450,9 @@ class Gateway {
  							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
  						} elseif($response['L_ERRORCODE0'] == '11611') {
  							$GLOBALS['gui']->setNotify($this->_lang['payment_decline']);
- 						}	elseif($response['L_ERRORCODE0'] == '15005') {
+ 						} elseif($response['L_ERRORCODE0'] == '15005') {
  							$GLOBALS['gui']->setNotify($this->_lang['bank_declined']);
- 						}	elseif($response['L_ERRORCODE0'] == '15007') {
+ 						} elseif($response['L_ERRORCODE0'] == '15007') {
  							$GLOBALS['gui']->setNotify($this->_lang['card_expired']);
  						} elseif (preg_match('#^L_LONGMESSAGE(\d+)$#', $key, $match)) {
 							$GLOBALS['gui']->setError($value);
