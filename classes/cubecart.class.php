@@ -1755,13 +1755,13 @@ class Cubecart {
 			} else {
 				if (!empty($error)) {
 					switch ($error) {
-					case FM_DL_ERROR_EXPIRED;
+					case FileManager::FM_DL_ERROR_EXPIRED;
 						$message = $GLOBALS['language']->filemanager['error_dl_expired'];
 						break;
-					case FM_DL_ERROR_MAXDL;
+					case FileManager::FM_DL_ERROR_MAXDL;
 						$message = $GLOBALS['language']->filemanager['error_dl_maximum'];
 						break;
-					case FM_DL_ERROR_PAYMENT;
+					case FileManager::FM_DL_ERROR_PAYMENT;
 						$message = $GLOBALS['language']->filemanager['error_dl_payment'];
 						break;
 					}
