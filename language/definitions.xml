@@ -1023,6 +1023,9 @@
     <string name="error_dl_expired" introduced="5.0.0"><![CDATA[This download has expired.]]></string>
     <string name="error_dl_payment" introduced="5.0.0"><![CDATA[Payment must be completed before the file can be downloaded.]]></string>
     <string name="error_dl_maximum" introduced="5.0.0"><![CDATA[You have downloaded this file the maximum number of times allowed.]]></string>
+    <string name="error_dl_file_missing" introduced="5.2.9"><![CDATA[It has not been possible to locate the download file.]]></string>
+	<string name="error_dl_noproduct" introduced="5.2.9"><![CDATA[Product is missing or deleted.]]></string>
+	<string name="error_dl_norecord" introduced="5.2.9"><![CDATA[No record for this download exists]]></string>
     <string name="error_file_delete" introduced="5.0.0"><![CDATA[Failed to delete file.]]></string>
     <string name="error_file_moved" introduced="5.0.0"><![CDATA[Failed to rename/move file.]]></string>
     <string name="error_file_update" introduced="5.0.0"><![CDATA[Failed to update file.]]></string>

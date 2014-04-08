@@ -1755,15 +1755,24 @@ class Cubecart {
 			} else {
 				if (!empty($error)) {
 					switch ($error) {
-					case FileManager::FM_DL_ERROR_EXPIRED;
-						$message = $GLOBALS['language']->filemanager['error_dl_expired'];
+						case FileManager::FM_DL_ERROR_EXPIRED;
+							$message = $GLOBALS['language']->filemanager['error_dl_expired'];
 						break;
-					case FileManager::FM_DL_ERROR_MAXDL;
-						$message = $GLOBALS['language']->filemanager['error_dl_maximum'];
+						case FileManager::FM_DL_ERROR_MAXDL;
+							$message = $GLOBALS['language']->filemanager['error_dl_maximum'];
 						break;
-					case FileManager::FM_DL_ERROR_PAYMENT;
-						$message = $GLOBALS['language']->filemanager['error_dl_payment'];
+						case FileManager::FM_DL_ERROR_PAYMENT;
+							$message = $GLOBALS['language']->filemanager['error_dl_payment'];
 						break;
+						case FileManager::FM_DL_ERROR_NOFILE;
+	 						$message	= $GLOBALS['language']->filemanager['error_dl_file_missing'];
+	 					break;
+	 					case FileManager::FM_DL_ERROR_NOPRODUCT;
+	 						$message	= $GLOBALS['language']->filemanager['error_dl_noproduct'];
+	 					break;
+	 					case FileManager::FM_DL_ERROR_NORECORD;
+	 						$message	= $GLOBALS['language']->filemanager['error_dl_norecord'];
+	 					break;
 					}
 					$GLOBALS['gui']->setError($message);
 				}
