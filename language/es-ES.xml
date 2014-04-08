@@ -971,9 +971,9 @@
       <string name="title_templates" introduced="5.0.0"><![CDATA[Plantillas de mensaje de correo electrónico]]></string>
     </group>
     <group name="filemanager">
-      <string name="error_dl_expired" introduced="5.0.0"><![CDATA[Esta descarga ha caducado.]]></string>
-      <string name="error_dl_payment" introduced="5.0.0"><![CDATA[Debe completarse el pago antes de poder descargar el archivo.]]></string>
-      <string name="error_dl_maximum" introduced="5.0.0"><![CDATA[Ha descargado este archivo el número máximo permitido de veces.]]></string>
+      <string name="error_dl_1" introduced="5.0.0"><![CDATA[Esta descarga ha caducado.]]></string>
+      <string name="error_dl_6" introduced="5.0.0"><![CDATA[Debe completarse el pago antes de poder descargar el archivo.]]></string>
+      <string name="error_dl_2" introduced="5.0.0"><![CDATA[Ha descargado este archivo el número máximo permitido de veces.]]></string>
       <string name="error_file_delete" introduced="5.0.0"><![CDATA[No se pudo borrar el archivo.]]></string>
       <string name="error_file_moved" introduced="5.0.0"><![CDATA[No se pudo cambiar el nombre/mover el archivo.]]></string>
       <string name="error_file_update" introduced="5.0.0"><![CDATA[No se pudo actualizar el archivo.]]></string>

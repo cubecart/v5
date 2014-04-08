@@ -971,9 +971,9 @@
       <string name="title_templates" introduced="5.0.0"><![CDATA[E-mail sjablonen]]></string>
     </group>
     <group name="filemanager">
-      <string name="error_dl_expired" introduced="5.0.0"><![CDATA[Deze download is verlopen.]]></string>
-      <string name="error_dl_payment" introduced="5.0.0"><![CDATA[Betaling moet worden afgerond voordat het bestand kan worden gedownload.]]></string>
-      <string name="error_dl_maximum" introduced="5.0.0"><![CDATA[U heeft dit bestand het maximale toegestane aantal keren gedownload.]]></string>
+      <string name="error_dl_1" introduced="5.0.0"><![CDATA[Deze download is verlopen.]]></string>
+      <string name="error_dl_6" introduced="5.0.0"><![CDATA[Betaling moet worden afgerond voordat het bestand kan worden gedownload.]]></string>
+      <string name="error_dl_2" introduced="5.0.0"><![CDATA[U heeft dit bestand het maximale toegestane aantal keren gedownload.]]></string>
       <string name="error_file_delete" introduced="5.0.0"><![CDATA[Bestand verwijderen mislukt]]></string>
       <string name="error_file_moved" introduced="5.0.0"><![CDATA[Bestand hernoemen/versplaatsen mislukt]]></string>
       <string name="error_file_update" introduced="5.0.0"><![CDATA[Mislukt bestand bij te werken.]]></string>

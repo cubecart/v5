@@ -986,9 +986,9 @@
    <string name="title_templates"><![CDATA[תבניות דוא"ל]]></string>
   </group>
   <group name="filemanager">
-   <string name="error_dl_expired"><![CDATA[פג תוקפה של הורדה זו.]]></string>
-   <string name="error_dl_payment"><![CDATA[עליך להשלים את תהליך התשלום לפני הורדת הקובץ.]]></string>
-   <string name="error_dl_maximum"><![CDATA[הורדת את הקובץ במספר המקסימאלי המותר.]]></string>
+   <string name="error_dl_1"><![CDATA[פג תוקפה של הורדה זו.]]></string>
+   <string name="error_dl_6"><![CDATA[עליך להשלים את תהליך התשלום לפני הורדת הקובץ.]]></string>
+   <string name="error_dl_2"><![CDATA[הורדת את הקובץ במספר המקסימאלי המותר.]]></string>
    <string name="error_file_delete"><![CDATA[שגיאה במחיקת הקובץ.]]></string>
    <string name="error_file_moved"><![CDATA[שגיאה בשינוי שם/העברת קובץ.]]></string>
    <string name="error_file_update"><![CDATA[שגיאה בעדכון קובץ.]]></string>
