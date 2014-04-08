@@ -269,8 +269,8 @@
     <string name="error_search_no_results" introduced="5.0.0"><![CDATA[No matching products found. Please try again.]]></string>
     <string name="error_tell_friend_email" introduced="5.0.0"><![CDATA[Please make sure your friend's email is correct.]]></string>
     <string name="export_products_per" introduced="5.0.0"><![CDATA[Products per export]]></string>
-    <string name="file_path" introduced="5.0.0"><![CDATA[File Path]]></string>
-    <string name="file_path_help" introduced="5.0.0"><![CDATA[If a path is specified this overrides existing files that have been selected.]]></string>
+    <string name="file_path" introduced="5.0.0"><![CDATA[File path/name.ext]]></string>
+    <string name="file_path_help" introduced="5.0.0"><![CDATA[If a server path/name.ext or a complete URL is specified, this overrides any existing files that have been selected.]]></string>
     <string name="friends_email" introduced="5.0.0"><![CDATA[Friend's Email]]></string>
     <string name="friends_name" introduced="5.0.0"><![CDATA[Friend's Name]]></string>
     <string name="gift_certificate" introduced="5.0.0"><![CDATA[Gift Certificate]]></string>
