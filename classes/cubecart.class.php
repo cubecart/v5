@@ -1716,6 +1716,15 @@ class Cubecart {
 						case FileManager::FM_DL_ERROR_PAYMENT;
 							$message	= $GLOBALS['language']->filemanager['error_dl_payment'];
 						break;
+						case FileManager::FM_DL_ERROR_NOFILE;
+							$message	= $GLOBALS['language']->filemanager['error_dl_file_missing'];
+						break;
+						case FileManager::FM_DL_ERROR_NOPRODUCT;
+							$message	= $GLOBALS['language']->filemanager['error_dl_noproduct'];
+						break;
+						case FileManager::FM_DL_ERROR_NORECORD;
+							$message	= $GLOBALS['language']->filemanager['error_dl_norecord'];
+						break;
 					}
 					$GLOBALS['gui']->setError($message);
 				}
