@@ -453,10 +453,7 @@ if (isset($_GET['action']) && isset($_GET['type'])) {
 			}
 			$GLOBALS['smarty']->assign('ADD_EDIT_TEMPLATE', $page_title);
 			$GLOBALS['smarty']->assign('TEMPLATE', $data);
-			/*
-					$GLOBALS['smarty']->assign('MACRO_WARNING', '<strong>IMPORTANT:</strong> A macro {$EMAIL_CONTENT} is required somewhere in the template content. This will be replaced with the dynamic email content.');
-					$GLOBALS['smarty']->assign('MACRO_EMAIL_CONTENT', '{$EMAIL_CONTENT}');
-					*/
+
 			$macros = array(
 				array('name' => '{$EMAIL_CONTENT}', 'description' => $lang['email']['macro_template_content'], 'required' => 'Yes'),
 				array('name' => '{$DATA.logoURL}', 'description' => $lang['email']['macro_template_store_logo'], 'required' => 'No'),
