@@ -971,9 +971,9 @@
       <string name="title_templates" introduced="5.0.0"><![CDATA[Modèles d'e-mail]]></string>
     </group>
     <group name="filemanager">
-      <string name="error_dl_expired" introduced="5.0.0"><![CDATA[Ce téléchargement a expiré.]]></string>
-      <string name="error_dl_payment" introduced="5.0.0"><![CDATA[Le paiement doit être effectué avant que le fichier soit téléchargé.]]></string>
-      <string name="error_dl_maximum" introduced="5.0.0"><![CDATA[Vous avez téléchargé ce fichier le nombre de fois maximum autorisé.]]></string>
+      <string name="error_dl_1" introduced="5.0.0"><![CDATA[Ce téléchargement a expiré.]]></string>
+      <string name="error_dl_6" introduced="5.0.0"><![CDATA[Le paiement doit être effectué avant que le fichier soit téléchargé.]]></string>
+      <string name="error_dl_2" introduced="5.0.0"><![CDATA[Vous avez téléchargé ce fichier le nombre de fois maximum autorisé.]]></string>
       <string name="error_file_delete" introduced="5.0.0"><![CDATA[Impossible de supprimer le fichier.]]></string>
       <string name="error_file_moved" introduced="5.0.0"><![CDATA[Impossible de renommer/déplacer le fichier.]]></string>
       <string name="error_file_update" introduced="5.0.0"><![CDATA[Impossible de mettre à jour le fichier.]]></string>
