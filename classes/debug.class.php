@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -31,62 +31,62 @@ class Debug {
 	 *
 	 * @var FirePHP object
 	 */
-	public $firephp		= null;
+	public $firephp  = null;
 
 	/**
 	 * Custom debug messages
 	 *
 	 * @var array of strings
 	 */
-	private $_custom		= array();
+	private $_custom  = array();
 	/**
 	 * Debug timer used to calc page load time
 	 *
 	 * @var float
 	 */
-	private $_debug_timer	= 0;
+	private $_debug_timer = 0;
 	/**
 	 * Display debug message
 	 *
 	 * @var bool
 	 */
-	private $_display		= true;
+	private $_display  = true;
 	/**
 	 * Enabled/disabled
 	 *
 	 * @var bool
 	 */
-	private $_enabled		= false;
+	private $_enabled  = false;
 	/**
 	 * Error messages
 	 *
 	 * @var array of strings
 	 */
-	private $_errors		= array();
+	private $_errors  = array();
 	/**
 	 * FirePHP log group
 	 *
 	 * @var array
 	 */
-	private $_messages		= array();
+	private $_messages  = array();
 	/**
 	 * SQL messages
 	 *
 	 * @var array of strings
 	 */
-	private $_sql			= array();
+	private $_sql   = array();
 	/**
 	 * Custom timers
 	 *
 	 * @var array of floats
 	 */
-	private $_timers		= array();
+	private $_timers  = array();
 	/**
 	 * XDebug enabled
 	 *
 	 * @var bool
 	 */
-	private $_xdebug		= false;
+	private $_xdebug  = false;
 
 	/**
 	 * Class instance
@@ -114,17 +114,17 @@ class Debug {
 		set_exception_handler(array(&$this, 'exceptionHandler'));
 
 		// Enable debugger
-		if(isset($GLOBALS['config']) && is_object($GLOBALS['config'])) { 
+		if (isset($GLOBALS['config']) && is_object($GLOBALS['config'])) {
 			$this->_enabled = $GLOBALS['config']->get('config', 'debug');
 			$ip_string = $GLOBALS['config']->get('config', 'debug_ip_addresses');
-			if(!empty($ip_string)) {
-				if(strstr($ip_string,',')) {
-					$ip_addresses = explode(',',$ip_string);
-					if(!in_array(get_ip_address(),$ip_addresses)) {
+			if (!empty($ip_string)) {
+				if (strstr($ip_string, ',')) {
+					$ip_addresses = explode(',', $ip_string);
+					if (!in_array(get_ip_address(), $ip_addresses)) {
 						$this->_enabled = false;
 					}
 				} else {
-					if($ip_string!==get_ip_address()) {
+					if ($ip_string!==get_ip_address()) {
 						$this->_enabled = false;
 					}
 				}
@@ -146,8 +146,8 @@ class Debug {
 		$this->_debug_timer = $this->_getTime();
 
 		if ($this->_enabled && file_exists(CC_INCLUDES_DIR.'FirePHPCore'.CC_DS)) {
-			require_once(CC_INCLUDES_DIR.'FirePHPCore'.CC_DS.'fb.php');				// (procedural API) or
-			require_once(CC_INCLUDES_DIR.'FirePHPCore'.CC_DS.'FirePHP.class.php');	// (object oriented API)
+			require_once CC_INCLUDES_DIR.'FirePHPCore'.CC_DS.'fb.php';    // (procedural API) or
+			require_once CC_INCLUDES_DIR.'FirePHPCore'.CC_DS.'FirePHP.class.php'; // (object oriented API)
 			$this->firephp = FirePHP::getInstance(true);
 		}
 
@@ -175,10 +175,10 @@ class Debug {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**
@@ -230,12 +230,12 @@ class Debug {
 	 */
 	public function display($return = false, $glue = "\n") {
 		// Cheeky hack for the w3c validator - we don't want it seeing the debug output
-		if (strstr($_SERVER['HTTP_USER_AGENT'], 'W3C_Validator') || get_ip_address() == '128.30.52.71') {
+		if (strstr($_SERVER['HTTP_USER_AGENT'], 'W3C_Validator')) {
 			$this->_enabled = false;
 		}
 
 		if ($this->_display && $this->_enabled) {
-			$output[] = '<div id="debug-info" style="font-family: Verdana, Arial, Helvetica; font-size:10px; border: 1px solid black; padding:3px; color: black; background-color:#E7E7E7; clear: both; margin: 15px;">';
+			$output[] = '<div id="debug-info" class="pad">';
 
 			// Display the PHP errors
 			$output[] = '<strong>PHP</strong>:<br />'.$this->_errorDisplay().'<hr size="1" />';
@@ -281,8 +281,8 @@ class Debug {
 					$output[] = '<strong>Errors</strong>:<br />';
 					foreach ($this->_sql['error'] as $index => $error) {
 						if (!empty($error)) {
-							$sql_error	= true;
-							$output[]	= '[<strong>'.($index + 1).'</strong>] '.strip_tags($error).'<br />';
+							$sql_error = true;
+							$output[] = '[<strong>'.($index + 1).'</strong>] '.strip_tags($error).'<br />';
 						}
 					}
 					if (!isset($sql_error)) {
@@ -387,56 +387,56 @@ class Debug {
 	public function errorLogger($error_no, $error_string, $error_file, $error_line, $error_context = null) {
 		$log = true;
 		switch ($error_no) {
-			case E_CORE_ERROR:
-				$type	= 'Core Error';
-				break;
-			case E_CORE_WARNING:
-				$type	= 'Core Warning';
-				$log = false;
-				break;
-			case E_COMPILE_ERROR:
-				$type	= 'Compile Error';
-				break;
-			case E_COMPILE_WARNING:
-				$type	= 'Compile Warning';
-				break;
-			case E_ERROR:
-			case E_USER_ERROR:
-				$type	= 'Error';
-				break;
-			case E_NOTICE:
-			case E_USER_NOTICE:
-				$type	= 'Notice';
-				$log = false;
-				break;
-			case E_PARSE:
-				$type	= 'Parse Error';
-				break;
-			case E_RECOVERABLE_ERROR:
-				$type	= 'Recoverable';
-				break;
-			case E_STRICT:
-				$type	= 'Strict';
-				$group	= 'warn';
-				$log = false;
-				break;
-			case E_WARNING:
-			case E_USER_WARNING:
-				$type	= 'Warning';
-				$log = false;
-				break;
-			case 'EXCEPTION':
-				$type = 'Exception';
-				break;
-			default:
-				$type = 'Unknown ('.$error_no.')';
-				if (CC_PHP_ID > 52) {
-					if ($error_no == E_DEPRECATED || $error_no == E_USER_DEPRECATED) {
-						$type	= 'Deprecated';
-					}
+		case E_CORE_ERROR:
+			$type = 'Core Error';
+			break;
+		case E_CORE_WARNING:
+			$type = 'Core Warning';
+			$log = false;
+			break;
+		case E_COMPILE_ERROR:
+			$type = 'Compile Error';
+			break;
+		case E_COMPILE_WARNING:
+			$type = 'Compile Warning';
+			break;
+		case E_ERROR:
+		case E_USER_ERROR:
+			$type = 'Error';
+			break;
+		case E_NOTICE:
+		case E_USER_NOTICE:
+			$type = 'Notice';
+			$log = false;
+			break;
+		case E_PARSE:
+			$type = 'Parse Error';
+			break;
+		case E_RECOVERABLE_ERROR:
+			$type = 'Recoverable';
+			break;
+		case E_STRICT:
+			$type = 'Strict';
+			$group = 'warn';
+			$log = false;
+			break;
+		case E_WARNING:
+		case E_USER_WARNING:
+			$type = 'Warning';
+			$log = false;
+			break;
+		case 'EXCEPTION':
+			$type = 'Exception';
+			break;
+		default:
+			$type = 'Unknown ('.$error_no.')';
+			if (CC_PHP_ID > 52) {
+				if ($error_no == E_DEPRECATED || $error_no == E_USER_DEPRECATED) {
+					$type = 'Deprecated';
 				}
-				break;
-    	}
+			}
+			break;
+		}
 		$error = "[<strong>".$type."</strong>] \t".$error_file.":".$error_line." - ".$error_string;
 		$this->_errors[] = $error;
 
@@ -465,20 +465,20 @@ class Debug {
 		for ($i = 0; $i < $numargs; ++$i) {
 			if ($i == 0) {
 				switch ($arg_list[0]) {
-					case 'error':
-						$type = 'error';
+				case 'error':
+					$type = 'error';
 					break;
-					case 'info':
-						$type = 'info';
+				case 'info':
+					$type = 'info';
 					break;
-					case 'log':
-						$type = 'log';
+				case 'log':
+					$type = 'log';
 					break;
-					case 'warn':
-						$type = 'warn';
+				case 'warn':
+					$type = 'warn';
 					break;
-					default:
-						$this->firephp->{$type}($arg_list[0]);
+				default:
+					$this->firephp->{$type}($arg_list[0]);
 					break;
 				}
 			} else {
@@ -534,17 +534,17 @@ class Debug {
 	 */
 	private static function _debugGetBytes($input) {
 		switch (substr($input, -1, 1)) {
-			case 'G':
-				$bytes = ((substr($input, 0, strlen($input)-1) * 1024) * 1024) * 1024;
-				break;
-			case 'M':
-				$bytes = (substr($input, 0, strlen($input)-1) * 1024) * 1024;
-				break;
-			case 'K':
-				$bytes = substr($input, 0, strlen($input)-1) * 1024;
-				break;
-			default:
-				$bytes = $input;
+		case 'G':
+			$bytes = ((substr($input, 0, strlen($input)-1) * 1024) * 1024) * 1024;
+			break;
+		case 'M':
+			$bytes = (substr($input, 0, strlen($input)-1) * 1024) * 1024;
+			break;
+		case 'K':
+			$bytes = substr($input, 0, strlen($input)-1) * 1024;
+			break;
+		default:
+			$bytes = $input;
 		}
 		return $bytes;
 	}
@@ -556,11 +556,11 @@ class Debug {
 	 * @return string
 	 */
 	private function _debugMemoryUsage($peak = false) {
-		$memAvail	= ini_get('memory_limit');
+		$memAvail = ini_get('memory_limit');
 		if ($this->_xdebug) {
-			$memUsed	= ($peak) ? xdebug_peak_memory_usage() : xdebug_memory_usage();
+			$memUsed = ($peak) ? xdebug_peak_memory_usage() : xdebug_memory_usage();
 		} else {
-			$memUsed	= ($peak) ? memory_get_peak_usage() : memory_get_usage();
+			$memUsed = ($peak) ? memory_get_peak_usage() : memory_get_usage();
 		}
 		$memPercent = round(($memUsed/$this->_debugGetBytes($memAvail))*100, 2);
 		$memUsedHR = implode('', formatBytes($memUsed));

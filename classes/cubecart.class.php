@@ -1705,7 +1705,7 @@ class Cubecart {
 			if ($filemanager->deliverDownload($_REQUEST['accesskey'], $error)) {
 				exit;
 			} else {
-				if (!empty()) {
+				if (!empty($error)) {
 					$GLOBALS['gui']->setError($GLOBALS['language']->filemanager['error_dl_'.$error]);
 				}
 				httpredir(currentPage(array('accesskey'), array('_a' => 'downloads')));
