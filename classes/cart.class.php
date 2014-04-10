@@ -253,11 +253,12 @@ class Cart {
 						// Update product code & stock based on options matrix
 
 						$options_identifier_string = '';
-						foreach ($option_identifiers as $option_identifier) {
-							$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
+						if(is_array($option_identifiers)) {
+							foreach($option_identifiers as $option_identifier) {
+								$options_identifier_string .= $option_identifier['option_id'].$option_identifier['value_id'];
+							}	
+							$options_identifier_string = md5($options_identifier_string);
 						}
-
-						$options_identifier_string = md5($options_identifier_string);
 					}
 				}
 
