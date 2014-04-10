@@ -1016,9 +1016,9 @@ class Cart {
 				if (empty($old_basket) || $old_basket != $basket) {
 					$old_basket = $basket;
 					if ((Database::getInstance()->count('CubeCart_saved_cart', 'customer_id', array('customer_id' => $id))) !== false) {
-						Database::getInstance()->update('CubeCart_saved_cart', array('basket' => $basket), array('customer_id' => $id));
+						$GLOBALS['db']->update('CubeCart_saved_cart', array('basket' => $basket), array('customer_id' => $id));
 					} else {
-						Database::getInstance()->insert('CubeCart_saved_cart', array('customer_id' => $id, 'basket' => $basket));
+						$GLOBALS['db']->insert('CubeCart_saved_cart', array('customer_id' => $id, 'basket' => $basket));
 					}
 				}
 			}
