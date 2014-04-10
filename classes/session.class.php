@@ -517,20 +517,14 @@ class Session {
 		if ($this->_state == 'closed') {
 			return true;
 		}
-		
-		$old_sessionid = $this->getId();
-		session_regenerate_id(true);
-
-		$new_sessionid = session_id();
 
 		$record = array(
 			'location'		=> currentPage(),
-			'session_last'	=> $this->get('session_last', 'client', ''),
-			'session_id'	=> $new_sessionid
+			'session_last'	=> $this->get('session_last', 'client', '')
 		);
 		
 		//Use the instance because the global might be gone already
-		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $old_sessionid), false);
+		Database::getInstance()->update('CubeCart_sessions', $record, array('session_id' => $this->getId()), false);
 		// Tidy Access Logs keep months worth
 		Database::getInstance()->delete('CubeCart_access_log', array('time' => '<'.(time()-(3600*24*7*4))));
 		// Purge sessions older than the session time out
@@ -599,6 +593,13 @@ class Session {
  		*/
 		session_cache_limiter('none');
 		session_start();
+		
+		$old_sessionid = $this->getId();
+		session_regenerate_id(true);
+ 	
+		//Use the instance because the global might be gone already
+		Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
+		
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
 		if($this->_http_user_agent()=='IEX') {
 			$this->set_cookie(session_name(),session_id(),time()+$this->_session_timeout);
