@@ -2,7 +2,7 @@
 /**
  * Header
  */
-if(!defined('CC_DS')) die('Access Denied');
+if (!defined('CC_DS')) die('Access Denied');
 require CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'cache'.CC_DS.'cache.class.php';
 
 /**
@@ -20,20 +20,20 @@ class Cache extends Cache_Controler {
 	 *
 	 * @var string
 	 */
-	protected $_cache_path	= '';
+	protected $_cache_path = '';
 
-    final protected function __construct() {
-    	if (!$this->setPath()) {
-    		$this->_online = false;
-    		return ;
-    	}
+	final protected function __construct() {
+		if (!$this->setPath()) {
+			$this->_online = false;
+			return ;
+		}
 
-    	$this->_mode	= 'File';
-    	$this->_online	= true;
+		$this->_mode = 'File';
+		$this->_online = true;
 
-    	//Run the parent constructor
-    	parent::__construct();
-    }
+		//Run the parent constructor
+		parent::__construct();
+	}
 
 	/**
 	 * Setup the instance (singleton)
@@ -42,10 +42,10 @@ class Cache extends Cache_Controler {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**
@@ -57,17 +57,17 @@ class Cache extends Cache_Controler {
 	 */
 	public function clear($type = '') {
 		if (!empty($type)) {
-			$prefix	= '*'.strtolower($type).'*';
+			$prefix = '*'.strtolower($type).'*';
 		} else {
 			$prefix = '*';
 		}
 
 		//Loop through each cache file
 		$files = glob($this->_cache_path.$this->_prefix.$prefix.$this->_suffix, GLOB_NOSORT);
-		if(is_array($files)) {
+		if (is_array($files)) {
 			foreach ($files as $file) {
 				//Delete the file
-				if(!preg_match('/index.php$/i', $file)) {
+				if (!preg_match('/index.php$/i', $file)) {
 					unlink($file);
 				}
 			}
@@ -123,13 +123,13 @@ class Cache extends Cache_Controler {
 	public function getIDs() {
 		if (empty($this->_ids)) {
 			foreach (glob($this->_cache_path.'*'.$this->_suffix, GLOB_NOSORT) as $file) {
-	        	if (strpos($file, $this->_prefix) !== false) {
-	            	$this->_ids[] = str_replace(array($this->_prefix, $this->_suffix, CC_CACHE_DIR), '', $file);
-	        	}
-	        }
+				if (strpos($file, $this->_prefix) !== false) {
+					$this->_ids[] = str_replace(array($this->_prefix, $this->_suffix, CC_CACHE_DIR), '', $file);
+				}
+			}
 		}
 
-        return $this->_ids;
+		return $this->_ids;
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Cache extends Cache_Controler {
 
 		//Make sure the cache file exists
 		if (file_exists($file)) {
-			$contents	= @file_get_contents($file, false);
+			$contents = @file_get_contents($file, false);
 
 			//If there is no newline then the file isn't valid
 			if (strpos($contents, "\n") === false) {
@@ -240,11 +240,11 @@ class Cache extends Cache_Controler {
 
 		//Create the meta data for the file
 		$meta = array(
-			'time'		=> time(),
-			'expire'	=> (!empty($expire) && is_numeric($expire)) ? $expire : $this->_expire,
+			'time'  => time(),
+			'expire' => (!empty($expire) && is_numeric($expire)) ? $expire : $this->_expire,
 		);
 		//Combine the meta and the data
-		$data 	= serialize($meta)."\n".$data;
+		$data  = serialize($meta)."\n".$data;
 
 		//Write to file
 		if (file_put_contents($this->_cache_path.$name, $data)) {

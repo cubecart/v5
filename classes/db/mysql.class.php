@@ -2,7 +2,7 @@
 /**
  * Header
  */
-if(!defined('CC_DS')) die('Access Denied');
+if (!defined('CC_DS')) die('Access Denied');
 require CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'db'.CC_DS.'database.class.php';
 
 /**
@@ -34,9 +34,9 @@ class Database extends Database_Contoller {
 
 		$this->_setup();
 
-    	//Run the parent constructor
-    	parent::__construct();
-    }
+		//Run the parent constructor
+		parent::__construct();
+	}
 
 	/**
 	 * Setup the instance (singleton)
@@ -46,10 +46,10 @@ class Database extends Database_Contoller {
 	 */
 	public static function getInstance($config = '') {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self($config);
-        }
+			self::$_instance = new self($config);
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	/**
@@ -98,8 +98,8 @@ class Database extends Database_Contoller {
 	 * @return array
 	 */
 	public function getFields($table, $all = false) {
-		
-		if(isset($this->_allowedColumns[$table]) && is_array($this->_allowedColumns[$table])) {
+
+		if (isset($this->_allowedColumns[$table]) && is_array($this->_allowedColumns[$table])) {
 			return $this->_allowedColumns[$table];
 		}
 
@@ -141,7 +141,7 @@ class Database extends Database_Contoller {
 	 * @return string
 	 */
 	public function serverVersion() {
-		$version	= mysql_get_server_info($this->_db_connect_id);
+		$version = mysql_get_server_info($this->_db_connect_id);
 		return version_clean($version);
 	}
 
@@ -154,7 +154,7 @@ class Database extends Database_Contoller {
 	 */
 	public function sqlSafe($value, $quote = false) {
 
-		$value	= mysql_real_escape_string(stripslashes($value), $this->_db_connect_id);
+		$value = mysql_real_escape_string(stripslashes($value), $this->_db_connect_id);
 
 		return (!$quote || is_null($value)) ? $value : "'$value'";
 	}
@@ -192,7 +192,7 @@ class Database extends Database_Contoller {
 			}
 
 			$this->_stopTimer();
-			
+
 			/* Left in for debug purposes
 			if($this->error()) {
 				$fp = fopen('mysql_schema_log.txt', 'a+');
@@ -200,7 +200,7 @@ class Database extends Database_Contoller {
 				fclose($fp);
 			}
 			*/
-			
+
 			//If there is an error and its not because of system error
 			if ($this->error() && (strpos($this->errorInfo(), 'CubeCart_system_error_log') !== false)) {
 				$this->_logError();
@@ -221,18 +221,18 @@ class Database extends Database_Contoller {
 	 * Setup anything DB wise
 	 */
 	private function _setup() {
-		
+
 		@mysql_query($this->_db_connect_id, "SET SESSION sql_mode = ''");
-		
-		if(defined('SKIP_DB_SETUP') && SKIP_DB_SETUP) { 
+
+		if (defined('SKIP_DB_SETUP') && SKIP_DB_SETUP) {
 			// check MySQL Strict mode on upgrade/install
 			$mysql_mode = $this->misc('SELECT @@sql_mode;');
-			if(stristr($mysql_mode[0]['@@sql_mode'], 'strict')) {
+			if (stristr($mysql_mode[0]['@@sql_mode'], 'strict')) {
 				die($lang['setup']['error_strict_mode']);
 			}
 			return false;
 		}
-		
+
 		//Force UTF-8
 		@mysql_query($this->_db_connect_id, "SET NAMES 'utf8'");
 		@mysql_query($this->_db_connect_id, "SET CHARACTER SET 'utf8'");

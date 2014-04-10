@@ -251,7 +251,7 @@ class Website_Payments_Pro  {
 			'SHIPTOZIP'		=> $delivery['postcode'],
 			'SHIPTOCOUNTRY'	=> getCountryFormat($delivery['country_id'], 'numcode', 'iso'),
 			'SHIPTOPHONENUM'=> isset($delivery['phone']) ? $delivery['phone'] : '',
-			'NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'
+			'NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal'
 		);
 
 		$i	= 0;
@@ -563,9 +563,6 @@ class Website_Payments_Pro  {
 		
 		httpredir($this->_api_paypal_url.$this->_token);
 	}
-
-	################################################
-	/* !Protected Methods */
 
 	final protected function nvp_request($method_name = null, $nvp_data = array()) {
 		if (!empty($method_name) && is_array($nvp_data)) {

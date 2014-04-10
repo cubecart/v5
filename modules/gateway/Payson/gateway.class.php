@@ -34,9 +34,9 @@ class Gateway {
   		$cost = str_replace(".", ",", $cost);
   		$shipcost = '0,00';
 
-  		$handler_url = $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=Payson';
+  		$handler_url = $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=Payson';
 
-  		$cHash = md5($this->_module['email'].":".$cost.":".$shipcost.":".str_replace('&amp;','&',$handler_url).":1".$this->_module['key']);
+  		$cHash = md5($this->_module['email'].":".$cost.":".$shipcost.":".str_replace('&','&',$handler_url).":1".$this->_module['key']);
 
 		$hidden	= array(
 			'BuyerEmail' 		=> 	$this->_basket['billing_address']['email'],
@@ -66,7 +66,7 @@ class Gateway {
 
 	public function process() {
 		
-		$retHashString	= str_replace('&','&amp;',$_GET['OkURL']).$_GET['Paysonref'].$this->_module['key'];
+		$retHashString	= str_replace('&','&',$_GET['OkURL']).$_GET['Paysonref'].$this->_module['key'];
 		$retHash		= md5($retHashString);
 		
 		$order			= Order::getInstance();

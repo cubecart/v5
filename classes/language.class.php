@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -28,46 +28,46 @@ class Language {
 	 *
 	 * @var string
 	 */
-	private $_language					= '';
+	private $_language     = '';
 	/**
 	 * Custom language
 	 *
 	 * @var array
 	 */
-	private $_language_custom			= array();
+	private $_language_custom   = array();
 	/**
 	 * Language data
 	 *
 	 * @var array
 	 */
-	private $_language_data				= array();
+	private $_language_data    = array();
 	/**
 	 * Language definitions
 	 *
 	 * @var array
 	 */
-	private $_language_definitions		= array();
+	private $_language_definitions  = array();
 	/**
 	 * Language definitions data
 	 *
 	 * @var array
 	 */
-	private $_language_definition_data	= array();
+	private $_language_definition_data = array();
 	/**
 	 * Language groups
 	 *
 	 * @var array
 	 */
-	private $_language_groups			= false;
+	private $_language_groups   = false;
 	/**
 	 * Language strings
 	 *
 	 * @var array
 	 */
-	private $_language_strings			= array();
+	private $_language_strings   = array();
 
-	const LANG_REGEX	= '#^([a-z]{2})\-?([A-Z]{2})?$#';
-	const EMAIL_FILE	= '#^email_(([a-z]{2})(\-[A-Z]{2})?(\-custom)?)\.[a-z]+(\.gz)?$#';
+	const LANG_REGEX = '#^([a-z]{2})\-?([A-Z]{2})?$#';
+	const EMAIL_FILE = '#^email_(([a-z]{2})(\-[A-Z]{2})?(\-custom)?)\.[a-z]+(\.gz)?$#';
 
 	/**
 	 * Class instance
@@ -86,7 +86,7 @@ class Language {
 				//See if the language is set in the session
 				if (!CC_IN_ADMIN && $GLOBALS['session']->has('language', 'client')) {
 					$this->_language = $GLOBALS['session']->get('language', 'client');
-				} elseif(CC_IN_ADMIN) {
+				} elseif (CC_IN_ADMIN) {
 					$admin_lang = $GLOBALS['session']->get('user_language', 'admin');
 					$this->_language = (!empty($admin_lang)) ? $admin_lang : $GLOBALS['config']->get('config', 'default_language');
 				} else {
@@ -123,7 +123,7 @@ class Language {
 	public function assignLang() {
 
 		$GLOBALS['smarty']->assign('LANG', $this->_language_strings);
-		
+
 	}
 
 
@@ -135,8 +135,8 @@ class Language {
 	public function __get($name) {
 		$name = strtolower($name);
 		if (isset($this->_language_strings[$name])) {
-            return $this->_language_strings[$name];
-        }
+			return $this->_language_strings[$name];
+		}
 
 		return false;
 	}
@@ -158,7 +158,7 @@ class Language {
 	public function __set($name, $value) {
 		$name = strtolower($name);
 		if (!isset($this->_language_strings[$name]) && is_array($value)) {
-			$this->_language_custom[$name]	= $name;
+			$this->_language_custom[$name] = $name;
 			$this->_language_strings[$name] = $value;
 		}
 	}
@@ -182,10 +182,10 @@ class Language {
 	 */
 	public static function getInstance($admin = false) {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self($admin);
-        }
+			self::$_instance = new self($admin);
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
@@ -311,61 +311,61 @@ class Language {
 	 * @param int $id
 	 * @return bool
 	 */
-    public function fullyTranslated($type, $id) {
-    	switch ($type){
-    		case 'document':
-    			$data = array(
-    				'table' 	=> 'CubeCart_documents',
-    				'id_column' => 'doc_id',
-    				'language' 	=> 'doc_lang',
-    				'parent_id' => 'doc_parent_id',
-    				'ignore_default' => false // documents acts differently using main table
-    			);
+	public function fullyTranslated($type, $id) {
+		switch ($type) {
+		case 'document':
+			$data = array(
+				'table'  => 'CubeCart_documents',
+				'id_column' => 'doc_id',
+				'language'  => 'doc_lang',
+				'parent_id' => 'doc_parent_id',
+				'ignore_default' => false // documents acts differently using main table
+			);
 
-    		break;
-    		case 'product':
-    			$data = array(
-    				'table' 	=> 'CubeCart_inventory_language',
-    				'id_column' => 'product_id',
-    				'language' 	=> 'language',
- 					'parent_id' => false,
-    				'ignore_default' => true // documents acts differently using main table
-    			);
-    		break;
-    		case 'category':
-    			$data = array(
-    				'table' 	=> 'CubeCart_category_language',
-    				'id_column' => 'cat_id',
-    				'language' 	=> 'language',
-    				'parent_id' => false,
-    				'ignore_default' => true // documents acts differently using main table
-    			);
-    		break;
-    	}
-    	// Break on false
-    	if (($languages = $this->listLanguages()) !== false) {
-    		$result = true;
-
-    		foreach($languages as $language) {
-    		    // skip default language if languages are stores in same table
-    			if ($data['ignore_default'] && $language['code'] == $GLOBALS['config']->get('config', 'default_language')) {
-    				 continue;
-    			}
-    			$where = ($data['parent_id']) ? '`'.$data['language'].'` = \''.$language['code'].'\' AND (`'.$data['parent_id'].'` = '.$id.' || `'.$data['id_column'].'`= '.$id.')' : array($data['language'] => $language['code'], $data['id_column'] => $id);
-
-    			if ($result && !$GLOBALS['db']->select($data['table'], false, $where))
-        			$result = false;
-        		}
+			break;
+		case 'product':
+			$data = array(
+				'table'  => 'CubeCart_inventory_language',
+				'id_column' => 'product_id',
+				'language'  => 'language',
+				'parent_id' => false,
+				'ignore_default' => true // documents acts differently using main table
+			);
+			break;
+		case 'category':
+			$data = array(
+				'table'  => 'CubeCart_category_language',
+				'id_column' => 'cat_id',
+				'language'  => 'language',
+				'parent_id' => false,
+				'ignore_default' => true // documents acts differently using main table
+			);
+			break;
 		}
-        return $result;
-   	}
+		// Break on false
+		if (($languages = $this->listLanguages()) !== false) {
+			$result = true;
 
-   	/**
-   	 * Get custom language strings
-   	 *
-   	 * @param string $group
-   	 * @return array
-   	 */
+			foreach ($languages as $language) {
+				// skip default language if languages are stores in same table
+				if ($data['ignore_default'] && $language['code'] == $GLOBALS['config']->get('config', 'default_language')) {
+					continue;
+				}
+				$where = ($data['parent_id']) ? '`'.$data['language'].'` = \''.$language['code'].'\' AND (`'.$data['parent_id'].'` = '.$id.' || `'.$data['id_column'].'`= '.$id.')' : array($data['language'] => $language['code'], $data['id_column'] => $id);
+
+				if ($result && !$GLOBALS['db']->select($data['table'], false, $where))
+					$result = false;
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * Get custom language strings
+	 *
+	 * @param string $group
+	 * @return array
+	 */
 	public function getCustom($group, $language = '') {
 		if (!empty($group)) {
 			if (empty($language)) {
@@ -421,14 +421,14 @@ class Language {
 	 * @return array/false
 	 */
 	public function getGroups() {
-//		if (!empty($this->_language_strings)) {
+		//  if (!empty($this->_language_strings)) {
 		if (!empty($this->_language_strings_def)) { // $this->_language_strings_def in method loadLang() defined
 			if (empty($this->_language_groups)) {
 				foreach ($this->_language_strings_def as $group => $strings) { // $this->_language_strings_def in method loadLang() defined
-//				foreach ($this->_language_strings as $group => $strings) { 
+					//    foreach ($this->_language_strings as $group => $strings) {
 					$this->_language_groups[$group] = $group;
 				}
-				unset($group,$strings);
+				unset($group, $strings);
 			}
 			natsort($this->_language_groups);
 			return $this->_language_groups;
@@ -476,8 +476,8 @@ class Language {
 	 * @return friendly path
 	 */
 	public function getFriendlyModulePath($path, $name_only = false) {
-		$path_parts = explode(CC_DS,$path);
-		if($name_only) {
+		$path_parts = explode(CC_DS, $path);
+		if ($name_only) {
 			return strtolower($path_parts[2]);
 		}
 		return ucfirst($path_parts[0]).' - '.ucfirst($path_parts[1]).' - '.$path_parts[2];
@@ -533,9 +533,9 @@ class Language {
 					if ($xml->email) {
 						foreach ($xml->email as $email) {
 							if ($email->content) {
-								$record['content_type']	= (string)$email->attributes()->name;
-								$record['language']		= (string)$xml->attributes()->language;
-								$record['subject']		= (string)$email->subject;
+								$record['content_type'] = (string)$email->attributes()->name;
+								$record['language']  = (string)$xml->attributes()->language;
+								$record['subject']  = (string)$email->subject;
 								foreach ($email->content as $content) {
 									$record['content_'.(string)$content->attributes()->type] = trim((string)$content);
 								}
@@ -564,18 +564,18 @@ class Language {
 	 * @return bool
 	 */
 	public function importLanguage($file, $overwrite = false) {
-		$temp_name 		= $file['tmp_name']['file'];
-		$destination 	= CC_LANGUAGE_DIR.$file['name']['file'];
-		$file_content 	= file_get_contents($temp_name);
+		$temp_name   = $file['tmp_name']['file'];
+		$destination  = CC_LANGUAGE_DIR.$file['name']['file'];
+		$file_content  = file_get_contents($temp_name);
 
 		// Validate file
 		libxml_use_internal_errors(true);
 		$sxe = simplexml_load_string($file_content);
 		if (!$sxe) {
-			foreach(libxml_get_errors() as $error) {
-        		trigger_error('Failed loading XML:'. $error->message);
-    		}
-		    return false;
+			foreach (libxml_get_errors() as $error) {
+				trigger_error('Failed loading XML:'. $error->message);
+			}
+			return false;
 		} else {
 			$xml = new SimpleXMLElement($file_content);
 			if (empty($xml->info->title) || empty($xml->info->code)) {
@@ -603,7 +603,7 @@ class Language {
 			return $GLOBALS['cache']->read('lang.list');
 		} else {
 			//Get all langauge files
-			if (($files	= glob(CC_LANGUAGE_DIR.'*.{xml,gz}', GLOB_BRACE)) !== false) {
+			if (($files = glob(CC_LANGUAGE_DIR.'*.{xml,gz}', GLOB_BRACE)) !== false) {
 				$list = array();
 				foreach ($files as $file) {
 					// Get the language code from the filename
@@ -627,7 +627,7 @@ class Language {
 						foreach ((array)$data->info as $key => $value) {
 							$list[(string)$data->info->code][(string)$key] = (string)$value;
 						}
-						unset($data,$xml);
+						unset($data, $xml);
 					}
 				}
 				if (!empty($list) && is_array($list)) {
@@ -660,8 +660,8 @@ class Language {
 			&& ($GLOBALS['cache']->exists($name.'.definition_data') && is_array($GLOBALS['cache']->read($name.'.definition_data')))) {
 			$this->_language_definitions = $GLOBALS['cache']->read($name.'.definitions');
 			$this->_language_definition_data = $GLOBALS['cache']->read($name.'.definition_data');
-//			$this->_language_definitions = array_merge($GLOBALS['cache']->read($name.'.definitions'), $this->_language_definitions);
-//			$this->_language_definition_data = array_merge($GLOBALS['cache']->read($name.'.definition_data'), $this->_language_definition_data);
+			//   $this->_language_definitions = array_merge($GLOBALS['cache']->read($name.'.definitions'), $this->_language_definitions);
+			//   $this->_language_definition_data = array_merge($GLOBALS['cache']->read($name.'.definition_data'), $this->_language_definition_data);
 		} else {
 			// Load language definitions
 			$file = $path.$file_name;
@@ -669,7 +669,7 @@ class Language {
 				$definition_data = $definition = array();
 				$xml = new SimpleXMLElement(file_get_contents($file));
 				foreach ($xml->group as $group) {
-					$group_name	= (string)$group->attributes()->name;
+					$group_name = (string)$group->attributes()->name;
 					if (empty($group_name)) {
 						continue;
 					}
@@ -697,8 +697,8 @@ class Language {
 				if (!empty($definition)) {
 					$GLOBALS['cache']->write($definition, $name.'.definitions');
 					$GLOBALS['cache']->write($definition_data, $name.'.definition_data');
-//					$this->_language_definitions = array_merge($definition, $this->_language_definitions);
-//					$this->_language_definition_data = array_merge($definition_data, $this->_language_definition_data);
+					//     $this->_language_definitions = array_merge($definition, $this->_language_definitions);
+					//     $this->_language_definition_data = array_merge($definition_data, $this->_language_definition_data);
 					$this->_language_definitions = $definition;
 					$this->_language_definition_data = $definition_data;
 				}
@@ -734,7 +734,6 @@ class Language {
 			$data = $this->_extractXML($path.$language);
 			if (!empty($data)) {
 				$xml = new SimpleXMLElement($data);
-
 				if (!empty($xml)) {
 					if (!empty($xml->info)) {
 						foreach ((array)$xml->info as $key => $value) {
@@ -743,8 +742,8 @@ class Language {
 						$GLOBALS['cache']->write($lang_data, 'lang.info.'.(string)$xml->info->code);
 						$this->_language_data = $lang_data;
 					}
-
 					switch (floor((float)$xml->attributes()->version)) {
+<<<<<<< HEAD
 						case 2:
 							// New format - Similar layout to the definition file
 							if ($xml->translation && $xml->translation->group) {
@@ -754,13 +753,24 @@ class Language {
 										$xml_name = $string->attributes()->name;
 										$strings[(string)$group][(string)$xml_name] = trim((string)$string);
 									}
+=======
+					case 2:
+						// New format - Similar layout to the definition file
+						if ($xml->translation && $xml->translation->group) {
+							foreach ($xml->translation->group as $groups) {
+								$group = (string)$groups->attributes()->name;
+								foreach ($groups->string as $string) {
+									$xml_name = $string->attributes()->name;
+									$strings[(string)$group][(string)$xml_name] = trim((string)$string);
+>>>>>>> FETCH_HEAD
 								}
-								unset($groups, $group, $xml_name, $string);
 							}
-							break;
-						default:
-							trigger_error('Language format error - exiting.', E_USER_WARNING);
-							die;
+							unset($groups, $group, $xml_name, $string);
+						}
+						break;
+					default:
+						trigger_error('Language format error - exiting.', E_USER_WARNING);
+						die;
 					}
 
 				}
@@ -809,12 +819,12 @@ class Language {
 		if (!empty($language)) {
 			// Load in existing file
 			$source = $path.$language.'.xml';
-			$target	= ($replace) ? $source : $path.$language.'-custom.xml';
+			$target = ($replace) ? $source : $path.$language.'-custom.xml';
 			$strings = array();
 
 			if (file_exists($source)) {
-				$data	= file_get_contents($source);
-				$xml	= new SimpleXMLElement($data);
+				$data = file_get_contents($source);
+				$xml = new SimpleXMLElement($data);
 				foreach ($xml->info as $values) {
 					foreach ($values as $key => $value) {
 						$info[$key] = $value;
@@ -822,14 +832,14 @@ class Language {
 				}
 				if ($xml->translation && $xml->translation->group) {
 					foreach ($xml->translation->group as $groups) {
-						$group	= $groups->attributes()->name;
+						$group = $groups->attributes()->name;
 						foreach ($groups->string as $string) {
 							$name = $string->attributes()->name;
 							$strings[(string)$group][(string)$name] = $string;
 						}
 					}
 				}
-				unset($data,$xml);
+				unset($data, $xml);
 
 				// Fetch Database Results
 				if (($custom = $GLOBALS['db']->select('CubeCart_lang_strings', false, array('language' => $language))) !== false) {
@@ -858,10 +868,10 @@ class Language {
 				$xml->endElement();
 				if ($compress) {
 					$output = gzencode($xml->getDocument(), 9, FORCE_GZIP);
-					$ext	= '.gz';
+					$ext = '.gz';
 				} else {
 					$output = $xml->getDocument();
-					$ext	= false;
+					$ext = false;
 				}
 
 				return (bool)file_put_contents($target.$ext, $output);
@@ -876,6 +886,10 @@ class Language {
 	 */
 	public function setTemplate() {
 		$lang_data = $this->getData();
+<<<<<<< HEAD
+=======
+
+>>>>>>> FETCH_HEAD
 		//Assign left to right or right to left
 		$GLOBALS['smarty']->assign('TEXT_DIRECTION', $lang_data['text-direction']);
 		//Assign character set
@@ -893,7 +907,7 @@ class Language {
 	public function translateCategory(&$category) {
 		if (!empty($category)) {
 			if ($this->_language != $GLOBALS['config']->get('config', 'default_language')) {
-				if (($translation = $GLOBALS['db']->select('CubeCart_category_language', array('cat_name','cat_desc','seo_meta_title','seo_meta_description','seo_meta_keywords'), array('cat_id' => $category['cat_id'], 'language' => $this->_language))) !== false) {
+				if (($translation = $GLOBALS['db']->select('CubeCart_category_language', array('cat_name', 'cat_desc', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('cat_id' => $category['cat_id'], 'language' => $this->_language))) !== false) {
 					$category = array_merge($category, $translation[0]);
 				}
 			}
@@ -909,16 +923,16 @@ class Language {
 	 * @return array
 	 */
 	public function translateDocument(&$document) {
-        if (!empty($document)) {
-            if ($this->_language != $GLOBALS['config']->get('config', 'default_language')) {
-                if (($translation = $GLOBALS['db']->select('CubeCart_documents', array('doc_id','doc_name','doc_content','doc_url','doc_url_openin','seo_meta_title','seo_meta_description','seo_meta_keywords'), array('doc_parent_id' => $document['doc_id'], 'doc_lang' => $this->_language))) !== false) {
-                    $document = array_merge($document, $translation[0]);
-                }
-            }
-            return $document;
-        }
-        return false;
-    }
+		if (!empty($document)) {
+			if ($this->_language != $GLOBALS['config']->get('config', 'default_language')) {
+				if (($translation = $GLOBALS['db']->select('CubeCart_documents', array('doc_id', 'doc_name', 'doc_content', 'doc_url', 'doc_url_openin', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('doc_parent_id' => $document['doc_id'], 'doc_lang' => $this->_language))) !== false) {
+					$document = array_merge($document, $translation[0]);
+				}
+			}
+			return $document;
+		}
+		return false;
+	}
 
 	/**
 	 * Translate a product
@@ -929,7 +943,7 @@ class Language {
 	public function translateProduct(&$product) {
 		if (!empty($product)) {
 			if ($this->_language != $GLOBALS['config']->get('config', 'default_language')) {
-				if (($translation = $GLOBALS['db']->select('CubeCart_inventory_language', array('name','description','seo_meta_title','seo_meta_description','seo_meta_keywords'), array('product_id' => (int)$product['product_id'], 'language' => $this->_language))) !== false) {
+				if (($translation = $GLOBALS['db']->select('CubeCart_inventory_language', array('name', 'description', 'seo_meta_title', 'seo_meta_description', 'seo_meta_keywords'), array('product_id' => (int)$product['product_id'], 'language' => $this->_language))) !== false) {
 					$product = array_merge($product, $translation[0]);
 				}
 			}
@@ -958,7 +972,7 @@ class Language {
 		//Append the DS if needed
 		$path = appendDS($path);
 
-		return (is_dir($path) && file_exists($path));
+		return is_dir($path) && file_exists($path);
 	}
 
 	/**
@@ -968,6 +982,7 @@ class Language {
 	 * @return array/false
 	 */
 	private function _extractXML($language) {
+<<<<<<< HEAD
     	if ((($files = glob($language.'*{-custom,}.xml*', GLOB_BRACE | GLOB_NOSORT)) !== false) && !empty($files)) {
 	        $merged_addon_strings = '<?xml version="1.0"?><language version="2.0">';
 	        foreach ($files as $file) {
@@ -999,6 +1014,40 @@ class Language {
 	        return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
 	    }
 	    return false;
+=======
+		if ((($files = glob($language.'*{-custom,}.xml*', GLOB_BRACE | GLOB_NOSORT)) !== false) && !empty($files)) {
+			$merged_addon_strings = '<?xml version="1.0"?><language version="2.0">';
+			foreach ($files as $file) {
+				if (substr($file, -3) == '.gz') {
+					// Extract GZipped content
+					$xml_data = gzuncompress(simplexml_load_file($file.'.gz'));
+				} else {
+					$xml_data = simplexml_load_file($file);
+				}
+				if (is_object($xml_data->info)) {
+					foreach ($xml_data->info as $element) {
+						$merged_addon_strings .= $element->asXML();
+					}
+				}
+				$merged_addon_strings .= '<translation>';
+				if (is_object($xml_data->translation->group)) {
+					foreach ($xml_data->translation->group as $element) {
+						$merged_addon_strings .= $element->asXML();
+					}
+				}
+				$merged_addon_strings .= '<translation></translation>';
+				if (is_object($xml_data->translation->translate)) {
+					foreach ($xml_data->translation->translate as $element) {
+						$merged_addon_strings .= $element->asXML();
+					}
+				}
+				$merged_addon_strings .= '</translation>';
+			}
+			$merged_addon_strings .= '</language>';
+			return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
+		}
+		return false;
+>>>>>>> FETCH_HEAD
 	}
 
 	/**

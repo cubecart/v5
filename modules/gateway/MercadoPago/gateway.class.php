@@ -35,9 +35,9 @@ class Gateway {
 			
 			'currency'				=> $this->_module['country'],
 			
-			'url_process'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=MercadoPago&amp;cart_id='.$this->_basket['cart_order_id'],
-			'url_succesfull'		=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=MercadoPago&amp;cart_id='.$this->_basket['cart_order_id'],
-			'url_cancel'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=MercadoPago&amp;cart_id='.$this->_basket['cart_order_id'],
+			'url_process'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=MercadoPago&cart_id='.$this->_basket['cart_order_id'],
+			'url_succesfull'		=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=MercadoPago&cart_id='.$this->_basket['cart_order_id'],
+			'url_cancel'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=MercadoPago&cart_id='.$this->_basket['cart_order_id'],
 			
 			'cart_email' 			=> $this->_basket['billing_address']['email'],
 			'cart_name' 			=> $this->_basket['billing_address']['first_name'], 

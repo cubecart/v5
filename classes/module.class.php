@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -27,7 +27,7 @@ class Module {
 	 *
 	 * @var array
 	 */
-	public 	$_settings;
+	public  $_settings;
 
 	/**
 	 * Module content
@@ -40,7 +40,7 @@ class Module {
 	 *
 	 * @var array
 	 */
-	private $_info			= false;
+	private $_info   = false;
 	/**
 	 * Module local name
 	 *
@@ -58,13 +58,13 @@ class Module {
 	 *
 	 * @var string
 	 */
-	private $_package_file	= 'package.conf.inc';
+	private $_package_file = 'package.conf.inc';
 	/**
 	 * Module config dile
 	 *
 	 * @var string
 	 */
-	private $_package_xml	= 'config.xml';
+	private $_package_xml = 'config.xml';
 	/**
 	 * Module path
 	 *
@@ -114,7 +114,7 @@ class Module {
 				}
 				$this->_module_data($path, $local_name);
 				// Install hooks if required
-				if($_POST['module']['status']) {
+				if ($_POST['module']['status']) {
 					$GLOBALS['hooks']->install($this->_module_name);
 				} else {
 					$GLOBALS['hooks']->uninstall($this->_module_name);
@@ -137,7 +137,7 @@ class Module {
 				$GLOBALS['smarty']->assign('TITLE', $this->module_fetch_logo($this->_info['type'], $this->_module_name, $lang['module_title']));
 
 				// Get tax types for modules drop down box
-				if (($this->_taxes = $GLOBALS['db']->select('CubeCart_tax_class', array('id','tax_name'), false, array('tax_name' => 'ASC'))) !== false) {
+				if (($this->_taxes = $GLOBALS['db']->select('CubeCart_tax_class', array('id', 'tax_name'), false, array('tax_name' => 'ASC'))) !== false) {
 					foreach ($this->_taxes as $tax) {
 						$tax['selected'] = (isset($this->_settings['tax']) && $this->_settings['tax'] == $tax['id']) ? "selected='selected'" : "";
 						$taxes[] = $tax;
@@ -150,12 +150,12 @@ class Module {
 					$GLOBALS['debug']->debugTail($this->_settings, $this->_module_name.': settings');
 
 					if ($this->_info['type'] == 'gateway') {
-						$this->_settings['processURL'] 	= $this->communicateURL('process');
-						$this->_settings['callURL'] 	= $this->communicateURL('call');
-						$this->_settings['fromURL'] 	= $this->communicateURL('from');
+						$this->_settings['processURL']  = $this->communicateURL('process');
+						$this->_settings['callURL']  = $this->communicateURL('call');
+						$this->_settings['fromURL']  = $this->communicateURL('from');
 					}
 					// Allow for 3d arrays, key is subsistuted after MODULE_ in upper case
-					foreach($this->_settings as $key => $value) {
+					foreach ($this->_settings as $key => $value) {
 						if (is_array($value)) {
 							$GLOBALS['smarty']->assign('MODULE_'.strtoupper($key), $value);
 						} else {
@@ -166,7 +166,7 @@ class Module {
 					// Assign checked & selects
 					if (is_array($this->_settings)) {
 						foreach ($this->_settings as $setting => $value) {
-							$value = str_replace(array('.','-'),'_',$value);
+							$value = str_replace(array('.', '-'), '_', $value);
 							$GLOBALS['smarty']->assign('SELECT_'.$setting.'_'.$value, 'selected="selected"');
 							$GLOBALS['smarty']->assign('CHECKED_'.$setting.'_'.$value, 'checked="checked"');
 						}
@@ -181,7 +181,7 @@ class Module {
 				}
 				$GLOBALS['language']->setTemplate();
 
-				if($fetch) {
+				if ($fetch) {
 					$this->fetch();
 				}
 			}
@@ -208,10 +208,10 @@ class Module {
 	 */
 	public function assign_to_template($name, $value=null) {
 		if (is_array($name)) {
-			foreach($name as $key => $value) {
+			foreach ($name as $key => $value) {
 				$this->_template_data[$key] = $value;
 			}
-		} elseif(!empty($name) && !is_null($value)) {
+		} elseif (!empty($name) && !is_null($value)) {
 			$this->_template_data[$name] = $value;
 			return true;
 		} else {
@@ -225,12 +225,12 @@ class Module {
 	 * @param string $method
 	 * @return string
 	 */
-	public function communicateURL($method = 'process'){
+	public function communicateURL($method = 'process') {
 		// SSL is preferred
-		if($method == 'from') {
+		if ($method == 'from') {
 			return $GLOBALS['storeURL'].'/index.php?_a=gateway';
 		} else {
-			return $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type='.$this->_info['type'].'&amp;cmd='.$method.'&amp;module='.$this->_module_name;
+			return $GLOBALS['storeURL'].'/index.php?_g=rm&type='.$this->_info['type'].'&cmd='.$method.'&module='.$this->_module_name;
 		}
 	}
 
@@ -252,8 +252,8 @@ class Module {
 	 * Send template date to the screen
 	 */
 	public function fetch() {
-		if(!empty($this->_template_data)) {
-			foreach($this->_template_data as $key => $value) {
+		if (!empty($this->_template_data)) {
+			foreach ($this->_template_data as $key => $value) {
 				$GLOBALS['smarty']->assign($key, $value);
 			}
 		}
@@ -270,12 +270,12 @@ class Module {
 	 * @return string
 	 */
 	public function module_fetch_logo($type, $name, $module_title = '') {
-		$images	= glob(CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$type.CC_DS.$name.CC_DS.'admin'.CC_DS.'logo.{gif,jpg,png}', GLOB_BRACE);
+		$images = glob(CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$type.CC_DS.$name.CC_DS.'admin'.CC_DS.'logo.{gif,jpg,png}', GLOB_BRACE);
 		// $name is the module folder name, $module_title is the title set in the module lang file which is preferable
 		if (is_array($images) && isset($images[0])) {
 			$title = (empty($module_title)) ? $name : $module_title;
 			return '<img src="modules/'.$type.'/'.$name.'/admin/'.basename($images[0]).'" alt="'.$title.'" title="'.$title.'" width="114" />';
-		} elseif(!empty($module_title)) {
+		} elseif (!empty($module_title)) {
 			return $module_title;
 		} else {
 			return str_replace('_', ' ', $name);
@@ -312,12 +312,12 @@ class Module {
 		if (!empty($settings) && is_array($settings)) {
 			$updated = false;
 
-			$settings['countries'] 			= $this->module_fetch_zones('zones');
+			$settings['countries']    = $this->module_fetch_zones('zones');
 			$settings['disabled_countries'] = $this->module_fetch_zones('disabled_zones');
 			$data = array(
-				'status'	=> $settings['status'],
-				'default'	=> $settings['default'],
-				'position'	=> (isset($settings['position']) && $settings['position'] > 0) ? $settings['position'] : 0,
+				'status' => $settings['status'],
+				'default' => $settings['default'],
+				'position' => (isset($settings['position']) && $settings['position'] > 0) ? $settings['position'] : 0,
 			);
 			unset($settings['status'], $settings['default']);
 			if ($GLOBALS['config']->set($this->_local_name, '', $settings)) {
@@ -325,7 +325,7 @@ class Module {
 			}
 			if (isset($settings['default']) && $settings['default']) {
 				// If this is to be set as default then the others need to be unset
-				if($GLOBALS['db']->update('CubeCart_modules', array('default' => 0), array('module' => $this->_info['type']))) {
+				if ($GLOBALS['db']->update('CubeCart_modules', array('default' => 0), array('module' => $this->_info['type']))) {
 					$updated = true;
 				}
 			}
@@ -335,9 +335,9 @@ class Module {
 					$updated = true;
 				}
 			} else {
-				$data['folder']	= $this->_local_name;
-				$data['module']	= $this->_info['type'];
-				if($GLOBALS['db']->insert('CubeCart_modules', $data)) {
+				$data['folder'] = $this->_local_name;
+				$data['module'] = $this->_info['type'];
+				if ($GLOBALS['db']->insert('CubeCart_modules', $data)) {
 					$updated = true;
 				}
 			}
@@ -348,7 +348,7 @@ class Module {
 	public function module_fetch_zones($label) {
 
 		if (!isset($_POST[$label]) || !is_array($_POST[$label])) return '';
-		
+
 		foreach ($_POST[$label] as $zone) {
 			if (!empty($zone)) $zones[] = $zone;
 		}
@@ -384,7 +384,7 @@ class Module {
 		// Set Module Path
 		if ($path) {
 			$drop = array('admin', 'classes', 'skin', 'language');
-			$this->_path = CC_ROOT_DIR.str_replace($drop, '', dirname(str_replace(CC_ROOT_DIR,'',$path)));
+			$this->_path = CC_ROOT_DIR.str_replace($drop, '', dirname(str_replace(CC_ROOT_DIR, '', $path)));
 			// Drop trailing slashes
 			if (substr($this->_path, -1) == CC_DS) {
 				$this->_path = substr($this->_path, 0, -1);
@@ -395,13 +395,13 @@ class Module {
 			$xml = new SimpleXMLElement(file_get_contents($this->_path.CC_DS.$this->_package_xml, true));
 			## Parse and handle XML data
 			foreach ((array)$xml->info as $key => $value) {
-				$this->_info[$key]	= (string)$value;
+				$this->_info[$key] = (string)$value;
 			}
 			//$this->_module_name = (isset($this->_info['folder']) && !empty($this->_info['folder'])) ? $this->_info['folder'] : str_replace(' ', '_', $this->_info['name']);
 		} else if (file_exists($this->_path.CC_DS.$this->_package_file)) {
-			$this->_info		= unserialize(file_get_contents($this->_path.CC_DS.$this->_package_file, true));
-			//$this->_module_name = str_replace(' ', '_', $this->_info['name']);
-		} else {
+				$this->_info  = unserialize(file_get_contents($this->_path.CC_DS.$this->_package_file, true));
+				//$this->_module_name = str_replace(' ', '_', $this->_info['name']);
+			} else {
 			$pathFolders = explode(CC_DS, $this->_path);
 			$noFolders = count($pathFolders);
 			$this->_info['type'] = $pathFolders[($noFolders-2)];
@@ -409,12 +409,12 @@ class Module {
 		}
 
 		$this->_module_name = str_replace(' ', '_', $local_name);
-		$this->_local_name		= ($local_name) ? $local_name : $this->_module_name;
+		$this->_local_name  = ($local_name) ? $local_name : $this->_module_name;
 
 		// Load module configuration
 		if (!empty($this->_module_name)) {
-			$config	= $GLOBALS['config']->get($this->_local_name);
-			$module	= $GLOBALS['db']->select('CubeCart_modules', false, array('folder' => $this->_module_name));
+			$config = $GLOBALS['config']->get($this->_local_name);
+			$module = $GLOBALS['db']->select('CubeCart_modules', false, array('folder' => $this->_module_name));
 			unset($config['status'], $config['default']);
 			$this->_settings = ($module) ? array_merge($module[0], $config) : $config;
 		}

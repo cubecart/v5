@@ -16,14 +16,14 @@
 		  <td align="center">
 		  	{if isset($content.translations)}
 			{foreach from=$content.translations item=translation}
-			<a href="{$translation.edit}"><img src="language/flags/{$translation.language}.png" alt="{$translation.language}" /></a>
+			<a href="{$translation.edit}"><img src="language/flags/{$translation.language}.png" alt="{$translation.language}"></a>
 			{/foreach}
 			{else}
 			{$LANG.translate.trans_none}
 			{/if}
 		  </td>
 		  <td width="30" align="center">
-			<a href="{$content.translate}" title="{$LANG.translate.trans_add}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.translate.trans_add}" /></a>
+			<a href="{$content.translate}" title="{$LANG.translate.trans_add}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.translate.trans_add}"></a>
 		  </td>
 		</tr>
 		{/foreach}
@@ -38,11 +38,11 @@
 	  {foreach from=$EMAIL_TEMPLATES item=template}
 	  <div>
 		<span class="actions">
-		  <a href="{$template.clone}" title="{$LANG.common.clone}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/page_copy.png" alt="{$LANG.common.clone}" /></a>
-		  <a href="{$template.edit}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
-		  <a href="{$template.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
+		  <a href="{$template.clone}" title="{$LANG.common.clone}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/page_copy.png" alt="{$LANG.common.clone}"></a>
+		  <a href="{$template.edit}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
+		  <a href="{$template.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
 		</span>
-		<input type="hidden" name="template_default[{$template.template_id}]" id="template_default_{$template.template_id}" value="{$template.template_default}" class="toggle unique" /> <a href="{$template.edit}">{$template.title}</a>
+		<input type="hidden" name="template_default[{$template.template_id}]" id="template_default_{$template.template_id}" value="{$template.template_default}" class="toggle unique"> <a href="{$template.edit}">{$template.title}</a>
 	  </div>
 	  {/foreach}
 	  {else}
@@ -77,7 +77,7 @@
 		  <option value="{$export}">{$export}</option>
 		  {/foreach}
 		  </select>
-		<input type="checkbox" name="export_compress" value="1" checked="checked" /> {$LANG.email.export_compress}
+		<input type="checkbox" name="export_compress" value="1" checked="checked"> {$LANG.email.export_compress}
 	  </div>
 	</fieldset>
 	{/if}
@@ -147,15 +147,15 @@
   		</tbody>
   	</table>
   </div>
-  <input type="hidden" name="content[content_type]" value="{$CONTENT.content_type}" />
-  <input type="hidden" name="content[content_id]" value="{$CONTENT.content_id}" />
+  <input type="hidden" name="content[content_type]" value="{$CONTENT.content_type}">
+  <input type="hidden" name="content[content_id]" value="{$CONTENT.content_id}">
   {/if}
 
   {if isset($DISPLAY_TEMPLATE_FORM)}
   <div id="general" class="tab_content">
   	<h3>{$ADD_EDIT_TEMPLATE}</h3>
   	<fieldset>
-  	<div><label for="template_desc">{$LANG.email.template_name}</label><span><input type="text" name="template[title]" id="template_desc" value="{$TEMPLATE.title}" class="textbox required" /></span></div>
+  	<div><label for="template_desc">{$LANG.email.template_name}</label><span><input type="text" name="template[title]" id="template_desc" value="{$TEMPLATE.title}" class="textbox required"></span></div>
   	</fieldset>
   </div>
   <div id="email_html" class="tab_content">
@@ -214,14 +214,14 @@
   	</table>
   </div>
 
-  <input type="hidden" name="template[template_id]" value="{$TEMPLATE.template_id}" />
+  <input type="hidden" name="template[template_id]" value="{$TEMPLATE.template_id}">
   {/if}
   
   {include file='templates/element.hook_form_content.php'}
 
   <div class="form_control">
-	<input id="previous-tab" type="hidden" value="" name="previous-tab" />
-	<input type="submit" value="{$LANG.common.save}" />{if isset($DISPLAY_DELETE_LINK)} <a href="{$LINK_DELETE}" class="delete" title="{$LANG.notification.confirm_delete}">{$LANG.common.delete}</a>{/if}
+	<input id="previous-tab" type="hidden" value="" name="previous-tab">
+	<input type="submit" value="{$LANG.common.save}">{if isset($DISPLAY_DELETE_LINK)} <a href="{$LINK_DELETE}" class="delete" title="{$LANG.notification.confirm_delete}">{$LANG.common.delete}</a>{/if}
   </div>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
 </form>

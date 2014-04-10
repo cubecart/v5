@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -28,31 +28,31 @@ class ACP {
 	 *
 	 * @var bool
 	 */
-	private $_hide_navigation	= false;
+	private $_hide_navigation = false;
 	/**
 	 * Navigation
 	 *
 	 * @var array
 	 */
-	private $_navigation		= array();
+	private $_navigation  = array();
 	/**
 	 * Tabs
 	 *
 	 * @var array
 	 */
-	private $_tabs				= array();
+	private $_tabs    = array();
 	/**
 	 * Wiki namespace
 	 *
 	 * @var string
 	 */
-	private $_wiki_namespace	= 'ACP';
+	private $_wiki_namespace = 'ACP';
 	/**
 	 * Wiki page
 	 *
 	 * @var string
 	 */
-	private $_wiki_page			= null;
+	private $_wiki_page   = null;
 
 	/**
 	 * Class instance
@@ -71,10 +71,10 @@ class ACP {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
@@ -89,8 +89,8 @@ class ACP {
 		if (!empty($array)) {
 			foreach ($array as $name => $url) {
 				$this->_navigation[$group][] = array(
-					'name'	=> strip_tags($name),
-					'url'	=> $url,
+					'name' => strip_tags($name),
+					'url' => $url,
 				);
 			}
 		}
@@ -110,27 +110,27 @@ class ACP {
 		if (!empty($name)) {
 			$url = (!empty($url) && is_array($url)) ? currentPage(null, $url) : $url;
 			$this->_tabs[] = array(
-				'name'		=> $name,
-				'target'	=> $target,
-				'url'		=> preg_replace('/(#.*)$/i', '', $url),
-				'accesskey'	=> $accesskey,
-				'notify'	=> $notify_count,
+				'name'  => $name,
+				'target' => $target,
+				'url'  => preg_replace('/(#.*)$/i', '', $url),
+				'accesskey' => $accesskey,
+				'notify' => $notify_count,
 			);
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
-	* Remove tab control
-	*
-	* @param string $name
-	* @return self
-	*/
-	
+	 * Remove tab control
+	 *
+	 * @param string $name
+	 * @return self
+	 */
+
 	public function removeTabControl($name) {
 		if (!empty($name)) {
-			foreach($this->_tabs as $key => $tab) {
+			foreach ($this->_tabs as $key => $tab) {
 				if ( $tab['name'] == $name ) {
 					unset($this->_tabs[$key]);
 				}
@@ -146,11 +146,11 @@ class ACP {
 	 */
 	public function adminLog($message) {
 		if (!empty($message)) {
-			$record	= array(
-				'admin_id'		=> Admin::getInstance()->getId(),
-				'ip_address'	=> get_ip_address(),
-				'time'			=> time(),
-				'description'	=> $message,
+			$record = array(
+				'admin_id'  => Admin::getInstance()->getId(),
+				'ip_address' => get_ip_address(),
+				'time'   => time(),
+				'description' => $message,
 			);
 			$GLOBALS['db']->insert('CubeCart_admin_log', $record);
 		}
@@ -199,14 +199,14 @@ class ACP {
 		$base = CC_ROOT_DIR.CC_DS.$GLOBALS['config']->get('config', 'adminFolder').CC_DS.'sources'.CC_DS;
 		$node = (!empty($node)) ? $node : 'index';
 
-		$source	= implode('.', array($request, $node, 'inc.php'));
+		$source = implode('.', array($request, $node, 'inc.php'));
 		if (file_exists($base.$source)) {
 			return $base.$source;
 		} else {
 			if (!is_dir($base.$request) && file_exists($base.$request.'inc.php')) {
-				$source	= CC_ROOT_DIR.CC_DS.$GLOBALS['config']->get('config', 'adminFolder').CC_DS.'sources'.CC_DS.$request.'.inc.php';
+				$source = CC_ROOT_DIR.CC_DS.$GLOBALS['config']->get('config', 'adminFolder').CC_DS.'sources'.CC_DS.$request.'.inc.php';
 			} else {
-				$source	= CC_ROOT_DIR.CC_DS.$GLOBALS['config']->get('config', 'adminFolder').CC_DS.'sources'.CC_DS.$request.CC_DS.$node.'.inc.php';
+				$source = CC_ROOT_DIR.CC_DS.$GLOBALS['config']->get('config', 'adminFolder').CC_DS.'sources'.CC_DS.$request.CC_DS.$node.'.inc.php';
 			}
 			trigger_error($request.'/'.$node.' needs to be updated.', E_USER_NOTICE);
 			return $source;
@@ -219,20 +219,20 @@ class ACP {
 	 * @param string $message
 	 */
 	public function setACPWarning($message, $show_once = false, $display = true) {
-		if(empty($message)) {
+		if (empty($message)) {
 			return;
 		}
 		// Log message and don't show again to current staff member
-		if($show_once) {
-			if(!$GLOBALS['db']->select('CubeCart_admin_error_log', 'log_id', array('message' => $message, 'admin_id' => Admin::getInstance()->get('admin_id')))) {
+		if ($show_once) {
+			if (!$GLOBALS['db']->select('CubeCart_admin_error_log', 'log_id', array('message' => $message, 'admin_id' => Admin::getInstance()->get('admin_id')))) {
 				$GLOBALS['db']->insert('CubeCart_admin_error_log', array('message' => $message, 'admin_id' => Admin::getInstance()->get('admin_id'), 'time' => time()));
-				if($display) {
+				if ($display) {
 					$GLOBALS['gui']->setError($message);
 				}
 			}
-		}  else if($display) {
-			$GLOBALS['gui']->setError($message);
-		}
+		}  else if ($display) {
+				$GLOBALS['gui']->setError($message);
+			}
 	}
 
 	/**
@@ -294,13 +294,13 @@ class ACP {
 			if (($navigation = $GLOBALS['cache']->read('acp.showNavigation.'.$admin_session_language)) === false) {
 				foreach ($this->_navigation as $group => $menu) {
 					$item = array(
-						'title'	=> $group,
-						'group'	=> str_replace(' ', '_', $group)
+						'title' => $group,
+						'group' => str_replace(' ', '_', $group)
 					);
 					foreach ($menu as $submenu) {
 						$item['members'][] = array(
-							'title'	=> ucwords($submenu['name']),
-							'url'	=> $submenu['url'],
+							'title' => ucwords($submenu['name']),
+							'url' => $submenu['url'],
 						);
 					}
 					$navigation[] = $item;
@@ -321,10 +321,10 @@ class ACP {
 	public function showTabs() {
 		if (Admin::getInstance()->is() && !empty($this->_tabs) && is_array($this->_tabs)) {
 			foreach ($this->_tabs as $tab) {
-				$tab['name']	= ucwords($tab['name']);
-				$tab['tab_id']	= 'tab_'.str_replace(' ', '_', $tab['target']);
-				$tab['target']	= (!empty($tab['target'])) ? '#'.$tab['target'] : '';
-				$tabs[]	= $tab;
+				$tab['name'] = ucwords($tab['name']);
+				$tab['tab_id'] = 'tab_'.str_replace(' ', '_', $tab['target']);
+				$tab['target'] = (!empty($tab['target'])) ? '#'.$tab['target'] : '';
+				$tabs[] = $tab;
 			}
 			foreach ($GLOBALS['hooks']->load('admin.tabs') as $hook) include $hook;
 			$GLOBALS['smarty']->assign('TABS', $tabs);

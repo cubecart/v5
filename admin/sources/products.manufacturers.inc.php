@@ -63,29 +63,29 @@ foreach ($GLOBALS['hooks']->load('admin.product.manufacturer.pre_display') as $h
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_manufacturer'], false, currentPage(array('edit')));
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_manufacturer_edit'], 'manu_edit');
-	if (($manufacturers = $GLOBALS['db']->select('CubeCart_manufacturers', array('name','id','URL'), array('id' => (int)$_GET['edit']))) !== false) {
+	if (($manufacturers = $GLOBALS['db']->select('CubeCart_manufacturers', array('name', 'id', 'URL'), array('id' => (int)$_GET['edit']))) !== false) {
 		$GLOBALS['smarty']->assign('EDIT', $manufacturers[0]);
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['catalogue']['error_manufacturer_found']);
 		httpredir(currentPage(array('edit')));
 	}
-	$GLOBALS['smarty']->assign('DISPLAY_FORM',true);
+	$GLOBALS['smarty']->assign('DISPLAY_FORM', true);
 
 } else {
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_manufacturer'], 'manufacturers');
 	$GLOBALS['main']->addTabControl($lang['catalogue']['title_manufacturer_add'], 'manu_add');
-	$catalogue	= Catalogue::getInstance();
-	$page		= (isset($_GET['page'])) ? $_GET['page'] : 1;
-	$per_page	= 10;
-	if (($manufacturers = $GLOBALS['db']->select('CubeCart_manufacturers', array('id','image'), false, 'name', $per_page, $page)) !== false) {
+	$catalogue = Catalogue::getInstance();
+	$page  = (isset($_GET['page'])) ? $_GET['page'] : 1;
+	$per_page = 10;
+	if (($manufacturers = $GLOBALS['db']->select('CubeCart_manufacturers', array('id', 'image'), false, 'name', $per_page, $page)) !== false) {
 		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page));
 		foreach ($manufacturers as $manufacturer) {
 			$manufacturer['name'] = $catalogue->getManufacturer($manufacturer['id']);
-			$smarty_data['manufacturers'][]	= $manufacturer;
+			$smarty_data['manufacturers'][] = $manufacturer;
 		}
 		$GLOBALS['smarty']->assign('MANUFACTURERS', $smarty_data['manufacturers']);
 
 	}
-	$GLOBALS['smarty']->assign('DISPLAY_LIST',true);
+	$GLOBALS['smarty']->assign('DISPLAY_LIST', true);
 }
 $page_content = $GLOBALS['smarty']->fetch('templates/products.manufacturers.php');

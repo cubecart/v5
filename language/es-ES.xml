@@ -1675,7 +1675,6 @@
       <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Aplicar a]]></string>
       <string name="tax_class" introduced="5.0.0"><![CDATA[Clase de impuesto]]></string>
       <string name="tax_class_name" introduced="5.0.0"><![CDATA[Nombre del tipo de impuesto]]></string>
-      <string name="tax_customer" introduced="5.0.0"><![CDATA[Añadir impuesto de ventas a los clientes correspondientes]]></string>
       <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Aplicar impuestos a los clientes por]]></string>
       <string name="tax_delete" introduced="5.0.0"><![CDATA[ADVERTENCIA: Eliminar esto también eliminará las normas fiscales que dependen de ello. ¿Está seguro de que desea continuar?]]></string>
       <string name="tax_detail" introduced="5.0.0"><![CDATA[Datos fiscales]]></string>

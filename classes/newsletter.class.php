@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -26,7 +26,7 @@ class Newsletter {
 	protected static $_instance;
 
 	public function __construct() {
-		$this->_mailer	= Mailer::getInstance();
+		$this->_mailer = Mailer::getInstance();
 	}
 
 	/**
@@ -36,10 +36,10 @@ class Newsletter {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-            self::$_instance = new self();
-        }
+			self::$_instance = new self();
+		}
 
-        return self::$_instance;
+		return self::$_instance;
 	}
 
 
@@ -49,13 +49,13 @@ class Newsletter {
 			// Valid email, but is it a dupe...
 			if (!$dupes = $GLOBALS['db']->select('CubeCart_newsletter_subscriber', array('email'), array('email' => strtolower($email)))) {
 
-				$record	= array(
-					'status'		=> true,
-					'email'			=> $email,
-					'validation'	=> $this->generateValidation($email),
+				$record = array(
+					'status'  => true,
+					'email'   => $email,
+					'validation' => $this->generateValidation($email),
 				);
 				$GLOBALS['db']->insert('CubeCart_newsletter_subscriber', $record);
-				
+
 				return true;
 			}
 			return false;
@@ -119,8 +119,8 @@ class Newsletter {
 		if ($newsletter_id && is_numeric($newsletter_id)) {
 			if (($contents = $GLOBALS['db']->select('CubeCart_newsletter', false, array('newsletter_id' => (int)$newsletter_id))) !== false) {
 				$content = $contents[0];
-				$this->_html	= $content['content_html'];
-				$this->_text	= $content['content_text'];
+				$this->_html = $content['content_html'];
+				$this->_text = $content['content_text'];
 
 				if (!empty($content['sender_name'])) {
 					$this->_mailer->FromName = $content['sender_name'];
@@ -137,15 +137,15 @@ class Newsletter {
 				} else {
 					ini_set('ignore_user_abort', true);
 					// Send to all subscribers
-					$limit	= 20;
-					$total	= (int)$GLOBALS['db']->count('CubeCart_newsletter_subscriber', 'status', array('status' => '1'));
+					$limit = 20;
+					$total = (int)$GLOBALS['db']->count('CubeCart_newsletter_subscriber', 'status', array('status' => '1'));
 					if (($subscribers = $GLOBALS['db']->select('CubeCart_newsletter_subscriber', array('email'), array('status' => '1'), false, $limit, $cycle)) !== false) {
 						foreach ($subscribers as $subscriber) {
 							if (filter_var($subscriber['email'], FILTER_VALIDATE_EMAIL)) {
-								$content	= array(
-									'subject'		=> $content['subject'],
-									'content_html'	=> $content['content_html'],
-									'content_text'	=> $content['content_text'],
+								$content = array(
+									'subject'  => $content['subject'],
+									'content_html' => $content['content_html'],
+									'content_text' => $content['content_text'],
 								);
 								$this->_mailer->sendEmail($subscriber['email'], $content, $contents[0]['template_id']);
 							} else {
@@ -155,10 +155,10 @@ class Newsletter {
 						}
 						$sent_to = $limit * $cycle;
 						if ($total > $sent_to) {
-							$data	= array(
-								'count'		=> $sent_to,
-								'total'		=> $total,
-								'percent'	=> ($sent_to/$total)*100,
+							$data = array(
+								'count'  => $sent_to,
+								'total'  => $total,
+								'percent' => ($sent_to/$total)*100,
 							);
 							return $data;
 						} else {

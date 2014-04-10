@@ -1,10 +1,14 @@
 <?php
-if (!defined('CC_INI_SET'))	die('Access Denied');
+if (!defined('CC_INI_SET')) die('Access Denied');
 Admin::getInstance()->permissions('orders', CC_PERM_READ, true);
 $order = Order::getInstance();
 global $lang;
 
+<<<<<<< HEAD
 if(isset($_POST['search']) && !is_array($_POST['multi-order'])) {
+=======
+if (isset($_POST['search']) && !is_array($_POST['multi-order'])) {
+>>>>>>> FETCH_HEAD
 	httpredir('?_g=orders&'.http_build_query($_POST));
 }
 
@@ -33,7 +37,7 @@ if (isset($_GET['delete']) && !empty($_GET['delete']) && Admin::getInstance()->p
 }
 
 if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders', CC_PERM_EDIT)) {
-	$order_id	= (!empty($_POST['cart_order_id'])) ? $_POST['cart_order_id'] : $order->createOrderId(true);
+	$order_id = (!empty($_POST['cart_order_id'])) ? $_POST['cart_order_id'] : $order->createOrderId(true);
 	// Hook
 	foreach ($GLOBALS['hooks']->load('admin.order.index.pre_process') as $hook) include $hook;
 
@@ -47,19 +51,19 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 	// Add products
 	if (isset($_POST['inv_add']) && is_array($_POST['inv_add'])) {
 		foreach ($_POST['inv_add'] as $data) {
-			$record	= array(
-				'product_id'	=> (int)$data['product_id'],
-				'quantity'		=> $data['product_quantity'],
-				'price'			=> $data['price'],
-				'cart_order_id'	=> $order_id,
+			$record = array(
+				'product_id' => (int)$data['product_id'],
+				'quantity'  => $data['product_quantity'],
+				'price'   => $data['price'],
+				'cart_order_id' => $order_id,
 			);
 			if (!empty($data['product_id']) && is_numeric($data['product_id'])) {
 				// Get product data
 				if (($product = $GLOBALS['db']->select('CubeCart_inventory', false, array('product_id' => $data['product_id']))) !== false) {
-					$record	= array_merge($product[0], $record);
+					$record = array_merge($product[0], $record);
 				}
 			} else {
-				$record['name']			= $data['product'];
+				$record['name']   = $data['product'];
 			}
 			$GLOBALS['db']->insert('CubeCart_order_inventory', $record);
 			unset($record);
@@ -81,10 +85,10 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 	// Add Taxes
 	if (isset($_POST['tax_add']) && is_array($_POST['tax_add'])) {
 		foreach ($_POST['tax_add'] as $data) {
-			$record	= array(
-				'cart_order_id'	=> $order_id,
-				'tax_id'		=> (int)$data['tax_id'],
-				'amount'		=> $data['amount'],
+			$record = array(
+				'cart_order_id' => $order_id,
+				'tax_id'  => (int)$data['tax_id'],
+				'amount'  => $data['amount'],
 			);
 			$GLOBALS['db']->insert('CubeCart_order_tax', $record);
 			unset($record);
@@ -97,32 +101,32 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 		}
 	}
 	#// Order Summary data
-	$record	= array(
-		'cart_order_id'	=> $order_id,
-		'dashboard'		=> (isset($_POST['dashboard'])) ? (int)$_POST['dashboard'] : false,
-		'discount_type'	=> $_POST['summary']['discount_type'],
+	$record = array(
+		'cart_order_id' => $order_id,
+		'dashboard'  => (isset($_POST['dashboard'])) ? (int)$_POST['dashboard'] : false,
+		'discount_type' => $_POST['summary']['discount_type'],
 	);
 
-	$customer_data	= $_POST['customer'];
+	$customer_data = $_POST['customer'];
 	if (isset($_POST['customer']['customer_id']) && !empty($_POST['customer']['customer_id'])) {
 		if (($customer = $GLOBALS['db']->select('CubeCart_customer', array('customer_id', 'title', 'first_name', 'last_name'), array('customer_id' => (int)$_POST['customer']['customer_id']))) !== false) {
-			$customer_data	= array_merge($customer[0],$_POST['customer']);
+			$customer_data = array_merge($customer[0], $_POST['customer']);
 		}
 	}
-	if($_POST['summary']['discount_type']=='p') {
+	if ($_POST['summary']['discount_type']=='p') {
 		$_POST['summary']['discount'] = $_POST['summary']['subtotal']*($_POST['summary']['discount']*0.01);
 	}
-	
-	$record	= array_merge($customer_data, $_POST['summary'], $record);
+
+	$record = array_merge($customer_data, $_POST['summary'], $record);
 
 	// Add a new note, if there's any content
 	if (!empty($_POST['note'])) {
-		$note	= array(
-			'admin_id'		=> Admin::getInstance()->get('admin_id'),
-			'cart_order_id'	=> $order_id,
-			'content'		=> strip_tags($_POST['note']),
+		$note = array(
+			'admin_id'  => Admin::getInstance()->get('admin_id'),
+			'cart_order_id' => $order_id,
+			'content'  => strip_tags($_POST['note']),
 		);
-		if($GLOBALS['db']->insert('CubeCart_order_notes', $note)) {
+		if ($GLOBALS['db']->insert('CubeCart_order_notes', $note)) {
 			$notes_added = true;
 		}
 	}
@@ -144,13 +148,13 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 		//$order_status = $order->orderStatus($_POST['order']['status'], $order_id, true);
 		$order_status = $order->orderStatus($_POST['order']['status'], $order_id);
 
-		if($update_status || $order_status || $notes_added) {
+		if ($update_status || $order_status || $notes_added) {
 			$GLOBALS['main']->setACPNotify($lang['orders']['notify_order_update']);
 		} else {
 			$GLOBALS['main']->setACPWarning($lang['orders']['error_order_update']);
 		}
 	}
-	
+
 	// Hook
 	foreach ($GLOBALS['hooks']->load('admin.order.index.post_process') as $hook) include $hook;
 
@@ -163,7 +167,7 @@ if (isset($_POST['cart_order_id']) && Admin::getInstance()->permissions('orders'
 
 if (isset($_GET['delete-note']) && isset($_GET['order_id'])) {
 	$GLOBALS['db']->delete('CubeCart_order_notes', array('cart_order_id' => $_GET['order_id'], 'note_id' => $_GET['delete-note']));
-	httpredir(currentPage(array('delete-note','print_hash')), 'notes');
+	httpredir(currentPage(array('delete-note', 'print_hash')), 'notes');
 }
 
 $tax = Tax::getInstance();
@@ -183,11 +187,11 @@ if (isset($_GET['action'])) {
 	if (isset($_GET['order_id'])) {
 		$GLOBALS['main']->addTabControl($lang['orders']['tab_history'], 'order_history');
 		/*! Order History */
-		if (($order_history = $GLOBALS['db']->select('CubeCart_order_history', array('status','updated'), array('cart_order_id' => $_GET['order_id']), array('updated' => 'DESC'))) !== false) {
-			foreach($order_history as $event) {
-				$event['updated'] 	= formatTime($event['updated']);
-				$event['status'] 	= $lang['order_state']['name_'.$event['status']];
-				$smarty_data['list_history'][]	= $event;
+		if (($order_history = $GLOBALS['db']->select('CubeCart_order_history', array('status', 'updated'), array('cart_order_id' => $_GET['order_id']), array('updated' => 'DESC'))) !== false) {
+			foreach ($order_history as $event) {
+				$event['updated']  = formatTime($event['updated']);
+				$event['status']  = $lang['order_state']['name_'.$event['status']];
+				$smarty_data['list_history'][] = $event;
 			}
 			$GLOBALS['smarty']->assign('LIST_HISTORY', $smarty_data['list_history']);
 		}
@@ -202,18 +206,18 @@ if (isset($_GET['action'])) {
 		}
 		if (($tax_details = $GLOBALS['db']->select('CubeCart_tax_details')) !== false) {
 			foreach ($tax_details as $tax_detail) {
-				$detail[(int)$tax_detail['id']]	= $tax_detail;
+				$detail[(int)$tax_detail['id']] = $tax_detail;
 			}
 			$tax_by_country = array();
 			foreach ($tax_rates as $tax_rate) {
 				$data = array_merge($types[$tax_rate['type_id']], $detail[$tax_rate['details_id']], $tax_rate);
-				$rates[$tax_rate['id']]	= $data;
+				$rates[$tax_rate['id']] = $data;
 				$tax_by_country[$tax_rate['country_id']][] = $data;
 			}
 		}
 		if (is_array($tax_by_country)) {
 			foreach ($tax_by_country as $numcode => $taxes) {
-				$country	= getCountryFormat($numcode);
+				$country = getCountryFormat($numcode);
 				$smarty_data['select_tax'][$country] = $taxes;
 			}
 			$GLOBALS['smarty']->assign('SELECT_TAX', $smarty_data['select_tax']);
@@ -223,16 +227,22 @@ if (isset($_GET['action'])) {
 		// Load order summary
 		if (isset($_GET['order_id']) && ($summary = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $_GET['order_id']))) !== false) {
 			// Make some values frendlier
-			$summary[0]['ship_method'] 		= str_replace('_', ' ', $summary[0]['ship_method']);
-			$summary[0]['ship_date'] 		= ((int)(str_replace('-', '', $summary[0]['ship_date'])) > 0) ? $summary[0]['ship_date'] : "";
+			$summary[0]['ship_method']   = str_replace('_', ' ', $summary[0]['ship_method']);
+			$summary[0]['ship_date']   = ((int)(str_replace('-', '', $summary[0]['ship_date'])) > 0) ? $summary[0]['ship_date'] : "";
 
 			// Processing/Pending orders are on the dashboard by default otherwise show defined value
-			if($summary[0]['discount_type']=='p') {
+			if ($summary[0]['discount_type']=='p') {
 				$summary[0]['discount_form'] = number_format(($summary[0]['discount']/$summary[0]['subtotal'])*100);
 			} else {
+<<<<<<< HEAD
 				$summary[0]['discount_form'] = number_format($summary[0]['discount'],2);
   			}
 			
+=======
+				$summary[0]['discount_form'] = number_format($summary[0]['discount'], 2);
+			}
+
+>>>>>>> FETCH_HEAD
 			$GLOBALS['smarty']->assign('SUMMARY', $summary[0]);
 			if ($summary[0]['status'] >= 3) {
 				$GLOBALS['smarty']->assign('DISPLAY_DASHBOARD', true);
@@ -241,19 +251,19 @@ if (isset($_GET['action'])) {
 			$GLOBALS['gui']->addBreadcrumb($summary[0]['cart_order_id'], currentPage(array('print_hash')));
 			// Load order inventory
 			if (($inventory = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $summary[0]['cart_order_id']))) !== false) {
-				$subtotal	= 0;
+				$subtotal = 0;
 				foreach ($inventory as $product) {
 					$subtotal += ($product['price']*$product['quantity']);
 					$product['line'] = $product['price'];
 					$price_total = $product['price']*$product['quantity'];
-					$product['price_total']	= number_format($price_total, 2);
+					$product['price_total'] = number_format($price_total, 2);
 
 					$product['line_formatted'] = Tax::getInstance()->priceFormat($product['price']);
 					$product['price_total_formatted'] = Tax::getInstance()->priceFormat($price_total);
-					
-					if (!empty($product['product_options']) && preg_match('/^a:[0-9]/', $product['product_options'])) { 
+
+					if (!empty($product['product_options']) && preg_match('/^a:[0-9]/', $product['product_options'])) {
 						$product['options'] = implode(' ', cc_unserialize($product['product_options']));
-					} elseif(!empty($product['product_options'])) {
+					} elseif (!empty($product['product_options'])) {
 						$product['options'] = $product['product_options'];
 					}
 
@@ -269,22 +279,22 @@ if (isset($_GET['action'])) {
 			if ($overview_summary['discount_type'] == 'p') {
 				$overview_summary['percent'] = number_format(($overview_summary['discount']/$overview_summary['subtotal'])*100) . '%';
 			} else if ($overview_summary['discount_type'] == 'pp') {
-				$overview_summary['percent'] = number_format(($overview_summary['discount']/($overview_summary['subtotal']+$overview_summary['discount']))*100) . '%';
-			}
+					$overview_summary['percent'] = number_format(($overview_summary['discount']/($overview_summary['subtotal']+$overview_summary['discount']))*100) . '%';
+				}
 
-			$overview_summary['name']		= (isset($summary[0]['name']) && !empty($summary[0]['name'])) ? $summary[0]['name'] : $summary[0]['first_name'].' '.$summary[0]['last_name'];
-			$overview_summary['name_d']		= (isset($summary[0]['name_d']) && !empty($summary[0]['name_d'])) ? $summary[0]['name_d'] : $summary[0]['first_name_d'].' '.$summary[0]['last_name_d'];
-			$overview_summary['ship_date'] 	= $overview_summary['ship_date'] ? formatDispatchDate($overview_summary['ship_date']) : "&nbsp;";
-			$overview_summary['discount'] 	= $GLOBALS['tax']->priceFormat($overview_summary['discount']);
-			$overview_summary['subtotal'] 	= $GLOBALS['tax']->priceFormat($overview_summary['subtotal']);
-			$overview_summary['shipping'] 	= $GLOBALS['tax']->priceFormat($overview_summary['shipping']);
-			$overview_summary['total_tax'] 	= $GLOBALS['tax']->priceFormat($overview_summary['total_tax']);
-			$overview_summary['total'] 		= $GLOBALS['tax']->priceFormat($overview_summary['total']);
-			$overview_summary['country_d']	= is_numeric($overview_summary['country_d']) ? getCountryFormat($overview_summary['country_d'], 'numcode', 'name') : $overview_summary['country_d'];
-			$overview_summary['country']	= is_numeric($overview_summary['country']) ? getCountryFormat($overview_summary['country'], 'numcode', 'name') : $overview_summary['country'];
-			$overview_summary['state_d']	= is_numeric($overview_summary['state_d']) ? getStateFormat($overview_summary['state_d']) : $overview_summary['state_d'];
-			$overview_summary['state']		= is_numeric($overview_summary['state']) ? getStateFormat($overview_summary['state']) : $overview_summary['state'];
-			$overview_summary_taxes			= $GLOBALS['db']->select('CubeCart_order_tax', array('tax_id','amount'), array('cart_order_id' => $_GET['order_id']));
+			$overview_summary['name']  = (isset($summary[0]['name']) && !empty($summary[0]['name'])) ? $summary[0]['name'] : $summary[0]['first_name'].' '.$summary[0]['last_name'];
+			$overview_summary['name_d']  = (isset($summary[0]['name_d']) && !empty($summary[0]['name_d'])) ? $summary[0]['name_d'] : $summary[0]['first_name_d'].' '.$summary[0]['last_name_d'];
+			$overview_summary['ship_date']  = $overview_summary['ship_date'] ? formatDispatchDate($overview_summary['ship_date']) : "&nbsp;";
+			$overview_summary['discount']  = $GLOBALS['tax']->priceFormat($overview_summary['discount']);
+			$overview_summary['subtotal']  = $GLOBALS['tax']->priceFormat($overview_summary['subtotal']);
+			$overview_summary['shipping']  = $GLOBALS['tax']->priceFormat($overview_summary['shipping']);
+			$overview_summary['total_tax']  = $GLOBALS['tax']->priceFormat($overview_summary['total_tax']);
+			$overview_summary['total']   = $GLOBALS['tax']->priceFormat($overview_summary['total']);
+			$overview_summary['country_d'] = is_numeric($overview_summary['country_d']) ? getCountryFormat($overview_summary['country_d'], 'numcode', 'name') : $overview_summary['country_d'];
+			$overview_summary['country'] = is_numeric($overview_summary['country']) ? getCountryFormat($overview_summary['country'], 'numcode', 'name') : $overview_summary['country'];
+			$overview_summary['state_d'] = is_numeric($overview_summary['state_d']) ? getStateFormat($overview_summary['state_d']) : $overview_summary['state_d'];
+			$overview_summary['state']  = is_numeric($overview_summary['state']) ? getStateFormat($overview_summary['state']) : $overview_summary['state'];
+			$overview_summary_taxes   = $GLOBALS['db']->select('CubeCart_order_tax', array('tax_id', 'amount'), array('cart_order_id' => $_GET['order_id']));
 			if ($overview_summary_taxes) {
 				foreach ($overview_summary_taxes as $overview_tax) {
 					$tax_data = $GLOBALS['tax']->fetchTaxDetails($overview_tax['tax_id']);
@@ -295,18 +305,18 @@ if (isset($_GET['action'])) {
 				$GLOBALS['smarty']->assign('TAX_SUMMARY', $smarty_data['tax_summary']);
 			}
 
-			$label_fix = array('ship_method','ship_tracking','gateway');
+			$label_fix = array('ship_method', 'ship_tracking', 'gateway');
 			foreach ($overview_summary as $key => $value) {
-			    if (empty($value) && in_array($key,$label_fix)) $overview_summary[$key] = '&nbsp;';
+				if (empty($value) && in_array($key, $label_fix)) $overview_summary[$key] = '&nbsp;';
 			}
-			
-			$GLOBALS['smarty']->assign('OVERVIEW_SUMMARY',$overview_summary);
+
+			$GLOBALS['smarty']->assign('OVERVIEW_SUMMARY', $overview_summary);
 			// Show the customer comments
 			if (!empty($overview_summary['customer_comments'])) {
-				$GLOBALS['smarty']->assign('DISPLAY_COMMENTS',true);
+				$GLOBALS['smarty']->assign('DISPLAY_COMMENTS', true);
 			}
 			unset($overview_summary);
-			$GLOBALS['smarty']->assign('DISPLAY_OVERVIEW',true);
+			$GLOBALS['smarty']->assign('DISPLAY_OVERVIEW', true);
 
 			// Load transaction details, if any
 			if (($transactions = $GLOBALS['db']->select('CubeCart_transactions', false, array('order_id' => $summary[0]['cart_order_id']), array('time' => 'DESC'))) !== false) {
@@ -314,11 +324,11 @@ if (isset($_GET['action'])) {
 				foreach ($transactions as $transaction) {
 					foreach ($GLOBALS['hooks']->load('admin.order.index.transaction') as $hook) include $hook;
 					// Display transactions for this order
-					$transaction['status']	= empty($transaction['status']) ? $GLOBALS['lang']['common']['null'] : $transaction['status'];
-					$transaction['time']	= formatTime($transaction['time']);
-					$transaction['amount']	= Tax::getInstance()->priceFormat($transaction['amount']);
-					$smarty_data['list_transactions'][]	= $transaction;
-					if(isset($transaction['actions'])) $GLOBALS['smarty']->assign('DISPLAY_ACTIONS', true);
+					$transaction['status'] = empty($transaction['status']) ? $GLOBALS['lang']['common']['null'] : $transaction['status'];
+					$transaction['time'] = formatTime($transaction['time']);
+					$transaction['amount'] = Tax::getInstance()->priceFormat($transaction['amount']);
+					$smarty_data['list_transactions'][] = $transaction;
+					if (isset($transaction['actions'])) $GLOBALS['smarty']->assign('DISPLAY_ACTIONS', true);
 				}
 				$GLOBALS['smarty']->assign('TRANSACTIONS', $smarty_data['list_transactions']);
 				$GLOBALS['smarty']->assign('DISPLAY_TRANSACTIONS', true);
@@ -326,27 +336,27 @@ if (isset($_GET['action'])) {
 			// Load credit card details, if any
 			if (!empty($summary[0]['offline_capture'])) {
 				$GLOBALS['main']->addTabControl($lang['orders']['title_card_details'], 'credit_card');
-				$decrypt	= Encryption::getInstance();
+				$decrypt = Encryption::getInstance();
 				$decrypt->setup(false, $summary[0]['cart_order_id']);
 				$card = unserialize($decrypt->decrypt(stripslashes($summary[0]['offline_capture'])));
 				$card = (!empty($card)) ? $card : array('card_type' => '', 'card_number' => '', 'card_expire' => '', 'card_valid' => '', 'card_issue' => '', 'card_cvv' => '');
 				foreach ($card as $key => $value) {
-					$smarty_data['card_data'][$key]	= array(
-						'name'	=> $lang['orders']['card_'.$key],
-						'value'	=> (CC_SSL) ? $value : 'View under SSL',
+					$smarty_data['card_data'][$key] = array(
+						'name' => $lang['orders']['card_'.$key],
+						'value' => (CC_SSL) ? $value : 'View under SSL',
 					);
 				}
 				$GLOBALS['smarty']->assign('CARD_DATA', $smarty_data['card_data']);
 
-				$GLOBALS['smarty']->assign('CARD_DELETE', '?_g=orders&amp;action=edit&amp;order_id='.$summary[0]['cart_order_id']."&amp;delete_card=1#credit_card");
+				$GLOBALS['smarty']->assign('CARD_DELETE', '?_g=orders&action=edit&order_id='.$summary[0]['cart_order_id']."&delete_card=1#credit_card");
 				$GLOBALS['smarty']->assign('DISPLAY_CARD', true);
 			}
 			// Load addresses
 			if (($addresses = $GLOBALS['db']->select('CubeCart_addressbook', false, array('customer_id' => $summary[0]['customer_id']))) !== false) {
 				foreach ($addresses as $key => $address) {
-					$address['country_name']	= getCountryFormat($address['country']);
-					$address['key']				= $key;
-					$smarty_data['list_address'][]	= $address;
+					$address['country_name'] = getCountryFormat($address['country']);
+					$address['key']    = $key;
+					$smarty_data['list_address'][] = $address;
 				}
 				$GLOBALS['smarty']->assign('LIST_ADDRESS', $smarty_data['list_address']);
 				$GLOBALS['smarty']->assign('ADDRESS_JSON', json_encode($addresses));
@@ -354,20 +364,20 @@ if (isset($_GET['action'])) {
 			// Taxes
 			if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $summary[0]['cart_order_id']))) !== false) {
 				foreach ($taxes as $tax) {
-					$tax['display']		= $rates[$tax['tax_id']]['display'];
-					$tax['type_name']	= $rates[$tax['tax_id']]['type_name'];
-					$smarty_data['list_taxes'][]	= $tax;
+					$tax['display']  = $rates[$tax['tax_id']]['display'];
+					$tax['type_name'] = $rates[$tax['tax_id']]['type_name'];
+					$smarty_data['list_taxes'][] = $tax;
 				}
 				$GLOBALS['smarty']->assign('LIST_TAXES', $smarty_data['list_taxes']);
 			}
 		} else {
 			$_POST['summary'] = (isset($_POST['summary'])) ? $_POST['summary'] : array();
 			$_POST['customer'] = (isset($_POST['customer'])) ? $_POST['customer'] : array();
-			$summary[0]	= array_merge($_POST['summary'], $_POST['customer']);
+			$summary[0] = array_merge($_POST['summary'], $_POST['customer']);
 			$GLOBALS['smarty']->assign('SUMMARY', $summary[0]);
 		}
 
-		if (($admins = $GLOBALS['db']->select('CubeCart_admin_users',array('name','admin_id'))) !== false) {
+		if (($admins = $GLOBALS['db']->select('CubeCart_admin_users', array('name', 'admin_id'))) !== false) {
 			foreach ($admins as $admin) {
 				$author[$admin['admin_id']] = $admin['name'];
 			}
@@ -378,31 +388,31 @@ if (isset($_GET['action'])) {
 		$GLOBALS['main']->addTabControl($lang['common']['notes'], 'order_notes', null, null, $no_notes);
 		if ($notes) {
 			foreach ($notes as $note) {
-				$note['time']		= formatTime(strtotime($note['time']),false,true);
-				$note['author']		= $author[$note['admin_id']];
-				$note['delete']		= currentPage(array('print_hash'), array('delete-note' => $note['note_id']));
-				$note['content']	= strip_tags($note['content']);
-				$smarty_data['list_notes'][]	= $note;
+				$note['time']  = formatTime(strtotime($note['time']), false, true);
+				$note['author']  = $author[$note['admin_id']];
+				$note['delete']  = currentPage(array('print_hash'), array('delete-note' => $note['note_id']));
+				$note['content'] = strip_tags($note['content']);
+				$smarty_data['list_notes'][] = $note;
 			}
 			$GLOBALS['smarty']->assign('LIST_NOTES', $smarty_data['list_notes']);
 		}
 	}
 
 	for ($i = 1; $i <= 6; ++$i) {
-		$smarty_data['order_status'][]	= array(
-			'id'		=> $i,
-			'selected'	=> (isset($summary[0]) && isset($summary[0]['status']) && (int)$summary[0]['status'] === $i) ? ' selected="selected"' : '',
-			'string'	=> $lang['order_state']['name_'.$i],
+		$smarty_data['order_status'][] = array(
+			'id'  => $i,
+			'selected' => (isset($summary[0]) && isset($summary[0]['status']) && (int)$summary[0]['status'] === $i) ? ' selected="selected"' : '',
+			'string' => $lang['order_state']['name_'.$i],
 		);
 	}
 	$GLOBALS['smarty']->assign('LIST_ORDER_STATUS', $smarty_data['order_status']);
 	if (($countries = $GLOBALS['db']->select('CubeCart_geo_country')) !== false) {
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
 		foreach ($countries as $country) {
-			$country['is_billing']	= (isset($summary[0]) && isset($summary[0]['country']) && $country['numcode'] == $summary[0]['country']) ? ' selected="selected"' : '';
+			$country['is_billing'] = (isset($summary[0]) && isset($summary[0]['country']) && $country['numcode'] == $summary[0]['country']) ? ' selected="selected"' : '';
 			$country['selected'] = (!isset($summary[0]) || !isset($summary[0]['country']) && $country['numcode'] == $store_country) ? ' selected="selected"' : '';
-			$country['is_delivery']	= (isset($summary[0]) && isset($summary[0]['country_d']) && $country['numcode'] == $summary[0]['country_d']) ? ' selected="selected"' : '';
-			$smarty_data['list_country'][]	= $country;
+			$country['is_delivery'] = (isset($summary[0]) && isset($summary[0]['country_d']) && $country['numcode'] == $summary[0]['country_d']) ? ' selected="selected"' : '';
+			$smarty_data['list_country'][] = $country;
 		}
 		$GLOBALS['smarty']->assign('LIST_COUNTRY', $smarty_data['list_country']);
 		$GLOBALS['smarty']->assign('STATE_JSON', state_json());
@@ -413,104 +423,104 @@ if (isset($_GET['action'])) {
 	$GLOBALS['smarty']->assign('DISPLAY_FORM', true);
 
 } else if (isset($_GET['print']) && !empty($_GET['print'])) {
-	// Generate a printable page, and display it
-	// Made somewhat trickier by the way the templating system works
-	// so we'll generate the page, stick it in the cache folder, trigger the print, then delete the file
-	foreach ($_GET['print'] as $order_id) $order_list[]	= "'".$order_id."'";
+		// Generate a printable page, and display it
+		// Made somewhat trickier by the way the templating system works
+		// so we'll generate the page, stick it in the cache folder, trigger the print, then delete the file
+		foreach ($_GET['print'] as $order_id) $order_list[] = "'".$order_id."'";
 
-	if (($summaries = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $order_list))) !== false) {
-		foreach ($summaries as $key => $summary) {
-			$GLOBALS['smarty']->assign('PAGE_TITLE', (count($_GET['print'])>1) ? $lang['orders']['title_invoices'] : sprintf($lang['orders']['title_invoice_x'], $summary['cart_order_id']));
-			if (($inventory = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
-				foreach ($inventory as $item) {
-					$item['item_price'] = Tax::getInstance()->priceFormat($item['price'], true);
-					$item['price'] = Tax::getInstance()->priceFormat(($item['price']*$item['quantity']), true);
-					if (!empty($item['product_options'])) {
-						$options = ($array = cc_unserialize($item['product_options'])) ? $array : explode("\n", $item['product_options']);
-						foreach ($options as $option) {
-							$value	= trim($option);
-							if (empty($value)) {
-								continue;
+		if (($summaries = $GLOBALS['db']->select('CubeCart_order_summary', false, array('cart_order_id' => $order_list))) !== false) {
+			foreach ($summaries as $key => $summary) {
+				$GLOBALS['smarty']->assign('PAGE_TITLE', (count($_GET['print'])>1) ? $lang['orders']['title_invoices'] : sprintf($lang['orders']['title_invoice_x'], $summary['cart_order_id']));
+				if (($inventory = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
+					foreach ($inventory as $item) {
+						$item['item_price'] = Tax::getInstance()->priceFormat($item['price'], true);
+						$item['price'] = Tax::getInstance()->priceFormat(($item['price']*$item['quantity']), true);
+						if (!empty($item['product_options'])) {
+							$options = ($array = cc_unserialize($item['product_options'])) ? $array : explode("\n", $item['product_options']);
+							foreach ($options as $option) {
+								$value = trim($option);
+								if (empty($value)) {
+									continue;
+								}
+								$item['options'][] = $option;
 							}
-							$item['options'][] = $option;
 						}
+						$summary['items'][] = $item;
 					}
-					$summary['items'][]	= $item;
 				}
+				// Taxes
+				if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
+					$GLOBALS['tax']->loadTaxes($summary['country']);
+					foreach ($taxes as $vat) {
+						$detail = Tax::getInstance()->fetchTaxDetails($vat['tax_id']);
+						$summary['taxes'][] = array('name' => $detail['name'], 'value' => Tax::getInstance()->priceFormat($vat['amount'], true));
+					}
+				} else {
+					$summary['taxes'][] = array('name' => $lang['basket']['total_tax'], 'value' => Tax::getInstance()->priceFormat($summary['total_tax']));
+				}
+				// Price Formatting
+				$summary['percent'] = '';
+				if ($summary['discount_type'] == 'p') {
+					$summary['percent'] = number_format(($summary['discount']/$summary['subtotal'])*100) . '%';
+				} else if ($summary['discount_type'] == 'pp') {
+						$summary['percent'] = number_format(($summary['discount']/($summary['subtotal']+$summary['discount']))*100) . '%';
+					}
+				$format = array('discount', 'shipping', 'subtotal', 'total_tax', 'total');
+				foreach ($format as $field) {
+					if (isset($summary[$field])) $summary[$field] = Tax::getInstance()->priceFormat($summary[$field]);
+				}
+				$summary['state_d'] = (is_numeric($summary['state_d'])) ? getStateFormat($summary['state_d']) : $summary['state_d'];
+				$summary['country_d'] = getCountryFormat($summary['country_d']);
+				$summary['order_date'] = formatTime($summary['order_date'], false, true);
+				$summary['ship_date'] = ((int)(str_replace('-', '', $summary['ship_date'])) > 0) ? formatDispatchDate($summary['ship_date']) : '&nbsp;';
+
+				$label_fix = array('ship_method', 'ship_tracking', 'gateway');
+				foreach ($summary as $key => $value) {
+					if (empty($value) && in_array($key, $label_fix)) $summary[$key] = '&nbsp;';
+				}
+
+
+				if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
+					foreach ($notes as $key => $note) {
+						$summary['notes'][] = $note['content'].'<br />';
+					}
+				}
+
+				$smarty_data['list_orders'][] = $summary;
+				unset($summary, $address);
 			}
-			// Taxes
-			if (($taxes = $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
-				$GLOBALS['tax']->loadTaxes($summary['country']);
-				foreach ($taxes as $vat) {
-					$detail	= Tax::getInstance()->fetchTaxDetails($vat['tax_id']);
-					$summary['taxes'][]	= array('name' => $detail['name'], 'value' => Tax::getInstance()->priceFormat($vat['amount'], true));
-				}
+			$GLOBALS['smarty']->assign('ORDER_LIST', $smarty_data['list_orders']);
+
+			$store_logo = $GLOBALS['gui']->getLogo(true, 'invoices');
+			$GLOBALS['smarty']->assign('STORE_LOGO', $store_logo);
+			$GLOBALS['smarty']->assign('STORE', array(
+					'address' => $GLOBALS['config']->get('config', 'store_address'),
+					'county' => getStateFormat($GLOBALS['config']->get('config', 'store_zone')),
+					'country' => getCountryFormat($GLOBALS['config']->get('config', 'store_country')),
+					'postcode' => $GLOBALS['config']->get('config', 'store_postcode'))
+			);
+			// Parse
+			$template = $GLOBALS['smarty']->fetch('templates/orders.print.php');
+
+			$print_hash = md5(implode('{@}', $summaries[0]));
+
+			$cleanup = '<?php unlink(__FILE__); ?>';
+			$filename = 'print.'.$print_hash.'.php';
+
+			if (file_put_contents(CC_FILES_DIR.$filename, $template.$cleanup)) {
+				httpredir($GLOBALS['storeURL'].'/files/'.$filename);
 			} else {
-				$summary['taxes'][]	= array('name' => $lang['basket']['total_tax'], 'value' => Tax::getInstance()->priceFormat($summary['total_tax']));
+				$GLOBALS['main']->setACPWarning($lang['orders']['error_print_generate']);
+				httpredir(currentPage(array('print')));
 			}
-			// Price Formatting
-			$summary['percent'] = '';
-			if ($summary['discount_type'] == 'p') {
-				$summary['percent'] = number_format(($summary['discount']/$summary['subtotal'])*100) . '%';
-			} else if ($summary['discount_type'] == 'pp') {
-				$summary['percent'] = number_format(($summary['discount']/($summary['subtotal']+$summary['discount']))*100) . '%';
-			}
-			$format	= array('discount','shipping','subtotal','total_tax','total');
-			foreach ($format as $field) {
-				if (isset($summary[$field])) $summary[$field] = Tax::getInstance()->priceFormat($summary[$field]);
-			}
-			$summary['state_d'] = (is_numeric($summary['state_d'])) ? getStateFormat($summary['state_d']) : $summary['state_d'];
-			$summary['country_d'] = getCountryFormat($summary['country_d']);
-			$summary['order_date'] = formatTime($summary['order_date'],false,true);
-			$summary['ship_date'] = ((int)(str_replace('-', '', $summary['ship_date'])) > 0) ? formatDispatchDate($summary['ship_date']) : '&nbsp;';
-
-			$label_fix = array('ship_method','ship_tracking','gateway');
-			foreach ($summary as $key => $value) {
-			    if (empty($value) && in_array($key,$label_fix)) $summary[$key] = '&nbsp;';
-			}
-
-
-			if (($notes = $GLOBALS['db']->select('CubeCart_order_notes', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
-				foreach ($notes as $key => $note) {
-					$summary['notes'][] = $note['content'].'<br />';
-				}
-			}
-
-			$smarty_data['list_orders'][]	= $summary;
-			unset($summary, $address);
-		}
-		$GLOBALS['smarty']->assign('ORDER_LIST',$smarty_data['list_orders']);
-
-		$store_logo = $GLOBALS['gui']->getLogo(true, 'invoices');
-		$GLOBALS['smarty']->assign('STORE_LOGO', $store_logo);
-		$GLOBALS['smarty']->assign('STORE', array(
-			'address'	=> $GLOBALS['config']->get('config', 'store_address'),
-			'county'	=> getStateFormat($GLOBALS['config']->get('config', 'store_zone')),
-			'country'	=> getCountryFormat($GLOBALS['config']->get('config', 'store_country')),
-			'postcode'	=> $GLOBALS['config']->get('config', 'store_postcode'))
-		);
-		// Parse
-		$template = $GLOBALS['smarty']->fetch('templates/orders.print.php');
-
-		$print_hash	= md5(implode('{@}', $summaries[0]));
-
-		$cleanup	= '<?php unlink(__FILE__); ?>';
-		$filename	= 'print.'.$print_hash.'.php';
-
-		if (file_put_contents(CC_FILES_DIR.$filename, $template.$cleanup)) {
-			httpredir($GLOBALS['storeURL'].'/files/'.$filename);
 		} else {
 			$GLOBALS['main']->setACPWarning($lang['orders']['error_print_generate']);
 			httpredir(currentPage(array('print')));
 		}
 	} else {
-		$GLOBALS['main']->setACPWarning($lang['orders']['error_print_generate']);
-		httpredir(currentPage(array('print')));
-	}
-} else {
 	if (isset($_POST['multi-order']) && !empty($_POST['multi-order'])) {
 		// Update selected orders to given status
-		$order	= Order::getInstance();
+		$order = Order::getInstance();
 		// An admin is working on this so lets NOT send out email notifications
 		//$order->disableAdminEmail();
 
@@ -526,12 +536,12 @@ if (isset($_GET['action'])) {
 				}
 			}
 			switch ($_POST['multi-action']) {
-				case 'print':
-					$add_array['print'][] = $order_id;
-					break;
-				case 'delete':
-					if ($order->deleteOrder($order_id)) $deleted = true;
-					break;
+			case 'print':
+				$add_array['print'][] = $order_id;
+				break;
+			case 'delete':
+				if ($order->deleteOrder($order_id)) $deleted = true;
+				break;
 			}
 		}
 		if ($_POST['multi-action'] == 'delete') {
@@ -544,6 +554,7 @@ if (isset($_GET['action'])) {
 		if ($updated) {
 			$GLOBALS['main']->setACPNotify($lang['orders']['notify_orders_status']);
 		}
+<<<<<<< HEAD
 		httpredir(currentPage(array('print_hash','multi-action'), $add_array));
 	} else if (isset($_GET['search'])) {
 				
@@ -554,18 +565,45 @@ if (isset($_GET['action'])) {
 			}
 			if ((!empty($dates['from']) && !empty($dates['to'])) && $dates['from'] == $dates['to'])	{
 				$where[] = "order_date = '".$dates['from']."'";
+=======
+		httpredir(currentPage(array('print_hash', 'multi-action'), $add_array));
+	} else if (isset($_GET['search'])) {
+
+			// Search by date range
+			if (isset($_GET['search']['date']) && is_array($_GET['search']['date']) && (!empty($_GET['search']['date']['form']) || !empty($_GET['search']['date']['to']))) {
+				foreach ($_GET['search']['date'] as $key => $date) {
+					$dates[$key] = (!empty($date)) ? strtotime($date) : null;
+				}
+				if ((!empty($dates['from']) && !empty($dates['to'])) && $dates['from'] == $dates['to']) {
+					$where[] = "order_date = '".$dates['from']."'";
+				} else {
+					if (!empty($dates['from'])) {
+						$where[] = "order_date >= '".$dates['from']."'";
+					}
+					if (!empty($dates['to'])) {
+						$where[] = "order_date <= '".$dates['to']."'";
+					}
+				}
+				if (isset($where) && is_array($where)) {
+					$where = implode(' AND ', $where);
+				}
+>>>>>>> FETCH_HEAD
 			} else {
-				if (!empty($dates['from']))	{
-					$where[] = "order_date >= '".$dates['from']."'";
+				// Order ID
+				if (isset($_GET['search']['order_number']) && !empty($_GET['search']['order_number'])) {
+					$where['cart_order_id'] = '~'.$_GET['search']['order_number'];
 				}
-				if (!empty($dates['to'])) {
-					$where[] = "order_date <= '".$dates['to']."'";
+				// Order Status
+				if (isset($_GET['search']['status']) && is_numeric($_GET['search']['status'])) {
+					$where['status'] = (int)$_GET['search']['status'];
 				}
-			}
-			if (isset($where) && is_array($where)) {
-				$where = implode(' AND ', $where);
+				// Customer ID
+				if (isset($_GET['search']['search_customer_id']) && is_numeric($_GET['search']['search_customer_id'])) {
+					$where['customer_id'] = (int)$_GET['search']['search_customer_id'];
+				}
 			}
 		} else {
+<<<<<<< HEAD
 			// Order ID
 			if (isset($_GET['search']['order_number']) && !empty($_GET['search']['order_number'])) {
 				$where['cart_order_id'] = '~'.$_GET['search']['order_number'];
@@ -581,14 +619,24 @@ if (isset($_GET['action'])) {
 		}
 	} else {
 		$where	= (isset($_GET['customer_id']) && is_numeric($_GET['customer_id'])) ? array('customer_id' => (int)$_GET['customer_id']) : false;
+=======
+		$where = (isset($_GET['customer_id']) && is_numeric($_GET['customer_id'])) ? array('customer_id' => (int)$_GET['customer_id']) : false;
+>>>>>>> FETCH_HEAD
 	}
-	$where	= (isset($where) && !empty($where)) ? $where : false;
+	$where = (isset($where) && !empty($where)) ? $where : false;
 
 	for ($i = 1;$i <= 6; ++$i) {
+<<<<<<< HEAD
 		$smarty_data['order_status'][]	= array(
 			'id'		=> $i,
 			'selected'	=> (isset($_GET['search']['status']) && $i == $_GET['search']['status']) ? ' selected="selected"' : '',
 			'string'	=> $lang['order_state']['name_'.$i],
+=======
+		$smarty_data['order_status'][] = array(
+			'id'  => $i,
+			'selected' => (isset($_GET['search']['status']) && $i == $_GET['search']['status']) ? ' selected="selected"' : '',
+			'string' => $lang['order_state']['name_'.$i],
+>>>>>>> FETCH_HEAD
 		);
 	}
 	$GLOBALS['smarty']->assign('LIST_ORDER_STATUS', $smarty_data['order_status']);
@@ -605,22 +653,28 @@ if (isset($_GET['action'])) {
 	}
 	$current_page = currentPage(array('sort'));
 	$thead_sort = array (
-		'cart_order_id' => $GLOBALS['db']->column_sort('cart_order_id', $lang['orders']['order_number'] ,'sort', $current_page, $_GET['sort']),
-		'customer' 		=> $GLOBALS['db']->column_sort('customer', $lang['orders']['title_customer'], 'sort', $current_page, $_GET['sort']),
-		'status' 		=> $GLOBALS['db']->column_sort('status', $lang['common']['status'], 'sort', $current_page, $_GET['sort']),
-		'date' 			=> $GLOBALS['db']->column_sort('order_date', $lang['common']['date'], 'sort', $current_page, $_GET['sort']),
-		'total' 		=> $GLOBALS['db']->column_sort('total', $lang['basket']['total'], 'sort', $current_page, $_GET['sort'])
+		'cart_order_id' => $GLOBALS['db']->column_sort('cart_order_id', $lang['orders']['order_number'] , 'sort', $current_page, $_GET['sort']),
+		'customer'   => $GLOBALS['db']->column_sort('customer', $lang['orders']['title_customer'], 'sort', $current_page, $_GET['sort']),
+		'status'   => $GLOBALS['db']->column_sort('status', $lang['common']['status'], 'sort', $current_page, $_GET['sort']),
+		'date'    => $GLOBALS['db']->column_sort('order_date', $lang['common']['date'], 'sort', $current_page, $_GET['sort']),
+		'total'   => $GLOBALS['db']->column_sort('total', $lang['basket']['total'], 'sort', $current_page, $_GET['sort'])
 	);
 	$GLOBALS['smarty']->assign('THEAD', $thead_sort);
 	// Sort has to be a string in this instance as column 'customer' doesn't exist!!
-	$key 		= array_keys($_GET['sort']);
-	$order_by 	= '`'.$key[0].'` '.$_GET['sort'][$key[0]];
-	$orders		= $GLOBALS['db']->select(sprintf('`%1$sCubeCart_order_summary` LEFT JOIN `%1$sCubeCart_customer` ON %1$sCubeCart_order_summary.customer_id = %1$sCubeCart_customer.customer_id',$GLOBALS['config']->get('config', 'dbprefix')), sprintf('%1$sCubeCart_order_summary.*, %1$sCubeCart_customer.type, CONCAT(%1$sCubeCart_order_summary.last_name, %1$sCubeCart_order_summary.first_name) AS `customer`, %1$sCubeCart_order_summary.status',$GLOBALS['config']->get('config', 'dbprefix')), $where, $order_by, $per_page, $page);
-	
+	$key   = array_keys($_GET['sort']);
+	$order_by  = '`'.$key[0].'` '.$_GET['sort'][$key[0]];
+	$orders  = $GLOBALS['db']->select(sprintf('`%1$sCubeCart_order_summary` LEFT JOIN `%1$sCubeCart_customer` ON %1$sCubeCart_order_summary.customer_id = %1$sCubeCart_customer.customer_id', $GLOBALS['config']->get('config', 'dbprefix')), sprintf('%1$sCubeCart_order_summary.*, %1$sCubeCart_customer.type, CONCAT(%1$sCubeCart_order_summary.last_name, %1$sCubeCart_order_summary.first_name) AS `customer`, %1$sCubeCart_order_summary.status', $GLOBALS['config']->get('config', 'dbprefix')), $where, $order_by, $per_page, $page);
+
 	if ($orders) {
+<<<<<<< HEAD
 		
 		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
 		
+=======
+
+		$GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination(false, $per_page, $page, 9));
+
+>>>>>>> FETCH_HEAD
 		if (isset($_GET['customer_id'])) {
 			$GLOBALS['main']->setACPNotify(sprintf($lang['orders']['notify_orders_by'], $orders[0]['first_name'], $orders[0]['last_name']));
 		}
@@ -628,21 +682,22 @@ if (isset($_GET['action'])) {
 			$GLOBALS['main']->setACPNotify($lang['orders']['notify_search_result']);
 		}
 
-		foreach ($orders as $order) {			
-			$order['name']			= (isset($order['name']) && !empty($order['name'])) ? $order['name'] : sprintf('%s %s %s', $order['title'], $order['first_name'], $order['last_name']);
-			
-			$order['icon']			= ($order['type']==2 || empty($order['customer_id'])) ? 'user_ghost' : 'user_registered';
-			$order['link_edit']		= currentPage(array('print_hash'), array('action' => 'edit', 'order_id' => $order['cart_order_id']));
-			$order['link_customer']	= ($order['customer_id']) ? "?_g=customers&action=edit&customer_id=".$order['customer_id'] : "#";
-			$order['link_delete']	= currentPage(array('print_hash'), array('delete' => $order['cart_order_id']));
-			// Link needs to be an array with one key
-			$order['link_print']	= currentPage(array('print_hash'), array('print[0]' => $order['cart_order_id']));
-			$order['status']		= $lang['order_state']['name_'.$order['status']];
-			$order['date']			= formatTime($order['order_date']);
-			$order['prod_total']	= Tax::getInstance()->priceFormat($order['total']);
+		foreach ($orders as $order) {
+			$order['name']   = (isset($order['name']) && !empty($order['name'])) ? $order['name'] : sprintf('%s %s %s', $order['title'], $order['first_name'], $order['last_name']);
 
-			$smarty_data['list_orders'][]	= $order;
+			$order['icon']   = ($order['type']==2 || empty($order['customer_id'])) ? 'user_ghost' : 'user_registered';
+			$order['link_edit']  = currentPage(array('print_hash'), array('action' => 'edit', 'order_id' => $order['cart_order_id']));
+			$order['link_customer'] = ($order['customer_id']) ? "?_g=customers&action=edit&customer_id=".$order['customer_id'] : "#";
+			$order['link_delete'] = currentPage(array('print_hash'), array('delete' => $order['cart_order_id']));
+			// Link needs to be an array with one key
+			$order['link_print'] = currentPage(array('print_hash'), array('print[0]' => $order['cart_order_id']));
+			$order['status']  = $lang['order_state']['name_'.$order['status']];
+			$order['date']   = formatTime($order['order_date']);
+			$order['prod_total'] = Tax::getInstance()->priceFormat($order['total']);
+
+			$smarty_data['list_orders'][] = $order;
 		}
+<<<<<<< HEAD
 		$GLOBALS['smarty']->assign('ORDER_LIST',$smarty_data['list_orders']);
 		
 	} else if (isset($_GET['search'])) {
@@ -650,6 +705,15 @@ if (isset($_GET['action'])) {
 		$GLOBALS['main']->setACPWarning($lang['orders']['error_search_result']);
 	}
 	$GLOBALS['smarty']->assign('DISPLAY_ORDER_LIST',true);
+=======
+		$GLOBALS['smarty']->assign('ORDER_LIST', $smarty_data['list_orders']);
+
+	} else if (isset($_GET['search'])) {
+			# No orders found
+			$GLOBALS['main']->setACPWarning($lang['orders']['error_search_result']);
+		}
+	$GLOBALS['smarty']->assign('DISPLAY_ORDER_LIST', true);
+>>>>>>> FETCH_HEAD
 	// Hook
 	foreach ($GLOBALS['hooks']->load('admin.order.index.list') as $hook) include $hook;
 }

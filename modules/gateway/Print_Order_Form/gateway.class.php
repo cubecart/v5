@@ -16,7 +16,7 @@ class Gateway {
 
 	public function transfer() {
 		$transfer	= array(
-			'action'	=> 'index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=Print_Order_Form&amp;cart_order_id='.$this->_basket['cart_order_id'],
+			'action'	=> 'index.php?_g=rm&type=gateway&cmd=call&module=Print_Order_Form&cart_order_id='.$this->_basket['cart_order_id'],
 			'method'	=> 'post',
 			'target'	=> '_self',
 			'submit'	=> 'auto',

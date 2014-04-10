@@ -14,10 +14,10 @@
 	        }
 	    }).render("AmazonAddressWidget") ;
 	</script>
-	Return to <a href="{$VAL_SELF}&amp;amazon_action=cancel" style="size: 10px">Standard Checkout</a>
+	Return to <a href="{$VAL_SELF}&amazon_action=cancel" style="size: 10px">Standard Checkout</a>
 	</div>
-	<div class="basket_actions">
-	  <a href="index.php?_a=basket&amp;empty-basket=true" class="button_submit left">{$LANG.basket.basket_empty}</a>
-	  <input type="submit" name="proceed" class="button_submit" disabled="disabled" style="display: none; visibility:hidden;" value="{$LANG.common.continue}" />
+	<div class="basket_actions clearfix">
+	  <a href="index.php?_a=basket&empty-basket=true" class="button_submit button alert left">{$LANG.basket.basket_empty}</a>
+	  <input type="submit" name="proceed" class="button_submit button right" disabled="disabled" style="display: none; visibility:hidden;" value="{$LANG.common.continue}" />
 	</div>
 </form>

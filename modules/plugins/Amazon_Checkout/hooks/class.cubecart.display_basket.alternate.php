@@ -42,7 +42,6 @@ if ($GLOBALS['cart']->basket_digital==false && !defined('PURCHASE_CONTRACT_ID') 
 			$position = '';
 		}
 		$list_checkouts[$position]	= $button;
-
  	}
 } elseif(defined('PURCHASE_CONTRACT_ID')) {
 	$load_checkouts = false;

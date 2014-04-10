@@ -353,7 +353,9 @@ function formatTime($timestamp, $format = false, $static = false) {
 		$fuzzy = false;
 	}
 	$date = strftime('%D', $seconds);
-	$time = strftime('%H:%M', $seconds);
+	$fuzzy_time = $GLOBALS['config']->get('config', 'fuzzy_time_format');
+	if(empty($fuzzy_time)) $fuzzy_time = '%H:%M';
+	$time = strftime($fuzzy_time, $seconds);
 	if ($fuzzy && !$static && $date_today == $date) { ## Today
 		return $GLOBALS['language']->common['today'].", ".$time;
 	} elseif ($fuzzy && !$static && strftime("%D", strtotime('yesterday')) == $date) { ## Yesterday

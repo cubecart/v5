@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -27,34 +27,34 @@ class Archive {
 	 *
 	 * @var handle
 	 */
-	private $_archive	= false;
+	private $_archive = false;
 	/**
 	 * Archive contents
 	 *
 	 * @var string
 	 */
-	private $_contents	= null;
+	private $_contents = null;
 	/**
 	 * Enabled?
 	 *
 	 * @var bool
 	 */
-	private $_enabled	= false;
+	private $_enabled = false;
 	/**
 	 * Error message
 	 *
 	 * @var string
 	 */
-	private $_error		= false;
+	private $_error  = false;
 	/**
 	 * Zip class class
 	 *
 	 * @var class
 	 */
-	private $_zip		= false;
+	private $_zip  = false;
 
 	public function __construct($archive, $create = false) {
-		$this->_enabled	= (extension_loaded('zip')) ? true : false;
+		$this->_enabled = (extension_loaded('zip')) ? true : false;
 		if ($this->_enabled && !empty($archive)) {
 			$this->_zip = new ZipArchive;
 			return $this->open($archive, $create);
@@ -122,7 +122,7 @@ class Archive {
 	 */
 	public function delete($filename) {
 		if ($this->_enabled && !empty($filename)) {
-			$index	= $this->_zip->locateName($filename, ZIPARCHIVE::FL_NODIR);
+			$index = $this->_zip->locateName($filename, ZIPARCHIVE::FL_NODIR);
 			if ($index) {
 				return $this->deleteIndex((int)$index);
 			}
@@ -142,10 +142,10 @@ class Archive {
 		if ($this->_enabled) {
 			$archive = str_replace('/', CC_DS, $archive);
 			if ($create) {
-				$this->_archive	= $this->_zip->open($archive, ZIPARCHIVE::CREATE);
+				$this->_archive = $this->_zip->open($archive, ZIPARCHIVE::CREATE);
 			} else if (file_exists($archive)) {
-				$this->_archive	= $this->_zip->open($archive);
-			}
+					$this->_archive = $this->_zip->open($archive);
+				}
 
 			if ($this->_archive === true) {
 				$this->contents();
@@ -167,41 +167,41 @@ class Archive {
 	private function error() {
 		if ($this->_enabled) {
 			switch ($this->_archive) {
-				case ZIPARCHIVE::ER_CRC:
-					$message	= 'ZIP CRC error';
+			case ZIPARCHIVE::ER_CRC:
+				$message = 'ZIP CRC error';
 				break;
-				case ZIPARCHIVE::ER_EXISTS:
-					$message	= 'ZIP archive already exists';
+			case ZIPARCHIVE::ER_EXISTS:
+				$message = 'ZIP archive already exists';
 				break;
-				case ZIPARCHIVE::ER_INCONS:
-					$message	= 'ZIP archive inconsistency';
+			case ZIPARCHIVE::ER_INCONS:
+				$message = 'ZIP archive inconsistency';
 				break;
-				case ZIPARCHIVE::ER_INVAL:
-					$message	= 'Invalid arguments';
+			case ZIPARCHIVE::ER_INVAL:
+				$message = 'Invalid arguments';
 				break;
-				case ZIPARCHIVE::ER_MEMORY:
-					$message	= 'Memory allocation failure';
-					break;
-				case ZIPARCHIVE::ER_MULTIDISK:
-					$message	= 'Multi-disk archives are not supported';
+			case ZIPARCHIVE::ER_MEMORY:
+				$message = 'Memory allocation failure';
 				break;
-				case ZIPARCHIVE::ER_NOENT:
-					$message	= 'File does not exist';
+			case ZIPARCHIVE::ER_MULTIDISK:
+				$message = 'Multi-disk archives are not supported';
 				break;
-				case ZIPARCHIVE::ER_NOZIP:
-					$message	= 'Not a valid ZIP archive';
+			case ZIPARCHIVE::ER_NOENT:
+				$message = 'File does not exist';
 				break;
-				case ZIPARCHIVE::ER_OPEN:
-					$message	= 'Unable to open archive';
+			case ZIPARCHIVE::ER_NOZIP:
+				$message = 'Not a valid ZIP archive';
 				break;
-				case ZIPARCHIVE::ER_READ:
-					$message	= 'ZIP file read error';
+			case ZIPARCHIVE::ER_OPEN:
+				$message = 'Unable to open archive';
 				break;
-				case ZIPARCHIVE::ER_SEEK:
-					$message	= 'ZIP file seek error';
+			case ZIPARCHIVE::ER_READ:
+				$message = 'ZIP file read error';
 				break;
-				default:
-					$message = 'Unknown error: '.$this->_archive;
+			case ZIPARCHIVE::ER_SEEK:
+				$message = 'ZIP file seek error';
+				break;
+			default:
+				$message = 'Unknown error: '.$this->_archive;
 			}
 		} else {
 			$message = 'ZIP library was not detected in your PHP installation';
@@ -233,7 +233,7 @@ class Archive {
 	 */
 	public function read($filename = false) {
 		if ($this->_enabled && !empty($filename)) {
-			$index	= $this->_zip->locateName($filename, ZIPARCHIVE::FL_NODIR);
+			$index = $this->_zip->locateName($filename, ZIPARCHIVE::FL_NODIR);
 			if ($index) {
 				return $this->_zip->getFromIndex((int)$index);
 			}

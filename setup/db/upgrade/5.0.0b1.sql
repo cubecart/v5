@@ -586,6 +586,7 @@ ALTER TABLE `CubeCart_reviews` ADD `customer_id` INT UNSIGNED NOT NULL DEFAULT '
 ALTER TABLE `CubeCart_reviews` ADD `vote_up` INT NOT NULL DEFAULT '0'; #EOQ
 ALTER TABLE `CubeCart_reviews` ADD `vote_down` INT NOT NULL DEFAULT '0'; #EOQ
 ALTER TABLE `CubeCart_reviews` ADD `anon` TINYINT(1) UNSIGNED DEFAULT '0'; #EOQ
+ALTER TABLE `CubeCart_reviews` ADD INDEX (`approved`); #EOQ
 
 ALTER TABLE `CubeCart_sessions` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 ALTER TABLE `CubeCart_sessions` CHANGE `sessId` `session_id` VARCHAR(32) NOT NULL DEFAULT ''; #EOQ
@@ -604,7 +605,6 @@ ALTER TABLE `CubeCart_tax_details` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ALTER TABLE `CubeCart_tax_details` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `name` `name` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `display` `display` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
-ALTER TABLE `CubeCart_tax_details` CHANGE `reg_number` `reg_number` VARBINARY(150) NOT NULL DEFAULT ''; #EOQ
 ALTER TABLE `CubeCart_tax_details` CHANGE `status` `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'; #EOQ
 
 ALTER TABLE `CubeCart_tax_rates` DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
@@ -691,7 +691,11 @@ ALTER TABLE `CubeCart_reviews` ADD KEY `product_id` (`product_id`); #EOQ
 ALTER TABLE `CubeCart_reviews` ADD KEY `votes` (`vote_up`,`vote_down`); #EOQ
 ALTER TABLE `CubeCart_reviews` ADD FULLTEXT KEY `fulltext` (`name`,`email`,`title`,`review`); #EOQ
 ALTER TABLE `CubeCart_sessions` KEY `customer_id` (`customer_id`); #EOQ
+<<<<<<< HEAD
 ALTER TABLE `CubeCart_sessions` KEY `session_last` (`session_last`); #EOQ 
+=======
+ALTER TABLE `CubeCart_sessions` KEY `session_last` (`session_last`); #EOQ
+>>>>>>> FETCH_HEAD
 ALTER TABLE `CubeCart_transactions` ADD KEY `order_id` (`order_id`); #EOQ
 ALTER TABLE `CubeCart_transactions` ADD KEY `time` (`time`); #EOQ
 ALTER TABLE `CubeCart_option_assign` DROP INDEX `product`; #EOQ

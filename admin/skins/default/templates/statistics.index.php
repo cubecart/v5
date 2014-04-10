@@ -13,15 +13,15 @@
 	    <select name="select[day]">
 	    {foreach from=$DAYS item=day}<option value="{$day.value}"{$day.selected}>{$day.value}</option>{/foreach}
 	    </select>
-	    <input type="submit" value="{$LANG.common.go}" />
+	    <input type="submit" value="{$LANG.common.go}">
 	  </fieldset>
 	</div>
-	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+	<input type="hidden" name="token" value="{$SESSION_TOKEN}">
   </form>
-    <img src="cache/{$GRAPH.yearly}" alt="" />
-    <img src="cache/{$GRAPH.monthly}" alt="" />
-	<img src="cache/{$GRAPH.daily}" alt="" />
-	<img src="cache/{$GRAPH.hourly}" alt="" />
+    <img src="cache/{$GRAPH.yearly}" alt="">
+    <img src="cache/{$GRAPH.monthly}" alt="">
+	<img src="cache/{$GRAPH.daily}" alt="">
+	<img src="cache/{$GRAPH.hourly}" alt="">
   {else}
   <p>{$LANG.statistics.notify_sales_none}</p>
   {/if}
@@ -31,7 +31,7 @@
 <div id="stats_prod_sales" class="tab_content">
   <h3>{$LANG.statistics.title_popular}</h3>
   <div>
-	<img src="cache/{$GRAPH_IMAGE_SALES}" alt="" />
+	<img src="cache/{$GRAPH_IMAGE_SALES}" alt="">
   </div>
   <div>{$PAGINATION_SALES}</div>
  <table class="list">
@@ -61,7 +61,7 @@
 <div id="stats_prod_views" class="tab_content">
   <h3>{$LANG.statistics.title_viewed}</h3>
   <div>
-	<img src="cache/{$GRAPH_IMAGE_VIEWS}" alt="" />
+	<img src="cache/{$GRAPH_IMAGE_VIEWS}" alt="">
   </div>
   <div>{$PAGINATION_VIEWS}</div>
   <table class="list">
@@ -91,7 +91,7 @@
 <div id="stats_search" class="tab_content">
   <h3>{$LANG.statistics.title_search}</h3>
   <div>
-	<img src="cache/{$GRAPH_IMAGE_SEARCH}" alt="" />
+	<img src="cache/{$GRAPH_IMAGE_SEARCH}" alt="">
   </div>
   <div>{$PAGINATION_SEARCH}</div>
   <table class="list">
@@ -121,7 +121,7 @@
   <div id="stats_best_customers" class="tab_content">
   <h3>{$LANG.statistics.title_customers_best}</h3>
   <div>
-	<img src="cache/{$GRAPH_IMAGE_BEST}" alt="" />
+	<img src="cache/{$GRAPH_IMAGE_BEST}" alt="">
   </div>
   <div>{$PAGINATION_BEST}</div>
   <table class="list">
@@ -152,9 +152,9 @@
   <h3>{$LANG.statistics.title_customers_active}</h3>
   <p>
   {if $BOTS==true}
-  	<a href="?_g=statistics&amp;bots=false#stats_online">{$LANG.statistics.display_customers_only}</a>
+  	<a href="?_g=statistics&bots=false#stats_online">{$LANG.statistics.display_customers_only}</a>
   {else}
-  	<a href="?_g=statistics&amp;bots=true#stats_online">{$LANG.statistics.display_bots_and_customers}</a>
+  	<a href="?_g=statistics&bots=true#stats_online">{$LANG.statistics.display_bots_and_customers}</a>
   {/if}
   </p>
   <table class="list">
@@ -171,7 +171,7 @@
 	<tbody>
 	{foreach from=$USERS_ONLINE item=user}
 	  <tr>
-		<td align="center"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$user.is_admin}.png" /></td>
+		<td align="center"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$user.is_admin}.png"></td>
 		<td>
 		  <strong>
 		  {if !empty($user.customer_id)}
@@ -181,8 +181,13 @@
 		  {/if}
 		  </strong>
 		  {if !empty($user.ip_address)}
+<<<<<<< HEAD
 		  <br />
 		  [<a href="http://api.hostip.info/get_html.php?ip={$user.ip_address}&amp;position=true" class="colorbox hostip">{$user.ip_address}</a>]
+=======
+		  <br>
+		  [<a href="http://api.hostip.info/get_html.php?ip={$user.ip_address}&position=true" class="colorbox hostip">{$user.ip_address}</a>]
+>>>>>>> FETCH_HEAD
 		  {/if}
 		</td>
 		<td>{$user.location} <a href="{$user.location}" target="_blank">&raquo;</a></td>

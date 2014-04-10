@@ -39,11 +39,11 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 			## Generate the PayPal Pro button
 			$button_image = ($GLOBALS['gui']->mobile) ? $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/express_checkout_mobile.gif' : 'https://www.paypal.com/'.$locale.'/i/btn/btn_xpressCheckout.gif';
 			
-			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" /><img src="'.$button_image.'" alt="" /></a>';
+			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&module=PayPal_Pro" target="_self" title="" /><img src="'.$button_image.'" alt="" /></a>';
 			
 			if($module_config['billmelater']==1) {
 				$button	= $button.'<br />
-				<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro&amp;bml=1" target="_self" title="" /><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_SM.png" alt="" /></a><div align="right"><a href="https://www.securecheckout.billmelater.com/paycapture-content/fetch?hash=AU826TU8&content=/bmlweb/ppwpsiw.html" class="colorbox_iframe"><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_text.png" /></a></div>';	
+				<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&module=PayPal_Pro&bml=1" target="_self" title="" /><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_SM.png" alt="" /></a><div align="right"><a href="https://www.securecheckout.billmelater.com/paycapture-content/fetch?hash=AU826TU8&content=/bmlweb/ppwpsiw.html" class="colorbox_iframe"><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_text.png" /></a></div>';	
 				
 			}
 			

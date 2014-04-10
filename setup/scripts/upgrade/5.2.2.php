@@ -7,7 +7,7 @@ $targets = array(
 foreach ($targets as $target) {
 	if ($rec = $db->select($target[0], array($target[1]), false, array($target[2]=>'ASC'))) {
 		$r = 0;
-		foreach($rec as $reco) {
+		foreach ($rec as $reco) {
 			$db->update($target[0], array('priority'=> ++$r), array($target[1] => $reco[$target[1]]));
 		}
 	}

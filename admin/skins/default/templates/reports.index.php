@@ -20,13 +20,13 @@
 	  <tbody>
 		{foreach from=$REPORT_DATE item=data}
 		<tr>{$data.value}
-		  <td><a href="?_g=orders&amp;action=edit&amp;order_id={$data.cart_order_id}">{$data.cart_order_id}</a></td>
+		  <td><a href="?_g=orders&action=edit&order_id={$data.cart_order_id}">{$data.cart_order_id}</a></td>
 		  <td align="right">{$data.subtotal}</td>
 		  <td align="right">{$data.discount}</td>
 		  <td align="right">{$data.shipping}</td>
 		  <td align="right">{$data.total_tax}</td>
 		  <td align="right">{$data.total}</td>
-		  <td align="left"><a href="?_g=customers&amp;action=edit&amp;customer_id={$data.customer_id}">{$data.first_name} {$data.last_name}</a></td>
+		  <td align="left"><a href="?_g=customers&action=edit&customer_id={$data.customer_id}">{$data.first_name} {$data.last_name}</a></td>
 		  <td>{$data.country}</td>
 		  <td>{$data.state}</td>
 		  <td>{$data.status}</td>
@@ -50,9 +50,9 @@
 	</table>
 	<div>{$PAGINATION}</div>
   	<div>
-	{if $DOWNLOAD}<input type="submit" name="download" class="submit" value="{$LANG.common.export}" />{/if}
+	{if $DOWNLOAD}<input type="submit" name="download" class="submit" value="{$LANG.common.export}">{/if}
 	{foreach from=$EXPORT item=module}
-	<input type="submit" name="external_report[{$module.folder}]" class="submit" value="{$LANG.customer.export_to} {$module.description}" />
+	<input type="submit" name="external_report[{$module.folder}]" class="submit" value="{$LANG.customer.export_to} {$module.description}">
 	{/foreach}
   </div>
   </div>
@@ -63,8 +63,8 @@
 		<div>
 		  <label for="date_range_from">{$LANG.search.date_range}</label>
 		  <span>
-			<input type="text" id="date_range_from" name="report[date][from]" class="textbox number date" value="{$POST.date.from}" /> -
-			<input type="text" id="date_range_to" name="report[date][to]" class="textbox number date" value="{$POST.date.to}" />
+			<input type="text" id="date_range_from" name="report[date][from]" class="textbox number date" value="{$POST.date.from}"> -
+			<input type="text" id="date_range_to" name="report[date][to]" class="textbox number date" value="{$POST.date.to}">
 		  </span>
 		</div>
 		<div>
@@ -78,7 +78,7 @@
 			</span>
 		</div>
 	</fieldset>
-	<div><input type="submit" class="button" value="{$LANG.common.display}" /></div>
+	<div><input type="submit" class="button" value="{$LANG.common.display}"></div>
   </div>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
 </form>

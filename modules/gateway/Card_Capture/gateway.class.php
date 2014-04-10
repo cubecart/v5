@@ -126,7 +126,7 @@ class Gateway {
 							$GLOBALS['smarty']->assign('PRODUCTS', $vars['products']);
 						}
 	
-						// Taxes
+						// Taxes
 						$taxes	= $GLOBALS['db']->select('CubeCart_order_tax', false, array('cart_order_id' => $order_summary['cart_order_id']));
 
 						// Put tax in

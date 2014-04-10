@@ -25,7 +25,7 @@ class Canada_Post {
 	public static function tracking($tracking_id = null) {
 		$tracking_id	= preg_replace('#[^a-z0-9]#iU', '', $tracking_id);
 		if (!is_null($tracking_id) && preg_match('#^([0-9]{16}|[a-z]{2}[0-9]{9}[a-z]{2})$#iU', $tracking_id)) {
-			return sprintf('https://obc.canadapost.ca/emo/basicPin.do?action=query&amp;trackingId=%s', $tracking_id);
+			return sprintf('https://obc.canadapost.ca/emo/basicPin.do?action=query&trackingId=%s', $tracking_id);
 		}
 		return false;
 	}

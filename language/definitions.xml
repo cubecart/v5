@@ -5,15 +5,20 @@
 -->
 <definitions version="1.0">
   <group name="account">
+<<<<<<< HEAD
 	<string name="payment_review"><![CDATA[Your payment has been accepted but requires manual review by a member of staff. Please accept our apologies for any delay in the process of your order.]]></string>
     <string name="payment_decline"><![CDATA[Your payment has been declined. Please check that your billing address matches that of your card and that the three digit security code is correct. If the issue perists please contact a member of staff.]]></string>
+=======
+  	<string name="return_register_form" introduced="6.0.0"><![CDATA[Need to register?]]></string>
+>>>>>>> FETCH_HEAD
     <string name="already_registered" introduced="5.0.0"><![CDATA[Already registered?]]></string>
     <string name="contact_details" introduced="5.0.0"><![CDATA[Contact Details]]></string>
     <string name="create_account" introduced="5.0.0"><![CDATA[I would like to create an account]]></string>
     <string name="download_count" introduced="5.0.0"><![CDATA[Downloads]]></string>
     <string name="download_deleted" introduced="5.0.0"><![CDATA[This download is no longer available.]]></string>
     <string name="download_expired" introduced="5.0.0"><![CDATA[Expired]]></string>
-    <string name="download_expires" introduced="5.0.0"><![CDATA[Expires]]></string>
+    <string name="download_expires" introduced="5.0.0"><![CDATA[Expiry Date]]></string>
+    <string name="download_filename" introduced="6.0.0"><![CDATA[File Name]]></string>
     <string name="enter_validation_key" introduced="5.0.0"><![CDATA[Please enter your email address and validation key below, then choose a new password]]></string>
     <string name="error_address_added" introduced="5.0.0"><![CDATA[Failed to save address.]]></string>
     <string name="error_address_billing" introduced="5.0.0"><![CDATA[A billing address is required before you can proceed.]]></string>
@@ -23,10 +28,13 @@
     <string name="error_details_updated" introduced="5.0.0"><![CDATA[Your details have not been updated.]]></string>
     <string name="error_details_wrong" introduced="5.0.0"><![CDATA[Incorrect details, please try again.]]></string>
     <string name="error_email_in_use" introduced="5.0.0"><![CDATA[That email address is already being used.]]></string>
-    <string name="error_login" introduced="5.0.0"><![CDATA[Invalid Username and/or Password]]></string>
+    <string name="error_login" introduced="5.0.0"><![CDATA[Invalid Username or Password]]></string>
     <string name="error_login_block" introduced="5.0.0"><![CDATA[User login blocked. Please try again later]]></string>
     <string name="error_name_required" introduced="5.0.0"><![CDATA[We need to know your name.]]></string>
-    <string name="error_password_empty" introduced="5.0.0"><![CDATA[Your password can not be empty.]]></string>
+    <string name="error_firstname_required" introduced="6.0.0"><![CDATA[Please enter your first name.]]></string>
+    <string name="error_lastname_required" introduced="6.0.0"><![CDATA[Please enter your last name.]]></string>
+    <string name="error_password_empty" introduced="5.0.0"><![CDATA[Please enter a password.]]></string>
+    <string name="error_password_length" introduced="6.0.0"><![CDATA[Please enter at least 6 characters for your password.]]></string>
     <string name="error_password_mismatch" introduced="5.0.0"><![CDATA[Your passwords do not match.]]></string>
     <string name="error_password_recovery" introduced="5.0.0"><![CDATA[Email not sent. Please check your email address, and try again.]]></string>
     <string name="error_password_recover" introduced="5.0.0"><![CDATA[Failed to update your password. Please check the email address and validation key are correct and verify the new password matches.]]></string>
@@ -62,16 +70,21 @@
     <string name="recover_password" introduced="5.0.0"><![CDATA[Recover Password]]></string>
     <string name="recover_password_text" introduced="5.0.0"><![CDATA[If you have forgotten your password, put your email in the box below and we'll send instructions to regain access]]></string>
     <string name="register" introduced="5.0.0"><![CDATA[Register]]></string>
-    <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list.]]></string>
-    <string name="register_text" introduced="5.0.0"><![CDATA[Please complete the fields below to register:]]></string>
+    <string name="register_welcome" introduced="6.0.0"><![CDATA[New here? Please click the button below to register.]]></string>
+    <string name="register_mailing" introduced="5.0.0"><![CDATA[Check this box to subscribe to our mailing list]]></string>
+    <string name="register_text" introduced="6.0.0"><![CDATA[Please complete the fields below to register.]]></string>
+    <string name="login_here" introduced="6.0.0"><![CDATA[Login here]]></string>
+    <string name="want_to_signup" introduced="6.0.0"><![CDATA[Want to signup?]]></string>
+    <string name="register_here" introduced="6.0.0"><![CDATA[Register here]]></string>
     <string name="register_terms_agree" introduced="5.0.0"><![CDATA[I agree to the Terms &amp; Conditions]]></string>
+    <string name="register_terms_agree_link" introduced="6.0.0"><![CDATA[I agree to the <a href="%s">Terms &amp; Conditions</a>]]></string>
     <string name="remember_me" introduced="5.0.0"><![CDATA[Remember Me?]]></string>
     <string name="share" introduced="5.0.0"><![CDATA[Share]]></string>
     <string name="title_acp" introduced="5.0.0"><![CDATA[Admin Control Panel]]></string>
     <string name="title_login_acp" introduced="5.0.0"><![CDATA[Store Control Panel Login]]></string>
     <string name="title_password_new" introduced="5.0.0"><![CDATA[Please enter a new password]]></string>
-    <string name="update_your_details" introduced="5.0.0"><![CDATA[Your existing details can be edited below:]]></string>
-    <string name="update_your_password" introduced="5.0.0"><![CDATA[To change your password please firstly verify your existing one then enter and confirm a new one:]]></string>
+    <string name="update_your_details" introduced="5.0.0"><![CDATA[Your existing details can be edited below.]]></string>
+    <string name="update_your_password" introduced="5.0.0"><![CDATA[To change your password please verify your existing one then enter and confirm a new one.]]></string>
     <string name="user_id" introduced="5.0.0"><![CDATA[User ID]]></string>
     <string name="username" introduced="5.0.0"><![CDATA[Username]]></string>
     <string name="validation_key" introduced="5.0.0"><![CDATA[Validation key]]></string>
@@ -79,15 +92,21 @@
     <string name="welcome_back_guest" introduced="5.0.0"><![CDATA[Welcome back, Guest!]]></string>
     <string name="welcome_guest" introduced="5.0.0"><![CDATA[Hi, Guest!]]></string>
     <string name="your_account" introduced="5.0.0"><![CDATA[Your Account]]></string>
-    <string name="your_addressbook" introduced="5.0.0"><![CDATA[Your Address Book]]></string>
-    <string name="your_details" introduced="5.0.0"><![CDATA[Your Details]]></string>
-    <string name="your_downloads" introduced="5.0.0"><![CDATA[Your Digital Downloads]]></string>
+    <string name="my_account" introduced="6.0.0"><![CDATA[My Account]]></string>
+    <string name="your_addressbook" introduced="5.0.0"><![CDATA[Address Book]]></string>
+    <string name="your_details" introduced="5.0.0"><![CDATA[Profile]]></string>
+    <string name="your_downloads" introduced="5.0.0"><![CDATA[Digital Downloads]]></string>
     <string name="your_order" introduced="5.0.0"><![CDATA[Your Order]]></string>
-    <string name="your_orders" introduced="5.0.0"><![CDATA[Your Order History]]></string>
+    <string name="your_orders" introduced="5.0.0"><![CDATA[Order History]]></string>
     <string name="your_orders_explained" introduced="5.0.0"><![CDATA[Your past and existing orders are listed here.]]></string>
     <string name="your_subscription" introduced="5.0.0"><![CDATA[Newsletter Subscriptions]]></string>
   </group>
   <group name="address">
+  	<string name="address_not_found" introduced="6.0.0"><![CDATA[Can't find your address?]]></string>
+  	<string name="add_address" introduced="6.0.0"><![CDATA[Add Address]]></string>
+  	<string name="edit_address" introduced="6.0.0"><![CDATA[Edit Address]]></string>
+  	<string name="example_address_description" introduced="6.0.0"><![CDATA[e.g. &quot;Work Address&quot;]]></string>
+  	<string name="address_lookup" introduced="6.0.0"><![CDATA[Start typing a postcode, street or address]]></string>
     <string name="add_edit" introduced="5.0.0"><![CDATA[Add/Edit Address]]></string>
     <string name="address_add" introduced="5.0.0"><![CDATA[Add New Address]]></string>
     <string name="address_edit" introduced="5.0.0"><![CDATA[Edit Address]]></string>
@@ -97,13 +116,13 @@
     <string name="company_name" introduced="5.0.0"><![CDATA[Company Name]]></string>
     <string name="copy_from_billing" introduced="5.0.0"><![CDATA[Copy from Billing Address]]></string>
     <string name="country" introduced="5.0.0"><![CDATA[Country]]></string>
-    <string name="default_billing_address" introduced="5.0.0"><![CDATA[Default billing address]]></string>
-    <string name="default_delivery_address" introduced="5.0.0"><![CDATA[Default delivery address]]></string>
+    <string name="default_billing_address" introduced="5.0.0"><![CDATA[Default Billing Address]]></string>
+    <string name="default_delivery_address" introduced="5.0.0"><![CDATA[Default Delivery Address]]></string>
     <string name="delivery_address" introduced="5.0.0"><![CDATA[Delivery Address]]></string>
     <string name="delivery_is_billing" introduced="5.0.0"><![CDATA[My delivery address is the same as my billing address.]]></string>
     <string name="form_address_select" introduced="5.0.0"><![CDATA[-- Predefined Addresses --]]></string>
     <string name="line1" introduced="5.0.0"><![CDATA[Address]]></string>
-    <string name="line2" introduced="5.0.0"><![CDATA[&nbsp;]]></string>
+    <string name="line2" introduced="5.0.0"><![CDATA[]]></string>
     <string name="mobile" introduced="5.0.0"><![CDATA[Mobile]]></string>
     <string name="notify_addresses_none" introduced="5.0.0"><![CDATA[No saved addresses.]]></string>
     <string name="phone" introduced="5.0.0"><![CDATA[Phone]]></string>
@@ -168,7 +187,10 @@
     <string name="title_administrators" introduced="5.0.0"><![CDATA[Administrators]]></string>
   </group>
   <group name="basket">
+    <string name="your_basket" introduced="6.0.0"><![CDATA[Your Basket]]></string>
+  	<string name="basket" introduced="6.0.0"><![CDATA[Basket]]></string>
     <string name="basket_checkout" introduced="5.0.0"><![CDATA[Checkout]]></string>
+    <string name="basket_secure_checkout" introduced="6.0.0"><![CDATA[Secure Checkout]]></string>
     <string name="basket_empty" introduced="5.0.0"><![CDATA[Empty Basket]]></string>
     <string name="basket_is_empty" introduced="5.0.0"><![CDATA[Your basket is empty.]]></string>
     <string name="basket_item_count" introduced="5.0.0"><![CDATA[item(s) in basket]]></string>
@@ -202,7 +224,7 @@
     <string name="allowed_uses" introduced="5.0.0"><![CDATA[Allowed Uses]]></string>
     <string name="all_sale_items" introduced="5.0.0"><![CDATA[All Sale Items]]></string>
     <string name="average_rating" introduced="5.0.0"><![CDATA[Average Rating]]></string>
-    <string name="bulk_discount" introduced="5.0.0"><![CDATA[Bulk discounts available]]></string>
+    <string name="bulk_discount" introduced="5.0.0"><![CDATA[Quantity discounts available]]></string>
     <string name="buy" introduced="5.0.0"><![CDATA[Buy]]></string>
     <string name="buy_now" introduced="5.0.0"><![CDATA[Buy now]]></string>
     <string name="buy_it" introduced="5.0.0"><![CDATA[Buy it]]></string>
@@ -343,6 +365,7 @@
     <string name="post_anonymously" introduced="5.0.0"><![CDATA[Post Anonymously]]></string>
     <string name="price_hidden" introduced="5.0.0"><![CDATA[x.xx]]></string>
     <string name="price_per_unit" introduced="5.0.0"><![CDATA[Price per unit]]></string>
+    <string name="price_each" introduced="6.0.0"><![CDATA[Price Each]]></string>
     <string name="pricing_standard" introduced="5.0.0"><![CDATA[Retail Pricing]]></string>
     <string name="product_add" introduced="5.0.0"><![CDATA[Add Product]]></string>
     <string name="product_upc" introduced="5.0.0"><![CDATA[UPC Code]]></string>
@@ -479,6 +502,10 @@
   </group>
   <group name="checkout">
     <string name="checkout" introduced="5.0.0"><![CDATA[Checkout]]></string>
+<<<<<<< HEAD
+=======
+    <string name="secure_checkout" introduced="6.0.0"><![CDATA[Secure Checkout]]></string>
+>>>>>>> FETCH_HEAD
     <string name="error_shipping" introduced="5.0.0"><![CDATA[Unfortunately there are no suitable shipping methods available for your order. This may be because the total weight of your order is too high or we cannot ship to your country. Please contact a member of our staff for any further inquiries.]]></string>
     <string name="check_shipping" introduced="5.0.0"><![CDATA[New shipping options are available! Please check and continue.]]></string>
     <string name="error_too_many_added" introduced="5.0.0"><![CDATA[Sorry, you can't buy more than we have. We have automatically reduced your quantity to the maximum available.]]></string>
@@ -495,6 +522,16 @@
     <string name="your_basket" introduced="5.0.0"><![CDATA[Your Shopping Basket]]></string>
   </group>
   <group name="common">
+  	<string name="top" introduced="6.0.0"><![CDATA[Top]]></string>
+  	<string name="loading" introduced="6.0.0"><![CDATA[Loading]]></string>
+  	<string name="signup" introduced="6.0.0"><![CDATA[Signup]]></string>
+  	<string name="follow_us" introduced="6.0.0"><![CDATA[Follow Us]]></string>
+  	<string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
+  	<string name="invoice" introduced="6.0.0"><![CDATA[Invoice]]></string>
+  	<string name="min" introduced="6.0.0"><![CDATA[Min]]></string>
+  	<string name="max" introduced="6.0.0"><![CDATA[Max]]></string>
+  	<string name="from" introduced="6.0.0"><![CDATA[From]]></string>
+  	<string name="to" introduced="6.0.0"><![CDATA[To]]></string>
     <string name="add" introduced="5.0.0"><![CDATA[Add]]></string>
     <string name="add_new" introduced="5.0.0"><![CDATA[Add new]]></string>
     <string name="advanced" introduced="5.0.0"><![CDATA[Advanced]]></string>
@@ -569,6 +606,8 @@
     <string name="installed" introduced="5.0.0"><![CDATA[Installed]]></string>
     <string name="ip_address" introduced="5.0.0"><![CDATA[IP Address]]></string>
     <string name="items" introduced="5.0.0"><![CDATA[Item(s)]]></string>
+    <string name="item" introduced="6.0.0"><![CDATA[Item]]></string>
+    <string name="item_plural" introduced="6.0.0"><![CDATA[Items]]></string>
     <string name="language" introduced="5.0.0"><![CDATA[Language]]></string>
     <string name="large" introduced="5.0.0"><![CDATA[Large]]></string>
     <string name="length" introduced="5.0.0"><![CDATA[Length]]></string>
@@ -576,7 +615,7 @@
     <string name="message" introduced="5.0.0"><![CDATA[Message]]></string>
     <string name="misc" introduced="5.0.0"><![CDATA[Misc]]></string>
     <string name="mobile_site" introduced="5.1.1"><![CDATA[Mobile Site]]></string>
-    <string name="more" introduced="5.0.0"><![CDATA[More...]]></string>
+    <string name="more" introduced="5.0.0"><![CDATA[More]]></string>
     <string name="more_info" introduced="5.0.0"><![CDATA[More info]]></string>
     <string name="name" introduced="5.0.0"><![CDATA[Name]]></string>
     <string name="negative" introduced="5.0.0"><![CDATA[Negative]]></string>
@@ -627,6 +666,7 @@
     <string name="show" introduced="5.0.0"><![CDATA[Show]]></string>
     <string name="size" introduced="5.0.0"><![CDATA[Size]]></string>
     <string name="small" introduced="5.0.0"><![CDATA[Small]]></string>
+    <string name="specification" introduced="6.0.0"><![CDATA[Specification]]></string>
     <string name="status" introduced="5.0.0"><![CDATA[Status]]></string>
     <string name="subject" introduced="5.0.0"><![CDATA[Subject]]></string>
     <string name="submit" introduced="5.0.0"><![CDATA[Submit]]></string>
@@ -657,7 +697,7 @@
   <group name="confirm">
     <string name="confirm_page" introduced="5.0.0"><![CDATA[Confirmation Page]]></string>
     <string name="fail_page" introduced="5.0.0"><![CDATA[Failure Page]]></string>
-    <string name="print" introduced="5.0.0"><![CDATA[Print Receipt]]></string>
+    <string name="print" introduced="5.0.0"><![CDATA[Print Invoice]]></string>
     <string name="order_pending" introduced="5.2.6"><![CDATA[Many thanks for your order! The order status is currently pending but it will automatically update to processing once payment is confirmed. Normally this is automated and will happen within the hour but please do contact us if require more information.]]></string>
     <string name="order_processing" introduced="5.2.6"><![CDATA[Many thanks for your order! Payment has been received and your order is now being processed.]]></string>
     <string name="order_complete" introduced="5.2.6"><![CDATA[Many thanks for your order! Payment has been received and your order is now complete.]]></string>
@@ -802,6 +842,7 @@
     <string name="title_technical_data" introduced="5.0.0"><![CDATA[Technical Details]]></string>
   </group>
   <group name="documents">
+  	<string name="smarty_parse" introduced="6.0.0"><![CDATA[Parse Smarty Tags]]></string>
     <string name="document_contact" introduced="5.0.0"><![CDATA[Contact Us]]></string>
     <string name="document_content" introduced="5.0.0"><![CDATA[Content]]></string>
     <string name="document_create" introduced="5.0.0"><![CDATA[Create Document]]></string>
@@ -1022,6 +1063,8 @@
     <string name="title_image_crop" introduced="5.0.0"><![CDATA[Crop Image]]></string>
   </group>
   <group name="form">
+  	<string name="required" introduced="6.0.0"><![CDATA[(Required)]]></string>
+  	<string name="field_required" introduced="6.0.0"><![CDATA[This field is required.]]></string>
     <string name="action" introduced="5.0.0"><![CDATA[Action]]></string>
     <string name="check_uncheck" introduced="5.0.0"><![CDATA[Check/Uncheck all]]></string>
     <string name="ignore" introduced="5.0.0"><![CDATA[-- Ignore --]]></string>
@@ -1063,6 +1106,7 @@
     <string name="postal_address" introduced="5.0.0"><![CDATA[Postal Address]]></string>
     <string name="postal_order" introduced="5.0.0"><![CDATA[Postal Order]]></string>
     <string name="select" introduced="5.0.0"><![CDATA[Choose Payment Method]]></string>
+    <string name="choose_payment" introduced="6.0.0"><![CDATA[Please select a payment method.]]></string>
     <string name="transfer_progress" introduced="5.0.0"><![CDATA[Payment gateway progress]]></string>
     <string name="transferring" introduced="5.0.0"><![CDATA[Transferring, Please wait...]]></string>
     <string name="plugins_link" introduced="5.2.2"><![CDATA[Alternate Checkout providers such as <strong>Amazon Payments</strong>, <strong>Google Checkout</strong> and <strong>PayPal</strong> can be found in the &quot;<a href="?_g=modules&type=plugins">Plugins</a>&quot; section.]]></string>
@@ -1308,29 +1352,35 @@
   <group name="newsletter">
     <string name="click_to_subscribe" introduced="5.0.0"><![CDATA[Click here to subscribe.]]></string>
     <string name="click_to_unsubscribe" introduced="5.0.0"><![CDATA[Click here to unsubscribe.]]></string>
-    <string name="customer_is_subscribed" introduced="5.0.0"><![CDATA[You are currently subscribed to our newsletter.]]></string>
-    <string name="customer_not_subscribed" introduced="5.0.0"><![CDATA[You are not currently being sent our newsletter by email.]]></string>
+    <string name="customer_is_subscribed" introduced="5.0.0"><![CDATA[You are subscribed to recieve to our newsletter.]]></string>
+    <string name="customer_not_subscribed" introduced="5.0.0"><![CDATA[You are not subscribed to our newsletter.]]></string>
     <string name="customer_subscribed" introduced="5.0.0"><![CDATA[Subscribed to newsletter?]]></string>
     <string name="email_subscribed" introduced="5.0.0"><![CDATA[Your email address has been subscribed to our mailing list.]]></string>
     <string name="email_invalid" introduced="5.0.0"><![CDATA[The email address entered was not valid.]]></string>
     <string name="enter_email_signup" introduced="5.0.0"><![CDATA[Enter your e-mail address to receive our newsletter]]></string>
-    <string name="enter_email_subscribe_unsubscribe" introduced="5.0.0"><![CDATA[Please enter your email address below to subscribe or unsubscribe to our newsletter.]]></string>
+    <string name="enter_email_subscribe_unsubscribe" introduced="5.0.0"><![CDATA[Please enter your email address below to subscribe or to be removed from our mailing list.]]></string>
     <string name="error_email_verified" introduced="5.0.0"><![CDATA[There was an error verifying your email address.]]></string>
     <string name="error_subscribed" introduced="5.0.0"><![CDATA[You have either susbcribed already, or the email address entered was not valid.]]></string>
     <string name="mailing_list" introduced="5.0.0"><![CDATA[Mailing List]]></string>
     <string name="newsletters" introduced="5.0.0"><![CDATA[Newsletters]]></string>
-    <string name="no_archived_newsletters" introduced="5.0.0"><![CDATA[There are no archived newsletters available.]]></string>
+    <string name="no_archived_newsletters" introduced="5.0.0"><![CDATA[There are no archived newsletters right now.]]></string>
     <string name="notify_email_verified" introduced="5.0.0"><![CDATA[Your email address has been verified.]]></string>
     <string name="notify_subscribed" introduced="5.0.0"><![CDATA[Your email address has been added to our mailing list.]]></string>
     <string name="notify_unsubscribed" introduced="5.0.0"><![CDATA[Your email address has been removed from our mailing list.]]></string>
+    <string name="notify_already_subscribed" introduced="6.0.0"><![CDATA[Email address already subscribed.]]></string>
     <string name="subscribe" introduced="5.0.0"><![CDATA[Subscribe]]></string>
+    <string name="unsubscribe" introduced="6.0.0"><![CDATA[Unsubscribe]]></string>
     <string name="subscribe_now" introduced="5.0.0"><![CDATA[Subscribe Now]]></string>
     <string name="subscription" introduced="5.0.0"><![CDATA[Subscription]]></string>
-    <string name="view_newsletter_archive" introduced="5.0.0"><![CDATA[View our Newsletter archive.]]></string>
+    <string name="view_newsletter_archive" introduced="5.0.0"><![CDATA[Our previous newsletters can be found below.]]></string>
   </group>
   <group name="notification">
     <string name="confirm_cancel" introduced="5.2.8"><![CDATA[Are you sure you want to cancel?]]></string>
+<<<<<<< HEAD
     <string name="cookie_dialogue" introduced="5.0.0"><![CDATA[&quot;%s&quot; would like to place cookies on your computer to help us make this website better. To find out more about the cookies, see our privacy policy.]]></string>
+=======
+    <string name="cookie_dialogue" introduced="5.0.0"><![CDATA[&quot;%s&quot; uses cookies to improve its website. For more details and how to manage cookies, please see our <a href="index.php?_a=document&doc_id=4">privacy policy</a>.]]></string>
+>>>>>>> FETCH_HEAD
     <string name="cookie_dialogue_declaration" introduced="5.0.0"><![CDATA[I accept cookies from this site.]]></string>
     <string name="confirm_delete" introduced="5.0.0"><![CDATA[Are you sure you want to delete?]]></string>
     <string name="confirm_revert" introduced="5.0.0"><![CDATA[Are you sure you want to revert?]]></string>
@@ -1485,6 +1535,7 @@
     <string name="input_default" introduced="5.0.0"><![CDATA[Search our store]]></string>
     <string name="keywords" introduced="5.0.0"><![CDATA[Keywords]]></string>
     <string name="price_range" introduced="5.0.0"><![CDATA[Price Range]]></string>
+    <string name="enter_search_term" introduced="6.0.0"><![CDATA[Please enter a search keyword]]></string>
     <string name="title_by_date" introduced="5.0.0"><![CDATA[Search by Date]]></string>
     <string name="title_filter" introduced="5.0.0"><![CDATA[Report Filter]]></string>
     <string name="title_search_customers" introduced="5.0.0"><![CDATA[Search Customers]]></string>
@@ -1683,7 +1734,11 @@
     <string name="ssl_enable" introduced="5.0.0"><![CDATA[Enable SSL]]></string>
     <string name="ssl_force" introduced="5.0.0"><![CDATA[Force SSL mode on all pages]]></string>
     <string name="ssl_root_path" introduced="5.0.0"><![CDATA[SSL root path]]></string>
+<<<<<<< HEAD
     <string name="cookie_domain" introduced="5.2.9"><![CDATA[Cookie Domain]]></string>
+=======
+    <string name="cookie_domain" introduced="6.0.0"><![CDATA[Cookie Domain]]></string>
+>>>>>>> FETCH_HEAD
     <string name="ssl_url" introduced="5.0.0"><![CDATA[SSL Store URL]]></string>
     <string name="standard_url" introduced="5.0.0"><![CDATA[Standard Store URL]]></string>
     <string name="stock_allow_oos" introduced="5.0.0"><![CDATA[Allow out-of-stock purchases]]></string>
@@ -1717,17 +1772,19 @@
     <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Apply To]]></string>
     <string name="tax_class" introduced="5.0.0"><![CDATA[Tax Class]]></string>
     <string name="tax_class_name" introduced="5.0.0"><![CDATA[Tax Class Name]]></string>
-    <string name="tax_customer" introduced="5.0.0"><![CDATA[Add sales tax to qualifying customers]]></string>
     <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Tax Customer by]]></string>
     <string name="tax_delete" introduced="5.0.0"><![CDATA[WARNING: Deleting this will also delete all tax rules that depend on it. Are you sure you wish to continue?]]></string>
+    <string name="tax_vat_number" introduced="6.0.0"><![CDATA[VAT Registration Number]]></string>
     <string name="tax_detail" introduced="5.0.0"><![CDATA[Tax Detail]]></string>
     <string name="tax_name" introduced="5.0.0"><![CDATA[Unique Name]]></string>
     <string name="tax_name_display" introduced="5.0.0"><![CDATA[Display As]]></string>
-    <string name="tax_number" introduced="5.0.0"><![CDATA[Reg. Number]]></string>
+    <string name="tax_number" introduced="6.0.0"><![CDATA[VAT Registration Number]]></string>
+    <string name="tax_description_placeholder" introduced="6.0.0"><![CDATA[e.g. ]]></string>
     <string name="tax_on_goods" introduced="5.0.0"><![CDATA[Goods]]></string>
     <string name="tax_on_shipping" introduced="5.0.0"><![CDATA[Shipping]]></string>
     <string name="tax_rate" introduced="5.0.0"><![CDATA[Tax Rate]]></string>
-    <string name="time_format" introduced="5.0.0"><![CDATA[Time Format]]></string>
+    <string name="time_format" introduced="5.0.0"><![CDATA[Date & Time Format]]></string>
+    <string name="fuzzy_time_format" introduced="6.0.0"><![CDATA[Fuzzy Time Format]]></string>
     <string name="time_utc_offset" introduced="5.0.0"><![CDATA[UTC Offset]]></string>
     <string name="time_zone" introduced="5.0.0"><![CDATA[Timezone]]></string>
     <string name="title_advanced" introduced="5.0.0"><![CDATA[Advanced Settings]]></string>

@@ -63,7 +63,7 @@ $template_vars = array (
 	'gateways'	=> $gateway_list,
 	'modes'		=> $mode_list,
 	'country'	=> $GLOBALS['config']->get('config','store_country'),
-	'paypal_ipn_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'
+	'paypal_ipn_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal'
 );
 $store_country = $GLOBALS['config']->get('config', 'store_country');
 if($store_country==840) {
