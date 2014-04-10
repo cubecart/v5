@@ -108,8 +108,8 @@ class Gateway {
             $basicmode = Icepay_Basicmode::getInstance();
             $basicmode->setMerchantID($this->_module['merchantid'])
                     ->setSecretCode($this->_module['secretcode'])
-                    ->setSuccessURL("{$GLOBALS['storeURL']}/index.php?_g=rm&type=gateway&cmd=process&module=ICEPAY")
-                    ->setErrorURL("{$GLOBALS['storeURL']}/index.php?_g=rm&type=gateway&cmd=process&module=ICEPAY")
+                    ->setSuccessURL("{$GLOBALS['storeURL']}/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=ICEPAY")
+                    ->setErrorURL("{$GLOBALS['storeURL']}/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=ICEPAY")
                     ->validatePayment($paymentObj);
 
             $basicmode->setProtocol('https');

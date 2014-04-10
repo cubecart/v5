@@ -9,15 +9,15 @@ $count = $count[0]['count'];
 
 ## Update Admin Data
 if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()->permissions('users', CC_PERM_EDIT)) {
-	$added    = false;
-	$updated   = false;
+	$added 			= false;
+	$updated 		= false;
 
-	$record   = $_POST['admin'];
-	$record['name'] = ucwords($record['name']);
+	$record			= $_POST['admin'];
+	$record['name']	= ucwords($record['name']);
 
 	if (!empty($_POST['password'])) {
 		if ($_POST['password'] === $_POST['passconf']) {
-			$record['password'] = $_POST['password'];
+			$record['password']	= $_POST['password'];
 		} else {
 
 		}
@@ -34,10 +34,10 @@ if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()-
 		if (!empty($record['password'])) {
 			if (($user = $GLOBALS['db']->select('CubeCart_admin_users', array('salt'), array('admin_id' => $_POST['admin_id']), null, 1)) !== false) {
 				if (empty($user[0]['salt'])) {
-					$salt = Password::getInstance()->createSalt();
+					$salt	= Password::getInstance()->createSalt();
 					$record['salt'] = $salt;
 				} else {
-					$salt = $user[0]['salt'];
+					$salt	= $user[0]['salt'];
 				}
 				$record['password'] = Password::getInstance()->getSalted($record['password'], $salt);
 			}
@@ -55,12 +55,12 @@ if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()-
 	} else {
 		## Create new admin
 		if (!empty($record['password'])) {
-			$record['salt']  = Password::getInstance()->createSalt();
-			$record['password'] = Password::getInstance()->getSalted($record['password'], $record['salt']);
-			$record['status'] = 1;
+			$record['salt']		= Password::getInstance()->createSalt();
+			$record['password']	= Password::getInstance()->getSalted($record['password'], $record['salt']);
+			$record['status']	= 1;
 			if ($GLOBALS['db']->insert('CubeCart_admin_users', $record)) {
-				$admin_id = $GLOBALS['db']->insertid();
-				$added = true;
+				$admin_id	= $GLOBALS['db']->insertid();
+				$added	= true;
 				$GLOBALS['main']->setACPNotify($lang['admins']['notify_admin_create']);
 			} else {
 				## no name added as it may be empty
@@ -78,9 +78,9 @@ if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()-
 				$status += $value;
 			}
 			$record = array(
-				'admin_id'  => $admin_id,
-				'section_id' => $section,
-				'level'   => $status,
+				'admin_id'		=> $admin_id,
+				'section_id'	=> $section,
+				'level'			=> $status,
 			);
 			$GLOBALS['db']->insert('CubeCart_permissions', $record);
 		}
@@ -90,9 +90,9 @@ if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()-
 	if ($added) {
 		httpredir(currentPage(array('action')));
 	} else if ($updated) {
-			$GLOBALS['main']->setACPNotify($lang['admins']['notify_admin_update']);
-			httpredir(currentPage(array('action', 'admin_id')));
-		} else {
+		$GLOBALS['main']->setACPNotify($lang['admins']['notify_admin_update']);
+		httpredir(currentPage(array('action','admin_id')));
+	} else {
 		$GLOBALS['main']->setACPWarning($lang['common']['error_no_changes']);
 	}
 }
@@ -102,7 +102,7 @@ if (isset($_POST['admin']) && is_array($_POST['admin']) && Admin::getInstance()-
 if (isset($_POST['status']) && is_array($_POST['status']) && Admin::getInstance()->permissions('users', CC_PERM_FULL)) {
 	$updated = false;
 	foreach ($_POST['status'] as $admin_id => $status) {
-		if ($GLOBALS['db']->update('CubeCart_admin_users', array('status' => (int)$status), array('admin_id' => (int)$admin_id))) {
+		if($GLOBALS['db']->update('CubeCart_admin_users', array('status' => (int)$status), array('admin_id' => (int)$admin_id))) {
 			$updated = true;
 		}
 	}
@@ -137,7 +137,7 @@ if (isset($_GET['action']) && (Admin::getInstance()->superUser() || ((int)$_GET[
 	}
 	##
 	$GLOBALS['main']->addTabControl($lang['common']['general'], 'general');
-	$GLOBALS['smarty']->assign('IS_SUPER', (bool)Admin::getInstance()->superUser());
+	$GLOBALS['smarty']->assign('IS_SUPER',(bool)Admin::getInstance()->superUser());
 
 	if ($_GET['action'] == 'edit' && isset($_GET['admin_id']) && is_numeric($_GET['admin_id'])) {
 		$GLOBALS['smarty']->assign('ADD_EDIT_ADMIN', $lang['admins']['title_admin_edit']);
@@ -163,7 +163,7 @@ if (isset($_GET['action']) && (Admin::getInstance()->superUser() || ((int)$_GET[
 			if (!empty($admin[0]['customer_id'])) {
 				$GLOBALS['smarty']->assign('USER', $user[0]);
 				$GLOBALS['smarty']->assign('UNLINK', currentPage(null, array('action' => 'unlink')));
-				$GLOBALS['smarty']->assign('LINKED', true);
+				$GLOBALS['smarty']->assign('LINKED',true);
 			}
 			$GLOBALS['main']->addTabControl($lang['admins']['tab_overview'], 'overview');
 		} else {
@@ -179,7 +179,7 @@ if (isset($_GET['action']) && (Admin::getInstance()->superUser() || ((int)$_GET[
 		$GLOBALS['gui']->addBreadcrumb('Create New');
 	}
 	$GLOBALS['smarty']->assign('DISPLAY_FORM', true);
-	$languages = $GLOBALS['language']->listLanguages();
+	$languages	= $GLOBALS['language']->listLanguages();
 	$comparitor = (isset($admin[0]['language'])) ? $admin[0]['language'] : $GLOBALS['config']->get('config', 'default_language');
 	foreach ($languages as $details) {
 		$details['selected'] = ($comparitor == $details['code']) ? ' selected="selected"' : '';
@@ -187,30 +187,30 @@ if (isset($_GET['action']) && (Admin::getInstance()->superUser() || ((int)$_GET[
 	}
 	$GLOBALS['smarty']->assign('LANGUAGES', $smarty_data['languages']);
 
-	$sections = array(
-		'categories' => 3,
-		'customers'  => 5,
-		'documents'  => 4,
-		'filemanager' => 7,
-		'orders'  => 10,
-		'products'  => 2,
-		'users'   => 1,
-		'statistics' => 8,
-		'settings'  => 9,
-		'reviews'  => 12,
+	$sections	= array(
+		'categories'	=> 3,
+		'customers'		=> 5,
+		'documents'		=> 4,
+		'filemanager'	=> 7,
+		'orders'		=> 10,
+		'products'		=> 2,
+		'users'			=> 1,
+		'statistics'	=> 8,
+		'settings'		=> 9,
+		'reviews'		=> 12,
 	);
 	## Load Sections data
 	foreach ($GLOBALS['hooks']->load('admin.settings.admins.sections') as $hook) include $hook;
 	foreach ($sections as $name => $section_id) {
-		$section['id']  = $section_id;
-		$section['info'] = $lang['admins']['perm_'.$name.'_info'];
-		$section['name'] = $lang['admins']['perm_'.$name];
+		$section['id']		= $section_id;
+		$section['info']	= $lang['admins']['perm_'.$name.'_info'];
+		$section['name']	= $lang['admins']['perm_'.$name];
 		#
-		$section['read'] = (isset($permission[$section_id]) && $permission[$section_id] & 1) ? 'checked="checked"' : '';
-		$section['edit'] = (isset($permission[$section_id]) && $permission[$section_id] & 2) ? 'checked="checked"' : '';
-		$section['delete'] = (isset($permission[$section_id]) && $permission[$section_id] & 4) ? 'checked="checked"' : '';
+		$section['read']	= (isset($permission[$section_id]) && $permission[$section_id] & 1) ? 'checked="checked"' : '';
+		$section['edit']	= (isset($permission[$section_id]) && $permission[$section_id] & 2) ? 'checked="checked"' : '';
+		$section['delete']	= (isset($permission[$section_id]) && $permission[$section_id] & 4) ? 'checked="checked"' : '';
 		#
-		$smarty_data['sections'][] = $section;
+		$smarty_data['sections'][]	= $section;
 	}
 	$GLOBALS['smarty']->assign('SECTIONS', $smarty_data['sections']);
 } else {

@@ -44,7 +44,6 @@ if(defined('PURCHASE_CONTRACT_ID') && $module_config = $GLOBALS['config']->get('
 				'customer_id' 		=> $GLOBALS['session']->get('customer_id', 'amazon'),
 				'product_options'	=> base64_encode($order->serializeOptions($product)),
 			);
-			
 			$custom_data = base64_encode(json_encode($custom_data));
 			$itemObject->setItemCustomData($custom_data);
 			$itemList->addItem($itemObject);

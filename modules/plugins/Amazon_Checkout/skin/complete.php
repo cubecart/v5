@@ -1,7 +1,7 @@
 {if empty($AMAZON.order_id)}
   <h2>Oops, something is wrong!</h2>
   	<p>It looks like there has been a problem with your order. Please contact a member of staff for assistance.
-	<p>Return to <a href="{$VAL_SELF}&amazon_action=cancel" style="size: 10px">Standard Checkout</a></p>
+	<p>Return to <a href="{$VAL_SELF}&amp;amazon_action=cancel" style="size: 10px">Standard Checkout</a></p>
 {else}
   <h2>Order Confirmation</h2>
     <h3>Thank you!</h3>

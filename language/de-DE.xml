@@ -1675,6 +1675,7 @@
       <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Anwenden auf]]></string>
       <string name="tax_class" introduced="5.0.0"><![CDATA[Steuerklasse]]></string>
       <string name="tax_class_name" introduced="5.0.0"><![CDATA[Name Steuerklasse]]></string>
+      <string name="tax_customer" introduced="5.0.0"><![CDATA[Bei entsprechenden Kunden Mehrwertsteuer hinzufügen]]></string>
       <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Steuer Kunde nach]]></string>
       <string name="tax_delete" introduced="5.0.0"><![CDATA[ACHTUNG: Wenn Sie dies löschen, werden auch alle Steuerregelungen gelöscht, die davon abhängig sind. Sind Sie sicher, dass Sie fortfahren wollen?]]></string>
       <string name="tax_detail" introduced="5.0.0"><![CDATA[Steuerinformationen]]></string>

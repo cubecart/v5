@@ -74,8 +74,8 @@ class Gateway {
 			'trx_id' 			=> $this->_basket['cart_order_id'],
 			'MediosPago' 		=> $this->_module['dm_payment_methods'],
 			'image_url' 		=> $this->_module['dm_store_logo_url'],
-			'DireccionExito' 	=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=DineroMail&cart_order_id='.$this->_basket['cart_order_id'].'&dm_status='.$hash,
-			'DireccionFracaso' 	=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=DineroMail&cart_order_id='.$this->_basket['cart_order_id'].'&dm_status='.$hash,
+			'DireccionExito' 	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=DineroMail&amp;cart_order_id='.$this->_basket['cart_order_id'].'&amp;dm_status='.$hash,
+			'DireccionFracaso' 	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=DineroMail&amp;cart_order_id='.$this->_basket['cart_order_id'].'&amp;dm_status='.$hash,
 			'DireccionEnvio' 	=> $this->_module['dm_delivery_addres'],
 			'Mensaje' 			=> $this->_module['dm_message']
 		);

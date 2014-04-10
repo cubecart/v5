@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:   http://www.cubecart.com
- * Email:  sales@devellion.com
- * License:  http://www.cubecart.com/v5-software-license
+ * Web:			http://www.cubecart.com
+ * Email:		sales@devellion.com
+ * License:		http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -27,25 +27,25 @@ class Admin {
 	 *
 	 * @var array
 	 */
-	private $_admin_data = array();
+	private $_admin_data	= array();
 	/**
 	 * Logged in?
 	 *
 	 * @var bool
 	 */
-	private $_logged_in  = false;
+	private $_logged_in		= false;
 	/**
 	 * Permission array
 	 *
 	 * @var array
 	 */
-	private $_permissions = array();
+	private $_permissions	= array();
 	/**
 	 * Permissions sections
 	 *
 	 * @var array
 	 */
-	private $_sections  = array();
+	private $_sections		= array();
 
 	/**
 	 * Class instance
@@ -56,13 +56,13 @@ class Admin {
 
 	final private function __construct() {
 		// Logout requests
-		if (isset($_GET['_g']) && $_GET['_g'] == 'logout') {
+		if (isset($_GET['_g']) && $_GET['_g'] == 'logout')	{
 			$this->logout();
 		}
 
 		// Ensure the ACP is only ever using the default currency
 		if (ADMIN_CP==true)
-			$GLOBALS['session']->set('currency', $GLOBALS['config']->get('config', 'default_currency'), 'client');
+		$GLOBALS['session']->set('currency', $GLOBALS['config']->get('config', 'default_currency'), 'client');
 
 		// Action Auto-Handlers
 		if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -80,10 +80,10 @@ class Admin {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Admin {
 	 */
 	public function get($element) {
 		if (!empty($element)) {
-			return isset($this->_admin_data[$element]) ? $this->_admin_data[$element] : false;
+			return (isset($this->_admin_data[$element]) ? $this->_admin_data[$element] : false);
 		} else {
 			return $this->_admin_data;
 		}
@@ -117,7 +117,7 @@ class Admin {
 	 * @return int
 	 */
 	public function getId() {
-		return isset($this->_admin_data['admin_id']) ? $this->_admin_data['admin_id'] : 0;
+		return (isset($this->_admin_data['admin_id']) ? $this->_admin_data['admin_id'] : 0);
 	}
 
 	/**
@@ -156,13 +156,13 @@ class Admin {
 	 */
 	public function passwordRequest($username, $email) {
 		if (!empty($username) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			if (($check = $GLOBALS['db']->select('CubeCart_admin_users', array('admin_id', 'email', 'language', 'name'), array('username' => $username, 'email' => $email, 'status' => '1'))) !== false) {
+			if (($check	= $GLOBALS['db']->select('CubeCart_admin_users', array('admin_id', 'email', 'language', 'name'), array('username' => $username, 'email' => $email, 'status' => '1'))) !== false) {
 				// Generate validation key
-				$validation = Password::getInstance()->createSalt();
+				$validation	= Password::getInstance()->createSalt();
 				if ($GLOBALS['db']->update('CubeCart_admin_users', array('verify' => $validation), array('admin_id' => (int)$check[0]['admin_id']))) {
 					// Send email
-					$mailer = Mailer::getInstance();
-					$data['link'] = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config', 'adminFile').'?_g=recovery&email='.$check[0]['email'].'&validate='.$validation;
+					$mailer	= Mailer::getInstance();
+					$data['link'] = $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=recovery&email='.$check[0]['email'].'&validate='.$validation;
 					$data['name'] = $check[0]['name'];
 
 					$content = $mailer->loadContent('admin.password_recovery', $check[0]['language'], $data);
@@ -186,19 +186,19 @@ class Admin {
 	 */
 	public function passwordReset($email, $validation, $password) {
 		if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($validation) && !empty($password['new']) && !empty($password['confirm']) && ($password['new'] === $password['confirm'])) {
-			if (($check = $GLOBALS['db']->select('CubeCart_admin_users', array('admin_id', 'username'), array('email' => $email, 'verify' => $validation, 'status' => '1'))) !== false) {
+			if (($check	= $GLOBALS['db']->select('CubeCart_admin_users', array('admin_id', 'username'), array('email' => $email, 'verify' => $validation, 'status' => '1'))) !== false) {
 
 				$salt = Password::getInstance()->createSalt();
-				$record = array(
-					'salt'  => $salt,
-					'password' => Password::getInstance()->getSalted($password['new'], $salt),
-					'verify' => null,
+				$record	= array(
+					'salt'		=> $salt,
+					'password'	=> Password::getInstance()->getSalted($password['new'], $salt),
+					'verify'	=> null,
 					'new_password' => 1
 				);
-				$where = array(
-					'admin_id' => $check[0]['admin_id'],
-					'email'  => $email,
-					'verify' => $validation,
+				$where	= array(
+					'admin_id'	=> $check[0]['admin_id'],
+					'email'		=> $email,
+					'verify'	=> $validation,
 				);
 				if ($GLOBALS['db']->update('CubeCart_admin_users', $record, $where)) {
 					return $this->_authenticate($check[0]['username'], $password['new']);
@@ -229,10 +229,10 @@ class Admin {
 			}
 		} else {
 			// Get integers for section and permission level
-			$departments[] = (!is_numeric($sections)) ? $this->_getSectionId($sections) : (int)$sections;
+			$departments[]	= (!is_numeric($sections)) ? $this->_getSectionId($sections) : (int)$sections;
 		}
 		$level = (!is_numeric($level)) ? $this->_convertPermission($level) : (int)$level;
-
+		
 		if (is_array($departments)) {
 			foreach ($departments as $section_id) {
 				// Do they have permission to be here?
@@ -243,27 +243,27 @@ class Admin {
 						continue;
 					}
 				} else if (isset($this->_permissions[0])) {
-						// Check global permissions
-						if ($this->_permissions[0] & $level) {
-							$allowed = true;
-							continue;
-						}
+					// Check global permissions
+					if ($this->_permissions[0] & $level) {
+						$allowed = true;
+						continue;
 					}
+				}
 				$allowed = false;
 				break;
 			}
 		}
-
+		
 		// Are they authorized?
 		if ($allowed) {
 			return true;
 		}
 		// Unauthorized - do we redirect, or just return false?
-		if ($message) {
+		if($message) {
 			$GLOBALS['main']->setACPWarning($GLOBALS['language']->notification['error_privileges']);
 		}
 		if ($halt) {
-			httpredir($GLOBALS['rootRel'].$GLOBALS['config']->get('config', 'adminFile')."?_g=401");
+			httpredir($GLOBALS['rootRel'].$GLOBALS['config']->get('config','adminFile')."?_g=401");
 		}
 		return false;
 	}
@@ -296,9 +296,9 @@ class Admin {
 					$salt = Password::getInstance()->createSalt();
 					//Update it to the newer MD5 so we can fix it later
 					$pass = Password::getInstance()->updateOld($user[0]['password'], $salt);
-					$update = array(
-						'salt'  => $salt,
-						'password' => $pass,
+					$update	= array(
+						'salt'		=> $salt,
+						'password'	=> $pass,
 						'new_password' => 0
 					);
 					if ($GLOBALS['db']->update('CubeCart_admin_users', $update, array('admin_id' => (int)$user[0]['admin_id']))) {
@@ -323,23 +323,23 @@ class Admin {
 				if (!$GLOBALS['session']->blocked()) {
 					$this->_logged_in = true;
 					$update = array(
-						'blockTime'  => 0,
-						'browser'  => $_SERVER['HTTP_USER_AGENT'],
-						'failLevel'  => 0,
-						'session_id' => $GLOBALS['session']->getId(),
-						'ip_address' => get_ip_address(),
-						'verify'  => '',
-						'lastTime'  => time(),
-						'logins'  => $result[0]['logins'] +1,
+						'blockTime' 	=> 0,
+						'browser'		=> $_SERVER['HTTP_USER_AGENT'],
+						'failLevel' 	=> 0,
+						'session_id'	=> $GLOBALS['session']->getId(),
+						'ip_address'	=> get_ip_address(),
+						'verify'		=> '',
+						'lastTime'		=> time(),
+						'logins'		=> $result[0]['logins'] +1,
 					);
 					if ($result[0]['new_password'] != 1) {
 						$salt = Password::getInstance()->createSalt();
 						$pass = Password::getInstance()->getSalted($password, $salt);
-						$update = array_merge($update, array(
-								'salt'   => $salt,
-								'password'  => $pass,
-								'new_password' => 1,
-							));
+						$update	= array_merge($update, array(
+							'salt'			=> $salt,
+							'password'		=> $pass,
+							'new_password'	=> 1,
+						));
 					}
 					$GLOBALS['db']->update('CubeCart_admin_users', $update, array('admin_id' => $result[0]['admin_id']));
 					$GLOBALS['session']->set('admin_id', $result[0]['admin_id'], 'client');
@@ -356,20 +356,20 @@ class Admin {
 							$newdata['failLevel'] = 1;
 							$newdata['blockTime'] = 0;
 						} else if ($user[0]['failLevel'] == ($GLOBALS['config']->get('config', 'bfattempts') - 1)) {
-								$timeAgo = time() - $GLOBALS['config']->get('config', 'bftime');
-								if ($user[0]['lastTime'] < $timeAgo) {
-									$newdata['failLevel'] = 1;
-									$newdata['blockTime'] = 0;
-								} else {
-									// block the account
-									$newdata['failLevel'] = $GLOBALS['config']->get('config', 'bfattempts');
-									$newdata['blockTime'] = time() + $GLOBALS['config']->get('config', 'bftime');
-								}
-							} else if ($user[0]['blockTime'] < time()) {
-								$timeAgo    = time() - $GLOBALS['config']->get('config', 'bftime');
-								$newdata['failLevel'] = ($user[0]['lastTime']<$timeAgo) ? 1 : $user[0]['failLevel'] + 1;
+							$timeAgo = time() - $GLOBALS['config']->get('config', 'bftime');
+							if ($user[0]['lastTime'] < $timeAgo) {
+								$newdata['failLevel'] = 1;
 								$newdata['blockTime'] = 0;
 							} else {
+								// block the account
+								$newdata['failLevel'] = $GLOBALS['config']->get('config', 'bfattempts');
+								$newdata['blockTime'] = time() + $GLOBALS['config']->get('config', 'bftime');
+							}
+						} else if ($user[0]['blockTime'] < time()) {
+							$timeAgo				= time() - $GLOBALS['config']->get('config', 'bftime');
+							$newdata['failLevel']	= ($user[0]['lastTime']<$timeAgo) ? 1 : $user[0]['failLevel'] + 1;
+							$newdata['blockTime']	= 0;
+						} else {
 							// Display Blocked message
 							$GLOBALS['gui']->setError(sprintf($GLOBALS['language']->account['error_login_block'] ($GLOBALS['config']->get('config', 'bftime') / 60)));
 							$this->_blocked = true;
@@ -384,25 +384,25 @@ class Admin {
 					$minutes_blocked = ceil(($GLOBALS['config']->get('config', 'bftime')/60));
 					$GLOBALS['gui']->setError(sprintf('Too many invalid logins have been made. Access has been blocked for %s minutes.', $minutes_blocked));
 				}
-
+				
 			}
 			if (!$GLOBALS['session']->blocked()) {
 				$redir = '';
 				if (isset($_GET['redir']) && !empty($_GET['redir'])) {
 					$redir = $_GET['redir'];
 				} else if (isset($_POST['redir']) && !empty($_POST['redir'])) {
-						$redir = $_POST['redir'];
-					} else if ($GLOBALS['session']->has('redir')) {
-						$redir = $GLOBALS['session']->get('redir');
-					} else if ($GLOBALS['session']->has('back')) {
-						$redir = $GLOBALS['session']->get('back');
-					}
+					$redir = $_POST['redir'];
+				} else if ($GLOBALS['session']->has('redir')) {
+					$redir = $GLOBALS['session']->get('redir');
+				} else if ($GLOBALS['session']->has('back')) {
+					$redir = $GLOBALS['session']->get('back');
+				}
 
 				if (!empty($redir)) {
 					if (preg_match('#^http#iU', $redir)) {
 						// Prevent phishing attacks, or anything untoward, unless it's redirecting back to this store
 						if ((substr($redir, 0, strlen(CC_STORE_URL)) == CC_STORE_URL) || (substr($redir, 0, strlen($GLOBALS['config']->get('config', 'ssl_url'))) == $GLOBALS['config']->get('config', 'ssl_url'))) {
-							// All good, proceed
+								// All good, proceed
 						} else {
 							trigger_error(sprintf("Possible Phishing attack - Redirection to '%s' is not allowed.", $redir));
 							$redir = '';
@@ -435,18 +435,18 @@ class Admin {
 	 */
 	private function _convertPermission($name = null) {
 		switch (strtolower($name)) {
-		case 'delete':
-			$value = CC_PERM_DELETE;
-			break;
-		case 'edit':
-		case 'write':
-			$value = CC_PERM_EDIT;
-			break;
-		case 'read':
-			$value = CC_PERM_READ;
-			break;
-		default:
-			$value = 0;
+			case 'delete':
+				$value = CC_PERM_DELETE;
+				break;
+			case 'edit':
+			case 'write':
+				$value = CC_PERM_EDIT;
+				break;
+			case 'read':
+				$value = CC_PERM_READ;
+				break;
+			default:
+				$value = 0;
 		}
 		return $value;
 	}
@@ -461,18 +461,18 @@ class Admin {
 		if (!empty($name)) {
 			foreach ($GLOBALS['hooks']->load('class.admin.get_section_id') as $hook) include $hook;
 			$sections = array(
-				'categories' => 3,
-				'customers'  => 5,
-				'documents'  => 4,
-				'filemanager' => 7,
-				'offers'  => 11,
-				'orders'  => 10,
-				'products'  => 2,
-				'users'   => 1,
-				'shipping'  => 6,
-				'statistics' => 8,
-				'settings'  => 9,
-				'reviews'  => 12,
+				'categories'	=> 3,
+				'customers'		=> 5,
+				'documents'		=> 4,
+				'filemanager'	=> 7,
+				'offers'		=> 11,
+				'orders'		=> 10,
+				'products'		=> 2,
+				'users'			=> 1,
+				'shipping'		=> 6,
+				'statistics'	=> 8,
+				'settings'		=> 9,
+				'reviews'		=> 12,
 			);
 			if (isset($sections[$name])) {
 				return (int)$sections[$name];

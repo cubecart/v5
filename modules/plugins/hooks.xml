@@ -92,7 +92,6 @@
  <hook trigger="class.cubecart.display_category" deprecated="" />
  <hook trigger="class.cubecart.display_content" deprecated="" />
  <hook trigger="class.cubecart.display_gateways" deprecated="" />
- <hook trigger="class.cubecart.display_checkout_gateways" deprecated="" />
  <hook trigger="class.cubecart.display_homepage" deprecated="" />
  <hook trigger="class.cubecart.display_product" deprecated="" />
  <hook trigger="class.cubecart.display_basket.alternate" deprecated="" />
@@ -100,8 +99,6 @@
  <hook trigger="class.cubecart.login" deprecated="" />
  <hook trigger="class.cubecart.product_price" deprecated="" />
  <hook trigger="class.gui.css" deprecated="" />
- <hook trigger="class.gui.head_js" deprecated="" />
- <hook trigger="class.gui.body_js" deprecated="" />
  <hook trigger="class.gui.display" deprecated="" />
  <hook trigger="class.gui.display_currency_switch" deprecated="" />
  <hook trigger="class.gui.display_documents" deprecated="" />

@@ -2,13 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>{$PAGE_TITLE}</title>
-<<<<<<< HEAD
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="../{$SKIN_VARS.admin_folder}/styles/print.css" media="screen,print" />
-=======
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="../{$SKIN_VARS.admin_folder}/styles/print.css" media="screen,print">
->>>>>>> FETCH_HEAD
 </head>
 <body onload="window.print();">
   {if isset($ORDER_LIST)}
@@ -17,18 +12,18 @@
 	  <div id="header">
 		<div id="printLabel">
 		  <div>
-		  	{if !empty($order.name_d) && empty($order.last_name_d)}{$order.name_d}{else}{$order.title_d} {$order.first_name_d} {$order.last_name_d}{/if}<br>
-	  		{if !empty($order.company_name_d)}{$order.company_name_d}<br>{/if}
-	  		{$order.line1_d} <br>
-	  		{if !empty($order.line2_d)}{$order.line2_d}<br>{/if}
-	  		{$order.town_d}<br>
-	  		{$order.state_d}, {$order.postcode_d}<br>
+		  	{if !empty($order.name_d) && empty($order.last_name_d)}{$order.name_d}{else}{$order.title_d} {$order.first_name_d} {$order.last_name_d}{/if}<br />
+	  		{if !empty($order.company_name_d)}{$order.company_name_d}<br />{/if}
+	  		{$order.line1_d} <br />
+	  		{if !empty($order.line2_d)}{$order.line2_d}<br />{/if}
+	  		{$order.town_d}<br />
+	  		{$order.state_d}, {$order.postcode_d}<br />
 	  		{$order.country_d}
 		  </div>
-		  <div class="sender">{$LANG.address.return_address}<br>{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
+		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
 		</div>
 		<div id="storeLabel">
-		  <img src="{$STORE_LOGO}" alt="">
+		  <img src="{$STORE_LOGO}" alt="" />
 		</div>
 	  </div>
 
@@ -45,7 +40,7 @@
 	  <div class="product">
 		<span class="price">{$item.price}</span>{$item.quantity} &times; {$item.name} {if !empty($item.product_code)}({$item.product_code}){/if}
 		{if isset($item.options)}
-		<br>{$LANG.catalogue.title_options} {foreach from=$item.options item=option}&raquo; {$option}{/foreach}
+		<br />{$LANG.catalogue.title_options} {foreach from=$item.options item=option}&raquo; {$option}{/foreach}
 		{/if}
 	  </div>
 	  {/foreach}
@@ -56,7 +51,7 @@
 		{if isset($order.taxes)} {foreach from=$order.taxes item=tax}
 		<div class="total">{$tax.name} <strong>{$tax.value}</strong></div>
 		{/foreach}{/if}
-		<br>
+		<br />
 		<div class="total"><strong>{$LANG.basket.total_grand} {$order.total}</strong></div>
 	  </div>
 	  {if !empty($order.customer_comments)}
@@ -83,10 +78,10 @@
   	<div id="header">
 		<div id="printLabel">
 		  <div>{$order.address}</div>
-		  <div class="sender">{$LANG.address.return_address}<br>{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
+		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
 		</div>
 		<div id="storeLabel">
-		  <img src="{$STORE_LOGO}" alt="">
+		  <img src="{$STORE_LOGO}" alt="" />
 		</div>
 	</div>
 	<div class="info">

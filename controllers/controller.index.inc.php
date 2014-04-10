@@ -1,5 +1,5 @@
 <?php
-if (!defined('CC_DS')) die('Access Denied');
+if(!defined('CC_DS')) die('Access Denied');
 //Check PHP version
 if (version_compare(PHP_VERSION, '5.2.3', '<')) {
 	die('<strong>ERROR!</strong><br />CubeCart requires <a href="http://www.php.net">PHP</a> Version 5.2.3 or better. Your server is currently running PHP Version '.PHP_VERSION);
@@ -29,15 +29,14 @@ $GLOBALS['smarty']->compile_dir  = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->config_dir   = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->cache_dir    = CC_SKIN_CACHE_DIR;
 $GLOBALS['smarty']->error_reporting = E_ALL & ~E_NOTICE;
-$GLOBALS['smarty']->debugging = false;
 //Initialize language
 $GLOBALS['language'] = Language::getInstance();
 //Initialize hooks
 $GLOBALS['hooks'] = HookLoader::getInstance();
 //Initialize SEO
 $GLOBALS['seo'] = SEO::getInstance();
-if (isset($_GET['seo_path']) && !empty($_GET['seo_path'])) {
-	$_GET['seo_path'] = preg_replace('/(\/\~[a-z0-9]{1,}\/)/', '', $_GET['seo_path']); // Remove /~username/ from seo_path
+if(isset($_GET['seo_path']) && !empty($_GET['seo_path'])) {
+	$_GET['seo_path'] = preg_replace('/(\/\~[a-z0-9]{1,}\/)/','',$_GET['seo_path']); // Remove /~username/ from seo_path
 	$GLOBALS['seo']->getItem($_GET['seo_path']);
 }
 //Initialize SSL
@@ -57,13 +56,13 @@ $GLOBALS['cart'] = Cart::getInstance();
 
 // Set store timezone - default to UTC
 date_default_timezone_set(($GLOBALS['config']->get('config', 'time_zone')) ? $GLOBALS['config']->get('config', 'time_zone') : 'UTC');
-if ($GLOBALS['config']->get('config', 'recaptcha') && !$GLOBALS['session']->get('confirmed', 'recaptcha')) {
+if ($GLOBALS['config']->get('config','recaptcha') && !$GLOBALS['session']->get('confirmed','recaptcha')) {
 
 	require CC_INCLUDES_DIR.'lib'.CC_DS.'recaptcha'.CC_DS.'recaptchalib.php';
 	$GLOBALS['recaptcha_keys'] = array('captcha_private' => '6LfT4sASAAAAAKQMCK9w6xmRkkn6sl6ORdnOf83H', 'captcha_public' => '6LfT4sASAAAAAOl71cRz11Fm0erGiqNG8VAfKTHn');
 
 	$recaptcha['error'] = null;
-	$recaptcha['confirmed'] = false;
+	$recaptcha['confirmed']	= false;
 
 	if (isset($_POST['recaptcha_response_field'])) {
 		$resp = recaptcha_check_answer($GLOBALS['recaptcha_keys']['captcha_private'], $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
@@ -76,11 +75,11 @@ if ($GLOBALS['config']->get('config', 'recaptcha') && !$GLOBALS['session']->get(
 		}
 	}
 	$GLOBALS['session']->set('', $recaptcha, 'recaptcha');
-} elseif (!$GLOBALS['session']->get('confirmed', 'recaptcha')) {
+} elseif(!$GLOBALS['session']->get('confirmed','recaptcha')) {
 	$GLOBALS['session']->delete('', 'recaptcha');
 }
-$_GET['_a']  = (isset($_GET['_a'])) ? $_GET['_a'] : null;
-$_REQUEST['_a'] = (isset($_REQUEST['_a'])) ? $_REQUEST['_a'] : null;
+$_GET['_a']		= (isset($_GET['_a'])) ? $_GET['_a'] : null;
+$_REQUEST['_a']	= (isset($_REQUEST['_a'])) ? $_REQUEST['_a'] : null;
 
 foreach ($GLOBALS['hooks']->load('controller.index') as $hook) include $hook;
 
@@ -88,9 +87,6 @@ $GLOBALS['language']->setTemplate();
 $GLOBALS['cubecart']->loadPage();
 $GLOBALS['gui']->displayCommon();
 
-$checkout_pages = array('confirm', 'basket', 'gateway', 'cart','checkout');
-
-
-$global_template_file = (in_array($_GET['_a'], $checkout_pages) && file_exists(CC_ROOT_DIR.'/skins/'.$GLOBALS['gui']->getSkin().'/templates/main.checkout.php')) ? 'main.checkout.php' : 'main.php';
+$global_template_file = 'main.php';
 
 offline();

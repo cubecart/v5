@@ -3,9 +3,9 @@
   <h3>{$LANG.orders.title_transaction_logs}</h3>
   <form action="{$VAL_SELF}" method="post">
 	<div>
-	  <input type="text" name="search" class="textbox"> <input type="submit" value="{$LANG.common.search}" class="mini_button">
+	  <input type="text" name="search" class="textbox" /> <input type="submit" value="{$LANG.common.search}" class="mini_button" />
 	</div>
-	<input type="hidden" name="token" value="{$SESSION_TOKEN}">
+	<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
   </form>
   <table class="list">
 	<thead>
@@ -57,7 +57,7 @@
 	<tbody>
 	  {if $ORDER_TRANSACTIONS}{foreach from=$ORDER_TRANSACTIONS item=transaction}
 	  <tr>
-		<td><!--<a href="{$transaction.link}">{$transaction.order_id}</a><br>-->{$transaction.trans_id}</td>
+		<td><!--<a href="{$transaction.link}">{$transaction.order_id}</a><br />-->{$transaction.trans_id}</td>
 		<td align="center">{$transaction.status}</td>
 		<td align="center">{$transaction.amount}</td>
 		<td align="center">{$transaction.gateway}</td>

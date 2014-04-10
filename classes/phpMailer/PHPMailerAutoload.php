@@ -30,8 +30,4 @@ function PHPMailerAutoload($classname)
     }
 }
 
-<<<<<<< HEAD
 spl_autoload_register('PHPMailerAutoload');
-=======
-spl_autoload_register('PHPMailerAutoload');
->>>>>>> FETCH_HEAD

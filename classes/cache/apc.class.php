@@ -4,7 +4,7 @@
  * Header
  */
 
-if (!defined('CC_DS')) die('Access Denied');
+if(!defined('CC_DS')) die('Access Denied');
 require CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'cache'.CC_DS.'cache.class.php';
 
 /**
@@ -21,12 +21,12 @@ class Cache extends Cache_Controler {
 			$this->_online = false;
 			return ;
 		}
-		$this->_mode = 'APC';
-		$this->_online = true;
+    	$this->_mode	= 'APC';
+    	$this->_online	= true;
 
-		//Run the parent constructor
-		parent::__construct();
-	}
+    	//Run the parent constructor
+    	parent::__construct();
+    }
 
 	/**
 	 * Setup the instance (singleton)
@@ -35,10 +35,10 @@ class Cache extends Cache_Controler {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	/**
@@ -125,15 +125,15 @@ class Cache extends Cache_Controler {
 		if (empty($this->_ids)) {
 			$info = @apc_cache_info('user');
 			if (!empty($info) && is_array($info)) {
-				foreach ($info['cache_list'] as $item) {
-					if (strpos($item['info'], $this->_prefix) !== false) {
-						$this->_ids[] = str_replace(array($this->_prefix, $this->_suffix), '', $item['info']);
-					}
-				}
+		        foreach ($info['cache_list'] as $item) {
+		            if (strpos($item['info'], $this->_prefix) !== false) {
+		                $this->_ids[] = str_replace(array($this->_prefix, $this->_suffix), '', $item['info']);
+		            }
+		        }
 			}
 		}
 
-		return $this->_ids;
+        return $this->_ids;
 	}
 
 	/**
@@ -178,9 +178,9 @@ class Cache extends Cache_Controler {
 		if ($this->status()) {
 			$mem = @apc_sma_info();
 			if ($mem) {
-				$mem_size = $mem['num_seg'] * $mem['seg_size'];
-				$mem_avail = $mem['avail_mem'];
-				$mem_used = $mem_size - $mem_avail;
+				$mem_size	= $mem['num_seg'] * $mem['seg_size'];
+				$mem_avail	= $mem['avail_mem'];
+				$mem_used	= $mem_size - $mem_avail;
 				return sprintf('Max: %s - Used: %s (%.2f%%) - Available: %s (%.2f%%)', formatBytes($mem_size, true), formatBytes($mem_used, true), ($mem_used * (100 / $mem_size)), formatBytes($mem_avail, true), ($mem_avail * (100 / $mem_size)));
 			} else {
 				return 'APC Statistics are unavailable.';

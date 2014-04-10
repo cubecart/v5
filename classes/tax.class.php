@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:   http://www.cubecart.com
- * Email:  sales@devellion.com
- * License:  http://www.cubecart.com/v5-software-license
+ * Web:			http://www.cubecart.com
+ * Email:		sales@devellion.com
+ * License:		http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -24,15 +24,15 @@
 class Tax {
 	public $_tax_country;
 
-	public $_tax_table_add = false;
-	public $_tax_table_inc = false;
-	public $_tax_table_applied = false;
+	public $_tax_table_add	= false;
+	public $_tax_table_inc	= false;
+	public $_tax_table_applied	= false;
 	public $_tax_table = false;
 
-	public $_currency_vars = false;
+	public $_currency_vars	= false;
 
-	public $_total_tax_add = 0;
-	public $_total_tax_inc = 0;
+	public $_total_tax_add	= 0;
+	public $_total_tax_inc	= 0;
 
 	public $_tax_classes;
 
@@ -46,8 +46,8 @@ class Tax {
 	final protected function __construct() {
 		$cache = Cache::getInstance();
 		// Should we be showing prices?
-		if (Config::getInstance()->get('config', 'catalogue_hide_prices') && !User::getInstance()->is() && !CC_IN_ADMIN) {
-			Session::getInstance()->set('hide_prices', true);
+		if(Config::getInstance()->get('config', 'catalogue_hide_prices') && !User::getInstance()->is() && !CC_IN_ADMIN) {
+			Session::getInstance()->set('hide_prices',true);
 		} else {
 			Session::getInstance()->delete('hide_prices');
 		}
@@ -70,10 +70,10 @@ class Tax {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
@@ -82,10 +82,10 @@ class Tax {
 		$GLOBALS['cart']->set('order_taxes', false);
 		if (is_array($this->_tax_table_applied)) {
 			foreach ($this->_tax_table_applied as $tax_id => $tax_name) {
-				$tax_value = $this->_tax_table_inc[$tax_id]+$this->_tax_table_add[$tax_id];
-				$tax_data = array(
-					'name' => $tax_name,
-					'value' => $GLOBALS['tax']->priceFormat($tax_value, true),
+				$tax_value	= $this->_tax_table_inc[$tax_id]+$this->_tax_table_add[$tax_id];
+				$tax_data	= array(
+					'name'	=> $tax_name,
+					'value'	=> $GLOBALS['tax']->priceFormat($tax_value, true),
 				);
 				$basket_taxes[] = array(
 					'tax_id' => $tax_id,
@@ -101,7 +101,7 @@ class Tax {
 
 	public function exchangeRate(&$price, $from = false) {
 		if (!empty($from) && $from != $GLOBALS['config']->get('config', 'default_currency')) {
-			$currency = $GLOBALS['db']->select('CubeCart_currency', array('value'), array('code' => $from));
+			$currency	= $GLOBALS['db']->select('CubeCart_currency', array('value'), array('code' => $from));
 			if ($currency) {
 				$price = $price/$currency[0]['value'];
 			}
@@ -111,37 +111,37 @@ class Tax {
 
 	public function fetchTaxAmounts() {
 		return array(
-			'applied' => $this->_total_tax_add,
-			'included' => $this->_total_tax_inc,
+			'applied'	=> $this->_total_tax_add,
+			'included'	=> $this->_total_tax_inc,
 		);
 	}
 
 	public function fetchTaxDetails($tax_id) {
 		if (($rate = $GLOBALS['db']->select('CubeCart_tax_rates', false, array('id' => (int)$tax_id))) !== false) {
 			if (($detail = $GLOBALS['db']->select('CubeCart_tax_details', false, array('id' => $rate[0]['details_id']))) !== false) {
-				return array_merge($rate[0], $detail[0]);
+				return array_merge($rate[0],$detail[0]);
 			}
 		}
-
+		
 		return false;
 	}
 
 	// Remove inclusive tax
 	public function inclusiveTaxRemove(&$price, $tax_type, $type = 'goods') {
-		$tax_total = 0;
+		$tax_total	= 0;
 		$country_id = $GLOBALS['config']->get('config', 'store_country');
 
-		$query = "SELECT SQL_CACHE T.tax_name AS type_name, D.display, D.name, R.id, R.type_id, R.tax_percent, R.goods, R.shipping, R.county_id FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_rates AS R, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_details AS D, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_class AS T, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_geo_country AS C WHERE D.id = R.details_id AND C.numcode = R.country_id AND R.type_id = T.id AND D.status = 1 AND R.active = 1 AND R.country_id = ".(int)$country_id;
-		$taxes = $GLOBALS['db']->query($query);
+		$query	= "SELECT SQL_CACHE T.tax_name AS type_name, D.display, D.name, R.id, R.type_id, R.tax_percent, R.goods, R.shipping, R.county_id FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_rates AS R, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_details AS D, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_class AS T, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_geo_country AS C WHERE D.id = R.details_id AND C.numcode = R.country_id AND R.type_id = T.id AND D.status = 1 AND R.active = 1 AND R.country_id = ".(int)$country_id;
+		$taxes	= $GLOBALS['db']->query($query);
 		if (is_array($taxes)) {
 			foreach ($taxes as $i => $tax_group) {
 				$tax_table[$tax_group['id']] = array(
-					'goods'  => (bool)$tax_group['goods'],
-					'shipping' => (bool)$tax_group['shipping'],
-					'type'  => $tax_group['type_id'],
-					'name'  => (!empty($tax_group['display'])) ? $tax_group['display'] : $tax_group['name'],
-					'percent' => $tax_group['tax_percent'],
-					'county_id' => $tax_group['county_id'],
+					'goods'		=> (bool)$tax_group['goods'],
+					'shipping'	=> (bool)$tax_group['shipping'],
+					'type'		=> $tax_group['type_id'],
+					'name'		=> (!empty($tax_group['display'])) ? $tax_group['display'] : $tax_group['name'],
+					'percent'	=> $tax_group['tax_percent'],
+					'county_id'	=> $tax_group['county_id'],
 				);
 			}
 		}
@@ -149,10 +149,10 @@ class Tax {
 		if (is_array($tax_table)) {
 			foreach ($tax_table as $tax_id => $tax) {
 				if ($tax[$type] && $tax['type'] == $tax_type && in_array($tax['county_id'], array($GLOBALS['config']->get('config', 'store_zone'), 0))) {
-					$tax_total += sprintf('%.4f', $price - ($price/(($tax['percent']/100)+1)));
+					$tax_total	+= sprintf('%.4f', $price - ($price/(($tax['percent']/100)+1)));
 				}
 			}
-			$price -= $tax_total;
+			$price	-= $tax_total;
 		}
 		return $price;
 	}
@@ -188,24 +188,24 @@ class Tax {
 	}
 
 	public function loadTaxes($country_id) {
-
+	
 		if (!empty($country_id)) {
 			$this->_country_id = $country_id;
 
 			// Fetch new vars
-			$query = "SELECT SQL_CACHE T.tax_name AS type_name, D.display, D.name, R.id, R.type_id, R.tax_percent, R.goods, R.shipping, R.county_id FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_rates AS R, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_details AS D, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_class AS T, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_geo_country AS C WHERE D.id = R.details_id AND C.numcode = R.country_id AND R.type_id = T.id AND D.status = 1 AND R.active = 1 AND R.country_id = ".$country_id;
-			$taxes = $GLOBALS['db']->query($query);
+			$query	= "SELECT SQL_CACHE T.tax_name AS type_name, D.display, D.name, R.id, R.type_id, R.tax_percent, R.goods, R.shipping, R.county_id FROM ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_rates AS R, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_details AS D, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_tax_class AS T, ".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_geo_country AS C WHERE D.id = R.details_id AND C.numcode = R.country_id AND R.type_id = T.id AND D.status = 1 AND R.active = 1 AND R.country_id = ".$country_id;
+			$taxes	= $GLOBALS['db']->query($query);
 			if (is_array($taxes)) {
 				foreach ($taxes as $i => $tax_group) {
 					$this->_tax_table[$tax_group['id']] = array(
 						// What is is applied to?
-						'goods'  => (int)$tax_group['goods'],
-						'shipping' => (int)$tax_group['shipping'],
+						'goods'		=> (int)$tax_group['goods'],
+						'shipping'	=> (int)$tax_group['shipping'],
 						// Details
-						'type'  => $tax_group['type_id'],
-						'name'  => (!empty($tax_group['display'])) ? $tax_group['display'] : $tax_group['name'],
-						'percent' => $tax_group['tax_percent'],
-						'county_id' => $tax_group['county_id'],
+						'type'		=> $tax_group['type_id'],
+						'name'		=> (!empty($tax_group['display'])) ? $tax_group['display'] : $tax_group['name'],
+						'percent'	=> $tax_group['tax_percent'],
+						'county_id'	=> $tax_group['county_id'],
 					);
 				}
 			}
@@ -213,7 +213,7 @@ class Tax {
 	}
 
 	public function priceConvertFX($price) {
-		return $price / $this->_currency_vars['value'];
+		return ($price / $this->_currency_vars['value']);
 	}
 
 
@@ -224,8 +224,8 @@ class Tax {
 
 	public function priceFormat($price, $display_null = true, $default_currency = false) {
 
-		if ($default_currency) {
-			$this->loadCurrencyVars($GLOBALS['config']->get('config', 'default_currency'));
+		if($default_currency) {
+			$this->loadCurrencyVars($GLOBALS['config']->get('config','default_currency'));
 		}
 
 		$price = $this->_removeSymbol($price);
@@ -259,29 +259,29 @@ class Tax {
 			foreach ($this->_tax_table as $tax_id => $tax) {
 				if ($tax[$type] && $tax['type'] == $tax_type && in_array($tax['county_id'], array($state, 0))) {
 					switch ($tax_inclusive) {
-					case true:
-						## Already includes tax - but how much?
-						$amount = $price - sprintf('%.2f', $price/(($tax['percent']/100)+1), 2); // Changed from round( in 5.1
-						$this->_tax_table_applied[$tax_id] = $tax['name'];
-						$this->_tax_table_inc[$tax_id]  += $amount;
-						$this->_total_tax_inc    += $amount;
-						break;
-					case false:
-					default:
-						## Excludes tax - lets add it
-						$amount = $price*($tax['percent']/100);
-						$this->_tax_table_applied[$tax_id] = $tax['name'];
-						if (isset($this->_tax_table_add[$tax_id])) {
-							$this->_tax_table_add[$tax_id] += $amount;
-						} else {
-							$this->_tax_table_add[$tax_id] = $amount;
-						}
-						$this->_total_tax_add    += $amount;
-						break;
+						case true:
+							## Already includes tax - but how much?
+							$amount = $price - sprintf('%.2f', $price/(($tax['percent']/100)+1), 2); // Changed from round( in 5.1
+							$this->_tax_table_applied[$tax_id]	= $tax['name'];
+							$this->_tax_table_inc[$tax_id]		+= $amount;
+							$this->_total_tax_inc				+= $amount;
+							break;
+						case false:
+						default:
+							## Excludes tax - lets add it
+							$amount	= $price*($tax['percent']/100);
+							$this->_tax_table_applied[$tax_id]	= $tax['name'];
+							if (isset($this->_tax_table_add[$tax_id])) {
+								$this->_tax_table_add[$tax_id]	+= $amount;
+							} else {
+								$this->_tax_table_add[$tax_id]	= $amount;
+							}
+							$this->_total_tax_add				+= $amount;
+							break;
 					}
 				}
 			}
-			return array('amount' => sprintf('%.2f', $amount), 'tax_inclusive' => $tax_inclusive, 'tax_name' => $tax['name']);
+			return array('amount' => sprintf('%.2f',$amount), 'tax_inclusive' => $tax_inclusive, 'tax_name' => $tax['name']);
 		}
 		return false;
 	}
@@ -290,18 +290,18 @@ class Tax {
 	public function salePrice($normal_price = null, $sale_price = null, $format = true) {
 		if (Config::getInstance()->has('config', 'catalogue_sale_mode')) {
 			switch (Config::getInstance()->get('config', 'catalogue_sale_mode')) {
-			case 1:  ## Fixed value per item
-				if (!empty($sale_price) && $sale_price > 0 && ($sale_price != $normal_price)) {
-					return ($format) ? $this->priceFormat($sale_price) : $sale_price;
-				}
-				return false;
-			case 2:  ## Percentage off all stock
-				$value = $normal_price * ((100-Config::getInstance()->get('config', 'catalogue_sale_percentage'))/100);
-				if (is_numeric($value) && $value < $normal_price) {
-					return ($format) ? $this->priceFormat($value) : $value;
-				}
-			default:
-				return false;
+				case 1:		## Fixed value per item
+					if (!empty($sale_price) && $sale_price > 0 && ($sale_price != $normal_price)) {
+						return ($format) ? $this->priceFormat($sale_price) : $sale_price;
+					}
+					return false;
+				case 2:		## Percentage off all stock
+					$value	= $normal_price * ((100-Config::getInstance()->get('config', 'catalogue_sale_percentage'))/100);
+					if (is_numeric($value) && $value < $normal_price) {
+						return ($format) ? $this->priceFormat($value) : $value;
+					}
+				default:
+					return false;
 			}
 		}
 		return false;
@@ -313,12 +313,12 @@ class Tax {
 
 	public function taxReset() {
 		// Reset tax vars
-		$this->_tax_table   = false;
-		$this->_tax_table_add  = false;
-		$this->_tax_table_inc  = false;
-		$this->_tax_table_applied = false;
-		$this->_total_tax_add  = 0;
-		$this->_total_tax_inc  = 0;
+		$this->_tax_table			= false;
+		$this->_tax_table_add		= false;
+		$this->_tax_table_inc		= false;
+		$this->_tax_table_applied	= false;
+		$this->_total_tax_add		= 0;
+		$this->_total_tax_inc		= 0;
 	}
 
 	private function _removeSymbol($price) {

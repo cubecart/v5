@@ -795,11 +795,3 @@ dl {
 	display: block;
 	font-family: Helvetica, Arial, Verdana, sans-serif !important;
 }
-#debug-info {
-	font-family: "Courier New", Courier, monospace; 
-	font-size:10px; 
-	border-top: 5px dashed #C0C0C0; 
-	color: black; 
-	background-color:#E7E7E7;
-	clear:both; 
-}

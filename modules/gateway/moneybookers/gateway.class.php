@@ -62,7 +62,7 @@ class Gateway {
 			'pay_to_email' 			=> $this->_module['email'],
 			'transaction_id' 		=> $this->_basket['cart_order_id'],
 			'return_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=moneybookers&cart_order_id='.$this->_basket['cart_order_id'],
-			'cancel_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway',
+			'cancel_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway',
 			'status_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=moneybookers&cart_order_id='.$this->_basket['cart_order_id'],
 			'language' 				=> 'EN',
 			'pay_from_email' 		=> $this->_basket['billing_address']['email'],

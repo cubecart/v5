@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:   http://www.cubecart.com
- * Email:  sales@devellion.com
- * License:  http://www.cubecart.com/v5-software-license
+ * Web:			http://www.cubecart.com
+ * Email:		sales@devellion.com
+ * License:		http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -25,7 +25,7 @@ class SSL {
 	 * SSL enabled pages
 	 * @var array
 	 */
-	private $_ssl_pages  = array();
+	private $_ssl_pages		= array();
 	/**
 	 * Class instance
 	 *
@@ -42,34 +42,33 @@ class SSL {
 		}
 
 		$ssl_path = $GLOBALS['config']->get('config', 'ssl_path');
-		if (empty($ssl_path)) {
+		if (empty($ssl_path))	{
 			//trigger_error('SSL Root Relative Path has not been defined. Cannot enable SSL mode.', E_USER_NOTICE);
 			$GLOBALS['config']->merge('config', 'ssl', false);
 		}
 		if (ADMIN_CP) {
-			if (isset($_GET['ssl_switch']) && $_GET['ssl_switch']) {
+			if(isset($_GET['ssl_switch']) && $_GET['ssl_switch']) {
 				$this->_sslSwitch('on');
-			} elseif (isset($_GET['ssl_switch']) && !$_GET['ssl_switch']) {
+			} elseif(isset($_GET['ssl_switch']) && !$_GET['ssl_switch']) {
 				$this->_sslSwitch('off');
 			}
-			$GLOBALS['storeURL'] = CC_STORE_URL;
-			$GLOBALS['rootRel']  = CC_ROOT_REL;
+			$GLOBALS['storeURL']	= CC_STORE_URL;
+			$GLOBALS['rootRel']		= CC_ROOT_REL;
 
 		} elseif ($GLOBALS['config']->get('config', 'ssl')) {
 			// Define a list of pages that should always be in SSL mode
 			$this->_ssl_pages = array(
 				// Cart
-				'basket'  => true,
-				'cart'   => true,
-				'checkout'  => true,
-				'complete'  => true,
-				'confirm'  => true,
-				'gateway'  => true,
-				'remote'  => true,
-				'template'  => true,
+				'basket'		=> true,
+				'cart'			=> true,
+				'checkout'		=> true,
+				'complete'		=> true,
+				'confirm'		=> true,
+				'gateway'		=> true,
+				'remote'		=> true,
+				'template'		=> true,
 
 				// User Related
-<<<<<<< HEAD
 				'login'			=> true,
 				'logout'		=> true,
 				'recover'		=> true,
@@ -84,24 +83,8 @@ class SSL {
 				'profile'		=> true,
 				'vieworder'		=> true,
 				'receipt'		=> true,
-=======
-				'login'   => true,
-				'logout'  => true,
-				'recover'  => true,
-				'recovery'  => true,
-				'register'  => true,
-				'contact'  => true,
-
-				'account'  => true,
-				'addressbook' => true,
-				'downloads'  => true,
-				'download'  => true,
-				'profile'  => true,
-				'vieworder'  => true,
-				'receipt'  => true,
->>>>>>> FETCH_HEAD
 			);
-
+			
 			foreach ($GLOBALS['hooks']->load('class.ssl.pages') as $hook) include $hook;
 
 			// Switch to SSL, if necessary
@@ -109,8 +92,8 @@ class SSL {
 		} else {
 
 			// Defaulted
-			$GLOBALS['storeURL'] = CC_STORE_URL;
-			$GLOBALS['rootRel']  = CC_ROOT_REL;
+			$GLOBALS['storeURL']	= CC_STORE_URL;
+			$GLOBALS['rootRel']		= CC_ROOT_REL;
 		}
 	}
 
@@ -121,10 +104,10 @@ class SSL {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	/**
@@ -166,28 +149,28 @@ class SSL {
 				parse_str($_SERVER['QUERY_STRING'], $params);
 			}
 			if (isset($params['SSL'])) {
-				$hash  = $params['SSL'];
-				$compare = $params;
+				$hash		= $params['SSL'];
+				$compare	= $params;
 				unset($compare['SSL'], $compare[session_name()]);
-				$validate = md5(serialize($compare));
-				$force_val = is_string($force) ? $force : true;
-				$force  = ($hash === $validate) ? $force_val : false;
+				$validate	= md5(serialize($compare));
+				$force_val	= is_string($force) ? $force : true;
+				$force		= ($hash === $validate) ? $force_val : false;
 			}
 
-			if (isset($GLOBALS['seo']->_a) && !empty($GLOBALS['seo']->_a)) {
-				$current_mode = $GLOBALS['seo']->_a;
+			if(isset($GLOBALS['seo']->_a) && !empty($GLOBALS['seo']->_a)) {
+				$current_mode	= $GLOBALS['seo']->_a;
 			} else {
-				$current_mode = (isset($_GET['_a'])) ? $_GET['_a'] : '';
+				$current_mode	= (isset($_GET['_a'])) ? $_GET['_a'] : '';
 			}
 
-			if (is_string($force)) {
+			if(is_string($force)) {
 				$enable_ssl = ($force=='off') ? false : true;
 			} else {
-				$enable_ssl  = ($force || $GLOBALS['config']->get('config', 'ssl_force') || (isset($this->_ssl_pages[$current_mode]) && $this->_ssl_pages[$current_mode] == true)) ? true : false;
+				$enable_ssl		= ($force || $GLOBALS['config']->get('config', 'ssl_force') || (isset($this->_ssl_pages[$current_mode]) && $this->_ssl_pages[$current_mode] == true)) ? true : false;
 			}
 
 			// Fix for remote calls! This STOPS redirect from SSL to standard protocol if a call is to SSL.
-			if ($_GET['_g']=='rm' && CC_SSL) {
+			if($_GET['_g']=='rm' && CC_SSL) {
 				$enable_ssl = true;
 			}
 
@@ -203,7 +186,6 @@ class SSL {
 				if ($force) {
 					$params['SSL'] = md5(serialize($params));
 				}
-<<<<<<< HEAD
 				
 				/* Defunct for security reasons
 				if($GLOBALS['config']->get('config', 'ssl')==1) {
@@ -215,27 +197,16 @@ class SSL {
  				}
  				*/
 				
-=======
-				/* Depreciated for security reasons
-				if($GLOBALS['config']->get('config', 'ssl')==1) {
-					$ssl_url 		= str_replace('https','',$GLOBALS['config']->get('config', 'ssl_url'));
-					$standard_url 	= str_replace('http','',$GLOBALS['config']->get('config', 'standard_url'));
-					if ($ssl_url!==$standard_url) {
-						$params[session_name()] = session_id();
-					}
-				}
-				*/
->>>>>>> FETCH_HEAD
 				unset($params['ssl_switch']);
 				if (!empty($params)) {
 					$page .= '?'.http_build_query($params, false, '&');
 				}
-
-				if (preg_match('/seo_path/', $page)) {
+				
+				if(preg_match('/seo_path/', $page)) {
 					$URL = SEO::getInstance()->getItem($params['seo_path'], true);
-					$page = str_ireplace($GLOBALS['config']->get('config', 'ssl_url'), $GLOBALS['config']->get('config', 'standard_url'), SEO::getInstance()->SEOable($URL));
+					$page = str_ireplace($GLOBALS['config']->get('config', 'ssl_url'),$GLOBALS['config']->get('config', 'standard_url'),SEO::getInstance()->SEOable($URL));
 				}
-
+				
 				httpredir($page);
 			} else {
 				return false;
@@ -245,11 +216,11 @@ class SSL {
 		// Get/Set paths and directories
 
 		if ($GLOBALS['config']->get('config', 'ssl') && CC_SSL) {
-			$GLOBALS['storeURL'] = $GLOBALS['config']->get('config', 'ssl_url');
-			$GLOBALS['rootRel']  = $GLOBALS['config']->get('config', 'ssl_path');
+			$GLOBALS['storeURL']	= $GLOBALS['config']->get('config', 'ssl_url');
+			$GLOBALS['rootRel']		= $GLOBALS['config']->get('config', 'ssl_path');
 		} else {
-			$GLOBALS['storeURL'] = CC_STORE_URL;
-			$GLOBALS['rootRel']  = CC_ROOT_REL;
+			$GLOBALS['storeURL']	= CC_STORE_URL;
+			$GLOBALS['rootRel']		= CC_ROOT_REL;
 		}
 		// Make $GLOBALS paths fool-proof... until someone invents a better fool...
 		if (substr($GLOBALS['storeURL'], -1, 1) == '/') $GLOBALS['storeURL'] = substr($GLOBALS['storeURL'], 0, strlen($GLOBALS['storeURL'])-1);

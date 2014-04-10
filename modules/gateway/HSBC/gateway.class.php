@@ -18,7 +18,7 @@ class Gateway {
 	public function transfer() {
 
 		$transfer	= array(
-			'action'	=> 'index.php?_g=rm&type=gateway&cmd=process&module=HSBC&auth=1&cart_order_id='.$this->_basket['cart_order_id'],
+			'action'	=> 'index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=HSBC&amp;auth=1&amp;cart_order_id='.$this->_basket['cart_order_id'],
 			'method'	=> 'post',
 			'target'	=> '_self',
 			'submit'	=> 'manual',
@@ -80,7 +80,7 @@ class Gateway {
 				'PurchaseAmount' 	=> $order_summary['total'],
 				'PurchaseAmountRaw' => preg_replace('#[^0-9]#', '', $order_summary['total']),
 				'MD'				=> base64_encode(implode('|', $ccPassthru)),
-				'ResultUrl' 		=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_a=gateway&gateway=HSBC'
+				'ResultUrl' 		=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_a=gateway&amp;gateway=HSBC'
 
 			);
 

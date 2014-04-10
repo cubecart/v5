@@ -22,5 +22,5 @@
 	};
 	
 </script>
-Delivering to {$AMAZON.delivery_address} (<a href="{$VAL_SELF}&amazon_action=address" style="size: 10px">Change</a>)
+Delivering to {$AMAZON.delivery_address} (<a href="{$VAL_SELF}&amp;amazon_action=address" style="size: 10px">Change</a>)
 </div>

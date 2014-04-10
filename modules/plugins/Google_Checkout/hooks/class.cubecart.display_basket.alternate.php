@@ -33,6 +33,6 @@ if ($module_config = $GLOBALS['config']->get('Google_Checkout')) {
 		} else {
 			$position = '';
 		}
-		$list_checkouts[$position]	= sprintf('<a href="?_a=gateway&module=Google_Checkout"><img src="'.$server_url.'buttons/checkout.gif?merchant_id=%s&w=%d&h=%d&style=trans&variant=text" alt="" /></a>', $module_config['merchId'], $width, $height);
+		$list_checkouts[$position]	= sprintf('<a href="?_a=gateway&amp;module=Google_Checkout"><img src="'.$server_url.'buttons/checkout.gif?merchant_id=%s&amp;w=%d&amp;h=%d&amp;style=trans&amp;variant=text" alt="" /></a>', $module_config['merchId'], $width, $height);
 	}
 }

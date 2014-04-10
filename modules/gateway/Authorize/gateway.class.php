@@ -78,12 +78,12 @@ class Gateway {
 				'x_customer_ip' 		=> get_ip_address(),
 				'x_receipt_link_method' => 'POST',
 				'x_receipt_link_text'	=> 'Return to Store &amp; Confirm Order',
-				'x_receipt_link_url'	=> $GLOBALS['storeURL'].'/index.php?_g=remote&type=gateway&cmd=process&module=Authorize'
+				'x_receipt_link_url'	=> $GLOBALS['storeURL'].'/index.php?_g=remote&amp;type=gateway&amp;cmd=process&amp;module=Authorize'
 				
 				/* Ideal setup doesn't work :(
 				'x_receipt_link_url'	=> $GLOBALS['storeURL'].'?_a=vieworder&cart_order_id='.$this->_basket['cart_order_id'],
 				'x_relay_response'		=> 'TRUE',
-				'x_relay_url'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=Authorize'
+				'x_relay_url'			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=Authorize'
 				*/
 			);
 		} else {

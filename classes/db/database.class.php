@@ -17,50 +17,50 @@ class Database_Contoller {
 	 *
 	 * @var array
 	 */
-	protected $_allowed_exceptions = array('CURRENT_TIMESTAMP', 'NOW()', 'offline_capture', 'NULL');
+	protected $_allowed_exceptions	= array('CURRENT_TIMESTAMP', 'NOW()', 'offline_capture', 'NULL');
 	/**
 	 * Was it a cached query
 	 *
 	 * @var bool
 	 */
-	protected $_cached   = false;
+	protected $_cached			= false;
 
 	/**
 	 * DB connection
 	 *
 	 * @var id
 	 */
-	protected $_db_connect_id = null;
+	protected $_db_connect_id	= null;
 	/**
 	 * Number of rows found
 	 *
 	 * @var $_found_rows int
 	 */
-	protected $_found_rows  = null;
+	protected $_found_rows		= null;
 	/**
 	 * Store prefix
 	 *
 	 * @var string
 	 */
-	protected $_prefix   = '';
+	protected $_prefix			= '';
 	/**
 	 * Query to execute
 	 *
 	 * @var $_query string
 	 */
-	protected $_query   = false;
+	protected $_query			= false;
 	/**
 	 * Query run time
 	 *
 	 * @var $_query_time float
 	 */
-	protected $_query_time  = null;
+	protected $_query_time		= null;
 	/**
 	 * Query result
 	 *
 	 * @var $_result
 	 */
-	protected $_result   = null;
+	protected $_result			= null;
 	/**
 	 * Query allowed columns memory cache
 	 *
@@ -92,17 +92,17 @@ class Database_Contoller {
 	 * @return string
 	 */
 	public function column_sort($column_name, $display_text, $order_by = 'sort', $current_page, $current_sort = false, $anchor = false) {
-		$link   = "$current_page&{$order_by}[$column_name]=";
+		$link 		= "$current_page&amp;{$order_by}[$column_name]=";
 		$image_path = $GLOBALS['config']->get('config', 'adminFolder').'/skins/default/images/';
 		if ($anchor) {
 			$anchor = '#'.$anchor;
 		}
 
-		$link_asc  = (isset($current_sort[$column_name]) && $current_sort[$column_name] == 'ASC') ? "<img src=\"{$image_path}sort_asc_on.png\" title=\"Sort by $display_text ascending\" />" : "<a href=\"{$link}ASC{$anchor}\"><img src=\"{$image_path}sort_asc_off.png\" title=\"Sort by $display_text ascending\" /></a>";
-		$link_desc  = (isset($current_sort[$column_name]) && $current_sort[$column_name] == 'DESC') ? "<img src=\"{$image_path}sort_desc_on.png\" title=\"Sort by $display_text descending\" />" : "<a href=\"{$link}DESC{$anchor}\"><img src=\"{$image_path}sort_desc_off.png\" title=\"Sort by $display_text descending\" /></a>";
-		$html_out  = "<span>$link_desc $link_asc</span>$display_text";
+		$link_asc 	= (isset($current_sort[$column_name]) && $current_sort[$column_name] == 'ASC') ? "<img src=\"{$image_path}sort_asc_on.png\" title=\"Sort by $display_text ascending\" />" : "<a href=\"{$link}ASC{$anchor}\"><img src=\"{$image_path}sort_asc_off.png\" title=\"Sort by $display_text ascending\" /></a>";
+		$link_desc 	= (isset($current_sort[$column_name]) && $current_sort[$column_name] == 'DESC') ? "<img src=\"{$image_path}sort_desc_on.png\" title=\"Sort by $display_text descending\" />" : "<a href=\"{$link}DESC{$anchor}\"><img src=\"{$image_path}sort_desc_off.png\" title=\"Sort by $display_text descending\" /></a>";
+		$html_out 	= "<span>$link_desc $link_asc</span>$display_text";
 
-		return  $html_out;
+		return 	$html_out;
 	}
 
 	/**
@@ -115,26 +115,26 @@ class Database_Contoller {
 	 * @return bool
 	 */
 	public function count($table = false, $field = false, $where = false) {
-
-		if (!stristr($table, 'JOIN')) {
+		
+		if(!stristr($table,'JOIN')) {
 			$wrapper = '`';
 			$prefix = $this->_prefix;
 		} else {
 			$wrapper = '';
 			$prefix = '';
 		}
-
+		
 		if (!empty($table)) {
 			$allowed = $this->getFields($table);
-
+		
 			$field = (in_array($field, $allowed) && !is_numeric($field)) ? $field : '*';
-
-			$this->_query = "SELECT COUNT($field) AS Count FROM $wrapper$prefix$table$wrapper ".$this->where($table, $where).';';
+						
+			$this->_query	= "SELECT COUNT($field) AS Count FROM $wrapper$prefix$table$wrapper ".$this->where($table, $where).';';
 			$this->_execute();
 			if ($this->_result && isset($this->_result[0]['Count'])) {
 				return ((int)$this->_result[0]['Count'] > 0) ? (int)$this->_result[0]['Count'] : false;
 			}
-
+			
 		}
 
 		return false;
@@ -181,7 +181,7 @@ class Database_Contoller {
 	public function doSQLBackup($dropTables = false, $incStructure = true, $incRows = true) {
 		$data = "-- --------------------------------------------------------\n-- CubeCart SQL Dump\n-- version ".CC_VERSION."\n-- http://www.cubecart.com\n-- \n-- Host: ".$GLOBALS['config']->get('config', 'dbhost')."\n-- Generation Time: ".strftime($GLOBALS['config']->get('config', 'time_format'), time())."\n-- Server version: ".$this->serverVersion()."\n-- PHP Version: ".phpversion()."\n-- \n-- Database: `".$GLOBALS['config']->get('config', 'dbdatabase')."`\n";
 		$tables = $this->getRows();
-		foreach ($tables as $table) {
+		foreach($tables as $table){
 			$data .= $this->sqldumptable($table, $dropTables, $incStructure, $incRows);
 		}
 		$data .= "-- --------------------------------------------------------\n-- CubeCart SQL Dump Complete\n-- --------------------------------------------------------";
@@ -205,12 +205,12 @@ class Database_Contoller {
 	 * @return array
 	 */
 	public function getFulltextIndex($table = 'CubeCart_inventory', $prefix = false) {
-		if (is_array($table)) {
+		if(is_array($table)) {
 			return false;
 		}
 		$fieldlist = array();
-		$sql = "SHOW INDEX FROM `{$this->_prefix}$table`;";
-		$result = $this->query($sql);
+		$sql	= "SHOW INDEX FROM `{$this->_prefix}$table`;";
+		$result	= $this->query($sql);
 		if ($result) {
 			foreach ($result as $index) {
 				if ($index['Index_type'] == 'FULLTEXT' && $index['Key_name'] == 'fulltext') {
@@ -258,7 +258,7 @@ class Database_Contoller {
 	 */
 	public function getRows($query = false) {
 		// Used in maintenance/backup and database, also in upgrade
-		if (!$query) {
+		if(!$query) {
 			$this->_query = 'SHOW tables';
 		} else {
 			$this->_query = $query;
@@ -266,7 +266,7 @@ class Database_Contoller {
 		$this->_query .= (empty($this->_prefix)) ?  '' : " LIKE '".$this->_prefix."%'";
 		$this->_execute(false);
 		$tableNames = $this->_result;
-		foreach ($tableNames as $tableName) {
+		foreach($tableNames as $tableName){
 			sort($tableName);
 			$this->_query = "SHOW TABLE STATUS LIKE '".$tableName[0]."'";
 			$this->_execute(false);
@@ -370,14 +370,14 @@ class Database_Contoller {
 	 */
 	public function pagination($total_results = false, $per_page = 10, $page = 1, $show = 5, $var_name = 'page', $anchor = false, $glue = ' ', $view_all = true) {
 		if (!$total_results && !is_null($this->_found_rows) && is_numeric($this->_found_rows)) {
-			$total_results = $this->_found_rows;
+			$total_results	= $this->_found_rows;
 		}
-
+		
 		$GLOBALS['smarty']->assign('TOTAL_RESULTS', $total_results);
 
 		$glue = (!$glue) ? ' ' : $glue;
 		// Lets do some maths...
-		$total_pages = $per_page ? ceil($total_results/$per_page) : 0;
+		$total_pages	= $per_page ? ceil($total_results/$per_page) : 0;
 
 		if ($total_pages > 1) {
 			// Get the current query string variables
@@ -400,15 +400,15 @@ class Database_Contoller {
 			}
 
 			$data = array(
-				'anchor'  => $anchor,
-				'current'  => "{$url_elements['path']}?",
-				'page'   => $page,
-				'params'  => $params,
-				'http_params' => http_build_query($params),
-				'show'   => (int)$show,
-				'total'   => (int)$total_pages,
-				'var_name'  => $var_name,
-				'view_all'  => (bool)$view_all,
+				'anchor'		=> $anchor,
+				'current'		=> "{$url_elements['path']}?",
+				'page'			=> $page,
+				'params'		=> $params,
+				'http_params'	=> http_build_query($params),
+				'show'			=> (int)$show,
+				'total'			=> (int)$total_pages,
+				'var_name'		=> $var_name,
+				'view_all'		=> (bool)$view_all,
 			);
 			$GLOBALS['smarty']->assign($data);
 			return $GLOBALS['smarty']->fetch('templates/element.paginate.php');
@@ -428,14 +428,14 @@ class Database_Contoller {
 			$log = null;
 			$queries = preg_split("/;\s?(#EOQ|[\n\r])/i", $schema, -1, PREG_SPLIT_NO_EMPTY);
 			if (is_array($queries)) {
-
+				
 				$default_lang = (isset($_SESSION['setup']['long_lang_identifier']) && !empty($_SESSION['setup']['long_lang_identifier'])) ? $_SESSION['setup']['long_lang_identifier'] : 'en-US';
-
+				
 				foreach ($queries as $i => $query) {
 					if (!empty($this->_prefix)) {
-						$query = str_replace(array('CubeCart_', '{%DEFAULT_EN-XX%}'), array($this->_prefix.'CubeCart_', $default_lang), $query);
+						$query	= str_replace(array('CubeCart_','{%DEFAULT_EN-XX%}'), array($this->_prefix.'CubeCart_',$default_lang), $query);
 					}
-					$query = trim($query);
+					$query	= trim($query);
 					if (!empty($query)) {
 						$this->query($query, false, 0, false);
 					}
@@ -460,10 +460,10 @@ class Database_Contoller {
 		// For old fashioned 'hand written' queries
 		$limit = '';
 		if (is_numeric($maxRows)) {
-
-			$page   = intval($page);
+			
+			$page 	 = intval($page);
 			$maxRows = intval($maxRows);
-
+		
 			if ($page > 0) {
 				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
 			} else {
@@ -495,34 +495,34 @@ class Database_Contoller {
 	 * @return bool
 	 */
 	public function select($table, $columns = false, $where = false, $order = false, $maxRows = false, $page = false, $cache = true) {
-
+		
 		$table_where = $table;
-
-		if (!stristr($table, 'JOIN')) {
+		
+		if(!stristr($table,'JOIN')) {
 			// Build an SQL SELECT query the (almost) easy way
 			$allowed = $this->getFields($table);
 			$wrapper = '`';
-			$prefix = $this->_prefix;
+			$prefix = $this->_prefix;	
 		} else {
-			// Find the original table in JOIN set
-			if (preg_match('#^`(.+)`[a-z ]+JOIN#i', $table, $match)) {
-				$table_where = str_replace($this->_prefix, '', $match[1]);
-			}
+		    // Find the original table in JOIN set
+		    if (preg_match('#^`(.+)`[a-z ]+JOIN#i',$table, $match)) {
+		    	$table_where = str_replace($this->_prefix,'',$match[1]);
+		    }
 			$wrapper = '';
 			$prefix = '';
 		}
-
+		
 		if ($columns) {
 			if (is_array($allowed) && is_array($columns)) {
 				foreach ($columns as $key => $field) {
 					if (in_array($field, $allowed) && !is_numeric($field)) {
 						if (!is_numeric($key) && in_array(strtoupper($key), array('DISTINCT'))) {
-							$group_by[] = $field;
-							$cols[]  = "$key `$field`";
-						} else if (!is_numeric($key) && in_array(strtoupper($key), array('MIN', 'MAX', 'SUM'))) {
-								$cols[]  = "$key($field) AS {$key}_$field";
-							} else {
-							$cols[]  = "`$field`";
+							$group_by[]	= $field;
+							$cols[]		= "$key `$field`";
+						} else if (!is_numeric($key) && in_array(strtoupper($key), array('MIN','MAX','SUM'))) {
+							$cols[]		= "$key($field) AS {$key}_$field";
+						} else {
+							$cols[]		= "`$field`";
 						}
 					}
 				}
@@ -549,16 +549,16 @@ class Database_Contoller {
 
 		if (!$columns || !isset($cols)) $cols[] = '*';
 
-		$limit  = null;
-		$calc_rows = null;
-		$sql_cache = null;
+		$limit		= null;
+		$calc_rows	= null;
+		$sql_cache	= null;
 
 		if (is_numeric($maxRows)) {
 			if (is_numeric($page)) {
 				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
 				// Auto Cleverness for pagination
 				// This way makes the initial query marginally slower, but is faster than running a second query
-				$calc_rows = 'SQL_CALC_FOUND_ROWS';
+				$calc_rows	= 'SQL_CALC_FOUND_ROWS';
 			} else {
 				if (strtolower($page) == 'all') {
 					// Don't set a limit - show EVERYTHING
@@ -579,10 +579,10 @@ class Database_Contoller {
 			}
 			// Added cleverness for auto pagination, without pissing around running a second query
 			if (!is_null($calc_rows)) {
-				$count = $this->query('SELECT FOUND_ROWS() as Count;');
+				$count	= $this->query('SELECT FOUND_ROWS() as Count;');
 				if ($count) $this->_found_rows = $count[0]['Count'];
 			} else {
-				$this->_found_rows = $this->count($table, $columns, $where);
+				$this->_found_rows = $this->count($table,$columns, $where);
 			}
 			return ($output) ? $output : false;
 		}
@@ -604,9 +604,9 @@ class Database_Contoller {
 			$tabledump .= "-- --------------------------------------------------------\n\nDROP TABLE IF EXISTS `".$tableData['Name']."`; #EOQ\n\n";
 		}
 		if ($incStructure) {
-			$schema  = $this->query('SHOW CREATE TABLE `'.$tableData['Name'].'`');
+			$schema		= $this->query('SHOW CREATE TABLE `'.$tableData['Name'].'`');
 			$tabledump .= "-- --------------------------------------------------------\n\n-- \n-- Table structure for table `".$tableData['Name']."`\n--\n\n";
-			$tabledump .= $schema[0]['Create Table'];
+			$tabledump .= $schema[0]['Create Table']; 
 			$tabledump .= "; #EOQ\n\n";
 		}
 		if ($incRows) {
@@ -614,18 +614,18 @@ class Database_Contoller {
 			$this->_query = "SELECT * FROM ".$tableData['Name'];
 			$this->_execute(false);
 			$rows = $this->_result;
-			if ($rows) {
+			if($rows) {
 				$tabledump .="--\n-- Dumping data for table `".$tableData['Name']."`\n--\n\n";
-				foreach ($rows as $row) {
-					$tabledump .= "INSERT INTO `".$tableData['Name']."` VALUES(";
-					## get each field's data
-					$comma = false;
-					foreach ($row as $key => $value) {
+				foreach($rows as $row) {
+				$tabledump .= "INSERT INTO `".$tableData['Name']."` VALUES(";
+				## get each field's data
+				$comma = false;
+					foreach($row as $key => $value) {
 						$tabledump .= $comma ? ', ' : '';
-						$tabledump .= $this->sqlSafe($value, true);
+						$tabledump .= $this->sqlSafe($value,true);
 						$comma = true;
 					}
-					$tabledump .= "); #EOQ\n";
+				$tabledump .= "); #EOQ\n";
 				}
 			} else {
 				$tabledump .="-- Table `".$tableData['Name']."` has no data\n\n";
@@ -643,7 +643,7 @@ class Database_Contoller {
 	public function strip_slashes($input) {
 		// Strip slashes, unless it's serialized data
 		if (!preg_match('#^\w:\d+:\{(.+)\}$#su', $input)) {
-			$input = stripslashes($input);
+			$input	= stripslashes($input);
 		}
 
 		return $input;
@@ -657,12 +657,12 @@ class Database_Contoller {
 	 * @return bool
 	 */
 	public function truncate($input) {
-		if (is_array($input)) {
+		if(is_array($input)) {
 			$this->_query = '';
 			$result = true;
 			foreach ($input as $table) {
 				$this->_query .= 'TRUNCATE `'.$this->_prefix.$table.'`; ';
-				if (!$this->_execute(false)) {
+				if (!$this->_execute(false))	{
 					$result = false;
 				}
 			}
@@ -688,12 +688,12 @@ class Database_Contoller {
 			$allowed = $this->getFields($table);
 			foreach ($record as $field => $value) {
 				if (in_array($field, $allowed) && !is_numeric($field)) {
-					$number = substr($value, 1);
-					if (!in_array($field, $skip_math_fields) && isset($value[0]) && is_numeric($number) && ($value[0] == '+' || $value[0] == '-')) {
-						$set[] = "`$field` = `$field` {$value[0]} ".$number;
+					$number = substr($value,1);
+					if (!in_array($field,$skip_math_fields) && isset($value[0]) && is_numeric($number) && ($value[0] == '+' || $value[0] == '-')) {
+						$set[]	= "`$field` = `$field` {$value[0]} ".$number;
 					} else {
-						$value = (in_array($value, $this->_allowed_exceptions, true)) ? $value : $this->sqlSafe($value, true);
-						$set[] = "`$field` = $value";
+						$value	= (in_array($value, $this->_allowed_exceptions, true)) ? $value : $this->sqlSafe($value, true);
+						$set[]	= "`$field` = $value";
 					}
 				}
 			}
@@ -727,40 +727,40 @@ class Database_Contoller {
 					if (is_array($value)) {
 						foreach ($value as $val) {
 							if (in_array($val, $allowed) && !is_numeric($val)) {
-								if (isset($key[0]) && !ctype_alnum($key[0]) || $key[0]=='NULL' || is_null($key[0]) || $key[0]=='NOT NULL') {
+								if(isset($key[0]) && !ctype_alnum($key[0]) || $key[0]=='NULL' || is_null($key[0]) || $key[0]=='NOT NULL') {
 									if (preg_match('#^([<>!~\+\-]=?)(.+)#', $key, $match)) {
 										switch ($match[1]) {
-										case '~':
-											// Fuzzy searching
-											$symbol = 'LIKE';
-											$key = "%{$match[2]}%";
-											break;
-										default:
-											$symbol = $match[1];
-											$key = trim($match[2]);
+											case '~':
+												// Fuzzy searching
+												$symbol	= 'LIKE';
+												$key	= "%{$match[2]}%";
+												break;
+											default:
+												$symbol	= $match[1];
+												$key	= trim($match[2]);
 										}
 									}
 								}
-
-								if (strtoupper($key[0]) == 'NULL' || is_null($key[0])) {
+								
+								if (strtoupper($key[0]) == 'NULL' || is_null($key[0])) { 
 									$symbol = 'IS NULL';
 									$where[] = "`$val` $symbol";
-								} elseif (strtoupper($key[0])=='NOT NULL') {
+								} elseif (strtoupper($key[0])=='NOT NULL') { 
 									$symbol = 'IS NOT NULL';
 									$where[] = "`$val` $symbol";
 								} else {
 									$symbol = (isset($symbol)) ? $symbol : '=';
-									$or[] = "`$val` $symbol ".$this->sqlSafe($key, true);
+									$or[] = "`$val` $symbol ".$this->sqlSafe($key,true);
 								}
-
+								
 							} else {
 								foreach ($value as $i => $val) {
 									if (empty($val)) unset($value[$i]);
 								}
-								if (count($value)>0) {
+								if(count($value)>0) {
 									if ($key[0] == '!') {
-										$modifier = 'NOT';
-										$key  = substr($key, 1);
+										$modifier	= 'NOT';
+										$key		= substr($key, 1);
 									} else {
 										$modifier = '';
 									}
@@ -770,7 +770,7 @@ class Database_Contoller {
 							}
 						}
 						if (isset($or) && is_array($or)) {
-							$where[] = implode(' OR ', $or);
+							$where[]	= implode(' OR ', $or);
 							unset($or);
 						}
 					} else {
@@ -778,14 +778,14 @@ class Database_Contoller {
 							if (isset($value) && !ctype_alnum($value) || $value=='NULL' || is_null($value) || $value=='NOT NULL') {
 								if (preg_match('#^([<>!~\+\-]=?)(.+)#', $value, $match)) {
 									switch ($match[1]) {
-									case '~':
-										// Fuzzy searching
-										$symbol = 'LIKE';
-										$value = "%{$match[2]}%";
-										break;
-									default:
-										$symbol = $match[1];
-										$value = trim($match[2]);
+										case '~':
+											// Fuzzy searching
+											$symbol	= 'LIKE';
+											$value	= "%{$match[2]}%";
+											break;
+										default:
+											$symbol	= $match[1];
+											$value	= trim($match[2]);
 									}
 								}
 							}
@@ -796,14 +796,14 @@ class Database_Contoller {
 								$symbol = 'IS NULL';
 								//$where[] = "`$key` $symbol";
 								$where[] = "$full_key $symbol";
-							} elseif (strtoupper($value)=='NOT NULL') {
+							} elseif (strtoupper($value)=='NOT NULL') { 
 								$symbol = 'IS NOT NULL';
 								//$where[] = "`$key` $symbol";
 								$where[] = "$full_key $symbol";
 							} else {
 								$symbol = (isset($symbol)) ? $symbol : '=';
 								//$where[] = "`$key` $symbol ".$this->sqlSafe($value,true);
-								$where[] = "$full_key $symbol ".$this->sqlSafe($value, true);
+								$where[] = "$full_key $symbol ".$this->sqlSafe($value,true);
 							}
 						} else {
 							trigger_error("`$key` is not allowed as a key in '$table' table!");
@@ -869,14 +869,14 @@ class Database_Contoller {
 	 * Starts a timer for a query
 	 */
 	protected function _startTimer() {
-		$this->_query_time = microtime(true);
+    	$this->_query_time	= microtime(true);
 	}
 
 	/**
 	 * Stops a timer
 	 */
 	protected function _stopTimer() {
-		$this->_query_time = microtime(true) - $this->_query_time;
+		$this->_query_time	= microtime(true) - $this->_query_time;
 	}
 
 	/**

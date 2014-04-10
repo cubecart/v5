@@ -1,4 +1,4 @@
-<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data">
+<form action="{$VAL_SELF}" method="post" enctype="multipart/form-data" />
   {if $DISPLAY_PLUGINS}
   <div id="plugins" class="tab_content">
 	<h3>{$LANG.hooks.title_plugins_installed}</h3>
@@ -6,7 +6,7 @@
 	  {foreach from=$PLUGINS item=plugin}
 	  <div>
 		<span class="actions">&nbsp;</span>
-		<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/plugin.png" alt=""> <a href="{$plugin.edit}">{$plugin.name}</a>
+		<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/plugin.png" alt="" /> <a href="{$plugin.edit}">{$plugin.name}</a>
 	  </div>
 	  {foreachelse}
 	  <div>{$LANG.hooks.error_plugin_none}</div>
@@ -15,17 +15,12 @@
   </div>
   <div id="snippets" class="tab_content">
 	<h3>{$LANG.hooks.title_code_snippets}</h3>
-	<p><a href="?_g=settings&node=hooks&add_snippet=1#snippets" class="delete">{$LANG.hooks.add_snippet}</a></p>
+	<p><a href="?_g=settings&amp;node=hooks&amp;add_snippet=1#snippets" class="delete">{$LANG.hooks.add_snippet}</a></p>
 	<fieldset class="list">
 	  {foreach from=$SNIPPETS item=snippet}
 	  <div>
-<<<<<<< HEAD
 		<span class="actions"><a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="" /></a> <a href="?_g=settings&amp;node=hooks&amp;delete_snippet={$snippet.snippet_id}#snippets" class="delete" title="{$LANG.notification.confirm_continue}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="" /></a></span>
 		<span class="toggle"><input type="hidden" id="snippet_status_{$snippet.snippet_id}" name="snippet_status[{$snippet.snippet_id}]" value="{$snippet.enabled}" class="toggle" /></span> <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt="" /> <a href="?_g=settings&amp;node=hooks&amp;snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
-=======
-		<span class="actions"><a href="?_g=settings&node=hooks&snippet={$snippet.snippet_id}#snippets"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt=""></a> <a href="?_g=settings&node=hooks&delete_snippet={$snippet.snippet_id}#snippets" class="delete" title="{$LANG.notification.confirm_continue}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt=""></a></span>
-		<span class="toggle"><input type="hidden" id="snippet_status_{$snippet.snippet_id}" name="snippet_status[{$snippet.snippet_id}]" value="{$snippet.enabled}" class="toggle"></span> <img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/php.png" alt=""> <a href="?_g=settings&node=hooks&snippet={$snippet.snippet_id}#snippets">{$snippet.description}</a>
->>>>>>> FETCH_HEAD
 	  </div>
 	  {foreachelse}
 	  <div>{$LANG.hooks.error_snippet_none}</div>
@@ -40,27 +35,27 @@
 	{else}
 	<h3>{$LANG.hooks.title_code_snippet_add}</h3>
 	{/if}
-	<p><a href="?_g=settings&node=hooks#snippets" class="delete">{$LANG.common.cancel}</a></p>
+	<p><a href="?_g=settings&amp;node=hooks#snippets" class="delete">{$LANG.common.cancel}</a></p>
 	
 	<fieldset>
 	  <legend>{$LANG.hooks.title_code_snippet}</legend>
-	  <div><label for="enabled">{$LANG.common.enabled}</label><span><input name="snippet[enabled]" id="enabled" type="hidden" class="toggle" value="{$SNIPPET.enabled}"></span></div>
+	  <div><label for="enabled">{$LANG.common.enabled}</label><span><input name="snippet[enabled]" id="enabled" type="hidden" class="toggle" value="{$SNIPPET.enabled}" /></span></div>
 	  <div>
 		<label for="unique_id">{$LANG.hooks.unique_id}</label>
 		<span>
-		  <input type="text" name="snippet[unique_id]" id="unique_id" class="textbox required" value="{$SNIPPET.unique_id}">
+		  <input type="text" name="snippet[unique_id]" id="unique_id" class="textbox required" value="{$SNIPPET.unique_id}" />
 		</span>
 	  </div>
 	  <div>
 		<label for="priority">{$LANG.hooks.priority}</label>
 		<span>
-		  <input type="text" name="snippet[priority]" id="priority" class="textbox required number" value="{$SNIPPET.priority}">
+		  <input type="text" name="snippet[priority]" id="priority" class="textbox required number" value="{$SNIPPET.priority}" />
 		</span>
 	  </div>
 	  <div>
 		<label for="description">{$LANG.common.description}</label>
 		<span>
-		  <input type="text" name="snippet[description]" id="description" class="textbox required" value="{$SNIPPET.description}">
+		  <input type="text" name="snippet[description]" id="description" class="textbox required" value="{$SNIPPET.description}" />
 		</span>
 	  </div>
 	  <div>
@@ -79,16 +74,16 @@
 	  <div>
 		<label for="version">{$LANG.hooks.version}</label>
 		<span>
-		  <input type="text" name="snippet[version]" id="version" class="textbox" value="{$SNIPPET.version}">
+		  <input type="text" name="snippet[version]" id="version" class="textbox" value="{$SNIPPET.version}" />
 		</span>
 	  </div>
 	  <div>
 		<label for="author">{$LANG.hooks.author}</label>
 		<span>
-		  <input type="text" name="snippet[author]" id="author" class="textbox" value="{$SNIPPET.author}">
+		  <input type="text" name="snippet[author]" id="author" class="textbox" value="{$SNIPPET.author}" />
 		</span>
 	  </div>
-	  <input type="hidden" name="snippet[snippet_id]" id="snippet_id" class="textbox" value="{$SNIPPET.snippet_id}">
+	  <input type="hidden" name="snippet[snippet_id]" id="snippet_id" class="textbox" value="{$SNIPPET.snippet_id}" />
 	</fieldset>
 	* {$LANG.hooks.php_tag_replace}
 	{/if}
@@ -98,7 +93,7 @@
   <h3>{$LANG.hooks.title_import_code_snippets}</h3>
 	<p>{$LANG.hooks.example_code_snippet_xml}</p>
 	<fieldset><legend>{$LANG.hooks.browse_for_file}</legend>
-	<input type="file" name="code_snippet_import" id="code_snippet_import">
+	<input type="file" name="code_snippet_import" id="code_snippet_import" class="" />
 	</fieldset>
   </div>
   {/if}
@@ -110,9 +105,9 @@
 	  {foreach from=$HOOKS item=hook}
 	  <div>
 		<span class="actions">
-		  <a href="{$hook.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
+		  <a href="{$hook.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
 		</span>
-		<input type="hidden" name="status[{$hook.hook_id}]" value="{$hook.enabled}" id="status_{$hook.hook_id}" class="toggle">
+		<input type="hidden" name="status[{$hook.hook_id}]" value="{$hook.enabled}" id="status_{$hook.hook_id}" class="toggle" />
 		<a href="{$hook.edit}">{$hook.hook_name}</a>
 	  </div>
 	  {foreachelse}
@@ -127,7 +122,7 @@
   <div id="hook_edit" class="tab_content">
 	<h3>{$LANG.hooks.title_hook_configure}</h3>
 	<fieldset><legend>{$LANG.hooks.title_hook_required}</legend>
-	  <div><label for="hook_name">{$LANG.hooks.name}</label><span><input type="text" name="hook[hook_name]" id="hook_name" class="textbox required" value="{$HOOK.hook_name}"></span></div>
+	  <div><label for="hook_name">{$LANG.hooks.name}</label><span><input type="text" name="hook[hook_name]" id="hook_name" class="textbox required" value="{$HOOK.hook_name}" /></span></div>
 	  {if isset($PLUGINS)}
 	  <div>
 		<label for="plugin">{$LANG.hooks.title_plugin}</label>
@@ -150,14 +145,14 @@
 	  </div>
 	</fieldset>
 	<fieldset><legend>{$LANG.hooks.title_hook_optional}</legend>
-	  <div><label for="filepath">{$LANG.hooks.path_to_file}</label><span><input type="text" name="hook[filepath]" id="filepath" class="textbox" value="{$HOOK.filepath}"></span></div>
-	  <input type="hidden" name="hook[hook_id]" value="{$HOOK.hook_id}">
+	  <div><label for="filepath">{$LANG.hooks.path_to_file}</label><span><input type="text" name="hook[filepath]" id="filepath" class="textbox" value="{$HOOK.filepath}" /></span></div>
+	  <input type="hidden" name="hook[hook_id]" value="{$HOOK.hook_id}" />
 	</fieldset>
   </div>
   {/if}
 
   {include file='templates/element.hook_form_content.php'}
 
-  <div class="form_control"><input type="submit" value="{$LANG.common.save}"></div>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
+  <div class="form_control"><input type="submit" value="{$LANG.common.save}" /></div>
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>

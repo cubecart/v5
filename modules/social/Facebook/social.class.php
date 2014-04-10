@@ -18,7 +18,7 @@ class Facebook {
 			$attributes[]	= ($this->_module['button_color']=='dark') 			? 'colorscheme="dark"' : '';
 			$attributes[]	= ($this->_module['button_layout']!=='standard') 	? 'layout="'.$this->_module['button_layout'].'"' : '';
 			$attributes[]	= 'href="'.currentPage().'"';
-			//$attributes[] 	= 'width="'.$this->_module['button_width'].'"';
+			$attributes[] 	= 'width="'.$this->_module['button_width'].'"';
 			
 			if ($this->_section=='product') $GLOBALS['smarty']->assign('FBOG', 1);
 			

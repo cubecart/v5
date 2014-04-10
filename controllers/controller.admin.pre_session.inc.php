@@ -1,5 +1,5 @@
 <?php
-if (!defined('CC_DS')) die('Access Denied');
+if(!defined('CC_DS')) die('Access Denied');
 if (version_compare(PHP_VERSION, '5.2.3', '<')) {
 	die('<strong>ERROR!</strong><br />CubeCart requires <a href="http://www.php.net">PHP</a> Version 5.2.3 or better. Your server is currently running PHP Version '.PHP_VERSION);
 }
@@ -21,9 +21,9 @@ $GLOBALS['session'] = Session::getInstance();
 Sanitize::checkToken();
 // Initialize Smarty
 $GLOBALS['smarty'] = new Smarty();
-$GLOBALS['smarty']->compile_dir  = CC_SKIN_CACHE_DIR;
-$GLOBALS['smarty']->config_dir  = CC_SKIN_CACHE_DIR;
-$GLOBALS['smarty']->cache_dir  = CC_SKIN_CACHE_DIR;
+$GLOBALS['smarty']->compile_dir		= CC_SKIN_CACHE_DIR;
+$GLOBALS['smarty']->config_dir		= CC_SKIN_CACHE_DIR;
+$GLOBALS['smarty']->cache_dir		= CC_SKIN_CACHE_DIR;
 //Initialize language
 $GLOBALS['language'] = Language::getInstance();
 //Initialize hooks
@@ -46,11 +46,11 @@ date_default_timezone_set((!empty($tz)) ? $tz : 'UTC');
 $GLOBALS['main'] = ACP::getInstance();
 $lang = $GLOBALS['language']->getLanguageStrings();
 
-$global_template_file['session_true']  = 'main.php';
-$global_template_file['session_false']  = 'login.php';
+$global_template_file['session_true'] 	= 'main.php';
+$global_template_file['session_false'] 	= 'login.php';
 
 // hook_tab_content is a place where hooks can specify template includes that
-// define their admin tab content.
+// define their admin tab content. 
 $GLOBALS['hook_tab_content'] = array();
 
 foreach ($GLOBALS['hooks']->load('controller.admin') as $hook) include $hook;

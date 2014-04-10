@@ -80,15 +80,9 @@ class Session {
 			ini_set('session.gc_divisor', 100);
 		}
 		$cookie_domain = $GLOBALS['config']->get('config', 'cookie_domain');
-<<<<<<< HEAD
  		if(!empty($cookie_domain)) {
  			ini_set('session.cookie_domain',$cookie_domain);
  		}
-=======
-		if(!empty($cookie_domain)) {
-			ini_set('session.cookie_domain',$cookie_domain);
-		}
->>>>>>> FETCH_HEAD
 		if (!$ini['session.cookie_path']) {
 			ini_set('session.cookie_path', $GLOBALS['rootRel']);
 		}
@@ -100,6 +94,7 @@ class Session {
 			ini_set('session.gc_maxlifetime', $this->_session_timeout);
 			session_set_cookie_params($this->_session_timeout);
 		}
+
 		if (!$ini['session.use_cookies']) {
 			//Enforce cookies only
 			ini_set('session.use_cookies', true);
@@ -112,7 +107,6 @@ class Session {
 			// make sure sesison cookies are http ONLY!
 			ini_set('session.cookie_httponly',true);
 		}
-		
 		$this->_start();
 		$this->_validate();
 		$this->_setTimers();
@@ -585,15 +579,9 @@ class Session {
 	 * Start session
 	 */
 	private function _start() {
-<<<<<<< HEAD
 		/* Defunct for security reasons
 		$session_name = session_name();
 		// Only allow session interchange for SSL and when SSL domains don't match!
-=======
-		// Only allow session interchange for SSL and when SSL domains don't match! (Depreciated for security reasons)
-		/*
-		$session_name = session_name();
->>>>>>> FETCH_HEAD
  		$config = $GLOBALS['config']->get('config');
  		if($config['ssl']==1) {
  			$ssl_url 		= str_replace('https','',$config['ssl_url']);
@@ -608,11 +596,7 @@ class Session {
 		
 		$old_sessionid = $this->getId();
 		session_regenerate_id(true);
-<<<<<<< HEAD
 		
-=======
- 	
->>>>>>> FETCH_HEAD
 		//Use the instance because the global might be gone already
 		Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
 		

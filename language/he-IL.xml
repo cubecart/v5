@@ -1678,6 +1678,7 @@
    <string name="tax_apply_to"><![CDATA[החל ל]]></string>
    <string name="tax_class"><![CDATA[סוג מס]]></string>
    <string name="tax_class_name"><![CDATA[שם מחלקת המס]]></string>
+   <string name="tax_customer"><![CDATA[הוסף מס מכירה ללקוחות זכאים]]></string>
    <string name="tax_customer_by"><![CDATA[החל מיסוי ללקוח לאחר הזנת]]></string>
    <string name="tax_delete"><![CDATA[אזהרה!: במחיקה של ערך זה כל חוקי המס אשר תלויים בו ימחקו גם כן. האם אתה בטוח שברצונך להמשיך?]]></string>
    <string name="tax_detail"><![CDATA[פרטי מס]]></string>

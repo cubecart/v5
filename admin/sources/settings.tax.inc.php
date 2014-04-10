@@ -8,9 +8,9 @@ $GLOBALS['main']->addTabControl($lang['settings']['title_tax_class'], 'taxclasse
 $GLOBALS['main']->addTabControl($lang['settings']['title_tax_detail'], 'taxdetails', null, 'D');
 $GLOBALS['main']->addTabControl($lang['settings']['title_tax_rule'], 'taxrules', null, 'R');
 
-$updated  = false;
-$redirect  = false;
-$anchor  = false;
+$updated 	= false;
+$redirect 	= false;
+$anchor		= false;
 
 #######################
 ## Update Tax Classes
@@ -110,7 +110,7 @@ if ($updated) {
 	$GLOBALS['main']->setACPNotify($lang['settings']['notify_tax_updated']);
 }
 if ($redirect) {
-	httpredir(currentPage(array('delete_class', 'delete_detail', 'delete_rule')), $anchor);
+	httpredir(currentPage(array('delete_class','delete_detail','delete_rule')),$anchor);
 }
 
 ###############################################################
@@ -139,7 +139,7 @@ if (($tax_details = $GLOBALS['db']->select('CubeCart_tax_details')) !== false) {
 			$tax_detail['disabled'] = 'selected="selected"';
 		}
 		$tax_detail_array[$tax_detail['id']] = $tax_detail['name'];
-		$smarty_data['tax_details'][] = $tax_detail;
+		$smarty_data['tax_details'][]	= $tax_detail;
 	}
 	$GLOBALS['smarty']->assign('TAX_DETAILS', $smarty_data['tax_details']);
 }
@@ -147,11 +147,11 @@ if (($tax_details = $GLOBALS['db']->select('CubeCart_tax_details')) !== false) {
 ## Get Tax Rules
 if (($tax_rules = $GLOBALS['db']->select('CubeCart_tax_rates')) !== false) {
 	foreach ($tax_rules as $rule) {
-		$rule['country'] = getCountryFormat($rule['country_id']);
-		$rule['state']  = ($rule['county_id'] != 0) ? getStateFormat($rule['county_id']) : $lang['common']['regions_all'];
-		$rule['class']  = $tax_class[$rule['type_id']];
-		$rule['detail']  = $tax_detail_array[$rule['details_id']];
-		$smarty_data['tax_rules'][] = $rule;
+		$rule['country']	= getCountryFormat($rule['country_id']);
+		$rule['state']		= ($rule['county_id'] != 0) ? getStateFormat($rule['county_id']) : $lang['common']['regions_all'];
+		$rule['class']		= $tax_class[$rule['type_id']];
+		$rule['detail']		= $tax_detail_array[$rule['details_id']];
+		$smarty_data['tax_rules'][]	= $rule;
 	}
 	$GLOBALS['smarty']->assign('TAX_RULES', $smarty_data['tax_rules']);
 }

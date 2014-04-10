@@ -18,10 +18,7 @@ class Gateway {
 		
 		$GLOBALS['language']->loadDefinitions('paypal_pro', CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'plugins'.CC_DS.'PayPal_Pro'.CC_DS.'language', 'module.definitions.xml');
 		$this->_lang = $GLOBALS['language']->getStrings('paypal_pro');
-<<<<<<< HEAD
 		
-=======
->>>>>>> FETCH_HEAD
 	}
 
 	##################################################
@@ -96,7 +93,7 @@ class Gateway {
 				
 				'return' 				=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 				'cancel_return' 		=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
-				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal'			
+				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'			
 			);
 			
 		} else { 
@@ -431,10 +428,7 @@ class Gateway {
 				$order->logTransaction($log);
 			}
 			
-<<<<<<< HEAD
 			## Improved FMF logic by Havenswift Hosting & Ron at offshoremarineparts.com
-=======
->>>>>>> FETCH_HEAD
 			if($response['L_ERRORCODE0'] == '11610') {
 				$GLOBALS['gui']->setNotify($this->_lang['payment_review']);
 				$order->orderStatus(Order::ORDER_PENDING, $this->_basket['cart_order_id']);

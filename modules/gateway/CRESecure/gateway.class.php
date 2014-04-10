@@ -34,8 +34,8 @@ class Gateway {
 			'CRESecureID'			=> $this->_module['CRESecureID'],
 			'CRESecureAPIToken'		=> $this->_module['CRESecureAPIToken'],
 			'total_amt'				=> $this->_basket['total'],
-			'return_url'			=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_g=rm&mod_type=gateway&cmd=process&module=CRESecure',
-			'content_template_url'	=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_a=template&type=gateway&module=CRESecure',
+			'return_url'			=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_g=rm&amp;mod_type=gateway&amp;cmd=process&amp;module=CRESecure',
+			'content_template_url'	=> $GLOBALS['config']->get('config', 'ssl_url').'/index.php?_a=template&amp;type=gateway&amp;module=CRESecure',
 			// Optional (but useful)
 			'order_id'				=> $this->_basket['cart_order_id'],
 		#	'customer_id'			=> '',

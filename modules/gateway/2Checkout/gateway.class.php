@@ -53,7 +53,7 @@ class Gateway {
 			'pay_method' 			=> '',
 			'skip_landing' 			=> 1,
 			
-			'x_receipt_link_url'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=2Checkout',
+			'x_receipt_link_url'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=2Checkout',
 			
 			'card_holder_name' 		=> $this->_basket['billing_address']['first_name'].' '.$this->_basket['billing_address']['last_name'],
 			

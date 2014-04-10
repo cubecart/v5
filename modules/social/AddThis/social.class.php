@@ -45,7 +45,7 @@ class AddThis {
 					if($this->_module['large_icons']){
 						$this->_html[] = '<a class="addthis_button_compact"></a>';
 					} else {
-						$this->_html[] = '<a href="http://www.addthis.com/bookmark.php?v=250&username='.$this->_module['username'].'" class="addthis_button_compact">'.$GLOBALS['language']->account['share'].'</a>';
+						$this->_html[] = '<a href="http://www.addthis.com/bookmark.php?v=250&amp;username='.$this->_module['username'].'" class="addthis_button_compact">'.$GLOBALS['language']->account['share'].'</a>';
 					}
 				$this->_html[] = '</div>';
 				if($this->_module['analytics']) {

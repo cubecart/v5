@@ -1,1 +1,0 @@
-<a href="{$STORE_URL}/index.php?_a=account"><i class="fa fa-user"></i><span class="show-for-medium-up"> {if $IS_USER}{$CUSTOMER.first_name}{/if}</span></a>

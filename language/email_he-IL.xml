@@ -2,38 +2,59 @@
  <!-- By Tom Glazer, Tomglazer89@gmail.com, Hebsoft-il.com -->
 <emails version="2.0" language="he-IL">
   <email name="admin.password_recovery">
-    <subject><![CDATA[שחזור סיסמת ניהול]]></subject>
-    <content type="html"><![CDATA[<p>{$DATA.name} היקר,</p> 
+    <subject>
+      <![CDATA[שחזור סיסמת ניהול]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>{$DATA.name} היקר,</p> 
         <p>על מנת לקבל גישה מחודשת אל לוח הבקרה לניהול החנות. עקוב אחר הקישור שלהלן:</p> 
         <p><a href="{$DATA.link}">{$DATA.link}</a></p> 
-        <p>במידה והקישור הנ&quot;ל אינו עובד העתק והדבק את הכתובת בשורת הכתובות שבדפדפן האינטרנט שלך.</p>]]></content>
-    <content type="text"><![CDATA[{$DATA.name} היקר,
+        <p>במידה והקישור הנ&quot;ל אינו עובד העתק והדבק את הכתובת בשורת הכתובות שבדפדפן האינטרנט שלך.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[{$DATA.name} היקר,
         
         על מנת לקבל גישה מחודשת אל לוח הבקרה לניהול החנות. עקוב אחר הקישור שלהלן:
         
         {$DATA.link}
         
-       במידה והקישור הנ"ל אינו עובד העתק והדבק את הכתובת בשורת הכתובות שבדפדפן האינטרנט שלך.]]></content>
+       במידה והקישור הנ"ל אינו עובד העתק והדבק את הכתובת בשורת הכתובות שבדפדפן האינטרנט שלך.]]>
+    </content>
   </email>
   <email name="cart.order_complete">
-    <subject><![CDATA[ההזמנה הסתיימה]]></subject>
-    <content type="html"><![CDATA[<p>שלום {$DATA.first_name},</p> 
-        <p>אנו שמחים להודיעך כי הזמנתך מס&#39; {$DATA.cart_order_id} הסתיימה בהצלחה. במידה והזמנת סחורה שאינה דיגיטלית, היא נשלחה ותגיע אליך בקרוב.</p>]]></content>
-    <content type="text"><![CDATA[שלום {$DATA.first_name},
+    <subject>
+      <![CDATA[ההזמנה הסתיימה]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>שלום {$DATA.first_name},</p> 
+        <p>אנו שמחים להודיעך כי הזמנתך מס&#39; {$DATA.cart_order_id} הסתיימה בהצלחה. במידה והזמנת סחורה שאינה דיגיטלית, היא נשלחה ותגיע אליך בקרוב.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[שלום {$DATA.first_name},
         
-        אנו שמחים להודיעך כי הזמנתך מס' {$DATA.cart_order_id} הסתיימה בהצלחה. במידה והזמנת סחורה שאינה דיגיטלית, היא נשלחה ותגיע אליך בקרוב.]]></content>
+        אנו שמחים להודיעך כי הזמנתך מס' {$DATA.cart_order_id} הסתיימה בהצלחה. במידה והזמנת סחורה שאינה דיגיטלית, היא נשלחה ותגיע אליך בקרוב.]]>
+    </content>
   </email>
   <email name="cart.order_cancelled">
-    <subject><![CDATA[ההזמנה בוטלה]]></subject>
-    <content type="html"><![CDATA[<p>שלום {$DATA.first_name},</p> 
-        <p>הזמנתך מס&#39; {$DATA.cart_order_id} בוטלה בהצלחה.</p>]]></content>
-    <content type="text"><![CDATA[שלום {$DATA.first_name},
+    <subject>
+      <![CDATA[ההזמנה בוטלה]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>שלום {$DATA.first_name},</p> 
+        <p>הזמנתך מס&#39; {$DATA.cart_order_id} בוטלה בהצלחה.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[שלום {$DATA.first_name},
         
-        הזמנתך מס' {$DATA.cart_order_id} בוטלה בהצלחה.]]></content>
+        הזמנתך מס' {$DATA.cart_order_id} בוטלה בהצלחה.]]>
+    </content>
   </email>
   <email name="cart.order_confirmation">
-    <subject><![CDATA[אישור הזמנה #{$DATA.cart_order_id}]]></subject>
-    <content type="html"><![CDATA[<p>תודה רבה {$DATA.first_name}!</p>
+    <subject>
+      <![CDATA[אישור הזמנה #{$DATA.cart_order_id}]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>תודה רבה {$DATA.first_name}!</p>
         <p>הזמנתך מס&#39; {$DATA.cart_order_id} שבוצעה בתאריך {$DATA.order_date} התקבלה בהצלחה. אנא שמור הודעה זאת בארכיון שלך. ביכולתך לצפות במצב ההזמנה באופן מקוון באתר.</p> 
         <p><a href="{$DATA.link}">{$DATA.link}</a></p>
         <table width="100%">
@@ -107,8 +128,10 @@
         </tr>
         </tbody>
         
-        </table>]]></content>
-    <content type="text"><![CDATA[תודה רבה {$DATA.first_name}!
+        </table>]]>
+    </content>
+    <content type="text">
+      <![CDATA[תודה רבה {$DATA.first_name}!
         
         הזמנתך מס' {$DATA.cart_order_id} שבוצעה בתאריך {$DATA.order_date} התקבלה בהצלחה. אנא שמור הודעה זאת בארכיון שלך. ביכולתך לצפות במצב ההזמנה באופן מקוון באתר:
         
@@ -160,36 +183,52 @@
         {/foreach}
         --------------------------
          סה"כ: {$DATA.total}
-        ==========================]]></content>
+        ==========================]]>
+    </content>
   </email>
   <email name="cart.payment_fraud">
-    <subject><![CDATA[תקלה בהזמנה]]></subject>
-    <content type="html"><![CDATA[<p>שלום {$DATA.first_name},</p> 
-        <p>אנו מצטערים, אך לא יכולנו לקבל את התשלום על הזמנתך מס&#39; {$DATA.cart_order_id}. אנא צור קשר עם צוות האתר למידע נוסף.</p>]]></content>
-    <content type="text"><![CDATA[שלום{$DATA.first_name},
+    <subject>
+      <![CDATA[תקלה בהזמנה]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>שלום {$DATA.first_name},</p> 
+        <p>אנו מצטערים, אך לא יכולנו לקבל את התשלום על הזמנתך מס&#39; {$DATA.cart_order_id}. אנא צור קשר עם צוות האתר למידע נוסף.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[שלום{$DATA.first_name},
         
-        אנו מצטערים, אך לא יכולנו לקבל את התשלום על הזמנתך מס' {$DATA.cart_order_id}. אנא צור קשר עם צוות האתר למידע נוסף.]]></content>
+        אנו מצטערים, אך לא יכולנו לקבל את התשלום על הזמנתך מס' {$DATA.cart_order_id}. אנא צור קשר עם צוות האתר למידע נוסף.]]>
+    </content>
   </email>
   <email name="account.password_recovery">
-    <subject><![CDATA[שחזור סיסמה]]></subject>
-    <content type="html"><![CDATA[<p>{$DATA.first_name} {$DATA.last_name} היקר,<br /> 
+    <subject>
+      <![CDATA[שחזור סיסמה]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>{$DATA.first_name} {$DATA.last_name} היקר,<br /> 
         <br /> 
         על מנת לאפס את סיסמתך, לחץ על הקישור להלן או לחלופין העתק והדבק את הכתובת שלהלן לתוך שורת הכתובת שבדפדפן האינטרנט שלך. לאחר מעבר אל הקישור, תתבקש להזין ולאמת את סיסמתך החדשה.<br /> 
         <br /> 
         {$DATA.reset_link}<br /> 
         <br /> 
-        אם הינך זקוק לסיוע נוסף באיפוס סיסמתך, אל תהסס ליצור עמנו קשר.</p>]]></content>
-    <content type="text"><![CDATA[שלום {$DATA.first_name},
+        אם הינך זקוק לסיוע נוסף באיפוס סיסמתך, אל תהסס ליצור עמנו קשר.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[שלום {$DATA.first_name},
         
         על מנת לאפס את סיסמתך, לחץ על הקישור להלן או לחלופין העתק והדבק את הכתובת שלהלן לתוך שורת הכתובת שבדפדפן האינטרנט שלך. לאחר מעבר אל הקישור, תתבקש להזין ולאמת את סיסמתך החדשה.
         
         {$DATA.reset_link}
         
-        אם הינך זקוק לסיוע נוסף באיפוס סיסמתך, אל תהסס ליצור עמנו קשר.]]></content>
+        אם הינך זקוק לסיוע נוסף באיפוס סיסמתך, אל תהסס ליצור עמנו קשר.]]>
+    </content>
   </email>
   <email name="admin.order_received">
-    <subject><![CDATA[הזמנה חדשה מס&#39; #{$DATA.cart_order_id}]]></subject>
-    <content type="html"><![CDATA[<p>{$DATA.first_name} {$DATA.last_name} {if !empty({$BILLING.company_name})}({$BILLING.company_name}){/if} ביצע את הזמנה מספר {$DATA.cart_order_id} בתאריך {$DATA.order_date}.</p>
+    <subject>
+      <![CDATA[הזמנה חדשה מס&#39; #{$DATA.cart_order_id}]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>{$DATA.first_name} {$DATA.last_name} {if !empty({$BILLING.company_name})}({$BILLING.company_name}){/if} ביצע את הזמנה מספר {$DATA.cart_order_id} בתאריך {$DATA.order_date}.</p>
         <p>ביכולתך לנהל את ההזמנה בצורה מקוונת בקישור שלהלן.</p> 
         <p><a href="{$DATA.link}">{$DATA.link}</a></p>
         <table width="100%">
@@ -263,8 +302,10 @@
         </tr>
         </tbody>
         
-        </table>]]></content>
-    <content type="text"><![CDATA[{$DATA.first_name} {$DATA.last_name} {if !empty({$BILLING.company_name})}({$BILLING.company_name}){/if} ביצע את הזמנה מספר {$DATA.cart_order_id} בתאריך {$DATA.order_date}.
+        </table>]]>
+    </content>
+    <content type="text">
+      <![CDATA[{$DATA.first_name} {$DATA.last_name} {if !empty({$BILLING.company_name})}({$BILLING.company_name}){/if} ביצע את הזמנה מספר {$DATA.cart_order_id} בתאריך {$DATA.order_date}.
         
         ביכולתך לנהל את ההזמנה בצורה מקוונת בקישור שלהלן.
         
@@ -316,30 +357,41 @@
         {/foreach}
         --------------------------
         סה"כ: {$DATA.total}
-        ==========================]]></content>
+        ==========================]]>
+    </content>
   </email>
   <email name="admin.review_added">
-    <subject><![CDATA[ביקורת חדשה אודות מוצר]]></subject>
-    <content type="html"><![CDATA[{$DATA.name} פרסם תגובה/ביקורת אודות המוצר  '{$DATA.product_name}'. ביכולתך לנהל את הפרסום בקישור שלהלן.
+    <subject>
+      <![CDATA[ביקורת חדשה אודות מוצר]]>
+    </subject>
+    <content type="html">
+      <![CDATA[{$DATA.name} פרסם תגובה/ביקורת אודות המוצר  '{$DATA.product_name}'. ביכולתך לנהל את הפרסום בקישור שלהלן.
         <p><strong>קישור לניהול:</strong><br /><a href='{$DATA.link}'>{$DATA.link}</a></p> 
-        <p><strong>תקציר תוכן:</strong><br />{$DATA.review}</p>]]></content>
-    <content type="text"><![CDATA[{$DATA.name} פרסם תגובה/ביקורת אודות המוצר '{$DATA.product_name}'. ביכולתך לנהל את הפרסום בקישור שלהלן.
+        <p><strong>תקציר תוכן:</strong><br />{$DATA.review}</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[{$DATA.name} פרסם תגובה/ביקורת אודות המוצר '{$DATA.product_name}'. ביכולתך לנהל את הפרסום בקישור שלהלן.
         
         קישור לניהול:
         {$DATA.link}
         תקציר תוכן:
-        {$DATA.review}]]></content>
+        {$DATA.review}]]>
+    </content>
   </email>
   <email name="cart.digital_download">
-    <subject><![CDATA[ההורדה שלך]]></subject>
-    <content type="html"><![CDATA[<p>שלום {$DATA.first_name},</p> 
+    <subject>
+      <![CDATA[ההורדה שלך]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>שלום {$DATA.first_name},</p> 
         <p>ההורדה הדיגיטלית שלך מוכנה להורדה. אנא השתמש בקישורים שלהלן על מנת לגשת אל ההורדה:</p> 
         {foreach from=$DOWNLOADS item=download} 
         <p><strong>{$download.name}:</strong> (הקישור יפוג ב-{$download.expire}<strong>)</strong><br /> 
         {$download.url}</p> 
         {/foreach}
         <p>במידה והקישורים הנ&quot;ל אינם עובדים. אנא נסה להעתיק ולהדביק אותם אל שורת הכתובת שבדפדפן האינטרנט שלך. ביכולתך לגשת אל קבצים אלו גם מאזור הלקוחות האישי שלך שבאתרנו.</p> 
-        <p>&nbsp;</p>]]></content>
+        <p>&nbsp;</p>]]>
+    </content>
     <content type="text">
     <![CDATA[שלום {$DATA.first_name},
         
@@ -350,11 +402,15 @@
         {$download.url}
         {/foreach}
         
-        במידה והקישורים הנ"ל אינם עובדים. אנא נסה להעתיק ולהדביק אותם אל שורת הכתובת שבדפדפן האינטרנט שלך. ביכולתך לגשת אל קבצים אלו גם מאזור           הלקוחות האישי שלך שבאתרנו.]]></content>
+        במידה והקישורים הנ"ל אינם עובדים. אנא נסה להעתיק ולהדביק אותם אל שורת הכתובת שבדפדפן האינטרנט שלך. ביכולתך לגשת אל קבצים אלו גם מאזור           הלקוחות האישי שלך שבאתרנו.]]>
+    </content>
   </email>
   <email name="cart.gift_certificate">
-    <subject><![CDATA[קופון המתנה שלך]]></subject>
-    <content type="html"><![CDATA[<p>{$DATA.name} היקר,</p> 
+    <subject>
+      <![CDATA[קופון המתנה שלך]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>{$DATA.name} היקר,</p> 
         <p>אנו שמחים להעניק לך קופון מתנה לקניית מוצרים מהחנות שלנו.</p> 
         <p>קנייה מהנה!</p> 
         <p><strong>מתנת: </strong>{$DATA.first_name} {$DATA.last_name}<br /> 
@@ -363,8 +419,10 @@
         <strong>ברכה:</strong> {$DATA.message}</p> 
         <p>-------------------</p> 
         <p>על מנת לנצל את קופון המתנה הזן את &quot;קוד הקופון&quot; בשדה הטקסט הנקרא &quot;הוספת קופון  או קופון מתנה&quot; בזמן תהליך התשלום.</p> 
-        <p>אז למה שלא תנצל אותו עכשיו?</p>]]></content>
-    <content type="text"><![CDATA[{$DATA.name} היקר,
+        <p>אז למה שלא תנצל אותו עכשיו?</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[{$DATA.name} היקר,
         
         אנו שמחים להעניק לך קופון מתנה לקניית מוצרים מהחנות שלנו.
         
@@ -379,30 +437,43 @@
         
         על מנת לנצל את קופון המתנה הזן את "קוד הקופון" בשדה הטקסט הנקרא "הוספת קופון  או קופון מתנה" בזמן תהליך התשלום.
         
-        אז למה שלא תנצל אותו עכשיו?]]></content>
+        אז למה שלא תנצל אותו עכשיו?]]>
+    </content>
   </email>
   <email name="catalogue.tell_friend">
-    <subject><![CDATA[{$DATA.from} ממליץ לך על]]></subject>
-    <content type="html"><![CDATA[{$DATA.to} היקר,
+    <subject>
+      <![CDATA[{$DATA.from} ממליץ לך על]]>
+    </subject>
+    <content type="html">
+      <![CDATA[{$DATA.to} היקר,
         <p>חברך <strong>{$DATA.from}</strong> חשב שתהיה מעוניין במוצר <strong>{$DATA.name}</strong>.</p> 
         <p><strong>קישור למוצר:</strong> <a href="{$DATA.link}">{$DATA.name}</a></p> 
-        <p>{$DATA.message}</p>]]></content>
-    <content type="text"><![CDATA[{$DATA.to} היקר,
+        <p>{$DATA.message}</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[{$DATA.to} היקר,
         
         חברך {$DATA.from} חשב שתהיה מעוניין במוצר '{$DATA.name}'.
         
         {$DATA.name}
         קישור למוצר: {$DATA.link}
         
-        {$DATA.message}]]></content>
+        {$DATA.message}]]>
+    </content>
   </email>
   <email name="cart.payment_received">
-    <subject><![CDATA[תודה שקנית!]]></subject>
-    <content type="html"><![CDATA[<p>שלום {$DATA.first_name},</p> 
-        <p>תודה רבה. קיבלנו את התשלום בסך {$DATA.total} להזמנתך מס&#39; {$DATA.cart_order_id}.</p>]]></content>
-    <content type="text"><![CDATA[שלום {$DATA.first_name},
+    <subject>
+      <![CDATA[תודה שקנית!]]>
+    </subject>
+    <content type="html">
+      <![CDATA[<p>שלום {$DATA.first_name},</p> 
+        <p>תודה רבה. קיבלנו את התשלום בסך {$DATA.total} להזמנתך מס&#39; {$DATA.cart_order_id}.</p>]]>
+    </content>
+    <content type="text">
+      <![CDATA[שלום {$DATA.first_name},
         
-        תודה רבה. קיבלנו את התשלום בסך {$DATA.total} להזמנתך מס' {$DATA.cart_order_id}.]]></content>
+        תודה רבה. קיבלנו את התשלום בסך {$DATA.total} להזמנתך מס' {$DATA.cart_order_id}.]]>
+    </content>
   </email>
 </emails>
 

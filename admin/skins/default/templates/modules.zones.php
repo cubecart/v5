@@ -3,8 +3,8 @@
 	<fieldset id="enabled-zones" class="list"><legend>{$LANG.module.title_regions_enabled}</legend>
 	  {foreach from=$ENABLED_COUNTRIES item=country}
 	  <div>
-		<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.messages.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span>
-		<input type="hidden" name="zones[]" value="{$country.numcode}">
+		<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.messages.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span>
+		<input type="hidden" name="zones[]" value="{$country.numcode}" />
 		{$country.name}
 	  </div>
 	  {/foreach}
@@ -20,7 +20,7 @@
 			<option value="{$country.numcode}">{$country.name}</option>
 			{/foreach}
 		  </select>
-		  <a href="#" class="add" target="enabled-zones"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}"></a>
+		  <a href="#" class="add" target="enabled-zones"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a>
 		</span>
 	  </div>
 	</fieldset>

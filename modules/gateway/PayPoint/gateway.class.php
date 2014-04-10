@@ -35,7 +35,7 @@ class Gateway {
 			'trans_id' 		=> 'CC5'.md5(time().(rand(0,32000)*rand(0,32000))),
 			'merchant' 		=> $this->_module['merchant'],
 			'amount' 		=> $this->_basket['total'],
-			'callback' 		=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=process&module=PayPoint&cart_order_id='.$this->_basket['cart_order_id'],
+			'callback' 		=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=PayPoint&amp;cart_order_id='.$this->_basket['cart_order_id'],
 			'options' 		=> $test_mode.'currency='.$GLOBALS['config']->get('config', 'default_currency').',cart=cubecart',
 		);
 		if (!empty($this->_module['remote_password'])) {

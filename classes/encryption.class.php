@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:   http://www.cubecart.com
- * Email:  sales@devellion.com
- * License:  http://www.cubecart.com/v5-software-license
+ * Web:			http://www.cubecart.com
+ * Email:		sales@devellion.com
+ * License:		http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -28,31 +28,31 @@ class Encryption {
 	 *
 	 * @var string
 	 */
-	private $_cipher = null;
+	private $_cipher	= null;
 	/**
 	 * Initialisation for encryption
 	 *
 	 * @var string
 	 */
-	private $_iv  = null;
+	private $_iv		= null;
 	/**
 	 * Encryption key
 	 *
 	 * @var string
 	 */
-	private $_key  = null;
+	private $_key		= null;
 	/**
 	 * Encryption mode
 	 *
 	 * @var string
 	 */
-	private $_mode  = null;
+	private $_mode		= null;
 	/**
 	 * Encryption handler
 	 *
 	 * @var resource
 	 */
-	private $_td  = null;
+	private $_td		= null;
 
 	/**
 	 * Class instance
@@ -77,11 +77,11 @@ class Encryption {
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 		self::$_instance->setup();
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
@@ -121,14 +121,14 @@ class Encryption {
 	 * @param string $mode
 	 */
 	public function setup($key = '', $iv = '', $cipher = MCRYPT_RIJNDAEL_256, $mode = MCRYPT_MODE_CBC) {
-		$key   = (!empty($key)) ? $key : $GLOBALS['config']->get('config', 'license_key');
-		$iv    = (!empty($iv)) ? $iv : $GLOBALS['config']->get('config', 'license_key');
+		$key			= (!empty($key)) ? $key : $GLOBALS['config']->get('config', 'license_key');
+		$iv				= (!empty($iv)) ? $iv : $GLOBALS['config']->get('config', 'license_key');
 
-		$this->_cipher = $cipher;
-		$this->_mode = $mode;
+		$this->_cipher	= $cipher;
+		$this->_mode	= $mode;
 
-		$this->_td  = mcrypt_module_open($this->_cipher, '', $this->_mode, '');
-		$this->_iv  = substr(md5($iv), 0, mcrypt_enc_get_iv_size($this->_td));
-		$this->_key  = substr(md5($key), 0, mcrypt_enc_get_key_size($this->_td));
+		$this->_td		= mcrypt_module_open($this->_cipher, '', $this->_mode, '');
+		$this->_iv		= substr(md5($iv), 0, mcrypt_enc_get_iv_size($this->_td));
+		$this->_key		= substr(md5($key), 0, mcrypt_enc_get_key_size($this->_td));
 	}
 }

@@ -6,9 +6,9 @@
  * Copyright Devellion Limited 2010. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:   http://www.cubecart.com
- * Email:  sales@devellion.com
- * License:  http://www.cubecart.com/v5-software-license
+ * Web:			http://www.cubecart.com
+ * Email:		sales@devellion.com
+ * License:		http://www.cubecart.com/v5-software-license
  * ========================================
  * CubeCart is NOT Open Source.
  * Unauthorized reproduction is not allowed.
@@ -21,33 +21,33 @@
  * @version 1.0.0
  * @since 5.0.0
  */
-class Password {
+ class Password {
 
-	/**
+ 	/**
 	 * Class instance
 	 *
 	 * @var instance
 	 */
 	private static $_instance;
 
-	final private function __construct() { }
+	final private function __construct() {	}
 
-	/**
+ 	/**
 	 * Setup the instance (singleton)
 	 *
 	 * @return Password
 	 */
 	public static function getInstance() {
 		if (!(self::$_instance instanceof self)) {
-			self::$_instance = new self();
-		}
+            self::$_instance = new self();
+        }
 
-		return self::$_instance;
+        return self::$_instance;
 	}
 
 	//=====[ Public ]====================================================================================================
 
-	/**
+ 	/**
 	 * Create salt for passwords
 	 * @author http://www.richardlord.net/blog/php-password-security
 	 *
@@ -57,7 +57,7 @@ class Password {
 		return substr(str_pad(dechex(mt_rand()), 8, '0', STR_PAD_LEFT ), -8);
 	}
 
-	/**
+ 	/**
 	 * Create a salted password
 	 *
 	 * @param string $value
@@ -97,4 +97,4 @@ class Password {
 	public function updateOld($md5, $salt) {
 		return md5(md5($salt).$md5);
 	}
-}
+ }

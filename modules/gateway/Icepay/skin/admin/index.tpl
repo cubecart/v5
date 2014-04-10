@@ -51,7 +51,7 @@ In the special case you want to offer one single payment method, you can select 
             </div>
             <div style="margin: 15px 0;">
                 <label for="icepay-merchanturl" style="padding-top: 10px;">Merchant URL</label>
-                <input type="text" name="module[merchanturl]" id="icepay-secretcode" value="{$STORE_URL}/index.php?_g=rm&type=gateway&cmd=process&module=Icepay" style="padding: 5px; width: 330px;" />                
+                <input type="text" name="module[merchanturl]" id="icepay-secretcode" value="{$STORE_URL}/index.php?_g=rm&amp;type=gateway&amp;cmd=process&amp;module=Icepay" style="padding: 5px; width: 330px;" />                
                 <div style="font-style: italic; margin-left: 5px; font-size: 11px;">&#187; Copy-Paste this URL to the Success, Error and Postback section of your ICEPAY merchant account.</div>
             </div>
         </fieldset>

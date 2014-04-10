@@ -1675,6 +1675,7 @@
       <string name="tax_apply_to" introduced="5.0.0"><![CDATA[Appliquer à]]></string>
       <string name="tax_class" introduced="5.0.0"><![CDATA[Catégorie de taxe]]></string>
       <string name="tax_class_name" introduced="5.0.0"><![CDATA[Nom de la catégorie de taxe]]></string>
+      <string name="tax_customer" introduced="5.0.0"><![CDATA[Ajouter les taxes de ventes aux clients admissibles]]></string>
       <string name="tax_customer_by" introduced="5.0.0"><![CDATA[Taxer le client de]]></string>
       <string name="tax_delete" introduced="5.0.0"><![CDATA[AVERTISSEMENT : Supprimer ceci supprimera également toutes les règles relatives aux taxes qui en dépendent. Êtes-vous sûr de vouloir continuer ?]]></string>
       <string name="tax_detail" introduced="5.0.0"><![CDATA[Détail des taxes]]></string>

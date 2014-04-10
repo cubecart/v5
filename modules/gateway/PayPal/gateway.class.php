@@ -77,7 +77,7 @@ class Gateway {
 			'country'		=> $this->_basket['billing_address']['country_iso'],
 
 			## IPN and Return URLs
-			'notify_url'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal',
+			'notify_url'	=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
 			'return'		=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 			'cancel_return'	=> $GLOBALS['storeURL'].'/index.php?_a='.$cancel_return,
 			'rm'			=> 2 // 2 = return POST vars

@@ -39,7 +39,7 @@ function array_search( needle, haystack, strict ) {
 }
 
 if (jQuery)(function($){
-	
+
 	$.extend($.fn, {
 		fileTree: function(o, h) {
 			if (!o) var o = {};
@@ -51,7 +51,6 @@ if (jQuery)(function($){
 			if (!o.unique) {
 				o.unique = ($(this).hasClass('unique')) ? true : false;
 			}
-			
 			$(this).each(function() {
 				function showTree(c, t) {
 					$(c).addClass('wait');

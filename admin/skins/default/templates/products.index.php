@@ -45,19 +45,19 @@
 	  		{if isset($PRODUCTS)}
 	  		{foreach from=$PRODUCTS item=product}
 	  		<tr>
-		  		<td align="center" width="10"><input type="checkbox" name="delete[]" id="{$product.product_id}" value="{$product.product_id}" class="table"></td>
-		  		<td align="center"><input type="hidden" name="status[{$product.product_id}]" id="status_{$product.product_id}" value="{$product.status}" class="toggle"></td>
-		  		<td align="center"><img src="{$product.type_icon}" alt="{$product.type_alt}"></td>
+		  		<td align="center" width="10"><input type="checkbox" name="delete[]" id="{$product.product_id}" value="{$product.product_id}" class="table" /></td>
+		  		<td align="center"><input type="hidden" name="status[{$product.product_id}]" id="status_{$product.product_id}" value="{$product.status}" class="toggle" /></td>
+		  		<td align="center"><img src="{$product.type_icon}" alt="{$product.type_alt}" /></td>
 				<td align="center">
 					{if !empty($product.image_path_tiny)}
-					<a href="{$product.image_path_large}" class="colorbox" title="{$product.name}" target="_blank"><img src="{$product.image_path_tiny}" alt="{$product.name}"></a>
+					<a href="{$product.image_path_large}" class="colorbox" title="{$product.name}" target="_blank"><img src="{$product.image_path_tiny}" alt="{$product.name}" /></a>
 					{elseif !empty($product.image_path_large)}
-					<a href="{$product.image_path_large}" class="colorbox" title="{$product.name}" target="_blank"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/image.png" alt="{$product.name}"></a>
+					<a href="{$product.image_path_large}" class="colorbox" title="{$product.name}" target="_blank"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/image.png" alt="{$product.name}" /></a>
 					{/if}
 				</td>
 				<td><a href="{$product.link_edit}">{$product.name}</a>
 				{if isset($product.category)}
-				<br>
+				<br />
 				<span class="light-category">{$product.category}</span>
 				{/if}
 				</td>
@@ -68,21 +68,21 @@
 		  		{if $product.updated == '0000-00-00 00:00:00'}
 		  			{$LANG.common.unknown}
 		  		{else}
-		  			{formatTime(strtotime($product.updated))}
+		  			{$product.updated}
 		  		{/if}
 		  		</td>
 		  		<td align="center">
 		  			{foreach from=$product.translations item=translation}
-		  			<a href="{$translation.link}"><img src="language/flags/{$translation.language}.png" alt="{$translation.language}"></a>
+		  			<a href="{$translation.link}"><img src="language/flags/{$translation.language}.png" alt="{$translation.language}" /></a>
 		  			{/foreach}
 		  		</td>
 		  		<td align="center">
 		  		{if isset($product.link_clone)}
-					<a href="{$product.link_clone}" title="{$LANG.common.clone}" alt="{$LANG.common.clone}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/clone.png" alt="{$LANG.common.clone}"></a>
+					<a href="{$product.link_clone}" title="{$LANG.common.clone}" alt="{$LANG.common.clone}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/clone.png" alt="{$LANG.common.clone}" /></a>
 				{/if}
-					<a href="{$product.link_preview}" title="{$LANG.common.preview}" target="_blank" alt="{$LANG.common.preview}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/magnifier.png" alt="{$LANG.common.preview}"></a>
-		 			<a href="{$product.link_edit}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
-					<a href="{$product.link_delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
+					<a href="{$product.link_preview}" title="{$LANG.common.preview}" target="_blank" alt="{$LANG.common.preview}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/magnifier.png" alt="{$LANG.common.preview}" /></a>
+		 			<a href="{$product.link_edit}" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
+					<a href="{$product.link_delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 				</td>
 	  		</tr>
 	  		{/foreach}
@@ -90,7 +90,7 @@
 	  	<tfoot>
 	  	  <tr>
 	  		<td width="10">
-	  		  <span><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt="">
+	  		  <span><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/select_all.gif" alt="" />
 	  		</td>
 	  		<td colspan="11"><a href="#" class="check-all" rel="table">{$LANG.form.check_uncheck}</a>
 	  		{$LANG.maintain.db_with_selected}
@@ -122,17 +122,17 @@
   {include file='templates/element.hook_form_content.php'}
   
   <div class="form_control">
-	<input type="submit" value="{$LANG.common.save}">
+	<input type="submit" value="{$LANG.common.save}" />
   </div>
   {/if}
 
   {if isset($DISPLAY_PRODUCT_FORM)}
   <div id="general" class="tab_content">
 	<h3>{$LANG.catalogue.title_information_general}</h3>
-	<input type="hidden" name="product_id" value="{$PRODUCT.product_id}">
+	<input type="hidden" name="product_id" value="{$PRODUCT.product_id}" />
 	<fieldset><legend>{$LANG.catalogue.title_information_basic}</legend>
-	  <div><label for="">{$LANG.common.status}</label><span><input type="hidden" name="status" id="product_status" value="{$PRODUCT.status}" class="toggle"></span></div>
-	  <div><label for="name">{$LANG.catalogue.product_name}</label><span><input name="name" id="name" class="textbox required" type="text" value="{$PRODUCT.name}"></span></div>
+	  <div><label for="">{$LANG.common.status}</label><span><input type="hidden" name="status" id="product_status" value="{$PRODUCT.status}" class="toggle" /></span></div>
+	  <div><label for="name">{$LANG.catalogue.product_name}</label><span><input name="name" id="name" class="textbox required" type="text" value="{$PRODUCT.name}" /></span></div>
 	  <div><label for="manufacturer">{$LANG.catalogue.title_manufacturer}</label>
 	    <span>
 	  		<select name="manufacturer" id="manufacturer" class="textbox" type="text">
@@ -152,24 +152,24 @@
 	  		</select>
 	  	</span>
 	   </div>
-	  <div><label for="product_code">{$LANG.catalogue.product_code}</label><span><input name="product_code" id="product_code" class="textbox" type="text" value="{$PRODUCT.product_code}"> <input name="product_code_auto" id="product_code_auto" type="checkbox" {$PRODUCT.auto_code_checked}> <input name="product_code_old" id="product_code_old" type="hidden" value=""> {$LANG.catalogue.product_code_auto}</span></div>
-	  <div><label for="product_weight">{$LANG.catalogue.product_weight}</label><span><input name="product_weight" id="product_weight" class="textbox number" type="text" value="{$PRODUCT.product_weight}"></span></div>
-	  <div><label for="featured">{$LANG.catalogue.product_latest}</label><span><input type="hidden" name="featured" id="featured" class="toggle" value="{$PRODUCT.featured}"></span></div>
+	  <div><label for="product_code">{$LANG.catalogue.product_code}</label><span><input name="product_code" id="product_code" class="textbox" type="text" value="{$PRODUCT.product_code}" /> <input name="product_code_auto" id="product_code_auto" type="checkbox" {$PRODUCT.auto_code_checked} /> <input name="product_code_old" id="product_code_old" type="hidden" value="" /> {$LANG.catalogue.product_code_auto}</span></div>
+	  <div><label for="product_weight">{$LANG.catalogue.product_weight}</label><span><input name="product_weight" id="product_weight" class="textbox number" type="text" value="{$PRODUCT.product_weight}" /></span></div>
+	  <div><label for="featured">{$LANG.catalogue.product_latest}</label><span><input type="hidden" name="featured" id="featured" class="toggle" value="{$PRODUCT.featured}" /></span></div>
 	</fieldset>
 
 	<fieldset><legend>{$LANG.catalogue.title_stock_control}</legend>
-	  <div><label for="use_stock_level">{$LANG.catalogue.stock_level_use}</label><span><input type="hidden" name="use_stock_level" id="use_stock_level" class="toggle" value="{$PRODUCT.use_stock_level}"></span></div>
-	  <div><label for="stock_level">{$LANG.catalogue.stock_level}</label><span><input name="stock_level" id="stock_level" class="textbox number" type="text" value="{$PRODUCT.stock_level}"></span>{if isset($DISPLAY_MATRIX_STOCK_NOTE)}&nbsp;{$LANG.catalogue.matrix_stock_level}{/if}</div>
-	  <div><label for="stock_warning">{$LANG.catalogue.stock_level_warn}</label><span><input name="stock_warning" id="stock_warning" class="textbox number" type="text" value="{$PRODUCT.stock_warning}"></span></div>
+	  <div><label for="use_stock_level">{$LANG.catalogue.stock_level_use}</label><span><input type="hidden" name="use_stock_level" id="use_stock_level" class="toggle" value="{$PRODUCT.use_stock_level}" /></span></div>
+	  <div><label for="stock_level">{$LANG.catalogue.stock_level}</label><span><input name="stock_level" id="stock_level" class="textbox number" type="text" value="{$PRODUCT.stock_level}" /></span>{if isset($DISPLAY_MATRIX_STOCK_NOTE)}&nbsp;{$LANG.catalogue.matrix_stock_level}{/if}</div>
+	  <div><label for="stock_warning">{$LANG.catalogue.stock_level_warn}</label><span><input name="stock_warning" id="stock_warning" class="textbox number" type="text" value="{$PRODUCT.stock_warning}" /></span></div>
 	</fieldset>
 	<fieldset><legend>{$LANG.catalogue.title_misc}</legend>
-	  <div><label for="upc_code">{$LANG.catalogue.product_upc}</label><span><input name="upc" id="upc" class="textbox" type="text" value="{$PRODUCT.upc}" maxlength="20"></span></div>
-	  <div><label for="ean_code">{$LANG.catalogue.product_ean}</label><span><input name="ean" id="ean" class="textbox" type="text" value="{$PRODUCT.ean}" maxlength="20"></span></div>
-	  <div><label for="jan_code">{$LANG.catalogue.product_jan}</label><span><input name="jan" id="jan" class="textbox" type="text" value="{$PRODUCT.jan}" maxlength="20"></span></div>
-	  <div><label for="isbn_code">{$LANG.catalogue.product_isbn}</label><span><input name="isbn" id="isbn" class="textbox" type="text" value="{$PRODUCT.isbn}" maxlength="20"></span></div> 
-	  <div><label for="gtin_code">{$LANG.catalogue.product_gtin}</label><span><input name="gtin" id="gtin" class="textbox" type="text" value="{$PRODUCT.gtin}" maxlength="20"></span></div>
-	  <div><label for="mpn_code">{$LANG.catalogue.product_mpn}</label><span><input name="mpn" id="mpn" class="textbox" type="text" value="{$PRODUCT.mpn}" maxlength="20"></span></div>
-	  <!--<div><label for="brand_code">{$LANG.catalogue.product_brand}</label><span><input name="brand" id="brand" class="textbox" type="text" value="{$PRODUCT.brand}" maxlength="20"></span></div>-->
+	  <div><label for="upc_code">{$LANG.catalogue.product_upc}</label><span><input name="upc" id="upc" class="textbox" type="text" value="{$PRODUCT.upc}" maxlength="20" /></span></div>
+	  <div><label for="ean_code">{$LANG.catalogue.product_ean}</label><span><input name="ean" id="ean" class="textbox" type="text" value="{$PRODUCT.ean}" maxlength="20" /></span></div>
+	  <div><label for="jan_code">{$LANG.catalogue.product_jan}</label><span><input name="jan" id="jan" class="textbox" type="text" value="{$PRODUCT.jan}" maxlength="20" /></span></div>
+	  <div><label for="isbn_code">{$LANG.catalogue.product_isbn}</label><span><input name="isbn" id="isbn" class="textbox" type="text" value="{$PRODUCT.isbn}" maxlength="20" /></span></div> 
+	  <div><label for="gtin_code">{$LANG.catalogue.product_gtin}</label><span><input name="gtin" id="gtin" class="textbox" type="text" value="{$PRODUCT.gtin}" maxlength="20" /></span></div>
+	  <div><label for="mpn_code">{$LANG.catalogue.product_mpn}</label><span><input name="mpn" id="mpn" class="textbox" type="text" value="{$PRODUCT.mpn}" maxlength="20" /></span></div>
+	  <!--<div><label for="brand_code">{$LANG.catalogue.product_brand}</label><span><input name="brand" id="brand" class="textbox" type="text" value="{$PRODUCT.brand}" maxlength="20" /></span></div>-->
 	  <div><label for="google_cat_code">{$LANG.catalogue.product_google_category}</label><span>
 	  {if $GOOGLE_CATS}
 	  	<select name="google_category" id="google_category" class="textbox" style="font-size: 10px;">
@@ -177,7 +177,7 @@
 		  {foreach from=$GOOGLE_CATS item=cat}<option value="{$cat}" {if $cat == $PRODUCT.google_category && !empty($PRODUCT.google_category)}selected="selected"{/if}>{$cat}</option>{/foreach}
 		</select>
 	  {else}
-	  <input name="google_category" id="google_category" class="textbox" type="text" value="{$PRODUCT.google_category}" maxlength="250">
+	  <input name="google_category" id="google_category" class="textbox" type="text" value="{$PRODUCT.google_category}" maxlength="250" />
 	  {/if}
 	  </span></div>
 	</fieldset>
@@ -202,15 +202,15 @@
 	<div id="group_0" class="field_select_target">
 	  <p>{$LANG.catalogue.pricing_standard}</p>
 	  <fieldset><legend>{$LANG.catalogue.title_pricing}</legend>
-		<div><label for="price">{$LANG.common.price_standard}</label><span><input name="price" id="price" class="textbox number-right" type="text" value="{$PRODUCT.price}"></span></div>
-		<div><label for="sale_price">{$LANG.common.price_sale}</label><span><input name="sale_price" id="sale_price" class="textbox number-right" type="text" value="{$PRODUCT.sale_price}"></span></div>
-		<div><label for="cost_price">{$LANG.common.price_cost}</label><span><input name="cost_price" id="cost_price" class="textbox number-right" type="text" value="{$PRODUCT.cost_price}"></span></div>
+		<div><label for="price">{$LANG.common.price_standard}</label><span><input name="price" id="price" class="textbox number-right" type="text" value="{$PRODUCT.price}" /></span></div>
+		<div><label for="sale_price">{$LANG.common.price_sale}</label><span><input name="sale_price" id="sale_price" class="textbox number-right" type="text" value="{$PRODUCT.sale_price}" /></span></div>
+		<div><label for="cost_price">{$LANG.common.price_cost}</label><span><input name="cost_price" id="cost_price" class="textbox number-right" type="text" value="{$PRODUCT.cost_price}" /></span></div>
 		<div><label for="tax_type">{$LANG.catalogue.tax_class}</label><span>{if isset($TAXES)}<select name="tax_type" id="tax_type" class="textbox">
 		<option value="">{$LANG.common.please_select} &hellip;</option>
 		  {foreach from=$TAXES item=tax}<option value="{$tax.id}"{$tax.selected}>{$tax.tax_name}</option>{/foreach}
 		</select>{else}{$LANG.catalogue.no_taxes_setup}{/if}</span></div>
-		<div><label for="tax_inclusive">{$LANG.catalogue.tax_included}</label><span><input type="hidden" name="tax_inclusive" id="tax_inclusive" class="toggle" value="{$PRODUCT.tax_inclusive}"></span></div>
-		<div><label for="minimum_quantity">{$LANG.catalogue.minimum_quantity}</label><span><input name="minimum_quantity" id="minimum_quantity" class="textbox number-right" type="text" value="{$PRODUCT.minimum_quantity}"></span></div>
+		<div><label for="tax_inclusive">{$LANG.catalogue.tax_included}</label><span><input type="hidden" name="tax_inclusive" id="tax_inclusive" class="toggle" value="{$PRODUCT.tax_inclusive}" /></span></div>
+		<div><label for="minimum_quantity">{$LANG.catalogue.minimum_quantity}</label><span><input name="minimum_quantity" id="minimum_quantity" class="textbox number-right" type="text" value="{$PRODUCT.minimum_quantity}" /></span></div>
 	  </fieldset>
 
 	  <fieldset><legend>{$LANG.catalogue.title_discount_quantity}</legend>
@@ -219,25 +219,20 @@
 		  <div id="qty_discount_0" class="list">
 		    {if isset($QUANTITY_DISCOUNTS)}
 			{foreach from=$QUANTITY_DISCOUNTS item=discount}
-<<<<<<< HEAD
 			<div><span class="actions"><a href="#" rel="{$discount.discount_id}" class="remove" name="discount_delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span><label><span class="editable number-right" name="discount[{$discount.discount_id}][quantity]" title="Click to edit">{$discount.quantity}</span></label>
 			<input type="text" name="discount[{$discount.discount_id}][price]" class="textbox number-right" value="{$discount.price}" />
-=======
-			<div><span class="actions"><a href="#" rel="{$discount.discount_id}" class="remove" name="discount_delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span><label><span class="editable number-right" name="discount[{$discount.discount_id}][quantity]" title="Click to edit">{$discount.quantity}</span></label>
-			<input type="text" name="discount[{$discount.discount_id}][price]" class="textbox number-right" value="{$discount.price}">
->>>>>>> FETCH_HEAD
 			</div>
 			{/foreach}{/if}
 		  </div>
 		  <div class="inline-add">
-			<span class="actions"><a href="#" class="add" target="qty_discount_0"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}"></a></span>
-			<label><input type="text" rel="quantity" class="editable textbox number not-empty"></label>
-			<input type="text" rel="price" class="textbox number-right not-empty">
+			<span class="actions"><a href="#" class="add" target="qty_discount_0"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a></span>
+			<label><input type="text" rel="quantity" class="editable textbox number not-empty" /></label>
+			<input type="text" rel="price" class="textbox number-right not-empty" />
 		  </div>
 		  <!-- Source for inline adding -->
 		  <div class="inline-source" name="discount_add[0]">
-			<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span>
-			<label rel="quantity"></label><input type="hidden" rel="quantity"><input type="text" class="textbox number-right" rel="price">
+			<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span>
+			<label rel="quantity"></label><input type="hidden" rel="quantity" /><input type="text" class="textbox number-right" rel="price" />
 		  </div>
 
 		</div>
@@ -249,8 +244,8 @@
 	<div id="group_{$group.group_id}" class="field_select_target">
 	  <p>{$group.group_description}</p>
 	  <fieldset><legend>{$LANG.catalogue.title_pricing}</legend>
-		<div><label for="price">{$LANG.common.price_standard}</label><span><input name="group[{$group.group_id}][price]" id="price" class="textbox number-right" type="text" value="{$group.price}"></span></div>
-		<div><label for="sale_price">{$LANG.common.price_sale}</label><span><input name="group[{$group.group_id}][sale_price]" id="sale_price" class="textbox number-right" type="text" value="{$group.sale_price}"></span></div>
+		<div><label for="price">{$LANG.common.price_standard}</label><span><input name="group[{$group.group_id}][price]" id="price" class="textbox number-right" type="text" value="{$group.price}" /></span></div>
+		<div><label for="sale_price">{$LANG.common.price_sale}</label><span><input name="group[{$group.group_id}][sale_price]" id="sale_price" class="textbox number-right" type="text" value="{$group.sale_price}" /></span></div>
 		<div>
 		  <label for="tax_type">{$LANG.catalogue.tax_class}</label>
 		  <span>
@@ -262,7 +257,7 @@
 		<div>
 		  <label for="tax_inclusive">{$LANG.catalogue.tax_included}</label>
 		  <span>
-			<input type="hidden" name="group[{$group.group_id}][tax_inclusive]" id="tax_inclusive_{$group.group_id}" class="toggle" value="{$group.tax_inclusive}">
+			<input type="hidden" name="group[{$group.group_id}][tax_inclusive]" id="tax_inclusive_{$group.group_id}" class="toggle" value="{$group.tax_inclusive}" />
 		  </span>
 		</div>
 	  </fieldset>
@@ -272,20 +267,20 @@
 		  <div id="discount_list_{$group.group_id}" >
 			{foreach from=$group.quantities item=quantity}
 			<div>
-			  <span class="actions"><a href="#" rel="{$quantity.discount_id}" class="remove" name="discount_delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span>
-			  <label><span class="editable number-right" name="discount[{$quantity.discount_id}][quantity]" title="Click to edit">{$quantity.quantity}</span></label><input type="text" name="discount[{$quantity.discount_id}][price]" class="textbox number-right" value="{$quantity.price}">
+			  <span class="actions"><a href="#" rel="{$quantity.discount_id}" class="remove" name="discount_delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span>
+			  <label><span class="editable number-right" name="discount[{$quantity.discount_id}][quantity]" title="Click to edit">{$quantity.quantity}</span></label><input type="text" name="discount[{$quantity.discount_id}][price]" class="textbox number-right" value="{$quantity.price}" />
 			</div>
 			{/foreach}
 		  </div>
 		  <div class="inline-add">
-			<span class="actions"><a href="#" class="add" target="discount_list_{$group.group_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}"></a></span>
-			<label><input type="text" rel="quantity" class="textbox number not-empty"></label>
-			<input type="text" rel="price" class="textbox number-right not-empty">
+			<span class="actions"><a href="#" class="add" target="discount_list_{$group.group_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a></span>
+			<label><input type="text" rel="quantity" class="textbox number not-empty" /></label>
+			<input type="text" rel="price" class="textbox number-right not-empty" />
 		  </div>
 		  <!-- Source for inline adding -->
 		  <div class="inline-source" name="discount_add[{$group.group_id}]">
-			<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></span>
-			<label rel="quantity"></label><input type="hidden" rel="quantity"><input type="text" class="textbox number-right" rel="price">
+			<span class="actions"><a href="#" class="remove dynamic" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></span>
+			<label rel="quantity"></label><input type="hidden" rel="quantity" /><input type="text" class="textbox number-right" rel="price" />
 		  </div>
 		</div>
 	  </fieldset>
@@ -307,8 +302,8 @@
 		<tbody>
 		  {foreach from=$CATEGORIES item=category}
 		  <tr>
-		    <td align="center"><input type="radio" name="primary_cat" class="check-primary" value="{$category.id}" rel="cat_{$category.id}"{$category.primary}></td>
-		    <td align="center"><input type="checkbox" id="cat_{$category.id}" name="categories[{$category.id}]" value="{$category.id}" class="check_cat" {$category.selected}></td>
+		    <td align="center"><input type="radio" name="primary_cat" class="check-primary" value="{$category.id}" rel="cat_{$category.id}"{$category.primary} /></td>
+		    <td align="center"><input type="checkbox" id="cat_{$category.id}" name="categories[{$category.id}]" value="{$category.id}" class="check_cat" {$category.selected} /></td>
 		    <td>{$category.name}</td>
 		  </tr>
 		  {/foreach}
@@ -316,7 +311,7 @@
 	  <tfoot>
 		<tr>
 		  <td>&nbsp;</td>
-		  <td align="center"><input type="checkbox" class="check-all" rel="check_cat"></td>
+		  <td align="center"><input type="checkbox" class="check-all" rel="check_cat" /></td>
 		  <td><strong>{$LANG.form.check_uncheck}</strong></td>
 		</tr>
 	  </tfoot>
@@ -343,27 +338,27 @@
 		  {foreach from=$options item=option}
 		  {if $option.from_assigned}
 		  <tr id="option_{$option.assign_id}">
-			<td align="center"><input type="hidden" id="enable_{$option.assign_id}" name="option_update[{$option.assign_id}][set_enabled]" value="{$option.set_enabled}" class="toggle"></td>
-			<td align="center"><input type="hidden" id="matrix_include_{$option.assign_id}" name="option_update[{$option.assign_id}][matrix_include]" value="{$option.matrix_include}" class="toggle"></td>
+			<td align="center"><input type="hidden" id="enable_{$option.assign_id}" name="option_update[{$option.assign_id}][set_enabled]" value="{$option.set_enabled}" class="toggle" /></td>
+			<td align="center"><input type="hidden" id="matrix_include_{$option.assign_id}" name="option_update[{$option.assign_id}][matrix_include]" value="{$option.matrix_include}" class="toggle" /></td>
 			<td>{$option.display}</td>
-			<td align="right"><input type="checkbox" name="option_update[{$option.assign_id}][option_negative]" {if isset($option.option_negative) && $option.option_negative == 1}checked="checked"{/if} value="1"></td>
+			<td align="right"><input type="checkbox" name="option_update[{$option.assign_id}][option_negative]" {if isset($option.option_negative) && $option.option_negative == 1}checked="checked"{/if} value="1" /></td>
 			<td><span class="editable number-right" name="option_update[{$option.assign_id}][option_price]" title="{$LANG.common.click_edit}">{$option.option_price}</span></td>
 			<td><span class="editable number" name="option_update[{$option.assign_id}][option_weight]" title="{$LANG.common.click_edit}">{$option.option_weight}</span></td>
 			<td align="center">
-			  {if !$option.set_member_id}<a href="#" name="option_remove" class="remove" rel="{$option.assign_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>{else}<a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled"></a>{/if}
-			  <input type="hidden" id="data_{$option.assign_id}" value="{$option.data}">
+			  {if !$option.set_member_id}<a href="#" name="option_remove" class="remove" rel="{$option.assign_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>{else}<a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled" /></a>{/if}
+			  <input type="hidden" id="data_{$option.assign_id}" value="{$option.data}" />
 			</td>
 		  </tr>
 		  {else}
 
 		  <tr id="option_member_{$option.set_member_id}">
-			<td align="center"><input type="hidden" id="enable_member_{$option.set_member_id}" name="option_create[{$option.set_member_id}][set_enabled]" value="{$option.set_enabled}" class="toggle"></td>
-			<td align="center"><input type="hidden" id="matrix_include_{$option.assign_id}" name="option_update[{$option.assign_id}][matrix_include]" value="{$option.matrix_include}" class="toggle"></td>
+			<td align="center"><input type="hidden" id="enable_member_{$option.set_member_id}" name="option_create[{$option.set_member_id}][set_enabled]" value="{$option.set_enabled}" class="toggle" /></td>
+			<td align="center"><input type="hidden" id="matrix_include_{$option.assign_id}" name="option_update[{$option.assign_id}][matrix_include]" value="{$option.matrix_include}" class="toggle" /></td>
 			<td>{$option.display}</td>
-			<td align="right"><input type="checkbox" name="option_create[{$option.set_member_id}][option_negative]" {if isset($option.option_negative) && $option.option_negative == 1}checked="checked"{/if}  value="1"></td>
+			<td align="right"><input type="checkbox" name="option_create[{$option.set_member_id}][option_negative]" {if isset($option.option_negative) && $option.option_negative == 1}checked="checked"{/if}  value="1" /></td>
 			<td><span class="editable number-right" name="option_create[{$option.set_member_id}][option_price]" title="{$LANG.common.click_edit}">{$option.option_price}</span></td>
 			<td><span class="editable number" name="option_create[{$option.set_member_id}][option_weight]" title="{$LANG.common.click_edit}">{$option.option_weight}</span></td>
-			<td><a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled"></a></td>
+			<td><a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled" /></a></td>
 		  </tr>
 		  {/if}
 		  {/foreach}
@@ -392,32 +387,32 @@
 				{/if}
 			  </select>
 			</td>
-			<td align="right"><input type="checkbox" id="opt_negative" rel="negative" class="checkbox data"></td>
-			<td><input type="text" id="opt_price" rel="price" class="textbox number-right data"></td>
-			<td><input type="text" id="opt_weight" rel="weight" class="textbox number data"></td>
-			<!-- td><input type="text" id="opt_stock" rel="stock" class="textbox number data"></td -->
-			<td align="center"><a href="#" onclick="optionAdd('option_template', 'options_added'); return false;"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}"></a></td>
+			<td align="right"><input type="checkbox" id="opt_negative" rel="negative" class="checkbox data" /></td>
+			<td><input type="text" id="opt_price" rel="price" class="textbox number-right data" /></td>
+			<td><input type="text" id="opt_weight" rel="weight" class="textbox number data" /></td>
+			<!-- td><input type="text" id="opt_stock" rel="stock" class="textbox number data" /></td -->
+			<td align="center"><a href="#" onclick="optionAdd('option_template', 'options_added'); return false;"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" /></a></td>
 		  </tr>
 
 		  <tr class="inline-source">
 			<td>&nbsp;</td>
-			<td class="name"><input type="hidden" rel=""></td>
-			<td class="negative"><input type="hidden" rel=""></td>
-			<td class="price"><input type="hidden" rel=""></td>
-			<td class="weight"><input type="hidden" rel=""></td>
-			<!-- td class="stock"><input type="hidden" rel=""></td -->
-			<td align="center"><a href="#" class="remove dynamic"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></td>
+			<td class="name"><input type="hidden" rel="" /></td>
+			<td class="negative"><input type="hidden" rel="" /></td>
+			<td class="price"><input type="hidden" rel="" /></td>
+			<td class="weight"><input type="hidden" rel="" /></td>
+			<!-- td class="stock"><input type="hidden" rel="" /></td -->
+			<td align="center"><a href="#" class="remove dynamic"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></td>
 		  </tr>
 
 		  <tr id="option_template" class="dynamic">
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td class="name"><input type="hidden" name="option_add[value][]" value="" disabled="disabled"></td>
-			<td class="negative" align="right"><input type="checkbox" name="option_add[negative][]" value="1" disabled="disabled"></td>
-			<td class="price"><input type="hidden" name="option_add[price][]" value="" disabled="disabled"></td>
-			<td class="weight"><input type="hidden" name="option_add[weight][]" value="" disabled="disabled"></td>
-			<!-- td class="stock"><input type="hidden" name="option_add[stock][]" value="" disabled="disabled"></td -->
-			<td align="center"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a></td>
+			<td class="name"><input type="hidden" name="option_add[value][]" value="" disabled="disabled" /></td>
+			<td class="negative" align="right"><input type="checkbox" name="option_add[negative][]" value="1" disabled="disabled" /></td>
+			<td class="price"><input type="hidden" name="option_add[price][]" value="" disabled="disabled" /></td>
+			<td class="weight"><input type="hidden" name="option_add[weight][]" value="" disabled="disabled" /></td>
+			<!-- td class="stock"><input type="hidden" name="option_add[stock][]" value="" disabled="disabled" /></td -->
+			<td align="center"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></td>
 		  </tr>
 		</tfoot>
 	  </table>
@@ -432,7 +427,7 @@
 		{if isset($OPTION_SETS_ENABLED)} {foreach from=$OPTION_SETS_ENABLED item=set}
 		<div id="">
 		  <span class="actions">
-		  	<a href="#" name="set_remove" class="remove" rel="{$set.set_product_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
+		  	<a href="#" name="set_remove" class="remove" rel="{$set.set_product_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		  </span>
 		  {$set.set_name}
 		</div>
@@ -445,7 +440,7 @@
 		<select id="" name="set_assign">
 		  <option value="">{$LANG.form.please_select}</option>
 		  {foreach from=$OPTION_SETS item=option_set}<option value="{$option_set.set_id}">{$option_set.set_name}</option>{/foreach}
-		</select> <input type="submit" value="{$LANG.common.add}">
+		</select> <input type="submit" value="{$LANG.common.add}" />
 		</span>
 	  </div>
 	</fieldset>
@@ -470,14 +465,14 @@
 	{foreach from=$OPTIONS_MATRIX.all_possible item=row}
 	    <tr>
 		  <td>{$row.options_values}</td>
-		  <td align="center"><input type="hidden" id="use_stock_{$row.options_identifier}" name="option_matrix[{$row.options_identifier}][use_stock]" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.use_stock}" class="toggle"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][stock_level]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.stock_level}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][product_code]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.product_code}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][upc]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.upc}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][ean]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.ean}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][jan]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.jan}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][isbn]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.isbn}"></td>
-		  <td><input type="text" name="option_matrix[{$row.options_identifier}][restock_note]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.restock_note}" maxlength="255" ></td>
+		  <td align="center"><input type="hidden" id="use_stock_{$row.options_identifier}" name="option_matrix[{$row.options_identifier}][use_stock]" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.use_stock}" class="toggle" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][stock_level]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.stock_level}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][product_code]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.product_code}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][upc]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.upc}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][ean]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.ean}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][jan]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.jan}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][isbn]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.isbn}" /></td>
+		  <td><input type="text" name="option_matrix[{$row.options_identifier}][restock_note]" class="textbox number" value="{$OPTIONS_MATRIX.existing.{$row.options_identifier}.restock_note}" maxlength="255"  /></td>
 	    </tr>
 	{/foreach} 
 	  </tbody>
@@ -488,18 +483,18 @@
   <div id="image" class="tab_content">
 	<h3>{$LANG.settings.title_images}</h3>
 	
-	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/star.png" alt="{$LANG.catalogue.image_main}"> - {$LANG.catalogue.image_main}
-	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/1.png" alt="{$LANG.catalogue.image_included}"> - {$LANG.catalogue.image_included}
-	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/0.png" alt="{$LANG.catalogue.image_excluded}"> - {$LANG.catalogue.image_excluded}
+	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/star.png" alt="{$LANG.catalogue.image_main}" /> - {$LANG.catalogue.image_main}
+	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/1.png" alt="{$LANG.catalogue.image_included}" /> - {$LANG.catalogue.image_included}
+	<img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/0.png" alt="{$LANG.catalogue.image_excluded}" /> - {$LANG.catalogue.image_excluded}
 	<div class="fm-container">
 	  <div id="image" rel="1" class="fm-filelist"></div>
 	  <div class="master_image">
-	  {$LANG.catalogue.image_main}:<br><br>
-	  <img src="{$PRODUCT.master_image}" id="master_image_preview">
+	  {$LANG.catalogue.image_main}:<br /><br />
+	  <img src="{$PRODUCT.master_image}" id="master_image_preview" />
 	  </div>
 	</div>
 	<p>{$LANG.filemanager.file_upload_note}</p>
-	<div><label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="image" id="uploader" type="file" class="multiple"></span></div>
+	<div><label for="uploader">{$LANG.filemanager.file_upload}</label><span><input name="image" id="uploader" type="file" class="multiple" /></span></div>
 
   </div>
 
@@ -510,14 +505,14 @@
 	</div>
 	<fieldset><legend>{$LANG.catalogue.title_file_path_custom}</legend>
 	<div>{$LANG.catalogue.file_path_help}</div>
-	<div id="digital_freetype"><label for="digital_path">{$LANG.catalogue.file_path}</label><span> <input name="digital_path" id="digital_path" class="textbox" type="text" value="{$PRODUCT.digital_path}" {$VAL_DIGITALDIR_EMPTY}></span></div>
+	<div id="digital_freetype"><label for="digital_path">{$LANG.catalogue.file_path}</label><span> <input name="digital_path" id="digital_path" class="textbox" type="text" value="{$PRODUCT.digital_path}" {$VAL_DIGITALDIR_EMPTY} /></span></div>
 	</fieldset>
   </div>
   <div id="seo" class="tab_content">
   <h3>{$LANG.settings.tab_seo}</h3>
 	<fieldset><legend>{$LANG.settings.title_seo_meta_data}</legend>
-	  <div><label for="seo_meta_title">{$LANG.settings.seo_meta_title}</label><span><input name="seo_meta_title" id="seo_meta_title" class="textbox" type="text" value="{$PRODUCT.seo_meta_title}"></span></div>
-	  <div><label for="seo_path">{$LANG.settings.seo_path}</label><span><input name="seo_path" id="seo_path" class="textbox" type="text" value="{$PRODUCT.seo_path}"></span></div>
+	  <div><label for="seo_meta_title">{$LANG.settings.seo_meta_title}</label><span><input name="seo_meta_title" id="seo_meta_title" class="textbox" type="text" value="{$PRODUCT.seo_meta_title}" /></span></div>
+	  <div><label for="seo_path">{$LANG.settings.seo_path}</label><span><input name="seo_path" id="seo_path" class="textbox" type="text" value="{$PRODUCT.seo_path}" /></span></div>
 	  <div><label for="seo_meta_keywords">{$LANG.settings.seo_meta_keywords}</label><span><textarea name="seo_meta_keywords" id="seo_meta_keywords" class="textbox">{$PRODUCT.seo_meta_keywords}</textarea></span></div>
 	  <div><label for="seo_meta_description">{$LANG.settings.seo_meta_description}</label><span><textarea name="seo_meta_description" id="seo_meta_description" class="textbox">{$PRODUCT.seo_meta_description}</textarea></span></div>
 	</fieldset>
@@ -529,19 +524,19 @@
 	{foreach from=$CUSTOMER_REVIEWS item=review}
 	<div class="note">
 	  <span class="actions">
-		<input type="hidden" name="review[{$review.id}]" id="review_{$review.id}" value="{$review.approved}" class="toggle">
-		<a href="?_g=reviews&edit={$review.id}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
-		<a href="{$review.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
+		<input type="hidden" name="review[{$review.id}]" id="review_{$review.id}" value="{$review.approved}" class="toggle" />
+		<a href="?_g=reviews&amp;edit={$review.id}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
+		<a href="{$review.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 	  </span>
 	  <strong>{$review.title}</strong>
 	  <div>{$review.review}</div>
 	  <div class="details">
 		<span style="float: right;">
 		{section name=i start=1 loop=5 step=1}
-		<input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if}>
+		<input type="radio" class="rating" name="rating_{$review.id}" value="{$smarty.section.i.index}" disabled="disabled" {if $review.rating == $smarty.section.i.index}checked="checked"{/if} />
 		{/section}
 		</span>
-		{$review.date} :: <a href="mailto:<{$review.email}">{$review.name}</a> (<a href="http://api.hostip.info/get_html.php?ip={$review.ip_address}&position=true" class="colourbox hostip">{$review.ip_address}</a>)
+		{$review.date} :: <a href="mailto:<{$review.email}">{$review.name}</a> (<a href="http://api.hostip.info/get_html.php?ip={$review.ip_address}&amp;position=true" class="colourbox hostip">{$review.ip_address}</a>)
 	  </div>
 	</div>
 	{/foreach}
@@ -556,11 +551,11 @@
 	  {foreach from=$TRANSLATIONS item=translation}
 	  <div>
 		<span class="actions">
-		  <a href="{$translation.edit}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}"></a>
-		  <a href="{$translation.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}"></a>
+		  <a href="{$translation.edit}" class="edit" title="{$LANG.common.edit}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/edit.png" alt="{$LANG.common.edit}" /></a>
+		  <a href="{$translation.delete}" class="delete" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		</span>
-		<input type="hidden" name="" id="">
-		<a href="{$translation.edit}" title="{$translation.name}"><img src="language/flags/{$translation.language}.png" alt="{$translation.name}"></a>
+		<input type="hidden" name="" id="" class="" />
+		<a href="{$translation.edit}" title="{$translation.name}"><img src="language/flags/{$translation.language}.png" alt="{$translation.name}" /></a>
 		&nbsp; <a href="{$translation.edit}" title="{$translation.name}">{$translation.name}</a>
 	  </div>
 	  {/foreach}
@@ -575,9 +570,9 @@
   {include file='templates/element.hook_form_content.php'}
 
   <div class="form_control">
-	<input type="hidden" name="save" value="{$FORM_HASH}">
-	<input type="hidden" name="previous-tab" id="previous-tab" value="">
-	<input type="submit" value="{$LANG.common.save}"> <input type="submit" name="submit_cont" value="{$LANG.common.save_reload}">
+	<input type="hidden" name="save" value="{$FORM_HASH}" />
+	<input type="hidden" name="previous-tab" id="previous-tab" value="" />
+	<input type="submit" value="{$LANG.common.save}" /> <input type="submit" name="submit_cont" value="{$LANG.common.save_reload}" />
   </div>
   <script type="text/javascript">
 	{if isset($JSON_IMAGES)}var file_list		= {$JSON_IMAGES};{/if}
@@ -589,7 +584,7 @@
   <div id="general" class="tab_content">
 	<h3>{$LANG.common.general}</h3>
 	<fieldset>
-	  <div><label for="trans_name">{$LANG.catalogue.product_name}</label><span><input type="text" name="translate[name]" id="trans_name" value="{$TRANS.name}" class="textbox"></span></div>
+	  <div><label for="trans_name">{$LANG.catalogue.product_name}</label><span><input type="text" name="translate[name]" id="trans_name" value="{$TRANS.name}" class="textbox" /></span></div>
 	  <div><label for="trans_lang">{$LANG.common.language}</label><span><select name="translate[language]" id="trans_lang" class="textbox">
 	  {if isset($LANGUAGES)} {foreach from=$LANGUAGES item=language}<option value="{$language.code}"{$language.selected}>{$language.title}</option>{/foreach} {/if}
 	  </select></span></div>
@@ -602,8 +597,8 @@
   <div id="seo" class="tab_content">
   <h3>{$LANG.settings.title_seo}</h3>
 	<fieldset><legend>{$LANG.settings.title_seo_meta_data}</legend>
-	  <div><label for="seo_meta_title">{$LANG.settings.seo_meta_title}</label><span><input name="translate[seo_meta_title]" id="seo_meta_title" class="textbox" type="text" value="{$TRANS.seo_meta_title}"></span></div>
-	  <div><label for="seo_path">{$LANG.settings.seo_path}</label><span><input name="seo_path" id="seo_path" class="textbox" type="text" value="{$TRANS.seo_path}"></span></div>
+	  <div><label for="seo_meta_title">{$LANG.settings.seo_meta_title}</label><span><input name="translate[seo_meta_title]" id="seo_meta_title" class="textbox" type="text" value="{$TRANS.seo_meta_title}" /></span></div>
+	  <div><label for="seo_path">{$LANG.settings.seo_path}</label><span><input name="seo_path" id="seo_path" class="textbox" type="text" value="{$TRANS.seo_path}" /></span></div>
 	  <div><label for="seo_meta_keywords">{$LANG.settings.seo_meta_keywords}</label><span><textarea name="translate[seo_meta_keywords]" id="seo_meta_keywords" class="textbox">{$TRANS.seo_meta_keywords}</textarea></span></div>
 	  <div><label for="seo_meta_description">{$LANG.settings.seo_meta_description}</label><span><textarea name="translate[seo_meta_description]" id="prod_seo_description" class="textbox">{$TRANS.seo_meta_description}</textarea></span></div>
 	</fieldset>
@@ -612,13 +607,13 @@
   {include file='templates/element.hook_form_content.php'}
   
   <div class="form_control">
-	<input type="hidden" name="product_id" value="{$TRANS.product_id}">
-	<input type="hidden" name="translation_id" value="{$TRANS.translation_id}">
-	<input type="hidden" name="previous-tab" id="previous-tab" value="">
-	<input type="submit" value="{$LANG.common.save}">
+	<input type="hidden" name="product_id" value="{$TRANS.product_id}" />
+	<input type="hidden" name="translation_id" value="{$TRANS.translation_id}" />
+	<input type="hidden" name="previous-tab" id="previous-tab" value="" />
+	<input type="submit" value="{$LANG.common.save}" />
   </div>
 
 {/if}
-<input type="hidden" name="token" value="{$SESSION_TOKEN}">
+<input type="hidden" name="token" value="{$SESSION_TOKEN}" />
 </form>
 

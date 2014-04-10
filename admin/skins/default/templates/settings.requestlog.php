@@ -30,7 +30,7 @@
 		{/foreach}
 		</tbody>
 	  </table>
-  <input type="hidden" name="token" value="{$SESSION_TOKEN}">
+  <input type="hidden" name="token" value="{$SESSION_TOKEN}" />
   </form>
   <div>{$PAGINATION_REQUEST_LOG}</div>
 </div>

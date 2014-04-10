@@ -40,7 +40,7 @@ class Gateway {
 		
 		if($_POST['NotificationType']=='NewOrderNotification') {	
 			
-			$data = new SimpleXMLElement(stripslashes($GLOBALS['RAW']['POST']['NotificationData']));
+			$data = new SimpleXMLElement(stripslashes($_POST['NotificationData']));
 		
 			$cart_order_id = $order->createOrderId(true, false);
 			
@@ -155,7 +155,7 @@ class Gateway {
 			
 		} elseif(!empty($_POST['NotificationType']) && in_array($_POST['NotificationType'], array('OrderCancelledNotification','OrderReadyToShipNotification'))) {
 			
-			$data = new SimpleXMLElement(stripslashes($GLOBALS['RAW']['POST']['NotificationData']));
+			$data = new SimpleXMLElement(stripslashes($_POST['NotificationData']));
 			$past_data = $this->getOrderTrans((string)$data->ProcessedOrder->AmazonOrderID);
 			
 			if($_POST['NotificationType']=='OrderCancelledNotification') {
