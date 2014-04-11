@@ -601,7 +601,7 @@ class Session {
 		Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
 		
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
-		if($this->_http_user_agent()=='IEX') {
+		if($this->_http_user_agent()!=='IEX') {
 			$this->set_cookie(session_name(),session_id(),time()+$this->_session_timeout);
 		}
 
