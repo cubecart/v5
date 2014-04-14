@@ -594,6 +594,7 @@ class Session {
 		session_cache_limiter('none');
 		session_start();
 		
+		/* Regerate session every 5 seconds (This causes random admin logout)
 		$session_time = $this->get('session_last');
 		if((time() - $session_time) > 5) {
 			$old_sessionid = $this->getId();
@@ -602,6 +603,7 @@ class Session {
 			//Use the instance because the global might be gone already
 			Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
 		}
+		*/
 		
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
 		if($this->_http_user_agent()!=='IEX') {
