@@ -594,11 +594,14 @@ class Session {
 		session_cache_limiter('none');
 		session_start();
 		
-		$old_sessionid = $this->getId();
-		session_regenerate_id(true);
-		
-		//Use the instance because the global might be gone already
-		Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
+		$session_time = $this->get('session_last');
+		if((time() - $session_time) > 5) {
+			$old_sessionid = $this->getId();
+			session_regenerate_id(true);
+			
+			//Use the instance because the global might be gone already
+			Database::getInstance()->update('CubeCart_sessions', array('session_id'	=> session_id()), array('session_id' => $old_sessionid), false);
+		}
 		
 		// Increase session length on each page load. NOT IE however as we all know it is a wingy PITA
 		if($this->_http_user_agent()!=='IEX') {
