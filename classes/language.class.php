@@ -996,7 +996,6 @@ class Language {
 		        }
 	        }
 	        $merged_addon_strings .= '</language>';
-	        echo $merged_addon_strings;
 	        return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
 	    }
 	    return false;
