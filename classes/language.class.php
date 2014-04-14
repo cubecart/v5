@@ -988,14 +988,15 @@ class Language {
 		            	$merged_addon_strings .= $element->asXML();
 		            }
 		        }
-		        $merged_addon_strings .= '</translation><translation>';
+		        $merged_addon_strings .= '</translation>';
 		        if(is_object($xml_data->translation->translate)) {
 			        foreach($xml_data->translation->translate as $element) {
 			            $merged_addon_strings .= $element->asXML();
 			        }
 		        }
 	        }
-	        $merged_addon_strings .= '</translation></language>';
+	        $merged_addon_strings .= '</language>';
+	        echo $merged_addon_strings;
 	        return (!empty($merged_addon_strings)) ? $merged_addon_strings : false;
 	    }
 	    return false;
