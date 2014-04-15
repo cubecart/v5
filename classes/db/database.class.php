@@ -726,7 +726,7 @@ class Database_Contoller {
 					unset($symbol);
 					if (is_array($value)) {
 						foreach ($value as $val) {
-							if (in_array($val, $allowed) && !is_numeric($val)) {
+							if (in_array($val, $allowed) && !is_numeric($val) || preg_match('/CONCAT/',$val)) {
 								if(isset($key[0]) && !ctype_alnum($key[0]) || $key[0]=='NULL' || is_null($key[0]) || $key[0]=='NOT NULL') {
 									if (preg_match('#^([<>!~\+\-]=?)(.+)#', $key, $match)) {
 										switch ($match[1]) {
@@ -742,15 +742,17 @@ class Database_Contoller {
 									}
 								}
 								
+								$val_ = preg_match('/CONCAT/',$val) ? $val : "`$val`";
+								
 								if (strtoupper($key[0]) == 'NULL' || is_null($key[0])) { 
 									$symbol = 'IS NULL';
-									$where[] = "`$val` $symbol";
+									$where[] = "$val_ $symbol";
 								} elseif (strtoupper($key[0])=='NOT NULL') { 
 									$symbol = 'IS NOT NULL';
-									$where[] = "`$val` $symbol";
+									$where[] = "$val_ $symbol";
 								} else {
 									$symbol = (isset($symbol)) ? $symbol : '=';
-									$or[] = "`$val` $symbol ".$this->sqlSafe($key,true);
+									$or[] = "$val_ $symbol ".$this->sqlSafe($key,true);
 								}
 								
 							} else {

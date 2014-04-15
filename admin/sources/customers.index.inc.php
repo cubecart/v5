@@ -391,7 +391,9 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 	$GLOBALS['main']->addTabControl($lang['customer']['title_customer_add'], null, currentPage(null, array('action' => 'add')));
 	$GLOBALS['main']->addTabControl($lang['search']['title_search_customers'], 'sidebar');
 
-	$where = isset($_GET['q']) && !empty($_GET['q']) ? array('~'.(string)$_GET['q'] => array('last_name', 'first_name', 'email')) : false;
+//	$where = isset($_GET['q']) && !empty($_GET['q']) ? array('~'.(string)$_GET['q'] => array('last_name', 'first_name', 'email')) : false;
+	// Support customer full name search
+	$where = isset($_GET['q']) && !empty($_GET['q']) ? array('~'.(string)trim($_GET['q']) => array('email', "CONCAT(first_name ,' ',last_name)", "CONCAT(last_name ,' ',first_name)")) : false;
 
 	$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
