@@ -56,14 +56,25 @@
 		  </select>
 		</span>
 	  </div>
-	  
 	</fieldset>
+	 <fieldset><legend>{$LANG.paypal_pro.styling}</legend>
+	  <div><label for="payflow_color">{$LANG.paypal_pro.payflow_color}:</label><span>#<input type="text" name="module[payflow_color]" id="payflow_color" value="{$MODULE.payflow_color}" class="textbox" /> </span></div>
+	  <div><small>{$LANG.paypal_pro.payflow_color_example}</small></div>
+	  <div><label for="cartborder_color">{$LANG.paypal_pro.cartborder_color}:</label><span>#<input type="text" name="module[cartborder_color]" id="cartborder_color" value="{$MODULE.cartborder_color}" class="textbox" /></span></div>
+	  <div><small>{$LANG.paypal_pro.cartborder_color_example}</small></div>
+	  <div><label for="logoimg">{$LANG.paypal_pro.logoimg}:</label><span><input type="text" name="module[logoimg]" id="logoimg" value="{$MODULE.logoimg}" class="textbox" /></span></div>
+	  <div><small>{$LANG.paypal_pro.logoimg_example}</small></div>
+	  <!--<div><label for="hdrimg">{$LANG.paypal_pro.hdrimg}:</label><span><input type="text" name="module[hdrimg]" id="hdrimg" value="{$MODULE.hdrimg}" class="textbox" /></span></div>
+	  <div><small>{$LANG.paypal_pro.hdrimg_example}</small></div>-->
+	   </fieldset>
 	
-	<fieldset><legend>{$LANG.paypal_pro.financing}</legend>
 	{if $BML}
+	<fieldset><legend>{$LANG.paypal_pro.financing}</legend>
+	
 	  <div><label for="paypal_billmelater">{$LANG.paypal_pro.billmelater}</label><span><input type="hidden" name="module[billmelater]" id="paypal_billmelater" class="toggle" value="{$MODULE.billmelater}" /></span></div>
-	  {/if}
+	  
 	 </fieldset>
+	 {/if}
 	
 	{if $MODULE.mode!=2}
 	<fieldset id='3ds'><legend>{$LANG.paypal_pro.settings_3ds}</legend>
