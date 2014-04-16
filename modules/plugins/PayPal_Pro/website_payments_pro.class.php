@@ -541,8 +541,7 @@ class Website_Payments_Pro  {
 					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
 				), $nvp_data);
 			}
-			echo "<pre>";
-			var_dump($nvp_data); exit;	
+				
 			if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 				$GLOBALS['db']->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
 				switch ($response['ACK']) {

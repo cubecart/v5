@@ -21,8 +21,8 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		
 		$phone_no = $GLOBALS['session']->get('phone', 'PayPal_Pro');
 		
-		if(isset($response['PHONENUM']) && !empty($response['PHONENUM'])) {
-			$phone_no = $response['PHONENUM'];
+		if(isset($response['PAYMENTREQUEST_0_SHIPTOPHONENUM']) && !empty($response['PAYMENTREQUEST_0_SHIPTOPHONENUM'])) {
+			$phone_no = $response['PAYMENTREQUEST_0_SHIPTOPHONENUM'];
 		} elseif(!empty($phone_no)) {
 			// use it :)
 		} else {
@@ -31,7 +31,7 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		}
 		
 		$customer	= array(
-			'title'			=> isset($response['SALUTATION']) ? $response['SALUTATION'] : '',
+			'title'			=> isset($response['SUFFIX']) ? $response['SUFFIX'] : '',
 			'first_name'	=> $response['FIRSTNAME'],
 			'last_name'		=> $response['LASTNAME'],
 			'email'			=> $response['EMAIL'],
@@ -43,19 +43,19 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 			'title'			=> $customer['title'],
 			'first_name'	=> $customer['first_name'],
 			'last_name'		=> $customer['last_name'],
-			'line1'			=> $response['SHIPTOSTREET'],
-			'line2'			=> '',
-			'postcode'		=> $response['SHIPTOZIP'],
-			'town'			=> $response['SHIPTOCITY'],
+			'line1'			=> $response['PAYMENTREQUEST_0_SHIPTOSTREET'],
+			'line2'			=> $response['PAYMENTREQUEST_0_SHIPTOSTREET2'],
+			'postcode'		=> $response['PAYMENTREQUEST_0_SHIPTOZIP'],
+			'town'			=> $response['PAYMENTREQUEST_0_SHIPTOCITY'],
 			
-			'state_id'		=> getStateFormat($response['SHIPTOSTATE'], 'abbrev', 'id'),
-			'state'			=> getStateFormat($response['SHIPTOSTATE'], 'abbrev', 'name'),
-			'state_abbrev'	=> $response['SHIPTOSTATE'],
+			'state_id'		=> getStateFormat($response['PAYMENTREQUEST_0_SHIPTOSTATE'], 'abbrev', 'id'),
+			'state'			=> getStateFormat($response['PAYMENTREQUEST_0_SHIPTOSTATE'], 'abbrev', 'name'),
+			'state_abbrev'	=> $response['PAYMENTREQUEST_0_SHIPTOSTATE'],
 			
-			'country'		=> getCountryFormat($response['SHIPTOCOUNTRYCODE'], 'iso', 'numcode'),
-			'country_id'	=> getCountryFormat($response['SHIPTOCOUNTRYCODE'], 'iso', 'numcode'),
-			'country_iso'	=> $response['SHIPTOCOUNTRYCODE'],
-			'country_iso3'	=> getCountryFormat($response['SHIPTOCOUNTRYCODE'], 'iso', 'iso3'),
+			'country'		=> getCountryFormat($response['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'], 'iso', 'numcode'),
+			'country_id'	=> getCountryFormat($response['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'], 'iso', 'numcode'),
+			'country_iso'	=> $response['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'],
+			'country_iso3'	=> getCountryFormat($response['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'], 'iso', 'iso3'),
 			'user_defined'  => true			
 			
 		);
