@@ -25,6 +25,10 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 			const ORDER_CANCELLED	= 6;
 			*/
 			
+			if($response['PAYMENTINFO_0_ERRORCODE']=='10486') {
+				httpredir('https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='.$response['TOKEN']);
+			}
+			
 			switch ($response['PAYMENTINFO_0_PAYMENTSTATUS']) {
 				case 'Canceled-Reversal':	## A reversal has been cancelled
 					break;
