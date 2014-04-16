@@ -25,7 +25,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 			const ORDER_CANCELLED	= 6;
 			*/
 			
-			switch ($response['PAYMENTSTATUS']) {
+			switch ($response['PAYMENTINFO_0_PAYMENTSTATUS']) {
 				case 'Canceled-Reversal':	## A reversal has been cancelled
 					break;
 				case 'Denied':				## The merchant has denied the payment
@@ -40,7 +40,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 				case 'Partially-Refunded':	## The payment has been partially refunded
 					break;
 				case 'Pending':				## The payment is pending
-					switch ($response['PENDINGREASON']) {
+					switch ($response['PAYMENTINFO_0_PENDINGREASON']) {
 						case 'address':			## The customer did not include a confirmed shipping address
 							## Give options to Authorize or Deny the payment
 							break;
@@ -67,7 +67,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 					$pp_order_status	= 1;
 					break;
 				case 'Reversed':			## A payment was reversed due to a chargeback, or other type of reversal
-					switch ($response['REASONCODE']) {
+					switch ($response['PAYMENTINFO_0_REASONCODE']) {
 						case 'none':			## No reason code
 							break;
 						case 'chargeback':		## Chargeback by customer
@@ -107,9 +107,9 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 	
 			$transData['gateway']		= 'PayPal Express Checkout';
 			$transData['order_id']		= $cart_order_id;
-			$transData['trans_id']		= $response['TRANSACTIONID'];
-			$transData['amount']		= $response['AMT'];
-			$transData['status']		= $response['PAYMENTSTATUS'];
+			$transData['trans_id']		= $response['PAYMENTINFO_0_TRANSACTIONID'];
+			$transData['amount']		= $response['PAYMENTINFO_0_AMT'];
+			$transData['status']		= $response['PAYMENTINFO_0_PAYMENTSTATUS'];
 			$transData['customer_id']	= $order_summary['customer_id'];
 			$transData['extra']			= '';
 			$transData['notes']			= '';

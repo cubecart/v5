@@ -235,69 +235,66 @@ class Website_Payments_Pro  {
 		## Completes an Express Checkout transaction
 		$delivery	= $this->_basket['delivery_address'];
 		$nvp_data	= array(
-			'PAYMENTACTION'		=> $this->_api_method,
+			'PAYMENTREQUEST_0_PAYMENTACTION'		=> $this->_api_method,
 			'TOKEN'				=> $this->_token,
 			'PAYERID'			=> $GLOBALS['session']->get('PayerID', 'PayPal_Pro'),
 			'RETURNFMFDETAILS'	=> '1',
-			'CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
-			'INVNUM'			=> $this->_basket['cart_order_id'],
-			'IPADDRESS'			=> get_ip_address(),
+			'PAYMENTREQUEST_0_CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
+			'PAYMENTREQUEST_0_INVNUM'			=> $this->_basket['cart_order_id'],
+			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
+			'PAYMENTREQUEST_0_ITEMAMT' => sprintf('%.2f', $this->_basket['subtotal']),
+			'PAYMENTREQUEST_0_SHIPPINGAMT' => sprintf('%.2f', $this->_basket['shipping']['value']),
+			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
+			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
+			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,	
 			## Delivery Address
-			'SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
-			'SHIPTOSTREET'	=> $delivery['line1'],
-			'SHIPTOSTREET2'	=> isset($delivery['line2']) ? $delivery['line2'] : '',
-			'SHIPTOCITY'	=> $delivery['town'],
-			'SHIPTOSTATE'	=> getStateFormat($delivery['state_id'], 'id', 'abbrev'),
-			'SHIPTOZIP'		=> $delivery['postcode'],
-			'SHIPTOCOUNTRY'	=> getCountryFormat($delivery['country_id'], 'numcode', 'iso'),
-			'SHIPTOPHONENUM'=> isset($delivery['phone']) ? $delivery['phone'] : '',
-			'NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'
+			'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
+			'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
+			'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> isset($delivery['line2']) ? $delivery['line2'] : '',
+			'PAYMENTREQUEST_0_SHIPTOCITY'	=> $delivery['town'],
+			'PAYMENTREQUEST_0_SHIPTOSTATE'	=> getStateFormat($delivery['state_id'], 'id', 'abbrev'),
+			'PAYMENTREQUEST_0_SHIPTOZIP'		=> $delivery['postcode'],
+			'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'	=> getCountryFormat($delivery['country_id'], 'numcode', 'iso'),
+			'PAYMENTREQUEST_0_SHIPTOPHONENUM'=> isset($delivery['phone']) ? $delivery['phone'] : ''
 		);
 
 		$i	= 0;
 		$tax_total	= 0;
 		$prod_total	= 0;
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
-		if($store_country==840) {
-			foreach ($this->_basket['contents'] as $hash => $item) {
-				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-				$price		= $item['total_price_each'];	## Always tax exclusive
-				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-				$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-				$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
-	
-				$tax_total	+= $prod_tax = $taxes['applied'];
-				$prod_total	+= $price;
-	
-				$nvp_data	= array_merge(array(
-					'L_NAME'.$i	=> $item['name'],
-					'L_AMT'.$i	=> sprintf('%.2f', $price),
-					'L_QTY'.$i	=> $item['quantity'],
-					'L_TAX'.$i	=> sprintf('%.2f', $prod_tax),
-				), $nvp_data);
-				$i++;
-			}
-			
-			if($this->_basket['discount']>0) {
-				$nvp_data	= array_merge(array(
-					'L_NAME'.$i	=> 'Discount',
-					'L_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
-					'L_QTY'.$i	=> 1,
-					'L_TAX'.$i	=> 0,
-				), $nvp_data);
-			}
+		
+		foreach ($this->_basket['contents'] as $hash => $item) {
+			$product	= $GLOBALS['catalogue']->getProductData($item['id']);
+			$price		= $item['total_price_each'];	## Always tax exclusive
+			$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
+			$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
+			$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
+
+			$tax_total	+= $prod_tax = $taxes['applied'];
+			$prod_total	+= $price;
 			
 			$nvp_data	= array_merge(array(
-				'ITEMAMT'			=> $this->_basket['subtotal'],
-				'SHIPPINGAMT'		=> $this->_basket['shipping']['value'],
-				'TAXAMT'			=> $this->_basket['total_tax'],
-				'AMT'				=> $this->_basket['total'],
+				'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
+				'L_PAYMENTREQUEST_0_ITEMURL'.$i => $GLOBALS['storeURL'].'/index.php?_a=product&product_id='.$item['id'],
+				'L_PAYMENTREQUEST_0_NUMBER'.$i => $item['product_code'],
+				'L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE'.$i => $item['product_weight'],
+				'L_PAYMENTREQUEST_0_ITEMWEIGHTUNIT'.$i => $GLOBALS['config']->get('config','product_weight_unit'),
+				'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $prod_tax),
 			), $nvp_data);
 			
-		} else {
+			
+			$i++;
+		}
+		
+		if($this->_basket['discount']>0) {
 			$nvp_data	= array_merge(array(
-				'ITEMAMT'			=> $this->_basket['total'],
-				'AMT'				=> $this->_basket['total'],
+				'L_PAYMENTREQUEST_0_NAME'.$i	=> 'Discount',
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
 			), $nvp_data);
 		}
 
@@ -457,7 +454,7 @@ class Website_Payments_Pro  {
 				'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 				'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
 				'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
-				'NOSHIPPING'	=> 1,
+				//'NOSHIPPING'	=> 1, // With this set to 1 no shipping address is provided by PayPal
 				'ALLOWNOTE'		=> 0,
 				'ADDROVERRIDE'	=> 0,
 				'LOCALECODE'	=> $GLOBALS['language']->getLanguage(),
