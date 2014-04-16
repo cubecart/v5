@@ -454,7 +454,7 @@ class Website_Payments_Pro  {
 				'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 				'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
 				'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
-				//'NOSHIPPING'	=> 1, // With this set to 1 no shipping address is provided by PayPal
+				//'NOSHIPPING'	=> 2, // With this set to 1 no shipping address is provided by PayPal
 				'ALLOWNOTE'		=> 0,
 				'ADDROVERRIDE'	=> 0,
 				'LOCALECODE'	=> $GLOBALS['language']->getLanguage(),
