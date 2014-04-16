@@ -608,13 +608,13 @@ class User {
 				if ($GLOBALS['db']->update('CubeCart_customer', $record, $where)) {
 					if ($this->authenticate($check[0]['email'], $password['password'], false, false, false, false)) {
 						$GLOBALS['gui']->setNotify(($GLOBALS['language']->account['notify_password_recovery_success']));
-						httpredir(currentPage(array('validate'), array('_a' => 'profile')));
+                        httpredir('?_a=profile');
 					}
 				}
 			}
 		}
 
-		$GLOBALS['gui']->setError(($GLOBALS['language']->account['error_password_update']));
+		$GLOBALS['gui']->setError($GLOBALS['language']->account['error_password_recover']);
 		return false;
 	}
 

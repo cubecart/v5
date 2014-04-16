@@ -2424,12 +2424,7 @@ class Cubecart {
 		$GLOBALS['smarty']->assign('SECTION_NAME', 'recovery');
 		
 		if (isset($_POST['email']) && isset($_POST['validate']) && isset($_POST['password'])) {
-			if ($GLOBALS['user']->passwordReset($_POST['email'], $_POST['validate'], $_POST['password'])) {
-				$GLOBALS['gui']->setNotify($GLOBALS['language']->account['notify_password_recovery_success']);
-				httpredir('?_a=account');
-			} else {
-				$GLOBALS['gui']->setError($GLOBALS['language']->account['error_password_recover']);
-			}
+			$GLOBALS['user']->passwordReset($_POST['email'], $_POST['validate'], $_POST['password']);
 		}
 		$email		= (isset($_GET['email'])) ? $_GET['email'] : null;
 		$validate	= (isset($_GET['validate'])) ? $_GET['validate'] : null;
