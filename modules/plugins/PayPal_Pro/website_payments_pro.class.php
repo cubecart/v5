@@ -325,6 +325,8 @@ class Website_Payments_Pro  {
 					$GLOBALS['session']->delete('', 'PayPal_Pro');
 					break;
 			}
+			$paypal_url = ($this->_module['gateway']=='1') ? 'www.paypal.com' : 'www.sandbox.paypal.com';
+			$response['RETRY_URL'] = 'https://'.$paypal_url.'/cgi-bin/webscr?cmd=_express-checkout&token='.$this->_token;
 			return $response;
 		}
 		return false;
@@ -462,13 +464,13 @@ class Website_Payments_Pro  {
 				'PAYFLOWCOLOR'	=> $this->_module['payflow_color'],
 				'CARTBORDERCOLOR' => $this->_module['cartborder_color'],
 				'LOGOIMG'		=> $this->_module['logoimg'],
-				'TOTALTYPE'		=> 'EstimatedTotal',
 				'BRANDNAME'		=> $GLOBALS['config']->get('config', 'store_name'),
 				'GIFTMESSAGEENABLE' => 0,
 				'GIFTRECEIPTENABLE' => 0,
 				'GIFTWRAPENABLE'	=> 0,
 				'BUYEREMAILOPTINENABLE'	=> 0,
-				'SURVEYENABLE'	=> 0
+				'SURVEYENABLE'	=> 0,
+				'REQCONFIRMSHIPPING' => $this->_module['confAddress']
 			);
 			
 			if($bml) {
@@ -497,7 +499,10 @@ class Website_Payments_Pro  {
 					'PAYMENTREQUEST_0_SHIPTOZIP'		=> $delivery['postcode'],
 					'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'	=> $delivery['country_iso'],
 					'PAYMENTREQUEST_0_SHIPTOPHONENUM'=> $billing['phone'], /* we don't have a delivery value for this */
+					'TOTALTYPE'		=> 'Total',
 				), $nvp_data);
+			} else {
+				$nvp_data['TOTALTYPE'] = 'EstimatedTotal';
 			}
 
 			## Add basket contents
