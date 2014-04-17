@@ -75,7 +75,6 @@ class Website_Payments_Pro  {
 		$static_nvp_data = array(
 			'BUTTONCODE' 		=> 'TOKEN',
 			'BUTTONTYPE' 		=> 'PAYMENT',
-			'BUTTONIMAGEURL' 	=> 'https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif'
 		);	
 		
 		$k = 0;
@@ -95,32 +94,6 @@ class Website_Payments_Pro  {
 	}
 
 	################################################
-
-	public function DoAuthorization($transaction_id = null, $amount = null) {
-		## Authorize a payment
-		$nvp_data	= array(
-			'TRANSACTIONID'	=> $transaction_id,
-			'AMT'			=> $amount,
-			'CURRENCYCODE'	=> $GLOBALS['config']->get('config','default_currency'),
-		);
-		return $this->nvp_request('DoAuthorization', $nvp_data);
-	}
-
-	public function DoCapture($capture = null) {
-		if (!empty($capture) && is_array($capture)) {
-			$nvp_data	= array (
-				'AUTHORIZATIONID'	=> $capture['transaction_id'],
-				'AMT'				=> $capture['amount'],
-				'COMPLETETYPE'		=> ($capture['complete']) ? 'Complete' : 'NotComplete',
-				'CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
-				'NOTE'				=> $capture['note'],
-			);
-			if ($response = $this->nvp_request('DoCapture', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
 
 	public function DoDirectPayment($nvp = array()) {
 		## Process a credit card payment
@@ -332,50 +305,6 @@ class Website_Payments_Pro  {
 		return false;
 	}
 
-	public function DoReauthorization($transaction_id = null, $amount = null) {
-		## Reauthorize a payment
-		if (!empty($transaction_id) && !empty($amount)) {
-			$nvp_data	= array(
-				'AUTHORIZATIONID'	=> $transaction_id,
-				'AMT'				=> $amount,
-				'CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
-			);
-		#	var_dump($nvp_data);
-			if ($response = $this->nvp_request('DoReauthorization', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
-
-	public function DoVoid($void = null) {
-		## Void an order or authorization
-		if (!empty($void) && is_array($void)) {
-			$nvp_data	= array(
-				'AUTHORIZATIONID'	=> $void['transaction_id'],
-				'NOTE'				=> $void['note'],
-			);
-			if ($response = $this->nvp_request('DoVoid', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
-
-	public function GetBalance() {
-		## Obtain the available balance for a PayPal account
-		if ($response = $this->nvp_request('GetBalance', array('RETURNALLCURRENCIES' => '1'))) {
-			foreach ($response as $key => $value) {
-				if (preg_match('#^L_CURRENCYCODE([0-9]+)#', $key, $match)) {
-					$currency[$value]	= (float)$response['L_AMT'.$match[1]];
-				}
-			}
-		#	var_dump($response);
-			return (is_array($currency)) ? $currency : false;
-		}
-		return false;
-	}
-
 	public function GetExpressCheckoutDetails() {
 		## Obtain information about an Express Checkout transaction
 		if ($this->_token) {
@@ -396,50 +325,6 @@ class Website_Payments_Pro  {
 		}
 		return false;
 	}
-
-	public function GetTransactionDetails($transaction_id = null) {
-		## Obtain information about a specific transaction
-		if (!empty($transaction_id)) {
-			$nvp_data	= array(
-				'TRANSACTIONID'	=> $transaction_id
-			);
-			if ($response = $this->nvp_request('GetTransactionDetails', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
-
-	public function ManagePendingTransactionStatus($transaction_id = null, $accept = false) {
-		## Accept or deny a payment held by the Fraud Management Filters
-		if (!empty($transaction_id)) {
-			$nvp_data	= array(
-				'TRANSACTIONID'	=> $transaction_id,
-				'ACTION'		=> ($accept) ? 'Accept' : 'Deny',
-			);
-			if ($response = $this->nvp_request('ManagePendingTransactionStatus', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
-
-	public function RefundTransaction($refund = null) {
-		## Refund a transaction, ether partially, or in full
-		if (!empty($refund) && is_array($refund)) {
-			$nvp_data	= array(
-				'TRANSACTIONID'	=> $refund['transaction_id'],
-				'REFUNDTYPE'	=> $refund['type'],
-				'AMT'			=> $refund['amount'],
-				'NOTE'			=> $refund['note'],
-			);
-			if ($response = $this->nvp_request('RefundTransaction', $nvp_data)) {
-				return $response;
-			}
-		}
-		return false;
-	}
-
 	public function SetExpressCheckout($bml = false) {
 		
 		## Initiates an Express Checkout transaction		
@@ -599,7 +484,6 @@ class Website_Payments_Pro  {
 		ksort($nvp_array);
 		return $nvp_array;
 	}
-
 }
 
 

@@ -15,9 +15,6 @@
   </info>
   
   <hooks>
-	<hook trigger="admin.order.index.post_process" enabled="1"><![CDATA[Admin Processing]]></hook>
-	<hook trigger="admin.order.index.pre_display" enabled="1"><![CDATA[Admin Pre-display]]></hook>
-	<hook trigger="admin.order.index.transaction" enabled="1"><![CDATA[Transaction display]]></hook>
 	<hook trigger="class.cart.clear" enabled="1"><![CDATA[Empty Basket]]></hook>
 	<hook trigger="class.cubecart.construct.callback.gateway" enabled="1"><![CDATA[Callback Handler]]></hook>
 	<hook trigger="class.cubecart.construct.cancel" enabled="1"><![CDATA[Cancel Process Handler]]></hook>
