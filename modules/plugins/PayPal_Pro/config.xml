@@ -23,5 +23,6 @@
 	<hook trigger="class.cubecart.display_basket.alternate" enabled="1"><![CDATA[Checkout Button]]></hook>
 	<hook trigger="class.cubecart.display_gateways" enabled="1"><![CDATA[Gateways for Payments Pro]]></hook>
 	<hook trigger="class.cubecart.checkout_progress" enabled="1"><![CDATA[Checkout Progress]]></hook>
+	<hook trigger="class.gui.javascripts" enabled="1"><![CDATA[PayPal JS]]></hook>
   </hooks>
 </installer>

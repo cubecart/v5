@@ -2,6 +2,17 @@
 if(!defined('CC_DS')) die('Access Denied');
 $module	= new Module(__FILE__, $_GET['module'], 'admin/index.tpl', true, false);
 
+$script_data = <<<EOD
+jQuery(document).ready(function() {
+	var pp_acceptance = "<a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png\" border=\"0\" alt=\"Now accepting PayPal\"></a><div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/how-paypal-works\" target=\"_blank\" ><b>How PayPal Works</b></a></div>";
+	$("#basket_summary").after(pp_acceptance);
+});
+EOD;
+
+$fp = fopen(CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'extra'.CC_DS.'PayPal_acceptance.js', 'w');
+fwrite($fp, $script_data);
+fclose($fp);
+
 ## Modes
 $modes	= array(
 	'4'	=> $GLOBALS['language']->paypal_pro['mode_pp_hosted'],
