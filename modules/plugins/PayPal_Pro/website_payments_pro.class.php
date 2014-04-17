@@ -103,6 +103,7 @@ class Website_Payments_Pro  {
 				'PAYMENTACTION'		=> ($this->_api_method == 'Order') ? 'Authorization' : $this->_api_method,
 				'IPADDRESS'			=> get_ip_address(),
 				'RETURNFMFDETAILS'	=> '1',
+				
 				'INVNUM'			=> $this->_basket['cart_order_id'],
 
 				## Values
@@ -119,7 +120,7 @@ class Website_Payments_Pro  {
 				'EXPDATE'			=> sprintf('%02d%d', (int)$nvp['exp_month'], (int)$nvp['exp_year']),
 
 				## Billing Address
-				'SALUTATION'		=> $nvp['title'],
+				'EMAIL'				=> $this->_basket['billing_address']['email'],
 				'FIRSTNAME'			=> $nvp['first_name'],
 				'LASTNAME'			=> $nvp['last_name'],
 				'STREET'			=> $nvp['line1'],
@@ -127,9 +128,9 @@ class Website_Payments_Pro  {
 				'CITY'				=> $nvp['town'],
 				'STATE'				=> getStateFormat($nvp['state_id'], 'id', 'abbrev'),
 				'ZIP'				=> $nvp['postcode'],
-				'PHONENUM'			=> $nvp['phone'],
 				'COUNTRYCODE'		=> getCountryFormat($nvp['country_id'], 'numcode', 'iso'),
 				'CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
+				'SHIPTOPHONENUM'	=> $nvp['phone'],
 
 				## Shipping Address
 				'SHIPTONAME'		=> trim(sprintf('%s %s %s', $this->_basket['delivery_address']['title'], $this->_basket['delivery_address']['first_name'], $this->_basket['delivery_address']['last_name'])),
@@ -138,7 +139,8 @@ class Website_Payments_Pro  {
 				'SHIPTOCITY'		=> $this->_basket['delivery_address']['town'],
 				'SHIPTOZIP'			=> $this->_basket['delivery_address']['postcode'],
 				'SHIPTOSTATE'		=> getStateFormat($this->_basket['delivery_address']['state_id'], 'id', 'abbrev'),
-				'SHIPTOCOUNTRYCODE'	=> $this->_basket['delivery_address']['country_iso'],
+				'SHIPTOCOUNTRY'		=> $this->_basket['delivery_address']['country_iso']
+				
 			);
 			if ($this->_module['3ds_status']) {
 				$centinel	= array(
