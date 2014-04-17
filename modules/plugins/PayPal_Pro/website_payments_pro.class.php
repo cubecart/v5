@@ -54,9 +54,7 @@ class Website_Payments_Pro  {
 		$this->_token	= $GLOBALS['session']->isEmpty('token','PayPal_Pro') ? false : $GLOBALS['session']->get('token', 'PayPal_Pro');
 	}
 
-	public function __destruct() {
-	#	$_SESSION['Paypal_Pro']['TOKEN']	= $this->_token;
-	}
+	public function __destruct() {}
 
 	public function __call($method, $arguments) {
 		if (!empty($arguments) && is_array($arguments[0])) {
@@ -502,7 +500,6 @@ class CentinelClient {
 			'TransactionPwd'	=> $transaction_pwd,
 		);
 		$this->_xml = new XML(true);
-		//$this->_xml->openMemory();
 	}
 
 	public function __destruct() {}
