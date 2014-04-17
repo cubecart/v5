@@ -64,9 +64,7 @@
 	  <div><small>{$LANG.paypal_pro.cartborder_color_example}</small></div>
 	  <div><label for="logoimg">{$LANG.paypal_pro.logoimg}:</label><span><input type="text" name="module[logoimg]" id="logoimg" value="{$MODULE.logoimg}" class="textbox" /></span></div>
 	  <div><small>{$LANG.paypal_pro.logoimg_example}</small></div>
-	  <!--<div><label for="hdrimg">{$LANG.paypal_pro.hdrimg}:</label><span><input type="text" name="module[hdrimg]" id="hdrimg" value="{$MODULE.hdrimg}" class="textbox" /></span></div>
-	  <div><small>{$LANG.paypal_pro.hdrimg_example}</small></div>-->
-	   </fieldset>
+	</fieldset>
 	
 	{if $BML}
 	<fieldset><legend>{$LANG.paypal_pro.financing}</legend>
