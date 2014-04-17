@@ -1006,12 +1006,12 @@ class Cart {
 	 * Save basket
 	 */
 	public function save() {
-		$GLOBALS['session']->set('', $this->basket, 'basket', true);
+		Session::getInstance()->set('', $this->basket, 'basket', true);
 		//Only care about auto saving the cart if there is something in there
 		if (!empty($this->basket) && isset($this->basket['contents'])) {
 			if (User::getInstance()->is() && $GLOBALS['config']->get('config', 'auto_save_cart')) {
 				static $old_basket = null;
-				$id = $GLOBALS['user']->getId();
+				$id = User::getInstance()->getId();
 				$basket = serialize($this->basket['contents']);
 				if (empty($old_basket) || $old_basket != $basket) {
 					$old_basket = $basket;
