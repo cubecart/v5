@@ -38,10 +38,12 @@ class Website_Payments_Pro  {
 				## Live Mode
 				$this->_api_endpoint	= 'api-3t.paypal.com/nvp';
 				$this->_api_paypal_url	= 'https://www.paypal.com/webscr&cmd=_express-checkout'.$mobile.'&token=';
+				$this->_api_paypal_recover_url	= 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=';
 			} else {
 				## Sandbox/Testing Mode
 				$this->_api_endpoint	= 'api-3t.sandbox.paypal.com/nvp';
 				$this->_api_paypal_url	= 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout'.$mobile.'&token=';
+				$this->_api_paypal_recover_url	= 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=';
 			}
 		} else {
 			## Accelerated Boarding
@@ -300,11 +302,13 @@ class Website_Payments_Pro  {
 					$GLOBALS['session']->delete('', 'PayPal_Pro');
 					break;
 			}
-			$paypal_url = ($this->_module['gateway']=='1') ? 'www.paypal.com' : 'www.sandbox.paypal.com';
-			$response['RETRY_URL'] = 'https://'.$paypal_url.'/cgi-bin/webscr?cmd=_express-checkout&token='.$this->_token;
 			return $response;
 		}
 		return false;
+	}
+	
+	public function RecoverExpressCheckout() {
+		httpredir($this->_api_paypal_recover_url.$this->_token);
 	}
 
 	public function GetExpressCheckoutDetails() {

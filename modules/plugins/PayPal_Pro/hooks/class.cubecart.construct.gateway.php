@@ -26,7 +26,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 			*/
 			
 			if($response['L_ERRORCODE0']=='10486') {
-				httpredir($response['RETRY_URL']);
+				$wpp->RecoverExpressCheckout();
 			}
 			
 			switch ($response['PAYMENTINFO_0_PAYMENTSTATUS']) {
