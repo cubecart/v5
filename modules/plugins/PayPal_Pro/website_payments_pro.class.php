@@ -374,10 +374,6 @@ class Website_Payments_Pro  {
 			## Billing information
 			$billing = $this->_basket['billing_address'];
 			
-			if($GLOBALS['user']->getId()>0) {
-				$nvp_data['PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID'] = $GLOBALS['user']->getId();
-			}
-			
 			## Delivery information
 			if (isset($this->_basket['delivery_address']['first_name']) && $delivery = $this->_basket['delivery_address']) {
 				$nvp_data	= array_merge(array(
