@@ -18,7 +18,7 @@
   <string name="api_username"><![CDATA[API Username]]></string>
   <string name="api_password"><![CDATA[API Password]]></string>
   <string name="api_signature"><![CDATA[API Signature]]></string>
-  <string name="callback_ssl"><![CDATA[Call back from Google Checkout can only be enabled if the store is running with SSL enabled. It is highly recommended to obtain an SSL certificate and enable this feature.]]></string>
+  <string name="callback_ssl"><![CDATA[Call back from PayPal Checkout can only be enabled if the store is running with SSL enabled. It is highly recommended to obtain an SSL certificate and enable this feature.]]></string>
   <string name="capture_amount"><![CDATA[Capture Amount]]></string>
   <string name="capture_final"><![CDATA[Final Capture]]></string>
   <string name="capture_final_no"><![CDATA[No, I will be capture more funds against this later.]]></string>
