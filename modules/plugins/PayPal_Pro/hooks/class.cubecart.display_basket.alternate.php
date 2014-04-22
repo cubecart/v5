@@ -37,9 +37,9 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 				$locale	= 'en_US';
 			}
 			## Generate the PayPal Pro button
-			$button_image = ($GLOBALS['gui']->mobile) ? $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/express_checkout_mobile.gif' : 'https://www.paypal.com/'.$locale.'/i/btn/btn_xpressCheckout.gif';
+			$button_image = $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/PP_Buttons_CheckOut_146x30_v3.png';
 			
-			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" /><img src="'.$button_image.'" alt="" /></a>';
+			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" class="colorbox_iframe" /><img src="'.$button_image.'" alt="" /></a>';
 			
 			if($module_config['billmelater']==1) {
 				$button	= $button.'<br />
