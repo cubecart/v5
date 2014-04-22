@@ -58,7 +58,7 @@ if ($settings['status']) {
 					'plugin'	=> true,
 					'base_folder' => 'PayPal_Pro',
 					'folder'	=> 'PayPal_Pro_Mark',
-					'desc'		=> 'https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif',
+					'desc'		=> 'modules/plugins/PayPal_Pro/images/PayPal_mark_37x23.png',
 				#	'help'		=> '',
 				);
 				break;
