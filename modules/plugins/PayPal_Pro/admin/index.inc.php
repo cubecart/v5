@@ -2,16 +2,26 @@
 if(!defined('CC_DS')) die('Access Denied');
 $module	= new Module(__FILE__, $_GET['module'], 'admin/index.tpl', true, false);
 
-$script_data = <<<EOD
-jQuery(document).ready(function() {
-	var pp_acceptance = "<a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png\" border=\"0\" alt=\"Now accepting PayPal\"></a><div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/how-paypal-works\" target=\"_blank\" ><b>How PayPal Works</b></a></div>";
-	$("#basket_summary").after(pp_acceptance);
-});
-EOD;
+$script_file = CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'extra'.CC_DS.'PayPal_acceptance.js';
 
-$fp = fopen(CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'extra'.CC_DS.'PayPal_acceptance.js', 'w');
-fwrite($fp, $script_data);
-fclose($fp);
+if($module->acceptance_mark=='1') {
+	$ssl = $GLOBALS['config']->get('ssl');
+	
+	$store_url = ($ssl=='1') ? $GLOBALS['config']->get('ssl_url') : CC_STORE_URL;
+	
+	$script_data = <<<END
+jQuery(document).ready(function() {
+	var pp_acceptance = "<div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"$store_url/modules/plugins/PayPal_Pro/images/acceptance_marks_UK_120x25.jpg\" border=\"0\" alt=\"Now accepting PayPal\"></a></div>";
+	$("body").append(pp_acceptance);
+});
+END;
+	
+	$fp = fopen($script_file, 'w');
+	fwrite($fp, $script_data);
+	fclose($fp);
+} else {
+	unlink($script_file);
+}
 
 ## Modes
 $modes	= array(
