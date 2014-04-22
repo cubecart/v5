@@ -89,7 +89,7 @@ if (!empty($earliest_order[0]['MIN_order_date'])) {
 			}
 			$graph_data[] = array($i, $value);
 		}
-		$max = sigfig($max, 1);
+		if ($max) $max = sigfig($max, 1);
 		// PHPlot
 		$filename	= 'cache.image.'.md5('yearly'.implode(',', $yearly)).'.png';
 		$graph->PHPlot(480, 360, 'cache'.CC_DS.$filename);
@@ -297,7 +297,7 @@ if (($results = $GLOBALS['db']->query($query, $per_page, $page)) !== false) {
 	foreach ($results as $key => $result) {
 		$result['key']		= (($page-1)*$per_page)+($key+1);
 		$result['expenditure'] = Tax::getInstance()->priceFormat($result['customer_expenditure']);
-		$result['percent']	= number_format(100*($result['customer_expenditure']/$divider[0]['total_sales']), 2);
+		$result['percent']	= $divider[0]['total_sales'] ? number_format(100*($result['customer_expenditure']/$divider[0]['total_sales']), 2) : 0;
 		$graph_data[]		= array($result['key'], $result['customer_expenditure']);
 		// Create a customer legend
 		$smarty_data['best_customers'][] = $result;
