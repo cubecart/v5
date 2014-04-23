@@ -77,7 +77,7 @@ if (isset($_GET['token']) && isset($_GET['PayerID']) && $GLOBALS['session']->get
 		
 		if(!$GLOBALS['user']->is()) {
 			$customer['password'] = substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",mt_rand(0,50),1).substr(md5(time()),1);
-			$customer_id = $GLOBALS['user']->createUser($customer, false);
+			$customer_id = $GLOBALS['user']->createUser($customer, false, 2);
 			$GLOBALS['db']->update('CubeCart_sessions', array('customer_id' => $customer_id), array('session_id' => $GLOBALS['session']->getId()));
 			if(!$GLOBALS['user']->getAddresses()) {
 				$GLOBALS['user']->saveAddress($address,$customer_id);

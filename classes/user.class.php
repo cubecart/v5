@@ -316,7 +316,6 @@ class User {
 		if (!empty($data)) {
 			// Insert record(s)
 			$data['new_password']	= '0';
-			$data['type'] 			= $type;
 			$data['ip_address']		= get_ip_address();
 			
 			if($existing = $GLOBALS['db']->select('CubeCart_customer', 'customer_id', array('email' => $data['email']))) {
@@ -324,6 +323,7 @@ class User {
 				$customer_id = $existing[0]['customer_id'];
 			} else {
 				$data['registered']		= time();
+				$data['type'] 			= $type;
 				$GLOBALS['db']->insert('CubeCart_customer', $data);
 				$customer_id = $GLOBALS['db']->insertid();
 			}
