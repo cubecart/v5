@@ -39,14 +39,30 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 			## Generate the PayPal Pro button
 			$button_image = $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/PP_Buttons_CheckOut_146x30_v3.png';
 			
-			$button	= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" class="colorbox_iframe" /><img src="'.$button_image.'" alt="" /></a>';
+			
+			$button = '<script>
+    (function(d, s, id){
+      var js, ref = d.getElementsByTagName(s)[0];
+      if (!d.getElementById(id)){
+        js = d.createElement(s); js.id = id; js.async = true;
+        js.src = "//www.paypalobjects.com/js/external/paypal.js";
+        ref.parentNode.insertBefore(js, ref);
+      }
+    }(document, "script", "paypal-js"));
+  </script>';
+			$button .= '<form action="doPayment” method="POST">';
+			
+			$wpp	= new Website_Payments_Pro($GLOBALS['config']->get('PayPal_Pro'));
+			$button_link = $wpp->SetExpressCheckout(false, true);
+			
+			$button	.= '<a href="'.$button_link.'" target="_self" title="" data-paypal-button="true" data-merchant-id="" /><img src="'.$button_image.'" alt="" /></a>';
 			
 			if($module_config['billmelater']==1) {
 				$button	= $button.'<br />
 				<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro&amp;bml=1" target="_self" title="" /><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_SM.png" alt="" /></a><div align="right"><a href="https://www.securecheckout.billmelater.com/paycapture-content/fetch?hash=AU826TU8&content=/bmlweb/ppwpsiw.html" class="colorbox_iframe"><img src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_bml_text.png" /></a></div>';	
 				
 			}
-			
+			$button .="</form>";
 			if(is_numeric($module_config['position']) && !isset($list_checkouts[$module_config['position']])) {
 				$position = $module_config['position'];
 			} else {
