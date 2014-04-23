@@ -51,7 +51,7 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
     }(document, "script", "paypal-js"));
   </script>';
 			
-			$button	.= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro" target="_self" title="" data-paypal-button="true" data-merchant-id="" /><img src="'.$button_image.'" alt="" /></a>';
+			$button	.= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro&amp;inline=1" target="_self" title="" data-paypal-button="true" data-merchant-id="" /><img src="'.$button_image.'" alt="" /></a>';
 			
 			if($module_config['billmelater']==1) {
 				$button	= $button.'<br />

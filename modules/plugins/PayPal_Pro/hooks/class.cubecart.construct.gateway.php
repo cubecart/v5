@@ -12,7 +12,8 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 
 	if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='SetExpressCheckout') {
 		$bml = ($_GET['bml']==1) ? true : false;
-		$wpp->SetExpressCheckout($bml);
+		$inline = ($_GET['inline']==1) ? true : false;
+		$wpp->SetExpressCheckout($bml,$inline);
 		exit;
 	} else if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='DoExpressCheckoutPayment') {
 		if ($response = $wpp->DoExpressCheckoutPayment()) {

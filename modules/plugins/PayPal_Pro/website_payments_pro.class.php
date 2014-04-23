@@ -220,7 +220,6 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
 			'PAYMENTREQUEST_0_INVNUM'			=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
-			'PAYMENTREQUEST_0_ITEMAMT' => sprintf('%.2f', $this->_basket['subtotal']),
 			'PAYMENTREQUEST_0_SHIPPINGAMT' => sprintf('%.2f', $this->_basket['shipping']['value']),
 			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
@@ -239,6 +238,7 @@ class Website_Payments_Pro  {
 		$i	= 0;
 		$tax_total	= 0;
 		$prod_total	= 0;
+		$itemamt 	= 0;
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
 		
 		foreach ($this->_basket['contents'] as $hash => $item) {
@@ -263,7 +263,7 @@ class Website_Payments_Pro  {
 				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $prod_tax),
 			), $nvp_data);
 			
-			
+			$itemamt+=sprintf('%.2f', $price);
 			$i++;
 		}
 		
@@ -274,7 +274,10 @@ class Website_Payments_Pro  {
 				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
 				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
 			), $nvp_data);
+			$itemamt-=sprintf('%.2f', $this->_basket['discount']);
 		}
+		
+		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = $itemamt;
 
 		## PayPal's statistic tracking stuff
 		if($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
@@ -342,7 +345,6 @@ class Website_Payments_Pro  {
 				'PAYMENTREQUEST_0_NOTIFYURL' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal',
 				'PAYMENTREQUEST_0_PAYMENTACTION'	=> $this->_api_method,
 				'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
-				'PAYMENTREQUEST_0_ITEMAMT' => sprintf('%.2f', $this->_basket['subtotal']),
 				'PAYMENTREQUEST_0_SHIPPINGAMT' => sprintf('%.2f', $this->_basket['shipping']['value']),
 				'PAYMENTREQUEST_0_CURRENCYCODE' => $GLOBALS['config']->get('config','default_currency'),
 				'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
@@ -395,6 +397,7 @@ class Website_Payments_Pro  {
 			$i 			= 0;
 			$tax_total	= 0;
 			$prod_total	= 0;
+			$itemamt 	= 0;
 			
 			$store_country = $GLOBALS['config']->get('config', 'store_country');
 			
@@ -407,6 +410,8 @@ class Website_Payments_Pro  {
 
 				$tax_total	+= $prod_tax = $taxes['applied'];
 				$prod_total	+= $price;
+				
+				$itemamt+=sprintf('%.2f', $price);
 
 				$nvp_data	= array_merge(array(
 					'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
@@ -428,7 +433,10 @@ class Website_Payments_Pro  {
 					'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
 					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
 				), $nvp_data);
+				$itemamt-=sprintf('%.2f', $this->_basket['discount']);
 			}
+			
+			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
 				
 			if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 				$GLOBALS['db']->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
