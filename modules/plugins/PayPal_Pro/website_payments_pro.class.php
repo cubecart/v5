@@ -445,22 +445,26 @@ class Website_Payments_Pro  {
 					case 'Success':
 						$this->_token	= $response['TOKEN'];
 						$GLOBALS['session']->set('token', $this->_token, 'PayPal_Pro');
+						
+						$GLOBALS['session']->set('stage', 'GetExpressCheckoutDetails', 'PayPal_Pro');
+		
+						if($inline) {
+							httpredir($this->_api_paypal_inline_url.$this->_token);
+						} else {
+							httpredir($this->_api_paypal_url.$this->_token);
+						}
+						
 						break;
 					case 'FailureWithWarning':
 					case 'Failure':
 						$GLOBALS['gui']->setError($GLOBALS['language']->gui_message['error'].': '.$response['L_LONGMESSAGE0'].' '.$response['L_SHORTMESSAGE0']);
+						httpredir(CC_STORE_URL.'/index.php?_a=confirm&PPWPP=cancel');
 						return false;
 						break;
 				}
 			}
 		}
-		$GLOBALS['session']->set('stage', 'GetExpressCheckoutDetails', 'PayPal_Pro');
 		
-		if($inline) {
-			httpredir($this->_api_paypal_inline_url.$this->_token);
-		} else {
-			httpredir($this->_api_paypal_url.$this->_token);
-		}
 	}
 
 	################################################
