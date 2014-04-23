@@ -38,14 +38,14 @@ class Website_Payments_Pro  {
 				## Live Mode
 				$this->_api_endpoint	= 'api-3t.paypal.com/nvp';
 				$this->_api_paypal_url	= 'https://www.paypal.com/webscr&cmd=_express-checkout'.$mobile.'&token=';
-				$this->_api_paypal_modal_url	= 'https://www.paypal.com/checkoutnow?useraction=commit&token=';
+				$this->_api_paypal_inline_url	= 'https://www.paypal.com/checkoutnow?useraction=commit&useraction=continue&token=';
 				$this->_api_paypal_recover_url	= 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=';
 				
 			} else {
 				## Sandbox/Testing Mode
 				$this->_api_endpoint	= 'api-3t.sandbox.paypal.com/nvp';
 				$this->_api_paypal_url	= 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout'.$mobile.'&token=';
-				$this->_api_paypal_modal_url	= 'https://www.sandbox.paypal.com/checkoutnow?useraction=commit&token=';
+				$this->_api_paypal_inline_url	= 'https://www.sandbox.paypal.com/checkoutnow?useraction=commit&useraction=continue&token=';
 				$this->_api_paypal_recover_url	= 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=';
 			}
 		} else {
@@ -332,7 +332,7 @@ class Website_Payments_Pro  {
 		}
 		return false;
 	}
-	public function SetExpressCheckout($bml = false, $modal = false) {
+	public function SetExpressCheckout($bml = false, $inline = false) {
 		
 		## Initiates an Express Checkout transaction		
 		if (empty($this->_token)) {
@@ -448,8 +448,8 @@ class Website_Payments_Pro  {
 		}
 		$GLOBALS['session']->set('stage', 'GetExpressCheckoutDetails', 'PayPal_Pro');
 		
-		if($modal) {
-			return $this->_api_paypal_modal_url.$this->_token;
+		if($inline) {
+			httpredir($this->_api_paypal_inline_url.$this->_token);
 		} else {
 			httpredir($this->_api_paypal_url.$this->_token);
 		}
