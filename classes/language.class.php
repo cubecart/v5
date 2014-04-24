@@ -233,7 +233,6 @@ class Language {
 				// Info
 				$xml->setElement('title', $array['title']);
 				$xml->setElement('code', $array['code'], false, false);
-				$xml->setElement('locale', $array['code'], false, false);
 				$xml->setElement('character_set', 'utf-8');
 				$xml->setElement('version', '1.0.0', false, false);
 				// Set min/max versions
@@ -1005,10 +1004,7 @@ class Language {
 	 * Set Locale
 	 */
 	private function _setLocale() {
-		if (isset($this->_language_data) && isset($GLOBALS['session']) && !empty($this->_language_data)) {
-			$money = ($GLOBALS['session']->has('currency', 'client') && $GLOBALS['session']->get('currency', 'client') == 'EUR') ? '@euro' : '';
-			setlocale(LC_ALL, $this->_language_data['locale'].'.'.$this->_language_data['character_set'].$money);
-		}
+		setlocale(LC_ALL, 'en_US.UTF-8');
 	}
 
 	/**

@@ -231,19 +231,14 @@ class Tax {
 		$price = $this->_removeSymbol($price);
 
 		if ($display_null && is_numeric($price)) {
-			$locale = localeconv();
 			if ($GLOBALS['session']->get('hide_prices')) {
 				## Hide the price, but create a string that is representative of the currency formating for the current locale
 				return $this->priceFormatHidden();
 			} else {
-				$price = ($this->_currency_vars['value']*$price);
-				if (function_exists('money_format') && $GLOBALS['session']->has('currency', 'client') && trim($locale['int_curr_symbol']) == $GLOBALS['session']->get('currency', 'client')) {
-					return money_format('%n', $this->priceCorrection($price));
-				} else {
-					$symbol_d = ($this->_currency_vars['symbol_decimal']) ? ',' : '.';
-					$symbol_t = (!$this->_currency_vars['symbol_decimal']) ? ',' : '.';
-					return $this->_currency_vars['symbol_left'].number_format($this->priceCorrection($price), $this->_currency_vars['decimal_places'], $symbol_d, $symbol_t).$this->_currency_vars['symbol_right'];
-				}
+				$price = ($this->_currency_vars['value']*$price);				
+				$symbol_d = ($this->_currency_vars['symbol_decimal']) ? ',' : '.';
+				$symbol_t = (!$this->_currency_vars['symbol_decimal']) ? ',' : '.';
+				return $this->_currency_vars['symbol_left'].number_format($this->priceCorrection($price), $this->_currency_vars['decimal_places'], $symbol_d, $symbol_t).$this->_currency_vars['symbol_right'];
 			}
 		}
 		return false;
