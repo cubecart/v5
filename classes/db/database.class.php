@@ -459,12 +459,13 @@ class Database_Contoller {
 	public function query($query, $maxRows = false, $page = 0, $cache = true) {
 		// For old fashioned 'hand written' queries
 		$limit = '';
+/*
 		if (is_numeric($maxRows)) {
 			
 			$page 	 = intval($page);
 			$maxRows = intval($maxRows);
 		
-			if ($page > 0) {
+			if (is_numeric($page)) {
 				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
 			} else {
 				if (strtolower($page) == 'all') {
@@ -476,8 +477,20 @@ class Database_Contoller {
 				}
 			}
 		}
-		$this->_query = $query.' '.$limit;
-		$this->_execute($cache);
+*/
+
+		if (is_numeric($maxRows)) {
+			if (is_numeric($page)) {
+				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
+			} else {
+				if (strtolower($page) == 'all') {
+					// Don't set a limit - show EVERYTHING
+				} else {
+					$limit = "LIMIT $maxRows";
+				}
+			}
+		}
+
 
 		return (!$this->error()) ? $this->_result : false;
 	}
