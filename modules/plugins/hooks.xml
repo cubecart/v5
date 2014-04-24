@@ -60,6 +60,7 @@
  <hook trigger="class.admin.get_section_id" deprecated="" />
  <hook trigger="class.ajax.load" deprecated="" />
  <hook trigger="class.cart.add.pre" deprecated="" />
+ <hook trigger="class.cart.add.preredirect" deprecated="" />
  <hook trigger="class.cart.add.save" deprecated="" />
  <hook trigger="class.cart.clear" deprecated="" />
  <hook trigger="class.cart.discount_add" deprecated="" />
@@ -87,6 +88,7 @@
  <hook trigger="class.cubecart.construct.logout" deprecated="" />
  <hook trigger="class.cubecart.construct.register" deprecated="" />
  <hook trigger="class.cubecart.construct.search" deprecated="" />
+ <hook trigger="class.cubecart.contact" deprecated="" />
  <hook trigger="class.cubecart.display_basket" deprecated="" />
  <hook trigger="class.cubecart.pre_display_category" deprecated="" />
  <hook trigger="class.cubecart.display_category" deprecated="" />
@@ -96,8 +98,11 @@
  <hook trigger="class.cubecart.display_product" deprecated="" />
  <hook trigger="class.cubecart.display_basket.alternate" deprecated="" />
  <hook trigger="class.cubecart.display_basket.related" deprecated="" />
+ <hook trigger="class.cubecart.document_widgets" deprecated="" />
  <hook trigger="class.cubecart.login" deprecated="" />
  <hook trigger="class.cubecart.product_price" deprecated="" />
+ <hook trigger="class.cubecart.review" deprecated="" />
+ <hook trigger="class.cubecart.review.insert" deprecated="" />
  <hook trigger="class.gui.css" deprecated="" />
  <hook trigger="class.gui.display" deprecated="" />
  <hook trigger="class.gui.display_currency_switch" deprecated="" />

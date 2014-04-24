@@ -410,6 +410,9 @@ class Cart {
 
 					//Save before the jump
 					$this->save();
+
+					foreach ($GLOBALS['hooks']->load('class.cart.add.preredirect') as $hook) include $hook;
+
 					// Jump to basket, or return to product page?
 					$jumpto = ($GLOBALS['config']->get('config', 'basket_jump_to')) ? $GLOBALS['rootRel'].'index.php?_a=basket' : currentPage(null);
 					if (isset($_GET['_g']) && $_GET['_g'] == 'ajaxadd' && $GLOBALS['config']->get('config', 'basket_jump_to')) {

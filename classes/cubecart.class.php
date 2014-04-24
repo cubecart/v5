@@ -296,6 +296,9 @@ class Cubecart {
 					$GLOBALS['smarty']->assign('SECTION_NAME', 'document');
 					/* !Site Documents */
 					if (($document = $this->getDocument($_GET['doc_id'])) !== false) {
+
+						foreach ($GLOBALS['hooks']->load('class.cubecart.document_widgets') as $hook) include $hook;
+
 						$GLOBALS['gui']->addBreadcrumb($document['doc_name'], currentPage());
 						$GLOBALS['smarty']->assign('DOCUMENT', $document);
 						/* Social Bookmarks */
@@ -1211,6 +1214,9 @@ class Cubecart {
 		if ($contact && $contact['status']) {
 			$GLOBALS['gui']->addBreadcrumb($GLOBALS['language']->documents['document_contact'], currentPage());
 			if (isset($_POST['contact'])) {
+
+				foreach ($GLOBALS['hooks']->load('class.cubecart.contact') as $hook) include $hook;
+
 				$GLOBALS['smarty']->assign('MESSAGE', $_POST['contact']);
 				// Validation
 				$error = false;
@@ -2173,6 +2179,9 @@ class Cubecart {
 			return;
 		}
 		if (isset($_POST['review']) && is_array($_POST['review'])) {
+
+			foreach ($GLOBALS['hooks']->load('class.cubecart.review') as $hook) include $hook;
+
 			$error	= false;
 			$record	= $_POST['review'];
 			if ($GLOBALS['user']->is()) {
@@ -2210,6 +2219,9 @@ class Cubecart {
 
 			if (!$error) {
 				if (($GLOBALS['db']->insert('CubeCart_reviews', $record)) !== false) {
+
+					foreach ($GLOBALS['hooks']->load('class.cubecart.review.insert') as $hook) include $hook;
+
 					$GLOBALS['gui']->setNotify($GLOBALS['language']->catalogue['notify_review_submit']);
 					$mail					= Mailer::getInstance();
 					$record['link'] 		= $GLOBALS['storeURL'].'/'.$GLOBALS['config']->get('config','adminFile').'?_g=products&node=reviews&edit='.$GLOBALS['db']->insertid();
