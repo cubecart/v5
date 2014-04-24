@@ -490,7 +490,8 @@ class Database_Contoller {
 				}
 			}
 		}
-
+		$this->_query = $query.' '.$limit;
+		$this->_execute($cache);
 
 		return (!$this->error()) ? $this->_result : false;
 	}
