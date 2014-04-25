@@ -198,7 +198,7 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_CURRENCYCODE'		=> $GLOBALS['config']->get('config','default_currency'),
 			'PAYMENTREQUEST_0_INVNUM'			=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
-			'PAYMENTREQUEST_0_SHIPPINGAMT' => sprintf('%.2f', $this->_basket['shipping']['value']),
+			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
 			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,	
@@ -252,6 +252,16 @@ class Website_Payments_Pro  {
 				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
 			), $nvp_data);
 			$itemamt-=sprintf('%.2f', $this->_basket['discount']);
+		}
+		
+		if($this->_basket['shipping']['value']>0) {
+			$nvp_data	= array_merge(array(
+				'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
+			), $nvp_data);
+			$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
 		}
 		
 		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = $itemamt;
@@ -411,14 +421,15 @@ class Website_Payments_Pro  {
 			$itemamt-=sprintf('%.2f', $this->_basket['discount']);
 			$i++;
 		}
-		
-		$nvp_data	= array_merge(array(
-			'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
-			'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
-			'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
-			'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
-		), $nvp_data);
-		$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
+		if($this->_basket['shipping']['value']>0) {
+			$nvp_data	= array_merge(array(
+				'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
+			), $nvp_data);
+			$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
+		}
 		
 		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
 			
