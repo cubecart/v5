@@ -112,9 +112,6 @@ class Website_Payments_Pro  {
 				## Values
 				'AMT'				=> sprintf('%.2f', $this->_basket['total']),
 				'ITEMAMT'			=> sprintf('%.2f', $this->_basket['total']),
-				//'ITEMAMT'			=> sprintf('%.2f', $this->_basket['subtotal']),
-				//'TAXAMT'			=> sprintf('%.2f', $this->_basket['total_tax']),
-				//'SHIPPINGAMT'		=> sprintf('%.2f', $this->_basket['shipping']['value']),
 
 				## Card details
 				'CREDITCARDTYPE'	=> $nvp['card_type'],
