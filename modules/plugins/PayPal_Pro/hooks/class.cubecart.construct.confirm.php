@@ -5,7 +5,7 @@ $Rev: 1169 $
 */
 if (isset($_GET['PPWPP']) && $_GET['PPWPP'] == 'cancel') {
 	$GLOBALS['session']->delete('', 'PayPal_Pro');
-	httpredir(currentPage(array('PayerID','PPWPP','token')));
+	httpredir('index.php?_a=basket');
 }
 
 
