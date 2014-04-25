@@ -315,132 +315,138 @@ class Website_Payments_Pro  {
 	public function SetExpressCheckout($bml = false, $inline = false) {
 		
 		## Initiates an Express Checkout transaction		
-		if (empty($this->_token)) {
-			$nvp_data	= array(
-				'RETURNURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm',
-				'CANCELURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm&PPWPP=cancel',
-				'PAYMENTREQUEST_0_NOTIFYURL' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal',
-				'PAYMENTREQUEST_0_PAYMENTACTION'	=> $this->_api_method,
-				'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
-				'PAYMENTREQUEST_0_SHIPPINGAMT' => sprintf('%.2f', $this->_basket['shipping']['value']),
-				'PAYMENTREQUEST_0_CURRENCYCODE' => $GLOBALS['config']->get('config','default_currency'),
-				'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
-				'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
-				'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
-				'ALLOWNOTE'		=> 0,
-				'ADDROVERRIDE'	=> 0,
-				'LOCALECODE'	=> $GLOBALS['language']->getLanguage(),
-				'PAYFLOWCOLOR'	=> $this->_module['payflow_color'],
-				'CARTBORDERCOLOR' => $this->_module['cartborder_color'],
-				'LOGOIMG'		=> $this->_module['logoimg'],
-				'BRANDNAME'		=> $GLOBALS['config']->get('config', 'store_name'),
-				'GIFTMESSAGEENABLE' => 0,
-				'GIFTRECEIPTENABLE' => 0,
-				'GIFTWRAPENABLE'	=> 0,
-				'BUYEREMAILOPTINENABLE'	=> 0,
-				'SURVEYENABLE'	=> 0,
-				'REQCONFIRMSHIPPING' => $this->_module['confAddress']
-			);
-			
-			if($bml) {
-				$nvp_data = array_merge($nvp_data, array('USERSELECTEDFUNDINGSOURCE' => 'BML','SOLUTIONTYPE' => 'SOLE', 'LANDINGPAGE' => 'BILLING'));
-				$GLOBALS['session']->set('BML', true, 'PayPal_Pro');
-			} elseif($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
-				$GLOBALS['session']->delete('BML', 'PayPal_Pro');
-			}
-			
-			## Billing information
-			$billing = $this->_basket['billing_address'];
-			
-			## Delivery information
-			if (isset($this->_basket['delivery_address']['first_name']) && $delivery = $this->_basket['delivery_address']) {
-				$nvp_data	= array_merge(array(
-					'EMAIL'				=> $billing['email'],
-					'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
-					'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
-					'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> $delivery['line2'],
-					'PAYMENTREQUEST_0_SHIPTOCITY'	=> $delivery['town'],
-					'PAYMENTREQUEST_0_SHIPTOSTATE'	=> $delivery['state_abbrev'],
-					'PAYMENTREQUEST_0_SHIPTOZIP'		=> $delivery['postcode'],
-					'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'	=> $delivery['country_iso'],
-					'PAYMENTREQUEST_0_SHIPTOPHONENUM'=> $billing['phone'], /* we don't have a delivery value for this */
-					'TOTALTYPE'		=> 'Total',
-				), $nvp_data);
-			} else {
-				$nvp_data['TOTALTYPE'] = 'EstimatedTotal';
-			}
-
-			## Add basket contents
-			$i 			= 0;
-			$tax_total	= 0;
-			$prod_total	= 0;
-			$itemamt 	= 0;
-			
-			$store_country = $GLOBALS['config']->get('config', 'store_country');
-			
-			foreach ($this->_basket['contents'] as $hash => $item) {
-				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-				$price		= $item['total_price_each'];	## Always tax exclusive
-				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-				$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-
-				$tax_total	+= $taxes['amount'];
-				$prod_total	+= $price;
-				
-				$itemamt+=sprintf('%.2f', $price);
-
-				$nvp_data	= array_merge(array(
-					'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
-					'L_PAYMENTREQUEST_0_ITEMURL'.$i => $GLOBALS['storeURL'].'/index.php?_a=product&product_id='.$item['id'],
-					'L_PAYMENTREQUEST_0_NUMBER'.$i => $item['product_code'],
-					'L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE'.$i => $item['product_weight'],
-					'L_PAYMENTREQUEST_0_ITEMWEIGHTUNIT'.$i => $GLOBALS['config']->get('config','product_weight_unit'),
-					'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
-					'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
-					'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
-					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
-				), $nvp_data);
-				$i++;
-			}
-			if($this->_basket['discount']>0) {
-				$nvp_data	= array_merge(array(
-					'L_PAYMENTREQUEST_0_NAME'.$i	=> 'Discount',
-					'L_PAYMENTREQUEST_0_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
-					'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
-					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
-				), $nvp_data);
-				$itemamt-=sprintf('%.2f', $this->_basket['discount']);
-			}
-			
-			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
-				
-			if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
-				$GLOBALS['db']->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
-				switch ($response['ACK']) {
-					case 'SuccessWithWarning':
-					case 'Success':
-						$this->_token	= $response['TOKEN'];
-						$GLOBALS['session']->set('token', $this->_token, 'PayPal_Pro');
-						
-						$GLOBALS['session']->set('stage', 'GetExpressCheckoutDetails', 'PayPal_Pro');
+		$nvp_data	= array(
+			'RETURNURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm',
+			'CANCELURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm&PPWPP=cancel',
+			'PAYMENTREQUEST_0_NOTIFYURL' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=gateway&cmd=call&module=PayPal',
+			'PAYMENTREQUEST_0_PAYMENTACTION'	=> $this->_api_method,
+			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
+			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
+			'PAYMENTREQUEST_0_CURRENCYCODE' => $GLOBALS['config']->get('config','default_currency'),
+			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
+			'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
+			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
+			'ALLOWNOTE'		=> 0,
+			'ADDROVERRIDE'	=> 0,
+			'LOCALECODE'	=> $GLOBALS['language']->getLanguage(),
+			'PAYFLOWCOLOR'	=> $this->_module['payflow_color'],
+			'CARTBORDERCOLOR' => $this->_module['cartborder_color'],
+			'LOGOIMG'		=> $this->_module['logoimg'],
+			'BRANDNAME'		=> $GLOBALS['config']->get('config', 'store_name'),
+			'GIFTMESSAGEENABLE' => 0,
+			'GIFTRECEIPTENABLE' => 0,
+			'GIFTWRAPENABLE'	=> 0,
+			'BUYEREMAILOPTINENABLE'	=> 0,
+			'SURVEYENABLE'	=> 0,
+			'REQCONFIRMSHIPPING' => $this->_module['confAddress']
+		);
 		
-						if($inline) {
-							httpredir($this->_api_paypal_inline_url.$this->_token);
-						} else {
-							httpredir($this->_api_paypal_url.$this->_token);
-						}
-						
-						break;
-					case 'FailureWithWarning':
-					case 'Failure':
-						$GLOBALS['gui']->setError($GLOBALS['language']->gui_message['error'].': '.$response['L_LONGMESSAGE0'].' '.$response['L_SHORTMESSAGE0']);
-						httpredir(CC_STORE_URL.'/index.php?_a=confirm&PPWPP=cancel');
-						return false;
-						break;
-				}
-			}
+		if($bml) {
+			$nvp_data = array_merge($nvp_data, array('USERSELECTEDFUNDINGSOURCE' => 'BML','SOLUTIONTYPE' => 'SOLE', 'LANDINGPAGE' => 'BILLING'));
+			$GLOBALS['session']->set('BML', true, 'PayPal_Pro');
+		} elseif($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
+			$GLOBALS['session']->delete('BML', 'PayPal_Pro');
 		}
 		
+		## Billing information
+		$billing = $this->_basket['billing_address'];
+		
+		## Delivery information
+		if (isset($this->_basket['delivery_address']['first_name']) && $delivery = $this->_basket['delivery_address']) {
+			$nvp_data	= array_merge(array(
+				'EMAIL'				=> $billing['email'],
+				'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
+				'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
+				'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> $delivery['line2'],
+				'PAYMENTREQUEST_0_SHIPTOCITY'	=> $delivery['town'],
+				'PAYMENTREQUEST_0_SHIPTOSTATE'	=> $delivery['state_abbrev'],
+				'PAYMENTREQUEST_0_SHIPTOZIP'		=> $delivery['postcode'],
+				'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'	=> $delivery['country_iso'],
+				'PAYMENTREQUEST_0_SHIPTOPHONENUM'=> $billing['phone'], /* we don't have a delivery value for this */
+				'TOTALTYPE'		=> 'Total',
+			), $nvp_data);
+		} else {
+			$nvp_data['TOTALTYPE'] = 'EstimatedTotal';
+		}
+
+		## Add basket contents
+		$i 			= 0;
+		$tax_total	= 0;
+		$prod_total	= 0;
+		$itemamt 	= 0;
+		
+		$store_country = $GLOBALS['config']->get('config', 'store_country');
+		
+		foreach ($this->_basket['contents'] as $hash => $item) {
+			$product	= $GLOBALS['catalogue']->getProductData($item['id']);
+			$price		= $item['total_price_each'];	## Always tax exclusive
+			$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
+			$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
+
+			$tax_total	+= $taxes['amount'];
+			$prod_total	+= $price;
+			
+			$itemamt+=sprintf('%.2f', $price);
+
+			$nvp_data	= array_merge(array(
+				'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
+				'L_PAYMENTREQUEST_0_ITEMURL'.$i => $GLOBALS['storeURL'].'/index.php?_a=product&product_id='.$item['id'],
+				'L_PAYMENTREQUEST_0_NUMBER'.$i => $item['product_code'],
+				'L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE'.$i => $item['product_weight'],
+				'L_PAYMENTREQUEST_0_ITEMWEIGHTUNIT'.$i => $GLOBALS['config']->get('config','product_weight_unit'),
+				'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
+			), $nvp_data);
+			$i++;
+		}
+		if($this->_basket['discount']>0) {
+			$nvp_data	= array_merge(array(
+				'L_PAYMENTREQUEST_0_NAME'.$i	=> 'Discount',
+				'L_PAYMENTREQUEST_0_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
+				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
+			), $nvp_data);
+			$itemamt-=sprintf('%.2f', $this->_basket['discount']);
+			$i++;
+		}
+		
+		$nvp_data	= array_merge(array(
+			'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
+			'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
+			'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+			'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
+		), $nvp_data);
+		$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
+		
+		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
+			
+		if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
+			$GLOBALS['db']->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
+			switch ($response['ACK']) {
+				case 'SuccessWithWarning':
+				case 'Success':
+					$this->_token	= $response['TOKEN'];
+					$GLOBALS['session']->set('token', $this->_token, 'PayPal_Pro');
+					
+					$GLOBALS['session']->set('stage', 'GetExpressCheckoutDetails', 'PayPal_Pro');
+	
+					if($inline) {
+						httpredir($this->_api_paypal_inline_url.$this->_token);
+					} else {
+						httpredir($this->_api_paypal_url.$this->_token);
+					}
+					
+					break;
+				case 'FailureWithWarning':
+				case 'Failure':
+					$GLOBALS['gui']->setError($GLOBALS['language']->gui_message['error'].': '.$response['L_LONGMESSAGE0'].' '.$response['L_SHORTMESSAGE0']);
+					httpredir(CC_STORE_URL.'/index.php?_a=confirm&PPWPP=cancel');
+					return false;
+					break;
+			}
+		}
 	}
 
 	################################################
