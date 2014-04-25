@@ -155,25 +155,6 @@ class Website_Payments_Pro  {
 				);
 				$nvp_data	= array_merge($nvp_data, $centinel);
 			}
-			$i	= 0;
-			$tax_total	= 0;
-			$prod_total	= 0;
-			/* Fail fail fail!
-			foreach ($this->_basket['contents'] as $hash => $item) {
-				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-				$price		= $item['total_price_each'];	## Always tax exclusive
-				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-				$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-				$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
-				$nvp_data	= array_merge(array(
-					'L_NAME'.$i	=> $item['name'],
-					'L_AMT'.$i	=> sprintf('%.2f', $price),
-					'L_QTY'.$i	=> $item['quantity'],
-					'L_TAX'.$i	=> sprintf('%.2f', $taxes['applied']),
-				), $nvp_data);
-				$i++;
-			}
-			*/
 
 			## Maestro/Solo required additional details
 			if (in_array($nvp['card_type'], array('Maestro', 'Solo'))) {
@@ -245,10 +226,9 @@ class Website_Payments_Pro  {
 			$product	= $GLOBALS['catalogue']->getProductData($item['id']);
 			$price		= $item['total_price_each'];	## Always tax exclusive
 			$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-			$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-			$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
+			$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
 
-			$tax_total	+= $prod_tax = $taxes['applied'];
+			$tax_total	+= $taxes['amount'];
 			$prod_total	+= $price;
 			
 			$nvp_data	= array_merge(array(
@@ -260,7 +240,7 @@ class Website_Payments_Pro  {
 				'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
 				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
 				'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
-				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $prod_tax),
+				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
 			), $nvp_data);
 			
 			$itemamt+=sprintf('%.2f', $price);
@@ -405,10 +385,9 @@ class Website_Payments_Pro  {
 				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
 				$price		= $item['total_price_each'];	## Always tax exclusive
 				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-				$GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-				$taxes		= $GLOBALS['tax']->fetchTaxAmounts();
+				$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
 
-				$tax_total	+= $prod_tax = $taxes['applied'];
+				$tax_total	+= $taxes['amount'];
 				$prod_total	+= $price;
 				
 				$itemamt+=sprintf('%.2f', $price);
@@ -422,7 +401,7 @@ class Website_Payments_Pro  {
 					'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
 					'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
 					'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
-					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $prod_tax),
+					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
 				), $nvp_data);
 				$i++;
 			}
