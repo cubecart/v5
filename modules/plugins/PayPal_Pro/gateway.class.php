@@ -446,9 +446,7 @@ class Gateway {
 					## Why? - Display an error message (hopefully they won't be too cryptic...)
 					## Improved FMF logic by Havenswift Hosting & Ron at offshoremarineparts.com
 					foreach ($response as $key => $value) {
-						if($response['L_ERRORCODE0'] == '11610') {
- 							$GLOBALS['gui']->setError($this->_lang['payment_decline']);
- 						} elseif($response['L_ERRORCODE0'] == '11611') {
+						if($response['L_ERRORCODE0'] == '11611') {
  							$GLOBALS['gui']->setNotify($this->_lang['payment_decline']);
  						} elseif($response['L_ERRORCODE0'] == '15005') {
  							$GLOBALS['gui']->setNotify($this->_lang['bank_declined']);
