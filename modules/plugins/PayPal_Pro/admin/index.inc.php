@@ -5,9 +5,9 @@ $module	= new Module(__FILE__, $_GET['module'], 'admin/index.tpl', true, false);
 $script_file = CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'extra'.CC_DS.'PayPal_acceptance.js';
 
 if($module->acceptance_mark=='1') {
-	$ssl = $GLOBALS['config']->get('ssl');
 	
-	$store_url = ($ssl=='1') ? $GLOBALS['config']->get('ssl_url') : CC_STORE_URL;
+	$ssl = $GLOBALS['config']->get('config','ssl');
+	$store_url = ($ssl=='1') ? $GLOBALS['config']->get('config','ssl_url') : CC_STORE_URL;
 	
 	$script_data = <<<END
 jQuery(document).ready(function() {
