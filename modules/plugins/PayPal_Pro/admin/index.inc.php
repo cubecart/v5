@@ -78,7 +78,17 @@ foreach ($confirmed as $value => $title) {
 	);
 }
 
+$ec_modes	= array('inline' => 'Inline (Lightbox Overlay)', 'redirect' => 'Redirect to PayPal');
+foreach ($ec_modes as $value => $title) {
+	$ec_mode_list[]	= array(
+		'value'		=> $value,
+		'title'		=> $title,
+		'selected'	=> ($value == $module->ec_mode) ? ' selected="selected"' : '',
+	);
+}
+
 $template_vars = array (
+	'ec_modes'	=> $ec_mode_list,
 	'confirmed' => $confirm_list,
 	'actions'	=> $action_list,
 	'gateways'	=> $gateway_list,

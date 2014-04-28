@@ -23,6 +23,14 @@
             </select>
             </span>
          </div>
+         <div>
+            <label for="ec_mode">{$LANG.paypal_pro.ec_action}</label>
+            <span>
+            <select name="module[ec_mode]" id="ec_mode">
+            {foreach from=$ec_modes item=ec_mode}<option value="{$ec_mode.value}"{$ec_mode.selected}>{$ec_mode.title}</option>{/foreach}
+            </select>
+            </span>
+         </div>
          <div><label for="paypal_username">{$LANG.paypal_pro.api_username}</label><span><input type="text" name="module[username]" id="paypal_username" value="{$MODULE.username}" class="textbox required" /></span></div>
          <div><label for="paypal_password">{$LANG.paypal_pro.api_password}</label><span><input type="text" name="module[password]" id="paypal_password" value="{$MODULE.password}" class="textbox required" /></span></div>
          <div><label for="paypal_signature">{$LANG.paypal_pro.api_signature}</label><span><input type="text" name="module[signature]" id="paypal_signature" value="{$MODULE.signature}" class="textbox required" /></span></div>

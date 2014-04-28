@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions version="1.0">
  <group name="paypal_pro">
+  <string name="ec_action"><![CDATA[Express Checkout Button Action]]></string>
   <string name="cubecart_styling"><![CDATA[CubeCart Page Styling]]></string>
   <string name="acceptance_mark"><![CDATA[Show PayPal acceptance mark in page footer?]]></string>
   <string name="styling"><![CDATA[PayPal Page Styling]]></string>

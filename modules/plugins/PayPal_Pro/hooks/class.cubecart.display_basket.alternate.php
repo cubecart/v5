@@ -51,7 +51,7 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
     }(document, "script", "paypal-js"));
   </script>';
 			
-			$inline = (CC_SSL) ? '&amp;inline=1' : '';
+			$inline = (CC_SSL && $module_config['ec_mode']=='inline') ? '&amp;inline=1' : '';
 			
 			$button	.= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro'.$inline.'" target="_self" title="" data-paypal-button="true" data-merchant-id="" /><img src="'.$button_image.'" alt="" /></a>';
 			
