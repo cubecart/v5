@@ -89,7 +89,7 @@ class Gateway {
 					
 				'showHostedThankyouPage' => 'false',
 				'bn' 					=> 'CubeCart_Cart_HostedProUMP',
-				'template' 				=> 'templateD',
+				'template' 				=> ($GLOBALS['gui']->mobile) ? 'mobile-iframe' : 'templateD',
 				
 				'return' 				=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 				'cancel_return' 		=> $GLOBALS['storeURL'].'/index.php?_a=gateway',

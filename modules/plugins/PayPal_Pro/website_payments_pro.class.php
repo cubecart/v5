@@ -337,7 +337,7 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
 			'ALLOWNOTE'		=> 0,
-			'ADDROVERRIDE'	=> 0,
+			'ADDROVERRIDE'	=> 1,
 			'LOCALECODE'	=> $GLOBALS['language']->getLanguage(),
 			'PAYFLOWCOLOR'	=> $this->_module['payflow_color'],
 			'CARTBORDERCOLOR' => $this->_module['cartborder_color'],
