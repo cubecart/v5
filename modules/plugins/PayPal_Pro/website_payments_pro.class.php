@@ -203,6 +203,7 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,	
 			## Delivery Address
+			'ADDROVERRIDE'	=> 1,
 			'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
 			'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
 			'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> isset($delivery['line2']) ? $delivery['line2'] : '',
