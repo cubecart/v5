@@ -39,19 +39,13 @@ if ($module_config = $GLOBALS['config']->get('PayPal_Pro')) {
 			## Generate the PayPal Pro button
 			$button_image = $GLOBALS['storeURL'].'/modules/plugins/PayPal_Pro/images/PP_Buttons_CheckOut_146x30_v3.png';
 			
-			
-			$button = '<script>
-    (function(d, s, id){
-      var js, ref = d.getElementsByTagName(s)[0];
-      if (!d.getElementById(id)){
-        js = d.createElement(s); js.id = id; js.async = true;
-        js.src = "//www.paypalobjects.com/js/external/paypal.js";
-        ref.parentNode.insertBefore(js, ref);
-      }
-    }(document, "script", "paypal-js"));
-  </script>';
-			
-			$inline = (CC_SSL && $module_config['ec_mode']=='inline') ? '&amp;inline=1' : '';
+			if(CC_SSL && $module_config['ec_mode']=='inline') {
+				$button = '<script>(function(e,t,n){var r,i=e.getElementsByTagName(t)[0];if(!e.getElementById(n)){r=e.createElement(t);r.id=n;r.async=true;r.src="//www.paypalobjects.com/js/external/paypal.js";i.parentNode.insertBefore(r,i)}})(document,"script","paypal-js")</script>';
+				$inline = '&amp;inline=1';
+			} else {
+				$button = '';
+				$inline = '';
+			}
 			
 			$button	.= '<a href="'.$GLOBALS['storeURL'].'/index.php?_a=gateway&amp;module=PayPal_Pro'.$inline.'" target="_self" title="" data-paypal-button="true" data-merchant-id="" /><img src="'.$button_image.'" alt="" /></a>';
 			
