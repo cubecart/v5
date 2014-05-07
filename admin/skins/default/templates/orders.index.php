@@ -305,7 +305,7 @@
 			<td><input type="hidden" id="ajax_product_id" rel="product_id" /><input type="text" id="ajax_name" class="textbox ajax not-empty" rel="product" /></td>
 			<td><input type="text" id="ajax_price" class="textbox number-right lineprice" rel="price" value="0.00" /></td>
 			<td  align="right"><input type="text" rel="line_price" class="textbox number-right subtotal" value="0.00" /></td>
-			<td align="center" class="action"><a href="#" title="{$LANG.common.add}" class="add" target="inventory-list"><image src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" title="{$LANG.common.add}" /></a></td>
+			<td align="center" class="action"><a href="#" title="{$LANG.common.add}" class="add" target="inventory-list"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/add.png" alt="{$LANG.common.add}" title="{$LANG.common.add}" /></a></td>
 		  </tr>
 		  <!-- Source for inline adding -->
 		  <tr class="update-subtotal inline-source" name="inv_add">
@@ -313,7 +313,7 @@
 			<td><input type="hidden" rel="product_id" /><input type="hidden" rel="product" /><span rel="product"></span> <span rel="product_options"></span></td>
 			<td><input type="text" rel="price" class="textbox number-right lineprice" /></td>
 			<td><input type="text" rel="line_price" class="textbox number-right subtotal" /></td>
-			<td><span class="action"><a href="#" class="remove dynamic" title="{$LANG.common.decision_remove}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" title="{$LANG.common.delete}" /></a></td>
+			<td><span class="action"><a href="#" class="remove dynamic" title="{$LANG.common.decision_remove}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" title="{$LANG.common.delete}" /></a></span></td>
 		  </tr>
 
 		  <tr>
