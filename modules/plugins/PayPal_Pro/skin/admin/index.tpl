@@ -77,7 +77,7 @@
       <fieldset>
          <legend>{$LANG.paypal_pro.cubecart_styling}</legend>
          <div><label for="acceptance_mark">{$LANG.paypal_pro.acceptance_mark}</label><span><input type="hidden" name="module[acceptance_mark]" id="acceptance_mark" class="toggle" value="{$MODULE.acceptance_mark}" /></span></div>
-         <div><img src="modules/plugins/PayPal_Pro/images/acceptance_marks_{if $CONFIG.store_country==840}US{else}UK{/if}.jpg" /></div>
+         <div><img src="modules/plugins/PayPal_Pro/images/acceptance_marks_{if $CONFIG.store_country==840}US{else}UK{/if}.png" /></div>
       </fieldset>
       {/if}
       
