@@ -129,7 +129,7 @@ class Autoloader {
 		}
 
 		//We will do mysqli if loaded
-		if (extension_loaded('mysqli')) {
+		if (function_exists('mysqli_connect')) {
 			include CC_ROOT_DIR.CC_DS.'classes'.CC_DS.'db'.CC_DS.'mysqli.class.php';
 			return true;
 		} else {
