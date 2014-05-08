@@ -58,7 +58,7 @@ if ($settings['status']) {
 					'plugin'	=> true,
 					'base_folder' => 'PayPal_Pro',
 					'folder'	=> 'PayPal_Pro_Mark',
-					'desc'		=> 'modules/plugins/PayPal_Pro/images/PayPal_mark_37x23.png',
+					'desc'		=> 'modules/plugins/PayPal_Pro/images/PayPal_mark_36x23.png',
 				#	'help'		=> '',
 				);
 				break;
@@ -90,7 +90,7 @@ if ($settings['status']) {
 					'plugin'	=> true,
 					'base_folder' => 'PayPal_Pro',
 					'folder'	=> 'PayPal_Pro_Mark',
-					'desc'		=> 'https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif',
+					'desc'		=> 'modules/plugins/PayPal_Pro/images/PayPal_mark_36x23.png',
 				#	'help'		=> 'https://www.paypal.com/'.$code.'/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside',
 				);
 				$gateways[99]	= array(

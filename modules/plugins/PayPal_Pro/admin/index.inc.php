@@ -19,7 +19,7 @@ if($module->acceptance_mark=='1' &&  in_array($store_country, array(840,826))) {
 	
 	$script_data = <<<END
 jQuery(document).ready(function() {
-	var pp_acceptance = "<div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"$store_url/modules/plugins/PayPal_Pro/images/acceptance_marks_$store_country.jpg\" border=\"0\" alt=\"Now accepting PayPal\"></a></div>";
+	var pp_acceptance = "<div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"$store_url/modules/plugins/PayPal_Pro/images/acceptance_marks_$country_iso.png\" border=\"0\" alt=\"Now accepting PayPal\"></a></div>";
 	$("body").append(pp_acceptance);
 });
 END;
