@@ -364,6 +364,7 @@ class Website_Payments_Pro  {
 		if (isset($this->_basket['delivery_address']['first_name']) && $delivery = $this->_basket['delivery_address']) {
 			$nvp_data	= array_merge(array(
 				'EMAIL'				=> $billing['email'],
+				'ADDROVERRIDE'	=> 1,
 				'PAYMENTREQUEST_0_SHIPTONAME'	=> sprintf('%s %s', $delivery['first_name'], $delivery['last_name']),
 				'PAYMENTREQUEST_0_SHIPTOSTREET'	=> $delivery['line1'],
 				'PAYMENTREQUEST_0_SHIPTOSTREET2'	=> $delivery['line2'],
