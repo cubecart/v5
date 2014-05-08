@@ -1,6 +1,6 @@
 <form action="{$VAL_SELF}" method="post" enctype="multipart/form-data">
    <div id="PayPal_Pro" class="tab_content">
-      <h3>{$LANG.paypal_pro.module_title}</h3>
+      <h3>{$TITLE}</h3>
       <fieldset>
          <legend>{$LANG.module.config_settings}</legend>
          <div><label for="paypal_status">{$LANG.common.status}</label><span><input type="hidden" name="module[status]" id="paypal_status" class="toggle" value="{$MODULE.status}" /></span></div>
@@ -73,11 +73,11 @@
          <div><label for="logoimg">{$LANG.paypal_pro.logoimg}:</label><span><input type="text" name="module[logoimg]" id="logoimg" value="{$MODULE.logoimg}" class="textbox" /></span></div>
          <div><small>{$LANG.paypal_pro.logoimg_example}</small></div>
       </fieldset>
-      {if $CONFIG.store_country==826}
+      {if $CONFIG.store_country==840 || $CONFIG.store_country==826}
       <fieldset>
          <legend>{$LANG.paypal_pro.cubecart_styling}</legend>
          <div><label for="acceptance_mark">{$LANG.paypal_pro.acceptance_mark}</label><span><input type="hidden" name="module[acceptance_mark]" id="acceptance_mark" class="toggle" value="{$MODULE.acceptance_mark}" /></span></div>
-         <div><img src="modules/plugins/PayPal_Pro/images/acceptance_marks_UK_120x25.jpg" /></div>
+         <div><img src="modules/plugins/PayPal_Pro/images/acceptance_marks_{if $CONFIG.store_country==840}US{else}UK{/if}.jpg" /></div>
       </fieldset>
       {/if}
       

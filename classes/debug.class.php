@@ -642,6 +642,6 @@ class Debug {
 	 * @param string $message
 	 */
 	private function _writeErrorLog($message) {
-		$GLOBALS['db']->insert('CubeCart_system_error_log', array('message' => $message, 'time' => time()));
+		Database::getInstance()->insert('CubeCart_system_error_log', array('message' => $message, 'time' => time()));
 	}
 }

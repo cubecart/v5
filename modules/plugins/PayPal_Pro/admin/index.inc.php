@@ -2,16 +2,24 @@
 if(!defined('CC_DS')) die('Access Denied');
 $module	= new Module(__FILE__, $_GET['module'], 'admin/index.tpl', true, false);
 
+$store_country = $GLOBALS['config']->get('config', 'store_country');
+if($store_country==840) {
+	$GLOBALS['smarty']->assign('BML', true);
+	$country_iso = "US";
+} elseif($store_country==826) {
+	$country_iso = "UK";
+}
+
 $script_file = CC_ROOT_DIR.CC_DS.'includes'.CC_DS.'extra'.CC_DS.'PayPal_acceptance.js';
 
-if($module->acceptance_mark=='1') {
+if($module->acceptance_mark=='1' &&  in_array($store_country, array(840,826))) {
 	
 	$ssl = $GLOBALS['config']->get('config','ssl');
 	$store_url = ($ssl=='1') ? $GLOBALS['config']->get('config','ssl_url') : CC_STORE_URL;
 	
 	$script_data = <<<END
 jQuery(document).ready(function() {
-	var pp_acceptance = "<div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"$store_url/modules/plugins/PayPal_Pro/images/acceptance_marks_UK_120x25.jpg\" border=\"0\" alt=\"Now accepting PayPal\"></a></div>";
+	var pp_acceptance = "<div style=\"text-align:center\"><a href=\"https://www.paypal.com/uk/webapps/mpp/paypal-popup\" title=\"How PayPal Works\" onclick=\"javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;\"><img src=\"$store_url/modules/plugins/PayPal_Pro/images/acceptance_marks_$store_country.jpg\" border=\"0\" alt=\"Now accepting PayPal\"></a></div>";
 	$("body").append(pp_acceptance);
 });
 END;
@@ -32,8 +40,8 @@ $modes	= array(
 );
 
 foreach ($modes as $value => $title) {
-	if ($value == '1' && $GLOBALS['config']->get('config','store_country') != 840) continue; // Direct Payment for US Only
-	if ($value == '4' && $GLOBALS['config']->get('config','store_country') != 826) continue; // PayPal Pro Hosted for UK Only
+	if ($value == '1' && $store_country != 840) continue; // Direct Payment for US Only
+	if ($value == '4' && $store_country != 826) continue; // PayPal Pro Hosted for UK Only
 	$mode_list[]		= array(
 		'value'		=> $value,
 		'title'		=> $title,
@@ -93,13 +101,10 @@ $template_vars = array (
 	'actions'	=> $action_list,
 	'gateways'	=> $gateway_list,
 	'modes'		=> $mode_list,
-	'country'	=> $GLOBALS['config']->get('config','store_country'),
+	'country'	=> $store_country,
 	'paypal_ipn_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal'
 );
-$store_country = $GLOBALS['config']->get('config', 'store_country');
-if($store_country==840) {
-	$GLOBALS['smarty']->assign('BML', true);
-}
+
 $module->assign_to_template($template_vars);
 $module->fetch();
 $page_content = $module->display();
