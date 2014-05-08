@@ -47,6 +47,7 @@
             </select>
             </span>
          </div>
+         <!-- Inline Checkout Depreciated for now
          <div>
             <label for="paypal_action">{$LANG.paypal_pro.payment_action}</label>
             <span>
@@ -55,6 +56,7 @@
             </select>
             </span>
          </div>
+         -->
          <div>
             <label for="paypal_confirmed">{$LANG.paypal_pro.confirmed_address}</label>
             <span>
