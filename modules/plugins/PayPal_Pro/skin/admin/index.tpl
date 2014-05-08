@@ -66,8 +66,6 @@
       </fieldset>
       <fieldset>
          <legend>{$LANG.paypal_pro.styling}</legend>
-         <div><label for="payflow_color">{$LANG.paypal_pro.payflow_color}:</label><span>#<input type="text" name="module[payflow_color]" id="payflow_color" value="{$MODULE.payflow_color}" class="textbox" /> </span></div>
-         <div><small>{$LANG.paypal_pro.payflow_color_example}</small></div>
          <div><label for="cartborder_color">{$LANG.paypal_pro.cartborder_color}:</label><span>#<input type="text" name="module[cartborder_color]" id="cartborder_color" value="{$MODULE.cartborder_color}" class="textbox" /></span></div>
          <div><small>{$LANG.paypal_pro.cartborder_color_example}</small></div>
          <div><label for="logoimg">{$LANG.paypal_pro.logoimg}:</label><span><input type="text" name="module[logoimg]" id="logoimg" value="{$MODULE.logoimg}" class="textbox" /></span></div>
