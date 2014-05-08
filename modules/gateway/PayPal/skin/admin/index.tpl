@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<div><label for="default">{$LANG.common.default}</label><span><input type="hidden" name="module[default]" id="default" class="toggle" value="{$MODULE.default}" /></span></div>
-			<!--<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>-->
+			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="email">{$LANG.paypal.email}</label><span><input name="module[email]" id="email" class="textbox" type="text" value="{$MODULE.email}" /></span></div>
 			<div>
 				<label for="email">{$LANG.paypal.mode}</label>
@@ -33,7 +33,6 @@
   		</div>
   		{$MODULE_ZONES}
   		<div class="form_control">
-			<input name="module[desc]" type="hidden" value="modules/plugins/PayPal_Pro/images/PayPal_mark_37x23.png" />
 			<input type="submit" name="save" value="{$LANG.common.save}" />
   		</div>
   	
