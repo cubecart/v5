@@ -937,7 +937,7 @@ class Cubecart {
 					$address	= array(
 						'customer_id'	=> $user_id,
 						'billing'		=> false,
-						'default'		=> false,
+						'default'		=> true, // This selects the correct delivery address
 						'description'	=> $GLOBALS['language']->address['default_delivery_address'],
 					);
 					$GLOBALS['user']->saveAddress(array_merge($this->_basket['delivery_address'], $address), $user_id);
@@ -1355,11 +1355,19 @@ class Cubecart {
 				$GLOBALS['gui']->setError($GLOBALS['language']->account['error_address_billing']);
 				httpredir('?_a=addressbook&action=add&redir=confirm');
 			}
+			// If for some reason we have no delivery address defined but we do have billing address.. take that
+			if(!$this->_basket['delivery_address']['user_defined'] && $this->_basket['billing_address']['user_defined']) {
+				$this->_basket['delivery_address'] = $this->_basket['billing_address'];
+				$GLOBALS['cart']->save();
+			}
 
 			$GLOBALS['smarty']->assign('ADDRESSES', $address_list);
 			// Display selector, if allowed
 
 			$GLOBALS['smarty']->assign('CTRL_DELIVERY', ($GLOBALS['config']->get('config', 'basket_allow_non_invoice_address') && !$GLOBALS['cart']->getBasketDigital()));
+			
+			
+			
 		} else {
 			// no address found - lets redirect to the 'add address' page
 			$GLOBALS['gui']->setError($GLOBALS['language']->account['error_address_billing']);
