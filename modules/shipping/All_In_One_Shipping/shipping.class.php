@@ -134,7 +134,7 @@ class All_In_One_Shipping {
 					}
 					$res = false;
 					$pc_debug = array();
-					$postcodes = str_replace(array("\r\n", "\n"), '|', $this->_all_zones[$i]['postcodes']);
+					$postcodes = str_replace(array("\r\n", "\n", ","), '|', $this->_all_zones[$i]['postcodes']);
 					$postcodes = preg_replace('/[^a-zA-Z0-9\*\-\|%_]/', '', $postcodes);
 					if (is_numeric($del_postcode) && preg_match_all('/([0-9]+)[\-]([0-9]+)/', $postcodes, $matches, PREG_SET_ORDER)) {
 						for ($m=0; !$res && $m<count($matches); $m++) {
