@@ -13,7 +13,6 @@ if (isset($_POST['newTaxCodeCountry']) && !empty($_POST['newTaxCodeCountry']) &&
 if(isset($_GET['rmTaxCode']) && !empty($_GET['rmTaxCode'])) {
 	unset($module->_settings['taxCode_'.$_GET['rmTaxCode']]);
 	$module->module_settings_save($module->_settings);
-	die();
 	$updated = true;
 }
 if ($updated) httpredir(currentPage(array('rmTaxCode')));
