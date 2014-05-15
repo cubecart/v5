@@ -291,7 +291,7 @@ class SEO {
 						$path = $this->getDirectory($id);
 					} elseif (!isset($this->_cat_dirs[$id])) {
 						// new category won't be in cache so it needs rebuilding
-						$GLOBALS['cache']->delete('seo.category.list');
+						Cache::getInstance()->delete('seo.category.list');
 						$this->_getCategoryList();
 						$path = $this->getDirectory($id);
 					} else {
