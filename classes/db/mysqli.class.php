@@ -99,6 +99,7 @@ class Database extends Database_Contoller {
 
 		//Try cache first
 		if (($return = $this->_getCached($query)) !== false) {
+			$this->_allowedColumns[$table] = $return;
 			return $return;
 		}
 
