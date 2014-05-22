@@ -158,7 +158,7 @@ if (!empty($_GET['_g'])) {
 					$module_logo		= new Module(false, $module, false);
 					$module_info['title'] = $module_logo->module_fetch_logo($module_type, $module);
 					$module_info['mobile_optimized'] = ($xml && strtolower($xml->info->mobile_optimized)=="true") ? true : false;
-					if($xml && (!isset($xml->info->block) || $xml->info->block=='false')) { $modules[] = $module_info; }
+					if(!isset($xml->info->block) || (isset($xml) && $xml->info->block=='false')) { $modules[] = $module_info; }
 				}
 				$GLOBALS['smarty']->assign('MODULES', $modules);
 				$GLOBALS['smarty']->assign('ORDER_SELECT', $order_select);
