@@ -459,28 +459,9 @@ class Database_Contoller {
 	public function query($query, $maxRows = false, $page = 0, $cache = true) {
 		// For old fashioned 'hand written' queries
 		$limit = '';
-/*
-		if (is_numeric($maxRows)) {
-			
-			$page 	 = intval($page);
-			$maxRows = intval($maxRows);
-		
-			if (is_numeric($page)) {
-				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
-			} else {
-				if (strtolower($page) == 'all') {
-					// Limit to 100 to prevent servers snapping in half
-					$maxRows = 100;
-					$limit = "LIMIT $maxRows";
-				} else {
-					$limit = "LIMIT $maxRows";
-				}
-			}
-		}
-*/
 
 		if (is_numeric($maxRows)) {
-			if (is_numeric($page)) {
+			if ($page>0) {
 				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
 			} else {
 				if (strtolower($page) == 'all') {
