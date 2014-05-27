@@ -549,11 +549,9 @@ class Database_Contoller {
 		$sql_cache	= null;
 
 		if (is_numeric($maxRows)) {
-			if (is_numeric($page)) {
+			$calc_rows = 'SQL_CALC_FOUND_ROWS';
+			if ($page>0) {
 				$limit = "LIMIT $maxRows OFFSET ".($page - 1) * $maxRows;
-				// Auto Cleverness for pagination
-				// This way makes the initial query marginally slower, but is faster than running a second query
-				$calc_rows	= 'SQL_CALC_FOUND_ROWS';
 			} else {
 				if (strtolower($page) == 'all') {
 					// Don't set a limit - show EVERYTHING
@@ -563,8 +561,9 @@ class Database_Contoller {
 			}
 		}
 		$group = (isset($group_by) && is_array($group_by)) ? 'GROUP BY '.implode(',', $group_by) : '';
-
-		$this->_query = "SELECT $sql_cache $calc_rows ".implode(', ', $cols)." FROM $wrapper{$prefix}$table$wrapper ".$this->where($table_where, $where)." $group $orderString $limit;";
+		
+		$parent_query = "SELECT $sql_cache $calc_rows ".implode(', ', $cols)." FROM $wrapper{$prefix}$table$wrapper ".$this->where($table_where, $where)." $group $orderString $limit;";
+		$this->_query = $parent_query;
 
 		$this->_execute($cache);
 
@@ -572,12 +571,15 @@ class Database_Contoller {
 			foreach ($this->_result as $row) {
 				$output[] = $row;
 			}
-			// Added cleverness for auto pagination, without pissing around running a second query
+			// Added cleverness for auto pagination, without running a second query
 			if (!is_null($calc_rows)) {
-				$count	= $this->query('SELECT FOUND_ROWS() as Count;');
-				if ($count) $this->_found_rows = $count[0]['Count'];
-			} else {
-				$this->_found_rows = $this->count($table,$columns, $where);
+				$count_query = 'SELECT FOUND_ROWS() as Count;';
+				if($count = $this->_getCached($parent_query.$count_query)) {				
+					$this->_found_rows = $count[0]['Count'];
+				} elseif($count = $this->misc($count_query, false)) { // Cache managed here not in DB->query					
+					$this->_found_rows = $count[0]['Count'];
+					$this->_writeCache($count, $parent_query.$count_query);
+				}
 			}
 			return ($output) ? $output : false;
 		}
