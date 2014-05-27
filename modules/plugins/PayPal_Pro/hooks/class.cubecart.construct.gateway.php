@@ -97,14 +97,6 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 					$pp_order_status	= 2;
 			}
 			
-			/* Fraud management filters clearly not fished
-			foreach ($response as $field => $value) {
-				if (preg_match('#^L_FMF#', $field)) {
-					## ???
-				}
-			}
-			*/
-			
 			$GLOBALS['session']->delete('', 'PayPal_Pro');
 			
 			$order	= Order::getInstance();
