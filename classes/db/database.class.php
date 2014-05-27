@@ -855,7 +855,6 @@ class Database_Contoller {
 			}
 			$GLOBALS['debug']->debugSQL('query', $message);
 			$this->_error = ($this->error()) ? $this->error().': '.$this->errorInfo() : false;
-			$this->_query = null;
 			$GLOBALS['debug']->debugSQL('error', $this->_error);
 		}
 
