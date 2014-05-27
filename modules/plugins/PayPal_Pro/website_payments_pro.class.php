@@ -324,7 +324,6 @@ class Website_Payments_Pro  {
 		return false;
 	}
 	public function SetExpressCheckout($bml = false, $inline = false) {
-		
 		## Initiates an Express Checkout transaction		
 		$nvp_data	= array(
 			'RETURNURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm',
@@ -434,6 +433,7 @@ class Website_Payments_Pro  {
 		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
 			
 		if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
+
 			$GLOBALS['db']->update('CubeCart_order_summary', array('gateway' => 'PayPal_Pro'), array('cart_order_id' => $this->_basket['cart_order_id']));
 			switch ($response['ACK']) {
 				case 'SuccessWithWarning':

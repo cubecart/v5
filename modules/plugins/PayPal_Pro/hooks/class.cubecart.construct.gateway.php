@@ -16,6 +16,7 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 		$wpp->SetExpressCheckout($bml,$inline);
 		exit;
 	} else if ($GLOBALS['session']->get('stage', 'PayPal_Pro')=='DoExpressCheckoutPayment') {
+
 		if ($response = $wpp->DoExpressCheckoutPayment()) {
 			/*
 			const ORDER_PENDING		= 1;
@@ -137,5 +138,8 @@ if (isset($_GET['module']) && $_GET['module'] == 'PayPal_Pro' || !$GLOBALS['sess
 				$GLOBALS['gui']->setError("Payment failed. Please try again.");
 			}
 		}
+	} else {
+		$GLOBALS['session']->delete('', 'PayPal_Pro');
+		httpredir('index.php?_a=gateway&module=PayPal_Pro');
 	}
 }
