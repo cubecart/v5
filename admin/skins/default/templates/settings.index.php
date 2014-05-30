@@ -273,8 +273,8 @@
 <div id="Advanced_Settings" class="tab_content">
   <h3>{$LANG.settings.title_advanced}</h3>
   <fieldset><legend>{$LANG.settings.title_licence_keys}</legend>
-	<div><label for="licence_key">{$LANG.settings.software_licence_key}</label><span><input name="config[license_key]" id="license_key" type="text" class="textbox" value="{$CONFIG.license_key}" /></span></div>
-	<div><label for="lkv">{$LANG.settings.copyright_key}</label><span><input name="lkv" id="lkv" type="text" class="textbox" value="{$CONFIG.lkv}" /></span></div>
+	<div><label for="licence_key">{$LANG.settings.software_licence_key}</label><span><input name="config[license_key]" autocomplete="off" id="license_key" type="text" class="textbox" value="{$CONFIG.license_key}" /></span></div>
+	<div><label for="lkv">{$LANG.settings.copyright_key}</label><span><input name="lkv" autocomplete="off" id="lkv" type="text" class="textbox" value="{$CONFIG.lkv}" /></span></div>
   </fieldset>
   <fieldset><legend>{$LANG.common.email}</legend>
 	<div><label for="email_method">{$LANG.settings.email_method}</label><span><select name="config[email_method]" id="email_method" class="textbox">
