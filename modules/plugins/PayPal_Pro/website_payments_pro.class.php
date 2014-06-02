@@ -440,7 +440,7 @@ class Website_Payments_Pro  {
 		if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 			
 			// Line items can screw up transaction rarely due to reounding.. lets skip them if we error on this
-			if($response['L_ERRORCODE0']==10413) {
+			if($line_items && $response['L_ERRORCODE0']==10413) {
 				$this->SetExpressCheckout($bml, $inline, false);
 			}
 
