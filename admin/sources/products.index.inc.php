@@ -778,12 +778,15 @@ if (isset($_GET['action'])) {
 		$taxonomy_lang = ($store_country==826) ? 'en-GB' : 'en-US';
 		
 		$request = new Request('www.google.com', '/basepages/producttype/taxonomy.'.$taxonomy_lang.'.txt');
+		$request->setMethod('get');
 		$request->skiplog(true);
 		$request->cache(true);
 		$request->setData(array('null'=>true));
 		if($response = $request->send()) {
 			$google_cats = explode("\n",$response);
 		}
+		
+		if(strstr($google_cats[0], 'Google_Product_Taxonomy_Version')) { unset($google_cats[0]); }
 		
 		$GLOBALS['smarty']->assign("GOOGLE_CATS",$google_cats);
 		
