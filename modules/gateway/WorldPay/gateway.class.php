@@ -35,6 +35,7 @@ class Gateway {
 						$this->_basket['billing_address']['state'];
 
 		$hidden		= 	array(
+			 				'authMode' 	=> 'E',
 							'instId' 	=> $this->_module['acNo'],
 							'cartId' 	=> $this->_basket['cart_order_id'],
 							'MC_OID' 	=> $this->_basket['cart_order_id'],
