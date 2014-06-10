@@ -53,7 +53,7 @@ if (isset($_POST['price'])) {
 	}
 	$GLOBALS['main']->setACPNotify($lang['catalogue']['notify_assign_update']);
 	httpredir(currentPage());
-} elseif(isset($_POST['price'])) {
+} elseif(!isset($_POST['price'])) {
 	$GLOBALS['main']->setACPWarning($lang['common']['error_no_change']);
 }
 
