@@ -387,21 +387,21 @@ class Catalogue {
 	}
 
 	function getCategoryStatusByProductID($product_id) {
-		if (empty($this->_category_status_prod_id)) {
-			$query = "SELECT CI.* , C.status FROM `".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_category_index` AS CI, `".$GLOBALS['config']->get('config', 'dbprefix')."CubeCart_category` AS C WHERE CI.product_id=$product_id AND CI.cat_id = C.cat_id ORDER BY CI.product_id";
-			if (($data = $GLOBALS['db']->query($query)) !== false) {
-				foreach ($data as $cat_data) {
-					$this->_category_status_prod_id[$cat_data['product_id']][] = $cat_data;
-				}
-			}
-		}
+            if (empty($this->_category_status_prod_id[$product_id])) {
+                    $query = sprintf("SELECT CI.* , C.status FROM `%1\$sCubeCart_category_index` AS CI, `%1\$sCubeCart_category` AS C WHERE CI.product_id = '$product_id' AND CI.cat_id = C.cat_id ORDER BY CI.product_id", $GLOBALS['config']->get('config', 'dbprefix'));
+                    if (($data = $GLOBALS['db']->query($query)) !== false) {
+                            foreach ($data as $cat_data) {
+                                    $this->_category_status_prod_id[$cat_data['product_id']][] = $cat_data;
+                            }
+                    }
+            }
 
-		if (isset($this->_category_status_prod_id[$product_id])) {
-			return $this->_category_status_prod_id[$product_id];
-		}
+            if (isset($this->_category_status_prod_id[$product_id])) {
+                    return $this->_category_status_prod_id[$product_id];
+            }
 
-		return array();
-	}
+            return array();
+    }
 
 	public function getCategoryTree($parent_id = 0) {
 		if (($categories = $GLOBALS['db']->select('CubeCart_category', array('cat_parent_id', 'cat_id', 'cat_name'), array('cat_parent_id' => $parent_id, 'status' => 1, 'hide' => 0), 'priority, cat_name ASC')) !== false) {
