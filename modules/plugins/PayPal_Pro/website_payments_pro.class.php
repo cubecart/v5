@@ -220,52 +220,58 @@ class Website_Payments_Pro  {
 		$itemamt 	= 0;
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
 		
-		foreach ($this->_basket['contents'] as $hash => $item) {
-			$product	= $GLOBALS['catalogue']->getProductData($item['id']);
-			$price		= $item['total_price_each'];	## Always tax exclusive
-			$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
-			$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
-
-			$tax_total	+= $taxes['amount'];
-			$prod_total	+= $price;
+		if(!$GLOBALS['session']->get('skip_line_items', 'PayPal_Pro')) {
+		
+			foreach ($this->_basket['contents'] as $hash => $item) {
+				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
+				$price		= $item['total_price_each'];	## Always tax exclusive
+				$GLOBALS['tax']->loadTaxes($this->_basket['delivery_address']['country_id']);
+				$taxes = $GLOBALS['tax']->productTax($price, $product['tax_type'], false, $this->_basket['delivery_address']['state_id']);
+	
+				$tax_total	+= $taxes['amount'];
+				$prod_total	+= $price;
+				
+				$nvp_data	= array_merge(array(
+					'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
+					'L_PAYMENTREQUEST_0_ITEMURL'.$i => $GLOBALS['storeURL'].'/index.php?_a=product&product_id='.$item['id'],
+					'L_PAYMENTREQUEST_0_NUMBER'.$i => $item['product_code'],
+					'L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE'.$i => $item['product_weight'],
+					'L_PAYMENTREQUEST_0_ITEMWEIGHTUNIT'.$i => $GLOBALS['config']->get('config','product_weight_unit'),
+					'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
+					'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
+					'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
+					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
+				), $nvp_data);
+				
+				$itemamt+=sprintf('%.2f', $price);
+				$i++;
+			}
 			
-			$nvp_data	= array_merge(array(
-				'L_PAYMENTREQUEST_0_ITEMCATEGORY'.$i => ($item['digital']=='1') ? 'Digital' : 'Physical',
-				'L_PAYMENTREQUEST_0_ITEMURL'.$i => $GLOBALS['storeURL'].'/index.php?_a=product&product_id='.$item['id'],
-				'L_PAYMENTREQUEST_0_NUMBER'.$i => $item['product_code'],
-				'L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE'.$i => $item['product_weight'],
-				'L_PAYMENTREQUEST_0_ITEMWEIGHTUNIT'.$i => $GLOBALS['config']->get('config','product_weight_unit'),
-				'L_PAYMENTREQUEST_0_NAME'.$i => $item['name'],
-				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $price),
-				'L_PAYMENTREQUEST_0_QTY'.$i	=> $item['quantity'],
-				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> sprintf('%.2f', $taxes['amount']),
-			), $nvp_data);
+			if($this->_basket['discount']>0) {
+				$nvp_data	= array_merge(array(
+					'L_PAYMENTREQUEST_0_NAME'.$i	=> 'Discount',
+					'L_PAYMENTREQUEST_0_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
+					'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+					'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
+				), $nvp_data);
+				$itemamt-=sprintf('%.2f', $this->_basket['discount']);
+			}
 			
-			$itemamt+=sprintf('%.2f', $price);
-			$i++;
-		}
+			if($this->_basket['shipping']['value']>0) {
+				$nvp_data	= array_merge(array(
+					'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
+					'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
+					'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
+					'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
+				), $nvp_data);
+				$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
+			}
+			
+			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = $itemamt;
 		
-		if($this->_basket['discount']>0) {
-			$nvp_data	= array_merge(array(
-				'L_PAYMENTREQUEST_0_NAME'.$i	=> 'Discount',
-				'L_PAYMENTREQUEST_0_AMT'.$i	=> '-'.sprintf('%.2f', $this->_basket['discount']),
-				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
-				'L_PAYMENTREQUEST_0_TAXAMT'.$i	=> 0,
-			), $nvp_data);
-			$itemamt-=sprintf('%.2f', $this->_basket['discount']);
+		} else {
+			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $this->_basket['total']);
 		}
-		
-		if($this->_basket['shipping']['value']>0) {
-			$nvp_data	= array_merge(array(
-				'L_PAYMENTREQUEST_0_NAME'.$i => 'Postage: '.$this->_basket['shipping']['name'],
-				'L_PAYMENTREQUEST_0_AMT'.$i	=> sprintf('%.2f', $this->_basket['shipping']['value']),
-				'L_PAYMENTREQUEST_0_QTY'.$i	=> 1,
-				'L_PAYMENTREQUEST_0_TAXAMT'.$i => sprintf('%.2f',($this->_basket['total_tax'] - $tax_total)),
-			), $nvp_data);
-			$itemamt+=sprintf('%.2f', $this->_basket['shipping']['value']);
-		}
-		
-		$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = $itemamt;
 
 		## PayPal's statistic tracking stuff
 		if($GLOBALS['session']->has('BML', 'PayPal_Pro')) {
@@ -436,11 +442,12 @@ class Website_Payments_Pro  {
 		} else {
 			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $this->_basket['total']);
 		}
-		
+			
 		if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 			
 			// Line items can screw up transaction rarely due to reounding.. lets skip them if we error on this
 			if($line_items && $response['L_ERRORCODE0']==10413) {
+				$GLOBALS['session']->set('skip_line_items', true, 'PayPal_Pro');
 				$this->SetExpressCheckout($bml, $inline, false);
 			}
 
