@@ -345,7 +345,7 @@
 			<td><span class="editable number-right" name="option_update[{$option.assign_id}][option_price]" title="{$LANG.common.click_edit}">{$option.option_price}</span></td>
 			<td><span class="editable number" name="option_update[{$option.assign_id}][option_weight]" title="{$LANG.common.click_edit}">{$option.option_weight}</span></td>
 			<td align="center">
-			  {if !$option.set_member_id}<a href="#" name="option_remove" class="remove" rel="{$option.assign_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>{else}<a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled" /></a>{/if}
+			  {if !$option.set_member_id}<a href="#" name="option_remove" class="remove" rel="{$option.assign_id}" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>{else}<a href="#"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete_disabled.png" title="{$LANG.catalogue.delete_option_disabled}" class="delete_disabled" /></a>{/if}
 			  <input type="hidden" id="data_{$option.assign_id}" value="{$option.data}" />
 			</td>
 		  </tr>
@@ -412,7 +412,7 @@
 			<td class="price"><input type="hidden" name="option_add[price][]" value="" disabled="disabled" /></td>
 			<td class="weight"><input type="hidden" name="option_add[weight][]" value="" disabled="disabled" /></td>
 			<!-- td class="stock"><input type="hidden" name="option_add[stock][]" value="" disabled="disabled" /></td -->
-			<td align="center"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></td>
+			<td align="center"><a href="#" class="remove" title="{$LANG.notification.confirm_delete}" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a></td>
 		  </tr>
 		</tfoot>
 	  </table>
@@ -427,7 +427,7 @@
 		{if isset($OPTION_SETS_ENABLED)} {foreach from=$OPTION_SETS_ENABLED item=set}
 		<div id="">
 		  <span class="actions">
-		  	<a href="#" name="set_remove" class="remove" rel="{$set.set_product_id}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
+		  	<a href="#" name="set_remove" class="remove" rel="{$set.set_product_id}" title="{$LANG.notification.confirm_delete}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/delete.png" alt="{$LANG.common.delete}" /></a>
 		  </span>
 		  {$set.set_name}
 		</div>
