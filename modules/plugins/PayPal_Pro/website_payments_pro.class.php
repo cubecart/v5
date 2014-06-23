@@ -199,7 +199,6 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_INVNUM'			=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
 			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
-			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=gateway&amp;cmd=call&amp;module=PayPal',
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,	
 			## Delivery Address
@@ -221,7 +220,9 @@ class Website_Payments_Pro  {
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
 		
 		if(!$GLOBALS['session']->get('skip_line_items', 'PayPal_Pro')) {
-		
+			
+			$nvp_data['PAYMENTREQUEST_0_TAXAMT'] = sprintf('%.2f', $this->_basket['total_tax']);
+			
 			foreach ($this->_basket['contents'] as $hash => $item) {
 				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
 				$price		= $item['total_price_each'];	## Always tax exclusive
@@ -270,6 +271,7 @@ class Website_Payments_Pro  {
 			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = $itemamt;
 		
 		} else {
+			
 			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $this->_basket['total']);
 		}
 
@@ -340,7 +342,6 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
 			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
 			'PAYMENTREQUEST_0_CURRENCYCODE' => $GLOBALS['config']->get('config','default_currency'),
-			'PAYMENTREQUEST_0_TAXAMT'	=> sprintf('%.2f', $this->_basket['total_tax']),
 			'PAYMENTREQUEST_0_INVNUM'	=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,
 			'ALLOWNOTE'		=> 0,
@@ -394,6 +395,9 @@ class Website_Payments_Pro  {
 		$store_country = $GLOBALS['config']->get('config', 'store_country');
 		
 		if($line_items) {
+		
+			$nvp_data['PAYMENTREQUEST_0_TAXAMT'] = sprintf('%.2f', $this->_basket['total_tax']);
+		
 			foreach ($this->_basket['contents'] as $hash => $item) {
 				$product	= $GLOBALS['catalogue']->getProductData($item['id']);
 				$price		= $item['total_price_each'];	## Always tax exclusive
@@ -439,15 +443,14 @@ class Website_Payments_Pro  {
 			}
 		
 			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $itemamt);
-		} else {
-			$nvp_data['PAYMENTREQUEST_0_ITEMAMT'] = sprintf('%.2f', $this->_basket['total']);
 		}
-			
+	
 		if ($response = $this->nvp_request('SetExpressCheckout', $nvp_data)) {
 			
 			// Line items can screw up transaction rarely due to reounding.. lets skip them if we error on this
 			if($line_items && $response['L_ERRORCODE0']==10413) {
 				$GLOBALS['session']->set('skip_line_items', true, 'PayPal_Pro');
+				unset($nvp_data);
 				$this->SetExpressCheckout($bml, $inline, false);
 			}
 
