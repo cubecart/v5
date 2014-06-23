@@ -398,8 +398,14 @@ class SEO {
 		if ($GLOBALS['config']->has('config', 'seo_metadata') && $GLOBALS['config']->get('config', 'seo_metadata') && !empty($this->_meta_data['description'])) {
 			switch ((int)$GLOBALS['config']->get('config', 'seo_metadata')) {
 				case self::TAGS_MERGE:
-					$description[] = $this->_meta_data['description'];
-					$description[] = $GLOBALS['config']->get('config', 'store_meta_description');
+					if ($GLOBALS['config']->get('config', 'store_meta_description') && $this->_meta_data['description']) {
+						$description[] = $this->_meta_data['description'];
+						$description[] = $GLOBALS['config']->get('config', 'store_meta_description');
+					} else if ($this->_meta_data['description']) {
+						$description = $this->_meta_data['description'];				
+					} else {
+						$description = $GLOBALS['config']->get('config', 'store_meta_description');					
+					}
 					break;
 				case self::TAGS_REPLACE:
 					$description = $this->_meta_data['description'];
