@@ -84,16 +84,17 @@ class Tax {
 		if (is_array($this->_tax_table_applied)) {
 			foreach ($this->_tax_table_applied as $tax_id => $tax_name) {
 				$tax_value	= ($this->_tax_table_inc[$tax_id]+$this->_tax_table_add[$tax_id])*$this->_adjust_tax;
-				$tax_data	= array(
-					'name'	=> $tax_name,
-					'value'	=> $GLOBALS['tax']->priceFormat($tax_value, true),
-				);
+				$tax_data[$tax_name]+= $tax_value;
 				$basket_taxes[] = array(
 					'tax_id' => $tax_id,
 					'amount' => $tax_value
 				);
-				$taxes[] = $tax_data;
 			}
+			// group taxes by name!
+			foreach($tax_data as $tax_name => $tax_value) {
+				$taxes[] = array('name' => $tax_name, 'value' => $this->priceFormat($tax_value,true));
+			}
+
 			$GLOBALS['cart']->set('order_taxes', $basket_taxes);
 			$GLOBALS['smarty']->assign('TAXES', $taxes);
 		}

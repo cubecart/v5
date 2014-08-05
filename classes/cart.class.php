@@ -713,7 +713,7 @@ class Cart {
 						$product['options']	= false;
 					}
 					// Product Discounts
-					$this->_applyProductDiscount($product['price'], $item['id'], $item['quantity']);
+					//$this->_applyProductDiscount($product['price'], $item['id'], $item['quantity']);
 
 					// Add the total product price inc options etc for payment gateways
 					$this->basket['contents'][$hash]['option_line_price'] = $option_line_price;
@@ -1175,13 +1175,16 @@ class Cart {
 					// Set remainder/usage value
 					$this->basket['coupons'][$key]['remainder'] = $remainder;
 				} else {
-					
+					$products = unserialize($data['product']);
+					$incexc = array_shift($products);
+					$product_count = count($products);
+			
 					$subtotal = $tax_total = 0;
 					foreach ($this->basket['contents'] as $hash => $item) {
-						$subtotal += ($item['total_price_each'] * $item['quantity']);
-						
-						$tax_total += $item['tax_each']['amount'];
-
+						if ($product_count==0 || $incexc == 'include' && in_array($item['id'], $products) || $incexc == 'exclude' && !in_array($item['id'], $products)) {
+							$subtotal += ($item['total_price_each'] * $item['quantity']);
+							$tax_total += $item['tax_each']['amount'];
+						}
 					}
 					
 					if ($data['shipping']) {
@@ -1196,7 +1199,6 @@ class Cart {
 					if($discount<$subtotal){
 						$subtotal -= $discount;
 						$new_tax = ($subtotal*$ave_tax_rate);
-						echo 
 						$GLOBALS['tax']->adjustTax($new_tax);
 						$this->_discount += $discount;
 					} elseif($discount>=$subtotal) {
@@ -1221,6 +1223,7 @@ class Cart {
 	 * @param int $product_id
 	 * @param int $quantity
 	 */
+
 	private function _applyProductDiscount(&$price, $product_id, $quantity = 1) {
 		// Apply 'assigned product' discounts on a per-product basis
 		if (isset($product_id) && is_numeric($product_id)) {
