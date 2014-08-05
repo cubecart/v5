@@ -927,8 +927,7 @@ class Cart {
 
 					$class = CC_ROOT_DIR.CC_DS.'modules'.CC_DS.'shipping'.CC_DS.$module['folder'].CC_DS.'shipping.class.php';
 					if (file_exists($class)) {
-						// Version 5 Shipping Calculators
-						// fix for duplicate shipping module entries in config table
+	
 						if(!class_exists($module['folder'])) include $class;
 						
 						if (class_exists($module['folder']) && method_exists((string)$module['folder'], 'calculate')) {
@@ -936,7 +935,13 @@ class Cart {
 							$packages		= $shipping->calculate();
 							if ($packages) {
 								uasort($packages, 'price_sort');
-								$shipArray[$module['folder']]	= $packages;
+								// work out tax amount on shipping
+								foreach($packages as $package){
+									$packages_with_tax[] = array_merge($package,array('tax' => $GLOBALS['tax']->productTax($package['value'],$package['tax_id'],$package['tax_inclusive'],0,'goods',false)));
+								}
+
+								$shipArray[$module['folder']]	= $packages_with_tax;
+								unset($packages_with_tax);
 							}
 						}
 					} else {
@@ -1170,27 +1175,36 @@ class Cart {
 					// Set remainder/usage value
 					$this->basket['coupons'][$key]['remainder'] = $remainder;
 				} else {
+					
+					$subtotal = $tax_total = 0;
+					foreach ($this->basket['contents'] as $hash => $item) {
+						$subtotal += ($item['total_price_each'] * $item['quantity']);
+						
+						$tax_total += $item['tax_each']['amount'];
 
-					switch ($data['type']) {
-						case 'percent':
-							if ($data['shipping']) {
-								$discount = $this->_shipping*($data['value']/100);
-							} else {
-								$discount = ($this->_subtotal-$this->_discount)*($data['value']/100);
-							}
-							$this->basket['coupons'][$key]['discount_value'] = $discount;
-							$this->_discount += $discount;
-							break;
-						case 'fixed':
-						default:
-							$discount = $data['value'];
-							if ($data['shipping'] && $this->_shipping <= $discount) {
-								$discount = $this->_shipping;
-							} else if ($this->_subtotal < $discount) {
-								$discount = $this->_subtotal;
-							}
-							$this->_discount += $discount;
 					}
+					
+					if ($data['shipping']) {
+						$subtotal += $this->basket['shipping']['value'];
+						$tax_total += $this->basket['shipping']['tax']['amount'];
+					}
+
+					$ave_tax_rate = ($tax_total / $subtotal);
+
+					$discount = ($data['type']=='percent') ? $subtotal*($data['value']/100) : $data['value'];
+
+					if($discount<$subtotal){
+						$subtotal -= $discount;
+						$new_tax = ($subtotal*$ave_tax_rate);
+						echo 
+						$GLOBALS['tax']->adjustTax($new_tax);
+						$this->_discount += $discount;
+					} elseif($discount>=$subtotal) {
+						$new_tax = 0;
+						$GLOBALS['tax']->adjustTax($new_tax);
+						$this->_discount += $subtotal;
+					}
+					
 				}
 			}
 			$this->save();

@@ -1417,15 +1417,17 @@ class Cubecart {
 				foreach ($shipping as $ship_name => $methods) {
 					$label	= (!is_numeric($ship_name) && !empty($ship_name)) ? str_replace('_', ' ', $ship_name) : null;
 					foreach ($methods as $data) {
-					
+
 						if ($data['tax_inclusive']) $GLOBALS['tax']->inclusiveTaxRemove($data['value'], $data['tax_id']);
 
 						$GLOBALS['tax']->exchangeRate($data['value'], (!empty($data['currency'])) ? $data['currency'] : $GLOBALS['config']->get('config', 'default_currency'));
+						
 						$value	= array(
 							'offset'	=> $offset,
 							'name'		=> $data['name'],
 							'value'		=> $data['value'],
-							'tax_id'	=> $data['tax_id'],
+							'tax_id'	=> $data['tax_id'], // Kept for legacy
+							'tax'		=> $data['tax']
 						);
 						$shipping_values[] = $value;
 						$data['name'] = empty($data['name']) ? '' : ' ('.$data['name'].')';
