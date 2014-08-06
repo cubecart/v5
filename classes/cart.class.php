@@ -712,9 +712,7 @@ class Cart {
 					} else {
 						$product['options']	= false;
 					}
-					// Product Discounts
-					//$this->_applyProductDiscount($product['price'], $item['id'], $item['quantity']);
-
+					
 					// Add the total product price inc options etc for payment gateways
 					$this->basket['contents'][$hash]['option_line_price'] = $option_line_price;
 					$this->basket['contents'][$hash]['total_price_each'] = $product['price'];
@@ -1142,56 +1140,23 @@ class Cart {
 	 * @return bool
 	 */
 	private function _applyDiscounts() {
-		if (isset($this->basket['coupons']) && is_array($this->basket['coupons'])) {
+		/* IF BRAIN POWER WAS MEASURED IN DONNER KEBABS THE CODE BELOW WOULD EASILY CONSUME 53 MEGA KEBABS */
+
+		if (isset($this->basket['coupons']) && count($this->basket['coupons'])>0) {
+			$subtotal = $tax_total = 0;
+			$coupon = false;
+
+			// COUPONS FIRST!!
 			foreach ($this->basket['coupons'] as $key => $data) {
-				// Product specific discounts should already have been calculated
-				if ($this->_item_discount) {
-					continue;
-				}
-				if ($data['gc']) {
+		
+				if (!$data['gc']) {
 					
-					$subtotal = $tax_total = 0;
-					foreach ($this->basket['contents'] as $hash => $item) {
-						if($item['total_price_each']>0) {
-							$subtotal += ($item['total_price_each'] * $item['quantity']);
-						}
-						if($item['tax_each']['amount']>0) {
-							$tax_total += $item['tax_each']['amount'];
-						}
-					}
-					if($this->basket['shipping']['value']>0) {
-						$subtotal += $this->basket['shipping']['value'];
-						if($this->basket['shipping']['tax']['amount']>0){
-							$tax_total += $this->basket['shipping']['tax']['amount'];
-						}
-					}
-					
-					$tax_total += $this->basket['shipping']['tax']['amount'];
-				
-					$ave_tax_rate = ($tax_total / $subtotal);
+					$coupon = true;
 
-					$discount	= $data['value'];
-
-					if($discount<$subtotal){
-						$subtotal -= $discount;
-						$new_tax = ($subtotal*$ave_tax_rate);
-						$GLOBALS['tax']->adjustTax($new_tax);
-						$this->_discount += $discount;
-						$remainder = 0;
-					} elseif($discount>=$subtotal) {
-						$new_tax = 0;
-						$GLOBALS['tax']->adjustTax($new_tax);
-						$remainder = $discount - $subtotal;
-						$this->_discount += $subtotal;
-					}
-					$this->basket['coupons'][$key]['remainder'] = $remainder;
-					
-				} else {
 					$products = unserialize($data['product']);
 					$incexc = array_shift($products);
 					$product_count = count($products);
 			
-					$subtotal = $tax_total = 0;
 					foreach ($this->basket['contents'] as $hash => $item) {
 						if ($product_count==0 || $incexc == 'include' && in_array($item['id'], $products) || $incexc == 'exclude' && !in_array($item['id'], $products)) {
 							if($item['total_price_each']>0) {
@@ -1200,14 +1165,18 @@ class Cart {
 							if($item['tax_each']['amount']>0) {
 								$tax_total += $item['tax_each']['amount'];
 							}
+						} elseif($item['total_price_each']>0) { // excluded items CAN be used against gift certificates!!
+							$excluded_products[$hash] = $item;
 						}
 					}
-					
+			
 					if($data['shipping'] && $this->basket['shipping']['value']>0) {
 						$subtotal += $this->basket['shipping']['value'];
 						if($this->basket['shipping']['tax']['amount']>0){
 							$tax_total += $this->basket['shipping']['tax']['amount'];
 						}
+					} elseif($this->basket['shipping']['value']>0) {
+						$excluded_shipping = $this->basket['shipping'];
 					}
 
 					$ave_tax_rate = ($tax_total / $subtotal);
@@ -1216,91 +1185,98 @@ class Cart {
 
 					if($discount<$subtotal){
 						$subtotal -= $discount;
-						$new_tax = ($subtotal*$ave_tax_rate);
-						$GLOBALS['tax']->adjustTax($new_tax);
 						$this->_discount += $discount;
 					} elseif($discount>=$subtotal) {
-						$new_tax = 0;
-						$GLOBALS['tax']->adjustTax($new_tax);
 						$this->_discount += $subtotal;
-					}
-					
+						$subtotal = 0;
+						if((!is_array($excluded_products) && !is_array($excluded_shipping))) {
+							$GLOBALS['tax']->adjustTax(0);
+							foreach($this->basket['coupons'] as $key => $data) {
+								if($data['gc']) unset($this->basket['coupons'][$key]);	
+							}
+							$this->save();
+							return true; // nothing else to check.. return 
+						}
+					}	
 				}
 			}
+			
+			if(!$coupon) {
+
+				foreach ($this->basket['contents'] as $hash => $item) {
+					if($item['total_price_each']>0) {
+						$subtotal += ($item['total_price_each'] * $item['quantity']);
+					}
+					if($item['tax_each']['amount']>0) {
+						$tax_total += $item['tax_each']['amount'];
+					}
+				}
+		
+				if($this->basket['shipping']['value']>0) {
+					$subtotal += $this->basket['shipping']['value'];
+					if($this->basket['shipping']['tax']['amount']>0){
+						$tax_total += $this->basket['shipping']['tax']['amount'];
+					}
+				}
+			
+				$ave_tax_rate = ($tax_total / $subtotal);
+			
+			} else {
+				if((is_array($excluded_products) || is_array($excluded_shipping))) {
+					$excluded_subtotal = $excluded_tax_total = 0;
+					if(is_array($excluded_products)) {
+						foreach ($excluded_products as $hash => $item) {
+							if($item['total_price_each']>0) {
+								$excluded_subtotal += ($item['total_price_each'] * $item['quantity']);
+							}
+							if($item['tax_each']['amount']>0) {
+								$excluded_tax_total += $item['tax_each']['amount'];
+							}
+						}
+					}
+					if(is_array($excluded_products) && $excluded_shipping['value']>0) {
+						$excluded_subtotal += $excluded_shipping['value'];
+						if($excluded_shipping['tax']['amount']>0){
+							$excluded_tax_total += $excluded_shipping['tax']['amount'];
+						}
+					}
+					$excluded_ave_tax_rate = ($excluded_tax_total / $excluded_subtotal);
+					$ave_tax_rate = ($ave_tax_rate + $excluded_ave_tax_rate) / 2;
+					$subtotal += $excluded_subtotal;
+				}
+
+			}			
+			
+			// GIFT CERTS SECOND!!
+			foreach ($this->basket['coupons'] as $key => $data) {
+				if($data['gc'] && $subtotal==0) {
+					// Gift cert not needed so remove
+					unset($this->basket['coupons'][$key]);
+				} elseif ($data['gc'] && $subtotal>0) {
+
+					$discount	= $data['value'];
+
+					if($discount<$subtotal){
+						$subtotal -= $discount;
+						$this->_discount += $discount;
+						$remainder = 0;
+					} elseif($discount>=$subtotal) {
+						$remainder = $discount - $subtotal;
+						$this->_discount += $subtotal;
+						$subtotal = 0;
+					}
+					$this->basket['coupons'][$key]['remainder'] = $remainder;	
+				}
+			}
+			
+			$tax = ($subtotal>0) ? ($subtotal*$ave_tax_rate) : 0;
+			$GLOBALS['tax']->adjustTax($tax);
+
 			$this->save();
 			return true;
 		}
 
 		return false;
-	}
-
-	/**
-	 * Apply product discount
-	 *
-	 * @param float $price
-	 * @param int $product_id
-	 * @param int $quantity
-	 */
-
-	private function _applyProductDiscount(&$price, $product_id, $quantity = 1) {
-		// Apply 'assigned product' discounts on a per-product basis
-		if (isset($product_id) && is_numeric($product_id)) {
-			if (isset($this->basket['coupons']) && is_array($this->basket['coupons'])) {
-				foreach ($this->basket['coupons'] as $key => $data) {
-					if ($data['subtotal']) {
-						continue; // subtotal based coupon
-					}
-					$products = unserialize($data['product']);
-					$incexc = array_shift($products);
-					// workaround for empty product arrays and exclude set....cause excluding NOTHING causes weird behavior
-					if(count($products) == 0) $incexc = 'include';
-					if ($incexc == 'include' && in_array($product_id, $products)) {
-						switch ($data['type']) {
-							case 'percent':
-								$discount	= $price*($data['value']/100);
-								$this->_discount += $discount*$quantity;
-								break;
-							case 'fixed':
-							default:
-//								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
-//								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
-//								$this->_discount += $discount;
-								$discount	= ($price < $data['value']) ? $price : $data['value'];
-								$this->_discount += $discount*$quantity;
-						}
-//						$this->_discount += $discount;
-						$price -= $discount;
-					} elseif ($incexc == 'exclude' && !in_array($product_id, $products)) {
-						switch ($data['type']) {
-							case 'percent':
-								$discount	= $price*($data['value']/100);
-								$this->_discount += $discount*$quantity;
-								break;
-							case 'fixed':
-							default:
-//								$available	= ($quantity > $data['available']) ? $data['available'] : $quantity;
-//								$discount	= (($price / $quantity) < $data['value']) ? ($price / $quantity) * $available : $data['value'] * $available;
-//								$this->_discount += $discount;
-								$discount	= ($price < $data['value']) ? $price : $data['value'];
-								$this->_discount += $discount*$quantity;
-						}
-//						$this->_discount += $discount;
-						$price -= $discount;
-					// Cover old coupons
-					} elseif($data['product']=='0' || !is_array($products)) {
-						$products = array();
-					}
-					// if we're including or excluding ANY products, whether in the cart or not,
-					// we need to block full cart discounts
-					if(count($products) > 0) {
-						$this->_item_discount = true;
-						$this->basket['coupons'][$key]['products'] = 1;
-					}
-				}
-			}
-		}
-
-		$this->save();
 	}
 
 	/**
