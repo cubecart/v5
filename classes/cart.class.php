@@ -1149,31 +1149,43 @@ class Cart {
 					continue;
 				}
 				if ($data['gc']) {
-					$remainder	= $data['value'];
+					
+					$subtotal = $tax_total = 0;
 					foreach ($this->basket['contents'] as $hash => $item) {
-						$price = $item['total_price_each'] * $item['quantity'];
-						if ($remainder > 0 && $price > 0) {
-							if ($remainder <= $price) {
-								$discount = $remainder;
-								$remainder = 0;
-							} else {
-								$discount = $price;
-								$remainder -= $price;
-							}
-							$this->_discount += $discount;
+						if($item['total_price_each']>0) {
+							$subtotal += ($item['total_price_each'] * $item['quantity']);
+						}
+						if($item['tax_each']['amount']>0) {
+							$tax_total += $item['tax_each']['amount'];
 						}
 					}
-					if ($remainder > 0 && $this->_shipping > 0) {
-						if ($this->_shipping <= $remainder) {
-							$remainder -= $this->_shipping;
-							$this->_shipping = 0;
-						} else {
-							$this->_shipping -= $remainder;
-							$remainder = 0;
+					if($this->basket['shipping']['value']>0) {
+						$subtotal += $this->basket['shipping']['value'];
+						if($this->basket['shipping']['tax']['amount']>0){
+							$tax_total += $this->basket['shipping']['tax']['amount'];
 						}
 					}
-					// Set remainder/usage value
+					
+					$tax_total += $this->basket['shipping']['tax']['amount'];
+				
+					$ave_tax_rate = ($tax_total / $subtotal);
+
+					$discount	= $data['value'];
+
+					if($discount<$subtotal){
+						$subtotal -= $discount;
+						$new_tax = ($subtotal*$ave_tax_rate);
+						$GLOBALS['tax']->adjustTax($new_tax);
+						$this->_discount += $discount;
+						$remainder = 0;
+					} elseif($discount>=$subtotal) {
+						$new_tax = 0;
+						$GLOBALS['tax']->adjustTax($new_tax);
+						$remainder = $discount - $subtotal;
+						$this->_discount += $subtotal;
+					}
 					$this->basket['coupons'][$key]['remainder'] = $remainder;
+					
 				} else {
 					$products = unserialize($data['product']);
 					$incexc = array_shift($products);
@@ -1182,14 +1194,20 @@ class Cart {
 					$subtotal = $tax_total = 0;
 					foreach ($this->basket['contents'] as $hash => $item) {
 						if ($product_count==0 || $incexc == 'include' && in_array($item['id'], $products) || $incexc == 'exclude' && !in_array($item['id'], $products)) {
-							$subtotal += ($item['total_price_each'] * $item['quantity']);
-							$tax_total += $item['tax_each']['amount'];
+							if($item['total_price_each']>0) {
+								$subtotal += ($item['total_price_each'] * $item['quantity']);
+							}
+							if($item['tax_each']['amount']>0) {
+								$tax_total += $item['tax_each']['amount'];
+							}
 						}
 					}
 					
-					if ($data['shipping']) {
+					if($data['shipping'] && $this->basket['shipping']['value']>0) {
 						$subtotal += $this->basket['shipping']['value'];
-						$tax_total += $this->basket['shipping']['tax']['amount'];
+						if($this->basket['shipping']['tax']['amount']>0){
+							$tax_total += $this->basket['shipping']['tax']['amount'];
+						}
 					}
 
 					$ave_tax_rate = ($tax_total / $subtotal);
