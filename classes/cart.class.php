@@ -487,8 +487,15 @@ class Cart {
 				$coupon	= $coupon[0];
 				// only allow multiple discount codes for gift certificates!
 				if(empty($coupon['cart_order_id'])) {
-					unset($this->basket['coupons']);
+					if(is_array($this->basket['coupons'])) {
+						foreach($this->basket['coupons'] as $key => $item) {
+							if(!$item['gc']) {
+								unset($this->basket['coupons'][$key]);
+							}
+						}
+					}
 				}
+				
 				
 				if($coupon['expires']!=='0000-00-00' && (strtotime($coupon['expires']) < time())) {
 					// Coupon is no longer valid
