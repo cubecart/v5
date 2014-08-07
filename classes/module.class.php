@@ -139,8 +139,8 @@ class Module {
 				// Get tax types for modules drop down box
 				if (($this->_taxes = $GLOBALS['db']->select('CubeCart_tax_class', array('id','tax_name'), false, array('tax_name' => 'ASC'))) !== false) {
 					$inherited_tax[] = array (
-						'id' => 'inherit',
-    					'tax_name' => 'Inherit'
+						'id' => 999999,
+    					'tax_name' => $GLOBALS['language']->common['inherit']
     				);
 					$this->_taxes = array_merge($this->_taxes,$inherited_tax);
 					foreach ($this->_taxes as $tax) {

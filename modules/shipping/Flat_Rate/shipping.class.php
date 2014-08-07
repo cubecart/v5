@@ -10,7 +10,6 @@ class Flat_Rate {
 	}
 
 	public function calculate() {
-
 		$value		= $this->_settings['cost'];
 		if ($this->_settings['handling'] > 0) {
 			$value	+= $this->_settings['handling'];
