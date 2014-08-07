@@ -277,8 +277,6 @@ class Tax {
 
 			$percent = $total_tax / $GLOBALS['cart']->basket['subtotal'];
 
-			var_dump($last_inherited,$total_tax,$percent);
-
 			if($tax_inclusive) {
 				$amount = $price - sprintf('%.2f', $price/($percent+1), 2);
 				$this->_tax_table_applied[$tax_id]	= $tax['name'];
