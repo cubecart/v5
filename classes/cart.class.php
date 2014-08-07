@@ -1209,7 +1209,6 @@ class Cart {
 			}
 			
 			if(!$coupon) {
-
 				foreach ($this->basket['contents'] as $hash => $item) {
 					if($item['total_price_each']>0) {
 						$subtotal += ($item['total_price_each'] * $item['quantity']);
@@ -1241,7 +1240,7 @@ class Cart {
 							}
 						}
 					}
-					if(is_array($excluded_products) && $excluded_shipping['value']>0) {
+					if(is_array($excluded_shipping) && $excluded_shipping['value']>0) {
 						$excluded_subtotal += $excluded_shipping['value'];
 						if($excluded_shipping['tax']['amount']>0){
 							$excluded_tax_total += $excluded_shipping['tax']['amount'];

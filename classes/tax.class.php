@@ -92,8 +92,10 @@ class Tax {
 			}
 		
 			// split inherited tax amongst other taxes
-			if(isset($tax_data['inherited']) && $tax_data['inherited']>0) {
-				$shared_tax = $tax_data['inherited']/(count($tax_data)-1);
+			if(isset($tax_data['inherited'])) {
+				if($tax_data['inherited']>0) {
+					$shared_tax = $tax_data['inherited']/(count($tax_data)-1);
+				}
 				unset($tax_data['inherited']);
 			}
 
