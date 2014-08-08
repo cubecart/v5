@@ -49,7 +49,6 @@ class By_Weight {
 						'delivery'		=> "",
 						'next_day'		=> "",
 					);
-
 				}
 			}
 		}
