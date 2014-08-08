@@ -945,7 +945,6 @@ class Cart {
 									$package['value'] = sprintf('%.2f',$package['value']);
 									$packages_with_tax[] = array_merge($package,array('tax' => $GLOBALS['tax']->productTax($package['value'],$package['tax_id'],$package['tax_inclusive'],0,'goods',false)));
 								}
-
 								$shipArray[$module['folder']]	= $packages_with_tax;
 								unset($packages_with_tax);
 							}
