@@ -1274,10 +1274,9 @@ class Cart {
 					$this->basket['coupons'][$key]['remainder'] = $remainder;	
 				}
 			}
-			
+			$ave_tax_rate = sprintf('%.2f',$ave_tax_rate);
 			$tax = ($subtotal>0) ? ($subtotal*$ave_tax_rate) : 0;
 			$GLOBALS['tax']->adjustTax($tax);
-
 			$this->save();
 			return true;
 		}
