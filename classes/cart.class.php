@@ -1192,9 +1192,11 @@ class Cart {
 
 					if($discount<$subtotal){
 						$subtotal -= $discount;
-						$this->_discount += $discount;
+						$this->_discount = $discount;
+						$this->basket['coupons'][$key]['value_display'] = sprintf('%.2f',$discount);
 					} elseif($discount>=$subtotal) {
-						$this->_discount += $subtotal;
+						$this->_discount = $subtotal;
+						$this->basket['coupons'][$key]['value_display'] = sprintf('%.2f',$subtotal);
 						$subtotal = 0;
 						if((!is_array($excluded_products) && !is_array($excluded_shipping))) {
 							$GLOBALS['tax']->adjustTax(0);
