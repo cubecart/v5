@@ -316,7 +316,7 @@ $select_options = array(
 	#'email_disable_alert'	=> null,
 	'ssl_force'				=> null,
 	'catalogue_hide_prices'	=> null,
-	'email_method'			=> array('mail' => $lang['settings']['email_method_mail'], 'smtp' => $lang['settings']['email_method_smtp']),
+	'email_method'			=> array('mail' => $lang['settings']['email_method_mail'], 'smtp' => $lang['settings']['email_method_smtp'], 'smtp_ssl' => $lang['settings']['email_method_smtp_ssl']),
 	'offline'				=> null,
 	'offline_allow_admin'	=> null,
 	'basket_out_of_stock_purchase'		=> null,
