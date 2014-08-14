@@ -283,31 +283,41 @@ class Tax {
 		
 		if($price<=0) return false; 
 
-		if($tax_type == 999999 && $sum) {
+		if($tax_type == 999999) {
 			
 			$this->_tax_table_applied[$tax_id]	= 'inherited';
 			
-			$last_inherited = $GLOBALS['session']->get('last_inherited');
-		
-			$total_tax = ($last_inherited>0) ? $GLOBALS['cart']->basket['total_tax'] - $last_inherited : $GLOBALS['cart']->basket['total_tax'];
+			$subtotal = $total_tax = 0;
+			foreach ($GLOBALS['cart']->basket['contents'] as $hash => $item) {
+				if($item['total_price_each']>0) {
+					$subtotal += ($item['total_price_each'] * $item['quantity']);
+				}
+				if($item['tax_each']['amount']>0) {
+					$tax_total += $item['tax_each']['amount'];
+				}
+			}
 
-			$percent = $total_tax / $GLOBALS['cart']->basket['subtotal'];
+			$percent = $tax_total / $subtotal;
 
 			if($tax_inclusive) {
 				$amount = $price - sprintf('%.2f', $price/($percent+1), 2);
-				$this->_tax_table_applied[$tax_id]	= $tax['name'];
-				$this->_tax_table_inc[$tax_id]		+= $amount;
-				$this->_total_tax_inc				+= $amount;
+				if($sum) {
+					$this->_tax_table_applied[$tax_id]	= $tax['name'];
+					$this->_tax_table_inc[$tax_id]		+= $amount;
+					$this->_total_tax_inc				+= $amount;
+				}
 			} else {
 				$amount	= $price * sprintf('%.2f',$percent);
-				if (isset($this->_tax_table_add[$tax_id])) {
-					$this->_tax_table_add[$tax_id]	+= $amount;
-				} else {
-					$this->_tax_table_add[$tax_id]	= $amount;
+				if($sum) {
+					if (isset($this->_tax_table_add[$tax_id])) {
+						$this->_tax_table_add[$tax_id]	+= $amount;
+					} else {
+						$this->_tax_table_add[$tax_id]	= $amount;
+					}
+					$this->_total_tax_add				+= $amount;	
 				}
-				$this->_total_tax_add				+= $amount;	
 			}
-			$GLOBALS['session']->set('last_inherited', $amount);
+			
 		}
 		if (is_array($this->_tax_table) && !empty($this->_tax_table)) {
 			foreach ($this->_tax_table as $tax_id => $tax) {
