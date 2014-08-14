@@ -292,16 +292,6 @@ class Tax {
 		if($tax_type == 999999) {
 			
 			$this->_tax_table_applied[$tax_id]	= 'inherited';
-			
-			$subtotal = $total_tax = 0;
-			foreach ($GLOBALS['cart']->basket['contents'] as $hash => $item) {
-				if($item['total_price_each']>0) {
-					$subtotal += ($item['total_price_each'] * $item['quantity']);
-				}
-				if($item['tax_each']['amount']>0) {
-					$tax_total += $item['tax_each']['amount'];
-				}
-			}
 
 			$percent = $this->_getInheritedTax();
 
