@@ -18,9 +18,6 @@
 	<div><label for="default_currency">{$LANG.settings.default_currency}</label><span><select name="config[default_currency]" id="default_currency" class="textbox">
 	{foreach from=$CURRENCIES item=currency}<option value="{$currency.code}"{$currency.selected}>{$currency.code} - {$currency.name}</option>{/foreach}
 	</select></span></div>
-	<div><label for="product_prices_include_tax">{$LANG.settings.tax_customer}</label><span><select name="config[product_prices_include_tax]" id="product_prices_include_tax" class="textbox">
-	  {foreach from=$OPT_PRODUCT_PRICES_INCLUDE_TAX item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
-	</select></span></div>
 	<div><label for="basket_tax_by_delivery">{$LANG.settings.tax_customer_by}</label><span><select name="config[basket_tax_by_delivery]" id="basket_tax_by_delivery" class="textbox">
 	  {foreach from=$OPT_BASKET_TAX_BY_DELIVERY item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
 	</select></span></div>

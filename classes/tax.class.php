@@ -300,9 +300,9 @@ class Tax {
 			$percent = $tax_total / $subtotal;
 
 			if($tax_inclusive) {
+				// if tax inclusive we need to remove tax and flag it as done!
 				$amount = $price - sprintf('%.2f', $price/($percent+1), 2);
 				if($sum) {
-					$this->_tax_table_applied[$tax_id]	= $tax['name'];
 					$this->_tax_table_inc[$tax_id]		+= $amount;
 					$this->_total_tax_inc				+= $amount;
 				}
@@ -317,11 +317,12 @@ class Tax {
 					$this->_total_tax_add				+= $amount;	
 				}
 			}
-			
+			return array('amount' => sprintf('%.2f',$amount), 'tax_inclusive' => $tax_inclusive, 'tax_name' => 'inherited');
 		}
 		if (is_array($this->_tax_table) && !empty($this->_tax_table)) {
 			foreach ($this->_tax_table as $tax_id => $tax) {
 				if ($tax[$type] && $tax['type'] == $tax_type && in_array($tax['county_id'], array($state, 0))) {
+					$tax_name = $tax['name'];
 					switch ($tax_inclusive) {
 						case true:
 							## Already includes tax - but how much?
@@ -349,7 +350,7 @@ class Tax {
 					}
 				}
 			}
-			return array('amount' => sprintf('%.2f',$amount), 'tax_inclusive' => $tax_inclusive, 'tax_name' => $tax['name']);
+			return array('amount' => sprintf('%.2f',$amount), 'tax_inclusive' => $tax_inclusive, 'tax_name' => $tax_name);
 		}
 		return false;
 	}

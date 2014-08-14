@@ -120,7 +120,6 @@ $default_config_settings	= array (
 	'catalogue_sale_mode'				=> false,
 	'catalogue_sale_percentage'			=> '',
 	'catalogue_show_empty'				=> true,
-	'product_prices_include_tax' 		=> false,
 	'product_weight_unit' 				=> 'Lb',
 	'proxy' 							=> false,
 	'proxy_host' 						=> '',
