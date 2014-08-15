@@ -2079,7 +2079,14 @@ class Cubecart {
 				if (isset($_GET['cancel'])) {
 					$order	= Order::getInstance();
 					if ($order->orderStatus(Order::ORDER_CANCELLED, $_GET['cancel'])) {
-						$GLOBALS['gui']->setError($GLOBALS['language']->order['notify_order_cancelled']);
+						// Specify order was cancelled by customer
+						$note	= array(
+							'admin_id'		=> 0,
+							'cart_order_id'	=> $_GET['cancel'],
+							'content'		=> $GLOBALS['language']->orders['cancel_by_customer'],
+						);
+						$GLOBALS['db']->insert('CubeCart_order_notes', $note);
+						$GLOBALS['gui']->setError($GLOBALS['language']->orders['notify_order_cancelled']);
 					}
 					httpredir(currentPage(array('cancel')));
 				}
