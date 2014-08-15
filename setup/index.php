@@ -60,6 +60,9 @@ $retry		= false;
 $installed	= false;
 $restart	= true;
 
+$domain = parse_url(CC_STORE_URL);
+$cookie_domain = '.'.str_replace('www.','',$domain['host']);
+
 $default_config_settings	= array (
 				
 	'license_key'						=> '',
@@ -136,6 +139,7 @@ $default_config_settings	= array (
 	'ssl_force'							=> false,
 	'ssl_path'							=> '',
 	'standard_url'						=> '',
+	'cookie_domain'						=> $cookie_domain,
 	'show_basket_weight'				=> true,
 	'stock_change_time'					=> 2,
 	'stock_level'						=> 0,
