@@ -36,14 +36,6 @@
     				</select> *
 				</span>
 			</div>
-			<div><label for="gate">{$LANG.sagepay.encryption}</label>
-				<span>
-					<select name="module[encryption]">
-        				<option value="XOR" {$SELECT_encryption_XOR}>XOR</option>
-        				<option value="AES" {$SELECT_encryption_AES}>AES ({$LANG.sagepay.recommended})</option>
-    				</select>
-				</span>
-			</div>
 			<!--<div><label for="iframe">{$LANG.sagepay.iframe}</label><span><input type="hidden" name="module[iframe]" id="iframe" class="toggle" value="{$MODULE.iframe}" /></span></div>-->
 			<p>{$LANG.sagepay.mode_warning}</p>
 			<div><label for="VendorEMail">{$LANG.sagepay.vendor_email}</label><span><input name="module[VendorEMail]" id="VendorEMail" class="textbox" type="text" value="{$MODULE.VendorEMail}" /></span></div>

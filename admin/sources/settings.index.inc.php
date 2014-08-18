@@ -313,8 +313,12 @@ $GLOBALS['config']->get('config', 'dnLoadCustomPath', ($GLOBALS['config']->isEmp
 //$GLOBALS['config']->get('config', 'offline_content', base64_decode($GLOBALS['config']->get('config', 'offline_content')));
 
 ## Auto assign config settings to {VAL_[KEYNAME]}
+for( $i = 1; $i <= 6; ++$i ) {
+	$a_n_s[(string)$i] = $lang['order_state']['name_' . (string)$i];
+}
+
 $select_options = array(
-	'admin_notify_status'	=> array('2' => $lang['order_state']['name_2'], '1' => $lang['order_state']['name_1']),
+	'admin_notify_status'	=> $a_n_s,
 	'basket_jump_to'		=> null,
 	'cache'					=> array($lang['common']['disabled'], $lang['common']['enabled']),
 	'catalogue_expand_tree'	=> null,
@@ -333,7 +337,6 @@ $select_options = array(
 	'recaptcha'				=> array($lang['common']['disabled'], $lang['common']['enabled']),
 	'catalogue_sale_mode'	=> array($lang['common']['disabled'], $lang['settings']['sales_per_product'], $lang['settings']['sales_percentage']),
 	'seo'					=> (file_exists(CC_ROOT_DIR.CC_DS.'.htaccess')) ? null : array(0 => $lang['common']['no']),
-	//'seo_method'			=> array($lang['settings']['seo_method_rewrite'],$lang['settings']['seo_method_lookback']),
 	'seo_method'			=> array($lang['settings']['seo_method_rewrite']),
 	'seo_metadata'			=> array($lang['settings']['seo_meta_option_disable'],$lang['settings']['seo_meta_option_merge'],$lang['settings']['seo_meta_option_replace']),
 	'basket_allow_non_invoice_address'	=> null,
