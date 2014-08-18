@@ -4,6 +4,12 @@ $(window).load(function() {
 });
 
 $(document).ready(function() {
+	
+	$('#rule-eu').click(function() {
+		
+		$( "#country-region" ).toggle( "slow", function() {});
+	});
+
 	//Check all products
 	if ($('#product_check').exists()) {
 		$('#product_check').change(function() {
@@ -710,6 +716,7 @@ $(document).ready(function() {
 	});
 	$('input.date').datepicker({});
 	window.scrollTo(0,0);
+
 });
 
 function inlineRemove(element) {
