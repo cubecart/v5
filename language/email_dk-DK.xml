@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<emails version="2.0" language="fi-FI">
+<emails version="2.0" language="dk-DK">
   <email name="admin.password_recovery">
     <subject>
       <![CDATA[Admin Password Recovery]]>
