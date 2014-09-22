@@ -147,7 +147,14 @@ class Gateway {
 				'x_country'				=> trim($_POST['country']),
 				'x_email'				=> trim($_POST['emailAddress']),
 				'x_customer_ip' 		=> get_ip_address(),
-				'x_test_request'		=> ($this->_module['testMode']) ? 'TRUE' : 'FALSE'
+				'x_test_request'		=> ($this->_module['testMode']) ? 'TRUE' : 'FALSE',
+				'x_ship_to_first_name'	=> $this->_basket['delivery_address']['first_name'],
+				'x_ship_to_last_name'	=> $this->_basket['delivery_address']['last_name'],
+				'x_ship_to_address'		=> $this->_basket['delivery_address']['line1'].' '.$this->_basket['delivery_address']['line2'],
+				'x_ship_to_city'		=> $this->_basket['delivery_address']['town'],
+				'x_ship_to_state'		=> $this->_basket['delivery_address']['state'],
+				'x_ship_to_zip'			=> $this->_basket['delivery_address']['postcode'],
+				'x_ship_to_country'		=> $this->_basket['delivery_address']['country_iso']
 			);
 			$request	= new Request($this->_url, $this->_path);
 			$request->setSSL();
