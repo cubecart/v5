@@ -101,7 +101,7 @@ $template_vars = array (
 	'gateways'	=> $gateway_list,
 	'modes'		=> $mode_list,
 	'country'	=> $store_country,
-	'paypal_ipn_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=plugins&amp;cmd=call&amp;module=PayPal'
+	'paypal_ipn_url' => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=plugins&amp;cmd=call&amp;module=PayPal_Pro'
 );
 
 $module->assign_to_template($template_vars);

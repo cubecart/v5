@@ -199,7 +199,7 @@ class Website_Payments_Pro  {
 			'PAYMENTREQUEST_0_INVNUM'			=> $this->_basket['cart_order_id'],
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
 			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
-			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=plugins&amp;cmd=call&amp;module=PayPal',
+			'PAYMENTREQUEST_0_NOTIFYURL'     => $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=plugins&amp;cmd=call&amp;module=PayPal_Pro',
 			'PAYMENTREQUEST_0_MULTISHIPPING' => 0,	
 			## Delivery Address
 			'ADDROVERRIDE'	=> 0,
@@ -337,7 +337,7 @@ class Website_Payments_Pro  {
 		$nvp_data	= array(
 			'RETURNURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm',
 			'CANCELURL'		=> $GLOBALS['storeURL'].'/index.php?_a=confirm&PPWPP=cancel',
-			'PAYMENTREQUEST_0_NOTIFYURL' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=plugins&cmd=call&module=PayPal',
+			'PAYMENTREQUEST_0_NOTIFYURL' => $GLOBALS['storeURL'].'/index.php?_g=rm&type=plugins&cmd=call&module=PayPal_Pro',
 			'PAYMENTREQUEST_0_PAYMENTACTION'	=> $this->_api_method,
 			'PAYMENTREQUEST_0_AMT' => sprintf('%.2f', $this->_basket['total']),
 			'PAYMENTREQUEST_0_SHIPPINGAMT' => 0,
