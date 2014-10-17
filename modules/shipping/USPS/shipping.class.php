@@ -1,4 +1,15 @@
 <?php
+/**
+ * CubeCart v6
+ * ========================================
+ * CubeCart is a registered trade mark of CubeCart Limited
+ * Copyright CubeCart Limited 2014. All rights reserved.
+ * UK Private Limited Company No. 5323904
+ * ========================================
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  GPL-2.0 http://opensource.org/licenses/GPL-2.0
+ */
 class USPS {
 	private $_basket;
 	private $_settings;
@@ -75,7 +86,7 @@ class USPS {
 		$this->weightLbsOz();
 		
 		// the following should be 'country_id' NOT 'country'!  If you think otherwise, talk to Bill!
-		if($delivery['country_id']==$GLOBALS['config']->get('config','store_country')) { // National "RateV3Request"
+		if($delivery['country_id']==$GLOBALS['config']->get('config','store_country')) { // National "RateV4Request"
 			$xml->writeElement('Service',"ALL");
 			$xml->writeElement('ZipOrigination',$this->_settings['ziporigin']);
 			
@@ -133,7 +144,7 @@ class USPS {
 
 		}
 		$xml->endElement(); ## End Package
-		$xml->endElement(); ## End RateV3Request
+		$xml->endElement(); ## End RateV4Request
 
 		## Send request
 		$request	= new Request($this->_url, $this->_path);
