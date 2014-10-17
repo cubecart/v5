@@ -26,6 +26,14 @@
     				</select>
 				</span>
 			</div>
+			<div><label for="auth_mode">{$LANG.worldpay.auth_mode}</label>
+				<span>
+					<select name="module[auth_mode]" id="auth_mode">
+        				<option value="A" {$SELECT_auth_mode_A}>{$LANG.worldpay.auth_mode_A}</option>
+        				<option value="E" {$SELECT_auth_mode_E}>{$LANG.worldpay.auth_mode_E}</option>
+    				</select>
+				</span>
+			</div>
 			</fieldset>
 			<fieldset><legend>{$LANG.worldpay.settings}</legend>
 			<p>{$LANG.module.3rd_party_settings_desc}</p>

@@ -9,5 +9,8 @@
   <string name="settings"><![CDATA[WorldPay Settings]]></string>
   <string name="callback_enabled"><![CDATA[Callback Enabled]]></string>
   <string name="callback_response"><![CDATA[Use Callback Response]]></string>
+  <string name="auth_mode"><![CDATA[Authorisation Mode]]></string>
+  <string name="auth_mode_A"><![CDATA[Full]]></string>
+  <string name="auth_mode_E"><![CDATA[Pre]]></string>
  </group>
 </definitions>
