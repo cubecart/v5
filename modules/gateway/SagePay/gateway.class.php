@@ -253,7 +253,7 @@ class Gateway {
 			if(strlen($this->_basket['delivery_address']['state_abbrev']) > 2) {
 				$this->_basket['delivery_address']['state_abbrev'] = getStateFormat($this->_basket['delivery_address']['state_abbrev'], 'name', 'abbrev');
 			}
-			$cryptVars .= "&DeliveryState" .$this->_ci($this->_basket['delivery_address']['state_abbrev'],CLEAN_INPUT_FILTER_TEXT);
+			$cryptVars .= "&DeliveryState=" .$this->_ci($this->_basket['delivery_address']['state_abbrev'],CLEAN_INPUT_FILTER_TEXT);
 		}
 
 		$TxType	= empty($this->_module['TxType']) ? 'PAYMENT' : $this->_module['TxType'];
