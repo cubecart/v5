@@ -47,5 +47,11 @@
   <string name="title_service_international"><![CDATA[International Services]]></string>
   <string name="title_shipping_config"><![CDATA[Shipping Configuration]]></string>
   <string name="username"><![CDATA[USPS Username]]></string>
+  <string name="first_class_disabled"><![CDATA[* This must be enabled if you want to enable specific first class services. If disabled no first class services will be offered.]]></string>
+  <string name="first_class_large_envelope"><![CDATA[Large Envelope]]></string>
+  <string name="first_class_letter"><![CDATA[Letter]]></string>
+  <string name="first_class_stamped_letter"><![CDATA[Stamped Letter]]></string>
+  <string name="first_class_parcel"><![CDATA[Parcel]]></string>
+  <string name="first_class_postcards"><![CDATA[Postcards]]></string>
  </group>
 </definitions>

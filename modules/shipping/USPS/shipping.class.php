@@ -44,7 +44,7 @@ class USPS {
 		$name = getCountryFormat($iso,"iso","name");
 		## Just to make life difficult and confusing... United Kingdom is not recognised by USPS, Great Britain is...
 		if($name == "United Kingdom") {
-			return "Great Britain";
+			return "Great Britain and Northern Ireland";
 		} else {
 			return $name;
 		}
@@ -161,9 +161,17 @@ class USPS {
 				} else {
 					foreach($xml->Package->Postage as $option){
 						if($this->_settings['class_id_'.$option['CLASSID']]) {
+							
+							$mail_service = (string)$this->cleanName((string)$option->MailService);
+							$setting_field = 'class_id_0_'.str_replace(array(' ','first-class_mail_'),array('_',''),strtolower($mail_service));
+
+							if((string)$option['CLASSID']=='0' && isset($this->_settings[$setting_field]) && !$this->_settings[$setting_field]) {
+								continue;
+							}
+
 							$package[]	= array(
 								'id'		=> (string)$option['CLASSID'],
-								'name'		=> (string)$this->cleanName((string)$option->MailService),
+								'name'		=> $mail_service,
 								'value'		=> (string)$this->plusHandling((float)$option->Rate),
 								'tax_id'	=> (int)$this->_settings['tax'],
 								## Delivery times
@@ -171,6 +179,7 @@ class USPS {
 								'delivery'	=> "",
 								'next_day'	=> "",
 							);
+							
 						}
 					}
 				}

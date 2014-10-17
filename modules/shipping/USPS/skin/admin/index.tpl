@@ -23,7 +23,7 @@
 				<select name="module[size]">
 					<option value="REGULAR" {$SELECT_size_REGULAR}>{$LANG.usps.size_regular}</option>
 					<option value="LARGE" {$SELECT_size_LARGE}>{$LANG.usps.size_large}</option>
-					<option value="OVERSIZE" {$SELECT_size_OVERSIZE}>{$LANG.usps.size_oversize}</option>
+					<option value="OVERSIZE" {$SELECT_size_OVERSIZE}>{$LANG.usps.size_over}</option>
 				</select>
 			</span>
 		</div>
@@ -79,9 +79,40 @@
 		27 - Express Mail Flat-Rate Envelope Hold For Pickup integer
 		-->
 			<div>
-				<label style="width: 350px">{$LANG.usps.service_first}</label>
+				<label style="width: 350px">{$LANG.usps.service_first}*</label>
 				<span>
 					<input type="hidden" name="module[class_id_0]" id="class_id_0" class="toggle" value="{$MODULE.class_id_0}" />
+				</span>
+			</div>
+
+<div>
+				<label style="width: 350px">{$LANG.usps.service_first} - {$LANG.usps.first_class_large_envelope}</label>
+				<span>
+					<input type="hidden" name="module[class_id_0_large_envelope]" id="class_id_0_large_envelope" class="toggle" value="{$MODULE.class_id_0_large_envelope}" />
+				</span>
+			</div>
+<div>
+				<label style="width: 350px">{$LANG.usps.service_first} - {$LANG.usps.first_class_letter}</label>
+				<span>
+					<input type="hidden" name="module[class_id_0_letter]" id="class_id_0_letter" class="toggle" value="{$MODULE.class_id_0_letter}" />
+				</span>
+			</div>
+			<div>
+				<label style="width: 350px">{$LANG.usps.service_first} - {$LANG.usps.first_class_stamped_letter}</label>
+				<span>
+					<input type="hidden" name="module[class_id_0_stamped_letter]" id="class_id_0_stamped_letter" class="toggle" value="{$MODULE.class_id_0_stamped_letter}" />
+				</span>
+			</div>
+<div>
+				<label style="width: 350px">{$LANG.usps.service_first} - {$LANG.usps.first_class_parcel}</label>
+				<span>
+					<input type="hidden" name="module[class_id_0_parcel]" id="class_id_0_parcel" class="toggle" value="{$MODULE.class_id_0_parcel}" />
+				</span>
+			</div>
+<div>
+				<label style="width: 350px">{$LANG.usps.service_first} - {$LANG.usps.first_class_postcards}</label>
+				<span>
+					<input type="hidden" name="module[class_id_0_postcards]" id="class_id_0_postcards" class="toggle" value="{$MODULE.class_id_0_postcards}" />
 				</span>
 			</div>
 			<div>
@@ -186,7 +217,7 @@
 				</span>
 			</div>
 		</fieldset>
-
+		<p>{$LANG.usps.first_class_disabled}</p>
     	<fieldset>
     		<legend>{$LANG.usps.title_service_international}</legend>
     		<!--
