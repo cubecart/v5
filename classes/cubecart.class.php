@@ -1741,7 +1741,7 @@ class Cubecart {
 				foreach ($downloads as $download) {
 					if (($product = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('id' => $download['order_inv_id']))) !== false) {
 						$download['expires'] = ($download['expire'] > 0) ? formatTime($download['expire']) : $GLOBALS['language']->common['never'];
-						$download['active'] = ($download['expire'] > 0 && $download['expire'] < time() || $download['downloads'] >= $GLOBALS['config']->get('config', 'download_count')) ? false : true;
+						$download['active'] = ($download['expire'] > 0 && $download['expire'] < time() || (int)$download['downloads'] >= $GLOBALS['config']->get('config', 'download_count') && $GLOBALS['config']->get('config', 'download_count') > 0) ? false : true;
 						$download['deleted'] = false;
 						$download = array_merge($product[0], $download);
 					} else {
