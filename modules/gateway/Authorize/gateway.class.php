@@ -101,15 +101,27 @@ class Gateway {
 		$order				= Order::getInstance();
 		$cart_order_id 		= $this->_basket['cart_order_id'];
 		$order_summary		= $order->getSummary($cart_order_id);
+		$response_code 		= (string)$_POST['x_response_code'];
 		
 		if($this->_module['mode']=='sim') {
 			
-			if($_POST['x_response_code']){
+			if($response_code=='1'){
 				$status = 'Approved';
 				$order->orderStatus(Order::ORDER_PROCESS, $_POST['x_invoice_num']);
 				$order->paymentStatus(Order::PAYMENT_SUCCESS, $_POST['x_invoice_num']);
 			} else {
-				$status = 'Declined';
+				
+				switch($response_code) {
+					case '2':
+						$status = 'Declined';
+					break;
+					case '3':
+						$status = 'Error';
+					break;
+					case '4':
+						$status = 'Held for Review';
+					break;
+				}
 				$order->orderStatus(Order::ORDER_PENDING, $_POST['x_invoice_num']);
 				$order->paymentStatus(Order::PAYMENT_PENDING, $_POST['x_invoice_num']);
 			}
