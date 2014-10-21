@@ -1546,11 +1546,13 @@ class Cubecart {
 				}
 				if (($related_products = $GLOBALS['db']->select('CubeCart_order_inventory', array('DISTINCT' => 'product_id'), array('cart_order_id' => $related, 'product_id' => $product_list), false, 3)) !== false) {
 					foreach ($related_products as $related) {
-						$related = $GLOBALS['catalogue']->getProductData($related['product_id']);
-						$related['img_src']	= $GLOBALS['gui']->getProductImage($related['product_id']);
-						$related['url'] = $GLOBALS['seo']->buildURL('prod', $related['product_id'], '&amp;');
-						if($related['product_id']>0) {
-							$related_list[] = $related;
+						if(!in_array($related['product_id'], $product_list)) {
+							$related = $GLOBALS['catalogue']->getProductData($related['product_id']);
+							$related['img_src']	= $GLOBALS['gui']->getProductImage($related['product_id']);
+							$related['url'] = $GLOBALS['seo']->buildURL('prod', $related['product_id'], '&amp;');
+							if($related['product_id']>0) {
+								$related_list[] = $related;
+							}
 						}
 					}
 					$GLOBALS['smarty']->assign('RELATED', $related_list);
