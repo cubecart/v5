@@ -94,7 +94,7 @@ class Gateway {
 				
 				'return' 				=> $GLOBALS['storeURL'].'/index.php?_a=complete',
 				'cancel_return' 		=> $GLOBALS['storeURL'].'/index.php?_a=gateway',
-				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&amp;type=plugins&amp;cmd=call&amp;module=PayPal_Pro'			
+				'notify_url' 			=> $GLOBALS['storeURL'].'/index.php?_g=rm&type=plugins&cmd=call&module=PayPal_Pro'			
 			);
 			
 		} else { 
