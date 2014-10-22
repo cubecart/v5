@@ -1198,6 +1198,7 @@ class Cubecart {
 				}
 				if(!$GLOBALS['session']->cookiesBlocked()) {
 					$GLOBALS['smarty']->assign('ANALYTICS', ($GLOBALS['config']->get('config', 'google_analytics')) ? true : false);
+					$GLOBALS['smarty']->assign('ANALYTICS_ID', $GLOBALS['config']->get('config', 'google_analytics'));
 				} else {
 					define('THIRD_PARTY_COOKIES',true);
 				}
