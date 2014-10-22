@@ -52,6 +52,9 @@ ga('send', 'pageview');
 	  </div>
 	  
 	</div>
+	<div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
+<div style="display: none" id="val_store_url">{$STORE_URL}</div>
+    {if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if} 
   {include file='js/common.html'}
   {foreach from=$JS_SCRIPTS key=k item=script}
   <script type="text/javascript" src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>

@@ -85,6 +85,9 @@ ga('send', 'pageview');
 		{/if}
 	</div>
 </div>
+<div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
+<div style="display: none" id="val_store_url">{$STORE_URL}</div>
+{if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if}
  {if isset($DEBUG_INFO)}{$DEBUG_INFO}{/if} {include file='js/common.html'} {if isset($JANRAIN)}{$JANRAIN}{/if} {if isset($LIVE_HELP)}{$LIVE_HELP}{/if} {foreach from=$JS_SCRIPTS key=k item=script}
 <script type="text/javascript" src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
  {/foreach} {if $COOKIE_DIALOGUE}

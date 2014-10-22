@@ -77,7 +77,9 @@ ga('send', 'pageview');
 	</div>
 	<div id="documents">{if isset($SKIN_SELECT)}{$SKIN_SELECT}{/if} {$SITE_DOCS}</div>
   </div>
-  
+  <div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
+<div style="display: none" id="val_store_url">{$STORE_URL}</div>
+  {if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if} 
   {$COPYRIGHT}
   
   {if !$CONFIG.disable_mobile_skin}<p id="mobile_switch"><a href="{$STORE_URL}/index.php?display_mobile=1">{$LANG.common.mobile_site}</a></p>{/if}
@@ -100,5 +102,8 @@ ga('send', 'pageview');
     <p{if $COOKIE_DIALOGUE_FAIL} class="retry"{/if}><input type="checkbox" name="accept_cookies" value="1" /> {$LANG.notification.cookie_dialogue_declaration} <input type="submit" name="accept_cookies_submit" value="{$LANG.common.continue}" /></p>
   </form>
   {/if}
+<div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
+<div style="display: none" id="val_store_url">{$STORE_URL}</div>
+{if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if}
 </body>
 </html>
