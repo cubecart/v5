@@ -102,8 +102,5 @@ ga('send', 'pageview');
     <p{if $COOKIE_DIALOGUE_FAIL} class="retry"{/if}><input type="checkbox" name="accept_cookies" value="1" /> {$LANG.notification.cookie_dialogue_declaration} <input type="submit" name="accept_cookies_submit" value="{$LANG.common.continue}" /></p>
   </form>
   {/if}
-<div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
-<div style="display: none" id="val_store_url">{$STORE_URL}</div>
-{if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if}
 </body>
 </html>
