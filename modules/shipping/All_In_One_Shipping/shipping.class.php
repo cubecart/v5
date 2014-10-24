@@ -119,9 +119,10 @@ class All_In_One_Shipping {
 		$this->debug('All zones:', $debug_level=2);
 		$this->debug('<pre>'.print_r($this->_all_zones, true).'</pre>', $debug_level=2);
 
-		$done = false;
+		$closest_match = 0;
+		$closest_match_zone_id = 0;
 
-		for ($i=0; !$done && $i<count($this->_all_zones); $i++) {
+		for ($i=0; $i<count($this->_all_zones); $i++) {
 
 			$debug_zone = sprintf('%s [Zone ID %s]', $this->_all_zones[$i]['zone_name'], $this->_all_zones[$i]['id']);
 
@@ -152,8 +153,24 @@ class All_In_One_Shipping {
 							$search = '/^'.str_replace(array('|','*','%','_'),array('$|^','.*','.*','.'),$postcodes).'$/';
 							$res = preg_match($search, $del_postcode);
 							if (!empty($del_postcode_district) && !empty($del_postcode_area)) {
-								$res = $res || preg_match($search, $del_postcode_district);
-								$res = $res || preg_match($search, $del_postcode_area);
+								$res = $res || preg_match($search, $del_postcode_district, $matches);
+								if(is_array($matches)) {
+									foreach($matches as $match) {
+										$match_len = strlen($match);
+										if($match_len>$closest_match) {
+											$closest_match_zone_id = $this->_all_zones[$i]['id'];
+										}
+									}
+								}
+								$res = $res || preg_match($search, $del_postcode_area, $matches);
+								if(is_array($matches)) {
+									foreach($matches as $match) {
+										$match_len = strlen($match);
+										if($match_len>$closest_match) {
+											$closest_match_zone_id = $this->_all_zones[$i]['id'];
+										}
+									}
+								}
 							}
 							$pc_debug[] = '- Postcode string search: '.$search.' &nbsp; '.($res?'(MATCHED!)':'(Didn\'t match)');
 						}
@@ -190,15 +207,12 @@ class All_In_One_Shipping {
 				$zone_ids[] = $this->_all_zones[$i]['id'];
 
 				$this->debug(sprintf('<strong>&gt;&gt;&gt; Shipping zone [ID %s] matches the delivery address! Use this zone for shipping calculations.</strong>', $this->_all_zones[$i]['id']));
-
-				if ($this->_settings['multiple_zones'] == 'first') {
-					$this->debug('Stopping at first matching zone (instead of searching for all matching zones - see AIOS module settings)');
-					$done = true;
-				} else {
-					$this->debug('Searching for all matching shipping zones (instead of stopping at first matching zone - see AIOS module settings)');
-				}
 			}
 			else $this->debug($debug_zone.sprintf(' --- Country didn\'t match [%s]', $this->_all_zones[$i]['countries']));
+		}
+
+		if($this->_settings['multiple_zones'] == 'first' && $closest_match_zone_id>0) {
+			$zone_ids = array($closest_match_zone_id);
 		}
 
 		if (!isset($zone_ids)) {
