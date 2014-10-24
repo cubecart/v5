@@ -5,7 +5,7 @@
 	<type>shipping</type>
 	<name><![CDATA[All_In_One_Shipping]]></name>
 	<description><![CDATA[Advanced shipping module that can calculate shipping based on the weight, subtotal and number of items in the order.]]></description>
-	<version>1.0 BETA</version>
+	<version>1.0.1</version>
 	<minVersion>5.0.0a</minVersion>
 	<maxVersion>5.0.*</maxVersion>
 	<creator><![CDATA[Estelles Winterflood]]></creator>
