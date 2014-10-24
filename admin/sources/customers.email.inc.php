@@ -71,10 +71,11 @@ $seo		= SEO::getInstance();
 $newsletter	= Newsletter::getInstance();
 
 if (isset($_POST['newsletter']) && !empty($_POST['newsletter'])) {
-	$redirect = false;
-	if ($newsletter->saveNewsletter($_POST['newsletter'])) {
-		$redirect = true;
-		$GLOBALS['main']->setACPNotify($lang['email']['notify_news_save']);
+    $redirect = false;
+    if ($newsletter->saveNewsletter($_POST['newsletter'])) {
+        $redirect = true;
+        $_POST['newsletter']['newsletter_id'] = (!empty($_POST['newsletter']['newsletter_id'])) ? $_POST['newsletter']['newsletter_id'] : $newsletter->_newsletter_id;
+        $GLOBALS['main']->setACPNotify($lang['email']['notify_news_save']);
 	} else {
 		$GLOBALS['main']->setACPWarning($lang['email']['error_news_save']);
 	}
