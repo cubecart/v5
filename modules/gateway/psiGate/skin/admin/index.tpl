@@ -18,6 +18,7 @@
 			<div><label for="description">{$LANG.common.description} *</label><span><input name="module[desc]" id="description" class="textbox" type="text" value="{$MODULE.desc}" /></span></div>
 			<div><label for="acNo">{$LANG.module.merchant_id}</label><span><input name="module[acNo]" id="acNo" class="textbox" type="text" value="{$MODULE.acNo}" /></span></div>
 			<div><label for="passphrase">{$LANG.psigate.passphrase}</label><span><input name="module[passPhrase]" id="passPhrase" class="textbox" type="text" value="{$MODULE.passPhrase}" /></span></div>
+			<div><label for="url">{$LANG.psigate.gateway_url}</label><span><input name="module[url]" id="url" class="textbox" type="text" value="{$MODULE.url}" /></span></div>
 			<div><label for="gate">{$LANG.psigate.gateway_mode}</label>
 				<span>
 					<select name="module[CardAction]">
