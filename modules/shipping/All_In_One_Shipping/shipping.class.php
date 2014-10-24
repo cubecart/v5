@@ -158,6 +158,7 @@ class All_In_One_Shipping {
 									foreach($matches as $match) {
 										$match_len = strlen($match);
 										if($match_len>$closest_match) {
+											$this->debug('Best match so far is &quot;'.$match.'&quot;');
 											$closest_match_zone_id = $this->_all_zones[$i]['id'];
 										}
 									}
@@ -167,6 +168,7 @@ class All_In_One_Shipping {
 									foreach($matches as $match) {
 										$match_len = strlen($match);
 										if($match_len>$closest_match) {
+											$this->debug('Best match so far is &quot;'.$match.'&quot;');
 											$closest_match_zone_id = $this->_all_zones[$i]['id'];
 										}
 									}
@@ -207,6 +209,11 @@ class All_In_One_Shipping {
 				$zone_ids[] = $this->_all_zones[$i]['id'];
 
 				$this->debug(sprintf('<strong>&gt;&gt;&gt; Shipping zone [ID %s] matches the delivery address! Use this zone for shipping calculations.</strong>', $this->_all_zones[$i]['id']));
+				if ($this->_settings['multiple_zones'] == 'first') {
+					$this->debug('Looking for first matching zone of best match (instead of searching for all matching zones - see AIOS module settings)');
+				} else {
+					$this->debug('Searching for all matching shipping zones (instead of stopping at first matching zone - see AIOS module settings)');
+				}
 			}
 			else $this->debug($debug_zone.sprintf(' --- Country didn\'t match [%s]', $this->_all_zones[$i]['countries']));
 		}
