@@ -1435,7 +1435,7 @@ class Cubecart {
 						
 						$value	= array(
 							'offset'	=> $offset,
-							'name'		=> $data['name'],
+							'name'		=> $ship_name.': '.$data['name'],
 							'value'		=> $data['value'],
 							'tax_id'	=> $data['tax_id'], // Kept for legacy
 							'tax'		=> $data['tax']
@@ -1670,6 +1670,8 @@ class Cubecart {
 						if ($affiliates) {
 							$GLOBALS['smarty']->assign('AFFILIATES', $affiliates);
 						}
+						$GLOBALS['cart']->set('payment', true);
+ 	  					$GLOBALS['cart']->save();
 						$GLOBALS['smarty']->assign('TRANSFER', $transfer);
 					} else {
 						// If there's no transfer method, then it can't be used as a module
