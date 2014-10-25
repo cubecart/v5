@@ -11,7 +11,7 @@
 	  <div id="header">
 		<div id="printLabel">
 		  <div>{$order.address}</div>
-		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
+		  <div class="sender">{$LANG.address.return_address}<br />{$STORE.address|nl2br}, {$STORE.county}, {$STORE.postcode} {$STORE.country}</div>
 		</div>
 		<div id="storeLabel">
 		  <img src="{$STORE_LOGO}" alt="" />
