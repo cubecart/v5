@@ -61,7 +61,7 @@
 			 {if is_array($OPTIONS)}
 			<div class="productOptions">
 				 {foreach from=$OPTIONS item=option} {if $option.type == '0'}
-				<div>
+				 <div style="overflow:hidden;">
 					<label for="option_{$option.option_id}" class="return">{$option.option_name}{if $option.price} ({$option.symbol}{$option.price}){/if}{if $option.required} *{/if}</label>
 					<div class="select">
 						<select name="productOptions[{$option.option_id}]" id="option_{$option.option_id}" class="textbox {if $option.required}required{/if}">
