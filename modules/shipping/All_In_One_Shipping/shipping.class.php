@@ -293,7 +293,7 @@ class All_In_One_Shipping {
 	public function calculate() {
 
 		$this->debugH('BASKET TOTALS');
-		$this->debug(sprintf('Basket weight: %.3f', $this->_weight));
+		$this->debug(sprintf('Basket weight: %.3F', $this->_weight));
 		$this->debug(sprintf('Basket value: %.2F', $this->_value));
 		$this->debug(sprintf('Basket item count: %d', $this->_item_count));
 

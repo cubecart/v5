@@ -134,7 +134,7 @@ class Gateway {
 							foreach($taxes as $order_tax) {
 								$tax_data = Tax::getInstance()->fetchTaxDetails($order_tax['tax_id']);
 								$tax['tax_name'] 	= $tax_data['name'];
-								$tax['tax_percent'] = sprintf('%.3f',$tax_data['tax_percent']);
+								$tax['tax_percent'] = sprintf('%.3F',$tax_data['tax_percent']);
 								$tax['tax_amount'] 	= Tax::getInstance()->priceFormat($order_tax['amount']);
 								$vars['taxes'][]	= $tax;
 							}
