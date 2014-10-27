@@ -81,7 +81,7 @@ class Canada_Post {
 							$package[]	= array(
 								'id'		=> (int)$service_id,
 								'name'		=> (string)$option->name,
-								'value'		=> sprintf('%.2f',$value),
+								'value'		=> sprintf('%.2F',$value),
 								'currency'	=> 'CAD',
 								'tax_id'	=> (int)$this->_settings['tax'],
 								## Delivery times

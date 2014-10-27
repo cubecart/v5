@@ -294,7 +294,7 @@ class All_In_One_Shipping {
 
 		$this->debugH('BASKET TOTALS');
 		$this->debug(sprintf('Basket weight: %.3f', $this->_weight));
-		$this->debug(sprintf('Basket value: %.2f', $this->_value));
+		$this->debug(sprintf('Basket value: %.2F', $this->_value));
 		$this->debug(sprintf('Basket item count: %d', $this->_item_count));
 
 		$zone_ids = $this->matching_zone_ids();
@@ -314,7 +314,7 @@ class All_In_One_Shipping {
 
 			$this->_package[] = array(
 				'name'      => $rates[$i]['method_name'],
-				'value'     => sprintf('%.2f', $price),
+				'value'     => sprintf('%.2F', $price),
 				'tax_id'    => (int)$this->_settings['tax'],
 				'tax_inclusive'	=> (int)$this->_settings['tax_included'],
 				## Delivery times not applicable to this module

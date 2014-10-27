@@ -10,7 +10,7 @@ class By_Percent {
 	}
 
 	public function calculate() {
-		$value	= sprintf("%.2f", ($this->_basket['subtotal'] - $this->_basket['discount']) * (($this->_settings['percent'])/100));
+		$value	= sprintf("%.2F", ($this->_basket['subtotal'] - $this->_basket['discount']) * (($this->_settings['percent'])/100));
 		if ($this->_settings['handling'] > 0) {
 			$value	+= $this->_settings['handling'];
 		}

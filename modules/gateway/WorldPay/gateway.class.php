@@ -69,7 +69,7 @@ class Gateway {
 		$transData['customer_id'] 	= $order_summary["customer_id"];
 		$transData['gateway'] 		= "WorldPay";
 		$transData['trans_id'] 		= $_REQUEST['transId'];
-		$transData['amount'] 		= sprintf("%.2f",$_REQUEST['amount']);
+		$transData['amount'] 		= sprintf("%.2F",$_REQUEST['amount']);
 
 		$GLOBALS['storeURL'] = str_replace('/modules/gateway/WorldPay','',$GLOBALS['storeURL']);
 

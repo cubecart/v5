@@ -204,7 +204,7 @@ class Cache extends Cache_Controler {
 			}
 			if ($memSize > 0) {
 				$memAvail = $memSize - $memUsed;
-				return sprintf('Max: %s - Used: %s (%.2f%%)', formatBytes($memSize, true), formatBytes($memUsed, true), ($memUsed * (100 / $memSize)), formatBytes($memAvail, true), ($memAvail * (100 / $memSize)));
+				return sprintf('Max: %s - Used: %s (%.2F%%)', formatBytes($memSize, true), formatBytes($memUsed, true), ($memUsed * (100 / $memSize)), formatBytes($memAvail, true), ($memAvail * (100 / $memSize)));
 			} else {
 				return 'Memcache Statistics are unavailable.';
 			}

@@ -30,7 +30,7 @@ class Gateway {
 
 	public function fixedVariables() {
 		
-		$cost = sprintf("%.2f",(float)$this->_basket['total']);
+		$cost = sprintf("%.2F",(float)$this->_basket['total']);
   		$cost = str_replace(".", ",", $cost);
   		$shipcost = '0,00';
 

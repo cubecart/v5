@@ -95,7 +95,7 @@ class Gateway {
 		$transData['customer_id'] 	= $order_summary["customer_id"];
 		$transData['gateway'] 		= "Nochex";
 		$transData['trans_id'] 		= $_POST["transaction_id"];
-		$transData['amount'] 		= sprintf("%.2f",$_POST['amount']);
+		$transData['amount'] 		= sprintf("%.2F",$_POST['amount']);
 		$transData['status'] 		= $_POST['status'];
 		
 		$extraNotes = '';

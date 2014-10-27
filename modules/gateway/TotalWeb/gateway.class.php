@@ -86,7 +86,7 @@ class Gateway {
         	$transData['gateway']  = "TotalWeb";
         	$transData['trans_id'] = $_REQUEST['TransID'];
         	$transData['order_id'] = $_REQUEST['Note'];
-		$transData['amount']   = sprintf("%.2f",$_REQUEST['Amount']);
+		$transData['amount']   = sprintf("%.2F",$_REQUEST['Amount']);
 
 		if ( $this->_module['secretkey'] <> $_REQUEST['SecretKey'] ) {
         		echo "1";
