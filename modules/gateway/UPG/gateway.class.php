@@ -49,6 +49,7 @@ class Gateway {
 			'cardholdercountry' => $this->_basket['billing_address']['postcode'],
 			'cardholdertelephonenumber' => $this->_basket['billing_address']['phone'],
 			'callbackurl'	=> $GLOBALS['storeURL'].'/modules/gateway/UPG/call.php',
+			'invoice'	=> $this->_basket['cart_order_id'],
 			'callbackdata' => 'oid|'.$this->_basket['cart_order_id']
 		);
 
