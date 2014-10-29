@@ -71,32 +71,41 @@ if (isset($_POST['process'])) {
 						}
 					} elseif($field_name == 'image' && !empty($value) && !is_numeric($value)) {
 						foreach ($GLOBALS['hooks']->load('admin.product.import.image.pre_process') as $hook) include $hook;
-						$image_name = basename($value);
-						$image_path = preg_replace('/^[.\/]/', '', dirname($value)); // lose first slash to match DB storage but add end slash
-						if(!empty($image_path)) {
-							$image_path .= '/';
-						}
-						$image = $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('filename' => $image_name, 'type' => 1, 'filepath' => empty($image_path) ? 'NULL' : $image_path), false, 1);
-						if(!$image) {
-							$root_image_path = CC_ROOT_DIR.'/images/source/'.$image_path.$image_name;
-							if(file_exists($root_image_path)) {
-								$finfo = (extension_loaded('fileinfo')) ? new finfo(FILEINFO_SYMLINK | FILEINFO_MIME) : false;
-								if ($finfo && $finfo instanceof finfo) {
-									preg_match('#([\w\-\.]+)/([\w\-\.]+)$#iU', $finfo->file($root_image_path), $match);
-									$mime	= $match[0];
-								} else if (function_exists('mime_content_type')) {
-									$mime	= mime_content_type($root_image_path);
-								} else {
-									$data	= getimagesize($root_image_path);
-									$mime	= $data['mime'];
+						
+						$image_splits = explode(',',$value);
+					
+							foreach($image_splits as $value) {
+							
+								$image_name = basename($value);
+							$image_path = preg_replace('/^[.\/]/', '', dirname($value)); // lose first slash to match DB storage but add end slash
+							if(!empty($image_path)) {
+								$image_path .= '/';
+							}
+							$image = $GLOBALS['db']->select('CubeCart_filemanager', array('file_id'), array('filename' => $image_name, 'type' => 1, 'filepath' => empty($image_path) ? 'NULL' : $image_path), false, 1);
+							
+							if(!$image) {
+								$root_image_path = CC_ROOT_DIR.'/images/source/'.$image_path.$image_name;
+								if(file_exists($root_image_path)) {
+									$finfo = (extension_loaded('fileinfo')) ? new finfo(FILEINFO_SYMLINK | FILEINFO_MIME) : false;
+									if ($finfo && $finfo instanceof finfo) {
+										preg_match('#([\w\-\.]+)/([\w\-\.]+)$#iU', $finfo->file($root_image_path), $match);
+										$mime	= $match[0];
+									} else if (function_exists('mime_content_type')) {
+										$mime	= mime_content_type($root_image_path);
+									} else {
+										$data	= getimagesize($root_image_path);
+										$mime	= $data['mime'];
+									}
+									$filesize = filesize($root_image_path);
+									$filesize = ($filesize > 0)? $filesize : 0;
 								}
-								$filesize = filesize($root_image_path);
-								$filesize = ($filesize > 0)? $filesize : 0;
-							}
 
-							if ($GLOBALS['db']->insert('CubeCart_filemanager', array('type' => 1, 'filepath' => empty($image_path) ? 'NULL' : $image_path, 'filename' => $image_name, 'filesize' => $filesize, 'mimetype' => $mime, 'md5hash' => md5($root_image_path)))) {
-								$image[0]['file_id']	= (int)$GLOBALS['db']->insertid();
-							}
+								if ($GLOBALS['db']->insert('CubeCart_filemanager', array('type' => 1, 'filepath' => empty($image_path) ? 'NULL' : $image_path, 'filename' => $image_name, 'filesize' => $filesize, 'mimetype' => $mime, 'md5hash' => md5($root_image_path)))) {
+									$images[]	= $GLOBALS['db']->insertid();
+								}
+							} else {
+								$images[] = $image[0]['file_id'];
+							} 
 						}
 					}
 					if ($polymorph) {
@@ -111,6 +120,9 @@ if (isset($_POST['process'])) {
 				if (isset($product_record) && !empty($product_record) && !empty($product_record['name'])) {
 					$product_record['date_added']	= $now;
 					// Insert product
+					if(!isset($product_record['product_code']) || empty($product_record['product_code'])) {
+						$product_record['product_code'] = generate_product_code($product_record['name']);
+					}
 					if ($GLOBALS['db']->insert('CubeCart_inventory', $product_record)) $insert++;
 					// Insert primary category
 					$product_id = $GLOBALS['db']->insertid();
@@ -136,20 +148,23 @@ if (isset($_POST['process'])) {
 							}
 						}
 					}
-					// Insert primary image
-					if($image[0]['file_id']>0) {
-						$image_record = array (
-							'product_id'	=> $product_id,
-							'file_id'		=> $image[0]['file_id'],
-							'main_img'		=> 1
-						);
-						$GLOBALS['db']->insert('CubeCart_image_index', $image_record);
+					if(is_array($images)) {
+						$primary = 1;
+						foreach($images as $file_id) {
+							$image_record = array (
+								'product_id'	=> $product_id,
+								'file_id'		=> $file_id,
+								'main_img'		=> $primary
+							);
+							$GLOBALS['db']->insert('CubeCart_image_index', $image_record);
+							$primary = 0;
+						}
 					}
 					// Insert SEO custom URL
 					if (empty($product_record['seo_path'])) $product_record['seo_path'] = $GLOBALS['seo']->generatePath($product_id, 'prod');
 					$GLOBALS['db']->insert('CubeCart_seo_urls', array('path'=> sanitizeSEOPath($product_record['seo_path']), 'item_id' => $product_id, 'type' => 'prod'));
 				}
-				unset($product_record, $category_record, $image_record, $image);
+				unset($product_record, $category_record, $image_record, $image, $images);
 			}
 			fclose($fp);
 		}
