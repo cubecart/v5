@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="google_adwords">
+  <string name="conversion"><![CDATA[Enable Conversion Tracking]]></string>
+  <string name="remarketing"><![CDATA[Enable Remarketing Tracking]]></string>
+  <string name="id"><![CDATA[Conversion ID]]></string>
+  <string name="label"><![CDATA[Conversion Label]]></string>
+ </group>
+</definitions>

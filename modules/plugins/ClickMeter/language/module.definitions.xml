@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions version="1.0">
+ <group name="clickmeter">
+  <string name="id"><![CDATA[Conversion ID]]></string>
+  <string name="commission"><![CDATA[Conversion Commission]]></string>
+  <string name="value"><![CDATA[Conversion Value]]></string>
+  <string name="parameter"><![CDATA[Conversion Parameter]]></string>
+  <string name="desc"><![CDATA[You can either copy in the parameters in option 1 to automatically generate the tracking JavaScript or use option 2 to paste in the tracking code provided by ClickMeter. Option 2 takes priority over option 1.]]></string>
+  <string name="opt1"><![CDATA[Option 1: Automatically Generate Tracking JavaScript]]></string>
+  <string name="opt2"><![CDATA[Option 2: Paste JavaScript]]></string>
+  <string name="js"><![CDATA[JavaScript Code]]></string>
+ </group>
+</definitions>

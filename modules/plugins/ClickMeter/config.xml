@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<installer version="1.0">
+  <info>
+	<uid>clickmeter@cubecart.com</uid>
+	<type>plugins</type>
+	<folder>ClickMeter</folder>
+	<name><![CDATA[ClickMeter]]></name>
+	<description><![CDATA[ClickMeter Conversion Tracking Module]]></description>
+	<version>1.0.0</version>
+	<minVersion>5.0.0</minVersion>
+	<maxVersion>6.*.*</maxVersion>
+	<creator><![CDATA[CubeCart, Ltd]]></creator>
+	<homepage><![CDATA[http://www.cubecart.com]]></homepage>
+  </info>
+  <hooks>
+	<hook trigger="class.gui.javascripts" enabled="1"><![CDATA[JS Tracking Code]]></hook>
+  </hooks>
+</installer>
