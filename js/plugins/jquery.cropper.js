@@ -1,7 +1,7 @@
 /*
 * Image Cropping Plugin
 * Version 1.1
-* Martin Purcell <martin@devellion.com>
+* Martin Purcell <martin@cubecart.com>
 *
 * Description:	Adapted (heavily) from the JQuery UI example script (ui.jquery.com)
 * Takes a source image, and creates a draggable, resizable image editor

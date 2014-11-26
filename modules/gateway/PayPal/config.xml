@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <installer version="1.0">
   <info>
-	<uid>gateway-paypal@devellion.com</uid>
+	<uid>gateway-paypal@cubecart.com</uid>
 	<type>gateway</type>
 	<mobile_optimized>true</mobile_optimized>
 	<name><![CDATA[PayPal]]></name>
@@ -9,7 +9,7 @@
 	<version>1.0.0</version>
 	<minVersion>5.0.0a</minVersion>
 	<maxVersion>5.1.*</maxVersion>
-	<creator><![CDATA[Devellion, Ltd]]></creator>
+	<creator><![CDATA[CubeCart Ltd]]></creator>
 	<homepage><![CDATA[http://www.cubecart.com]]></homepage>
 	<block>false</block>
   </info>
