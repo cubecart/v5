@@ -2,21 +2,13 @@
 /**
  * CubeCart v5
  * ========================================
- * CubeCart is a registered trade mark of Devellion Limited
- * Copyright Devellion Limited 2010. All rights reserved.
+ * CubeCart is a registered trade mark of CubeCart Limited
+ * Copyright CubeCart Limited 2014. All rights reserved.
  * UK Private Limited Company No. 5323904
  * ========================================
- * Web:			http://www.cubecart.com
- * Email:		sales@devellion.com
- * License:		http://www.cubecart.com/v5-software-license
- * ========================================
- * CubeCart is NOT Open Source.
- * Unauthorized reproduction is not allowed.
- *
- * @tutorial
- * To call hooks, use the following:
- *   foreach ($hooks->load('HOOK_TRIGGER') as $hook) include $hook;
- * Note that all hooks will be included into the current scope
+ * Web:   http://www.cubecart.com
+ * Email:  sales@devellion.com
+ * License:  GPL-2.0 http://opensource.org/licenses/GPL-2.0
  */
 
 /**
