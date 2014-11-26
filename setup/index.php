@@ -362,7 +362,6 @@ if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
 		if (file_exists(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'license.txt')) {
 			$GLOBALS['smarty']->assign('SOFTWARE_LICENCE', file_get_contents(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'license.txt'));
 		}
-		$lic_data = file_get_contents(CC_ROOT_DIR.'/docs/license.txt');
 		$GLOBALS['smarty']->assign('MODE_LICENCE', true);
 	} else if (!isset($_SESSION['setup']['complete'])) {
 		if(in_array($_SESSION['setup']['method'],array('install' => 'upgrade'))) {
