@@ -195,7 +195,7 @@
   </form>
 </div>
 <div id="footer">
-  Copyright <a href="http://www.cubecart.com" target="_blank">CubeCart Ltd</a> {$COPYRIGHT_YEAR}. All rights reserved.
+  <a href="http://www.cubecart.com" target="_blank">eCommerce</a> by CubeCart
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
