@@ -86,7 +86,7 @@ if (!isset($_SESSION['setup']['permissions'])) {
 	}
 	
 	if (!isset($_SESSION['setup']['progress']) || is_null($_SESSION['setup']['progress'])) {
-		if (isset($_POST['progress']) && (isset($_SESSION['setup']['license_key']) || version_compare($current, 3, 'ge'))) {
+		if (isset($_POST['progress']) && version_compare($current, 3, 'ge')) {
 			$_SESSION['setup']['progress'] = true;
 			httpredir('index.php');
 		}
@@ -189,9 +189,6 @@ if (!isset($_SESSION['setup']['permissions'])) {
 			
 			## Upgrade v4 global file to v5 spec
 			include $global_file;
-			if(!empty($glob['license_key'])) {
-				$_SESSION['setup']['license_key'] = $glob['license_key'];
-			}
 			unset($glob['license_key'], $glob['rootDir'], $glob['rootRel'], $glob['storeURL']);
 			ksort($glob);
 			## Write new file
