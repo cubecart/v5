@@ -59,5 +59,6 @@ ga('send', 'pageview');
   {foreach from=$JS_SCRIPTS key=k item=script}
   <script type="text/javascript" src="{$STORE_URL}/{$script|replace:'\\':'/'}"></script>
   {/foreach}
+{include file='templates/ccpower.php'}
 </body>
 </html>

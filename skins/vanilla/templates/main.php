@@ -101,5 +101,6 @@ ga('send', 'pageview');
 <div style="display: none" id="val_skin_folder">{$SKIN_FOLDER}</div>
 <div style="display: none" id="val_store_url">{$STORE_URL}</div>
 {if !empty($SKIN_COMMON)}<div style="display: none" id="val_skin_common_images">{$SKIN_COMMON}</div>{/if}
+{include file='templates/ccpower.php'}
 </body>
 </html>

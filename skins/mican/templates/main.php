@@ -102,5 +102,6 @@ ga('send', 'pageview');
     <p{if $COOKIE_DIALOGUE_FAIL} class="retry"{/if}><input type="checkbox" name="accept_cookies" value="1" /> {$LANG.notification.cookie_dialogue_declaration} <input type="submit" name="accept_cookies_submit" value="{$LANG.common.continue}" /></p>
   </form>
   {/if}
+{include file='templates/ccpower.php'}
 </body>
 </html>

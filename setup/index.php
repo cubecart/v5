@@ -25,10 +25,6 @@ if(isset($_GET['autoupdate']) && $_GET['autoupdate']) {
 	httpredir('index.php');
 }
 
-if (isset($_POST['license_key'])) {
-	$_SESSION['setup']['license_key'] = $_POST['license_key'];
-}
-
 // Empty the cache before we start
 $GLOBALS['cache'] = Cache::getInstance();
 if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
@@ -65,7 +61,6 @@ $cookie_domain = '.'.str_replace('www.','',$domain['host']);
 
 $default_config_settings	= array (
 				
-	'license_key'						=> '',
 	'default_language'					=> '',
 	'default_currency'					=> '',
 	'email_address'						=> '',
@@ -353,9 +348,10 @@ if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
 		$GLOBALS['smarty']->assign('MODE_METHOD', true);
 	} else if (!isset($_SESSION['setup']['licence'])) {
 		$step	= 3;
-		if (file_exists(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'licence.txt')) {
-			$GLOBALS['smarty']->assign('SOFTWARE_LICENCE', file_get_contents(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'licence.txt'));
+		if (file_exists(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'license.txt')) {
+			$GLOBALS['smarty']->assign('SOFTWARE_LICENCE', file_get_contents(CC_ROOT_DIR.CC_DS.'docs'.CC_DS.'license.txt'));
 		}
+		$lic_data = file_get_contents(CC_ROOT_DIR.'/docs/license.txt');
 		$GLOBALS['smarty']->assign('MODE_LICENCE', true);
 	} else if (!isset($_SESSION['setup']['complete'])) {
 		if(in_array($_SESSION['setup']['method'],array('install' => 'upgrade'))) {
@@ -523,8 +519,7 @@ if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
 				'admin_skin'			=> 'default',
 				'verify_settings'		=> true,
 				'enable_reviews'		=> true,
-				'show_basket_weight'	=> true,
-				'license_key'			=> $_SESSION['setup']['license_key']
+				'show_basket_weight'	=> true
 			);
 			$new_config	= array_merge($defaults, $new_config);
 			ksort($new_config);

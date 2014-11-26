@@ -85,10 +85,6 @@ if (!isset($_SESSION['setup']['permissions'])) {
 			$step	= 4;
 			$GLOBALS['smarty']->assign('UPGRADE', array('from' => $current, 'to' => CC_VERSION));
 			
-			if (version_compare($current, '4.0.0', '<') || (version_compare($current, '5.0.0', '<') && !isset($config['license_key']))) {
-				$GLOBALS['smarty']->assign('LANG_UPGRADE_LICENCE_NEEDED', sprintf($strings['setup']['upgrade_licence_needed'], $current));
-				$GLOBALS['smarty']->append('SHOW_LICENCE', true);
-			}
 			$_SESSION['setup']['start_version'] = $current;
 			$GLOBALS['smarty']->assign('LANG_UPGRADE_FROM_TO', sprintf($strings['setup']['upgrade_from_to'], $current, CC_VERSION));
 			$GLOBALS['smarty']->assign('MODE_UPGRADE_CONFIRM', true);

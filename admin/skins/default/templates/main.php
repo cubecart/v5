@@ -16,6 +16,7 @@
 
 <body>
   <div id="header">
+  <span id="logo"><a href="?"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/cc_logo.png" alt="{$LANG.account.title_acp}" /></a></span>
   <span class="user_info">{$LANG.settings.title_welcome_back} <a href="?_g=settings&amp;node=admins&amp;action=edit&amp;admin_id={$ADMIN_UID}">{$ADMIN_USER}</a> - [<a href="?_g=logout">{$LANG.account.logout}</a>]</span>
   </div>
   <div id="navigation">
@@ -119,5 +120,6 @@
   		<script type="text/javascript" src="{$js_src}"></script>
   	{/foreach}
   {/if}
+  {include file='templates/ccpower.php'}
 </body>
 </html>

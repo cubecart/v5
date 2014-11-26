@@ -1,37 +1,34 @@
 <?php
-if(!isset($glob['encoder']) || $glob['encoder']=='ioncube' || $glob['encoder']=='zend') {
-	$loader_version = @ioncube_loader_version();
+if(!defined('CC_DS')) die('This file can not be accessed directly.');
 
-	if (version_compare($loader_version, '4.4') >= 0) {
-		switch(CC_PHP_ID) {
-			case 54:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.4.php';
-			break;
-			case 53:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.3.php';
-			break;
-			case 52:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.4'.CC_DS.'php_5.2.php';
-		}
-	} elseif(version_compare($loader_version, '4.0') >= 0) {
-		switch(CC_PHP_ID) {
-			case 54:
-			case 53:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.3.php';
-			break;
-			case 52:
-				require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_4.0'.CC_DS.'php_5.2.php';
-		}
+if(CC_IN_ADMIN) {
+	
+	include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.pre_session.inc.php';	
+	
+	$feed_access_key = $GLOBALS['config']->get('config','feed_access_key');
+	$feed_access_key = (!$feed_access_key) ? '' : $feed_access_key;
+	
+	if (Admin::getInstance()->is() || ($_GET['_g']=='products' && $_GET['node']=='export' && !empty($_GET['format']) && $_GET['access']==$feed_access_key && !empty($feed_access_key))) {
+		include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.session.true.inc.php';
 	} else {
-		require_once CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'ioncube_3.1'.CC_DS.'php_5.2.php';
+		include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.session.false.inc.php';
+		$GLOBALS['smarty']->display('templates/'.$global_template_file['session_false']);
+		exit;
 	}
-} elseif(isset($glob['encoder'])) {
-	switch($glob['encoder']) {
-		case 'obfuscated': // Load Obfuscated file
-			require_once CC_ROOT_DIR.CC_DS.'CubeCart_obfuscated.php';
-		break;
-		default:
-		case 'plain': // For internal development only
-			require_once CC_ROOT_DIR.CC_DS.'CubeCart_plain.php';
-	}	
+	// Render the completed page
+	if (!isset($suppress_output) || !$suppress_output) {
+		$GLOBALS['gui']->displayCommon(true);
+		$GLOBALS['smarty']->display('templates/'.$global_template_file['session_true']);
+	}
+
+} else {
+
+	include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.index.inc.php';
+	
+	$htmlout = $GLOBALS['smarty']->fetch('templates/'.$global_template_file);
+	$htmlout = ($GLOBALS['gui']->disableJS) ? preg_replace('~<\s*\bscript\b[^>]*>(.*?)<\s*\/\s*script\s*>~is', '', $htmlout) : $htmlout;
+	
+	$googleAnalytics = isset($googleAnalytics) ? $googleAnalytics : '';
+	$htmlout = preg_replace('/(\<\/head\>)/i',$googleAnalytics.'$1', $htmlout);
+	die($htmlout);
 }

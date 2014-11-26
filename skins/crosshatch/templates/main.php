@@ -104,5 +104,6 @@ ga('send', 'pageview');
 	});
   </script>
  {/if}
+{include file='templates/ccpower.php'}
 </body>
 </html>

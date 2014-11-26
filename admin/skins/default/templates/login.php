@@ -9,7 +9,7 @@
 <body class="preauth-body">
   {include file='templates/common.gui_message.php'}
   <div class="preauth-wrapper{if !$SKIP_AD} preauth-wrapper-left-shift{/if}">
-  <div id="logo"></div>
+  <div id="logo"><a href="?"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/ccAdminLogoLrg.png" alt="eCommerce by CubeCart" /></a></div>
   <form action="{$VAL_SELF}" method="post" enctype="application/x-www-form-urlencoded" name="acp-login">
 	<div id="login-box">
 	{if isset($RECOVERY)}
@@ -32,12 +32,6 @@
 	  </div>
 	{else}
 	  <h1>{if $SSL.state=='mixed'}<span id="login_ssl_switch"><a href="{$SSL.url}" /><img src="{$SSL.icon}" /></a></span>{elseif $SSL.state=='forced'}<span id="login_ssl_switch"><img src="{$SSL.icon}" /></span>{/if}{$LANG.account.title_login_acp}</h1>
-	  {if $TRIAL_LIMITS} 
-  		<p>
-  		<strong style="display: inline-block; width: 55px;">Version:</strong> CubeCart Lite (<a href="{$TRIAL_LIMITS.url}">Upgrade</a>)<br />
-  		<strong style="display: inline-block; width: 55px;">Limits:</strong> {$TRIAL_LIMITS.orders} orders / {$TRIAL_LIMITS.customers} customers / {$TRIAL_LIMITS.administrator} Administrator<br />
-  		</p>
-  	  {/if}
 	  <div><span><input type="text" name="username" id="username" class="textbox required" value="{$USERNAME}" /></span><label for="username">{$LANG.account.username}</label>:</div>
 	  <div><span><input type="password" name="password" id="password" class="textbox required" value="{$PASSWORD}" /></span><label for="password">{$LANG.account.password}</label>:</div>
 	  <div id="login-box-foot">
@@ -64,5 +58,6 @@
   <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/admin.js"></script>
   </div>
+  {include file='templates/ccpower.php'}
 </body>
 </html>

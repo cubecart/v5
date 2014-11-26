@@ -135,13 +135,11 @@ textarea, .license {
 	height: 300px;
 	border: 1px solid #CDCDCD;
 	padding: 3px 0px 0px 3px;
-	font-family: Tahoma, san-serif;
-	font-size: 0.9em;
+	font-size: 1.25rem;
 	overflow: auto;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
-
 
 span.result {
 	float: right;
