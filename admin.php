@@ -1,4 +1,16 @@
 <?php
+/**
+ * CubeCart v5
+ * ========================================
+ * CubeCart is a registered trade mark of CubeCart Limited
+ * Copyright CubeCart Limited 2014. All rights reserved.
+ * UK Private Limited Company No. 5323904
+ * ========================================
+ * Web:   http://www.cubecart.com
+ * Email:  sales@cubecart.com
+ * License:  GPL-2.0 http://opensource.org/licenses/GPL-2.0
+ */
+
 ## Don't let anything be cached
 header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: pre-check=0, post-check=0, max-age=0');
@@ -14,4 +26,20 @@ define('CC_IN_ADMIN', true);
 ## Include core functions
 require 'includes'.CC_DS.'functions.inc.php';
 
-include 'controllers'.CC_DS.'controller.master.inc.php';
+include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.pre_session.inc.php';	
+
+$feed_access_key = $GLOBALS['config']->get('config','feed_access_key');
+$feed_access_key = (!$feed_access_key) ? '' : $feed_access_key;
+
+if (Admin::getInstance()->is() || ($_GET['_g']=='products' && $_GET['node']=='export' && !empty($_GET['format']) && $_GET['access']==$feed_access_key && !empty($feed_access_key))) {
+	include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.session.true.inc.php';
+} else {
+	include CC_ROOT_DIR.CC_DS.'controllers'.CC_DS.'controller.admin.session.false.inc.php';
+	$GLOBALS['smarty']->display('templates/'.$global_template_file['session_false']);
+	exit;
+}
+// Render the completed page
+if (!isset($suppress_output) || !$suppress_output) {
+	$GLOBALS['gui']->displayCommon(true);
+	$GLOBALS['smarty']->display('templates/'.$global_template_file['session_true']);
+}
