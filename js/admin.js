@@ -151,7 +151,9 @@ $(document).ready(function() {
 
     if ($('#cat_subset').exists()) {
         $('#cat_subset').change(function(){
-            $location = document.URL;
+        	// Remove page number
+            $location = document.URL.replace(/&?page=[0-9]/, '');
+            alert($location);
             if ($location.indexOf('cat_id') != -1) {
                    $location = removeVariableFromURL($location, 'cat_id');
             }
