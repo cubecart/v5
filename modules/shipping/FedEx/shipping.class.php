@@ -182,7 +182,11 @@ class FedEx {
 					foreach ($response->RateReplyDetails as $rateReply)
 					{
 						if($this->_settings['FDXG_'.$rateReply->ServiceType]==1) {
-							$value = $rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
+							if(is_array($rateReply->RatedShipmentDetails)) {
+								$value = $rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
+							} else {
+								$value = $rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount;
+							}
 							$value += ($this->_settings['handling']>0) ? $this->_settings['handling'] : 0;
 							
 							$package[]	= array(
