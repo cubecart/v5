@@ -86,7 +86,8 @@ $(document).ready(function() {
 
 	if ($('#default_htaccess').exists()) {
 		$('#default_htaccess').click(function() {
-			$.getJSON('./admin.php', {'_g': 'xml', type: 'htaccess', 'function':'get'}, function(data){
+			var admin_file = $('#val_admin_file').text();
+			$.getJSON('./'+admin_file, {'_g': 'xml', type: 'htaccess', 'function':'get'}, function(data){
 				$('#htaccess').val(data.content);
 			});
 			return false;
@@ -95,12 +96,13 @@ $(document).ready(function() {
 
 	if ($('#seo').exists()) {
 		$('#seo').change(function() {
+			var admin_file = $('#val_admin_file').text();
 			if ($('#seo').val() == 1) {
 				seo = "seo_code";
 			} else {
 				seo = "no_seo_code";
 			}
-			$.getJSON('./admin.php', {'_g': 'xml', type: seo, 'function':'get'}, function(data){
+			$.getJSON('./'+admin_file, {'_g': 'xml', type: seo, 'function':'get'}, function(data){
 				$('#htaccess').val(data.content);
 			});
 		});
@@ -163,9 +165,10 @@ $(document).ready(function() {
 	/**** Functions ****/
 	function ajaxSelected(v, id, rel) {
 		$('#result_'+id).val(v.id);
+		var admin_file = $('#val_admin_file').text();
 		switch (rel.toLowerCase()) {
 			case 'user':
-				$.getJSON('./admin.php', {'_g':'xml','type':'address','q':v.id, 'function':'search'}, function(data){
+				$.getJSON('./'+admin_file, {'_g':'xml','type':'address','q':v.id, 'function':'search'}, function(data){
 					$('select.address-list>option.temporary').remove();
 					for (var i=0;i<data.length;i++) {
 						var option = document.createElement('option');
@@ -190,7 +193,7 @@ $(document).ready(function() {
 		}
 	}
 	function ajaxSuggest(key, cont, rel) {
-		var script_name	= './admin.php';
+		var script_name	= './'+$('#val_admin_file').text();
 		var params		= { '_g': 'xml', 'type': rel, 'q':key, 'function':'search' };
 		$.get(script_name, params, function(obj){
 			var res	= [];
@@ -202,7 +205,8 @@ $(document).ready(function() {
 	}
 
 	function ajaxNewsletter(news_id, cycle) {
-		$.getJSON('./admin.php', {'_g': 'xml', type: 'newsletter', q: news_id, page: cycle, 'function':'search'}, function(data){
+		var admin_file = $('#val_admin_file').text();
+		$.getJSON('./'+admin_file, {'_g': 'xml', type: 'newsletter', q: news_id, page: cycle, 'function':'search'}, function(data){
 			$('div#progress_bar').css({width: data.percent+'%'});
 			$('div#progress_bar_percent').text(Math.round(data.percent)+'%');
 			if (data.percent == 100 || data.complete == 'true') {
@@ -265,7 +269,8 @@ $(document).ready(function() {
 
 	/* Filemanager inline widgets */
 	$('div.fm-filelist').each(function(){
-		$(this).fileTree({'root':'/', 'script':'./admin.php', 'group':$(this).attr('rel'), 'name':$(this).attr('id')});
+		var admin_file = $('#val_admin_file').text();
+		$(this).fileTree({'root':'/', 'script':'./'+admin_file, 'group':$(this).attr('rel'), 'name':$(this).attr('id')});
 	});
 
 	/* Tab Controller */
