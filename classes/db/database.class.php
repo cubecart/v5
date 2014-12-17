@@ -194,7 +194,7 @@ class Database_Contoller {
 
 		foreach($tables as $table){
 			set_time_limit(200);
-			fwrite($fp, $this->sqldumptable($table, $dropTables, $incStructure, $incRows));
+			$this->sqldumptable($fp, $table, $dropTables, $incStructure, $incRows);
 		}
 		$close_text = "-- --------------------------------------------------------\n-- CubeCart SQL Dump Complete\n-- --------------------------------------------------------";
 		fwrite($fp, $close_text);
@@ -620,16 +620,16 @@ class Database_Contoller {
 	 * @param bool $incRows
 	 * @return string
 	 */
-	public function sqldumptable($tableData, $dropTables = false, $incStructure = true, $incRows = true) {
+	public function sqldumptable($fp, $tableData, $dropTables = false, $incStructure = true, $incRows = true) {
 		$tabledump = '';
 		if ($dropTables) {
-			$tabledump .= "-- --------------------------------------------------------\n\nDROP TABLE IF EXISTS `".$tableData['Name']."`; #EOQ\n\n";
+			fwrite($fp, "-- --------------------------------------------------------\n\nDROP TABLE IF EXISTS `".$tableData['Name']."`; #EOQ\n\n");
 		}
 		if ($incStructure) {
 			$schema		= $this->query('SHOW CREATE TABLE `'.$tableData['Name'].'`');
-			$tabledump .= "-- --------------------------------------------------------\n\n-- \n-- Table structure for table `".$tableData['Name']."`\n--\n\n";
-			$tabledump .= $schema[0]['Create Table']; 
-			$tabledump .= "; #EOQ\n\n";
+			fwrite($fp, "-- --------------------------------------------------------\n\n-- \n-- Table structure for table `".$tableData['Name']."`\n--\n\n");
+			fwrite($fp, $schema[0]['Create Table']); 
+			fwrite($fp, "; #EOQ\n\n");
 		}
 		if ($incRows) {
 			## get data
@@ -637,23 +637,23 @@ class Database_Contoller {
 			$this->_execute(false);
 			$rows = $this->_result;
 			if($rows) {
-				$tabledump .="--\n-- Dumping data for table `".$tableData['Name']."`\n--\n\n";
+				fwrite($fp, "--\n-- Dumping data for table `".$tableData['Name']."`\n--\n\n");
 				foreach($rows as $row) {
-				$tabledump .= "INSERT INTO `".$tableData['Name']."` VALUES(";
+				fwrite($fp, "INSERT INTO `".$tableData['Name']."` VALUES(");
 				## get each field's data
 				$comma = false;
 					foreach($row as $key => $value) {
-						$tabledump .= $comma ? ', ' : '';
-						$tabledump .= $this->sqlSafe($value,true);
+						fwrite($fp, $comma ? ', ' : '');
+						fwrite($fp, $this->sqlSafe($value,true));
 						$comma = true;
 					}
-				$tabledump .= "); #EOQ\n";
+				fwrite($fp, "); #EOQ\n");
 				}
 			} else {
-				$tabledump .="-- Table `".$tableData['Name']."` has no data\n\n";
+				fwrite($fp, "-- Table `".$tableData['Name']."` has no data\n\n");
 			}
 		}
-		return $tabledump;
+		return false;
 	}
 
 	/**
