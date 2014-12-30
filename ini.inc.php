@@ -8,7 +8,7 @@
  * ========================================
  * Web:   http://www.cubecart.com
  * Email:  sales@cubecart.com
- * License:  GPL-2.0 http://opensource.org/licenses/GPL-2.0
+ * License:  GPL-3.0 https://www.gnu.org/licenses/quick-guide-gplv3.html
  */
 
 // I'll be honest, you probably shouldn't tinker with anything in here, all it does is ensure everyone has the same ini settings
