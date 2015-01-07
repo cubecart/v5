@@ -2421,6 +2421,8 @@ class Cubecart {
 					'country'	=> getCountryFormat($GLOBALS['config']->get('config', 'store_country')),
 					'postcode'	=> $GLOBALS['config']->get('config', 'store_postcode'))
 				);
+				
+				$GLOBALS['smarty']->assign('STORE_LOGO', $GLOBALS['gui']->getLogo(true, 'invoices'));
 
 				$GLOBALS['smarty']->display('templates/print.receipt.php');
 			}
