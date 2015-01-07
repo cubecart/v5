@@ -1834,7 +1834,6 @@
    <string name="error_db_doesnt_exist"><![CDATA[Bu veritabanı mevcut değil.]]></string>
    <string name="error_db_incorrect_something"><![CDATA[Hatalı veritabanı host, kullanıcı adı ve / veya şifre.]]></string>
    <string name="error_db_password_mismatch"><![CDATA[Sizin veritabanı şifreleri eşleşmiyor.]]></string>
-   <string name="error_ion_zend_required"><![CDATA[Ioncube Loader CubeCart 5 kullanımı için gerekli. Kurulum tamamlandıktan sonra  ayarlanabilir.]]></string>
    <string name="error_licence_invalid"><![CDATA[Bu lisans anahtarı geçerli görünmüyor. Eğer bir hesabınız yoksa boş bırakınız.]]></string>
    <string name="error_licence_required"><![CDATA[Yazılım lisans anahtarının bu yazılımın yüklemeniz ve kullanımı için gereklidir.]]></string>
    <string name="error_rename_images"><![CDATA[Lütfen Yeniden Adlandırmak için 'images/uploads/' klasöründe 'images/source/'.]]></string>

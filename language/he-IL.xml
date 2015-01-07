@@ -1808,7 +1808,6 @@
    <string name="error_db_doesnt_exist"><![CDATA[מסד נתונים זה אינו קיים.]]></string>
    <string name="error_db_incorrect_something"><![CDATA[שרת מארח, שם משתמש או/ו סיסמה שגויים.]]></string>
    <string name="error_db_password_mismatch"><![CDATA[הסיסמאות למסד הנתונים אינן תואמות.]]></string>
-   <string name="error_ion_zend_required"><![CDATA[המערכת דורשת כי Ioncube Loader יהיו מותקנים על השרת בכדי להשתמש ב-CubeCart 5. אנא צור קשר עם מנהל השרת שלך.]]></string>
    <string name="error_licence_invalid"><![CDATA[קוד הרישום אינו תקין.]]></string>
    <string name="error_licence_required"><![CDATA[על מנת להתקין ולהשתמש בתוכנה עליך להזין את קוד הרישום.]]></string>
    <string name="error_rename_images"><![CDATA[אנא שנה את שם התיקייה 'images/uploads/' לשם החדש 'images/source/'.]]></string>
