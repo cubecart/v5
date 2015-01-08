@@ -1299,14 +1299,14 @@ class Catalogue {
 							    $group_priority = $option['priority'];
 							    unset ($option['priority']);
 								foreach ($option as $value) {
-									//if (!isset($option_list[$value['option_id']])) {
+									if (!isset($option_list[$value['option_id']])) {
 										$option_list[$value['option_id']]	= array(
 											'type'			=> $value['option_type'],
 											'option_id'		=> $value['option_id'],
 											'option_name'	=> $value['option_name'],
 											'required'		=> (bool)$value['option_required'],
 										);
-									//}
+									}
 									$option_list[$value['option_id']]['values'][] = array(
 										'assign_id'		=> $value['assign_id'],
 										'price'			=> (isset($value['option_price']) && $value['option_price']>0) ? $GLOBALS['tax']->priceFormat($value['option_price'], true) : false,
