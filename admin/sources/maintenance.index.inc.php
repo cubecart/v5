@@ -515,9 +515,12 @@ $GLOBALS['smarty']->assign('EXISTING_BACKUPS', $existing_backups);
 ## Check current version
 if ($request = new Request('www.cubecart.com', '/version-check/'.CC_VERSION)) {
 	$request->skiplog(true);
+	$request->setMethod('get');
 	$request->cache(true);
+	$request->setSSL(true);
 	$request->setUserAgent('CubeCart');
 	$request->setData(array('version' => CC_VERSION));
+	
 	if (($response = $request->send()) !== false) {
 		if (version_compare(trim($response), CC_VERSION, '>')) {
 			$GLOBALS['smarty']->assign('OUT_OF_DATE',sprintf($lang['dashboard']['error_version_update'], $response, CC_VERSION));
