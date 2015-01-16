@@ -153,7 +153,6 @@ $(document).ready(function() {
         $('#cat_subset').change(function(){
         	// Remove page number
             $location = document.URL.replace(/&?page=[0-9]/, '');
-            alert($location);
             if ($location.indexOf('cat_id') != -1) {
                    $location = removeVariableFromURL($location, 'cat_id');
             }
