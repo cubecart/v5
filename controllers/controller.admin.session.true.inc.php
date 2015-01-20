@@ -88,11 +88,6 @@ if (!empty($_GET['_g'])) {
 				$module_admin	= CC_ROOT_DIR.CC_DS.'modules'.CC_DS.$module['type'].CC_DS.$module['module'].CC_DS.'admin'.CC_DS.$node.'.inc.php';
 				if (file_exists($module_admin)) {
 					define('MODULE_FORM_ACTION', (defined('VAL_SELF')) ? constant('VAL_SELF') : currentPage());
-					
-					$default_priority = $module_order[$module_type][strtolower($_GET['module'])];
-					if(is_numeric($default_priority) && !isset($_POST['module']['position'])) {
-						$_POST['module']['position'] = $default_priority;
-					}
 					include $module_admin;
 				} else {
 					trigger_error(sprintf("File '%s' doesn't exist", $module_admin), E_USER_WARNING);
