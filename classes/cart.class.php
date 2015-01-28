@@ -279,7 +279,7 @@ class Cart {
 				}
 			}
 			
-			$product = $GLOBALS['catalogue']->getProductData($product_id, 1, false, 10, 1, false, $options_identifier);
+			$product = $GLOBALS['catalogue']->getProductData($product_id, 1, false, 10, 1, false, $options_identifier_string);
 			
 			if ($product) {
 				// Check for options
