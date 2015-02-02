@@ -289,7 +289,7 @@ if(isset($_GET['upgrade']) && !empty($_GET['upgrade'])) {
 if(isset($_GET['delete']) && file_exists('backup'.CC_DS.$_GET['delete'])) {
 	## Generic error message for logs delete specific for backup
 	$message = preg_match('/\_error_log$/',$_GET['delete']) ? $lang['filemanager']['notify_file_delete'] : $lang['maintain']['backup_deleted'];
-	$GLOBALS['main']->setACPWarning();
+	$GLOBALS['main']->setACPWarning($message);
 	unlink('backup'.CC_DS.$_GET['delete']);
 	httpredir('?_g=maintenance&node=index#backup');
 }
