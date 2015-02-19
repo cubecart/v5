@@ -42,7 +42,7 @@
 	<div class="list">
 		{foreach from=$EXISTING_BACKUPS item=backup}
 		<div>
-		  <label for="{$backup.filename}" class="wide"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$backup.type}.png" alt="{$LANG.common.download}" /></a> <a href="{$backup.download_link}">{$backup.filename}</a> - {$backup.size}</label>
+		  <label for="{$backup.filename}" class="wide"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/{$backup.type}.png" alt="{$LANG.common.download}" /> <a href="{$backup.download_link}">{$backup.filename}</a> - {$backup.size}</label>
 		  <span class="actions">
 		    {if $backup.restore_link}
 		    <a href="{$backup.restore_link}" class="delete" title="{$backup.warning}"><img src="{$SKIN_VARS.admin_folder}/skins/{$SKIN_VARS.skin_folder}/images/restore.png" alt="{$LANG.common.restore}" /></a>
