@@ -1432,7 +1432,7 @@ class Cubecart {
 						
 						$value	= array(
 							'offset'	=> $offset,
-							'name'		=> $ship_name.': '.$data['name'],
+							'name'		=> $ship_name,
 							'value'		=> $data['value'],
 							'tax_id'	=> $data['tax_id'], // Kept for legacy
 							'tax'		=> $data['tax']
