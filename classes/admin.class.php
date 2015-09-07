@@ -165,6 +165,7 @@ class Admin {
 					$content = $mailer->loadContent('admin.password_recovery', $check[0]['language'], $data);
 					if ($content) {
 						$GLOBALS['smarty']->assign('DATA', $data);
+						$GLOBALS['session']->set('recover_login', true);
 						return $mailer->sendEmail($check[0]['email'], $content);
 					}
 				}
@@ -182,7 +183,7 @@ class Admin {
 	 * @return bool
 	 */
 	public function passwordReset($email, $validation, $password) {
-		if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($validation) && !empty($password['new']) && !empty($password['confirm']) && ($password['new'] === $password['confirm'])) {
+		if ($GLOBALS['session']->has('recover_login') && filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($validation) == 8 && !empty($password['new']) && !empty($password['confirm']) && ($password['new'] === $password['confirm'])) {
 			if (($check	= $GLOBALS['db']->select('CubeCart_admin_users', array('admin_id', 'username'), array('email' => $email, 'verify' => $validation, 'status' => '1'))) !== false) {
 
 				// Remove any blocks
@@ -200,6 +201,9 @@ class Admin {
 					'email'		=> $email,
 					'verify'	=> $validation,
 				);
+
+				$GLOBALS['session']->delete('recover_login');
+
 				if ($GLOBALS['db']->update('CubeCart_admin_users', $record, $where)) {
 					return $this->_authenticate($check[0]['username'], $password['new']);
 				}
