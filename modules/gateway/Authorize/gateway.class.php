@@ -12,7 +12,7 @@ class Gateway {
 
 		$this->_module	= $module;
 		$this->_basket =& $GLOBALS['cart']->basket;
-		$this->_url			= $this->_module['testMode'] ? 'test.authorize.net' : 'secure.authorize.net';
+		$this->_url			= $this->_module['testMode'] ? 'test.authorize.net' : 'secure2.authorize.net';
 		$this->_path		= '/gateway/transact.dll';
 		$this->_aim_delimiter = '|';
 	}
